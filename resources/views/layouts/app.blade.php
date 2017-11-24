@@ -36,7 +36,48 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li>
+                            <router-link :to="{name: 'indexDashboard'}">
+                                Dashboard
+                            </router-link>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                Master Data <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexUser'}">
+                                        User
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: ''}">
+                                        Supplier
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: ''}">
+                                        Satuan
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Kategori Produk
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Pelanggan
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Produk
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
