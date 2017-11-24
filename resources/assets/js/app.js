@@ -31,11 +31,11 @@
 import DashboardIndex from './components/dashboard/Dashboard.vue'
 
 //USER
-/*
+
 import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
-*/
+
 const routes = [
 {
 	path: '/',
@@ -46,17 +46,16 @@ const routes = [
 },
 
  //USER
- /*
+
  {
  	path: '/user', component:UserIndex,name:'indexUser'
- },
+ } ,
  {
  	path: '/user/create',component:UserCreate,name:'createUser' 
  },
  {
  	path: '/user/edit/:id',component:UserEdit,name:'editUser'
  }
- */
  ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

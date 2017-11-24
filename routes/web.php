@@ -11,10 +11,16 @@
 |
 */
 
+//HOME
+
+Auth::routes();
 Route::get('/', function () {
 	return redirect('/home');
 });
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+	//USER
+Route::resource('user','UserController',['except'=>'show']);
+
+Route::get('/user/view','UserController@view');
+Route::get('/user/pencarian','UserController@pencarian');
