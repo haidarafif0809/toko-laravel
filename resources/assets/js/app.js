@@ -48,6 +48,9 @@ import SatuanEdit from './components/satuan/SatuanEdit.vue'
 
 // kategori produk
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
+import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
+import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
+
 
 const routes = [
 {
@@ -76,8 +79,11 @@ const routes = [
  	path: '/user/edit/:id',component:UserEdit,name:'editUser'
  },
 
- { path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' }
- ]
+// kategori produk
+{ path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' },
+{ path: '/kategoriProduk/create', component: KategoriProdukCreate, name: 'createKategoriProduk' },
+{ path: '/kategoriProduk/edit/:id', component: KategoriProdukEdit, name: 'editKategoriProduk' }
+]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
