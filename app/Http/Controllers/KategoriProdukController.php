@@ -24,7 +24,6 @@ class KategoriProdukController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,6 +35,12 @@ class KategoriProdukController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'nama_produk' => 'required|unique:kategori_produks,nama_produk'
+        ]);
+        KategoriProduk::create([
+            'nama_produk' => $request->nama_produk
+        ]);
     }
 
     /**
@@ -57,7 +62,7 @@ class KategoriProdukController extends Controller
      */
     public function edit($id)
     {
-        //
+        return KategoriProduk::find($id);
     }
 
     /**
@@ -69,7 +74,12 @@ class KategoriProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama_produk' => 'required|unique:kategori_produks,nama_produk,' .$id
+        ]);
+        KategoriProduk::find($id)->update([
+            'nama_produk' => $request->nama_produk
+        ]);
     }
 
     /**
@@ -80,14 +90,15 @@ class KategoriProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-    public function view() {
-        return KategoriProduk::paginate(10);
-    }
+       $hapus = KategoriProduk::destroy($id);
+       return $hapus;
+   }
+   public function view() {
+    return KategoriProduk::paginate(3);
+}
 
-    public function search(Request $request) {
-        $nama_produk = KategoriProduk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
-        return response()->json($nama_produk);
-    }
+public function search(Request $request) {
+    $nama_produk = KategoriProduk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(3);
+    return response()->json($nama_produk);
+}
 }
