@@ -19029,10 +19029,14 @@ var PopOver = function (_ToolTip) {
 
 __webpack_require__(59);
 <<<<<<< HEAD
+<<<<<<< HEAD
 module.exports = __webpack_require__(259);
 =======
 module.exports = __webpack_require__(255);
 >>>>>>> master
+=======
+module.exports = __webpack_require__(261);
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 
 
 /***/ }),
@@ -19054,6 +19058,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue__ = __webpack_require__(262);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue__);
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__ = __webpack_require__(253);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__ = __webpack_require__(256);
@@ -19062,6 +19067,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__ = __webpack_require__(268);
 >>>>>>> master
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__ = __webpack_require__(258);
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue__);
@@ -19106,6 +19116,7 @@ window.Vue = __webpack_require__(27);
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 // Master Data Produk
@@ -19114,6 +19125,9 @@ window.Vue = __webpack_require__(27);
 
 
 >>>>>>> master
+=======
+
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 var routes = [{
   path: '/',
   components: {
@@ -67135,8 +67149,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(251)
+var __vue_script__ = __webpack_require__(253)
 /* template */
+<<<<<<< HEAD
 var __vue_template__ = __webpack_require__(252)
 <<<<<<< HEAD
 =======
@@ -67555,6 +67570,9 @@ var __vue_script__ = __webpack_require__(263)
 /* template */
 var __vue_template__ = __webpack_require__(264)
 >>>>>>> master
+=======
+var __vue_template__ = __webpack_require__(268)
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67595,25 +67613,20 @@ module.exports = Component.exports
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 251 */
 =======
 /* 263 */
 >>>>>>> master
+=======
+/* 251 */,
+/* 252 */,
+/* 253 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -67751,6 +67764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* 252 */
 =======
@@ -68033,11 +68047,16 @@ if (false) {
 =======
 /* 265 */
 >>>>>>> master
+=======
+/* 254 */,
+/* 255 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
+<<<<<<< HEAD
 <<<<<<< HEAD
 var __vue_script__ = __webpack_require__(254)
 /* template */
@@ -68047,6 +68066,11 @@ var __vue_script__ = __webpack_require__(266)
 /* template */
 var __vue_template__ = __webpack_require__(267)
 >>>>>>> master
+=======
+var __vue_script__ = __webpack_require__(256)
+/* template */
+var __vue_template__ = __webpack_require__(257)
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68087,15 +68111,18 @@ module.exports = Component.exports
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 254 */
 =======
 /* 266 */
 >>>>>>> master
+=======
+/* 256 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -68192,10 +68219,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 255 */
 =======
 /* 267 */
 >>>>>>> master
+=======
+/* 257 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68254,7 +68285,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama User\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Nama User")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68294,13 +68325,7 @@ var render = function() {
                             staticClass: "label label-danger",
                             attrs: { id: "name_error" }
                           },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t\t" +
-                                _vm._s(_vm.errors.name[0]) +
-                                "\n\t\t\t\t\t\t\t\t"
-                            )
-                          ]
+                          [_vm._v(_vm._s(_vm.errors.name[0]))]
                         )
                       : _vm._e()
                   ])
@@ -68313,7 +68338,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tEmail\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Email")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68353,11 +68378,7 @@ var render = function() {
                             staticClass: "label label-danger",
                             attrs: { id: "email_error" }
                           },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.errors.email[0]) + "\n\t\t\t\t\t\t\t\t"
-                            )
-                          ]
+                          [_vm._v(_vm._s(_vm.errors.email[0]))]
                         )
                       : _vm._e()
                   ])
@@ -68395,7 +68416,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary",
             attrs: { id: "btnSimpanUser", type: "submit" }
           },
-          [_vm._v(" \n\t\t\t\t\t\t\t\t\tTambah\n\t\t\t\t\t\t\t\t")]
+          [_vm._v(" Submit")]
         )
       ])
     ])
@@ -68412,15 +68433,20 @@ if (false) {
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 256 */
 =======
 /* 268 */
 >>>>>>> master
+=======
+/* 258 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
+<<<<<<< HEAD
 <<<<<<< HEAD
 var __vue_script__ = __webpack_require__(257)
 /* template */
@@ -68430,6 +68456,11 @@ var __vue_script__ = __webpack_require__(269)
 /* template */
 var __vue_template__ = __webpack_require__(270)
 >>>>>>> master
+=======
+var __vue_script__ = __webpack_require__(259)
+/* template */
+var __vue_template__ = __webpack_require__(260)
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68470,22 +68501,18 @@ module.exports = Component.exports
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 257 */
 =======
 /* 269 */
 >>>>>>> master
+=======
+/* 259 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -68591,10 +68618,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 258 */
 =======
 /* 270 */
 >>>>>>> master
+=======
+/* 260 */
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68623,7 +68654,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah User")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -68653,7 +68684,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tName\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Name")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68688,11 +68719,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm.errors.name
                       ? _c("span", { staticClass: "label label-danger" }, [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t" +
-                              _vm._s(_vm.errors.name[0]) +
-                              "\n\t\t\t\t\t\t\t\t"
-                          )
+                          _vm._v(_vm._s(_vm.errors.name[0]))
                         ])
                       : _vm._e()
                   ])
@@ -68705,7 +68732,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tEmail\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Email")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68740,11 +68767,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm.errors.email
                       ? _c("span", { staticClass: "label label-danger" }, [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t" +
-                              _vm._s(_vm.errors.email[0]) +
-                              "\n\t\t\t\t\t\t\t\t"
-                          )
+                          _vm._v(_vm._s(_vm.errors.email[0]))
                         ])
                       : _vm._e()
                   ])
@@ -68767,7 +68790,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah User")])
     ])
   },
   function() {
@@ -68782,7 +68805,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary",
             attrs: { id: "btnSimpanuser", type: "submit" }
           },
-          [_vm._v("\n\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t")]
+          [_vm._v("Submit")]
         )
       ])
     ])
@@ -68799,12 +68822,274 @@ if (false) {
 
 <<<<<<< HEAD
 /***/ }),
-/* 259 */
+/* 261 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
+<<<<<<< HEAD
 =======
 >>>>>>> master
+=======
+/***/ }),
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("User")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [
+              _c("div", { staticClass: "tambah-user" }, [
+                _c(
+                  "p",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "createUser" }, type: "button" }
+                      },
+                      [_vm._v("Create User")]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "pencarian" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "search",
+                    placeholder: "Pencarian"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-striped table-no-bordered table-hover",
+                  staticStyle: { width: "100%" },
+                  attrs: { cellspacing: "0", width: "100%" }
+                },
+                [
+                  _vm._m(1, false, false),
+                  _vm._v(" "),
+                  _vm.users.length > 0 && _vm.loading == false
+                    ? _c(
+                        "tbody",
+                        { staticClass: "data-ada" },
+                        _vm._l(_vm.users, function(user, index) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(user.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.email))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "bin",
+                                        rawName: "v-bin:id",
+                                        value: "edit-" + user.id,
+                                        expression: "'edit-' + user.id",
+                                        arg: "id"
+                                      }
+                                    ],
+                                    staticClass: "btn btn-xs btn-default",
+                                    attrs: {
+                                      to: {
+                                        name: "editUser",
+                                        params: { id: user.id }
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Edit\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-xs btn-danger",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.deleteEntry(
+                                          user.id,
+                                          index,
+                                          user.name
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Delete\n                            "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        })
+                      )
+                    : _vm.loading == true
+                      ? _c("tbody", { staticClass: "data-ada" }, [
+                          _vm._m(2, false, false)
+                        ])
+                      : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                          _vm._m(3, false, false)
+                        ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _vm.search == ""
+                    ? _c("pagination", {
+                        attrs: { data: _vm.usersData },
+                        on: { "pagination-change-page": _vm.getUsers }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _vm.search != ""
+                    ? _c("pagination", {
+                        attrs: { data: _vm.usersData },
+                        on: { "pagination-change-page": _vm.getHasilPencarian }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Table User")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("Sedang Memuat Data")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("Tidak Ada Data")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e261de26", module.exports)
+  }
+}
+
+>>>>>>> parent of 1dcf65e... Menambahkan css untuk tampilan table & memperbaiki user yang tidak bisa login
 /***/ })
 /******/ ]);

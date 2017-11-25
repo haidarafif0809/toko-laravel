@@ -12,11 +12,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="tambah-user">
-                            <p>
-                                <router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">
-                                    Tambah User
-                                </router-link>
-                            </p>
+                            <p><router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">Create User</router-link></p>
                         </div>
                         <div class="pencarian">
                          <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
@@ -44,23 +40,16 @@
                     </tr>
                 </tbody>
                 <tbody v-else-if="loading == true" class="data-ada" >
-                    <tr >
-                        <td colspan="4"  class="text-center">
-                            Sedang Memuat Data
-                        </td>
-                    </tr>
+                    <tr ><td colspan="4"  class="text-center">Sedang Memuat Data</td></tr>
                 </tbody>
                 <tbody v-else class="tidak-ada-data">
-                    <tr>
-                        <td colspan="4"  class="text-center">
-                            Tidak Ada Data
-                        </td>
-                    </tr>
+                    <tr ><td colspan="4"  class="text-center">Tidak Ada Data</td></tr>
                 </tbody>
             </table>
             <vue-simple-spinner v-if="loading"></vue-simple-spinner>
             <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getUsers" v-if="search == '' "></pagination></div>
             <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+
         </div>
     </div>
 </div>
