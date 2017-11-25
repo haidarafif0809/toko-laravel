@@ -34,6 +34,13 @@
 									</td>
 								</tr>
 							</tbody>
+							<tbody v-else-if="loading == true" class="data-ada" >
+								<tr >
+									<td colspan="4"  class="text-center">
+										Sedang Memuat Data
+									</td>
+								</tr>
+							</tbody>
 							<tbody class="data-tidak-ada" v-else>
 								<tr><td colspan="4" class="text-center">Tidak Ada Data</td></tr>
 							</tbody>
