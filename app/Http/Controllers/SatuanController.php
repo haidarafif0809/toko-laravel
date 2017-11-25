@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\Auditable\AuditableTrait;
 use Illuminate\Http\Request;
 use App\Satuan;
 
 class SatuanController extends Controller
 {
+   use AuditableTrait;
     /**
      * Display a listing of the resource.
      *
@@ -96,7 +98,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = Satuan::destroy($id);
-       return $hapus;
-   }
+     $hapus = Satuan::destroy($id);
+     return $hapus;
+ }
 }
