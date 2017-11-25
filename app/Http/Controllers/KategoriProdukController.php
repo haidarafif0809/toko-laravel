@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\KategoriProduk;
 
 class KategoriProdukController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

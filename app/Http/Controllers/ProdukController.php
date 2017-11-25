@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Produk;
 
 class ProdukController extends Controller
 {
@@ -43,7 +44,39 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate
+        $this->validate($request, [
+          // 'kode_barcode'        => 'unique:produks,kode_barcode',
+          // 'kode_barcode'         => 'unique:produks,kode_produk',
+          'kode_produk'        => 'required|unique:produks,kode_produk',
+          'kode_produk'         => 'required|unique:produks,kode_barcode',
+          'nama_produk'         => 'required',
+          // 'golongan_produk'     => 'required',
+          // 'kategori_produks_id' => 'required|exists:kategori_produks,id',
+          'harga_beli'          => 'required|numeric',
+          'harga_jual'          => 'numeric',
+          'satuans_id'          => 'required|exists:satuans,id'
+          // 'status'              => 'required',
+          // 'supliers_id'         => 'required|exists:supliers,id',
+          // 'limit_stok'          => 'numeric',
+          // 'over_stok'           => 'numeric'
+      ]);
+
+        //insert
+        $produk = Produk::create([
+            // 'kode_barcode'          =>$request->kode_barcode,
+            'kode_produk'           =>$request->kode_produk,
+            'nama_produk'           =>$request->nama_produk,
+            // 'golongan_produk'       =>$request->golongan_produk,
+            // 'kategori_produks_id'   =>$request->kategori_produks_id,
+            'harga_beli'            =>$request->harga_beli,
+            'harga_jual'            =>$request->harga_jual,
+            'satuans_id'            =>$request->satuans_id
+            // 'status'                =>$request->status,
+            // 'supliers_id'           =>$request->supliers_id,
+            // 'limit_stok'            =>$request->limit_stok,
+            // 'over_stok'             =>$request->over_stok
+        ]);
     }
 
     /**
