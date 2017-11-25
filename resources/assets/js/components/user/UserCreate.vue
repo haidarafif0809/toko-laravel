@@ -15,27 +15,33 @@
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 							<div class="form-group">
-								<label for="name" class="col-md-2 control-label">Nama User</label>
+								<label for="name" class="col-md-2 control-label">
+									Nama User
+								</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Nama User" type="text" v-model="user.name" name="name"  autofocus="">
-									<span v-if="errors.name" id="name_error" class="label label-danger">{{ errors.name[0] }}</span>
-
+									<span v-if="errors.name" id="name_error" class="label label-danger">
+										{{ errors.name[0] }}
+									</span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="name" class="col-md-2 control-label">Email</label>
+								<label for="name" class="col-md-2 control-label">
+									Email
+								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Email User" type="text" v-model="user.email" name="email"  autofocus="">
-									<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
-
+									<input class="form-control" required autocomplete="off" placeholder="Email User" type="text" v-model="user.email" name="email" autofocus="">
+									<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}
+									</span>
 								</div>
 							</div>
-
 
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
-									<button class="btn btn-primary" id="btnSimpanUser" type="submit"> Submit</button>
+									<button class="btn btn-primary" id="btnSimpanUser" type="submit"> 
+										Tambah
+									</button>
 								</div>
 							</div>
 						</form>
@@ -45,11 +51,6 @@
 			<div class="col-md-2"></div>
 		</div>
 	</div>
-
-
-
-
-
 
 </template>
 

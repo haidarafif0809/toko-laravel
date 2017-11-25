@@ -31,7 +31,6 @@
 import DashboardIndex from './components/dashboard/Dashboard.vue'
 
 //USER
-
 import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
