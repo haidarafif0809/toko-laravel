@@ -19059,6 +19059,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__ = __webpack_require__(263);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_kategoriProduk_KategoriProdukIndex_vue__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_kategoriProduk_KategoriProdukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_kategoriProduk_KategoriProdukIndex_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -19100,6 +19102,9 @@ window.Vue = __webpack_require__(27);
 
 
 
+// kategori produk
+
+
 var routes = [{
   path: '/',
   components: {
@@ -19116,7 +19121,7 @@ var routes = [{
   path: '/user/create', component: __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default.a, name: 'createUser'
 }, {
   path: '/user/edit/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue___default.a, name: 'editUser'
-}];
+}, { path: '/kategoriProduk', component: __WEBPACK_IMPORTED_MODULE_12__components_kategoriProduk_KategoriProdukIndex_vue___default.a, name: 'indexKategoriProduk' }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -68717,6 +68722,371 @@ module.exports = Component.exports
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(277)
+}
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(279)
+/* template */
+var __vue_template__ = __webpack_require__(280)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-230ea1ad"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\kategoriProduk\\KategoriProdukIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-230ea1ad", Component.options)
+  } else {
+    hotAPI.reload("data-v-230ea1ad", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(278);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("ed3ed5e0", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-230ea1ad\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./KategoriProdukIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-230ea1ad\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./KategoriProdukIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 278 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.pencarian[data-v-230ea1ad] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 279 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            // buat nampilin data dlm bentuk array
+            kategoriProduks: [],
+            // buat paginations
+            kategoriProduksData: {},
+            pencarian: '',
+            message: '',
+            url: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
+            loading: true
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+        app.getKategoriProduks();
+    },
+
+    watch: {
+        // whenever question changes, this function will run
+        pencarian: function pencarian(newQuestion) {
+            var irul = this;
+            irul.searchData();
+        }
+    },
+    methods: {
+        // method getkategoriProduk
+        getKategoriProduks: function getKategoriProduks(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.kategoriProduks = resp.data.data;
+                app.kategoriProduksData = resp.data;
+                app.loading = false;
+                // buat cek ddi console
+                console.log(app.kategoriProduks);
+            }).catch(function (resp) {
+                alert("Could not load kategoriProduks");
+                app.loading = false;
+            });
+        },
+        searchData: function searchData(page) {
+            var app = this;
+            app.loading == true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+                app.kategoriProduks = resp.data.data;
+                app.kategoriProduksData = resp.data;
+                app.loading = false;
+            }).catch(function (resp) {
+                alert("data tidak ditemukan");
+                app.loading = false;
+            });
+        },
+        deleteKategoriProduk: function deleteKategoriProduk(id, index, nama_produk) {
+            if (confirm("Yakin Ingin Menghapus kategoriProduk " + nama_produk + " ?")) {
+                var app = this;
+                axios.delete(app.url + '/' + id).then(function (resp) {
+                    app.getkategoriProduks();
+                    app.message = 'Sukses : Berhasil menghapus kategoriProduk ' + nama_produk;
+                    app.alert(app.message);
+                }).catch(function (resp) {
+                    alert("Could not delete kategoriProduk");
+                });
+            }
+        },
+        alert: function alert(pesan) {
+            this.$swal({
+                title: "Berhasil!",
+                text: pesan,
+                icon: "success"
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 280 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [_vm._v("Kategori Produk")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "panel-body" },
+      [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c(
+            "p",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { to: { name: "createKategoriProduk" } }
+                },
+                [_vm._v("Create Kategori Produk")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "pencarian" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pencarian,
+                  expression: "pencarian"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "pencarian",
+                placeholder: "Pencarian"
+              },
+              domProps: { value: _vm.pencarian },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.pencarian = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-striped table-hover" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _vm.kategoriProduks.length > 0 && _vm.loading == false
+              ? _c(
+                  "tbody",
+                  { staticClass: "data-ada" },
+                  _vm._l(_vm.kategoriProduks, function(kategoriProduk, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(kategoriProduk.nama_produk))]),
+                      _vm._v(" "),
+                      _c("td")
+                    ])
+                  })
+                )
+              : _c("tbody", { staticClass: "data-tidak-ada" }, [
+                  _c("tr"),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "text-center", attrs: { colspan: "3" } },
+                    [_vm._v("Tidak Ada Data")]
+                  )
+                ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _c("pagination", {
+              attrs: { data: _vm.kategoriProduksData },
+              on: { "pagination-change-page": _vm.getKategoriProduks }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama Kategori Produk")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-230ea1ad", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

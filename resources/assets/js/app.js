@@ -40,6 +40,9 @@ import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
 import ProdukEdit from './components/produk/ProdukEdit.vue'
 
+// kategori produk
+import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
+
 const routes = [
 {
 	path: '/',
@@ -62,7 +65,9 @@ const routes = [
  },
  {
  	path: '/user/edit/:id',component:UserEdit,name:'editUser'
- }
+ },
+
+ { path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' }
  ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

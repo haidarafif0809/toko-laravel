@@ -63,7 +63,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
+                                    <router-link :to="{name: 'indexKategoriProduk'}">
                                         Kategori Produk
                                     </router-link>
                                 </li>

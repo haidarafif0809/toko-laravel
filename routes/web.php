@@ -28,3 +28,8 @@ Route::get('/user/pencarian','UserController@pencarian');
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view','ProdukController@view');
 Route::get('/produk/cari','ProdukController@cari');
+
+// kategori barang
+Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);
+Route::get('/kategoriProduk/view','KategoriProdukController@view');
+Route::get('/kategoriProduk/search','KategoriProdukController@search');
