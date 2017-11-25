@@ -676,6 +676,115 @@ var eventOff = function eventOff(el, evtName, handler) {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -982,115 +1091,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -4118,7 +4118,7 @@ Popper.Defaults = Defaults;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 var normalizeHeaderName = __webpack_require__(69);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -5863,7 +5863,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 var settle = __webpack_require__(70);
 var buildURL = __webpack_require__(72);
 var parseHeaders = __webpack_require__(73);
@@ -19028,11 +19028,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(59);
-<<<<<<< HEAD
-module.exports = __webpack_require__(259);
-=======
-module.exports = __webpack_require__(255);
->>>>>>> master
+module.exports = __webpack_require__(264);
 
 
 /***/ }),
@@ -19051,23 +19047,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_bootstrap_vue_dist_bootstrap_vue_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_bootstrap_vue_dist_bootstrap_vue_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_Dashboard_vue__ = __webpack_require__(248);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_Dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_dashboard_Dashboard_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue__ = __webpack_require__(262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue__);
-<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__ = __webpack_require__(253);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__ = __webpack_require__(256);
-=======
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__ = __webpack_require__(268);
->>>>>>> master
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue__ = __webpack_require__(262);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__ = __webpack_require__(263);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__);
 
 /**
@@ -19105,15 +19095,11 @@ window.Vue = __webpack_require__(27);
 
 
 
-<<<<<<< HEAD
-=======
-
 // Master Data Produk
 
 
 
 
->>>>>>> master
 var routes = [{
   path: '/',
   components: {
@@ -48976,7 +48962,7 @@ module.exports = __webpack_require__(66);
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 var bind = __webpack_require__(21);
 var Axios = __webpack_require__(68);
 var defaults = __webpack_require__(12);
@@ -49063,7 +49049,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(12);
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 var InterceptorManager = __webpack_require__(77);
 var dispatchRequest = __webpack_require__(78);
 var isAbsoluteURL = __webpack_require__(80);
@@ -49155,7 +49141,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -49235,7 +49221,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -49310,7 +49296,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 /**
  * Parse headers into an object
@@ -49354,7 +49340,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -49472,7 +49458,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -49532,7 +49518,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -49591,7 +49577,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 var transformData = __webpack_require__(79);
 var isCancel = __webpack_require__(25);
 var defaults = __webpack_require__(12);
@@ -49677,7 +49663,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(5);
+var utils = __webpack_require__(6);
 
 /**
  * Transform the data for a request or a response
@@ -58853,7 +58839,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(152)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(155)
 /* template */
@@ -59514,7 +59500,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(163)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(165)
 /* template */
@@ -59992,7 +59978,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(171)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(173)
 /* template */
@@ -61207,7 +61193,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(189)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(191)
 /* template */
@@ -62568,7 +62554,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(206)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(208)
 /* template */
@@ -62778,7 +62764,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(212)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(214)
 /* template */
@@ -63100,7 +63086,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(220)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(222)
 /* template */
@@ -63319,7 +63305,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(226)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(228)
 /* template */
@@ -67046,7 +67032,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = null
 /* template */
@@ -67133,428 +67119,11 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(251)
 /* template */
 var __vue_template__ = __webpack_require__(252)
-<<<<<<< HEAD
-=======
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukIndex.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7fb34826", Component.options)
-  } else {
-    hotAPI.reload("data-v-7fb34826", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 251 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      produks: [],
-      produksData: {},
-      pencarian: "",
-      url: window.location.origin + window.location.pathname.replace("home", "produk"),
-      loading: true
-    };
-  },
-  watch: {
-    // whenever question changes, this function will run
-    pencarian: function pencarian(newQuestion) {
-      this.searchData();
-    }
-  },
-  mounted: function mounted() {
-    var app = this;
-    app.getProduks();
-  },
-
-  methods: {
-    getProduks: function getProduks(page) {
-      var app = this;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      axios.get(app.url + '/view?page=' + page).then(function (resp) {
-        app.produks = resp.data.data;
-        app.produksData = resp.data;
-        app.loading = false;
-      }).catch(function (resp) {
-        alert("Could not load produks");
-        app.loading = false;
-      });
-    },
-    searchData: function searchData(page) {
-      var app = this;
-      app.loading = true;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      axios.get(app.url + '/cari?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
-        app.produks = resp.data.data;
-        app.produksData = resp.data;
-        app.loading = false;
-      }).catch(function (resp) {
-        alert("Tidak dapat memuat produk..");
-        app.loading = false;
-      });
-    },
-    deleteEntry: function deleteEntry(id, index, nama_produk) {
-      if (confirm("Yakin Ingin Menghapus produk " + nama_produk + " ?")) {
-        var app = this;
-        axios.delete(app.url + '/' + id).then(function (resp) {
-          app.getProduks();
-          app.alert("Berhasil Menghapus produk " + nama_produk);
-        }).catch(function (resp) {
-          alert("Tidak dapat menghapus produk!");
-        });
-      }
-    },
-    alert: function alert(pesan) {
-      this.$swal({
-        title: "Berhasil!",
-        text: pesan,
-        icon: "success"
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 252 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [_vm._v("Dashboard")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "panel-body" },
-      [
-        _c(
-          "p",
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn btn-primary",
-                attrs: { to: { name: "createProduk" } }
-              },
-              [_vm._v("Tambah Produk")]
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "table table-responsive" }, [
-          _c("div", { staticClass: "pencarian" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.pencarian,
-                  expression: "pencarian"
-                }
-              ],
-              staticClass: "efek",
-              attrs: {
-                type: "text",
-                name: "pencarian",
-                placeholder: "Pencarian.."
-              },
-              domProps: { value: _vm.pencarian },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.pencarian = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(0, false, false),
-            _vm._v(" "),
-            _vm.produks.length > 0 && _vm.loading == false
-              ? _c(
-                  "tbody",
-                  { staticClass: "data-ada" },
-                  _vm._l(_vm.produks, function(produk, index) {
-                    return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(produk.nama_produk))]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-xs btn-default",
-                              attrs: {
-                                to: {
-                                  name: "editProduk",
-                                  params: { id: produk.id }
-                                },
-                                id: "edit-" + produk.id
-                              }
-                            },
-                            [_vm._v("\n              Edit \n            ")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#", id: "delete-" + produk.id },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteEntry(
-                                    produk.id,
-                                    index,
-                                    produk.nama_produk
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Hapus\n            ")]
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  })
-                )
-              : _c("tbody", { staticClass: "data-tidak-ada" }, [
-                  _vm._m(1, false, false)
-                ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { attrs: { align: "right" } },
-          [
-            _c("pagination", {
-              attrs: { data: _vm.produksData },
-              on: { "pagination-change-page": _vm.getProduks }
-            })
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Nama Produk")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Aksi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "2" } }, [
-        _vm._v("Tidak Ada Data")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7fb34826", module.exports)
-  }
-}
-
-/***/ }),
-/* 253 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(6)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukCreate.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var normalizeComponent = __webpack_require__(6)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = null
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukEdit.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 255 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(6)
-/* script */
-var __vue_script__ = __webpack_require__(263)
-/* template */
-var __vue_template__ = __webpack_require__(264)
->>>>>>> master
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67594,11 +67163,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 251 */
-=======
-/* 263 */
->>>>>>> master
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67751,11 +67316,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 252 */
-=======
-/* 264 */
->>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67796,15 +67357,11 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         attrs: { to: { name: "createUser" }, type: "button" }
                       },
-<<<<<<< HEAD
                       [
                         _vm._v(
                           "\n                                    Tambah User\n                                "
                         )
                       ]
-=======
-                      [_vm._v("Create User")]
->>>>>>> master
                     )
                   ],
                   1
@@ -67991,13 +67548,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-<<<<<<< HEAD
         _vm._v(
           "\n                            Sedang Memuat Data\n                        "
         )
-=======
-        _vm._v("Sedang Memuat Data")
->>>>>>> master
       ])
     ])
   },
@@ -68007,13 +67560,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-<<<<<<< HEAD
         _vm._v(
           "\n                            Tidak Ada Data\n                        "
         )
-=======
-        _vm._v("Tidak Ada Data")
->>>>>>> master
       ])
     ])
   }
@@ -68028,25 +67577,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 253 */
-=======
-/* 265 */
->>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-<<<<<<< HEAD
 var __vue_script__ = __webpack_require__(254)
 /* template */
 var __vue_template__ = __webpack_require__(255)
-=======
-var __vue_script__ = __webpack_require__(266)
-/* template */
-var __vue_template__ = __webpack_require__(267)
->>>>>>> master
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68086,11 +67625,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 254 */
-=======
-/* 266 */
->>>>>>> master
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68191,11 +67726,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 255 */
-=======
-/* 267 */
->>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68411,25 +67942,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 256 */
-=======
-/* 268 */
->>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-<<<<<<< HEAD
 var __vue_script__ = __webpack_require__(257)
 /* template */
 var __vue_template__ = __webpack_require__(258)
-=======
-var __vue_script__ = __webpack_require__(269)
-/* template */
-var __vue_template__ = __webpack_require__(270)
->>>>>>> master
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -68469,11 +67990,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< HEAD
 /* 257 */
-=======
-/* 269 */
->>>>>>> master
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -68590,11 +68107,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< HEAD
 /* 258 */
-=======
-/* 270 */
->>>>>>> master
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -68797,14 +68310,413 @@ if (false) {
   }
 }
 
-<<<<<<< HEAD
 /***/ }),
 /* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(260)
+/* template */
+var __vue_template__ = __webpack_require__(261)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7fb34826", Component.options)
+  } else {
+    hotAPI.reload("data-v-7fb34826", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 260 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      produks: [],
+      produksData: {},
+      pencarian: "",
+      url: window.location.origin + window.location.pathname.replace("home", "produk"),
+      loading: true
+    };
+  },
+  watch: {
+    // whenever question changes, this function will run
+    pencarian: function pencarian(newQuestion) {
+      this.searchData();
+    }
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.getProduks();
+  },
+
+  methods: {
+    getProduks: function getProduks(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.produks = resp.data.data;
+        app.produksData = resp.data;
+        app.loading = false;
+      }).catch(function (resp) {
+        alert("Could not load produks");
+        app.loading = false;
+      });
+    },
+    searchData: function searchData(page) {
+      var app = this;
+      app.loading = true;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+
+      axios.get(app.url + '/cari?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+        app.produks = resp.data.data;
+        app.produksData = resp.data;
+        app.loading = false;
+      }).catch(function (resp) {
+        alert("Tidak dapat memuat produk..");
+        app.loading = false;
+      });
+    },
+    deleteEntry: function deleteEntry(id, index, nama_produk) {
+      if (confirm("Yakin Ingin Menghapus produk " + nama_produk + " ?")) {
+        var app = this;
+        axios.delete(app.url + '/' + id).then(function (resp) {
+          app.getProduks();
+          app.alert("Berhasil Menghapus produk " + nama_produk);
+        }).catch(function (resp) {
+          alert("Tidak dapat menghapus produk!");
+        });
+      }
+    },
+    alert: function alert(pesan) {
+      this.$swal({
+        title: "Berhasil!",
+        text: pesan,
+        icon: "success"
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [_vm._v("Dashboard")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "panel-body" },
+      [
+        _c(
+          "p",
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { to: { name: "createProduk" } }
+              },
+              [_vm._v("Tambah Produk")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "table table-responsive" }, [
+          _c("div", { staticClass: "pencarian" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pencarian,
+                  expression: "pencarian"
+                }
+              ],
+              staticClass: "efek",
+              attrs: {
+                type: "text",
+                name: "pencarian",
+                placeholder: "Pencarian.."
+              },
+              domProps: { value: _vm.pencarian },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.pencarian = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _vm.produks.length > 0 && _vm.loading == false
+              ? _c(
+                  "tbody",
+                  { staticClass: "data-ada" },
+                  _vm._l(_vm.produks, function(produk, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(produk.nama_produk))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-xs btn-default",
+                              attrs: {
+                                to: {
+                                  name: "editProduk",
+                                  params: { id: produk.id }
+                                },
+                                id: "edit-" + produk.id
+                              }
+                            },
+                            [_vm._v("\n              Edit \n            ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-danger",
+                              attrs: { href: "#", id: "delete-" + produk.id },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteEntry(
+                                    produk.id,
+                                    index,
+                                    produk.nama_produk
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("\n              Hapus\n            ")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  })
+                )
+              : _c("tbody", { staticClass: "data-tidak-ada" }, [
+                  _vm._m(1, false, false)
+                ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _c("pagination", {
+              attrs: { data: _vm.produksData },
+              on: { "pagination-change-page": _vm.getProduks }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama Produk")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "2" } }, [
+        _vm._v("Tidak Ada Data")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7fb34826", module.exports)
+  }
+}
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukCreate.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukEdit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 264 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
-=======
->>>>>>> master
 /***/ })
 /******/ ]);
