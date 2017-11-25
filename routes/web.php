@@ -38,3 +38,8 @@ Route::get('/kategoriProduk/search','KategoriProdukController@search');
 Route::resource('satuan','SatuanController',['except'=>'show']);
 Route::get('/satuan/view', 'SatuanController@view');
 Route::get('/satuan/pencarian', 'SatuanController@search');
+
+// kas masuk
+Route::resource('kasMasuk','KasMasukController',['except'=>'show']);
+Route::get('/kasMasuk/view', 'KasMasukController@view');
+Route::get('/kasMasuk/pencarian', 'KasMasukController@search');

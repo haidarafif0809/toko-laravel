@@ -117,6 +117,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.2') }}"></script>
+<script src="{{ asset('js/app.js?v=1.3') }}"></script>
 </body>
 </html>

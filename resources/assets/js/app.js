@@ -50,6 +50,10 @@ import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
 
+// kas Masuk
+import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
+import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
+import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
 
 const routes = [
 {
@@ -81,7 +85,11 @@ const routes = [
 // kategori produk
 { path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' },
 { path: '/kategoriProduk/create', component: KategoriProdukCreate, name: 'createKategoriProduk' },
-{ path: '/kategoriProduk/edit/:id', component: KategoriProdukEdit, name: 'editKategoriProduk' }
+{ path: '/kategoriProduk/edit/:id', component: KategoriProdukEdit, name: 'editKategoriProduk' },
+// kas Masuk
+{ path: '/kasMasuk', component: KasMasukIndex, name: 'indexKasMasuk' },
+{ path: '/kasMasuk/create', component: KasMasukCreate, name: 'createKasMasuk' },
+{ path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' }
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
