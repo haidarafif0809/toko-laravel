@@ -40,6 +40,11 @@ import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
 import ProdukEdit from './components/produk/ProdukEdit.vue'
 
+// master data satuan
+import SatuanIndex from './components/satuan/SatuanIndex.vue'
+import SatuanCreate from './components/satuan/SatuanCreate.vue'
+import SatuanEdit from './components/satuan/SatuanEdit.vue'
+
 // kategori produk
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
 
@@ -54,6 +59,9 @@ const routes = [
 { path: '/produk', component: ProdukIndex, name: 'indexProduk' },
 { path: '/produk/create', component: ProdukCreate, name: 'createProduk' },
 { path: '/produk/edit/:id', component: ProdukEdit, name: 'editProduk' },
+{path: '/satuan',component:SatuanIndex,name:'indexSatuan'},
+{path: '/satuan-create',component:SatuanCreate,name:'createSatuan'},
+{path: '/satuan-edit',component:SatuanEdit,name:'editSatuan'},
 
  //USER
 

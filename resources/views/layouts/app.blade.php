@@ -58,7 +58,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: ''}">
+                                    <router-link :to="{name: 'indexSatuan'}">
                                         Satuan
                                     </router-link>
                                 </li>
@@ -117,6 +117,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js?v=1.0') }}"></script>
 </body>
 </html>

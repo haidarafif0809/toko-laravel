@@ -24,7 +24,7 @@ Route::resource('user','UserController',['except'=>'show']);
 
 Route::get('/user/view','UserController@view');
 Route::get('/user/pencarian','UserController@pencarian');
-
+// 
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view','ProdukController@view');
 Route::get('/produk/cari','ProdukController@cari');
@@ -33,3 +33,8 @@ Route::get('/produk/cari','ProdukController@cari');
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);
 Route::get('/kategoriProduk/view','KategoriProdukController@view');
 Route::get('/kategoriProduk/search','KategoriProdukController@search');
+
+// Satuan
+Route::resource('satuan','SatuanController',['except'=>'show']);
+Route::get('/satuan/view', 'SatuanController@view');
+Route::get('/satuan/pencarian', 'SatuanController@search');
