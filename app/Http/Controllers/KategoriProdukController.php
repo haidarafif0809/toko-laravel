@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Yajra\Auditable\AuditableTrait;
+
 use Illuminate\Http\Request;
 use App\KategoriProduk;
 
 class KategoriProdukController extends Controller
 {
-   use AuditableTrait;
+
     /**
      * Display a listing of the resource.
      *
