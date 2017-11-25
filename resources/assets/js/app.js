@@ -35,6 +35,11 @@ import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
 
+// Master Data Produk
+import ProdukIndex from './components/produk/ProdukIndex.vue'
+import ProdukCreate from './components/produk/ProdukCreate.vue'
+import ProdukEdit from './components/produk/ProdukEdit.vue'
+
 const routes = [
 {
 	path: '/',
@@ -43,6 +48,9 @@ const routes = [
 	},
 	name : 'indexDashboard'
 },
+{ path: '/produk', component: ProdukIndex, name: 'indexProduk' },
+{ path: '/produk/create', component: ProdukCreate, name: 'createProduk' },
+{ path: '/produk/edit/:id', component: ProdukEdit, name: 'editProduk' },
 
  //USER
 

@@ -24,3 +24,7 @@ Route::resource('user','UserController',['except'=>'show']);
 
 Route::get('/user/view','UserController@view');
 Route::get('/user/pencarian','UserController@pencarian');
+
+Route::resource('produk', 'ProdukController', ['except' => 'show']);
+Route::get('/produk/view','ProdukController@view');
+Route::get('/produk/cari','ProdukController@cari');
