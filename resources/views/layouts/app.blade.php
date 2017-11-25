@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -28,9 +29,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <router-link :to="{name: 'indexDashboard'}" class="navbar-brand">
                         Toko Dasar
-                    </a>
+                    </router-link>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
