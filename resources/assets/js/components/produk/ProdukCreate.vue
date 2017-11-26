@@ -43,7 +43,7 @@
 						<div class="form-group">
 							<label for="satuans_id" class="col-md-2 control-label">Satuan</label>
 							<div class="col-md-4">
-								<selectize-component v-model="satuans.nama_satuan" :settings="settings"> 
+								<selectize-component v-model="produk.satuan_id" :settings="settings"> 
 									<option v-for="satuan in satuans" v-bind:value="satuan.id" >{{ satuan.nama_satuan }}</option>
 								</selectize-component>
 								<span v-if="errors.satuans_id" class="label label-danger">{{ errors.satuans_id[0] }}</span>
