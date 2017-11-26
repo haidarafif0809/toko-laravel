@@ -24,10 +24,12 @@ Route::resource('user','UserController',['except'=>'show']);
 
 Route::get('/user/view','UserController@view');
 Route::get('/user/pencarian','UserController@pencarian');
-// 
+
+// Master Data Produk
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view','ProdukController@view');
 Route::get('/produk/cari','ProdukController@cari');
+Route::get('/produk/satuan','ProdukController@satuan');
 
 // kategori barang
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);

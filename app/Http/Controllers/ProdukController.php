@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Produk;
+use App\Satuan;
 
 class ProdukController extends Controller
 {
@@ -24,6 +25,12 @@ class ProdukController extends Controller
     public function cari(Request $request) {
         $produk = Produk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
         return response()->json($produk);
+    }
+
+    public function satuan() 
+    {
+        $satuan = Satuan::all();
+        return response()->json($satuan);
     }
 
     /**

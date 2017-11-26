@@ -43,12 +43,9 @@
 						<div class="form-group">
 							<label for="satuans_id" class="col-md-2 control-label">Satuan</label>
 							<div class="col-md-4">
-								<!-- <input class="form-control" required autocomplete="off" placeholder="Satuan produk" type="text" v-model="produk.satuans_id" name="satuans_id"  autofocus=""> -->
-								<select name="satuans_id" class="form-control" placeholder="Silahkan Pilih">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								</select>
+								<selectize-component v-model="satuans.nama_satuan" :settings="settings"> 
+									<option v-for="satuan in satuans" v-bind:value="satuan.id" >{{ satuan.nama_satuan }}</option>
+								</selectize-component>
 								<span v-if="errors.satuans_id" class="label label-danger">{{ errors.satuans_id[0] }}</span>
 
 							</div>
@@ -70,6 +67,7 @@ export default {
 	data: function () {
 		return {
 			errors: [],
+			satuans: [],
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 			produk: {
 				kode_produk: '',		
@@ -78,8 +76,16 @@ export default {
 				harga_beli: '',
 				satuans_id: ''
 			},
-			message : ''
+			message : '',
+			settings: {
+				placeholder: 'Pilih Satuan'
+			}
 		}
+	},
+	mounted() {
+		var app = this;
+		app.selected();
+
 	},
 	methods: {
 		saveForm() {
@@ -101,6 +107,16 @@ export default {
 			.catch(function (resp) {
 				app.success = false;
 				app.errors = resp.response.data.errors;
+			});
+		},
+		selected() {
+			var app = this;
+			axios.get(app.url+'/satuan')
+			.then(function (resp) {
+				app.satuans = resp.data;
+			})
+			.catch(function (resp) {
+				alert("Could not load satuan");
 			});
 		},
 		alert(pesan) {
