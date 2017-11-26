@@ -41,6 +41,7 @@ import UserEdit from './components/user/UserEdit.vue'
 import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
 import ProdukEdit from './components/produk/ProdukEdit.vue'
+import ProdukDetail from './components/produk/ProdukDetail.vue'
 
 // master data satuan
 import SatuanIndex from './components/satuan/SatuanIndex.vue'
@@ -65,24 +66,23 @@ const routes = [
 	},
 	name : 'indexDashboard'
 },
+
+// Master data Produk
 { path: '/produk', component: ProdukIndex, name: 'indexProduk' },
 { path: '/produk/create', component: ProdukCreate, name: 'createProduk' },
 { path: '/produk/edit/:id', component: ProdukEdit, name: 'editProduk' },
+{ path: '/produk/detail/:id', component: ProdukDetail, name: 'detailProduk' },
+
+// Master data satuan
 {path: '/satuan',component:SatuanIndex,name:'indexSatuan'},
 {path: '/satuan-create',component:SatuanCreate,name:'createSatuan'},
 {path: '/satuan-edit',component:SatuanEdit,name:'editSatuan'},
 
  //USER
 
- {
- 	path: '/user', component:UserIndex,name:'indexUser'
- } ,
- {
- 	path: '/user/create',component:UserCreate,name:'createUser' 
- },
- {
- 	path: '/user/edit/:id',component:UserEdit,name:'editUser'
- },
+ { path: '/user', component:UserIndex,name:'indexUser' } ,
+ { path: '/user/create',component:UserCreate,name:'createUser' },
+ { path: '/user/edit/:id',component:UserEdit,name:'editUser' },
 
 // kategori produk
 { path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' },
