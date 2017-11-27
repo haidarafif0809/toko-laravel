@@ -95,7 +95,11 @@ export default {
             .then(function (resp) {
                 app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
                 app.alert(app.message);
+                app.produk.kode_produk = ''
                 app.produk.nama_produk = ''
+                app.produk.harga_jual = ''
+                app.produk.harga_beli = ''
+                app.produk.satuans_id = ''
                 app.errors = '';
                 app.$router.replace('/produk');
 

@@ -111,7 +111,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        return Produk::find($id);
+        $produk = Produk::with('satuan')->where('produk_id', $id)->first();
+        // return response()->json($produk);
+        return $produk;
     }
 
     /**
