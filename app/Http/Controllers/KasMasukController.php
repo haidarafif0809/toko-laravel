@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\KasMasuk;
 
 class KasMasukController extends Controller
 {
@@ -80,5 +81,17 @@ class KasMasukController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view() 
+    {
+        $page = KasMasuk::paginate(3);
+        return $page;
+    }
+
+    public function search(Request $request)
+    {
+        $search = KasMasuk::where("kas_id", "LIKE", "%$request->pencarian")->paginate(3);
+        return $search;
     }
 }

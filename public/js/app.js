@@ -19100,7 +19100,6 @@ window.Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_simple_spinner___default.a);
 
 Vue.component('pagination', __webpack_require__(247));
 Vue.component('vue-simple-spinner', __webpack_require__(28));
-Vue.component('selectize-component', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"vue2-selectize\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 
@@ -68807,14 +68806,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			errors: [],
+			satuans: [],
 			url: window.location.origin + window.location.pathname.replace("home", "produk"),
 			produk: {
 				kode_produk: '',
@@ -68823,9 +68820,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				harga_beli: '',
 				satuans_id: ''
 			},
-			message: ''
+			message: '',
+			settings: {
+				placeholder: 'Pilih Satuan'
+			}
 		};
 	},
+	mounted: function mounted() {
+		var app = this;
+		app.selected();
+	},
+
 	methods: {
 		saveForm: function saveForm() {
 			var app = this;
@@ -68843,6 +68848,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).catch(function (resp) {
 				app.success = false;
 				app.errors = resp.response.data.errors;
+			});
+		},
+		selected: function selected() {
+			var app = this;
+			axios.get(app.url + '/satuan').then(function (resp) {
+				app.satuans = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load satuan");
 			});
 		},
 		alert: function alert(pesan) {
@@ -69086,18 +69099,42 @@ var render = function() {
                   [_vm._v("Satuan")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _vm._m(0, false, false),
-                  _vm._v(" "),
-                  _vm.errors.satuans_id
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.satuans_id[0]))
-                      ])
-                    : _vm._e()
-                ])
+                _c(
+                  "div",
+                  { staticClass: "col-md-4" },
+                  [
+                    _c(
+                      "selectize-component",
+                      {
+                        attrs: { settings: _vm.settings },
+                        model: {
+                          value: _vm.satuans.nama_satuan,
+                          callback: function($$v) {
+                            _vm.$set(_vm.satuans, "nama_satuan", $$v)
+                          },
+                          expression: "satuans.nama_satuan"
+                        }
+                      },
+                      _vm._l(_vm.satuans, function(satuan) {
+                        return _c(
+                          "option",
+                          { domProps: { value: satuan.id } },
+                          [_vm._v(_vm._s(satuan.nama_satuan))]
+                        )
+                      })
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.satuans_id
+                      ? _c("span", { staticClass: "label label-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.satuans_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
-              _vm._m(1, false, false)
+              _vm._m(0, false, false)
             ]
           )
         ])
@@ -69106,25 +69143,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control",
-        attrs: { name: "satuans_id", placeholder: "Silahkan Pilih" }
-      },
-      [
-        _c("option", [_vm._v("1")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("2")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("3")])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -71169,17 +71187,22 @@ if (false) {
 /* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(287)
+}
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(289)
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(290)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-18103066"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -71193,14 +71216,440 @@ var Component = normalizeComponent(
 Component.options.__file = "resources\\assets\\js\\components\\kasMasuk\\KasMasukIndex.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-18103066", Component.options)
+  } else {
+    hotAPI.reload("data-v-18103066", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
 module.exports = Component.exports
 
 
 /***/ }),
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(288);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("49e90fcf", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18103066\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./KasMasukIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-18103066\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./KasMasukIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.pencarian[data-v-18103066] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 289 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            // buat nampilin data dlm bentuk array
+            kasMasuks: [],
+            // buat paginations
+            kasMasuksData: {},
+            pencarian: '',
+            message: '',
+            url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
+            loading: true
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+        app.getKasMasuks();
+    },
+
+    watch: {
+        // whenever question changes, this function will run
+        pencarian: function pencarian(newQuestion) {
+            var irul = this;
+            irul.searchData();
+        }
+    },
+    methods: {
+        getKasMasuks: function getKasMasuks(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.kasMasuks = resp.data.data;
+                app.kasMasuksData = resp.data;
+                app.loading = false;
+                // buat cek ddi console
+                console.log(app.kasMasuks);
+            }).catch(function (resp) {
+                alert("Could not load KasMasuks");
+                app.loading = false;
+            });
+        },
+        searchData: function searchData(page) {
+            var app = this;
+            app.loading == true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+                app.kasMasuks = resp.data.data;
+                app.kasMasuksData = resp.data;
+                app.loading = false;
+            }).catch(function (resp) {
+                alert("data tidak ditemukan");
+                app.loading = false;
+            });
+        },
+        deleteKasMasuk: function deleteKasMasuk(id, index, kas_id) {
+            if (confirm("Yakin Ingin Menghapus Satuan " + kas_id + " ?")) {
+                var app = this;
+                axios.delete(app.url + '/' + kas_id).then(function (resp) {
+                    app.getKasMasuks();
+                    app.alert(kas_id);
+                }).catch(function (resp) {
+                    alert("Could not delete Satuan");
+                });
+            }
+        },
+        alert: function alert(kas_id) {
+            this.$swal({
+                title: "Berhasil!",
+                text: 'Sukses : Berhasil menghapus Kas Masuk ' + kas_id,
+                icon: "success"
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Kas Masuk")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("div", { staticClass: "tambah-user" }, [
+              _c(
+                "p",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: { name: "createKasMasuk" } }
+                    },
+                    [_vm._v("Create Kas Masuk")]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pencarian" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.pencarian,
+                    expression: "pencarian"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "pencarian",
+                  placeholder: "Pencarian"
+                },
+                domProps: { value: _vm.pencarian },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.pencarian = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table table-striped table-hover" }, [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm.kasMasuks.length > 0 && _vm.loading == false
+                ? _c(
+                    "tbody",
+                    { staticClass: "data-ada" },
+                    _vm._l(_vm.kasMasuks, function(kasMasuk, index) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(kasMasuk.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.kas_id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.kategori_id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.jumlah))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.keterangan))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.created_at))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-default",
+                                attrs: {
+                                  to: {
+                                    name: "editKasMasuk",
+                                    params: { kas_id: kasMasuk.kas_id }
+                                  },
+                                  id: "edit-" + kasMasuk.kas_id
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                   Edit  "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-xs btn-danger",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteKasMasuk(
+                                      kasMasuk.id,
+                                      index,
+                                      kasMasuk.kas_id
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    })
+                  )
+                : _vm.loading == true
+                  ? _c("tbody", { staticClass: "data-ada" }, [
+                      _vm._m(1, false, false)
+                    ])
+                  : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                      _vm._m(2, false, false)
+                    ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { align: "right" } },
+            [
+              _c("pagination", {
+                attrs: { data: _vm.kasMasuksData },
+                on: { "pagination-change-page": _vm.getKasMasuks }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("No Faktur")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Kas")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Kategori")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Jumlah")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Keterangan")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Waktu")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n                                   Sedang Memuat Data\n                               "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n                                   Tidak Ada Data\n                               "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-18103066", module.exports)
+  }
+}
+
+/***/ }),
 /* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71266,7 +71715,7 @@ module.exports = Component.exports
 /* 293 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleNotFoundError: Module not found: Error: Can't resolve 'selectize/dist/css/selectize.bootstrap3.css' in 'C:\\xampp\\htdocs\\toko-laravel\\resources\\assets\\sass'\n    at factoryCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\webpack\\lib\\Compilation.js:276:40)\n    at factory (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\webpack\\lib\\NormalModuleFactory.js:235:20)\n    at resolver (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\webpack\\lib\\NormalModuleFactory.js:60:20)\n    at asyncLib.parallel (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\webpack\\lib\\NormalModuleFactory.js:127:20)\n    at C:\\xampp\\htdocs\\toko-laravel\\node_modules\\async\\dist\\async.js:3874:9\n    at C:\\xampp\\htdocs\\toko-laravel\\node_modules\\async\\dist\\async.js:473:16\n    at iteratorCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\async\\dist\\async.js:1048:13)\n    at C:\\xampp\\htdocs\\toko-laravel\\node_modules\\async\\dist\\async.js:958:16\n    at C:\\xampp\\htdocs\\toko-laravel\\node_modules\\async\\dist\\async.js:3871:13\n    at resolvers.normal.resolve (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\webpack\\lib\\NormalModuleFactory.js:119:22)\n    at onError (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:65:10)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at runAfter (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:158:4)\n    at innerCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:146:3)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at next (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\tapable\\lib\\Tapable.js:252:11)\n    at C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\UnsafeCachePlugin.js:40:4\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at runAfter (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:158:4)\n    at innerCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:146:3)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at next (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\tapable\\lib\\Tapable.js:252:11)\n    at innerCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:144:11)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at next (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\tapable\\lib\\Tapable.js:249:35)\n    at resolver.doResolve.createInnerCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:44:6)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at afterInnerCallback (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\Resolver.js:166:11)\n    at loggingCallbackWrapper (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\enhanced-resolve\\lib\\createInnerCallback.js:31:19)\n    at next (C:\\xampp\\htdocs\\toko-laravel\\node_modules\\tapable\\lib\\Tapable.js:249:35)");
 
 /***/ })
 /******/ ]);

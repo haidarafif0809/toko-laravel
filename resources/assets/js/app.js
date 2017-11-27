@@ -22,7 +22,6 @@
 
  Vue.component('pagination', require('laravel-vue-pagination'));
  Vue.component('vue-simple-spinner', require('vue-simple-spinner'));
- Vue.component('selectize-component', require('vue2-selectize'));
 
  window.Vue.use(VueRouter);
 

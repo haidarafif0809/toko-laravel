@@ -92,10 +92,11 @@ class KategoriProdukController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = KategoriProduk::destroy($id);
-       return $hapus;
-   }
-   public function view() {
+     $hapus = KategoriProduk::destroy($id);
+     return $hapus;
+ }
+ public function view() 
+ {
     return KategoriProduk::paginate(3);
 }
 
