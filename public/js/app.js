@@ -29319,24 +29319,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_satuan_SatuanIndex_vue__ = __webpack_require__(267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_satuan_SatuanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_satuan_SatuanIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanCreate_vue__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanEdit_vue__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_kategoriProduk_KategoriProdukIndex_vue__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_kategoriProduk_KategoriProdukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_kategoriProduk_KategoriProdukIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukCreate_vue__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukEdit_vue__ = __webpack_require__(284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_kasMasuk_KasMasukIndex_vue__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_kasMasuk_KasMasukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_kasMasuk_KasMasukIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukCreate_vue__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukEdit_vue__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_produk_ProdukDetail_vue__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_produk_ProdukDetail_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_produk_ProdukDetail_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanIndex_vue__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanCreate_vue__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_satuan_SatuanEdit_vue__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_satuan_SatuanEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_satuan_SatuanEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukIndex_vue__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukCreate_vue__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_kategoriProduk_KategoriProdukEdit_vue__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_kategoriProduk_KategoriProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_kategoriProduk_KategoriProdukEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukIndex_vue__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukCreate_vue__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_kasMasuk_KasMasukEdit_vue__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_kasMasuk_KasMasukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_kasMasuk_KasMasukEdit_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -29379,6 +29381,7 @@ window.Vue = __webpack_require__(28);
 
 
 
+
 // master data satuan
 
 
@@ -29400,22 +29403,22 @@ var routes = [{
     dashboardIndex: __WEBPACK_IMPORTED_MODULE_5__components_dashboard_Dashboard_vue___default.a
   },
   name: 'indexDashboard'
-}, { path: '/produk', component: __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue___default.a, name: 'indexProduk' }, { path: '/produk/create', component: __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue___default.a, name: 'createProduk' }, { path: '/produk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue___default.a, name: 'editProduk' }, { path: '/satuan', component: __WEBPACK_IMPORTED_MODULE_12__components_satuan_SatuanIndex_vue___default.a, name: 'indexSatuan' }, { path: '/satuan-create', component: __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanCreate_vue___default.a, name: 'createSatuan' }, { path: '/satuan-edit', component: __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanEdit_vue___default.a, name: 'editSatuan' },
+},
+
+// Master data Produk
+{ path: '/produk', component: __WEBPACK_IMPORTED_MODULE_9__components_produk_ProdukIndex_vue___default.a, name: 'indexProduk' }, { path: '/produk/create', component: __WEBPACK_IMPORTED_MODULE_10__components_produk_ProdukCreate_vue___default.a, name: 'createProduk' }, { path: '/produk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_11__components_produk_ProdukEdit_vue___default.a, name: 'editProduk' }, { path: '/produk/detail/:id', component: __WEBPACK_IMPORTED_MODULE_12__components_produk_ProdukDetail_vue___default.a, name: 'detailProduk' },
+
+// Master data satuan
+{ path: '/satuan', component: __WEBPACK_IMPORTED_MODULE_13__components_satuan_SatuanIndex_vue___default.a, name: 'indexSatuan' }, { path: '/satuan-create', component: __WEBPACK_IMPORTED_MODULE_14__components_satuan_SatuanCreate_vue___default.a, name: 'createSatuan' }, { path: '/satuan-edit', component: __WEBPACK_IMPORTED_MODULE_15__components_satuan_SatuanEdit_vue___default.a, name: 'editSatuan' },
 
 //USER
 
-{
-  path: '/user', component: __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue___default.a, name: 'indexUser'
-}, {
-  path: '/user/create', component: __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default.a, name: 'createUser'
-}, {
-  path: '/user/edit/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue___default.a, name: 'editUser'
-},
+{ path: '/user', component: __WEBPACK_IMPORTED_MODULE_6__components_user_UserIndex_vue___default.a, name: 'indexUser' }, { path: '/user/create', component: __WEBPACK_IMPORTED_MODULE_7__components_user_UserCreate_vue___default.a, name: 'createUser' }, { path: '/user/edit/:id', component: __WEBPACK_IMPORTED_MODULE_8__components_user_UserEdit_vue___default.a, name: 'editUser' },
 
 // kategori produk
-{ path: '/kategoriProduk', component: __WEBPACK_IMPORTED_MODULE_15__components_kategoriProduk_KategoriProdukIndex_vue___default.a, name: 'indexKategoriProduk' }, { path: '/kategoriProduk/create', component: __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukCreate_vue___default.a, name: 'createKategoriProduk' }, { path: '/kategoriProduk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukEdit_vue___default.a, name: 'editKategoriProduk' },
+{ path: '/kategoriProduk', component: __WEBPACK_IMPORTED_MODULE_16__components_kategoriProduk_KategoriProdukIndex_vue___default.a, name: 'indexKategoriProduk' }, { path: '/kategoriProduk/create', component: __WEBPACK_IMPORTED_MODULE_17__components_kategoriProduk_KategoriProdukCreate_vue___default.a, name: 'createKategoriProduk' }, { path: '/kategoriProduk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_18__components_kategoriProduk_KategoriProdukEdit_vue___default.a, name: 'editKategoriProduk' },
 // kas Masuk
-{ path: '/kasMasuk', component: __WEBPACK_IMPORTED_MODULE_18__components_kasMasuk_KasMasukIndex_vue___default.a, name: 'indexKasMasuk' }, { path: '/kasMasuk/create', component: __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukCreate_vue___default.a, name: 'createKasMasuk' }, { path: '/kasMasuk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukEdit_vue___default.a, name: 'editKasMasuk' }];
+{ path: '/kasMasuk', component: __WEBPACK_IMPORTED_MODULE_19__components_kasMasuk_KasMasukIndex_vue___default.a, name: 'indexKasMasuk' }, { path: '/kasMasuk/create', component: __WEBPACK_IMPORTED_MODULE_20__components_kasMasuk_KasMasukCreate_vue___default.a, name: 'createKasMasuk' }, { path: '/kasMasuk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_21__components_kasMasuk_KasMasukEdit_vue___default.a, name: 'editKasMasuk' }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -68455,6 +68458,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -68610,30 +68617,52 @@ var render = function() {
                               attrs: {
                                 to: {
                                   name: "editProduk",
-                                  params: { id: produk.id }
+                                  params: { id: produk.produk_id }
                                 },
-                                id: "edit-" + produk.id
+                                id: "edit-" + produk.produk_id
                               }
                             },
-                            [_vm._v("\n              Edit \n            ")]
+                            [_vm._v("\n                Edit \n              ")]
                           ),
                           _vm._v(" "),
                           _c(
                             "a",
                             {
                               staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#", id: "delete-" + produk.id },
+                              attrs: {
+                                href: "#",
+                                id: "delete-" + produk.produk_id
+                              },
                               on: {
                                 click: function($event) {
                                   _vm.deleteEntry(
-                                    produk.id,
+                                    produk.produk_id,
                                     index,
                                     produk.nama_produk
                                   )
                                 }
                               }
                             },
-                            [_vm._v("\n              Hapus\n            ")]
+                            [_vm._v("\n                Hapus\n              ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-xs btn-success",
+                              attrs: {
+                                to: {
+                                  name: "detailProduk",
+                                  params: { id: produk.produk_id }
+                                },
+                                id: "edit-" + produk.produk_id
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                Detail \n              "
+                              )
+                            ]
                           )
                         ],
                         1
@@ -69116,11 +69145,11 @@ var render = function() {
                       {
                         attrs: { settings: _vm.settings },
                         model: {
-                          value: _vm.produk.satuan_id,
+                          value: _vm.produk.satuans_id,
                           callback: function($$v) {
-                            _vm.$set(_vm.produk, "satuan_id", $$v)
+                            _vm.$set(_vm.produk, "satuans_id", $$v)
                           },
-                          expression: "produk.satuan_id"
+                          expression: "produk.satuans_id"
                         }
                       },
                       _vm._l(_vm.satuans, function(satuan) {
@@ -69182,11 +69211,12 @@ if (false) {
 /* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(302)
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(303)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69205,6 +69235,22 @@ var Component = normalizeComponent(
 )
 Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukEdit.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-041415bf", Component.options)
+  } else {
+    hotAPI.reload("data-v-041415bf", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
 
 module.exports = Component.exports
 
@@ -71731,6 +71777,653 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-18103066", module.exports)
   }
 }
+
+/***/ }),
+/* 302 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            errors: [],
+            satuans: [],
+            produkId: null,
+            url: window.location.origin + window.location.pathname.replace("home", "produk"),
+            produk: {
+                kode_produk: '',
+                nama_produk: '',
+                harga_jual: '',
+                harga_beli: '',
+                satuans_id: ''
+            },
+            message: '',
+            settings: {
+                placeholder: 'Pilih Satuan'
+            }
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+        app.getData();
+        app.selected();
+    },
+
+    methods: {
+        saveForm: function saveForm() {
+            var app = this;
+            var newProduk = app.produk;
+            axios.patch(app.url + '/' + app.produkId, newProduk).then(function (resp) {
+                app.message = 'Sukses : Berhasil Menambah produk ' + app.produk.nama_produk;
+                app.alert(app.message);
+                app.produk.nama_produk = '';
+                app.errors = '';
+                app.$router.replace('/produk');
+            }).catch(function (resp) {
+                app.success = false;
+                app.errors = resp.response.data.errors;
+            });
+        },
+        selected: function selected() {
+            var app = this;
+            axios.get(app.url + '/satuan').then(function (resp) {
+                app.satuans = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load satuan");
+            });
+        },
+        alert: function alert(pesan) {
+            this.$swal({
+                title: "Berhasil!",
+                text: pesan,
+                icon: "success"
+            });
+        },
+        getData: function getData() {
+            var app = this;
+            var id = app.$route.params.id;
+            app.produkId = id;
+
+            axios.get(app.url + '/' + id + '/edit').then(function (resp) {
+                app.produk = resp.data;
+            }).catch(function () {
+                alert("Could not load your produk");
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
+              _vm._v("Produk")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Edit Produk")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Edit Produk")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c(
+            "form",
+            {
+              staticClass: "form-horizontal",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.saveForm()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "kode_produk" }
+                  },
+                  [_vm._v("Kode Produk")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.produk.kode_produk,
+                        expression: "produk.kode_produk"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Kode Produk",
+                      type: "text",
+                      name: "kode_produk",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.produk.kode_produk },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.produk, "kode_produk", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.kode_produk
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.kode_produk[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "nama_produk" }
+                  },
+                  [_vm._v("Nama Produk")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.produk.nama_produk,
+                        expression: "produk.nama_produk"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Name",
+                      type: "text",
+                      name: "nama_produk",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.produk.nama_produk },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.produk, "nama_produk", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.nama_produk
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.nama_produk[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "harga" }
+                  },
+                  [_vm._v("Harga")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.produk.harga_beli,
+                        expression: "produk.harga_beli"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Harga Beli",
+                      type: "text",
+                      name: "harga_beli",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.produk.harga_beli },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.produk, "harga_beli", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.harga_beli
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.harga_beli[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-2" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.produk.harga_jual,
+                        expression: "produk.harga_jual"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Harga Jual",
+                      type: "text",
+                      name: "harga_jual",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.produk.harga_jual },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.produk, "harga_jual", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.harga_jual
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.harga_jual[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "satuans_id" }
+                  },
+                  [_vm._v("Satuan")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-4" },
+                  [
+                    _c(
+                      "selectize-component",
+                      {
+                        attrs: { settings: _vm.settings },
+                        model: {
+                          value: _vm.produk.satuans_id,
+                          callback: function($$v) {
+                            _vm.$set(_vm.produk, "satuans_id", $$v)
+                          },
+                          expression: "produk.satuans_id"
+                        }
+                      },
+                      _vm._l(_vm.satuans, function(satuan) {
+                        return _c(
+                          "option",
+                          { domProps: { value: satuan.id } },
+                          [_vm._v(_vm._s(satuan.nama_satuan))]
+                        )
+                      })
+                    ),
+                    _vm._v(" "),
+                    _vm.errors.satuans_id
+                      ? _c("span", { staticClass: "label label-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.satuans_id[0]))
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0, false, false)
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { id: "btnSimpanproduk", type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-041415bf", module.exports)
+  }
+}
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(306)
+/* template */
+var __vue_template__ = __webpack_require__(305)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\produk\\ProdukDetail.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-460f9d74", Component.options)
+  } else {
+    hotAPI.reload("data-v-460f9d74", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
+              _vm._v("Produk")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Produk")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Dashboard")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "table table-responsive" }, [
+            _c("table", { staticClass: "table" }, [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.produk.nama_produk))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.produk.satuan.nama_satuan))])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Kode")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nama produk")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Harga jual")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Harga beli")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Satuan")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-460f9d74", module.exports)
+  }
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			produk: [],
+			produkId: null,
+			url: window.location.origin + window.location.pathname.replace("home", "produk")
+		};
+	},
+	mounted: function mounted() {
+		var app = this;
+		app.getData();
+	},
+
+	methods: {
+		alert: function alert(pesan) {
+			this.$swal({
+				title: "Berhasil!",
+				text: pesan,
+				icon: "success"
+			});
+		},
+		getData: function getData() {
+			var app = this;
+			var id = app.$route.params.id;
+			app.produkId = id;
+
+			axios.get(app.url + '/detail/' + id).then(function (resp) {
+				app.produk = resp.data;
+			}).catch(function () {
+				alert("Could not load your produk");
+			});
+		}
+	}
+});
 
 /***/ })
 /******/ ]);

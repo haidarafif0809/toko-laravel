@@ -16,30 +16,34 @@
           <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
             <tr v-for="produk , index in produks">
               <td>{{produk.nama_produk}}</td>
-              <td><router-link :to="{name: 'editProduk', params: {id: produk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.id" >
+              <td><router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >
                 Edit 
               </router-link> 
-              <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.id" v-on:click="deleteEntry(produk.id, index,produk.nama_produk)">
+              <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.produk_id" v-on:click="deleteEntry(produk.produk_id, index,produk.nama_produk)">
                 Hapus
-              </a></td>
-            </tr>
-          </tbody>
+              </a>
+              <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + produk.produk_id" >
+                Detail 
+              </router-link>
+            </td>
+          </tr>
+        </tbody>
 
-          <tbody v-else class="data-tidak-ada">
-            <tr>
-              <td colspan="2" class="text-center">Tidak Ada Data</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-      <div align="right">
-        <pagination :data="produksData" v-on:pagination-change-page="getProduks"></pagination>
-      </div>
-
+        <tbody v-else class="data-tidak-ada">
+          <tr>
+            <td colspan="2" class="text-center">Tidak Ada Data</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <vue-simple-spinner v-if="loading"></vue-simple-spinner>
+    <div align="right">
+      <pagination :data="produksData" v-on:pagination-change-page="getProduks"></pagination>
+    </div>
+
   </div>
+</div>
 </template>
 
 

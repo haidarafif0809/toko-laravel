@@ -30,6 +30,7 @@ Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view','ProdukController@view');
 Route::get('/produk/cari','ProdukController@cari');
 Route::get('/produk/satuan','ProdukController@satuan');
+Route::get('/produk/detail/{id}','ProdukController@detail');
 
 // kategori barang
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);

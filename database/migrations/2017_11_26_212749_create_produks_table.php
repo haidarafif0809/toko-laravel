@@ -14,7 +14,7 @@ class CreateProduksTable extends Migration
     public function up()
     {
         Schema::create('produks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('produk_id');
             $table->string('kode_produk');
             $table->string('kode_barcode')->nullable();
             $table->string('nama_produk');
@@ -36,6 +36,8 @@ class CreateProduksTable extends Migration
             $table->string('golongan')->nullable();
             $table->string('golongan_produk')->nullable();
             $table->string('stok_opname')->nullable();
+            $table->unsignedInteger('created_by')->nullable()->index();            
+            $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
     }
