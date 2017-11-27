@@ -11,7 +11,7 @@
                         <p class="panel-title">Table User</p>
                     </div>
                     <div class="panel-body">
-                        <div class="tambah-user">
+                        <div class="tambah">
                             <p>
                                 <router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">
                                     Tambah User
@@ -32,7 +32,7 @@
                                <td>{{ user.name }}</td>
                                <td>{{ user.email }}</td>
                                <td>
-                                <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default" v-bin:id="'edit-' + user.id">
+                                <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default">
                                     Edit
                                 </router-link>
                                 <a href="#"

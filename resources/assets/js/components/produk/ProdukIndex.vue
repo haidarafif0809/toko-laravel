@@ -6,7 +6,7 @@
       <p> <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link></p>
       <div class="table table-responsive">
         <div class="pencarian">
-          <input class="efek" type="text" name="pencarian" v-model="pencarian" placeholder="Pencarian..">
+          <input class="tambah" type="text" name="pencarian" v-model="pencarian" placeholder="Pencarian..">
         </div>
         <table class="table table-striped">
           <thead>

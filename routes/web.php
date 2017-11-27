@@ -21,9 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 	//USER
 Route::resource('user','UserController',['except'=>'show']);
-
 Route::get('/user/view','UserController@view');
 Route::get('/user/pencarian','UserController@pencarian');
+
+	//KAS
+Route::resource('kas','KasController',['except'=>'show']);
+Route::get('/kas/view','KasController@view');
+Route::get('/kas/pencarian','KasController@pencarian');
 
 // Master Data Produk
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
