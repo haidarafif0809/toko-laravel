@@ -37,6 +37,11 @@ import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
 
+//USER
+import KasIndex from './components/kas/KasIndex.vue'
+import KasCreate from './components/kas/KasCreate.vue'
+import KasEdit from './components/kas/KasEdit.vue'
+
 // Master Data Produk
 import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
@@ -79,10 +84,14 @@ const routes = [
 {path: '/satuan-edit',component:SatuanEdit,name:'editSatuan'},
 
  //USER
-
  { path: '/user', component:UserIndex,name:'indexUser' } ,
  { path: '/user/create',component:UserCreate,name:'createUser' },
  { path: '/user/edit/:id',component:UserEdit,name:'editUser' },
+
+  //KAS
+  { path: '/kas', component:KasIndex,name:'indexKas' } ,
+  { path: '/kas/create',component:KasCreate,name:'createKas' },
+  { path: '/kas/edit/:id',component:KasEdit,name:'editKas' },
 
 // kategori produk
 { path: '/kategoriProduk', component: KategoriProdukIndex, name: 'indexKategoriProduk' },

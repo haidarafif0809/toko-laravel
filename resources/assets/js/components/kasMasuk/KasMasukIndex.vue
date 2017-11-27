@@ -13,7 +13,7 @@
             <div class="panel-heading">Kas Masuk</div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <div class="tambah-user">
+                    <div class="tambah">
                         <p> <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary">Create Kas Masuk</router-link></p>        
                     </div>
                     <div class="pencarian">
@@ -67,11 +67,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 

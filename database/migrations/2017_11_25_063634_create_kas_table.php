@@ -15,6 +15,10 @@ class CreateKasTable extends Migration
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('kode_kas');
+            $table->string('nama_kas');
+            $table->unsignedInteger('created_by')->nullable()->index();            
+            $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
     }

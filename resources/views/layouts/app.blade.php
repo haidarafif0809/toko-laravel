@@ -77,6 +77,12 @@
                                         Produk
                                     </router-link>
                                 </li>
+                                <li>
+                                    <router-link :to="{name: 'indexKas'}">
+                                        Kas
+                                    </router-link>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -140,6 +146,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.3') }}"></script>
+<script src="{{ asset('js/app.js?v=1.4') }}"></script>
 </body>
 </html>
