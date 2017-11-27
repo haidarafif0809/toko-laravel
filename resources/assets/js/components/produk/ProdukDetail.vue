@@ -1,34 +1,32 @@
 <template>  
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<ol class="breadcrumb">
-				<li><router-link :to="{name: 'indexProduk'}" >Produk</router-link></li>
-				<li class="active" >Produk</li>    
-			</ol>
-			<div class="panel panel-default">
-				<div class="panel-heading">Dashboard</div>
+	<div class="container">
+		<ol class="breadcrumb">
+			<li><router-link :to="{name: 'indexProduk'}" >Produk</router-link></li>
+			<li class="active" >Produk</li>    
+		</ol>
+		<div class="panel panel-default">
+			<div class="panel-heading">Dashboard</div>
 
-				<div class="panel-body">
-					<div class="table table-responsive">
-						<table class="table">
-							<thead>
-								<th>Kode</th>
-								<th>Nama produk</th>
-								<th>Harga jual</th>
-								<th>Harga beli</th>
-								<th>Satuan</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>{{ produk.kode_produk }}</td>
-									<td>{{ produk.nama_produk }}</td>
-									<td>{{ produk.harga_jual }}</td>
-									<td>{{ produk.harga_beli }}</td>
-									<td>{{ produk.satuan.nama_satuan }}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+			<div class="panel-body">
+				<div class="table table-responsive">
+					<table class="table">
+						<thead>
+							<th>Kode</th>
+							<th>Nama produk</th>
+							<th>Harga jual</th>
+							<th>Harga beli</th>
+							<th>Satuan</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ produk.kode_produk }}</td>
+								<td>{{ produk.nama_produk }}</td>
+								<td>{{ produk.harga_jual }}</td>
+								<td>{{ produk.harga_beli }}</td>
+								<td>{{ produk.satuan.nama_satuan }}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

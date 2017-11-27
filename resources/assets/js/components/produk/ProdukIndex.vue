@@ -1,6 +1,8 @@
 <template>  
-  <div class="panel panel-default">
-    <div class="panel-heading">Dashboard</div>
+  <div class="container">
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Dashboard</div>
 
     <div class="panel-body">
       <p> <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link></p>
@@ -29,19 +31,20 @@
           </tr>
         </tbody>
 
-        <tbody v-else class="data-tidak-ada">
-          <tr>
-            <td colspan="2" class="text-center">Tidak Ada Data</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          <tbody v-else class="data-tidak-ada">
+            <tr>
+              <td colspan="2" class="text-center">Tidak Ada Data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-    <div align="right">
-      <pagination :data="produksData" v-on:pagination-change-page="getProduks"></pagination>
-    </div>
+      <vue-simple-spinner v-if="loading"></vue-simple-spinner>
+      <div align="right">
+        <pagination :data="produksData" v-on:pagination-change-page="getProduks"></pagination>
+      </div>
 
+    </div>
   </div>
 </div>
 </template>
