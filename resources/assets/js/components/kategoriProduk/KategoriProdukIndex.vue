@@ -13,7 +13,7 @@
             <div class="panel-heading">Kategori Produk</div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <div class="tambah-user">
+                    <div class="tambah">
                         <p> <router-link :to="{name: 'createKategoriProduk'}" class="btn btn-primary">Create Kategori Produk</router-link></p>        
                     </div>
                     <div class="pencarian">
@@ -57,11 +57,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                   <pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
-               </div>
-           </div>
-       </div>
-   </div>
+                 <pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
+             </div>
+         </div>
+     </div>
+ </div>
 </template>
 
 

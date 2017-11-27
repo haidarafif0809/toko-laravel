@@ -19,11 +19,11 @@ class ProdukController extends Controller
     }
 
     public function view(){
-        return Produk::paginate(10);
+        return Produk::with('satuan')->paginate(10);
     }
 
     public function cari(Request $request) {
-        $produk = Produk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
         return response()->json($produk);
     }
 
@@ -31,6 +31,12 @@ class ProdukController extends Controller
     {
         $satuan = Satuan::all();
         return response()->json($satuan);
+    }
+
+    public function detail($id) 
+    {
+        $produk = Produk::with('satuan')->where('produk_id', $id)->first();
+        return response()->json($produk);
     }
 
     /**
@@ -105,7 +111,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $produk = Produk::with('satuan')->where('produk_id', $id)->first();
+        // return response()->json($produk);
+        return $produk;
     }
 
     /**
@@ -117,7 +125,28 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [            
+            'kode_produk' => 'required|unique:produks,kode_produk',
+            'kode_produk' => 'required|unique:produks,kode_barcode',
+            'nama_produk' => 'required',
+            'harga_beli' => 'required|numeric',
+            'harga_jual' => 'numeric',
+            'satuans_id' => 'required|exists:satuans,id'
+        ]);
+
+        $produk =   Produk::find($id)->update([
+            'kode_produk' => $request->kode_produk,
+            'nama_produk' => $request->nama_produk,
+            'harga_beli' => $request->harga_beli,
+            'harga_jual' => $request->harga_jual,
+            'satuans_id' => $request->satuans_id
+        ]);
+        if ($produk == true) {
+            return response(200);
+        }
+        else {
+            return response(500);
+        }
     }
 
     /**
@@ -128,6 +157,6 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Produk::destroy($id);
     }
 }
