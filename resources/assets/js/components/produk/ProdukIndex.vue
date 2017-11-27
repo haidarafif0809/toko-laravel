@@ -1,6 +1,6 @@
 <template>  
   <div class="container">
-    
+
     <div class="panel panel-default">
       <div class="panel-heading">Dashboard</div>
 
@@ -17,16 +17,18 @@
             </thead>
             <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
               <tr v-for="produk , index in produks">
-                <td>{{produk.nama_produk}}</td>
+                <td>
+                  <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}">
+                    {{ produk.nama_produk }}
+                  </router-link>
+
+                </td>
                 <td><router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >
                   Edit 
                 </router-link> 
                 <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.produk_id" v-on:click="deleteEntry(produk.produk_id, index,produk.nama_produk)">
                   Hapus
                 </a>
-                <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + produk.produk_id" >
-                  Detail 
-                </router-link>
               </td>
             </tr>
           </tbody>
