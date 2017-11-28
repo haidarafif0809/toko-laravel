@@ -1,11 +1,12 @@
 <template>  
 	<div class="container">
 		<ol class="breadcrumb">
+			<li><router-link :to="{name: 'indexDashboard'}" >Dashboard</router-link></li>
 			<li><router-link :to="{name: 'indexProduk'}" >Produk</router-link></li>
-			<li class="active" >Produk</li>    
+			<li class="active" >Detail</li>    
 		</ol>
 		<div class="panel panel-default">
-			<div class="panel-heading">Dashboard</div>
+			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
 
 			<div class="panel-body">
 				<div class="table table-responsive">
