@@ -137,12 +137,12 @@ export default {
 		},
 		selected2() {
 			var app = this;
-			axios.get(app.url+'/kategori')
+			axios.get(app.url+'/kategoriTransaksi')
 			.then(function (resp) {
-				app.kategori = resp.data;
+				app.kategoriTransaksis = resp.data;
 			})
 			.catch(function (resp) {
-				alert("Could not load kategori ");
+				alert("Could not load kategori transaksi");
 			});
 		},
 

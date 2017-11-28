@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\KasMasuk;
 use App\Kas;
+use App\KategoriTransaksi;
 
 class KasMasukController extends Controller
 {
@@ -38,7 +39,7 @@ class KasMasukController extends Controller
     {
         $this->validate($request, [
             'kas_id' => 'required|exists:kas,id',
-            // 'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'kategori_id' => 'required|exists:kategori_transaksis,id',
             'jumlah' => 'required',
             'keterangan' => 'required'
         ]);
@@ -98,18 +99,23 @@ class KasMasukController extends Controller
 
     public function view() 
     {
-        $page = KasMasuk::with('kas')->paginate(10);
+        $page = KasMasuk::with('kategoriTransaksi')->paginate(10);
         return $page;
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::with('kas')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
+        $search = KasMasuk::with('kategoriTransaksi')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
         return $search;
     }
 
     public function kas() {
         $kas = Kas::all();
         return response()->json($kas);
+    }
+
+    public function kategoriTransaksi() {
+        $kategoriTransaksi = KategoriTransaksi::all();
+        return response()->json($kategoriTransaksi);
     }
 }
