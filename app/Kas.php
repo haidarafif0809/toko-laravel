@@ -10,4 +10,9 @@ class Kas extends Model
 	use AuditableTrait;
 	
 	protected $fillable = ['kode_kas','nama_kas'];
+
+	public function kasMasuk() {
+		return $this->hasOne('App\KasMasuk');
+	}
+
 }

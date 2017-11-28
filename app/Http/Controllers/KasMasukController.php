@@ -85,13 +85,13 @@ class KasMasukController extends Controller
 
     public function view() 
     {
-        $page = KasMasuk::paginate(3);
+        $page = KasMasuk::paginate(10);
         return $page;
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::where("kas_id", "LIKE", "%$request->pencarian")->paginate(3);
+        $search = KasMasuk::where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
         return $search;
     }
 }

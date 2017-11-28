@@ -14,6 +14,6 @@ class KasMasuk extends Model
 	];
 
 	public function kas() {
-		return $this->belongsTo('App\Kas', 'id', 'kas_id');
+		return $this->belongsTo('App\Kas');
 	}
 }

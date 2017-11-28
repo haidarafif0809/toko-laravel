@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8 col-md-offset-2">
 				<ul class="breadcrumb">
 					<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 					<li><router-link :to="{name: 'indexKategoriProduk'}">Kategori Produk</router-link></li>
