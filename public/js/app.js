@@ -75479,6 +75479,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -75582,174 +75584,179 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c(
-            "div",
-            { staticClass: "panel-heading" },
-            [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "tambah-suplier" }, [
-                  _c(
-                    "p",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: {
-                            to: { name: "createSuplier" },
-                            type: "button"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tTambah Suplier\n\t\t\t\t\t\t\t\t\t"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "pencarian" }, [
-                  _c("input", {
-                    directives: [
+        _c(
+          "div",
+          { staticClass: "panel panel-default" },
+          [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body" }, [
+              _c("div", { staticClass: "tambah-suplier" }, [
+                _c(
+                  "p",
+                  [
+                    _c(
+                      "router-link",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.pencarian,
-                        expression: "pencarian"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "pencarian",
-                      placeholder: "pencarian.."
-                    },
-                    domProps: { value: _vm.pencarian },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.pencarian = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("table", { staticClass: "table table-striped" }, [
-                  _vm._m(0, false, false),
-                  _vm._v(" "),
-                  _vm.supliers.length > 0 && _vm.loading == false
-                    ? _c(
-                        "tbody",
-                        { staticClass: "data-ada" },
-                        _vm._l(_vm.supliers, function(suplier, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(suplier.nama_suplier))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(suplier.alamat_suplier))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(suplier.no_telp_suplier))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-xs btn-default",
-                                    attrs: {
-                                      to: {
-                                        name: "editSuplier",
-                                        params: { id: suplier.id }
-                                      },
-                                      id: "edit-" + suplier.id
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t\tEdit \n\t\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.deleteEntry(
-                                          suplier.id,
-                                          index,
-                                          suplier.nama_suplier
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        })
-                      )
-                    : _c("tbody", { staticClass: "data-tidak-ada" }, [
-                        _vm._m(1, false, false)
-                      ])
-                ])
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "createSuplier" }, type: "button" }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tTambah Suplier\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _c("div", { staticClass: "pencarian" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pencarian,
+                      expression: "pencarian"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "pencarian",
+                    placeholder: "pencarian.."
+                  },
+                  domProps: { value: _vm.pencarian },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pencarian = $event.target.value
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.pencarian == ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.supliersData },
-                        on: { "pagination-change-page": _vm.getItems }
+              _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(1, false, false),
+                _vm._v(" "),
+                _vm.supliers.length > 0 && _vm.loading == false
+                  ? _c(
+                      "tbody",
+                      { staticClass: "data-ada" },
+                      _vm._l(_vm.supliers, function(suplier, index) {
+                        return _c("tr", [
+                          _c("td", [_vm._v(_vm._s(suplier.nama_suplier))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(suplier.alamat_suplier))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(suplier.no_telp_suplier))]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "btn btn-xs btn-default",
+                                  attrs: {
+                                    to: {
+                                      name: "editSuplier",
+                                      params: { id: suplier.id }
+                                    },
+                                    id: "edit-" + suplier.id
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t\t\tEdit \n\t\t\t\t\t\t\t\t\t"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteEntry(
+                                        suplier.id,
+                                        index,
+                                        suplier.nama_suplier
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t"
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
                       })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.pencarian != ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.supliersData },
-                        on: { "pagination-change-page": _vm.getsearchData }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ])
+                    )
+                  : _c("tbody", { staticClass: "data-tidak-ada" }, [
+                      _vm._m(2, false, false)
+                    ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+            _vm._v(" "),
+            _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _vm.pencarian == ""
+                  ? _c("pagination", {
+                      attrs: { data: _vm.supliersData },
+                      on: { "pagination-change-page": _vm.getItems }
+                    })
+                  : _vm._e()
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _vm.pencarian != ""
+                  ? _c("pagination", {
+                      attrs: { data: _vm.supliersData },
+                      on: { "pagination-change-page": _vm.getsearchData }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ],
+          1
+        )
       ])
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Suplier")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
