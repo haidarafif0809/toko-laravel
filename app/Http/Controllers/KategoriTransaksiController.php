@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use App\Satuan;
+use App\KategoriTransaksi;
 
-class SatuanController extends Controller
+class KategoriTransaksiController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -29,30 +27,32 @@ class SatuanController extends Controller
         //
     }
 
-    public function view()
-    {
-        return Satuan::paginate(10);
-    }
-    public function pencarian(Request $request)
-    {
-       $cari_satuan = Satuan::where('nama_satuan','LIKE',"%$request->search%")->paginate(10);
-       return $cari_satuan;
-   }
-
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+    public function view()
+    {
+        return KategoriTransaksi::paginate(10);
+    }
+    public function search(request $request)
+    {
+        $search = $request->search;
+        return KategoriTransaksi::where('nama_kategori_transaksi','LIKE',"%$request->search%")->paginate(10);
+    }
+
+
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nama_satuan' =>'required|unique:satuans,nama_satuan'
-        ]);
-        $satuan = Satuan::create(['nama_satuan' => $request->nama_satuan]);
-    }
+     $this->validate($request, [
+        'nama_kategori_transaksi' =>'required|unique:kategori_transaksis,nama_kategori_transaksi'
+    ]);
+     $kategoriTransaksi = KategoriTransaksi::create(['nama_kategori_transaksi' => $request->nama_kategori_transaksi]);
+ }
 
     /**
      * Display the specified resource.
@@ -73,7 +73,7 @@ class SatuanController extends Controller
      */
     public function edit($id)
     {
-        return Satuan::find($id);
+        return KategoriTransaksi::find($id);
     }
 
     /**
@@ -86,9 +86,9 @@ class SatuanController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_satuan' =>'required|unique:satuans,nama_satuan,'.$id
+            'nama_kategori_transaksi' =>'required|unique:kategori_transaksis,nama_kategori_transaksi,'.$id
         ]);
-        $satuan = Satuan::find($id)->update(['nama_satuan' => $request->nama_satuan]);
+        $satuan = KategoriTransaksi::find($id)->update(['nama_kategori_transaksi' => $request->nama_kategori_transaksi]);
     }
 
     /**
@@ -99,7 +99,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = Satuan::destroy($id);
+       $hapus = KategoriTransaksi::destroy($id);
        return $hapus;
    }
 }
