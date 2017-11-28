@@ -102,7 +102,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: 'indexUser'}">
+                                    <router-link :to="{name: 'indexKasKeluar'}">
                                         Kas Keluar
                                     </router-link>
                                 </li>
@@ -151,6 +151,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.6') }}"></script>
+<script src="{{ asset('js/app.js?v=1.8') }}"></script>
 </body>
 </html>

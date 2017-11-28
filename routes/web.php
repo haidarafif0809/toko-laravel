@@ -51,6 +51,14 @@ Route::get('/satuan/pencarian', 'SatuanController@search');
 Route::resource('kasMasuk','KasMasukController',['except'=>'show']);
 Route::get('/kasMasuk/view', 'KasMasukController@view');
 Route::get('/kasMasuk/pencarian', 'KasMasukController@search');
+Route::get('/kasMasuk/kas', 'KasMasukController@kas');
+Route::get('/kasMasuk/kategoriTransaksi', 'KasMasukController@kategoriTransaksi');
+
+// kas Keluar
+Route::resource('kas-keluar','KasKeluarController',['except'=>'show']);
+Route::get('/kas-keluar/view', 'KasKeluarController@view');
+Route::get('/kas-keluar/pencarian', 'KasKeluarController@pencarian');
+
 
 // Kategori Transaksi
 Route::resource('kategoriTransaksi','KategoriTransaksiController',['except'=>'show']);

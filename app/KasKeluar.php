@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Yajra\Auditable\AuditableTrait;
 
 
-class KategoriTransaksi extends Model
+class KasKeluar extends Model
 {
 	use AuditableTrait;
-
 	protected $fillable = [
-		'nama_kategori_transaksi',
+		'kas_id', 'kategori_id', 'jumlah', 'keterangan',
 	];
 
-	public function kasMasuk() 
-	{
-		return $this->hasOne('App\KasMasuk');
+	public function kas() {
+		return $this->belongsTo('App\Kas');
 	}
 }
