@@ -16,6 +16,8 @@ class CreateKategoriTransaksisTable extends Migration
         Schema::create('kategori_transaksis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_kategori_transaksi');
+            $table->unsignedInteger('created_by')->nullable()->index();            
+            $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
     }

@@ -65,7 +65,7 @@ import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
 
 // kas Keluar
 import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
-//import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
+import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
 //import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 
 // Kategori Transaksi
@@ -114,7 +114,7 @@ const routes = [
 
 // kas Masuk
 { path: '/kas-keluar', component: KasKeluarIndex, name: 'indexKasKeluar' },
-//{ path: '/kas-keluar/create', component: KasKeluarCreate, name: 'createKasKeluar' },
+{ path: '/kas-keluar/create', component: KasKeluarCreate, name: 'createKasKeluar' },
 //{ path: '/kas-keluar/edit/:id', component: KasKeluarEdit, name: 'editKasKeluar' },
 
 // master data kategori transaksi

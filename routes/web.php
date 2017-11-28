@@ -53,14 +53,13 @@ Route::get('/kasMasuk/view', 'KasMasukController@view');
 Route::get('/kasMasuk/pencarian', 'KasMasukController@search');
 Route::get('/kasMasuk/kas', 'KasMasukController@kas');
 Route::get('/kasMasuk/kategoriTransaksi', 'KasMasukController@kategoriTransaksi');
-<<<<<<< HEAD
 
-// kas Keluar
+// KAS KELUAR
 Route::resource('kas-keluar','KasKeluarController',['except'=>'show']);
 Route::get('/kas-keluar/view', 'KasKeluarController@view');
 Route::get('/kas-keluar/pencarian', 'KasKeluarController@pencarian');
-=======
->>>>>>> master
+Route::get('/kas-keluar/kas', 'KasKeluarController@kas');
+Route::get('/kas-keluar/kategoriTransaksi', 'KasKeluarController@kategoriTransaksi');
 
 // Kategori Transaksi
 Route::resource('kategoriTransaksi','KategoriTransaksiController',['except'=>'show']);
