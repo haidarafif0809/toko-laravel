@@ -17,10 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProdukSeeder::class);
         $this->call(KategoriProdukSeeder::class);
         $this->call(SatuanSeeder::class);
-<<<<<<< Updated upstream
         $this->call(KasMasukSeeder::class);
-=======
         $this->call(KategoriTransaksiSeeder::class);
->>>>>>> Stashed changes
     }
 }

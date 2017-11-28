@@ -110,7 +110,7 @@ const routes = [
 // master data kategori transaksi
 {path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
 {path: '/kategoriTransaksi-create',component:KategoriTransaksiCreate,name:'createKategoriTransaksi'},
-{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
+{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'}
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
