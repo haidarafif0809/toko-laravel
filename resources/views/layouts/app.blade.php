@@ -53,7 +53,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: ''}">
+                                    <router-link :to="{name: 'indexSuplier'}">
                                         Supplier
                                     </router-link>
                                 </li>
