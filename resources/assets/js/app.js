@@ -63,6 +63,11 @@ import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
 import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
 import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
 
+// Kategori Transaksi
+import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
+import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
+import KategoriTransaksiEdit from './components/kategoriTransaksi/KategoriTransaksiEdit.vue'
+
 const routes = [
 {
 	path: '/',
@@ -100,7 +105,12 @@ const routes = [
 // kas Masuk
 { path: '/kasMasuk', component: KasMasukIndex, name: 'indexKasMasuk' },
 { path: '/kasMasuk/create', component: KasMasukCreate, name: 'createKasMasuk' },
-{ path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' }
+{ path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' },
+
+// master data kategori transaksi
+{path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
+{path: '/kategoriTransaksi-create',component:KategoriTransaksiCreate,name:'createKategoriTransaksi'},
+{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
