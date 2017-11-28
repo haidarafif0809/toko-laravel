@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\KasMasuk;
+use App\Kas;
 
 class KasMasukController extends Controller
 {
@@ -35,7 +36,19 @@ class KasMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kas_id' => 'required|exists:kas,id',
+            // 'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'jumlah' => 'required',
+            'keterangan' => 'required'
+        ]);
+
+        $kasMasuk = KasMasuk::create([
+            'kas_id' => $request->kas_id,
+            'kategori_id' => $request->kategori_id,
+            'jumlah' => $request->jumlah,
+            'keterangan' => $request->keterangan
+        ]);
     }
 
     /**
@@ -85,13 +98,18 @@ class KasMasukController extends Controller
 
     public function view() 
     {
-        $page = KasMasuk::paginate(10);
+        $page = KasMasuk::with('kas')->paginate(10);
         return $page;
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
+        $search = KasMasuk::with('kas')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
         return $search;
+    }
+
+    public function kas() {
+        $kas = Kas::all();
+        return response()->json($kas);
     }
 }
