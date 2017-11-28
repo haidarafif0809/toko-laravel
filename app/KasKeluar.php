@@ -16,4 +16,7 @@ class KasKeluar extends Model
 	public function kas() {
 		return $this->belongsTo('App\Kas');
 	}
+	public function kategoriTransaksi() {
+		return $this->belongsTo('App\KategoriTransaksi');
+	}
 }

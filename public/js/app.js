@@ -29347,18 +29347,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kategoriTransaksi_KategoriTransaksiIndex_vue__ = __webpack_require__(313);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_kategoriTransaksi_KategoriTransaksiIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiCreate_vue__ = __webpack_require__(316);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiEdit_vue__ = __webpack_require__(319);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_suplier_SuplierIndex_vue__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_suplier_SuplierIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_suplier_SuplierIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierCreate_vue__ = __webpack_require__(325);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierEdit_vue__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiIndex_vue__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiCreate_vue__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiEdit_vue__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierIndex_vue__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierCreate_vue__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierEdit_vue__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierEdit_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -29424,7 +29426,7 @@ window.Vue = __webpack_require__(28);
 
 // kas Keluar
 
-//import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
+
 //import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 
 // Kategori Transaksi
@@ -29462,15 +29464,14 @@ var routes = [{
 { path: '/kasMasuk', component: __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_KasMasukIndex_vue___default.a, name: 'indexKasMasuk' }, { path: '/kasMasuk/create', component: __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukCreate_vue___default.a, name: 'createKasMasuk' }, { path: '/kasMasuk/edit/:id', component: __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue___default.a, name: 'editKasMasuk' },
 
 // kas Masuk
-{ path: '/kas-keluar', component: __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue___default.a, name: 'indexKasKeluar' },
-//{ path: '/kas-keluar/create', component: KasKeluarCreate, name: 'createKasKeluar' },
+{ path: '/kas-keluar', component: __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue___default.a, name: 'indexKasKeluar' }, { path: '/kas-keluar/create', component: __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue___default.a, name: 'createKasKeluar' },
 //{ path: '/kas-keluar/edit/:id', component: KasKeluarEdit, name: 'editKasKeluar' },
 
 // master data kategori transaksi
-{ path: '/kategoriTransaksi', component: __WEBPACK_IMPORTED_MODULE_26__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default.a, name: 'indexKategoriTransaksi' }, { path: '/kategoriTransaksi-create', component: __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default.a, name: 'createKategoriTransaksi' }, { path: '/kategoriTransaksi-edit', component: __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a, name: 'editKategoriTransaksi' },
+{ path: '/kategoriTransaksi', component: __WEBPACK_IMPORTED_MODULE_27__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default.a, name: 'indexKategoriTransaksi' }, { path: '/kategoriTransaksi-create', component: __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default.a, name: 'createKategoriTransaksi' }, { path: '/kategoriTransaksi-edit', component: __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a, name: 'editKategoriTransaksi' },
 
 // Suplier
-{ path: '/suplier', component: __WEBPACK_IMPORTED_MODULE_29__components_suplier_SuplierIndex_vue___default.a, name: 'indexSuplier' }, { path: '/suplier/create', component: __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierCreate_vue___default.a, name: 'createSuplier' }, { path: '/suplier/edit/:id', component: __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierEdit_vue___default.a, name: 'editSuplier' }];
+{ path: '/suplier', component: __WEBPACK_IMPORTED_MODULE_30__components_suplier_SuplierIndex_vue___default.a, name: 'indexSuplier' }, { path: '/suplier/create', component: __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierCreate_vue___default.a, name: 'createSuplier' }, { path: '/suplier/edit/:id', component: __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierEdit_vue___default.a, name: 'editSuplier' }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -74580,7 +74581,7 @@ var render = function() {
                         return _c("tr", [
                           _c("td", [_vm._v(_vm._s(kasKeluar.id))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(kasKeluar.kas_id))]),
+                          _c("td", [_vm._v(_vm._s(kasKeluar.kas_id.nama_kas))]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(kasKeluar.kategori_id))]),
                           _vm._v(" "),
@@ -75889,6 +75890,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -75992,174 +75995,179 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c(
-            "div",
-            { staticClass: "panel-heading" },
-            [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "tambah-suplier" }, [
-                  _c(
-                    "p",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: {
-                            to: { name: "createSuplier" },
-                            type: "button"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tTambah Suplier\n\t\t\t\t\t\t\t\t\t"
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "pencarian" }, [
-                  _c("input", {
-                    directives: [
+        _c(
+          "div",
+          { staticClass: "panel panel-default" },
+          [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body" }, [
+              _c("div", { staticClass: "tambah-suplier" }, [
+                _c(
+                  "p",
+                  [
+                    _c(
+                      "router-link",
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.pencarian,
-                        expression: "pencarian"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "pencarian",
-                      placeholder: "pencarian.."
-                    },
-                    domProps: { value: _vm.pencarian },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.pencarian = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("table", { staticClass: "table table-striped" }, [
-                  _vm._m(0, false, false),
-                  _vm._v(" "),
-                  _vm.supliers.length > 0 && _vm.loading == false
-                    ? _c(
-                        "tbody",
-                        { staticClass: "data-ada" },
-                        _vm._l(_vm.supliers, function(suplier, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(suplier.nama_suplier))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(suplier.alamat_suplier))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(suplier.no_telp_suplier))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-xs btn-default",
-                                    attrs: {
-                                      to: {
-                                        name: "editSuplier",
-                                        params: { id: suplier.id }
-                                      },
-                                      id: "edit-" + suplier.id
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t\tEdit \n\t\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.deleteEntry(
-                                          suplier.id,
-                                          index,
-                                          suplier.nama_suplier
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        })
-                      )
-                    : _c("tbody", { staticClass: "data-tidak-ada" }, [
-                        _vm._m(1, false, false)
-                      ])
-                ])
+                        staticClass: "btn btn-primary",
+                        attrs: { to: { name: "createSuplier" }, type: "button" }
+                      },
+                      [
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tTambah Suplier\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _c("div", { staticClass: "pencarian" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pencarian,
+                      expression: "pencarian"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "pencarian",
+                    placeholder: "pencarian.."
+                  },
+                  domProps: { value: _vm.pencarian },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pencarian = $event.target.value
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.pencarian == ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.supliersData },
-                        on: { "pagination-change-page": _vm.getItems }
+              _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(1, false, false),
+                _vm._v(" "),
+                _vm.supliers.length > 0 && _vm.loading == false
+                  ? _c(
+                      "tbody",
+                      { staticClass: "data-ada" },
+                      _vm._l(_vm.supliers, function(suplier, index) {
+                        return _c("tr", [
+                          _c("td", [_vm._v(_vm._s(suplier.nama_suplier))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(suplier.alamat_suplier))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(suplier.no_telp_suplier))]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "btn btn-xs btn-default",
+                                  attrs: {
+                                    to: {
+                                      name: "editSuplier",
+                                      params: { id: suplier.id }
+                                    },
+                                    id: "edit-" + suplier.id
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t\t\tEdit \n\t\t\t\t\t\t\t\t\t"
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteEntry(
+                                        suplier.id,
+                                        index,
+                                        suplier.nama_suplier
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t"
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
                       })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.pencarian != ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.supliersData },
-                        on: { "pagination-change-page": _vm.getsearchData }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ])
+                    )
+                  : _c("tbody", { staticClass: "data-tidak-ada" }, [
+                      _vm._m(2, false, false)
+                    ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+            _vm._v(" "),
+            _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _vm.pencarian == ""
+                  ? _c("pagination", {
+                      attrs: { data: _vm.supliersData },
+                      on: { "pagination-change-page": _vm.getItems }
+                    })
+                  : _vm._e()
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _vm.pencarian != ""
+                  ? _c("pagination", {
+                      attrs: { data: _vm.supliersData },
+                      on: { "pagination-change-page": _vm.getsearchData }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ],
+          1
+        )
       ])
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Suplier")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -77112,6 +77120,541 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(340)
+/* template */
+var __vue_template__ = __webpack_require__(341)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\kasKeluar\\KasKeluarCreate.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9e5c038a", Component.options)
+  } else {
+    hotAPI.reload("data-v-9e5c038a", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 340 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			errors: [],
+			kas: [],
+			kategoriTransaksis: [],
+			url: window.location.origin + window.location.pathname.replace("home", "kas-keluar"),
+			kasKeluar: {
+				kas_id: '',
+				kategori_id: '',
+				jumlah: '',
+				keterangan: ''
+			},
+			message: '',
+			settings: {
+				placeholder: 'Kas'
+			},
+			setting: {
+				placeholder: 'Kategori'
+			}
+
+		};
+	},
+	mounted: function mounted() {
+		var app = this;
+		app.selected();
+		app.selected2();
+	},
+
+	methods: {
+		saveForm: function saveForm() {
+			var app = this;
+			var newKategoriProduk = app.kasKeluar;
+			axios.post(app.url, newKategoriProduk).then(function (resp) {
+				app.message = 'Sukses : Berhasil Menambah Kas Keluar ' + app.kasKeluar.kas_id;
+				app.alert(app.message);
+				app.kasKeluar.kas_id = '';
+				app.kasKeluar.kategori_id = '';
+				app.kasKeluar.jumlah = '';
+				app.kasKeluar.keterangan = '';
+				app.errors = '';
+				app.$router.replace('/kas-keluar');
+			}).catch(function (resp) {
+				app.success = false;
+				app.errors = resp.response.data.errors;
+			});
+		},
+		selected: function selected() {
+			var app = this;
+			axios.get(app.url + '/kas').then(function (resp) {
+				app.kas = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load kas ");
+			});
+		},
+		selected2: function selected2() {
+			var app = this;
+			axios.get(app.url + '/kategoriTransaksi').then(function (resp) {
+				app.kategoriTransaksis = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load kategori transaksi");
+			});
+		},
+		alert: function alert(pesan) {
+			this.$swal({
+				title: "Berhasil!",
+				text: pesan,
+				icon: "success"
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexKasKeluar" } } }, [
+            _vm._v("Kas Keluar")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Kas Keluar")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c(
+              "form",
+              {
+                staticClass: "form-horizontal",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.saveForm()
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "kas_id" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\t\t\tKas\n\t\t\t\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4" },
+                    [
+                      _c(
+                        "selectize-component",
+                        {
+                          attrs: { settings: _vm.settings },
+                          model: {
+                            value: _vm.kasKeluar.kas_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.kasKeluar, "kas_id", $$v)
+                            },
+                            expression: "kasKeluar.kas_id"
+                          }
+                        },
+                        _vm._l(_vm.kas, function(ka, index) {
+                          return _c("option", { domProps: { value: ka.id } }, [
+                            _vm._v(_vm._s(ka.nama_kas))
+                          ])
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.errors.kas_id
+                        ? _c("span", { staticClass: "label label-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.kas_id[0]))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "kategori_id" }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t\t\tKategori Transaksi\n\t\t\t\t\t\t\t"
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4" },
+                    [
+                      _c(
+                        "selectize-component",
+                        {
+                          attrs: { settings: _vm.setting },
+                          model: {
+                            value: _vm.kasKeluar.kategori_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.kasKeluar, "kategori_id", $$v)
+                            },
+                            expression: "kasKeluar.kategori_id"
+                          }
+                        },
+                        _vm._l(_vm.kategoriTransaksis, function(
+                          kategoriTransaksi,
+                          index
+                        ) {
+                          return _c(
+                            "option",
+                            { domProps: { value: kategoriTransaksi.id } },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  kategoriTransaksi.nama_kategori_transaksi
+                                )
+                              )
+                            ]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.errors.kategori_id
+                        ? _c("span", { staticClass: "label label-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.kategori_id[0]))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "jumlah" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\t\t\tJumlah\n\t\t\t\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasKeluar.jumlah,
+                          expression: "kasKeluar.jumlah"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        autocomplete: "off",
+                        placeholder: "Nama Produk",
+                        type: "text",
+                        name: "jumlah",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.kasKeluar.jumlah },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.kasKeluar, "jumlah", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.jumlah
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "label label-danger",
+                            attrs: { id: "name_error" }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.jumlah[0]) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "keterangan" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\t\t\tKeterangan\n\t\t\t\t\t\t\t")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasKeluar.keterangan,
+                          expression: "kasKeluar.keterangan"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        autocomplete: "off",
+                        placeholder: "Nama Produk",
+                        type: "text",
+                        name: "keterangan",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.kasKeluar.keterangan },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.kasKeluar,
+                            "keterangan",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.keterangan
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "label label-danger",
+                            attrs: { id: "name_error" }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.keterangan[0]) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1, false, false)
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" })
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Kas Keluar")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { id: "btnSimpanKategoriProduk", type: "submit" }
+          },
+          [_vm._v(" \n\t\t\t\t\t\t\t\t\tTambah\n\t\t\t\t\t\t\t\t")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9e5c038a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

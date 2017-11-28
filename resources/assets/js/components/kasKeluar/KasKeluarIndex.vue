@@ -19,9 +19,9 @@
                             </p>
                         </div>
                         <div class="pencarian">
-                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                       </div>
-                       <table class="table table-striped table-hover">
+                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                     </div>
+                     <table class="table table-striped table-hover">
                         <thead>
                             <th>No Faktur</th>
                             <th>Kas</th>
@@ -34,7 +34,7 @@
                         <tbody v-if="kasKeluars.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kasKeluar , index in kasKeluars" >
                                 <td>{{kasKeluar.id}}</td>
-                                <td>{{kasKeluar.kas_id}}</td>
+                                <td>{{kasKeluar.kas_id.nama_kas}}</td>
                                 <td>{{kasKeluar.kategori_id}}</td>
                                 <td>{{kasKeluar.jumlah}}</td>
                                 <td>{{kasKeluar.keterangan}}</td>
