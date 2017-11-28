@@ -14,5 +14,8 @@ class Kas extends Model
 	public function kasMasuk() {
 		return $this->hasOne('App\KasMasuk');
 	}
+	public function kasMasuk() {
+		return $this->hasOne('App\KasKeluar');
+	}
 
 }

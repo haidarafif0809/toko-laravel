@@ -37,7 +37,7 @@ import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
 
-//USER
+//KAS
 import KasIndex from './components/kas/KasIndex.vue'
 import KasCreate from './components/kas/KasCreate.vue'
 import KasEdit from './components/kas/KasEdit.vue'
@@ -62,6 +62,11 @@ import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.v
 import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
 import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
 import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
+
+// kas Keluar
+import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
+//import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
+//import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 
 // Kategori Transaksi
 import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
@@ -106,6 +111,11 @@ const routes = [
 { path: '/kasMasuk', component: KasMasukIndex, name: 'indexKasMasuk' },
 { path: '/kasMasuk/create', component: KasMasukCreate, name: 'createKasMasuk' },
 { path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' },
+
+// kas Masuk
+{ path: '/kas-keluar', component: KasKeluarIndex, name: 'indexKasKeluar' },
+//{ path: '/kas-keluar/create', component: KasKeluarCreate, name: 'createKasKeluar' },
+//{ path: '/kas-keluar/edit/:id', component: KasKeluarEdit, name: 'editKasKeluar' },
 
 // master data kategori transaksi
 {path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
