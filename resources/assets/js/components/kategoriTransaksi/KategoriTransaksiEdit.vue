@@ -1,39 +1,42 @@
 <template>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<ul class="breadcrumb">
-					<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-					<li><router-link :to="{name: 'indexKategoriTransaksi'}">Kategori Transaksi</router-link></li>
-					<li class="active">Tambah Kategori Transaksi</li>
-				</ul>
+		<ul class="breadcrumb">
+			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+			<li><router-link :to="{name: 'indexKategoriTransaksi'}">Kategori Transaksi</router-link></li>
+			<li class="active">Tambah Kategori Transaksi</li>
+		</ul>
 
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title"> Kategori Transaksi </h4>
 					</div>
-					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
-						<div class="form-group">
-							<label for="nama_kategori_transaksi" class="col-md-2 control-label">Nama Kategori Transaksi</label>
-							<div class="col-md-4">
-								<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Transaksi" type="nama_kategori_transaksi" v-model="kategoriTransaksi.nama_kategori_transaksi" name="nama_kategori_transaksi"  autofocus="">
-								<span v-if="errors.nama_kategori_transaksi" class="label label-danger">{{ errors.nama_kategori_transaksi[0] }}</span>
+					<div class="panel-body">
+						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
+							<div class="form-group">
+								<label for="nama_kategori_transaksi" class="col-md-2 control-label">Nama Kategori Transaksi</label>
+								<div class="col-md-4">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Transaksi" type="nama_kategori_transaksi" v-model="kategoriTransaksi.nama_kategori_transaksi" name="nama_kategori_transaksi"  autofocus="">
+									<span v-if="errors.nama_kategori_transaksi" class="label label-danger">{{ errors.nama_kategori_transaksi[0] }}</span>
+
+								</div>
+
 
 							</div>
-
-
-						</div>
-						<div class="form-group">
-							<div class="col-md-4 col-md-offset-2">
-								<button class="btn btn-primary" id="btnSimpanKategoriTransaksi" type="submit">Submit</button>
+							<div class="form-group">
+								<div class="col-md-4 col-md-offset-2">
+									<button class="btn btn-primary" id="btnSimpanKategoriTransaksi" type="submit">Submit</button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>

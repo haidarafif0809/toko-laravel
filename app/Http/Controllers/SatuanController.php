@@ -33,11 +33,11 @@ class SatuanController extends Controller
     {
         return Satuan::paginate(10);
     }
-    public function pencarian(Request $request)
+    public function search(Request $request)
     {
-       $cari_satuan = Satuan::where('nama_satuan','LIKE',"%$request->search%")->paginate(10);
-       return $cari_satuan;
-   }
+     $cari_satuan = Satuan::where('nama_satuan','LIKE',"%$request->search%")->paginate(10);
+     return $cari_satuan;
+ }
 
 
     /**
@@ -99,7 +99,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = Satuan::destroy($id);
-       return $hapus;
-   }
+     $hapus = Satuan::destroy($id);
+     return $hapus;
+ }
 }

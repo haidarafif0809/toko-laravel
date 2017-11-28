@@ -125,7 +125,6 @@ const routes = [
 {path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
 {path: '/kategoriTransaksi-create',component:KategoriTransaksiCreate,name:'createKategoriTransaksi'},
 {path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
-{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
 
 // Suplier
 {path: '/suplier', component: SuplierIndex, name:'indexSuplier'},
