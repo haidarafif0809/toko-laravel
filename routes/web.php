@@ -61,7 +61,13 @@ Route::get('/kas-keluar/pencarian', 'KasKeluarController@pencarian');
 Route::get('/kas-keluar/kas', 'KasKeluarController@kas');
 Route::get('/kas-keluar/kategoriTransaksi', 'KasKeluarController@kategoriTransaksi');
 
+
 // Kategori Transaksi
 Route::resource('kategoriTransaksi','KategoriTransaksiController',['except'=>'show']);
 Route::get('/kategoriTransaksi/view', 'KategoriTransaksiController@view');
 Route::get('/kategoriTransaksi/pencarian', 'KategoriTransaksiController@search');
+
+// Suplier 
+Route::resource('suplier','SuplierController',['except'=>'show']);
+Route::get('/suplier/view', 'SuplierController@view');
+Route::get('/suplier/search', 'SuplierController@search');

@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KasMasukSeeder::class);
         $this->call(KaskeluarSeeder::class);
         $this->call(KategoriTransaksiSeeder::class);
+        $this->call(SuplierSeeder::class);
     }
 }

@@ -73,6 +73,10 @@ import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTrans
 import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
 import KategoriTransaksiEdit from './components/kategoriTransaksi/KategoriTransaksiEdit.vue'
 
+// Suplier 
+import SuplierIndex from './components/suplier/SuplierIndex.vue'
+import SuplierCreate from './components/suplier/SuplierCreate.vue'
+import SuplierEdit from './components/suplier/SuplierEdit.vue'
 const routes = [
 {
 	path: '/',
@@ -121,6 +125,13 @@ const routes = [
 {path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
 {path: '/kategoriTransaksi-create',component:KategoriTransaksiCreate,name:'createKategoriTransaksi'},
 {path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
+{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
+
+// Suplier
+{path: '/suplier', component: SuplierIndex, name:'indexSuplier'},
+{path: '/suplier/create', component:SuplierCreate, name:'createSuplier'},
+{path: '/suplier/edit/:id', component:SuplierEdit, name:'editSuplier'},
+
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
