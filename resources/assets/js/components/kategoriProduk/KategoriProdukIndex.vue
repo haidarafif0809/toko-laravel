@@ -9,6 +9,11 @@
 
 <template>  
     <div class="container">
+        <ul class="breadcrumb">
+            <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+            <li class="active">Kategori Produk</li>
+        </ul>
+
         <div class="panel panel-default">
             <div class="panel-heading">Kategori Produk</div>
             <div class="panel-body">

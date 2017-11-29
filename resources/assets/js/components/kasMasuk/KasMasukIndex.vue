@@ -9,6 +9,11 @@
 
 <template>  
     <div class="container">
+        <ul class="breadcrumb">
+            <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+            <li class="active">Kas Masuk</li>
+        </ul>
+
         <div class="panel panel-default">
             <div class="panel-heading">Kas Masuk</div>
             <div class="panel-body">
@@ -32,17 +37,17 @@
                         <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kasMasuk , index in kasMasuks" >
                                 <td>{{kasMasuk.id}}</td>
-                                <td>{{kasMasuk.kas_id}}</td>
+                                <td>{{kasMasuk.ka}}</td>
                                 <td>{{kasMasuk.kategori_id}}</td>
                                 <td>{{kasMasuk.jumlah}}</td>
                                 <td>{{kasMasuk.keterangan}}</td>
                                 <td>{{kasMasuk.created_at}}</td>
                                 <td>
-                                    <router-link :to="{name: 'editKasMasuk', params: {kas_id: kasMasuk.kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.kas_id" >
+                                    <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.id" >
                                     Edit  </router-link> 
                                     <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKasMasuk(kasMasuk.id, index,kasMasuk.kas_id)">Delete</a>
+                                    v-on:click="deleteKasMasuk(kasMasuk.id, index,kasMasuk.id)">Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -67,11 +72,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-               </div>
-           </div>
-       </div>
-   </div>
+                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+             </div>
+         </div>
+     </div>
+ </div>
 </template>
 
 

@@ -40,7 +40,7 @@ class KasMasukController extends Controller
         $this->validate($request, [
             'kas_id' => 'required|exists:kas,id',
             'kategori_id' => 'required|exists:kategori_transaksis,id',
-            'jumlah' => 'required',
+            'jumlah' => 'required|numeric',
             'keterangan' => 'required'
         ]);
 
@@ -71,7 +71,8 @@ class KasMasukController extends Controller
      */
     public function edit($id)
     {
-        //
+        return KasMasuk::with('kas')->find($id);
+
     }
 
     /**
@@ -83,7 +84,25 @@ class KasMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kas_id' => 'required|exists:kas,id',
+            'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'jumlah' => 'required|numeric',
+            'keterangan' => 'required'
+        ]);
+        $update = KasMasuk::find($id)->update([
+            'kas_id' => $request->kas_id,
+            'kategori_id' => $Request->kategori_id,
+            'jumlah' => $request->jumlah,
+            'keterangan' => $request->keterangan
+        ]);
+        if ($update == true) {
+            return response(200);
+        }
+        else {
+            return response(500);
+        }
+
     }
 
     /**
