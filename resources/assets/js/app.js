@@ -77,6 +77,11 @@ import KategoriTransaksiEdit from './components/kategoriTransaksi/KategoriTransa
 import SuplierIndex from './components/suplier/SuplierIndex.vue'
 import SuplierCreate from './components/suplier/SuplierCreate.vue'
 import SuplierEdit from './components/suplier/SuplierEdit.vue'
+
+// master data pelanggan
+import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
+import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
+import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
 const routes = [
 {
 	path: '/',
@@ -130,6 +135,11 @@ const routes = [
 {path: '/suplier', component: SuplierIndex, name:'indexSuplier'},
 {path: '/suplier/create', component:SuplierCreate, name:'createSuplier'},
 {path: '/suplier/edit/:id', component:SuplierEdit, name:'editSuplier'},
+
+// Master data pelanggan
+{path: '/pelanggan',component:PelangganIndex,name:'indexPelanggan'},
+{path: '/pelanggan-create',component:PelangganCreate,name:'createPelanggan'},
+{path: '/pelanggan-edit',component:PelangganEdit,name:'editPelanggan'},
 
 ]
 /**
