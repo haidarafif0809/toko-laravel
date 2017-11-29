@@ -52,7 +52,6 @@
 					</table>
 				</div>
 				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 				<div align="right"><pagination :data="supliersData" v-on:pagination-change-page="getItems" v-if="pencarian == '' "></pagination></div>
 				<div align="right"><pagination :data="supliersData" v-on:pagination-change-page="getsearchData" v-if="pencarian != '' "></pagination></div>
 			</div>
