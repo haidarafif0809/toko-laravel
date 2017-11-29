@@ -2,15 +2,15 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexKasMasuk'}">Kas Masuk</router-link></li>
-			<li class="active">Tambah Kas Masuk</li>
+			<li><router-link :to="{name: 'indexKasKeluar'}">Kas Keluar</router-link></li>
+			<li class="active">Tambah Kas Keluar</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Tambah Kas Masuk</p>
+						<p class="panel-title">Tambah Kas Keluar</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
@@ -19,7 +19,7 @@
 									Kas
 								</label>
 								<div class="col-md-4">
-									<selectize-component v-model="kasMasuk.kas_id" :settings="settings"> 
+									<selectize-component v-model="kasKeluar.kas_id" :settings="settings"> 
 										<option v-for="ka, index in kas" v-bind:value="ka.id" >{{ ka.nama_kas }}</option>
 									</selectize-component>
 									<span v-if="errors.kas_id" class="label label-danger">{{ errors.kas_id[0] }}</span>
@@ -30,7 +30,7 @@
 									Kategori Transaksi
 								</label>
 								<div class="col-md-4">
-									<selectize-component v-model="kasMasuk.kategori_id" :settings="setting"> 
+									<selectize-component v-model="kasKeluar.kategori_id" :settings="setting"> 
 										<option v-for="kategoriTransaksi, index in kategoriTransaksis" v-bind:value="kategoriTransaksi.id" >{{ kategoriTransaksi.nama_kategori_transaksi }}</option>
 									</selectize-component>
 									<span v-if="errors.kategori_id" class="label label-danger">{{ errors.kategori_id[0] }}</span>
@@ -41,7 +41,7 @@
 									Jumlah
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasMasuk.jumlah" name="jumlah"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasKeluar.jumlah" name="jumlah"  autofocus="">
 									<span v-if="errors.jumlah" id="name_error" class="label label-danger">
 										{{ errors.jumlah[0] }}
 									</span>
@@ -52,7 +52,7 @@
 									Keterangan
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasMasuk.keterangan" name="keterangan"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasKeluar.keterangan" name="keterangan"  autofocus="">
 									<span v-if="errors.keterangan" id="name_error" class="label label-danger">
 										{{ errors.keterangan[0] }}
 									</span>
@@ -82,8 +82,8 @@ export default {
 			errors: [],
 			kas: [],
 			kategoriTransaksis: [],
-			url : window.location.origin+(window.location.pathname).replace("home", "kasMasuk"),
-			kasMasuk: {
+			url : window.location.origin+(window.location.pathname).replace("home", "kas-keluar"),
+			kasKeluar: {
 				kas_id: '',
 				kategori_id: '',
 				jumlah: '',
@@ -108,17 +108,17 @@ export default {
 	methods: {
 		saveForm() {
 			var app = this;
-			var newKategoriProduk = app.kasMasuk;
+			var newKategoriProduk = app.kasKeluar;
 			axios.post(app.url, newKategoriProduk)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Kas Masuk '+ app.kasMasuk.kas_id;
+				app.message = 'Sukses : Berhasil Menambah Kas Keluar '+ app.kasKeluar.kas_id;
 				app.alert(app.message);
-				app.kasMasuk.kas_id = ''
-				app.kasMasuk.kategori_id = ''
-				app.kasMasuk.jumlah = ''
-				app.kasMasuk.keterangan = ''
+				app.kasKeluar.kas_id = ''
+				app.kasKeluar.kategori_id = ''
+				app.kasKeluar.jumlah = ''
+				app.kasKeluar.keterangan = ''
 				app.errors = '';
-				app.$router.replace('/kasMasuk');
+				app.$router.replace('/kas-keluar');
 			})
 			.catch(function (resp) {
 				app.success = false;

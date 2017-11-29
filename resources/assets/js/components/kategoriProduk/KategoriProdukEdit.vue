@@ -1,13 +1,12 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<ul class="breadcrumb">
-					<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-					<li><router-link :to="{name: 'indexKategoriProduk'}">Kategori Produk</router-link></li>
-					<li class="active">Tambah Kategori Produk</li>
-				</ul>
-
+			<ul class="breadcrumb">
+				<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+				<li><router-link :to="{name: 'indexKategoriProduk'}">Kategori Produk</router-link></li>
+				<li class="active">Tambah Kategori Produk</li>
+			</ul>
+			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title"> Kategori Produk </h4>

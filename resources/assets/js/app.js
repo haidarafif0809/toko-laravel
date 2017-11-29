@@ -37,7 +37,7 @@ import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
 
-//USER
+//KAS
 import KasIndex from './components/kas/KasIndex.vue'
 import KasCreate from './components/kas/KasCreate.vue'
 import KasEdit from './components/kas/KasEdit.vue'
@@ -63,6 +63,20 @@ import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
 import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
 import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
 
+// kas Keluar
+import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
+import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
+//import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
+
+// Kategori Transaksi
+import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
+import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
+import KategoriTransaksiEdit from './components/kategoriTransaksi/KategoriTransaksiEdit.vue'
+
+// Suplier 
+import SuplierIndex from './components/suplier/SuplierIndex.vue'
+import SuplierCreate from './components/suplier/SuplierCreate.vue'
+import SuplierEdit from './components/suplier/SuplierEdit.vue'
 const routes = [
 {
 	path: '/',
@@ -100,7 +114,23 @@ const routes = [
 // kas Masuk
 { path: '/kasMasuk', component: KasMasukIndex, name: 'indexKasMasuk' },
 { path: '/kasMasuk/create', component: KasMasukCreate, name: 'createKasMasuk' },
-{ path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' }
+{ path: '/kasMasuk/edit/:id', component: KasMasukEdit, name: 'editKasMasuk' },
+
+// kas Masuk
+{ path: '/kas-keluar', component: KasKeluarIndex, name: 'indexKasKeluar' },
+{ path: '/kas-keluar/create', component: KasKeluarCreate, name: 'createKasKeluar' },
+//{ path: '/kas-keluar/edit/:id', component: KasKeluarEdit, name: 'editKasKeluar' },
+
+// master data kategori transaksi
+{path: '/kategoriTransaksi',component:KategoriTransaksiIndex,name:'indexKategoriTransaksi'},
+{path: '/kategoriTransaksi-create',component:KategoriTransaksiCreate,name:'createKategoriTransaksi'},
+{path: '/kategoriTransaksi-edit',component:KategoriTransaksiEdit,name:'editKategoriTransaksi'},
+
+// Suplier
+{path: '/suplier', component: SuplierIndex, name:'indexSuplier'},
+{path: '/suplier/create', component:SuplierCreate, name:'createSuplier'},
+{path: '/suplier/edit/:id', component:SuplierEdit, name:'editSuplier'},
+
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

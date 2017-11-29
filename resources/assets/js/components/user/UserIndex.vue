@@ -89,7 +89,7 @@ mounted() {
 },
 watch: {
         // whenever question changes, this function will run
-        search: function (newQuestion) {
+        pencarian: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
@@ -117,7 +117,8 @@ watch: {
     			.then(function (resp) {
     				app.getUsers();
     				app.alert(name)
-    			})
+                    app.$router.replace('/user');
+                })
     			.catch(function (resp) {
     				alert("Could not delete user");
     			});
@@ -140,7 +141,6 @@ watch: {
     			app.loading = false
     			alert("Could not load users");
     		});
-
 
     	},
     	alert(name) {

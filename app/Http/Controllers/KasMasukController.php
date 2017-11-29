@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\KasMasuk;
+use App\Kas;
+use App\KategoriTransaksi;
 
 class KasMasukController extends Controller
 {
@@ -35,7 +37,19 @@ class KasMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kas_id' => 'required|exists:kas,id',
+            'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'jumlah' => 'required|numeric',
+            'keterangan' => 'required'
+        ]);
+
+        $kasMasuk = KasMasuk::create([
+            'kas_id' => $request->kas_id,
+            'kategori_id' => $request->kategori_id,
+            'jumlah' => $request->jumlah,
+            'keterangan' => $request->keterangan
+        ]);
     }
 
     /**
@@ -57,7 +71,8 @@ class KasMasukController extends Controller
      */
     public function edit($id)
     {
-        //
+        return KasMasuk::with('kas')->find($id);
+
     }
 
     /**
@@ -69,7 +84,25 @@ class KasMasukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kas_id' => 'required|exists:kas,id',
+            'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'jumlah' => 'required|numeric',
+            'keterangan' => 'required'
+        ]);
+        $update = KasMasuk::find($id)->update([
+            'kas_id' => $request->kas_id,
+            'kategori_id' => $Request->kategori_id,
+            'jumlah' => $request->jumlah,
+            'keterangan' => $request->keterangan
+        ]);
+        if ($update == true) {
+            return response(200);
+        }
+        else {
+            return response(500);
+        }
+
     }
 
     /**
@@ -85,13 +118,23 @@ class KasMasukController extends Controller
 
     public function view() 
     {
-        $page = KasMasuk::paginate(3);
+        $page = KasMasuk::with('kategoriTransaksi')->paginate(10);
         return $page;
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::where("kas_id", "LIKE", "%$request->pencarian")->paginate(3);
+        $search = KasMasuk::with('kategoriTransaksi')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
         return $search;
+    }
+
+    public function kas() {
+        $kas = Kas::all();
+        return response()->json($kas);
+    }
+
+    public function kategoriTransaksi() {
+        $kategoriTransaksi = KategoriTransaksi::all();
+        return response()->json($kategoriTransaksi);
     }
 }
