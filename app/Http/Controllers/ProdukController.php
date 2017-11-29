@@ -67,20 +67,14 @@ class ProdukController extends Controller
     {
         //validate
         $this->validate($request, [
-          // 'kode_barcode'        => 'unique:produks,kode_barcode',
-          // 'kode_barcode'         => 'unique:produks,kode_produk',
-          'kode_produk'        => 'required|unique:produks,kode_produk',
-          'nama_produk'         => 'required',
-          // 'golongan_produk'     => 'required',
+            'kode_produk'        => 'required|unique:produks,kode_produk',
+            'nama_produk'         => 'required',
           // 'kategori_produks_id' => 'required|exists:kategori_produks,id',
-          'harga_beli'          => 'required|numeric',
-          'harga_jual'          => 'numeric',
-          'satuans_id'          => 'required|exists:satuans,id'
-          // 'status'              => 'required',
-          // 'supliers_id'         => 'required|exists:supliers,id',
-          // 'limit_stok'          => 'numeric',
-          // 'over_stok'           => 'numeric'
-      ]);
+            'harga_beli'          => 'required|numeric',
+            'harga_jual'          => 'numeric',
+            'satuans_id'          => 'required|exists:satuans,id'
+          // 'status_jual'              => 'required'
+        ]);
 
         //insert
         $produk = Produk::create([
@@ -92,10 +86,7 @@ class ProdukController extends Controller
             'harga_beli'            =>$request->harga_beli,
             'harga_jual'            =>$request->harga_jual,
             'satuans_id'            =>$request->satuans_id
-            // 'status'                =>$request->status,
-            // 'supliers_id'           =>$request->supliers_id,
-            // 'limit_stok'            =>$request->limit_stok,
-            // 'over_stok'             =>$request->over_stok
+            // 'status_jual'                =>$request->status_jual
         ]);
     }
 
@@ -132,8 +123,9 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [            
-            'kode_produk' => 'required|unique:produks,kode_produk',
+        $this->validate($request, [
+            'kode_produk'        => 'required',
+            // 'kode_produk' => 'required|unique:produks,kode_produk,'. $id. ', produk_id',
             'nama_produk' => 'required',
             'harga_beli' => 'required|numeric',
             'harga_jual' => 'numeric',

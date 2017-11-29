@@ -9,11 +9,10 @@
 			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
 
 			<div class="panel-body">
-				<div class="table table-responsive">
+				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<th>Kode</th>
-							<th>Nama produk</th>
 							<th>Harga jual</th>
 							<th>Harga beli</th>
 							<th>Satuan</th>
@@ -21,7 +20,6 @@
 						<tbody>
 							<tr>
 								<td>{{ produk.kode_produk }}</td>
-								<td>{{ produk.nama_produk }}</td>
 								<td>{{ produk.harga_jual }}</td>
 								<td>{{ produk.harga_beli }}</td>
 								<td>{{ satuan.nama_satuan }}</td>
