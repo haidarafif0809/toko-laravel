@@ -18,4 +18,8 @@ class KategoriTransaksi extends Model
 	{
 		return $this->hasOne('App\KasMasuk');
 	}
+	public function kasKeluar() 
+	{
+		return $this->hasOne('App\KasKeluar');
+	}
 }
