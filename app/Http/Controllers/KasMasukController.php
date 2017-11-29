@@ -92,7 +92,7 @@ class KasMasukController extends Controller
         ]);
         $update = KasMasuk::find($id)->update([
             'kas_id' => $request->kas_id,
-            'kategori_id' => $Request->kategori_id,
+            'kategori_id' => $request->kategori_id,
             'jumlah' => $request->jumlah,
             'keterangan' => $request->keterangan
         ]);
@@ -113,18 +113,19 @@ class KasMasukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroy = KasMasuk::destroy($id);
+        return $destroy;
     }
 
     public function view() 
     {
-        $page = KasMasuk::with('kategoriTransaksi')->paginate(10);
+        $page = KasMasuk::with('kas')->paginate(10);
         return $page;
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::with('kategoriTransaksi')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
+        $search = KasMasuk::with('kas')->where("kas_id", "LIKE", "%$request->pencarian")->paginate(10);
         return $search;
     }
 
