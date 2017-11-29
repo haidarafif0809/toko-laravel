@@ -31,10 +31,11 @@
 								</div>
 							</div>
 
+
 							<div class="form-group">
 								<label for="tanggal_lahir" class="col-md-2 control-label">Tanggal Lahir</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Tanggal Lahir" type="datepicker" v-model.datepicker="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="">
 									<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
 								</div>
 							</div>
@@ -42,7 +43,7 @@
 							<div class="form-group">
 								<label for="nomor_telepon" class="col-md-2 control-label">Nomor Telepon</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.number="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="">
 									<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
 								</div>
 							</div>
@@ -54,7 +55,6 @@
 									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
 								</div>
 							</div>
-
 
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
@@ -77,7 +77,11 @@ export default {
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "pelanggan"),
 			pelanggan: {
-				nama_pelanggan: ''
+				kode_pelanggan: '',
+				nama_pelanggan: '',
+				tanggal_lahir: '',
+				nomor_telepon: '',
+				alamat: '',
 			},
 		}
 	},

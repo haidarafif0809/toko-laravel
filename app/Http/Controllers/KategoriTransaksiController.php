@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\KategoriTransaksi;
+use Illuminate\Http\Request;
 
 class KategoriTransaksiController extends Controller
 {
@@ -34,25 +34,23 @@ class KategoriTransaksiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
     public function view()
     {
-        return KategoriTransaksi::paginate(10);
+        return KategoriTransaksi::orderBy('id', 'desc')->paginate(10);
     }
     public function search(request $request)
     {
         $search = $request->search;
-        return KategoriTransaksi::where('nama_kategori_transaksi','LIKE',"%$request->search%")->paginate(10);
+        return KategoriTransaksi::where('nama_kategori_transaksi', 'LIKE', "%$request->search%")->paginate(10);
     }
-
 
     public function store(Request $request)
     {
-     $this->validate($request, [
-        'nama_kategori_transaksi' =>'required|unique:kategori_transaksis,nama_kategori_transaksi'
-    ]);
-     $kategoriTransaksi = KategoriTransaksi::create(['nama_kategori_transaksi' => $request->nama_kategori_transaksi]);
- }
+        $this->validate($request, [
+            'nama_kategori_transaksi' => 'required|unique:kategori_transaksis,nama_kategori_transaksi',
+        ]);
+        $kategoriTransaksi = KategoriTransaksi::create(['nama_kategori_transaksi' => $request->nama_kategori_transaksi]);
+    }
 
     /**
      * Display the specified resource.
@@ -86,7 +84,7 @@ class KategoriTransaksiController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_kategori_transaksi' =>'required|unique:kategori_transaksis,nama_kategori_transaksi,'.$id
+            'nama_kategori_transaksi' => 'required|unique:kategori_transaksis,nama_kategori_transaksi,' . $id,
         ]);
         $satuan = KategoriTransaksi::find($id)->update(['nama_kategori_transaksi' => $request->nama_kategori_transaksi]);
     }
@@ -99,7 +97,7 @@ class KategoriTransaksiController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = KategoriTransaksi::destroy($id);
-       return $hapus;
-   }
+        $hapus = KategoriTransaksi::destroy($id);
+        return $hapus;
+    }
 }

@@ -28,26 +28,26 @@
                         <thead>
                             <th>No Faktur</th>
                             <th>Kas</th>
-                            <th>Kategori</th>
+                            <th>Kategori Transaksi</th>
                             <th>Jumlah</th>
                             <th>Keterangan</th>
                             <th>Waktu</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
-                            <tr v-for="kasMasuk , index in kasMasuks" >
-                                <td>{{kasMasuk.id}}</td>
-                                <td>{{kasMasuk.kas_id}}</td>
-                                <td>{{kasMasuk.kategori_id}}</td>
-                                <td>{{kasMasuk.jumlah}}</td>
-                                <td>{{kasMasuk.keterangan}}</td>
-                                <td>{{kasMasuk.created_at}}</td>
+                            <tr v-for = "kasMasuk, index in kasMasuks">
+                                <td>{{kasMasuk.kas_masuk.kas_masuk_id}}</td>
+                                <td>{{kasMasuk.nama_kas}}</td>
+                                <td>{{kasMasuk.nama_kategori_transaksi}}</td>
+                                <td>{{kasMasuk.kas_masuk.jumlah}}</td>
+                                <td>{{kasMasuk.kas_masuk.keterangan}}</td>
+                                <td>{{kasMasuk.kas_masuk.created_at}}</td>
                                 <td>
-                                    <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.id" >
+                                    <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.kas_masuk.kas_masuk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.kas_masuk.kas_masuk_id" >
                                     Edit  </router-link> 
                                     <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKasMasuk(kasMasuk.id, index,kasMasuk.id)">Delete</a>
+                                    v-on:click="deleteKasMasuk(kasMasuk.kas_masuk.kas_masuk_id, index,kasMasuk.kas_masuk.kas_masuk_id)">Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -86,6 +86,8 @@ export default {
       return {
       // buat nampilin data dlm bentuk array
       kasMasuks: [],
+      // kas: [],
+      // kategori_transaksis: [],
       // buat paginations
       kasMasuksData: {},
       pencarian: '',
@@ -97,12 +99,14 @@ export default {
 mounted() {
 	var app = this;
 	app.getKasMasuks();
+    // app.getDataKas();
+    // app.getDataTransaksi();
 },
 watch: {
         // whenever question changes, this function will run
         pencarian: function (newQuestion) {
-        	var irul = this;
-        	irul.searchData()
+        	var app = this;
+        	app.searchData()
         }
     },
     methods: {
@@ -115,15 +119,39 @@ watch: {
         	.then(function (resp) {
         		app.kasMasuks = resp.data.data;
         		app.kasMasuksData = resp.data;
-        		app.loading = false;
+                app.loading = false;
         // buat cek ddi console
-        console.log(app.kasMasuks)
+        console.log(resp.data.data);
     })
-        	.catch(function (resp) {
-        		alert("Could not load KasMasuks");
-        		app.loading = false
-        	});
+            .catch(function (resp) {
+                alert("Could not load KasMasuks");
+                app.loading = false
+            });
         },
+        // getDataKas() {
+        //     let app = this;
+        //     let id = app.$route.params.id;
+
+        //     axios.get(app.url+'/dataKas/'+ id)
+        //     .then(function (resp) {
+        //         app.kas = resp.data;
+        //     })
+        //     .catch(function () {
+        //         alert("Could not load kas");
+        //     });
+        // },
+        // getDataTransaksi() {
+        //     let app = this;
+        //     let id = app.$route.params.id;
+
+        //     axios.get(app.url+'/dataTransaksi/'+ id)
+        //     .then(function (resp) {
+        //         app.kategori_transaksis = resp.data;
+        //     })
+        //     .catch(function () {
+        //         alert("Could not load transaksi");
+        //     });
+        // },
         searchData(page) {
         	var app = this;
         	app.loading == true;
@@ -142,23 +170,23 @@ watch: {
         		app.loading = false
         	});
         },
-        deleteKasMasuk(id, index,kas_id) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+kas_id+" ?")) {
+        deleteKasMasuk(id, index,nama_kas) {
+            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kas+" ?")) {
                 var app = this;
-                axios.delete(app.url+'/' + kas_id)
+                axios.delete(app.url+'/' + id)
                 .then(function (resp) {
                     app.getKasMasuks();
-                    app.alert(kas_id)
+                    app.alert(nama_kas)
                 })
                 .catch(function (resp) {
                     alert("Could not delete Satuan");
                 });
             }
         },
-        alert(kas_id) {
+        alert(nama_kas) {
         	this.$swal({
         		title: "Berhasil!",
-        		text: 'Sukses : Berhasil menghapus Kas Masuk '+ kas_id,
+        		text: 'Sukses : Berhasil menghapus Kas Masuk '+ nama_kas,
         		icon: "success",
         	});
         }

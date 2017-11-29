@@ -39,7 +39,7 @@
 									<td>{{ pelanggan.alamat }}</td>
 
 									<td>
-										<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default" v-bin:id="'edit-' + pelanggan.id">
+										<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
 											Edit
 										</router-link>
 										<a href="#"
