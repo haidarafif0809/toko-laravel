@@ -37,7 +37,7 @@
                         <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kasMasuk , index in kasMasuks" >
                                 <td>{{kasMasuk.id}}</td>
-                                <td>{{kasMasuk.ka}}</td>
+                                <td>{{kasMasuk.kas_id}}</td>
                                 <td>{{kasMasuk.kategori_id}}</td>
                                 <td>{{kasMasuk.jumlah}}</td>
                                 <td>{{kasMasuk.keterangan}}</td>
@@ -72,11 +72,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 
