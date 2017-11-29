@@ -39,6 +39,14 @@ class ProdukController extends Controller
         return response()->json($produk);
     }
 
+    public function detailSatuanDariProduk($id)
+    {
+        $produk = Produk::where('produk_id', $id)->first();
+        $satuan = Satuan::where('id', $produk->satuans_id)->first();
+
+        return response()->json($satuan);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -62,7 +70,6 @@ class ProdukController extends Controller
           // 'kode_barcode'        => 'unique:produks,kode_barcode',
           // 'kode_barcode'         => 'unique:produks,kode_produk',
           'kode_produk'        => 'required|unique:produks,kode_produk',
-          'kode_produk'         => 'required|unique:produks,kode_barcode',
           'nama_produk'         => 'required',
           // 'golongan_produk'     => 'required',
           // 'kategori_produks_id' => 'required|exists:kategori_produks,id',
@@ -127,7 +134,6 @@ class ProdukController extends Controller
     {
         $this->validate($request, [            
             'kode_produk' => 'required|unique:produks,kode_produk',
-            'kode_produk' => 'required|unique:produks,kode_barcode',
             'nama_produk' => 'required',
             'harga_beli' => 'required|numeric',
             'harga_jual' => 'numeric',
