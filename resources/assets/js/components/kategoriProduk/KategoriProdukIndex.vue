@@ -8,50 +8,67 @@
 </style>
 
 <template>  
-	<div class="panel panel-default">
-		<div class="panel-heading">Kategori Produk</div>
-		<div class="panel-body">
-			<div class="table-responsive">
-				<p> <router-link :to="{name: 'createKategoriProduk'}" class="btn btn-primary">Create Kategori Produk</router-link></p>        
-				<div class="pencarian">
-					<input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
-				</div>
-				<table class="table table-striped table-hover">
-					<thead>
-						<th>Nama Kategori Produk</th>
-						<th>Aksi</th>
-					</thead>
-					<tbody v-if="kategoriProduks.length > 0 && loading == false" class="data-ada">
-						<tr v-for="kategoriProduk , index in kategoriProduks" >
-							<td>{{kategoriProduk.nama_produk}}</td>
-							<td>
-							</td>
-						</tr>
-					</tbody>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Kategori Produk</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="tambah">
+                        <p> <router-link :to="{name: 'createKategoriProduk'}" class="btn btn-primary">Create Kategori Produk</router-link></p>        
+                    </div>
+                    <div class="pencarian">
+                        <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <th>Nama Kategori Produk</th>
+                            <th>Aksi</th>
+                        </thead>
+                        <tbody v-if="kategoriProduks.length > 0 && loading == false" class="data-ada">
+                            <tr v-for="kategoriProduk , index in kategoriProduks" >
+                                <td>{{kategoriProduk.nama_produk}}</td>
+                                <td>
+                                    <router-link :to="{name: 'editKategoriProduk', params: {id: kategoriProduk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kategoriProduk.id" >
+                                    Edit  </router-link> 
+                                    <a href="#"
+                                    class="btn btn-xs btn-danger" 
+                                    v-on:click="deleteKategoriProduk(kategoriProduk.id, index,kategoriProduk.nama_produk)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
 
-					<tbody v-else class="data-tidak-ada">
-						<tr></tr>
-						<td colspan="3" class="text-center">Tidak Ada Data</td>
-					</tr>
-				</tbody>
-			</table>
+                        <tbody v-else-if="loading == true" class="data-ada" >
+                            <tr >
+                                <td colspan="4"  class="text-center">
+                                    Sedang Memuat Data
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else class="tidak-ada-data">
+                            <tr>
+                                <td colspan="4"  class="text-center">
+                                    Tidak Ada Data
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-		</div>
-		<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+                </div>
+                <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
-		<div align="right">
-			<pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
-		</div>
-
-	</div>
-</div>
+                <div align="right">
+                 <pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
+             </div>
+         </div>
+     </div>
+ </div>
 </template>
 
 
 <script>
 export default {
-	data: function () {
-		return {
+    data: function () {
+      return {
       // buat nampilin data dlm bentuk array
       kategoriProduks: [],
       // buat paginations
@@ -112,23 +129,22 @@ watch: {
         	});
         },
         deleteKategoriProduk(id, index,nama_produk) {
-        	if (confirm("Yakin Ingin Menghapus kategoriProduk "+nama_produk+" ?")) {
-        		var app = this;
-        		axios.delete(app.url+'/' + id)
-        		.then(function (resp) {
-        			app.getkategoriProduks();
-        			app.message = 'Sukses : Berhasil menghapus kategoriProduk '+ nama_produk;
-        			app.alert(app.message)
-        		})
-        		.catch(function (resp) {
-        			alert("Could not delete kategoriProduk");
-        		});
-        	}
+            if (confirm("Yakin Ingin Menghapus Satuan "+nama_produk+" ?")) {
+                var app = this;
+                axios.delete(app.url+'/' + id)
+                .then(function (resp) {
+                    app.getKategoriProduks();
+                    app.alert(nama_produk)
+                })
+                .catch(function (resp) {
+                    alert("Could not delete Satuan");
+                });
+            }
         },
-        alert(pesan) {
+        alert(nama_produk) {
         	this.$swal({
         		title: "Berhasil!",
-        		text: pesan,
+        		text: 'Sukses : Berhasil menghapus kategori Produk '+ nama_produk,
         		icon: "success",
         	});
         }

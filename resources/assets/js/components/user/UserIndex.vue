@@ -11,7 +11,7 @@
                         <p class="panel-title">Table User</p>
                     </div>
                     <div class="panel-body">
-                        <div class="tambah-user">
+                        <div class="tambah">
                             <p>
                                 <router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">
                                     Tambah User
@@ -32,7 +32,7 @@
                                <td>{{ user.name }}</td>
                                <td>{{ user.email }}</td>
                                <td>
-                                <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default" v-bin:id="'edit-' + user.id">
+                                <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default">
                                     Edit
                                 </router-link>
                                 <a href="#"
@@ -89,7 +89,7 @@ mounted() {
 },
 watch: {
         // whenever question changes, this function will run
-        search: function (newQuestion) {
+        pencarian: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
@@ -117,7 +117,8 @@ watch: {
     			.then(function (resp) {
     				app.getUsers();
     				app.alert(name)
-    			})
+                    app.$router.replace('/user');
+                })
     			.catch(function (resp) {
     				alert("Could not delete user");
     			});
@@ -140,7 +141,6 @@ watch: {
     			app.loading = false
     			alert("Could not load users");
     		});
-
 
     	},
     	alert(name) {

@@ -1,12 +1,14 @@
 <template>  
-  <div class="panel panel-default">
-    <div class="panel-heading">Dashboard</div>
+  <div class="container">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Dashboard</div>
 
     <div class="panel-body">
       <p> <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link></p>
       <div class="table table-responsive">
         <div class="pencarian">
-          <input class="efek" type="text" name="pencarian" v-model="pencarian" placeholder="Pencarian..">
+          <input class="tambah" type="text" name="pencarian" v-model="pencarian" placeholder="Pencarian..">
         </div>
         <table class="table table-striped">
           <thead>
@@ -16,14 +18,18 @@
           <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
             <tr v-for="produk , index in produks">
               <td>{{produk.nama_produk}}</td>
-              <td><router-link :to="{name: 'editProduk', params: {id: produk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.id" >
+              <td><router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >
                 Edit 
               </router-link> 
-              <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.id" v-on:click="deleteEntry(produk.id, index,produk.nama_produk)">
+              <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.produk_id" v-on:click="deleteEntry(produk.produk_id, index,produk.nama_produk)">
                 Hapus
-              </a></td>
-            </tr>
-          </tbody>
+              </a>
+              <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + produk.produk_id" >
+                Detail 
+              </router-link>
+            </td>
+          </tr>
+        </tbody>
 
           <tbody v-else class="data-tidak-ada">
             <tr>
@@ -40,6 +46,7 @@
 
     </div>
   </div>
+</div>
 </template>
 
 

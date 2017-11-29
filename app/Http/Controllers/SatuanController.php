@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Satuan;
 
 class SatuanController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -31,11 +33,12 @@ class SatuanController extends Controller
     {
         return Satuan::paginate(10);
     }
-    public function search(request $request)
+    public function search(Request $request)
     {
-        $search = $request->search;
-        return Satuan::where('nama_satuan','LIKE',"%$request->search%")->paginate(10);
-    }
+     $cari_satuan = Satuan::where('nama_satuan','LIKE',"%$request->search%")->paginate(10);
+     return $cari_satuan;
+ }
+
 
     /**
      * Store a newly created resource in storage.
@@ -96,7 +99,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-       $hapus = Satuan::destroy($id);
-       return $hapus;
-   }
+     $hapus = Satuan::destroy($id);
+     return $hapus;
+ }
 }

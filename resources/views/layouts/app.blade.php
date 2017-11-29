@@ -53,7 +53,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: ''}">
+                                    <router-link :to="{name: 'indexSuplier'}">
                                         Supplier
                                     </router-link>
                                 </li>
@@ -73,8 +73,42 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
+                                    <router-link :to="{name: 'indexProduk'}">
                                         Produk
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexKas'}">
+                                        Kas
+                                    </router-link>
+                                </li> 
+                                <li>
+                                    <router-link :to="{name: 'indexKategoriTransaksi'}">
+                                        Kategori Transaksi
+                                    </router-link>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                Transaksi <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexKasMasuk'}">
+                                        Kas Masuk
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexKasKeluar'}">
+                                        Kas Keluar
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexUser'}">
+                                        Kas Mutasi
                                     </router-link>
                                 </li>
                             </ul>
@@ -117,6 +151,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.0') }}"></script>
+<script src="{{ asset('js/app.js?v=1.9') }}"></script>
 </body>
 </html>
