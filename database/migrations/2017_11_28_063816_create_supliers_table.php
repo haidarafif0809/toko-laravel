@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKategoriTransaksisTable extends Migration
+class CreateSupliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateKategoriTransaksisTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_transaksis', function (Blueprint $table) {
+        Schema::create('supliers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_kategori_transaksi');
-            $table->unsignedInteger('created_by')->nullable()->index();            
-            $table->unsignedInteger('updated_by')->nullable()->index();
+            $table->string('nama_suplier');
+            $table->string('alamat_suplier');
+            $table->string('no_telp_suplier');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateKategoriTransaksisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_transaksis');
+        Schema::dropIfExists('supliers');
     }
 }
