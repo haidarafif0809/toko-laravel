@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\KategoriProduk;
+use Illuminate\Database\Seeder;
 
 class KategoriProdukSeeder extends Seeder
 {
@@ -12,8 +12,24 @@ class KategoriProdukSeeder extends Seeder
      */
     public function run()
     {
-    	KategoriProduk::create([
-    		'nama_produk' => 'alquran'
-    	]);
+        // Membuat sample kategori produk
+        $kategori_produk                       = new KategoriProduk();
+        $kategori_produk->nama_kategori_produk = "SEMBAKO";
+        $kategori_produk->save();
+
+        // Membuat sample kategori produk
+        $kategori_produk                       = new KategoriProduk();
+        $kategori_produk->nama_kategori_produk = "FITTING";
+        $kategori_produk->save();
+
+        // Membuat sample kategori produk
+        $kategori_produk                       = new KategoriProduk();
+        $kategori_produk->nama_kategori_produk = "PIPA";
+        $kategori_produk->save();
+
+        // Membuat sample kategori produk
+        $kategori_produk                       = new KategoriProduk();
+        $kategori_produk->nama_kategori_produk = "GUTTER";
+        $kategori_produk->save();
     }
 }
