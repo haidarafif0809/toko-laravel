@@ -151,6 +151,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.12') }}"></script>
+<script src="{{ asset('js/app.js?v=1.13') }}"></script>
 </body>
 </html>
