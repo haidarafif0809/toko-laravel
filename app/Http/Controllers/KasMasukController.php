@@ -118,7 +118,7 @@ class KasMasukController extends Controller
 
     public function view()
     {
-        $kas_masuk = KasMasuk::paginate(10);
+        $kas_masuk = KasMasuk::orderBy('kas_masuk_id', 'desc')->paginate(10);
 
         $kas_masuk_array = array();
         foreach ($kas_masuk as $kas_masuks) {
