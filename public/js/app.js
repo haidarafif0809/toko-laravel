@@ -29560,10 +29560,6 @@ var routes = [{
     path: '/kategoriTransaksi-edit',
     component: __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a,
     name: 'editKategoriTransaksi'
-}, {
-    path: '/kategoriTransaksi-edit',
-    component: __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a,
-    name: 'editKategoriTransaksi'
 },
 // Suplier
 {
@@ -69830,6 +69826,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -69914,29 +69916,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Dashboard")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Produk")])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Dashboard")]),
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Produk")]),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "panel-body" },
         [
-          _c(
-            "p",
-            [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("div", { staticClass: "tambah" }, [
               _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: { to: { name: "createProduk" } }
-                },
-                [_vm._v("Tambah Produk")]
+                "p",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { to: { name: "createProduk" } }
+                    },
+                    [_vm._v("Tambah Produk")]
+                  )
+                ],
+                1
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "table table-responsive" }, [
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "pencarian" }, [
               _c("input", {
                 directives: [
@@ -69947,11 +69965,11 @@ var render = function() {
                     expression: "pencarian"
                   }
                 ],
-                staticClass: "tambah",
+                staticClass: "form-control",
                 attrs: {
                   type: "text",
                   name: "pencarian",
-                  placeholder: "Pencarian.."
+                  placeholder: "Pencarian"
                 },
                 domProps: { value: _vm.pencarian },
                 on: {
@@ -69965,7 +69983,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("table", { staticClass: "table table-striped" }, [
+            _c("table", { staticClass: "table table-striped table-hover" }, [
               _vm._m(0, false, false),
               _vm._v(" "),
               _vm.produks.length > 0 && _vm.loading == false
@@ -69974,7 +69992,31 @@ var render = function() {
                     { staticClass: "data-ada" },
                     _vm._l(_vm.produks, function(produk, index) {
                       return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(produk.nama_produk))]),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: {
+                                    name: "detailProduk",
+                                    params: { id: produk.produk_id }
+                                  },
+                                  id: "edit-" + produk.produk_id
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(produk.nama_produk) +
+                                    "\n                  "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -69993,7 +70035,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                Edit \n              "
+                                  "\n                  Edit \n                "
                                 )
                               ]
                             ),
@@ -70018,26 +70060,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                Hapus\n              "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-xs btn-success",
-                                attrs: {
-                                  to: {
-                                    name: "detailProduk",
-                                    params: { id: produk.produk_id }
-                                  },
-                                  id: "edit-" + produk.produk_id
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                Detail \n              "
+                                  "\n                  Hapus\n                "
                                 )
                               ]
                             )
@@ -70220,29 +70243,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			errors: [],
 			satuans: [],
+			kategori_produks_id: [],
 			url: window.location.origin + window.location.pathname.replace("home", "produk"),
 			produk: {
 				kode_produk: '',
 				nama_produk: '',
 				harga_jual: '',
 				harga_beli: '',
-				satuans_id: ''
+				satuans_id: '',
+				kategori_produks_id: '',
+				status_jual: ''
 			},
 			message: '',
-			settings: {
+			setting_satuan: {
 				placeholder: 'Pilih Satuan'
+			},
+			setting_kategori_produk: {
+				placeholder: 'Pilih Kategori Produk'
 			}
 		};
 	},
 	mounted: function mounted() {
 		var app = this;
-		app.selected();
+		app.selectedSatuan();
+		app.selectedKategoriProduksId();
 	},
 
 	methods: {
@@ -70257,6 +70309,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.produk.harga_jual = '';
 				app.produk.harga_beli = '';
 				app.produk.satuans_id = '';
+				app.produk.kategori_produks_id = '';
+				app.produk.status_jual = '';
 				app.errors = '';
 				app.$router.replace('/produk');
 			}).catch(function (resp) {
@@ -70264,12 +70318,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.errors = resp.response.data.errors;
 			});
 		},
-		selected: function selected() {
+		selectedSatuan: function selectedSatuan() {
 			var app = this;
 			axios.get(app.url + '/satuan').then(function (resp) {
 				app.satuans = resp.data;
 			}).catch(function (resp) {
 				alert("Could not load satuan");
+			});
+		},
+		selectedKategoriProduksId: function selectedKategoriProduksId() {
+			var app = this;
+			axios.get(app.url + '/kategori_produks_id').then(function (resp) {
+				app.kategori_produks_id = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load kategori produk");
 			});
 		},
 		alert: function alert(pesan) {
@@ -70434,7 +70496,7 @@ var render = function() {
                   staticClass: "col-md-2 control-label",
                   attrs: { for: "harga" }
                 },
-                [_vm._v("Harga")]
+                [_vm._v("Harga Beli")]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-2" }, [
@@ -70472,7 +70534,18 @@ var render = function() {
                       _vm._v(_vm._s(_vm.errors.harga_beli[0]))
                     ])
                   : _vm._e()
-              ]),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "harga" }
+                },
+                [_vm._v("Harga Jual")]
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-2" }, [
                 _c("input", {
@@ -70529,7 +70602,7 @@ var render = function() {
                   _c(
                     "selectize-component",
                     {
-                      attrs: { settings: _vm.settings },
+                      attrs: { settings: _vm.setting_satuan },
                       model: {
                         value: _vm.produk.satuans_id,
                         callback: function($$v) {
@@ -70553,6 +70626,106 @@ var render = function() {
                 ],
                 1
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kategori_produks_id" }
+                },
+                [_vm._v("Kategori Produk")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_kategori_produk },
+                      model: {
+                        value: _vm.produk.kategori_produks_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
+                        },
+                        expression: "produk.kategori_produks_id"
+                      }
+                    },
+                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
+                      return _c(
+                        "option",
+                        { domProps: { value: kategori_produk.id } },
+                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.kategori_produks_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "status_jual" }
+                },
+                [_vm._v("Status Jual")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "1" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "1") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "1")
+                    }
+                  }
+                }),
+                _vm._v(" Aktif\n\t\t\t\t\t\t"),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "0" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "0") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "0")
+                    }
+                  }
+                }),
+                _vm._v(" Tidak Aktif\n\t\t\t\t\t\t"),
+                _vm.errors.status_jual
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.status_jual[0]))
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _vm._m(0, false, false)
@@ -70706,12 +70879,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             errors: [],
             satuans: [],
+            kategori_produks_id: [],
             produkId: null,
             url: window.location.origin + window.location.pathname.replace("home", "produk"),
             produk: {
@@ -70719,18 +70911,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 nama_produk: '',
                 harga_jual: '',
                 harga_beli: '',
-                satuans_id: ''
+                satuans_id: '',
+                kategori_produks_id: '',
+                status_jual: ''
             },
             message: '',
-            settings: {
+            setting_satuan: {
                 placeholder: 'Pilih Satuan'
+            },
+            setting_kategori_produk: {
+                placeholder: 'Pilih Kategori Produk'
             }
         };
     },
     mounted: function mounted() {
         var app = this;
         app.getData();
-        app.selected();
+        app.selectedSatuan();
+        app.selectedKategoriProduksId();
     },
 
     methods: {
@@ -70745,6 +70943,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.produk.harga_jual = '';
                 app.produk.harga_beli = '';
                 app.produk.satuans_id = '';
+                app.produk.kategori_produks_id = '';
+                app.produk.status_jual = '';
                 app.errors = '';
                 app.$router.replace('/produk');
             }).catch(function (resp) {
@@ -70752,12 +70952,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.errors = resp.response.data.errors;
             });
         },
-        selected: function selected() {
+        selectedSatuan: function selectedSatuan() {
             var app = this;
             axios.get(app.url + '/satuan').then(function (resp) {
                 app.satuans = resp.data;
             }).catch(function (resp) {
                 alert("Could not load satuan");
+            });
+        },
+        selectedKategoriProduksId: function selectedKategoriProduksId() {
+            var app = this;
+            axios.get(app.url + '/kategori_produks_id').then(function (resp) {
+                app.kategori_produks_id = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load kategori produk");
             });
         },
         alert: function alert(pesan) {
@@ -71030,7 +71238,7 @@ var render = function() {
                   _c(
                     "selectize-component",
                     {
-                      attrs: { settings: _vm.settings },
+                      attrs: { settings: _vm.setting_satuan },
                       model: {
                         value: _vm.produk.satuans_id,
                         callback: function($$v) {
@@ -71054,6 +71262,106 @@ var render = function() {
                 ],
                 1
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kategori_produks_id" }
+                },
+                [_vm._v("Kategori Produk")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_kategori_produk },
+                      model: {
+                        value: _vm.produk.kategori_produks_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
+                        },
+                        expression: "produk.kategori_produks_id"
+                      }
+                    },
+                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
+                      return _c(
+                        "option",
+                        { domProps: { value: kategori_produk.id } },
+                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.kategori_produks_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "status_jual" }
+                },
+                [_vm._v("Status Jual")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "1" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "1") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "1")
+                    }
+                  }
+                }),
+                _vm._v(" Aktif\n                        "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "0" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "0") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "0")
+                    }
+                  }
+                }),
+                _vm._v(" Tidak Aktif\n                        "),
+                _vm.errors.status_jual
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.status_jual[0]))
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _vm._m(0, false, false)
@@ -71180,12 +71488,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			produk: [],
 			satuan: [],
+			kategori_produk: [],
 			produkId: null,
 			url: window.location.origin + window.location.pathname.replace("home", "produk")
 		};
@@ -71194,6 +71508,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var app = this;
 		app.getDataProduk();
 		app.getDataSatuanDariProduk();
+		app.getDataKategoriProdukDariProduk();
 	},
 
 	methods: {
@@ -71222,7 +71537,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(app.url + '/detailSatuanDariProduk/' + id).then(function (resp) {
 				app.satuan = resp.data;
 			}).catch(function () {
-				alert("Could not load your produk");
+				alert("Could not load your satuan");
+			});
+		},
+		getDataKategoriProdukDariProduk: function getDataKategoriProdukDariProduk() {
+			var app = this;
+			var id = app.$route.params.id;
+
+			axios.get(app.url + '/kategori_produks_id/' + id).then(function (resp) {
+				app.kategori_produk = resp.data;
+			}).catch(function () {
+				alert("Could not load your kategori produk");
 			});
 		}
 	}
@@ -71267,7 +71592,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "panel-body" }, [
-        _c("div", { staticClass: "table table-responsive" }, [
+        _c("div", { staticClass: "table-responsive" }, [
           _c("table", { staticClass: "table" }, [
             _vm._m(0, false, false),
             _vm._v(" "),
@@ -71275,13 +71600,25 @@ var render = function() {
               _c("tr", [
                 _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.produk.nama_produk))]),
-                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.satuan.nama_satuan))])
+                _c("td", [_vm._v(_vm._s(_vm.satuan.nama_satuan))]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(_vm._s(_vm.kategori_produk.nama_kategori_produk))
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm.produk.status_jual == 1
+                    ? _c("span", [_vm._v("Aktif")])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.produk.status_jual == 0
+                    ? _c("span", [_vm._v("Tidak Aktif")])
+                    : _vm._e()
+                ])
               ])
             ])
           ])
@@ -71298,13 +71635,15 @@ var staticRenderFns = [
     return _c("thead", [
       _c("th", [_vm._v("Kode")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Nama produk")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Harga jual")]),
       _vm._v(" "),
       _c("th", [_vm._v("Harga beli")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Satuan")])
+      _c("th", [_vm._v("Satuan")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Kategori Produk")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status Jual")])
     ])
   }
 ]
@@ -71685,7 +72024,7 @@ var render = function() {
                 [
                   _vm.search == ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.satuansData },
+                        attrs: { data: _vm.satuansData, limit: 1 },
                         on: { "pagination-change-page": _vm.getSatuans }
                       })
                     : _vm._e()
@@ -71699,7 +72038,7 @@ var render = function() {
                 [
                   _vm.search != ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.satuansData },
+                        attrs: { data: _vm.satuansData, limit: 1 },
                         on: { "pagination-change-page": _vm.getHasilPencarian }
                       })
                     : _vm._e()
@@ -76825,7 +77164,7 @@ var render = function() {
                 [
                   _vm.search == ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.kategoriTransaksiData },
+                        attrs: { data: _vm.kategoriTransaksiData, limit: 1 },
                         on: {
                           "pagination-change-page": _vm.getKategoriTransaksis
                         }
@@ -76841,7 +77180,7 @@ var render = function() {
                 [
                   _vm.search != ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.kategoriTransaksiData },
+                        attrs: { data: _vm.kategoriTransaksiData, limit: 1 },
                         on: { "pagination-change-page": _vm.getHasilPencarian }
                       })
                     : _vm._e()
@@ -79224,7 +79563,7 @@ var render = function() {
                 [
                   _vm.search == ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.pelanggansData },
+                        attrs: { data: _vm.pelanggansData, limit: 1 },
                         on: { "pagination-change-page": _vm.getPelanggans }
                       })
                     : _vm._e()
@@ -79238,7 +79577,7 @@ var render = function() {
                 [
                   _vm.search != ""
                     ? _c("pagination", {
-                        attrs: { data: _vm.pelanggansData },
+                        attrs: { data: _vm.pelanggansData, limit: 1 },
                         on: { "pagination-change-page": _vm.getHasilPencarian }
                       })
                     : _vm._e()

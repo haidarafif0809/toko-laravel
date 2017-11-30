@@ -187,10 +187,6 @@ const routes = [{
         path: '/kategoriTransaksi-edit',
         component: KategoriTransaksiEdit,
         name: 'editKategoriTransaksi'
-    }, {
-        path: '/kategoriTransaksi-edit',
-        component: KategoriTransaksiEdit,
-        name: 'editKategoriTransaksi'
     },
     // Suplier
     {
