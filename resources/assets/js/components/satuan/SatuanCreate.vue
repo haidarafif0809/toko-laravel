@@ -18,7 +18,7 @@
 							<div class="form-group">
 								<label for="nama_satuan" class="col-md-2 control-label">Nama</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama" type="nama_satuan" v-model="satuan.nama_satuan" name="nama_satuan"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nama" type="text" v-model="satuan.nama_satuan" name="nama_satuan"  autofocus="">
 									<span v-if="errors.nama_satuan" class="label label-danger">{{ errors.nama_satuan[0] }}</span>
 
 								</div>

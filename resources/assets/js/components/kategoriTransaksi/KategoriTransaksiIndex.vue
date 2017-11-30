@@ -35,7 +35,7 @@
 									<td>{{ kategoriTransaksi.nama_kategori_transaksi }}</td>
 
 									<td>
-										<router-link :to="{name: 'editKategoriTransaksi', params: {id:kategoriTransaksi.id}}" class="btn btn-xs btn-default" v-bin:id="'edit-' + kategoriTransaksi.id">
+										<router-link :to="{name: 'editKategoriTransaksi', params: {id:kategoriTransaksi.id}}" class="btn btn-xs btn-default">
 											Edit
 										</router-link>
 										<a href="#"

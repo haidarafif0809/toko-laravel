@@ -2,37 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Pelanggan;
+use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function view()
     {
@@ -40,63 +24,63 @@ class PelangganController extends Controller
     }
     public function search(Request $request)
     {
-        $cari_pelanggan = Pelanggan::where('kode_pelanggan','LIKE',"%$request->search%")
-        ->orWhere('nama_pelanggan','LIKE',"%$request->search%")
-        ->orWhere('tanggal_lahir','LIKE',"%$request->search%")
-        ->orWhere('nomor_telepon','LIKE',"%$request->search%")
-        ->orWhere('alamat','LIKE',"%$request->search%")->paginate(10);
+        $cari_pelanggan = Pelanggan::where('kode_pelanggan', 'LIKE', "%$request->search%")
+            ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
+            ->orWhere('tanggal_lahir', 'LIKE', "%$request->search%")
+            ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
+            ->orWhere('alamat', 'LIKE', "%$request->search%")->paginate(10);
         return $cari_pelanggan;
     }
 
-
     public function store(Request $request)
     {
-        //
+        //VALIDASI
+        $this->validate($request, [
+            'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
+            'nama_pelanggan' => 'required',
+            'tanggal_lahir'  => 'required',
+            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon',
+            'alamat'         => 'required',
+        ]);
+        $pelanggan = Pelanggan::create([
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'tanggal_lahir'  => $request->tanggal_lahir,
+            'nomor_telepon'  => $request->nomor_telepon,
+            'alamat'         => $request->alamat,
+        ]);
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return Pelanggan::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan,' . $id,
+            'nama_pelanggan' => 'required',
+            'tanggal_lahir'  => 'required',
+            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon,',
+            'alamat'         => 'required',
+        ]);
+        $pelanggan = Pelanggan::find($id)->update([
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'tanggal_lahir'  => $request->tanggal_lahir,
+            'nomor_telepon'  => $request->nomor_telepon,
+            'alamat'         => $request->alamat,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Pelanggan::destroy($id);
     }
 }
