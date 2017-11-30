@@ -34,6 +34,12 @@ Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view', 'ProdukController@view');
 Route::get('/produk/cari', 'ProdukController@cari');
 Route::get('/produk/satuan', 'ProdukController@satuan');
+<<<<<<< HEAD
+=======
+Route::get('/produk/kategori_produks_id', 'ProdukController@kategoriProduksId');
+Route::get('/produk/kategori_produks_id/{id}', 'ProdukController@detailKategoriProdukDariProduk');
+Route::get('/produk/status_jual', 'ProdukController@statusJual');
+>>>>>>> master
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
 Route::get('/produk/edit/{id}', 'ProdukController@edit');
@@ -78,3 +84,7 @@ Route::get('/suplier/search', 'SuplierController@search');
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
+
+// Kas Mutasi
+Route::resource('kas-mutasi', 'KasMutasiController', ['except' => 'show']);
+Route::get('/kas-mutasi/view', 'KasMutasiController@view');

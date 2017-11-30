@@ -19,19 +19,19 @@
                             </p>
                         </div>
                         <div class="pencarian">
-                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                       </div>
-                       <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                           <thead>
+                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                     </div>
+                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                         <thead>
                             <th>Nama</th>
 
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="satuans.length > 0 && loading == false" class="data-ada">
                             <tr v-for="satuan ,index in satuans">
-                             <td>{{ satuan.nama_satuan }}</td>
+                               <td>{{ satuan.nama_satuan }}</td>
 
-                             <td>
+                               <td>
                                 <router-link :to="{name: 'editSatuan', params: {id:satuan.id}}" class="btn btn-xs btn-default">
                                     Edit
                                 </router-link>
@@ -59,8 +59,8 @@
                 </tbody>
             </table>
             <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-            <div align="right"><pagination :data="satuansData" v-on:pagination-change-page="getSatuans" v-if="search == '' "></pagination></div>
-            <div align="right"><pagination :data="satuansData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+            <div align="right"><pagination :data="satuansData" v-on:pagination-change-page="getSatuans":limit="1" v-if="search == '' "></pagination></div>
+            <div align="right"><pagination :data="satuansData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
         </div>
     </div>
 </div>
@@ -71,17 +71,17 @@
 
 <script>
 export default {
-   data: function () {
-      return {
-         satuans: [],
-         satuansData: {},
-         url : window.location.origin+(window.location.pathname).replace("home","satuan"),
-         search : '',
-         loading : true
+ data: function () {
+  return {
+   satuans: [],
+   satuansData: {},
+   url : window.location.origin+(window.location.pathname).replace("home","satuan"),
+   search : '',
+   loading : true
 
-     }
- },
- mounted() {
+}
+},
+mounted() {
   var app = this;
   app.loading = true
   app.getSatuans();	

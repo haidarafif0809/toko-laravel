@@ -9,26 +9,39 @@
 			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
 
 			<div class="panel-body">
-				<div class="table table-responsive">
-					<table class="table">
-						<thead>
-							<th>Kode</th>
-							<th>Nama produk</th>
-							<th>Harga jual</th>
-							<th>Harga beli</th>
-							<th>Satuan</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{ produk.kode_produk }}</td>
-								<td>{{ produk.nama_produk }}</td>
-								<td>{{ produk.harga_jual }}</td>
-								<td>{{ produk.harga_beli }}</td>
-								<td>{{ satuan.nama_satuan }}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								Kode Produk:
+							</td>
+							<td>{{ produk.kode_produk }}</td>
+						</tr>
+						<tr>
+							<td>Harga Jual:</td>
+							<td>{{ produk.harga_jual }}</td>
+						</tr>
+						<tr>
+							<td>Harga Beli:</td>
+							<td>{{ produk.harga_beli }}</td>
+						</tr>
+						<tr>
+							<td>Satuan:</td>
+							<td>{{ satuan.nama_satuan }}</td>
+						</tr>
+						<tr>
+							<td>Kategori Produk:</td>
+							<td>{{ kategori_produk.nama_kategori_produk }}</td>
+						</tr>
+						<tr>
+							<td>Status Jual:</td>
+							<td>
+								<span v-if="produk.status_jual == 1">Aktif</span>
+								<span v-if="produk.status_jual == 0">Tidak Aktif</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -39,6 +52,7 @@ export default {
 		return {
 			produk: [],
 			satuan: [],
+			kategori_produk: [],
 			produkId: null,
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 		} 
@@ -47,6 +61,7 @@ export default {
 		var app = this;
 		app.getDataProduk();
 		app.getDataSatuanDariProduk();
+		app.getDataKategoriProdukDariProduk();
 	},
 	methods: {
 		alert(pesan) {
@@ -69,7 +84,7 @@ export default {
 				alert("Could not load your produk");
 			});
 		},
-		getDataSatuanDariProduk(){
+		getDataSatuanDariProduk() {
 			let app = this;
 			let id = app.$route.params.id;
 
@@ -78,8 +93,20 @@ export default {
 				app.satuan = resp.data;
 			})
 			.catch(function () {
-				alert("Could not load your produk");
+				alert("Could not load your satuan");
 			});
+		},
+		getDataKategoriProdukDariProduk() {
+			let app = this;
+			let id = app.$route.params.id;
+
+			axios.get(app.url+'/kategori_produks_id/' + id)
+			.then(function (resp) {
+				app.kategori_produk = resp.data;
+			})
+			.catch(function () {
+				alert("Could not load your kategori produk");
+			});			
 		}
 
 	}
