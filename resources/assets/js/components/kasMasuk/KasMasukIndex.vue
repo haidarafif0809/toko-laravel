@@ -1,12 +1,3 @@
-<style scoped>
-.pencarian {
-	color: red;
-
-	float: right;
-	padding-bottom: 10px;
-}
-</style>
-
 <template>  
     <div class="container">
         <ul class="breadcrumb">

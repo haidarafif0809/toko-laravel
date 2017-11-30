@@ -12,6 +12,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title"> Kas Keluar </h4>
 					</div>
+					<div class="panel-body">
 					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 
 						<div class="form-group">
@@ -56,6 +57,7 @@
 							</div>
 						</div>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
