@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupliersTable extends Migration
+class CreatePelanggansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateSupliersTable extends Migration
      */
     public function up()
     {
-        Schema::create('supliers', function (Blueprint $table) {
+        Schema::create('pelanggans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_suplier');
-            $table->string('alamat_suplier');
-            $table->string('no_telp_suplier');
+            $table->string('kode_pelanggan');
+            $table->string('nama_pelanggan');
+            $table->date('tanggal_lahir');
+            $table->string('nomor_telepon');
+            $table->string('alamat');
             $table->unsignedInteger('created_by')->nullable()->index();            
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
@@ -31,6 +33,6 @@ class CreateSupliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supliers');
+        Schema::dropIfExists('pelanggans');
     }
 }

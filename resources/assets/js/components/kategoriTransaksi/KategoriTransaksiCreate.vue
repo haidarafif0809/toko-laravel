@@ -19,7 +19,7 @@
 							<div class="form-group">
 								<label for="nama_kategori_transaksi" class="col-md-2 control-label">Nama Kategori Transaksi</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Transaksi" type="nama_kategori_transaksi" v-model="kategoriTransaksi.nama_kategori_transaksi" name="nama_kategori_transaksi"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Transaksi" type="text" v-model="kategoriTransaksi.nama_kategori_transaksi" name="nama_kategori_transaksi"  autofocus="">
 									<span v-if="errors.nama_kategori_transaksi" class="label label-danger">{{ errors.nama_kategori_transaksi[0] }}</span>
 
 								</div>

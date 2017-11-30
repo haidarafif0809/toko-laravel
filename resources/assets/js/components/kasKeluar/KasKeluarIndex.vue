@@ -33,16 +33,16 @@
                         </thead>
                         <tbody v-if="kasKeluars.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kasKeluar , index in kasKeluars" >
-                                <td>{{kasKeluar.id}}</td>
-                                <td>{{kasKeluar.kas_id.nama_kas}}</td>
-                                <td>{{kasKeluar.kategori_id}}</td>
-                                <td>{{kasKeluar.jumlah}}</td>
-                                <td>{{kasKeluar.keterangan}}</td>
-                                <td>{{kasKeluar.created_at}}</td>
+                                <td>{{kasKeluar.kas_keluar.id}}</td>
+                                <td>{{kasKeluar.nama_kas}}</td>
+                                <td>{{kasKeluar.nama_kategori_transaksi}}</td>
+                                <td>{{kasKeluar.kas_keluar.jumlah}}</td>
+                                <td>{{kasKeluar.kas_keluar.keterangan}}</td>
+                                <td>{{kasKeluar.kas_keluar.created_at}}</td>
                                 <td>
-                                    <!-- <router-link :to="{name: 'editKasKeluar', params: {kas_id: kasKeluar.kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasKeluar.kas_id" >
+                                   <!--   <router-link :to="{name: 'editKasKeluar', params: {kas_id: kasKeluar.kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasKeluar.kas_id" >
                                     Edit  </router-link> 
-                                    <a href="#"
+                                   <a href="#"
                                     class="btn btn-xs btn-danger" 
                                     v-on:click="deleteKasKeluar(kasKeluar.id, index,kasKeluar.kas_id)">Delete</a> -->
                                 </td>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+
 export default {
     data: function () {
       return {
@@ -100,7 +101,7 @@ watch: {
         }
     },
     methods: {
-        getKasKeluars(page) {
+     getKasKeluars(page) {
         	var app = this;
         	if (typeof page === 'undefined') {
         		page = 1;
@@ -110,8 +111,8 @@ watch: {
         		app.kasKeluars = resp.data.data;
         		app.kasKeluarsData = resp.data;
         		app.loading = false;
-        // console.log(app.kasKeluars)
-    })
+                //console.log(resp.data.data)
+            })
         	.catch(function (resp) {
         		alert("Could not load KasKeluars");
         		app.loading = false

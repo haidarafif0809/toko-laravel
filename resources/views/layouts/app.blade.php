@@ -68,7 +68,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
+                                    <router-link :to="{name: 'indexPelanggan'}">
                                         Pelanggan
                                     </router-link>
                                 </li>
