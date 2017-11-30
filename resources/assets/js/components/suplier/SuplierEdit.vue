@@ -43,7 +43,7 @@
 									Nomer Telpon 
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nomer Telpon" type="text" v-model="suplier.no_telp_suplier" name="no_telp_suplier"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nomer Telpon" type="number" v-model="suplier.no_telp_suplier" name="no_telp_suplier"  autofocus="">
 									<span v-if="errors.no_telp_suplier" class="label label-danger">
 										{{ errors.no_telp_suplier[0] }}
 									</span>
