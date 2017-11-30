@@ -7,15 +7,17 @@ use Yajra\Auditable\AuditableTrait;
 
 class Kas extends Model
 {
-	use AuditableTrait;
-	
-	protected $fillable = ['kode_kas','nama_kas'];
+    use AuditableTrait;
 
-	public function kasMasuk() {
-		return $this->hasOne('App\KasMasuk');
-	}
-	public function kasKeluar() {
-		return $this->hasOne('App\KasKeluar');
-	}
+    protected $fillable = ['kode_kas', 'nama_kas'];
+
+    public function kasMasuk()
+    {
+        return $this->hasOne('App\KasMasuk');
+    }
+    public function kasKeluar()
+    {
+        return $this->hasOne('App\KasKeluar');
+    }
 
 }
