@@ -54,6 +54,8 @@ Route::get('/kasMasuk/view', 'KasMasukController@view');
 Route::get('/kasMasuk/pencarian', 'KasMasukController@search');
 Route::get('/kasMasuk/kas', 'KasMasukController@kas');
 Route::get('/kasMasuk/kategoriTransaksi', 'KasMasukController@kategoriTransaksi');
+Route::get('/kasMasuk/dataKas/{id}', 'KasMasukController@dataKas');
+Route::get('/kasMasuk/dataTransaksi/{id}', 'KasMasukController@dataTransaksi');
 
 // KAS KELUAR
 Route::resource('kas-keluar','KasKeluarController',['except'=>'show']);

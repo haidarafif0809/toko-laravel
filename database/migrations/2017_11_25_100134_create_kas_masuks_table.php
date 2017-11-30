@@ -14,7 +14,7 @@ class CreateKasMasuksTable extends Migration
     public function up()
     {
         Schema::create('kas_masuks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('kas_masuk_id');
             $table->integer('kas_id');
             $table->integer('kategori_id');
             $table->integer('jumlah');
