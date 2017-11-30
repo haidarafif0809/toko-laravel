@@ -50,7 +50,7 @@ import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
 // kas Keluar
 import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
 import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
-//import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
+import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 // Kategori Transaksi
 import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
 import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
@@ -167,12 +167,11 @@ const routes = [{
         path: '/kas-keluar/create',
         component: KasKeluarCreate,
         name: 'createKasKeluar'
+    }, {
+        path: '/kas-keluar/edit/:id',
+        component: KasKeluarEdit,
+        name: 'editKasKeluar'
     },
-    /*{
-           path: '/kas-keluar/edit/:id',
-           component: KasKeluarEdit,
-           name: 'editKasKeluar'
-       },*/
     // master data kategori transaksi
     {
         path: '/kategoriTransaksi',
@@ -186,133 +185,6 @@ const routes = [{
         path: '/kategoriTransaksi-edit',
         component: KategoriTransaksiEdit,
         name: 'editKategoriTransaksi'
-    }, {
-        path: '/kategoriTransaksi-edit',
-        component: KategoriTransaksiEdit,
-        name: 'editKategoriTransaksi'
-    },
-    // Suplier
-    {
-        path: '/suplier',
-        component: SuplierIndex,
-        name: 'indexSuplier'
-    }, {
-        path: '/suplier/create',
-        component: SuplierCreate,
-        name: 'createSuplier'
-    }, {
-        path: '/suplier/edit/:id',
-        component: SuplierEdit,
-        name: 'editSuplier'
-    },
-    // Master data Produk
-    {
-        path: '/produk',
-        component: ProdukIndex,
-        name: 'indexProduk'
-    }, {
-        path: '/produk/create',
-        component: ProdukCreate,
-        name: 'createProduk'
-    }, {
-        path: '/produk/edit/:id',
-        component: ProdukEdit,
-        name: 'editProduk'
-    }, {
-        path: '/produk/detail/:id',
-        component: ProdukDetail,
-        name: 'detailProduk'
-    },
-    // Master data satuan
-    {
-        path: '/satuan',
-        component: SatuanIndex,
-        name: 'indexSatuan'
-    }, {
-        path: '/satuan-create',
-        component: SatuanCreate,
-        name: 'createSatuan'
-    }, {
-        path: '/satuan-edit',
-        component: SatuanEdit,
-        name: 'editSatuan'
-    },
-    //USER
-    {
-        path: '/user',
-        component: UserIndex,
-        name: 'indexUser'
-    }, {
-        path: '/user/create',
-        component: UserCreate,
-        name: 'createUser'
-    }, {
-        path: '/user/edit/:id',
-        component: UserEdit,
-        name: 'editUser'
-    },
-    //KAS
-    {
-        path: '/kas',
-        component: KasIndex,
-        name: 'indexKas'
-    }, {
-        path: '/kas/create',
-        component: KasCreate,
-        name: 'createKas'
-    }, {
-        path: '/kas/edit/:id',
-        component: KasEdit,
-        name: 'editKas'
-    },
-    // kategori produk
-    {
-        path: '/kategoriProduk',
-        component: KategoriProdukIndex,
-        name: 'indexKategoriProduk'
-    }, {
-        path: '/kategoriProduk/create',
-        component: KategoriProdukCreate,
-        name: 'createKategoriProduk'
-    }, {
-        path: '/kategoriProduk/edit/:id',
-        component: KategoriProdukEdit,
-        name: 'editKategoriProduk'
-    },
-    // kas Masuk
-    {
-        path: '/kasMasuk',
-        component: KasMasukIndex,
-        name: 'indexKasMasuk'
-    }, {
-        path: '/kasMasuk/create',
-        component: KasMasukCreate,
-        name: 'createKasMasuk'
-    }, {
-        path: '/kasMasuk/edit/:id',
-        component: KasMasukEdit,
-        name: 'editKasMasuk'
-    },
-    // kas Masuk
-    {
-        path: '/kas-keluar',
-        component: KasKeluarIndex,
-        name: 'indexKasKeluar'
-    }, {
-        path: '/kas-keluar/create',
-        component: KasKeluarCreate,
-        name: 'createKasKeluar'
-    },
-    //{ path: '/kas-keluar/edit/:id', component: KasKeluarEdit, name: 'editKasKeluar' },
-    // master data kategori transaksi
-    {
-        path: '/kategoriTransaksi',
-        component: KategoriTransaksiIndex,
-        name: 'indexKategoriTransaksi'
-    }, {
-        path: '/kategoriTransaksi-create',
-        component: KategoriTransaksiCreate,
-        name: 'createKategoriTransaksi'
     }, {
         path: '/kategoriTransaksi-edit',
         component: KategoriTransaksiEdit,
