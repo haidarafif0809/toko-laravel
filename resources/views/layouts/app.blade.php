@@ -68,7 +68,7 @@
                                     </router-link>
                                 </li>
                                 <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
+                                    <router-link :to="{name: 'indexPelanggan'}">
                                         Pelanggan
                                     </router-link>
                                 </li>
@@ -81,7 +81,7 @@
                                     <router-link :to="{name: 'indexKas'}">
                                         Kas
                                     </router-link>
-                                </li> 
+                                </li>
                                 <li>
                                     <router-link :to="{name: 'indexKategoriTransaksi'}">
                                         Kategori Transaksi
@@ -151,6 +151,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.8') }}"></script>
+<script src="{{ asset('js/app.js?v=1.12') }}"></script>
 </body>
 </html>

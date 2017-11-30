@@ -35,6 +35,7 @@ Route::get('/produk/view','ProdukController@view');
 Route::get('/produk/cari','ProdukController@cari');
 Route::get('/produk/satuan','ProdukController@satuan');
 Route::get('/produk/detail/{id}','ProdukController@detail');
+Route::get('/produk/detailSatuanDariProduk/{id}','ProdukController@detailSatuanDariProduk');
 Route::get('/produk/edit/{id}','ProdukController@edit');
 
 // kategori barang
@@ -71,3 +72,8 @@ Route::get('/kategoriTransaksi/pencarian', 'KategoriTransaksiController@search')
 Route::resource('suplier','SuplierController',['except'=>'show']);
 Route::get('/suplier/view', 'SuplierController@view');
 Route::get('/suplier/search', 'SuplierController@search');
+
+// Satuan
+Route::resource('pelanggan','PelangganController',['except'=>'show']);
+Route::get('/pelanggan/view', 'PelangganController@view');
+Route::get('/pelanggan/pencarian', 'PelangganController@search');

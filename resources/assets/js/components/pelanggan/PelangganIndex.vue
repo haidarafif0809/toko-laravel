@@ -2,45 +2,49 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li class="active">Kategori Transaksi</li>
+			<li class="active">Pelanggan</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Table Kategori Transaksi</p>
+						<p class="panel-title">Table Pelanggan</p>
 					</div>
 					<div class="panel-body">
-						<div class="tambah-kategoriTransaksi">
+						<div class="tambah">
 							<p>
-								<div class="tambah">
-									<router-link :to="{name: 'createKategoriTransaksi'}" type="button" class="btn btn-primary">
-										Tambah Kategori Transaksi
-									</router-link>
-								</div>
+								<router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
+									Tambah Pelanggan
+								</router-link>
 							</p>
 						</div>
 						<div class="pencarian">
 							<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
 						</div>
-
 						<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 							<thead>
-								<th>Nama Kategori Transaksi</th>
-
+								<th>Kode Pelanggan</th>
+								<th>Nama Pelanggan</th>
+								<th>Tanggal Lahir</th>
+								<th>Nomor Telepon</th>
+								<th>Alamat</th>
 								<th>Aksi</th>
 							</thead>
-							<tbody v-if="kategoriTransaksis.length > 0 && loading == false" class="data-ada">
-								<tr v-for="kategoriTransaksi ,index in kategoriTransaksis">
-									<td>{{ kategoriTransaksi.nama_kategori_transaksi }}</td>
+							<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
+								<tr v-for="pelanggan ,index in pelanggans">
+									<td>{{ pelanggan.kode_pelanggan }}</td>
+									<td>{{ pelanggan.nama_pelanggan }}</td>
+									<td>{{ pelanggan.tanggal_lahir }}</td>
+									<td>{{ pelanggan.nomor_telepon }}</td>
+									<td>{{ pelanggan.alamat }}</td>
 
 									<td>
-										<router-link :to="{name: 'editKategoriTransaksi', params: {id:kategoriTransaksi.id}}" class="btn btn-xs btn-default">
+										<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
 											Edit
 										</router-link>
 										<a href="#"
 										class="btn btn-xs btn-danger" 
-										v-on:click="deleteEntry(kategoriTransaksi.id, index,kategoriTransaksi.nama_kategori_transaksi)">
+										v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
 										Delete
 									</a>
 								</td>
@@ -62,10 +66,8 @@
 						</tbody>
 					</table>
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getKategoriTransaksis" v-if="search == '' "></pagination></div>
-
-					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getPelanggans" v-if="search == '' "></pagination></div>
+					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
 				</div>
 			</div>
 		</div>
@@ -78,9 +80,9 @@
 export default {
 	data: function () {
 		return {
-			kategoriTransaksis: [],
-			kategoriTransaksiData: {},
-			url : window.location.origin+(window.location.pathname).replace("home","kategoriTransaksi"),
+			pelanggans: [],
+			pelanggansData: {},
+			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
 			search : '',
 			loading : true
 
@@ -89,7 +91,7 @@ export default {
 	mounted() {
 		var app = this;
 		app.loading = true
-		app.getKategoriTransaksis();	
+		app.getPelanggans();	
 
 	},
 	watch: {
@@ -99,7 +101,7 @@ export default {
         }
     },
     methods: {
-    	getKategoriTransaksis(page) {
+    	getPelanggans(page) {
     		var app = this;
     		if (typeof page === 'undefined') {
     			page = 1;
@@ -107,25 +109,25 @@ export default {
     		axios.get(app.url+'/view?page='+page)
     		.then(function (resp) {
     			app.loading = false
-    			app.kategoriTransaksis = resp.data.data;
-    			app.kategoriTransaksiData = resp.data
+    			app.pelanggans = resp.data.data;
+    			app.pelanggansData = resp.data
 
     		})
     		.catch(function (resp) {
-    			alert("Could not load kategoriTransaksis");
+    			alert("Could not load pelanggans");
     		});
     	},
-    	deleteEntry(id, index,nama_kategori_transaksi) {
-    		if (confirm("Yakin Ingin Menghapus Kategori Transaksi "+nama_kategori_transaksi+" ?")) {
+    	deleteEntry(id, index,nama_pelanggan) {
+    		if (confirm("Yakin Ingin Menghapus Pelanggan "+nama_pelanggan+" ?")) {
     			var app = this;
     			axios.delete(app.url+'/' + id)
     			.then(function (resp) {
-    				app.getKategoriTransaksis();
-    				app.alert(nama_kategori_transaksi)
-    				app.$router.replace('/kategoriTransaksi');
+    				app.getPelanggans();
+    				app.alert(nama_pelanggan)
+    				app.$router.replace('/pelanggan');
     			})
     			.catch(function (resp) {
-    				alert("Could not delete Kategori Transaksi");
+    				alert("Could not delete pelanggan");
     			});
     		}
     	},
@@ -138,21 +140,21 @@ export default {
     		axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
     		.then(function (resp) {
     			app.loading = false
-    			app.kategoriTransaksis = resp.data.data;
-    			app.kategoriTransaksiData = resp.data;
+    			app.pelanggans = resp.data.data;
+    			app.pelanggansData = resp.data;
     		})
     		.catch(function (resp) {
     			console.log(resp);
     			app.loading = false
-    			alert("Could not load kategori Transaksis");
+    			alert("Could not load pelanggans");
     		});
 
 
     	},
-    	alert(nama_kategori_transaksi) {
+    	alert(nama_pelanggan) {
     		this.$swal({
     			title: "Berhasil!",
-    			text: "Berhasil Menghapus "+ nama_kategori_transaksi,
+    			text: "Berhasil Menghapus "+ nama_pelanggan,
     			icon: "success",
     		});
     	}
