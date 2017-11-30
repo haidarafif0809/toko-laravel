@@ -1,35 +1,41 @@
 <template>  
   <div class="container">
-
+    <ol class="breadcrumb">
+      <li><router-link :to="{name: 'indexDashboard'}" >Dashboard</router-link></li>
+      <li class="active">Produk</li>
+    </ol>
     <div class="panel panel-default">
-      <div class="panel-heading">Dashboard</div>
+      <div class="panel-heading">Produk</div>
 
-    <div class="panel-body">
-      <p> <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link></p>
-      <div class="table table-responsive">
-        <div class="pencarian">
-          <input class="tambah" type="text" name="pencarian" v-model="pencarian" placeholder="Pencarian..">
-        </div>
-        <table class="table table-striped">
-          <thead>
-            <th>Nama Produk</th>
-            <th>Aksi</th>
-          </thead>
-          <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
-            <tr v-for="produk , index in produks">
-              <td>{{produk.nama_produk}}</td>
-              <td><router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >
-                Edit 
-              </router-link> 
-              <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.produk_id" v-on:click="deleteEntry(produk.produk_id, index,produk.nama_produk)">
-                Hapus
-              </a>
-              <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + produk.produk_id" >
-                Detail 
-              </router-link>
-            </td>
-          </tr>
-        </tbody>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <div class="tambah">
+            <p> <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link></p>
+          </div>
+          <div class="pencarian">
+            <input type="text" class="form-control" name="pencarian" placeholder="Pencarian"  v-model="pencarian">
+          </div>
+          <table class="table table-striped table-hover">
+            <thead>
+              <th>Nama Produk</th>
+              <th>Aksi</th>
+            </thead>
+            <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
+              <tr v-for="produk , index in produks">
+                <td>
+                  <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" v-bind:id="'edit-' + produk.produk_id" >
+                    {{produk.nama_produk}}
+                  </router-link>
+                </td>
+                <td><router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >
+                  Edit 
+                </router-link> 
+                <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + produk.produk_id" v-on:click="deleteEntry(produk.produk_id, index,produk.nama_produk)">
+                  Hapus
+                </a>
+              </td>
+            </tr>
+          </tbody>
 
           <tbody v-else class="data-tidak-ada">
             <tr>

@@ -28,12 +28,15 @@
 						</div>
 					</div> 
 					<div class="form-group">
-						<label for="harga" class="col-md-2 control-label">Harga</label>
+						<label for="harga" class="col-md-2 control-label">Harga Beli</label>
 						<div class="col-md-2">
 							<input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
 							<span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
 
 						</div>
+					</div>
+					<div class="form-group">
+						<label for="harga" class="col-md-2 control-label">Harga Jual</label>
 						<div class="col-md-2">
 							<input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
 							<span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
@@ -43,10 +46,29 @@
 					<div class="form-group">
 						<label for="satuans_id" class="col-md-2 control-label">Satuan</label>
 						<div class="col-md-4">
-							<selectize-component v-model="produk.satuans_id" :settings="settings"> 
+							<selectize-component v-model="produk.satuans_id" :settings="setting_satuan"> 
 								<option v-for="satuan in satuans" v-bind:value="satuan.id" >{{ satuan.nama_satuan }}</option>
 							</selectize-component>
 							<span v-if="errors.satuans_id" class="label label-danger">{{ errors.satuans_id[0] }}</span>
+
+						</div>
+					</div> 
+					<div class="form-group">
+						<label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
+						<div class="col-md-4">
+							<selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
+								<option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
+							</selectize-component>
+							<span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="status_jual" class="col-md-2 control-label">Status Jual</label>
+						<div class="col-md-4">
+							<input type="radio" name="status_jual" v-model="produk.status_jual" value="1"> Aktif
+							<input type="radio" name="status_jual" v-model="produk.status_jual" value="0"> Tidak Aktif
+							<span v-if="errors.status_jual" class="label label-danger">{{ errors.status_jual[0] }}</span>
 
 						</div>
 					</div> 
@@ -67,23 +89,30 @@ export default {
 		return {
 			errors: [],
 			satuans: [],
+			kategori_produks_id: [],
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 			produk: {
 				kode_produk: '',		
 				nama_produk: '',
 				harga_jual: '',
 				harga_beli: '',
-				satuans_id: ''
+				satuans_id: '',
+				kategori_produks_id: '',
+				status_jual: ''
 			},
 			message : '',
-			settings: {
+			setting_satuan: {
 				placeholder: 'Pilih Satuan'
-			}
+			},
+			setting_kategori_produk: {
+				placeholder: 'Pilih Kategori Produk'
+			},
 		}
 	},
 	mounted() {
 		var app = this;
-		app.selected();
+		app.selectedSatuan();
+		app.selectedKategoriProduksId();
 
 	},
 	methods: {
@@ -99,6 +128,8 @@ export default {
 				app.produk.harga_jual = '';
 				app.produk.harga_beli = '';
 				app.produk.satuans_id = '';
+				app.produk.kategori_produks_id = '';
+				app.produk.status_jual = '';
 				app.errors = '';
 				app.$router.replace('/produk');
 
@@ -108,7 +139,7 @@ export default {
 				app.errors = resp.response.data.errors;
 			});
 		},
-		selected() {
+		selectedSatuan() {
 			var app = this;
 			axios.get(app.url+'/satuan')
 			.then(function (resp) {
@@ -116,6 +147,16 @@ export default {
 			})
 			.catch(function (resp) {
 				alert("Could not load satuan");
+			});
+		},
+		selectedKategoriProduksId() {
+			var app = this;
+			axios.get(app.url+'/kategori_produks_id')
+			.then(function (resp) {
+				app.kategori_produks_id = resp.data;
+			})
+			.catch(function (resp) {
+				alert("Could not load kategori produk");
 			});
 		},
 		alert(pesan) {
