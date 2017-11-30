@@ -19,4 +19,5 @@ class KasKeluar extends Model
 	public function kategoriTransaksi() {
 		return $this->belongsTo('App\KategoriTransaksi');
 	}
+	
 }
