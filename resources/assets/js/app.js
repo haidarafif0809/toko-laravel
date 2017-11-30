@@ -63,6 +63,8 @@ import SuplierEdit from './components/suplier/SuplierEdit.vue'
 import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
 import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
 import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
+//Kas Mutasi
+import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
 const routes = [{
         path: '/',
         components: {
@@ -217,6 +219,12 @@ const routes = [{
         path: '/pelanggan-edit',
         component: PelangganEdit,
         name: 'editPelanggan'
+    },
+    // Kas Mutasi
+    {
+        path: '/kas-mutasi',
+        component: KasMutasiIndex,
+        name: 'indexKasMutasi'
     },
 ]
 /**
