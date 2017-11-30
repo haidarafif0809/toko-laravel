@@ -63,9 +63,9 @@
 					</table>
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
-					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getKategoriTransaksis" v-if="search == '' "></pagination></div>
+					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getKategoriTransaksis":limit="1" v-if="search == '' "></pagination></div>
 
-					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+					<div align="right"><pagination :data="kategoriTransaksiData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
 				</div>
 			</div>
 		</div>
