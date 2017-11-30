@@ -40,11 +40,11 @@
                                 <td>{{kasKeluar.kas_keluar.keterangan}}</td>
                                 <td>{{kasKeluar.kas_keluar.created_at}}</td>
                                 <td>
-                                   <!--   <router-link :to="{name: 'editKasKeluar', params: {kas_id: kasKeluar.kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasKeluar.kas_id" >
+                                      <router-link :to="{name: 'editKasKeluar', params: {kas_id: kasKeluar.kas_id}}" class="btn btn-xs btn-default">
                                     Edit  </router-link> 
                                    <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKasKeluar(kasKeluar.id, index,kasKeluar.kas_id)">Delete</a> -->
+                                    v-on:click="deleteKasKeluar(kasKeluar.id, index,kasKeluar.kas_id)">Delete</a>
                                 </td>
                             </tr>
                         </tbody>

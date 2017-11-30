@@ -43,17 +43,33 @@ class KasKeluarController extends Controller
 
     public function edit($id)
     {
-        // return KasKeluar::find($id);
+        return KasKeluar::with('kas')->find($id);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kas_id'      => 'required|exists:kas,id',
+            'kategori_id' => 'required|exists:kategori_transaksis,id',
+            'jumlah'      => 'required|numeric',
+            'keterangan'  => 'required',
+        ]);
+        $update = KasKeluar::find($id)->update([
+            'kas_id'      => $request->kas_id,
+            'kategori_id' => $request->kategori_id,
+            'jumlah'      => $request->jumlah,
+            'keterangan'  => $request->keterangan,
+        ]);
+        if ($update == true) {
+            return response(200);
+        } else {
+            return response(500);
+        }
     }
 
     public function destroy($id)
     {
-        //
+        return KasKeluar::destroy($id);
     }
     public function view()
     {
