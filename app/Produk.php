@@ -7,15 +7,15 @@ use Yajra\Auditable\AuditableTrait;
 
 class Produk extends Model
 {
-	use AuditableTrait;
+    use AuditableTrait;
 
-	protected $primaryKey = 'produk_id';
+    protected $primaryKey = 'produk_id';
 
-	protected $fillable = ['produk_id','kode_produk','nama_produk','harga_beli','harga_jual','satuans_id','kategori_produks_id','status_jual','berkaitan_dgn_stok'];
+    protected $fillable = ['produk_id', 'kode_produk', 'nama_produk', 'harga_beli', 'harga_jual', 'satuans_id', 'kategori_produks_id', 'status_jual'];
 
-	public function satuan()
-	{
-		return $this->hasOne('App\Satuan','id', 'produk_id');
-	}
+    public function satuan()
+    {
+        return $this->hasOne('App\Satuan', 'id', 'produk_id');
+    }
 
 }

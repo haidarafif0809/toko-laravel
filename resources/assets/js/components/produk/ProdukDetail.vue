@@ -9,31 +9,39 @@
 			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
 
 			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<th>Kode</th>
-							<th>Harga jual</th>
-							<th>Harga beli</th>
-							<th>Satuan</th>
-							<th>Kategori Produk</th>
-							<th>Status Jual</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{ produk.kode_produk }}</td>
-								<td>{{ produk.harga_jual }}</td>
-								<td>{{ produk.harga_beli }}</td>
-								<td>{{ satuan.nama_satuan }}</td>
-								<td>{{ kategori_produk.nama_kategori_produk }}</td>
-								<td>
-									<span v-if="produk.status_jual == 1">Aktif</span>
-									<span v-if="produk.status_jual == 0">Tidak Aktif</span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								Kode Produk:
+							</td>
+							<td>{{ produk.kode_produk }}</td>
+						</tr>
+						<tr>
+							<td>Harga Jual:</td>
+							<td>{{ produk.harga_jual }}</td>
+						</tr>
+						<tr>
+							<td>Harga Beli:</td>
+							<td>{{ produk.harga_beli }}</td>
+						</tr>
+						<tr>
+							<td>Satuan:</td>
+							<td>{{ satuan.nama_satuan }}</td>
+						</tr>
+						<tr>
+							<td>Kategori Produk:</td>
+							<td>{{ kategori_produk.nama_kategori_produk }}</td>
+						</tr>
+						<tr>
+							<td>Status Jual:</td>
+							<td>
+								<span v-if="produk.status_jual == 1">Aktif</span>
+								<span v-if="produk.status_jual == 0">Tidak Aktif</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

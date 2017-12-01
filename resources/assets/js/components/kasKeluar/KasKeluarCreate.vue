@@ -41,7 +41,7 @@
 									Jumlah
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasKeluar.jumlah" name="jumlah"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Jumlah" type="text" v-model="kasKeluar.jumlah" name="jumlah"  autofocus="">
 									<span v-if="errors.jumlah" id="name_error" class="label label-danger">
 										{{ errors.jumlah[0] }}
 									</span>
@@ -52,7 +52,7 @@
 									Keterangan
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kasKeluar.keterangan" name="keterangan"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Keterangan" type="text" v-model="kasKeluar.keterangan" name="keterangan"  autofocus="">
 									<span v-if="errors.keterangan" id="name_error" class="label label-danger">
 										{{ errors.keterangan[0] }}
 									</span>

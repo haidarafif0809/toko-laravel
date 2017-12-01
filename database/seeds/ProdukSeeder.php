@@ -21,7 +21,6 @@ class ProdukSeeder extends Seeder
         $produk->satuans_id          = "1";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
-        $produk->berkaitan_dgn_stok  = "1000";
         $produk->save();
 
         // sample produk 2
@@ -33,7 +32,6 @@ class ProdukSeeder extends Seeder
         $produk->satuans_id          = "5";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
-        $produk->berkaitan_dgn_stok  = "1000";
         $produk->save();
 
         // sample produk 3
@@ -45,7 +43,6 @@ class ProdukSeeder extends Seeder
         $produk->satuans_id          = "8";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
-        $produk->berkaitan_dgn_stok  = "1000";
         $produk->save();
     }
 }
