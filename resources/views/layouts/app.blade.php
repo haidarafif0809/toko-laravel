@@ -163,19 +163,8 @@
             </nav>
             @yield('content')
         </div>
-<<<<<<< HEAD
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js?v=1.15') }}">
+        <script src="{{ asset('js/app.js?v=1.16') }}">
         </script>
     </body>
-=======
-    </nav>
-
-    @yield('content')
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.15') }}"></script>
-</body>
->>>>>>> master
 </html>

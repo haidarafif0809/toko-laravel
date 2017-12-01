@@ -34,12 +34,11 @@ Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view', 'ProdukController@view');
 Route::get('/produk/cari', 'ProdukController@cari');
 Route::get('/produk/satuan', 'ProdukController@satuan');
-<<<<<<< HEAD
-=======
+
 Route::get('/produk/kategori_produks_id', 'ProdukController@kategoriProduksId');
 Route::get('/produk/kategori_produks_id/{id}', 'ProdukController@detailKategoriProdukDariProduk');
 Route::get('/produk/status_jual', 'ProdukController@statusJual');
->>>>>>> master
+
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
 Route::get('/produk/edit/{id}', 'ProdukController@edit');
