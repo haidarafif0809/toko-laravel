@@ -73960,13 +73960,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         deleteKasMasuk: function deleteKasMasuk(id, index, nama_kas) {
-            if (confirm("Yakin Ingin Menghapus Satuan " + nama_kas + " ?")) {
+            if (confirm("Yakin Ingin Menghapus Kas Masuk " + nama_kas + " ?")) {
                 var app = this;
                 axios.delete(app.url + '/' + id).then(function (resp) {
                     app.getKasMasuks();
                     app.alert(nama_kas);
                 }).catch(function (resp) {
-                    alert("Could not delete Satuan");
+                    alert("Could not delete Kas Masuk");
                 });
             }
         },
@@ -74104,7 +74104,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                   Edit  "
+                                  "\n                                 Edit  "
                                 )
                               ]
                             ),
@@ -74189,7 +74189,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
+          "\n                                 Sedang Memuat Data\n                             "
         )
       ])
     ])
@@ -74201,7 +74201,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
+          "\n                                 Tidak Ada Data\n                             "
         )
       ])
     ])
@@ -74270,10 +74270,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -74599,8 +74595,8 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Nama Produk",
-                        type: "text",
+                        placeholder: "Jumlah",
+                        type: "number",
                         name: "jumlah",
                         autofocus: ""
                       },
@@ -74641,11 +74637,11 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "keterangan" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tKeterangan\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Keterangan")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
+                    _c("textarea", {
                       directives: [
                         {
                           name: "model",
@@ -74658,8 +74654,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Nama Produk",
-                        type: "text",
+                        placeholder: "Keterangan",
                         name: "keterangan",
                         autofocus: ""
                       },
@@ -74679,20 +74674,9 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.keterangan
-                      ? _c(
-                          "span",
-                          {
-                            staticClass: "label label-danger",
-                            attrs: { id: "name_error" }
-                          },
-                          [
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t\t" +
-                                _vm._s(_vm.errors.keterangan[0]) +
-                                "\n\t\t\t\t\t\t\t\t"
-                            )
-                          ]
-                        )
+                      ? _c("span", { staticClass: "label label-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.keterangan[0]))
+                        ])
                       : _vm._e()
                   ])
                 ]),
@@ -74983,216 +74967,219 @@ var render = function() {
         _c("div", { staticClass: "panel panel-default" }, [
           _vm._m(0, false, false),
           _vm._v(" "),
-          _c(
-            "form",
-            {
-              staticClass: "form-horizontal",
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.saveForm()
+          _c("div", { staticClass: "panel-body" }, [
+            _c(
+              "form",
+              {
+                staticClass: "form-horizontal",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.saveForm()
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "kas_id" }
-                  },
-                  [_vm._v("Kas")]
-                ),
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "kas_id" }
+                    },
+                    [_vm._v("Kas")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4" },
+                    [
+                      _c(
+                        "selectize-component",
+                        {
+                          attrs: { settings: _vm.settings },
+                          model: {
+                            value: _vm.kasMasuk.kas_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.kasMasuk, "kas_id", $$v)
+                            },
+                            expression: "kasMasuk.kas_id"
+                          }
+                        },
+                        _vm._l(_vm.kas, function(ka, index) {
+                          return _c("option", { domProps: { value: ka.id } }, [
+                            _vm._v(_vm._s(ka.nama_kas))
+                          ])
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.errors.kas_id
+                        ? _c("span", { staticClass: "label label-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.kas_id[0]))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-md-4" },
-                  [
-                    _c(
-                      "selectize-component",
-                      {
-                        attrs: { settings: _vm.settings },
-                        model: {
-                          value: _vm.kasMasuk.kas_id,
-                          callback: function($$v) {
-                            _vm.$set(_vm.kasMasuk, "kas_id", $$v)
-                          },
-                          expression: "kasMasuk.kas_id"
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "kategori_id" }
+                    },
+                    [_vm._v("Kategori Transaksi")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4" },
+                    [
+                      _c(
+                        "selectize-component",
+                        {
+                          attrs: { settings: _vm.setting },
+                          model: {
+                            value: _vm.kasMasuk.kategori_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.kasMasuk, "kategori_id", $$v)
+                            },
+                            expression: "kasMasuk.kategori_id"
+                          }
+                        },
+                        _vm._l(_vm.kategoriTransaksis, function(
+                          kategoriTransaksi,
+                          index
+                        ) {
+                          return _c(
+                            "option",
+                            { domProps: { value: kategoriTransaksi.id } },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  kategoriTransaksi.nama_kategori_transaksi
+                                )
+                              )
+                            ]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.errors.kategori_id
+                        ? _c("span", { staticClass: "label label-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.kategori_id[0]))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "jumlah" }
+                    },
+                    [_vm._v("Jumlah")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasMasuk.jumlah,
+                          expression: "kasMasuk.jumlah"
                         }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        autocomplete: "off",
+                        placeholder: "Jumlah",
+                        type: "number",
+                        name: "jumlah",
+                        autofocus: ""
                       },
-                      _vm._l(_vm.kas, function(ka, index) {
-                        return _c("option", { domProps: { value: ka.id } }, [
-                          _vm._v(_vm._s(ka.nama_kas))
-                        ])
-                      })
-                    ),
+                      domProps: { value: _vm.kasMasuk.jumlah },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.kasMasuk, "jumlah", $event.target.value)
+                        }
+                      }
+                    }),
                     _vm._v(" "),
-                    _vm.errors.kas_id
+                    _vm.errors.jumlah
                       ? _c("span", { staticClass: "label label-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.kas_id[0]))
+                          _vm._v(_vm._s(_vm.errors.jumlah[0]))
                         ])
                       : _vm._e()
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "kategori_id" }
-                  },
-                  [_vm._v("Kategori Transaksi")]
-                ),
+                  ])
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-md-4" },
-                  [
-                    _c(
-                      "selectize-component",
-                      {
-                        attrs: { settings: _vm.setting },
-                        model: {
-                          value: _vm.kasMasuk.kategori_id,
-                          callback: function($$v) {
-                            _vm.$set(_vm.kasMasuk, "kategori_id", $$v)
-                          },
-                          expression: "kasMasuk.kategori_id"
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "keterangan" }
+                    },
+                    [_vm._v("Keterangan")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasMasuk.keterangan,
+                          expression: "kasMasuk.keterangan"
                         }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        autocomplete: "off",
+                        placeholder: "Keterangan",
+                        name: "keterangan",
+                        autofocus: ""
                       },
-                      _vm._l(_vm.kategoriTransaksis, function(
-                        kategoriTransaksi,
-                        index
-                      ) {
-                        return _c(
-                          "option",
-                          { domProps: { value: kategoriTransaksi.id } },
-                          [
-                            _vm._v(
-                              _vm._s(kategoriTransaksi.nama_kategori_transaksi)
-                            )
-                          ]
-                        )
-                      })
-                    ),
+                      domProps: { value: _vm.kasMasuk.keterangan },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.kasMasuk,
+                            "keterangan",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
                     _vm._v(" "),
-                    _vm.errors.kategori_id
+                    _vm.errors.keterangan
                       ? _c("span", { staticClass: "label label-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.kategori_id[0]))
+                          _vm._v(_vm._s(_vm.errors.keterangan[0]))
                         ])
                       : _vm._e()
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "jumlah" }
-                  },
-                  [_vm._v("Jumlah")]
-                ),
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.kasMasuk.jumlah,
-                        expression: "kasMasuk.jumlah"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      placeholder: "Jumlah",
-                      type: "jumlah",
-                      name: "jumlah",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.kasMasuk.jumlah },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.kasMasuk, "jumlah", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.jumlah
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.jumlah[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "keterangan" }
-                  },
-                  [_vm._v("Keterangan")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.kasMasuk.keterangan,
-                        expression: "kasMasuk.keterangan"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      placeholder: "Keterangan",
-                      type: "keterangan",
-                      name: "keterangan",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.kasMasuk.keterangan },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.kasMasuk,
-                          "keterangan",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.keterangan
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.keterangan[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1, false, false)
-            ]
-          )
+                _vm._m(1, false, false)
+              ]
+            )
+          ])
         ])
       ])
     ])
