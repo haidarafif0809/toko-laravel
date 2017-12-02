@@ -51,8 +51,9 @@
 							<div class="form-group">
 								<label for="alamat" class="col-md-2 control-label">Alamat</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat"  autofocus="">
 									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
+									<p style="white-space: pre-line;">{{ message }}</p>
+									<textarea class="form-control" v-model="pelanggan.alamat" name="alamat" placeholder="Alamat"></textarea>
 								</div>
 							</div>
 
