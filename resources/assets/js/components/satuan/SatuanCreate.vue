@@ -3,7 +3,7 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexSatuan'}">Satuan</router-link></li>
-			<li class="active">Tambah satuan</li>
+			<li class="active">Tambah Satuan</li>
 		</ul>
 
 		<div class="row">
@@ -11,12 +11,12 @@
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title"> satuan </h4>
+						<h4 class="panel-title"> Satuan </h4>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 							<div class="form-group">
-								<label for="nama_satuan" class="col-md-2 control-label">Nama Satuan</label>
+								<label for="nama_satuan" class="col-md-2 control-label">Nama</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Satuan" type="text" v-model="satuan.nama_satuan" name="nama_satuan"  autofocus="">
 									<span v-if="errors.nama_satuan" class="label label-danger">{{ errors.nama_satuan[0] }}</span>

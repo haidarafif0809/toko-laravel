@@ -24,7 +24,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="nama_pelanggan" class="col-md-2 control-label">Nama Pelanggan</label>
+								<label for="nama_pelanggan" class="col-md-2 control-label">Nama</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="">
 									<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
