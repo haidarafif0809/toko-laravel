@@ -72066,7 +72066,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Satuan")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Satuan")])
     ])
   },
   function() {
@@ -72270,7 +72270,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah satuan")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Satuan")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -72300,7 +72300,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_satuan" }
                     },
-                    [_vm._v("Nama Satuan")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -72362,7 +72362,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("h4", { staticClass: "panel-title" }, [_vm._v(" satuan ")])
+      _c("h4", { staticClass: "panel-title" }, [_vm._v(" Satuan ")])
     ])
   },
   function() {
@@ -72570,7 +72570,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah satuan")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Satuan")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -72600,7 +72600,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_satuan" }
                     },
-                    [_vm._v("Nama Satuan")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -72662,7 +72662,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("h4", { staticClass: "panel-title" }, [_vm._v(" satuan ")])
+      _c("h4", { staticClass: "panel-title" }, [_vm._v(" Satuan ")])
     ])
   },
   function() {
@@ -77148,9 +77148,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [
-        _vm._v("Table Kategori Transaksi")
-      ])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Kategori Transaksi")])
     ])
   },
   function() {
@@ -77383,7 +77381,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_kategori_transaksi" }
                     },
-                    [_vm._v("Nama Kategori Transaksi")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -77658,7 +77656,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Kategori Transaksi")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Kategori Transaksi")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -77688,7 +77686,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_kategori_transaksi" }
                     },
-                    [_vm._v("Nama Kategori Transaksi")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -79545,7 +79543,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Pelanggan")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Pelanggan")])
     ])
   },
   function() {
@@ -79871,7 +79869,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pelanggan" }
                     },
-                    [_vm._v("Nama Pelanggan")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -80325,7 +80323,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Pelanggan")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Pelanggan")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -80407,7 +80405,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pelanggan" }
                     },
-                    [_vm._v("Nama Pelanggan")]
+                    [_vm._v("Nama")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [

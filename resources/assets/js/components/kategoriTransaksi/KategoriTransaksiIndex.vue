@@ -8,7 +8,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Table Kategori Transaksi</p>
+						<p class="panel-title">Kategori Transaksi</p>
 					</div>
 					<div class="panel-body">
 						<div class="tambah-kategoriTransaksi">
