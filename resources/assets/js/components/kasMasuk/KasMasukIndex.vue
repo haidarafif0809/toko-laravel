@@ -63,11 +63,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 
@@ -162,7 +162,7 @@ watch: {
         	});
         },
         deleteKasMasuk(id, index,nama_kas) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kas+" ?")) {
+            if (confirm("Yakin Ingin Menghapus Kas Masuk "+nama_kas+" ?")) {
                 var app = this;
                 axios.delete(app.url+'/' + id)
                 .then(function (resp) {
@@ -170,7 +170,7 @@ watch: {
                     app.alert(nama_kas)
                 })
                 .catch(function (resp) {
-                    alert("Could not delete Satuan");
+                    alert("Could not delete Kas Masuk");
                 });
             }
         },
