@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(348);
+module.exports = __webpack_require__(349);
 
 
 /***/ }),
@@ -80672,9 +80672,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(347)
 /* template */
-var __vue_template__ = __webpack_require__(347)
+var __vue_template__ = __webpack_require__(348)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -80715,6 +80715,102 @@ module.exports = Component.exports
 
 /***/ }),
 /* 347 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			kasMutasis: [],
+			kasMutasisData: {},
+			url: window.location.origin + window.location.pathname.replace("home", "kas-mutasi"),
+			loading: true
+		};
+	},
+	mounted: function mounted() {
+		var app = this;
+		app.loading = true;
+		app.getItems();
+	},
+
+	methods: {
+		getItems: function getItems(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+			axios.get(app.url + '/view?page=' + page).then(function (resp) {
+				app.kasMutasis = resp.data.data;
+				app.kasMutasisData = resp.data;
+				app.loading = false;
+				//console.log(resp.data.data)
+			}).catch(function (resp) {
+				alert("Could not load Kas Mutasis");
+				app.loading = false;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80736,7 +80832,74 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Kas Mutasi")])
     ]),
     _vm._v(" "),
-    _vm._m(0, false, false)
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c(
+            "div",
+            { staticClass: "panel-heading" },
+            [
+              _c("div", { staticClass: "panel-body" }, [
+                _c(
+                  "table",
+                  { staticClass: "table table-striped table-hover" },
+                  [
+                    _vm._m(0, false, false),
+                    _vm._v(" "),
+                    _vm.kasMutasis.length > 0 && _vm.loading == false
+                      ? _c(
+                          "tbody",
+                          { staticClass: "data-ada" },
+                          _vm._l(_vm.kasMutasis, function(kasMutasi, index) {
+                            return _c("tr", [
+                              _c("td", [
+                                _vm._v("kasMutasi.kas_mutasi.kas_mutasi.id")
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v("kasMutasi.kas_mutasi.dari_kas")
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("kasMutasi.kas_mutasi.ke_kas")]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v("kasMutasi.kas_mutasi.jumlah")]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v("kasMutasi.kas-mutasi.keterangan")
+                              ])
+                            ])
+                          })
+                        )
+                      : _vm.loading == true
+                        ? _c("tbody", { staticClass: "data-ada" }, [
+                            _vm._m(1, false, false)
+                          ])
+                        : _c("tbody", { staticClass: "data-tidak-ada" }, [
+                            _vm._m(2, false, false)
+                          ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _c("pagination", {
+                    attrs: { data: _vm.kasMutasisData },
+                    on: { "pagination-change-page": _vm.getItems }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -80744,41 +80907,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _c("div", { staticClass: "panel-body" }, [
-              _c("table", [
-                _c("thead", [
-                  _c("th", [_vm._v("No Faktur")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Dari Kas")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Ke Kas")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Jumlah")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Keterangan")])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td")
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("th", [_vm._v("No Faktur")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Dari Kas")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Ke Kas")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Jumlah")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Keterangan")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t\t\t")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tTidak ada data\n\t\t\t\t\t\t\t\t\t")
       ])
     ])
   }
@@ -80793,7 +80950,7 @@ if (false) {
 }
 
 /***/ }),
-/* 348 */
+/* 349 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
