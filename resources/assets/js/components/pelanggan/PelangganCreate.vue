@@ -43,7 +43,7 @@
 							<div class="form-group">
 								<label for="nomor_telepon" class="col-md-2 control-label">Nomor Telepon</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="tel" v-model="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="">
 									<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
 								</div>
 							</div>
