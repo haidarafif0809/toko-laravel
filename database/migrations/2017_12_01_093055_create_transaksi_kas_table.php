@@ -16,8 +16,6 @@ class CreateTransaksiKasTable extends Migration
         Schema::create('transaksi_kas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('jenis_transaksi');
-            $table->integer('kas');
-            $table->integer('kategori_transaksi');
             $table->integer('jumlah_masuk')->default(0);
             $table->integer('jumlah_keluar')->default(0);
             $table->timestamps();

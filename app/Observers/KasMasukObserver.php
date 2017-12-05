@@ -10,13 +10,13 @@ class KasMasukObserver
     public function creating(KasMasuk $KasMasuk)
     {
 
-        TransaksiKas::create(['id' => $KasMasuk->kas_masuk_id, 'jenis_transaksi' => 'kas_masuk', 'jumlah_masuk' => $KasMasuk->jumlah, 'kas' => $KasMasuk->kas_id, 'kategori_transaksi' => $KasMasuk->kategori_id]);
+        TransaksiKas::create(['id' => $KasMasuk->kas_masuk_id, 'jenis_transaksi' => $KasMasuk->type, 'jumlah_masuk' => $KasMasuk->jumlah]);
     }
 
     public function updating(KasMasuk $KasMasuk)
     {
 
-        TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->update(['jumlah_masuk' => $KasMasuk->jumlah, 'kas' => $KasMasuk->kas_id, 'kategori_transaksi' => $KasMasuk->kategori_id]);
+        TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->update(['jenis_transaksi' => $KasMasuk->type, 'jumlah_masuk' => $KasMasuk->jumlah]);
     }
 
     public function deleting(KasMasuk $KasMasuk)

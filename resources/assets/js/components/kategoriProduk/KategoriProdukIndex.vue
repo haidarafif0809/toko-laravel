@@ -91,8 +91,8 @@ mounted() {
 watch: {
         // whenever question changes, this function will run
         pencarian: function (newQuestion) {
-        	var irul = this;
-        	irul.searchData()
+        	var app = this;
+        	app.searchData()
         }
     },
     methods: {

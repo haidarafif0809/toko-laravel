@@ -15,10 +15,10 @@ class KategoriTransaksi extends Model
 
     public function kasMasuk()
     {
-        return $this->hasOne('App\KasMasuk');
+        return $this->hasMany('App\KasMasuk');
     }
     public function kasKeluar()
     {
-        return $this->hasOne('App\KasKeluar');
+        return $this->hasMany('App\KasKeluar');
     }
 }
