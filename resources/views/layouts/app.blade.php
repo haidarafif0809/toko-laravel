@@ -51,51 +51,43 @@
                         </li>
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                Master Data
+                                Produk
                                 <span class="caret">
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <router-link :to="{name: 'indexUser'}">
-                                        User
-                                    </router-link>
-                                </li>
-                                <li>
+
+                                <!-- <li>
                                     <router-link :to="{name: 'indexSuplier'}">
                                         Supplier
                                     </router-link>
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <router-link :to="{name: 'indexSatuan'}">
                                         Satuan
                                     </router-link>
-                                </li>
+                                </li> -->
                                 <li>
                                     <router-link :to="{name: 'indexKategoriProduk'}">
                                         Kategori Produk
                                     </router-link>
                                 </li>
-                                <li>
-                                    <router-link :to="{name: 'indexPelanggan'}">
-                                        Pelanggan
-                                    </router-link>
-                                </li>
+
                                 <li>
                                     <router-link :to="{name: 'indexProduk'}">
                                         Produk
                                     </router-link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <router-link :to="{name: 'indexKas'}">
                                         Kas
                                     </router-link>
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <router-link :to="{name: 'indexKategoriTransaksi'}">
                                         Kategori Transaksi
                                     </router-link>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -115,12 +107,36 @@
                                         Kas Keluar
                                     </router-link>
                                 </li>
-                                <li>
+                               <!--  <li>
                                     <router-link :to="{name: 'indexUser'}">
                                         Kas Mutasi
                                     </router-link>
-                                </li>
+                                </li> -->
                             </ul>
+                        </li>
+
+                        <li>
+                            <router-link :to="{name: 'indexUser'}">
+                                Staff
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link :to="{name: 'indexPelanggan'}">
+                                Pelanggan
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link :to="{name: 'indexDashboard'}">
+                                Penjualan
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link :to="{name: 'indexDashboard'}">
+                                Laporan
+                            </router-link>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -164,7 +180,7 @@
     @yield('content')
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.17') }}">
+<script src="{{ asset('js/app.js?v=1.18') }}">
 </script>
 </body>
 </html>
