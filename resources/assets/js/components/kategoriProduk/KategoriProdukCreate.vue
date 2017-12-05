@@ -15,13 +15,13 @@
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 							<div class="form-group">
-								<label for="nama_produk" class="col-md-2 control-label">
+								<label for="nama_kategori_produk" class="col-md-2 control-label">
 									Nama Produk
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kategoriProduk.nama_produk" name="nama_produk"  autofocus="">
-									<span v-if="errors.nama_produk" id="name_error" class="label label-danger">
-										{{ errors.nama_produk[0] }}
+									<input class="form-control" required autocomplete="off" placeholder="Nama Produk" type="text" v-model="kategoriProduk.nama_kategori_produk" name="nama_kategori_produk"  autofocus="">
+									<span v-if="errors.nama_kategori_produk" id="name_error" class="label label-danger">
+										{{ errors.nama_kategori_produk[0] }}
 									</span>
 								</div>
 							</div>
@@ -49,7 +49,7 @@ export default {
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_produk: ''
+				nama_kategori_produk: ''
 			},
 			message : ''
 		}
@@ -61,9 +61,9 @@ export default {
 			var newKategoriProduk = app.kategoriProduk;
 			axios.post(app.url, newKategoriProduk)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Kategori Produk '+ app.kategoriProduk.nama_produk;
+				app.message = 'Sukses : Berhasil Menambah Kategori Produk '+ app.kategoriProduk.nama_kategori_produk;
 				app.alert(app.message);
-				app.kategoriProduk.nama_produk = ''
+				app.kategoriProduk.nama_kategori_produk = ''
 				app.errors = '';
 				app.$router.replace('/kategoriProduk');
 			})

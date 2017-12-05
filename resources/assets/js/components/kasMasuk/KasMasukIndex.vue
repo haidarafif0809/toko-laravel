@@ -10,14 +10,14 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <div class="tambah">
-                        <p> <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary">Create Kas Masuk</router-link></p>        
+                        <p> <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary">Tambah Kas Masuk</router-link></p>        
                     </div>
                     <div class="pencarian">
-                        <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
+                        <input type="text" class="form-control" name="pencarian" placeholder="Pencarian"  v-model="pencarian" >
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <th>No Faktur</th>
+                            <th>No TRQ</th>
                             <th>Kas</th>
                             <th>Kategori Transaksi</th>
                             <th>Jumlah</th>
@@ -38,7 +38,7 @@
                                     Edit  </router-link> 
                                     <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKasMasuk(kasMasuk.kas_masuk.kas_masuk_id, index,kasMasuk.kas_masuk.kas_masuk_id)">Delete</a>
+                                    v-on:click="deleteKasMasuk(kasMasuk.kas_masuk.kas_masuk_id, index,kasMasuk.kas_masuk.kas_masuk_id)">Hapus</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -162,7 +162,7 @@ watch: {
         	});
         },
         deleteKasMasuk(id, index,nama_kas) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kas+" ?")) {
+            if (confirm("Yakin Ingin Menghapus Kas Masuk "+nama_kas+" ?")) {
                 var app = this;
                 axios.delete(app.url+'/' + id)
                 .then(function (resp) {
@@ -170,7 +170,7 @@ watch: {
                     app.alert(nama_kas)
                 })
                 .catch(function (resp) {
-                    alert("Could not delete Satuan");
+                    alert("Could not delete Kas Masuk");
                 });
             }
         },

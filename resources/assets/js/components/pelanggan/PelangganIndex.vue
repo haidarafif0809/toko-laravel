@@ -117,20 +117,6 @@ export default {
     			alert("Could not load pelanggans");
     		});
     	},
-    	deleteEntry(id, index,nama_pelanggan) {
-    		if (confirm("Yakin Ingin Menghapus Pelanggan "+nama_pelanggan+" ?")) {
-    			var app = this;
-    			axios.delete(app.url+'/' + id)
-    			.then(function (resp) {
-    				app.getPelanggans();
-    				app.alert(nama_pelanggan)
-    				app.$router.replace('/pelanggan');
-    			})
-    			.catch(function (resp) {
-    				alert("Could not delete pelanggan");
-    			});
-    		}
-    	},
     	getHasilPencarian(page){
     		var app = this;
     		app.loading = true;
@@ -148,18 +134,38 @@ export default {
     			app.loading = false
     			alert("Could not load pelanggans");
     		});
-
-
     	},
-    	alert(nama_pelanggan) {
-    		this.$swal({
-    			title: "Berhasil!",
-    			text: "Berhasil Menghapus "+ nama_pelanggan,
-    			icon: "success",
-    		});
-    	}
-    }
 
+
+    	deleteEntry(id, index,nama_pelanggan) {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus "+nama_pelanggan+" ?",
+    			icon : "warning",
+    			buttons: true,
+    			dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    			if (willDelete) {
+    				var app = this;
+    				axios.delete(app.url+'/' + id)
+    				.then(function (resp) {
+    					app.getPelanggans();
+    					swal("Pelanggan Berhasil Dihapus!  ", {
+    						icon: "success",
+    					});
+    				})
+    				.catch(function (resp) {
+    					app.$router.replace('/pelanggan/');
+    					swal("Gagal Menghapus Pelanggan!", {
+    						icon: "warning",
+    					});
+    				});
+    			}
+    			this.$router.replace('/pelanggan/');
+    		});
+    	},
+    }
 }
 </script>
 
