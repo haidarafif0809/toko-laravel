@@ -3,7 +3,7 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexPelanggan'}">Pelanggan</router-link></li>
-			<li class="active">Edit Pelanggan</li>
+			<li class="active">Tambah Pelanggan</li>
 		</ul>
 
 		<div class="row">
@@ -24,7 +24,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="nama_pelanggan" class="col-md-2 control-label">Nama</label>
+								<label for="nama_pelanggan" class="col-md-2 control-label">Nama Pelanggan</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="">
 									<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
@@ -50,9 +50,8 @@
 							<div class="form-group">
 								<label for="alamat" class="col-md-2 control-label">Alamat</label>
 								<div class="col-md-4">
+									<input class="form-control" required autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat"  autofocus="">
 									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
-									<p style="white-space: pre-line;">{{ message }}</p>
-									<textarea class="form-control" v-model="pelanggan.alamat" name="alamat" placeholder="Alamat"></textarea>
 								</div>
 							</div>
 

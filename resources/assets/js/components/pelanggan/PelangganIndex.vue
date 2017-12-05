@@ -8,7 +8,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Pelanggan</p>
+						<p class="panel-title">Table Pelanggan</p>
 					</div>
 					<div class="panel-body">
 						<div class="tambah">

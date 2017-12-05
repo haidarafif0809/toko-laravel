@@ -3,7 +3,7 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexKategoriTransaksi'}">Kategori Transaksi</router-link></li>
-			<li class="active">Edit Kategori Transaksi</li>
+			<li class="active">Tambah Kategori Transaksi</li>
 		</ul>
 
 		<div class="row">
@@ -16,7 +16,7 @@
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 							<div class="form-group">
-								<label for="nama_kategori_transaksi" class="col-md-2 control-label">Nama</label>
+								<label for="nama_kategori_transaksi" class="col-md-2 control-label">Nama Kategori Transaksi</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Transaksi" type="text" v-model="kategoriTransaksi.nama_kategori_transaksi" name="nama_kategori_transaksi"  autofocus="">
 									<span v-if="errors.nama_kategori_transaksi" class="label label-danger">{{ errors.nama_kategori_transaksi[0] }}</span>

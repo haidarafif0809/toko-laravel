@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Satuan</p>
+                        <p class="panel-title">Table Satuan</p>
                     </div>
                     <div class="panel-body">
                         <div class="tambah">
@@ -19,19 +19,19 @@
                             </p>
                         </div>
                         <div class="pencarian">
-                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                       </div>
-                       <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                           <thead>
+                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                     </div>
+                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                         <thead>
                             <th>Nama</th>
 
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="satuans.length > 0 && loading == false" class="data-ada">
                             <tr v-for="satuan ,index in satuans">
-                             <td>{{ satuan.nama_satuan }}</td>
+                               <td>{{ satuan.nama_satuan }}</td>
 
-                             <td>
+                               <td>
                                 <router-link :to="{name: 'editSatuan', params: {id:satuan.id}}" class="btn btn-xs btn-default">
                                     Edit
                                 </router-link>
@@ -71,17 +71,17 @@
 
 <script>
 export default {
-   data: function () {
-      return {
-         satuans: [],
-         satuansData: {},
-         url : window.location.origin+(window.location.pathname).replace("home","satuan"),
-         search : '',
-         loading : true
+ data: function () {
+  return {
+   satuans: [],
+   satuansData: {},
+   url : window.location.origin+(window.location.pathname).replace("home","satuan"),
+   search : '',
+   loading : true
 
-     }
- },
- mounted() {
+}
+},
+mounted() {
   var app = this;
   app.loading = true
   app.getSatuans();	

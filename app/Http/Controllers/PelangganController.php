@@ -67,7 +67,7 @@ class PelangganController extends Controller
             'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan,' . $id,
             'nama_pelanggan' => 'required',
             'tanggal_lahir'  => 'required',
-            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon,' . $id,
+            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon,',
             'alamat'         => 'required',
         ]);
         $pelanggan = Pelanggan::find($id)->update([
