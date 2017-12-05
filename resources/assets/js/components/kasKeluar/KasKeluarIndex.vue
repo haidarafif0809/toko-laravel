@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Table Kas Keluar</p>
+                        <p class="panel-title">Kas Keluar</p>
                     </div>
                     <div class="panel-body">
                         <div class="tambah">
@@ -96,7 +96,7 @@ mounted() {
 },
 watch: {
         // whenever question changes, this function will run
-        pencarian: function (newQuestion) {
+        search: function (newQuestion) {
             this.getHasilPencarian();
         }
     },
@@ -149,7 +149,7 @@ watch: {
                 app.loading = false
                 alert("Could not load kas keluars");
             });
-
+console.log(app.search)
         },
         alert(kas_id) {
         	this.$swal({

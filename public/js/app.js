@@ -67486,7 +67486,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         // whenever question changes, this function will run
-        pencarian: function pencarian(newQuestion) {
+        search: function search(newQuestion) {
             this.getHasilPencarian();
         }
     },
@@ -67746,7 +67746,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("User")])
     ])
   },
   function() {
@@ -68936,7 +68936,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Kas")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Kas")])
     ])
   },
   function() {
@@ -71826,18 +71826,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert("Could not load satuans");
             });
         },
-        deleteEntry: function deleteEntry(id, index, nama_satuan) {
-            if (confirm("Yakin Ingin Menghapus Satuan " + nama_satuan + " ?")) {
-                var app = this;
-                axios.delete(app.url + '/' + id).then(function (resp) {
-                    app.getSatuans();
-                    app.alert(nama_satuan);
-                    app.$router.replace('/satuan');
-                }).catch(function (resp) {
-                    alert("Could not delete satuan");
-                });
-            }
-        },
         getHasilPencarian: function getHasilPencarian(page) {
             var app = this;
             app.loading = true;
@@ -71854,11 +71842,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert("Could not load satuans");
             });
         },
-        alert: function alert(nama_satuan) {
-            this.$swal({
-                title: "Berhasil!",
-                text: "Berhasil Menghapus " + nama_satuan,
-                icon: "success"
+        deleteEntry: function deleteEntry(id, index, nama_satuan) {
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + nama_satuan + " ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + id).then(function (resp) {
+                        app.getSatuans();
+                        swal("Satuan Berhasil Dihapus!  ", {
+                            icon: "success"
+                        });
+                    }).catch(function (resp) {
+                        app.$router.replace('/satuan/');
+                        swal("Gagal Menghapus Satuan!", {
+                            icon: "warning"
+                        });
+                    });
+                }
+                _this.$router.replace('/satuan/');
             });
         }
     }
@@ -75263,7 +75271,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         // whenever question changes, this function will run
-        pencarian: function pencarian(newQuestion) {
+        search: function search(newQuestion) {
             this.getHasilPencarian();
         }
     },
@@ -75310,6 +75318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.loading = false;
                 alert("Could not load kas keluars");
             });
+            console.log(app.search);
         },
         alert: function alert(kas_id) {
             this.$swal({
@@ -75530,7 +75539,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Kas Keluar")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Kas Keluar")])
     ])
   },
   function() {
@@ -76743,78 +76752,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      kategoriTransaksis: [],
-      kategoriTransaksiData: {},
-      url: window.location.origin + window.location.pathname.replace("home", "kategoriTransaksi"),
-      search: '',
-      loading: true
+    data: function data() {
+        return {
+            kategoriTransaksis: [],
+            kategoriTransaksiData: {},
+            url: window.location.origin + window.location.pathname.replace("home", "kategoriTransaksi"),
+            search: '',
+            loading: true
 
-    };
-  },
-  mounted: function mounted() {
-    var app = this;
-    app.loading = true;
-    app.getKategoriTransaksis();
-  },
-
-  watch: {
-    // whenever question changes, this function will run
-    search: function search(newQuestion) {
-      this.getHasilPencarian();
-    }
-  },
-  methods: {
-    getKategoriTransaksis: function getKategoriTransaksis(page) {
-      var app = this;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-      axios.get(app.url + '/view?page=' + page).then(function (resp) {
-        app.loading = false;
-        app.kategoriTransaksis = resp.data.data;
-        app.kategoriTransaksiData = resp.data;
-      }).catch(function (resp) {
-        alert("Could not load kategoriTransaksis");
-      });
+        };
     },
-    deleteEntry: function deleteEntry(id, index, nama_kategori_transaksi) {
-      if (confirm("Yakin Ingin Menghapus Kategori Transaksi " + nama_kategori_transaksi + " ?")) {
+    mounted: function mounted() {
         var app = this;
-        axios.delete(app.url + '/' + id).then(function (resp) {
-          app.getKategoriTransaksis();
-          app.alert(nama_kategori_transaksi);
-          app.$router.replace('/kategoriTransaksi');
-        }).catch(function (resp) {
-          alert("Could not delete Kategori Transaksi");
-        });
-      }
+        app.loading = true;
+        app.getKategoriTransaksis();
     },
-    getHasilPencarian: function getHasilPencarian(page) {
-      var app = this;
-      app.loading = true;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-      axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
-        app.loading = false;
-        app.kategoriTransaksis = resp.data.data;
-        app.kategoriTransaksiData = resp.data;
-      }).catch(function (resp) {
-        console.log(resp);
-        app.loading = false;
-        alert("Could not load kategori Transaksis");
-      });
+
+    watch: {
+        // whenever question changes, this function will run
+        search: function search(newQuestion) {
+            this.getHasilPencarian();
+        }
     },
-    alert: function alert(nama_kategori_transaksi) {
-      this.$swal({
-        title: "Berhasil!",
-        text: "Berhasil Menghapus " + nama_kategori_transaksi,
-        icon: "success"
-      });
+    methods: {
+        getKategoriTransaksis: function getKategoriTransaksis(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.loading = false;
+                app.kategoriTransaksis = resp.data.data;
+                app.kategoriTransaksiData = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load kategoriTransaksis");
+            });
+        },
+        getHasilPencarian: function getHasilPencarian(page) {
+            var app = this;
+            app.loading = true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+                app.loading = false;
+                app.kategoriTransaksis = resp.data.data;
+                app.kategoriTransaksiData = resp.data;
+            }).catch(function (resp) {
+                console.log(resp);
+                app.loading = false;
+                alert("Could not load kategori Transaksis");
+            });
+        },
+        deleteEntry: function deleteEntry(id, index, nama_kategori_transaksi) {
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + nama_kategori_transaksi + " ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + id).then(function (resp) {
+                        app.getKategoriTransaksis();
+                        swal("Kategori Transaksi Berhasil Dihapus!  ", {
+                            icon: "success"
+                        });
+                    }).catch(function (resp) {
+                        app.$router.replace('/kategoriTransaksi/');
+                        swal("Gagal Menghapus Kategori Transaksi!", {
+                            icon: "warning"
+                        });
+                    });
+                }
+                _this.$router.replace('/kategoriTransaksi/');
+            });
+        }
     }
-  }
 
 });
 
@@ -79179,18 +79196,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alert("Could not load pelanggans");
       });
     },
-    deleteEntry: function deleteEntry(id, index, nama_pelanggan) {
-      if (confirm("Yakin Ingin Menghapus Pelanggan " + nama_pelanggan + " ?")) {
-        var app = this;
-        axios.delete(app.url + '/' + id).then(function (resp) {
-          app.getPelanggans();
-          app.alert(nama_pelanggan);
-          app.$router.replace('/pelanggan');
-        }).catch(function (resp) {
-          alert("Could not delete pelanggan");
-        });
-      }
-    },
     getHasilPencarian: function getHasilPencarian(page) {
       var app = this;
       app.loading = true;
@@ -79207,15 +79212,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alert("Could not load pelanggans");
       });
     },
-    alert: function alert(nama_pelanggan) {
-      this.$swal({
-        title: "Berhasil!",
-        text: "Berhasil Menghapus " + nama_pelanggan,
-        icon: "success"
+    deleteEntry: function deleteEntry(id, index, nama_pelanggan) {
+      var _this = this;
+
+      swal({
+        title: "Konfirmasi Hapus",
+        text: "Anda Yakin Ingin Menghapus " + nama_pelanggan + " ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          var app = _this;
+          axios.delete(app.url + '/' + id).then(function (resp) {
+            app.getPelanggans();
+            swal("Pelanggan Berhasil Dihapus!  ", {
+              icon: "success"
+            });
+          }).catch(function (resp) {
+            app.$router.replace('/pelanggan/');
+            swal("Gagal Menghapus Pelanggan!", {
+              icon: "warning"
+            });
+          });
+        }
+        _this.$router.replace('/pelanggan/');
       });
     }
   }
-
 });
 
 /***/ }),
@@ -79871,9 +79895,10 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model",
+                          rawName: "v-model.phone",
                           value: _vm.pelanggan.nomor_telepon,
-                          expression: "pelanggan.nomor_telepon"
+                          expression: "pelanggan.nomor_telepon",
+                          modifiers: { phone: true }
                         }
                       ],
                       staticClass: "form-control",
@@ -80409,9 +80434,10 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model",
+                          rawName: "v-model.phone",
                           value: _vm.pelanggan.nomor_telepon,
-                          expression: "pelanggan.nomor_telepon"
+                          expression: "pelanggan.nomor_telepon",
+                          modifiers: { phone: true }
                         }
                       ],
                       staticClass: "form-control",
