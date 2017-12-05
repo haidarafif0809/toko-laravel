@@ -78,6 +78,7 @@ export default {
 			kategoriTransaksis: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "kasMasuk"),
 			kasMasuk: {
+				kas_masuk_id: '',
 				kas_id: '',
 				kategori_id: '',
 				jumlah: '',
@@ -99,7 +100,7 @@ export default {
 			var newKasMasuk = app.kasMasuk;
 			axios.patch(app.url+'/' + app.kasMasukId, newKasMasuk)
 			.then(function (resp) {
-				app.message = 'Berhasil Merubah Kas Masuk "'+app.kasMasuk.kas_id+'"'
+				app.message = 'Berhasil Merubah Kas Masuk "'+app.kasMasuk.kas_masuk_id+'"'
 				app.alert(app.message);
 				app.$router.replace('/kasMasuk');
 

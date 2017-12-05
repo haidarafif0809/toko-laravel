@@ -7,8 +7,8 @@ use Yajra\Auditable\AuditableTrait;
 
 class KategoriProduk extends Model
 {
-	use AuditableTrait;
-	protected $fillable = [
-		'nama_produk',
-	];
+    use AuditableTrait;
+    protected $fillable = [
+        'nama_kategori_produk',
+    ];
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Http\Request;
 use App\KategoriProduk;
+use Illuminate\Http\Request;
 
 class KategoriProdukController extends Controller
 {
@@ -38,10 +37,10 @@ class KategoriProdukController extends Controller
     {
         //
         $this->validate($request, [
-            'nama_produk' => 'required|unique:kategori_produks,nama_produk'
+            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk',
         ]);
         KategoriProduk::create([
-            'nama_produk' => $request->nama_produk
+            'nama_kategori_produk' => $request->nama_kategori_produk,
         ]);
     }
 
@@ -77,10 +76,10 @@ class KategoriProdukController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_produk' => 'required|unique:kategori_produks,nama_produk,' .$id
+            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,' . $id,
         ]);
         KategoriProduk::find($id)->update([
-            'nama_produk' => $request->nama_produk
+            'nama_kategori_produk' => $request->nama_kategori_produk,
         ]);
     }
 
@@ -92,16 +91,17 @@ class KategoriProdukController extends Controller
      */
     public function destroy($id)
     {
-     $hapus = KategoriProduk::destroy($id);
-     return $hapus;
- }
- public function view() 
- {
-    return KategoriProduk::paginate(3);
-}
+        $hapus = KategoriProduk::destroy($id);
+        return $hapus;
+    }
+    public function view()
+    {
+        return KategoriProduk::paginate(10);
+    }
 
-public function search(Request $request) {
-    $nama_produk = KategoriProduk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(3);
-    return response()->json($nama_produk);
-}
+    public function search(Request $request)
+    {
+        $nama_kategori_produk = KategoriProduk::where('nama_kategori_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        return response()->json($nama_kategori_produk);
+    }
 }

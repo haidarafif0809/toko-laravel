@@ -72921,21 +72921,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.loading = false;
             });
         },
-        deleteKategoriProduk: function deleteKategoriProduk(id, index, nama_produk) {
-            if (confirm("Yakin Ingin Menghapus Satuan " + nama_produk + " ?")) {
+        deleteKategoriProduk: function deleteKategoriProduk(id, index, nama_kategori_produk) {
+            if (confirm("Yakin Ingin Menghapus Satuan " + nama_kategori_produk + " ?")) {
                 var app = this;
                 axios.delete(app.url + '/' + id).then(function (resp) {
                     app.getKategoriProduks();
-                    app.alert(nama_produk);
+                    app.alert(nama_kategori_produk);
                 }).catch(function (resp) {
                     alert("Could not delete Satuan");
                 });
             }
         },
-        alert: function alert(nama_produk) {
+        alert: function alert(nama_kategori_produk) {
             this.$swal({
                 title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus kategori Produk ' + nama_produk,
+                text: 'Sukses : Berhasil menghapus kategori Produk ' + nama_kategori_produk,
                 icon: "success"
             });
         }
@@ -73030,7 +73030,9 @@ var render = function() {
                       index
                     ) {
                       return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(kategoriProduk.nama_produk))]),
+                        _c("td", [
+                          _vm._v(_vm._s(kategoriProduk.nama_kategori_produk))
+                        ]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -73064,7 +73066,7 @@ var render = function() {
                                     _vm.deleteKategoriProduk(
                                       kategoriProduk.id,
                                       index,
-                                      kategoriProduk.nama_produk
+                                      kategoriProduk.nama_kategori_produk
                                     )
                                   }
                                 }
@@ -73256,7 +73258,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_produk: ''
+				nama_kategori_produk: ''
 			},
 			message: ''
 		};
@@ -73266,9 +73268,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newKategoriProduk = app.kategoriProduk;
 			axios.post(app.url, newKategoriProduk).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Kategori Produk ' + app.kategoriProduk.nama_produk;
+				app.message = 'Sukses : Berhasil Menambah Kategori Produk ' + app.kategoriProduk.nama_kategori_produk;
 				app.alert(app.message);
-				app.kategoriProduk.nama_produk = '';
+				app.kategoriProduk.nama_kategori_produk = '';
 				app.errors = '';
 				app.$router.replace('/kategoriProduk');
 			}).catch(function (resp) {
@@ -73346,7 +73348,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-md-2 control-label",
-                      attrs: { for: "nama_produk" }
+                      attrs: { for: "nama_kategori_produk" }
                     },
                     [_vm._v("\n\t\t\t\t\t\t\t\tNama Produk\n\t\t\t\t\t\t\t")]
                   ),
@@ -73357,8 +73359,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.kategoriProduk.nama_produk,
-                          expression: "kategoriProduk.nama_produk"
+                          value: _vm.kategoriProduk.nama_kategori_produk,
+                          expression: "kategoriProduk.nama_kategori_produk"
                         }
                       ],
                       staticClass: "form-control",
@@ -73367,10 +73369,12 @@ var render = function() {
                         autocomplete: "off",
                         placeholder: "Nama Produk",
                         type: "text",
-                        name: "nama_produk",
+                        name: "nama_kategori_produk",
                         autofocus: ""
                       },
-                      domProps: { value: _vm.kategoriProduk.nama_produk },
+                      domProps: {
+                        value: _vm.kategoriProduk.nama_kategori_produk
+                      },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
@@ -73378,14 +73382,14 @@ var render = function() {
                           }
                           _vm.$set(
                             _vm.kategoriProduk,
-                            "nama_produk",
+                            "nama_kategori_produk",
                             $event.target.value
                           )
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.errors.nama_produk
+                    _vm.errors.nama_kategori_produk
                       ? _c(
                           "span",
                           {
@@ -73395,7 +73399,7 @@ var render = function() {
                           [
                             _vm._v(
                               "\n\t\t\t\t\t\t\t\t\t" +
-                                _vm._s(_vm.errors.nama_produk[0]) +
+                                _vm._s(_vm.errors.nama_kategori_produk[0]) +
                                 "\n\t\t\t\t\t\t\t\t"
                             )
                           ]
@@ -73541,9 +73545,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -73556,7 +73557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_produk: ''
+				nama_kategori_produk: ''
 			},
 			kategoriProdukId: null,
 			message: ''
@@ -73567,7 +73568,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newKategoriProduk = app.kategoriProduk;
 			axios.patch(app.url + '/' + app.kategoriProdukId, newKategoriProduk).then(function (resp) {
-				app.message = 'Berhasil Merubah kategori Produk "' + app.kategoriProduk.nama_produk + '"';
+				app.message = 'Berhasil Merubah kategori Produk "' + app.kategoriProduk.nama_kategori_produk + '"';
 				app.alert(app.message);
 				app.$router.replace('/kategoriProduk');
 			}).catch(function (resp) {
@@ -73654,7 +73655,7 @@ var render = function() {
                   "label",
                   {
                     staticClass: "col-md-2 control-label",
-                    attrs: { for: "nama_produk" }
+                    attrs: { for: "nama_kategori_produk" }
                   },
                   [_vm._v("Nama Kategori Produk")]
                 ),
@@ -73665,8 +73666,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.kategoriProduk.nama_produk,
-                        expression: "kategoriProduk.nama_produk"
+                        value: _vm.kategoriProduk.nama_kategori_produk,
+                        expression: "kategoriProduk.nama_kategori_produk"
                       }
                     ],
                     staticClass: "form-control",
@@ -73674,11 +73675,13 @@ var render = function() {
                       required: "",
                       autocomplete: "off",
                       placeholder: "Nama Kategori Produk",
-                      type: "nama_produk",
-                      name: "nama_produk",
+                      type: "text",
+                      name: "nama_kategori_produk",
                       autofocus: ""
                     },
-                    domProps: { value: _vm.kategoriProduk.nama_produk },
+                    domProps: {
+                      value: _vm.kategoriProduk.nama_kategori_produk
+                    },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
@@ -73686,16 +73689,16 @@ var render = function() {
                         }
                         _vm.$set(
                           _vm.kategoriProduk,
-                          "nama_produk",
+                          "nama_kategori_produk",
                           $event.target.value
                         )
                       }
                     }
                   }),
                   _vm._v(" "),
-                  _vm.errors.nama_produk
+                  _vm.errors.nama_kategori_produk
                     ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.nama_produk[0]))
+                        _vm._v(_vm._s(_vm.errors.nama_kategori_produk[0]))
                       ])
                     : _vm._e()
                 ])
@@ -74021,7 +74024,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { name: "createKasMasuk" } }
                     },
-                    [_vm._v("Create Kas Masuk")]
+                    [_vm._v("Tambah Kas Masuk")]
                   )
                 ],
                 1
@@ -74104,7 +74107,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                 Edit  "
+                                  "\n                                   Edit  "
                                 )
                               ]
                             ),
@@ -74124,7 +74127,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Delete")]
+                              [_vm._v("Hapus")]
                             )
                           ],
                           1
@@ -74167,7 +74170,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", [_vm._v("No Faktur")]),
+      _c("th", [_vm._v("No TRQ")]),
       _vm._v(" "),
       _c("th", [_vm._v("Kas")]),
       _vm._v(" "),
@@ -74189,7 +74192,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                 Sedang Memuat Data\n                             "
+          "\n                                   Sedang Memuat Data\n                               "
         )
       ])
     ])
@@ -74201,7 +74204,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                 Tidak Ada Data\n                             "
+          "\n                                   Tidak Ada Data\n                               "
         )
       ])
     ])
@@ -74863,6 +74866,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			kategoriTransaksis: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
 			kasMasuk: {
+				kas_masuk_id: '',
 				kas_id: '',
 				kategori_id: '',
 				jumlah: '',
@@ -74883,7 +74887,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newKasMasuk = app.kasMasuk;
 			axios.patch(app.url + '/' + app.kasMasukId, newKasMasuk).then(function (resp) {
-				app.message = 'Berhasil Merubah Kas Masuk "' + app.kasMasuk.kas_id + '"';
+				app.message = 'Berhasil Merubah Kas Masuk "' + app.kasMasuk.kas_masuk_id + '"';
 				app.alert(app.message);
 				app.$router.replace('/kasMasuk');
 			}).catch(function (resp) {
