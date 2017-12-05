@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Table User</p>
+                        <p class="panel-title">User</p>
                     </div>
                     <div class="panel-body">
                         <div class="tambah">
@@ -89,7 +89,7 @@ mounted() {
 },
 watch: {
         // whenever question changes, this function will run
-        pencarian: function (newQuestion) {
+        search: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
