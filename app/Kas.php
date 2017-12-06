@@ -13,11 +13,11 @@ class Kas extends Model
 
     public function kasMasuk()
     {
-        return $this->hasOne('App\KasMasuk');
+        return $this->hasMany('App\KasMasuk', 'kas_masuk_id', 'id');
     }
     public function kasKeluar()
     {
-        return $this->hasOne('App\KasKeluar');
+        return $this->hasMany('App\KasKeluar');
     }
 
 }

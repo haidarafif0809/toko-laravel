@@ -14,28 +14,17 @@
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
+
 							<div class="form-group">
-								<label for="kas_id" class="col-md-2 control-label">
-									Kas
-								</label>
+								<label for="type" class="col-md-2 control-label">Type Kas</label>
 								<div class="col-md-4">
-									<selectize-component v-model="kasMasuk.kas_id" :settings="settings"> 
-										<option v-for="ka, index in kas" v-bind:value="ka.id" >{{ ka.nama_kas }}</option>
-									</selectize-component>
-									<span v-if="errors.kas_id" class="label label-danger">{{ errors.kas_id[0] }}</span>
+									<input type="radio" name="type" v-model="kasMasuk.type" value="1"> kas masuk
+									<input type="radio" name="type" v-model="kasMasuk.type" value="2"> kas keluar
+									<span v-if="errors.type" class="label label-danger">{{ errors.type[0] }}</span>
+
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="kategori_id" class="col-md-2 control-label">
-									Kategori Transaksi
-								</label>
-								<div class="col-md-4">
-									<selectize-component v-model="kasMasuk.kategori_id" :settings="setting"> 
-										<option v-for="kategoriTransaksi, index in kategoriTransaksis" v-bind:value="kategoriTransaksi.id" >{{ kategoriTransaksi.nama_kategori_transaksi }}</option>
-									</selectize-component>
-									<span v-if="errors.kategori_id" class="label label-danger">{{ errors.kategori_id[0] }}</span>
-								</div>
-							</div>
+							</div> 
+
 							<div class="form-group">
 								<label for="jumlah" class="col-md-2 control-label">
 									Jumlah
@@ -80,8 +69,7 @@ export default {
 			kategoriTransaksis: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "kasMasuk"),
 			kasMasuk: {
-				kas_id: '',
-				kategori_id: '',
+				type: '',
 				jumlah: '',
 				keterangan: ''
 			},
@@ -107,10 +95,9 @@ export default {
 			var newKategoriProduk = app.kasMasuk;
 			axios.post(app.url, newKategoriProduk)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Kas Masuk '+ app.kasMasuk.kas_id;
+				app.message = 'Sukses : Berhasil Menambah Kas Masuk '+ app.kasMasuk.type;
 				app.alert(app.message);
-				app.kasMasuk.kas_id = ''
-				app.kasMasuk.kategori_id = ''
+				app.kasMasuk.type = ''
 				app.kasMasuk.jumlah = ''
 				app.kasMasuk.keterangan = ''
 				app.errors = '';

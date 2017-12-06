@@ -67505,7 +67505,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         deleteEntry: function deleteEntry(id, index, name) {
-            if (confirm("Yakin Ingin Menghapus User " + name + " ?")) {
+            if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
                 var app = this;
                 axios.delete(app.url + '/' + id).then(function (resp) {
                     app.getUsers();
@@ -67563,7 +67563,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -67587,7 +67587,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                                    Tambah User\n                                "
+                          "\n                                    Tambah Staf\n                                "
                         )
                       ]
                     )
@@ -67746,7 +67746,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Staf")])
     ])
   },
   function() {
@@ -67923,7 +67923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah User ' + app.user.name;
+				app.message = 'Sukses : Berhasil Menambah Staf ' + app.user.name;
 				app.alert(app.message);
 				app.user.name = '';
 				app.user.email = '';
@@ -67968,13 +67968,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("User")
+            _vm._v("Staf")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -68004,7 +68004,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama User\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68021,7 +68021,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Nama User",
+                        placeholder: "Nama Staf",
                         type: "text",
                         name: "name",
                         autofocus: ""
@@ -68080,7 +68080,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Email User",
+                        placeholder: "Email Staf",
                         type: "text",
                         name: "email",
                         autofocus: ""
@@ -68130,7 +68130,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staf")])
     ])
   },
   function() {
@@ -68293,7 +68293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newUser = app.user;
 			axios.patch(app.url + '/' + app.userId, newUser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit user ' + app.user.name;
+				app.message = 'Sukses : Berhasil Mengedit Staf ' + app.user.name;
 				app.alert(app.message);
 				app.user.name = '';
 				app.user.email = '';
@@ -68319,7 +68319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(app.url + '/' + id + '/edit').then(function (resp) {
 				app.user = resp.data;
 			}).catch(function () {
-				alert("Could not load your user");
+				alert("Could not load your Staf");
 			});
 		}
 	}
@@ -68349,13 +68349,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("User")
+            _vm._v("Staf")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -68499,7 +68499,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staf")])
     ])
   },
   function() {
@@ -72892,8 +72892,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         // whenever question changes, this function will run
         pencarian: function pencarian(newQuestion) {
-            var irul = this;
-            irul.searchData();
+            var app = this;
+            app.searchData();
         }
     },
     methods: {
@@ -73930,31 +73930,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.loading = false;
             });
         },
-
-        // getDataKas() {
-        //     let app = this;
-        //     let id = app.$route.params.id;
-
-        //     axios.get(app.url+'/dataKas/'+ id)
-        //     .then(function (resp) {
-        //         app.kas = resp.data;
-        //     })
-        //     .catch(function () {
-        //         alert("Could not load kas");
-        //     });
-        // },
-        // getDataTransaksi() {
-        //     let app = this;
-        //     let id = app.$route.params.id;
-
-        //     axios.get(app.url+'/dataTransaksi/'+ id)
-        //     .then(function (resp) {
-        //         app.kategori_transaksis = resp.data;
-        //     })
-        //     .catch(function () {
-        //         alert("Could not load transaksi");
-        //     });
-        // },
         searchData: function searchData(page) {
             var app = this;
             app.loading == true;
@@ -73970,25 +73945,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.loading = false;
             });
         },
-        deleteKasMasuk: function deleteKasMasuk(id, index, nama_kas) {
-            if (confirm("Yakin Ingin Menghapus Kas Masuk " + nama_kas + " ?")) {
-                var app = this;
-                axios.delete(app.url + '/' + id).then(function (resp) {
-                    app.getKasMasuks();
-                    app.alert(nama_kas);
-                }).catch(function (resp) {
-                    alert("Could not delete Kas Masuk");
-                });
-            }
+        deleteKasMasuk: function deleteKasMasuk(id, index, type) {
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + type + " ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + id).then(function (resp) {
+                        app.getKasMasuks();
+                        swal("Berhasil Dihapus!  ", {
+                            icon: "success"
+                        });
+                    }).catch(function (resp) {
+                        app.$router.replace('/kategori-transaksi/');
+                        swal("Gagal Menghapus!", {
+                            icon: "warning"
+                        });
+                    });
+                }
+                _this.$router.replace('/kasMasuk/');
+            });
         },
-        alert: function alert(nama_kas) {
+        alert: function alert(type) {
             this.$swal({
                 title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus Kas Masuk ' + nama_kas,
+                text: 'Sukses : Berhasil menghapus Kas Masuk ' + type,
                 icon: "success"
             });
         }
     }
+
 });
 
 /***/ }),
@@ -74076,25 +74068,19 @@ var render = function() {
                     { staticClass: "data-ada" },
                     _vm._l(_vm.kasMasuks, function(kasMasuk, index) {
                       return _c("tr", [
-                        _c("td", [
-                          _vm._v(_vm._s(kasMasuk.kas_masuk.kas_masuk_id))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(kasMasuk.nama_kas))]),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.kas_masuk_id))]),
                         _vm._v(" "),
                         _c("td", [
-                          _vm._v(_vm._s(kasMasuk.nama_kategori_transaksi))
+                          kasMasuk.type == 1
+                            ? _c("span", [_vm._v("Kas Masuk")])
+                            : _c("span", [_vm._v(" Kas Keluar")])
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(kasMasuk.kas_masuk.jumlah))]),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.jumlah))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(kasMasuk.kas_masuk.keterangan))
-                        ]),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.keterangan))]),
                         _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(kasMasuk.kas_masuk.created_at))
-                        ]),
+                        _c("td", [_vm._v(_vm._s(kasMasuk.created_at))]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -74106,16 +74092,14 @@ var render = function() {
                                 attrs: {
                                   to: {
                                     name: "editKasMasuk",
-                                    params: {
-                                      id: kasMasuk.kas_masuk.kas_masuk_id
-                                    }
+                                    params: { id: kasMasuk.kas_masuk_id }
                                   },
-                                  id: "edit-" + kasMasuk.kas_masuk.kas_masuk_id
+                                  id: "edit-" + kasMasuk.kas_masuk_id
                                 }
                               },
                               [
                                 _vm._v(
-                                  "\n                                   Edit  "
+                                  "\n                                 Edit  "
                                 )
                               ]
                             ),
@@ -74128,9 +74112,9 @@ var render = function() {
                                 on: {
                                   click: function($event) {
                                     _vm.deleteKasMasuk(
-                                      kasMasuk.kas_masuk.kas_masuk_id,
+                                      kasMasuk.kas_masuk_id,
                                       index,
-                                      kasMasuk.kas_masuk.kas_masuk_id
+                                      kasMasuk.type
                                     )
                                   }
                                 }
@@ -74180,9 +74164,7 @@ var staticRenderFns = [
     return _c("thead", [
       _c("th", [_vm._v("No TRQ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Kas")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Kategori Transaksi")]),
+      _c("th", [_vm._v("type")]),
       _vm._v(" "),
       _c("th", [_vm._v("Jumlah")]),
       _vm._v(" "),
@@ -74200,7 +74182,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
+          "\n                                 Sedang Memuat Data\n                             "
         )
       ])
     ])
@@ -74212,7 +74194,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
+          "\n                                 Tidak Ada Data\n                             "
         )
       ])
     ])
@@ -74343,17 +74325,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -74363,8 +74334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			kategoriTransaksis: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
 			kasMasuk: {
-				kas_id: '',
-				kategori_id: '',
+				type: '',
 				jumlah: '',
 				keterangan: ''
 			},
@@ -74389,10 +74359,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newKategoriProduk = app.kasMasuk;
 			axios.post(app.url, newKategoriProduk).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Kas Masuk ' + app.kasMasuk.kas_id;
+				app.message = 'Sukses : Berhasil Menambah Kas Masuk ' + app.kasMasuk.type;
 				app.alert(app.message);
-				app.kasMasuk.kas_id = '';
-				app.kasMasuk.kategori_id = '';
+				app.kasMasuk.type = '';
 				app.kasMasuk.jumlah = '';
 				app.kasMasuk.keterangan = '';
 				app.errors = '';
@@ -74486,100 +74455,54 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-md-2 control-label",
-                      attrs: { for: "kas_id" }
+                      attrs: { for: "type" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tKas\n\t\t\t\t\t\t\t")]
+                    [_vm._v("Type Kas")]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c(
-                        "selectize-component",
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("input", {
+                      directives: [
                         {
-                          attrs: { settings: _vm.settings },
-                          model: {
-                            value: _vm.kasMasuk.kas_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.kasMasuk, "kas_id", $$v)
-                            },
-                            expression: "kasMasuk.kas_id"
-                          }
-                        },
-                        _vm._l(_vm.kas, function(ka, index) {
-                          return _c("option", { domProps: { value: ka.id } }, [
-                            _vm._v(_vm._s(ka.nama_kas))
-                          ])
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.errors.kas_id
-                        ? _c("span", { staticClass: "label label-danger" }, [
-                            _vm._v(_vm._s(_vm.errors.kas_id[0]))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "kategori_id" }
-                    },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t\t\tKategori Transaksi\n\t\t\t\t\t\t\t"
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c(
-                        "selectize-component",
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasMasuk.type,
+                          expression: "kasMasuk.type"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "type", value: "1" },
+                      domProps: { checked: _vm._q(_vm.kasMasuk.type, "1") },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.kasMasuk, "type", "1")
+                        }
+                      }
+                    }),
+                    _vm._v(" kas masuk\n\t\t\t\t\t\t\t\t"),
+                    _c("input", {
+                      directives: [
                         {
-                          attrs: { settings: _vm.setting },
-                          model: {
-                            value: _vm.kasMasuk.kategori_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.kasMasuk, "kategori_id", $$v)
-                            },
-                            expression: "kasMasuk.kategori_id"
-                          }
-                        },
-                        _vm._l(_vm.kategoriTransaksis, function(
-                          kategoriTransaksi,
-                          index
-                        ) {
-                          return _c(
-                            "option",
-                            { domProps: { value: kategoriTransaksi.id } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  kategoriTransaksi.nama_kategori_transaksi
-                                )
-                              )
-                            ]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.errors.kategori_id
-                        ? _c("span", { staticClass: "label label-danger" }, [
-                            _vm._v(_vm._s(_vm.errors.kategori_id[0]))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kasMasuk.type,
+                          expression: "kasMasuk.type"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "type", value: "2" },
+                      domProps: { checked: _vm._q(_vm.kasMasuk.type, "2") },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.kasMasuk, "type", "2")
+                        }
+                      }
+                    }),
+                    _vm._v(" kas keluar\n\t\t\t\t\t\t\t\t"),
+                    _vm.errors.type
+                      ? _c("span", { staticClass: "label label-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.type[0]))
+                        ])
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -74839,25 +74762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -74870,13 +74774,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			errors: [],
-			kas: [],
-			kategoriTransaksis: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
 			kasMasuk: {
 				kas_masuk_id: '',
-				kas_id: '',
-				kategori_id: '',
+				type: '',
 				jumlah: '',
 				keterangan: ''
 			},
@@ -74895,7 +74796,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newKasMasuk = app.kasMasuk;
 			axios.patch(app.url + '/' + app.kasMasukId, newKasMasuk).then(function (resp) {
-				app.message = 'Berhasil Merubah Kas Masuk "' + app.kasMasuk.kas_masuk_id + '"';
+				app.message = 'Berhasil Merubah Kas Masuk "' + app.kasMasuk.type + '"';
 				app.alert(app.message);
 				app.$router.replace('/kasMasuk');
 			}).catch(function (resp) {
@@ -74992,103 +74893,6 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "kas_id" }
-                    },
-                    [_vm._v("Kas")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c(
-                        "selectize-component",
-                        {
-                          attrs: { settings: _vm.settings },
-                          model: {
-                            value: _vm.kasMasuk.kas_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.kasMasuk, "kas_id", $$v)
-                            },
-                            expression: "kasMasuk.kas_id"
-                          }
-                        },
-                        _vm._l(_vm.kas, function(ka, index) {
-                          return _c("option", { domProps: { value: ka.id } }, [
-                            _vm._v(_vm._s(ka.nama_kas))
-                          ])
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.errors.kas_id
-                        ? _c("span", { staticClass: "label label-danger" }, [
-                            _vm._v(_vm._s(_vm.errors.kas_id[0]))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "kategori_id" }
-                    },
-                    [_vm._v("Kategori Transaksi")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-4" },
-                    [
-                      _c(
-                        "selectize-component",
-                        {
-                          attrs: { settings: _vm.setting },
-                          model: {
-                            value: _vm.kasMasuk.kategori_id,
-                            callback: function($$v) {
-                              _vm.$set(_vm.kasMasuk, "kategori_id", $$v)
-                            },
-                            expression: "kasMasuk.kategori_id"
-                          }
-                        },
-                        _vm._l(_vm.kategoriTransaksis, function(
-                          kategoriTransaksi,
-                          index
-                        ) {
-                          return _c(
-                            "option",
-                            { domProps: { value: kategoriTransaksi.id } },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  kategoriTransaksi.nama_kategori_transaksi
-                                )
-                              )
-                            ]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.errors.kategori_id
-                        ? _c("span", { staticClass: "label label-danger" }, [
-                            _vm._v(_vm._s(_vm.errors.kategori_id[0]))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",

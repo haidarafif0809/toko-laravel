@@ -56,7 +56,7 @@ Route::get('/satuan/pencarian', 'SatuanController@search');
 // kas masuk
 Route::resource('kasMasuk', 'KasMasukController', ['except' => 'show']);
 Route::get('/kasMasuk/view', 'KasMasukController@view');
-Route::get('/kasMasuk/pencarian', 'KasMasukController@search');
+Route::get('/kasMasuk/search', 'KasMasukController@search');
 Route::get('/kasMasuk/kas', 'KasMasukController@kas');
 Route::get('/kasMasuk/kategoriTransaksi', 'KasMasukController@kategoriTransaksi');
 Route::get('/kasMasuk/dataKas/{id}', 'KasMasukController@dataKas');

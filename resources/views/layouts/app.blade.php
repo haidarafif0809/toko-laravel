@@ -91,22 +91,17 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                        	<a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                        		Transaksi
-                        		<span class="caret">
-                        		</span>
-                        	</a>
-                        	<ul class="dropdown-menu">
-                        		<li>
-                        			<router-link :to="{name: 'indexKasMasuk'}">
-                        				Kas Masuk
-                        			</router-link>
-                        		</li>
-                        		<li>
-                        			<router-link :to="{name: 'indexKasKeluar'}">
-                        				Kas Keluar
-                        			</router-link>
-                        		</li>
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                Transaksi
+                                <span class="caret">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexKasMasuk'}">
+                                        Kas Masuk/Kas Keluar
+                                    </router-link>
+                                </li>
                                <!--  <li>
                                     <router-link :to="{name: 'indexUser'}">
                                         Kas Mutasi
@@ -116,9 +111,9 @@
                         </li>
 
                         <li>
-                        	<router-link :to="{name: 'indexUser'}">
-                        		Staff
-                        	</router-link>
+                            <router-link :to="{name: 'indexUser'}">
+                                Staf
+                            </router-link>
                         </li>
 
                         <li>
@@ -133,10 +128,44 @@
                         	</router-link>
                         </li>
 
-                        <li>
-                        	<router-link :to="{name: 'indexDashboard'}">
-                        		Laporan
-                        	</router-link>
+                        <li class="dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                Laporan
+                                <span class="caret">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Laporan Ringkas
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Analisa Penjualan Harian
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Analisa Penjualan Per Jam
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Data Transaksi Penjualan
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Rekapitulasi Kas
+                                    </router-link>
+                                </li>
+
+                            </ul>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
@@ -180,7 +209,7 @@
     @yield('content')
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.18') }}">
+<script src="{{ asset('js/app.js?v=1.19') }}">
 </script>
 </body>
 </html>

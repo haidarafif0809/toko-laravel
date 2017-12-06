@@ -9,19 +9,25 @@ class KasMasukObserver
 {
     public function creating(KasMasuk $KasMasuk)
     {
+        if ($KasMasuk->type == 1) {
 
-        TransaksiKas::create(['id' => $KasMasuk->kas_masuk_id, 'jenis_transaksi' => 'kas_masuk', 'jumlah_masuk' => $KasMasuk->jumlah, 'kas' => $KasMasuk->kas_id, 'kategori_transaksi' => $KasMasuk->kategori_id]);
+            TransaksiKas::create(['id' => $KasMasuk->kas_masuk_id, 'jenis_transaksi' => $KasMasuk->type, 'jumlah_masuk' => $KasMasuk->jumlah]);
+        } else {
+            TransaksiKas::create(['id' => $KasMasuk->kas_masuk_id, 'jenis_transaksi' => $KasMasuk->type, 'jumlah_keluar' => $KasMasuk->jumlah]);
+        }
     }
 
     public function updating(KasMasuk $KasMasuk)
     {
-
-        TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->update(['jumlah_masuk' => $KasMasuk->jumlah, 'kas' => $KasMasuk->kas_id, 'kategori_transaksi' => $KasMasuk->kategori_id]);
+        if ($KasMasuk->type == 1) {
+            TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->update(['jumlah_masuk' => $KasMasuk->jumlah]);
+        } else {
+            TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->update(['jumlah_keluar' => $KasMasuk->jumlah]);
+        }
     }
 
     public function deleting(KasMasuk $KasMasuk)
     {
-
         TransaksiKas::where('id', $KasMasuk->kas_masuk_id)->delete();
     }
 }
