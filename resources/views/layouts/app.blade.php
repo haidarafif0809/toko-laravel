@@ -99,12 +99,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <router-link :to="{name: 'indexKasMasuk'}">
-                                        Kas Masuk
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link :to="{name: 'indexKasKeluar'}">
-                                        Kas Keluar
+                                        Kas Masuk/Kas Keluar
                                     </router-link>
                                 </li>
                                <!--  <li>
