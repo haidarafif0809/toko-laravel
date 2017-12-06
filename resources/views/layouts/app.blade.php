@@ -214,7 +214,7 @@
     @yield('content')
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.18') }}">
+<script src="{{ asset('js/app.js?v=1.19') }}">
 </script>
 </body>
 </html>
