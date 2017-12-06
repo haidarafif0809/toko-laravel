@@ -67505,7 +67505,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         deleteEntry: function deleteEntry(id, index, name) {
-            if (confirm("Yakin Ingin Menghapus User " + name + " ?")) {
+            if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
                 var app = this;
                 axios.delete(app.url + '/' + id).then(function (resp) {
                     app.getUsers();
@@ -67563,7 +67563,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -67587,7 +67587,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                                    Tambah User\n                                "
+                          "\n                                    Tambah Staf\n                                "
                         )
                       ]
                     )
@@ -67746,7 +67746,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Staf")])
     ])
   },
   function() {
@@ -67923,7 +67923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah User ' + app.user.name;
+				app.message = 'Sukses : Berhasil Menambah Staf ' + app.user.name;
 				app.alert(app.message);
 				app.user.name = '';
 				app.user.email = '';
@@ -67968,13 +67968,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("User")
+            _vm._v("Staf")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -68004,7 +68004,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "name" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama User\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -68021,7 +68021,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Nama User",
+                        placeholder: "Nama Staf",
                         type: "text",
                         name: "name",
                         autofocus: ""
@@ -68080,7 +68080,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Email User",
+                        placeholder: "Email Staf",
                         type: "text",
                         name: "email",
                         autofocus: ""
@@ -68130,7 +68130,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staf")])
     ])
   },
   function() {
@@ -68293,7 +68293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newUser = app.user;
 			axios.patch(app.url + '/' + app.userId, newUser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit user ' + app.user.name;
+				app.message = 'Sukses : Berhasil Mengedit Staf ' + app.user.name;
 				app.alert(app.message);
 				app.user.name = '';
 				app.user.email = '';
@@ -68319,7 +68319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(app.url + '/' + id + '/edit').then(function (resp) {
 				app.user = resp.data;
 			}).catch(function () {
-				alert("Could not load your user");
+				alert("Could not load your Staf");
 			});
 		}
 	}
@@ -68349,13 +68349,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("User")
+            _vm._v("Staf")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit User")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Staf")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -68499,7 +68499,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit User")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staf")])
     ])
   },
   function() {

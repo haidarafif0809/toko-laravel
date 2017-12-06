@@ -117,7 +117,7 @@
 
                         <li>
                             <router-link :to="{name: 'indexUser'}">
-                                Staff
+                                Staf
                             </router-link>
                         </li>
 
@@ -133,10 +133,44 @@
                             </router-link>
                         </li>
 
-                        <li>
-                            <router-link :to="{name: 'indexDashboard'}">
+                        <li class="dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                                 Laporan
-                            </router-link>
+                                <span class="caret">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Laporan Ringkas
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Analisa Penjualan Harian
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Analisa Penjualan Per Jam
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Data Transaksi Penjualan
+                                    </router-link>
+                                </li>
+
+                                <li>
+                                    <router-link :to="{name: 'indexDashboard'}">
+                                        Rekapitulasi Kas
+                                    </router-link>
+                                </li>
+
+                            </ul>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->

@@ -2,15 +2,15 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexUser'}">User</router-link></li>
-			<li class="active">Edit User</li>
+			<li><router-link :to="{name: 'indexUser'}">Staf</router-link></li>
+			<li class="active">Edit Staf</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Edit User</p>
+						<p class="panel-title">Edit Staf</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
@@ -77,7 +77,7 @@ export default {
 			var newUser = app.user;
 			axios.patch(app.url+'/' + app.userId, newUser)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit user '+ app.user.name;
+				app.message = 'Sukses : Berhasil Mengedit Staf '+ app.user.name;
 				app.alert(app.message);
 				app.user.name = ''
 				app.user.email = ''
@@ -107,7 +107,7 @@ export default {
 				app.user = resp.data;
 			})
 			.catch(function () {
-				alert("Could not load your user")
+				alert("Could not load your Staf")
 			});
 		}
 
