@@ -2,24 +2,24 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexUser'}">User</router-link></li>
-			<li class="active">Tambah User</li>
+			<li><router-link :to="{name: 'indexUser'}">Staf</router-link></li>
+			<li class="active">Tambah Staf</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Tambah User</p>
+						<p class="panel-title">Tambah Staf</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 							<div class="form-group">
 								<label for="name" class="col-md-2 control-label">
-									Nama User
+									Nama Staf
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Nama User" type="text" v-model="user.name" name="name"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Staf" type="text" v-model="user.name" name="name"  autofocus="">
 									<span v-if="errors.name" id="name_error" class="label label-danger">
 										{{ errors.name[0] }}
 									</span>
@@ -31,7 +31,7 @@
 									Email
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Email User" type="text" v-model="user.email" name="email" autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Email Staf" type="text" v-model="user.email" name="email" autofocus="">
 									<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}
 									</span>
 								</div>
@@ -74,7 +74,7 @@ export default {
 			var newuser = app.user;
 			axios.post(app.url, newuser)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah User '+ app.user.name;
+				app.message = 'Sukses : Berhasil Menambah Staf '+ app.user.name;
 				app.alert(app.message);
 				app.user.name = ''
 				app.user.email = ''
