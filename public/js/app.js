@@ -73880,6 +73880,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -74067,7 +74070,11 @@ var render = function() {
                       return _c("tr", [
                         _c("td", [_vm._v(_vm._s(kasMasuk.kas_masuk_id))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(kasMasuk.type))]),
+                        _c("td", [
+                          kasMasuk.type == 1
+                            ? _c("span", [_vm._v("Kas Masuk")])
+                            : _c("span", [_vm._v(" Kas Keluar")])
+                        ]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(kasMasuk.jumlah))]),
                         _vm._v(" "),
@@ -74092,7 +74099,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                   Edit  "
+                                  "\n                                 Edit  "
                                 )
                               ]
                             ),
@@ -74175,7 +74182,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
+          "\n                                 Sedang Memuat Data\n                             "
         )
       ])
     ])
@@ -74187,7 +74194,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
+          "\n                                 Tidak Ada Data\n                             "
         )
       ])
     ])
@@ -74463,17 +74470,11 @@ var render = function() {
                           expression: "kasMasuk.type"
                         }
                       ],
-                      attrs: {
-                        type: "radio",
-                        name: "type",
-                        value: "kas_masuk"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.kasMasuk.type, "kas_masuk")
-                      },
+                      attrs: { type: "radio", name: "type", value: "1" },
+                      domProps: { checked: _vm._q(_vm.kasMasuk.type, "1") },
                       on: {
                         change: function($event) {
-                          _vm.$set(_vm.kasMasuk, "type", "kas_masuk")
+                          _vm.$set(_vm.kasMasuk, "type", "1")
                         }
                       }
                     }),
@@ -74487,17 +74488,11 @@ var render = function() {
                           expression: "kasMasuk.type"
                         }
                       ],
-                      attrs: {
-                        type: "radio",
-                        name: "type",
-                        value: "kas_keluar"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.kasMasuk.type, "kas_keluar")
-                      },
+                      attrs: { type: "radio", name: "type", value: "2" },
+                      domProps: { checked: _vm._q(_vm.kasMasuk.type, "2") },
                       on: {
                         change: function($event) {
-                          _vm.$set(_vm.kasMasuk, "type", "kas_keluar")
+                          _vm.$set(_vm.kasMasuk, "type", "2")
                         }
                       }
                     }),
@@ -74767,15 +74762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -74907,73 +74893,6 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-2 control-label",
-                      attrs: { for: "type" }
-                    },
-                    [_vm._v("Type Kas")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.kasMasuk.type,
-                          expression: "kasMasuk.type"
-                        }
-                      ],
-                      attrs: {
-                        type: "radio",
-                        name: "type",
-                        value: "kas_masuk"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.kasMasuk.type, "kas_masuk")
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.$set(_vm.kasMasuk, "type", "kas_masuk")
-                        }
-                      }
-                    }),
-                    _vm._v(" kas masuk\n\t\t\t\t\t\t\t\t"),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.kasMasuk.type,
-                          expression: "kasMasuk.type"
-                        }
-                      ],
-                      attrs: {
-                        type: "radio",
-                        name: "type",
-                        value: "kas_keluar"
-                      },
-                      domProps: {
-                        checked: _vm._q(_vm.kasMasuk.type, "kas_keluar")
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.$set(_vm.kasMasuk, "type", "kas_keluar")
-                        }
-                      }
-                    }),
-                    _vm._v(" kas keluar\n\t\t\t\t\t\t\t\t"),
-                    _vm.errors.type
-                      ? _c("span", { staticClass: "label label-danger" }, [
-                          _vm._v(_vm._s(_vm.errors.type[0]))
-                        ])
-                      : _vm._e()
-                  ])
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",

@@ -16,15 +16,6 @@
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 
 							<div class="form-group">
-								<label for="type" class="col-md-2 control-label">Type Kas</label>
-								<div class="col-md-4">
-									<input type="radio" name="type" v-model="kasMasuk.type" value="kas_masuk"> kas masuk
-									<input type="radio" name="type" v-model="kasMasuk.type" value="kas_keluar"> kas keluar
-									<span v-if="errors.type" class="label label-danger">{{ errors.type[0] }}</span>
-								</div>
-							</div> 
-
-							<div class="form-group">
 								<label for="jumlah" class="col-md-2 control-label">Jumlah</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Jumlah" type="number" v-model="kasMasuk.jumlah" name="jumlah"  autofocus="">

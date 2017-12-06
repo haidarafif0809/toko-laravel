@@ -13,7 +13,7 @@ class KasMasukSeeder extends Seeder
     public function run()
     {
         KasMasuk::create([
-            'type' => 'kas_masuk', 'jumlah' => 1000, 'keterangan' => 'lunas',
+            'type' => 1, 'jumlah' => 1000, 'keterangan' => 'lunas',
         ]);
     }
 }

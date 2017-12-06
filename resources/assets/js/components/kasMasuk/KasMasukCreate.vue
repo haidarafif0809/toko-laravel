@@ -18,8 +18,8 @@
 							<div class="form-group">
 								<label for="type" class="col-md-2 control-label">Type Kas</label>
 								<div class="col-md-4">
-									<input type="radio" name="type" v-model="kasMasuk.type" value="kas_masuk"> kas masuk
-									<input type="radio" name="type" v-model="kasMasuk.type" value="kas_keluar"> kas keluar
+									<input type="radio" name="type" v-model="kasMasuk.type" value="1"> kas masuk
+									<input type="radio" name="type" v-model="kasMasuk.type" value="2"> kas keluar
 									<span v-if="errors.type" class="label label-danger">{{ errors.type[0] }}</span>
 
 								</div>

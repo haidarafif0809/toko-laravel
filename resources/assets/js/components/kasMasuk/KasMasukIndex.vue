@@ -27,7 +27,10 @@
                         <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
                             <tr v-for = "kasMasuk, index in kasMasuks">
                                 <td>{{kasMasuk.kas_masuk_id}}</td>
-                                <td>{{kasMasuk.type}}</td>
+                                <td>
+                                    <span v-if="kasMasuk.type == 1">Kas Masuk</span>
+                                    <span v-else> Kas Keluar</span>
+                                </td>
                                 <td>{{kasMasuk.jumlah}}</td>
                                 <td>{{kasMasuk.keterangan}}</td>
                                 <td>{{kasMasuk.created_at}}</td>
@@ -60,11 +63,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 
@@ -135,14 +138,14 @@ watch: {
         	});
         },
         deleteKasMasuk(id, index,type) {
-         swal({
+           swal({
             title: "Konfirmasi Hapus",
             text : "Anda Yakin Ingin Menghapus "+type+" ?",
             icon : "warning",
             buttons: true,
             dangerMode: true,
         })
-         .then((willDelete) => {
+           .then((willDelete) => {
             if (willDelete) {
               var app = this;
               axios.delete(app.url+'/' + id)
@@ -161,15 +164,15 @@ watch: {
           }
           this.$router.replace('/kasMasuk/');
       });
-     },
-     alert(type) {
-         this.$swal({
-          title: "Berhasil!",
-          text: 'Sukses : Berhasil menghapus Kas Masuk '+ type,
-          icon: "success",
-      });
-     }
- }
+       },
+       alert(type) {
+           this.$swal({
+              title: "Berhasil!",
+              text: 'Sukses : Berhasil menghapus Kas Masuk '+ type,
+              icon: "success",
+          });
+       }
+   }
 
 }
 </script>

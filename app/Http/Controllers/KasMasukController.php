@@ -83,12 +83,10 @@ class KasMasukController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'type'       => 'required',
             'jumlah'     => 'required|numeric',
             'keterangan' => 'required',
         ]);
         $update = KasMasuk::find($id)->update([
-            'type'       => $request->type,
             'jumlah'     => $request->jumlah,
             'keterangan' => $request->keterangan,
         ]);
@@ -143,7 +141,7 @@ class KasMasukController extends Controller
 
     public function search(Request $request)
     {
-        $search = KasMasuk::with('kas')->with('kategoriTransaksi')->where('kas_id', 'LIKE', "%$request->pencarian%")->orWhere('kategori_id', 'LIKE', "%$request->pencarian%")->orWhere('jumlah', 'LIKE', "%$request->pencarian%")->orWhere('keterangan', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $search = KasMasuk::where('type', 'LIKE', "%$request->pencarian%")->orWhere('jumlah', 'LIKE', "%$request->pencarian%")->orWhere('keterangan', 'LIKE', "%$request->pencarian%")->paginate(10);
         return response()->json($search);
     }
 
