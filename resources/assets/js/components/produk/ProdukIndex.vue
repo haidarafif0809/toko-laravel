@@ -23,7 +23,7 @@
             <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
               <tr v-for="produk , index in produks">
                 <td>
-                  <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}" v-bind:id="'edit-' + produk.produk_id" >
+                  <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}">
                     {{produk.nama_produk}}
                   </router-link>
                 </td>
