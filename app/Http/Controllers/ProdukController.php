@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\KategoriProduk;
 use App\Produk;
 use App\Satuan;
+use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
+use Image;
 
 class ProdukController extends Controller
 {
@@ -97,9 +100,15 @@ class ProdukController extends Controller
             'harga_jual'          => 'numeric',
             'satuans_id'          => 'required|exists:satuans,id',
             'status_jual'         => 'required',
+            'foto'                => 'image64:jpeg,jpg,png|max:3072000',
         ]);
 
-        //insert
+        $imageData = $request->foto;
+        $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+        Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+
+        // insert
         $produk = Produk::create([
             'kode_produk'         => $request->kode_produk,
             'nama_produk'         => $request->nama_produk,
@@ -108,6 +117,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
+            'foto'                => $fileName,
         ]);
     }
 
@@ -152,9 +162,28 @@ class ProdukController extends Controller
             'harga_jual'          => 'numeric',
             'satuans_id'          => 'required|exists:satuans,id',
             'status_jual'         => 'required',
+            'foto'                => 'image64:jpeg,jpg,png|max:3072000',
         ]);
 
-        $produk = Produk::find($id)->update([
+        $imageData = $request->foto;
+        $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+        Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+
+        $produk = Produk::find($id);
+        if ($produk->foto) {
+            $oldImg   = $produk->foto;
+            $filePath = public_path('foto_produk/') . $produk->foto;
+
+            try {
+                File::delete($filePath);
+            } catch (FileNotFoundException $e) {
+                // File sudah dihapus/tidak ada
+            }
+
+        }
+
+        $produk->update([
             'kode_produk'         => $request->kode_produk,
             'nama_produk'         => $request->nama_produk,
             'kategori_produks_id' => $request->kategori_produks_id,
@@ -162,6 +191,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
+            'foto'                => $fileName,
         ]);
 
         if ($produk == true) {
