@@ -31,13 +31,13 @@
                         </thead>
                         <tbody v-if="kategoriProduks.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kategoriProduk , index in kategoriProduks" >
-                                <td>{{kategoriProduk.nama_produk}}</td>
+                                <td>{{kategoriProduk.nama_kategori_produk}}</td>
                                 <td>
                                     <router-link :to="{name: 'editKategoriProduk', params: {id: kategoriProduk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kategoriProduk.id" >
                                     Edit  </router-link> 
                                     <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKategoriProduk(kategoriProduk.id, index,kategoriProduk.nama_produk)">Delete</a>
+                                    v-on:click="deleteKategoriProduk(kategoriProduk.id, index,kategoriProduk.nama_kategori_produk)">Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -91,8 +91,8 @@ mounted() {
 watch: {
         // whenever question changes, this function will run
         pencarian: function (newQuestion) {
-        	var irul = this;
-        	irul.searchData()
+        	var app = this;
+        	app.searchData()
         }
     },
     methods: {
@@ -133,23 +133,23 @@ watch: {
         		app.loading = false
         	});
         },
-        deleteKategoriProduk(id, index,nama_produk) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+nama_produk+" ?")) {
+        deleteKategoriProduk(id, index,nama_kategori_produk) {
+            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kategori_produk+" ?")) {
                 var app = this;
                 axios.delete(app.url+'/' + id)
                 .then(function (resp) {
                     app.getKategoriProduks();
-                    app.alert(nama_produk)
+                    app.alert(nama_kategori_produk)
                 })
                 .catch(function (resp) {
                     alert("Could not delete Satuan");
                 });
             }
         },
-        alert(nama_produk) {
+        alert(nama_kategori_produk) {
         	this.$swal({
         		title: "Berhasil!",
-        		text: 'Sukses : Berhasil menghapus kategori Produk '+ nama_produk,
+        		text: 'Sukses : Berhasil menghapus kategori Produk '+ nama_kategori_produk,
         		icon: "success",
         	});
         }

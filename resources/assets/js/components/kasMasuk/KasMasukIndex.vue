@@ -10,16 +10,15 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <div class="tambah">
-                        <p> <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary">Create Kas Masuk</router-link></p>        
+                        <p> <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary">Tambah Kas Masuk</router-link></p>        
                     </div>
                     <div class="pencarian">
-                        <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
+                        <input type="text" class="form-control" name="pencarian" placeholder="Pencarian"  v-model="pencarian" >
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <th>No Faktur</th>
-                            <th>Kas</th>
-                            <th>Kategori Transaksi</th>
+                            <th>No TRQ</th>
+                            <th>type</th>
                             <th>Jumlah</th>
                             <th>Keterangan</th>
                             <th>Waktu</th>
@@ -27,18 +26,20 @@
                         </thead>
                         <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
                             <tr v-for = "kasMasuk, index in kasMasuks">
-                                <td>{{kasMasuk.kas_masuk.kas_masuk_id}}</td>
-                                <td>{{kasMasuk.nama_kas}}</td>
-                                <td>{{kasMasuk.nama_kategori_transaksi}}</td>
-                                <td>{{kasMasuk.kas_masuk.jumlah}}</td>
-                                <td>{{kasMasuk.kas_masuk.keterangan}}</td>
-                                <td>{{kasMasuk.kas_masuk.created_at}}</td>
+                                <td>{{kasMasuk.kas_masuk_id}}</td>
                                 <td>
-                                    <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.kas_masuk.kas_masuk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.kas_masuk.kas_masuk_id" >
+                                    <span v-if="kasMasuk.type == 1">Kas Masuk</span>
+                                    <span v-else> Kas Keluar</span>
+                                </td>
+                                <td>{{kasMasuk.jumlah}}</td>
+                                <td>{{kasMasuk.keterangan}}</td>
+                                <td>{{kasMasuk.created_at}}</td>
+                                <td>
+                                    <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.kas_masuk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.kas_masuk_id" >
                                     Edit  </router-link> 
                                     <a href="#"
                                     class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteKasMasuk(kasMasuk.kas_masuk.kas_masuk_id, index,kasMasuk.kas_masuk.kas_masuk_id)">Delete</a>
+                                    v-on:click="deleteKasMasuk(kasMasuk.kas_masuk_id, index,kasMasuk.type)">Hapus</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -58,16 +59,15 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 
@@ -119,30 +119,6 @@ watch: {
                 app.loading = false
             });
         },
-        // getDataKas() {
-        //     let app = this;
-        //     let id = app.$route.params.id;
-
-        //     axios.get(app.url+'/dataKas/'+ id)
-        //     .then(function (resp) {
-        //         app.kas = resp.data;
-        //     })
-        //     .catch(function () {
-        //         alert("Could not load kas");
-        //     });
-        // },
-        // getDataTransaksi() {
-        //     let app = this;
-        //     let id = app.$route.params.id;
-
-        //     axios.get(app.url+'/dataTransaksi/'+ id)
-        //     .then(function (resp) {
-        //         app.kategori_transaksis = resp.data;
-        //     })
-        //     .catch(function () {
-        //         alert("Could not load transaksi");
-        //     });
-        // },
         searchData(page) {
         	var app = this;
         	app.loading == true;
@@ -161,26 +137,42 @@ watch: {
         		app.loading = false
         	});
         },
-        deleteKasMasuk(id, index,nama_kas) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kas+" ?")) {
-                var app = this;
-                axios.delete(app.url+'/' + id)
-                .then(function (resp) {
-                    app.getKasMasuks();
-                    app.alert(nama_kas)
-                })
-                .catch(function (resp) {
-                    alert("Could not delete Satuan");
-                });
-            }
-        },
-        alert(nama_kas) {
-        	this.$swal({
-        		title: "Berhasil!",
-        		text: 'Sukses : Berhasil menghapus Kas Masuk '+ nama_kas,
-        		icon: "success",
-        	});
-        }
-    }
+        deleteKasMasuk(id, index,type) {
+           swal({
+            title: "Konfirmasi Hapus",
+            text : "Anda Yakin Ingin Menghapus "+type+" ?",
+            icon : "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+           .then((willDelete) => {
+            if (willDelete) {
+              var app = this;
+              axios.delete(app.url+'/' + id)
+              .then(function (resp) {
+                app.getKasMasuks();
+                swal("Berhasil Dihapus!  ", {
+                  icon: "success",
+              });
+            })
+              .catch(function (resp) {
+                app.$router.replace('/kategori-transaksi/');
+                swal("Gagal Menghapus!", {
+                  icon: "warning",
+              });
+            });
+          }
+          this.$router.replace('/kasMasuk/');
+      });
+       },
+       alert(type) {
+           this.$swal({
+              title: "Berhasil!",
+              text: 'Sukses : Berhasil menghapus Kas Masuk '+ type,
+              icon: "success",
+          });
+       }
+   }
+
 }
 </script>

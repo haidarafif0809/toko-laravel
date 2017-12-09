@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\KasMasuk;
+use Illuminate\Database\Seeder;
 
 class KasMasukSeeder extends Seeder
 {
@@ -12,8 +12,8 @@ class KasMasukSeeder extends Seeder
      */
     public function run()
     {
-    	KasMasuk::create([
-    		'kas_id' => '1', 'kategori_id' => '1', 'jumlah' => 1000, 'keterangan' => 'lunas'
-    	]);
+        KasMasuk::create([
+            'type' => 1, 'jumlah' => 1000, 'keterangan' => 'lunas',
+        ]);
     }
 }

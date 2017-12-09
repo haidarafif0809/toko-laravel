@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\KasMasuk;
+use App\Observers\KasMasukObserver;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Validator;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
             }
             return false;
         });
+        KasMasuk::observe(KasMasukObserver::class);
 
         Validator::replacer('image64', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':values', join(",", $parameters), $message);

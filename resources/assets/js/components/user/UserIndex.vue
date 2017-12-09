@@ -2,36 +2,36 @@
     <div class="container">
         <ul class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">User</li>
+            <li class="active">Staf</li>
         </ul>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Table User</p>
+                        <p class="panel-title">Staf</p>
                     </div>
                     <div class="panel-body">
                         <div class="tambah">
                             <p>
                                 <router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">
-                                    Tambah User
+                                    Tambah Staf
                                 </router-link>
                             </p>
                         </div>
                         <div class="pencarian">
-                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                     </div>
-                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                         <thead>
+                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                       </div>
+                       <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                           <thead>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="users.length > 0 && loading == false" class="data-ada">
                             <tr v-for="user ,index in users">
-                               <td>{{ user.name }}</td>
-                               <td>{{ user.email }}</td>
-                               <td>
+                             <td>{{ user.name }}</td>
+                             <td>{{ user.email }}</td>
+                             <td>
                                 <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default">
                                     Edit
                                 </router-link>
@@ -71,17 +71,17 @@
 
 <script>
 export default {
- data: function () {
-  return {
-   users: [],
-   usersData: {},
-   url : window.location.origin+(window.location.pathname).replace("home","user"),
-   search : '',
-   loading : true
+   data: function () {
+      return {
+         users: [],
+         usersData: {},
+         url : window.location.origin+(window.location.pathname).replace("home","user"),
+         search : '',
+         loading : true
 
-}
-},
-mounted() {
+     }
+ },
+ mounted() {
   var app = this;
   app.loading = true
   app.getUsers();	
@@ -89,7 +89,7 @@ mounted() {
 },
 watch: {
         // whenever question changes, this function will run
-        pencarian: function (newQuestion) {
+        search: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
@@ -111,7 +111,7 @@ watch: {
     		});
     	},
     	deleteEntry(id, index,name) {
-    		if (confirm("Yakin Ingin Menghapus User "+name+" ?")) {
+    		if (confirm("Yakin Ingin Menghapus Staf "+name+" ?")) {
     			var app = this;
     			axios.delete(app.url+'/' + id)
     			.then(function (resp) {

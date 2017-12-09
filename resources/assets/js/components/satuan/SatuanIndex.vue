@@ -110,47 +110,56 @@ watch: {
     			alert("Could not load satuans");
     		});
     	},
+        getHasilPencarian(page){
+            var app = this;
+            app.loading = true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
+            .then(function (resp) {
+                app.loading = false
+                app.satuans = resp.data.data;
+                app.satuansData = resp.data;
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                app.loading = false
+                alert("Could not load satuans");
+            });
+
+
+        },
+
     	deleteEntry(id, index,nama_satuan) {
-    		if (confirm("Yakin Ingin Menghapus Satuan "+nama_satuan+" ?")) {
-    			var app = this;
-    			axios.delete(app.url+'/' + id)
-    			.then(function (resp) {
-    				app.getSatuans();
-    				app.alert(nama_satuan)
-                    app.$router.replace('/satuan');
-                })
-    			.catch(function (resp) {
-    				alert("Could not delete satuan");
-    			});
-    		}
-    	},
-    	getHasilPencarian(page){
-    		var app = this;
-    		app.loading = true;
-    		if (typeof page === 'undefined') {
-    			page = 1;
-    		}
-    		axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
-    		.then(function (resp) {
-    			app.loading = false
-    			app.satuans = resp.data.data;
-    			app.satuansData = resp.data;
-    		})
-    		.catch(function (resp) {
-    			console.log(resp);
-    			app.loading = false
-    			alert("Could not load satuans");
-    		});
+            swal({
+                title: "Konfirmasi Hapus",
+                text : "Anda Yakin Ingin Menghapus "+nama_satuan+" ?",
+                icon : "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var app = this;
+                    axios.delete(app.url+'/' + id)
+                    .then(function (resp) {
+                        app.getSatuans();
+                        swal("Satuan Berhasil Dihapus!  ", {
+                            icon: "success",
+                        });
+                    })
+                    .catch(function (resp) {
+                        app.$router.replace('/satuan/');
+                        swal("Gagal Menghapus Satuan!", {
+                            icon: "warning",
+                        });
+                    });
+                }
+                this.$router.replace('/satuan/');
+            });
+        },
 
-
-    	},
-    	alert(nama_satuan) {
-    		this.$swal({
-    			title: "Berhasil!",
-    			text: "Berhasil Menghapus "+ nama_satuan,
-    			icon: "success",
-    		});
-    	}
     }
 
 }

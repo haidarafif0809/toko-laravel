@@ -11,16 +11,16 @@ class KasMasuk extends Model
 
     protected $primaryKey = 'kas_masuk_id';
     protected $fillable   = [
-        'kas_id', 'kategori_id', 'jumlah', 'keterangan',
+        'type', 'jumlah', 'keterangan',
     ];
 
     public function kas()
     {
-        return $this->hasOne('App\Kas', 'id', 'kas_masuk_id');
+        return $this->belongsTo('App\Kas', 'kas_id', 'id');
     }
 
     public function kategoriTransaksi()
     {
-        return $this->hasOne('App\KategoriTransaksi', 'id', 'kas_masuk_id');
+        return $this->belongsTo('App\KategoriTransaksi', 'kategori_id', 'id');
     }
 }

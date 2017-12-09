@@ -13,14 +13,11 @@
 					</div>
 					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 						<div class="form-group">
-							<label for="nama_produk" class="col-md-2 control-label">Nama Kategori Produk</label>
+							<label for="nama_kategori_produk" class="col-md-2 control-label">Nama Kategori Produk</label>
 							<div class="col-md-4">
-								<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Produk" type="nama_produk" v-model="kategoriProduk.nama_produk" name="nama_produk"  autofocus="">
-								<span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
-
+								<input class="form-control" required autocomplete="off" placeholder="Nama Kategori Produk" type="text" v-model="kategoriProduk.nama_kategori_produk" name="nama_kategori_produk"  autofocus="">
+								<span v-if="errors.nama_kategori_produk" class="label label-danger">{{ errors.nama_kategori_produk[0] }}</span>
 							</div>
-
-
 						</div>
 						<div class="form-group">
 							<div class="col-md-4 col-md-offset-2">
@@ -46,7 +43,7 @@ export default {
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_produk: ''
+				nama_kategori_produk: ''
 			},
 			kategoriProdukId: null,
 			message: ''
@@ -58,7 +55,7 @@ export default {
 			var newKategoriProduk = app.kategoriProduk;
 			axios.patch(app.url+'/' + app.kategoriProdukId, newKategoriProduk)
 			.then(function (resp) {
-				app.message = 'Berhasil Merubah kategori Produk "'+app.kategoriProduk.nama_produk+'"'
+				app.message = 'Berhasil Merubah kategori Produk "'+app.kategoriProduk.nama_kategori_produk+'"'
 				app.alert(app.message);
 				app.$router.replace('/kategoriProduk');
 

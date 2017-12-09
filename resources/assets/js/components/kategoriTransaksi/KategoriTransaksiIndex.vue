@@ -115,20 +115,6 @@ export default {
     			alert("Could not load kategoriTransaksis");
     		});
     	},
-    	deleteEntry(id, index,nama_kategori_transaksi) {
-    		if (confirm("Yakin Ingin Menghapus Kategori Transaksi "+nama_kategori_transaksi+" ?")) {
-    			var app = this;
-    			axios.delete(app.url+'/' + id)
-    			.then(function (resp) {
-    				app.getKategoriTransaksis();
-    				app.alert(nama_kategori_transaksi)
-    				app.$router.replace('/kategoriTransaksi');
-    			})
-    			.catch(function (resp) {
-    				alert("Could not delete Kategori Transaksi");
-    			});
-    		}
-    	},
     	getHasilPencarian(page){
     		var app = this;
     		app.loading = true;
@@ -149,13 +135,35 @@ export default {
 
 
     	},
-    	alert(nama_kategori_transaksi) {
-    		this.$swal({
-    			title: "Berhasil!",
-    			text: "Berhasil Menghapus "+ nama_kategori_transaksi,
-    			icon: "success",
+
+    	deleteEntry(id, index,nama_kategori_transaksi) {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus "+nama_kategori_transaksi+" ?",
+    			icon : "warning",
+    			buttons: true,
+    			dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    			if (willDelete) {
+    				var app = this;
+    				axios.delete(app.url+'/' + id)
+    				.then(function (resp) {
+    					app.getKategoriTransaksis();
+    					swal("Kategori Transaksi Berhasil Dihapus!  ", {
+    						icon: "success",
+    					});
+    				})
+    				.catch(function (resp) {
+    					app.$router.replace('/kategoriTransaksi/');
+    					swal("Gagal Menghapus Kategori Transaksi!", {
+    						icon: "warning",
+    					});
+    				});
+    			}
+    			this.$router.replace('/kategoriTransaksi/');
     		});
-    	}
+    	},
     }
 
 }

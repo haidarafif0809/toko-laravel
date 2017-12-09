@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\KategoriProduk;
 use Illuminate\Http\Request;
 
-class KategoriProdukController extends Controller
+class PenjualanController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +23,7 @@ class KategoriProdukController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -36,12 +35,6 @@ class KategoriProdukController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk',
-        ]);
-        KategoriProduk::create([
-            'nama_kategori_produk' => $request->nama_kategori_produk,
-        ]);
     }
 
     /**
@@ -63,7 +56,7 @@ class KategoriProdukController extends Controller
      */
     public function edit($id)
     {
-        return KategoriProduk::find($id);
+        //
     }
 
     /**
@@ -75,12 +68,7 @@ class KategoriProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,' . $id,
-        ]);
-        KategoriProduk::find($id)->update([
-            'nama_kategori_produk' => $request->nama_kategori_produk,
-        ]);
+        //
     }
 
     /**
@@ -91,17 +79,6 @@ class KategoriProdukController extends Controller
      */
     public function destroy($id)
     {
-        $hapus = KategoriProduk::destroy($id);
-        return $hapus;
-    }
-    public function view()
-    {
-        return KategoriProduk::paginate(10);
-    }
-
-    public function search(Request $request)
-    {
-        $nama_kategori_produk = KategoriProduk::where('nama_kategori_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
-        return response()->json($nama_kategori_produk);
+        //
     }
 }

@@ -65,6 +65,8 @@ import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
 import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
 //Kas Mutasi
 import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
+//Penjualan
+import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 const routes = [{
         path: '/',
         components: {
@@ -221,6 +223,12 @@ const routes = [{
         path: '/kas-mutasi',
         component: KasMutasiIndex,
         name: 'indexKasMutasi'
+    },
+    //Penjualan
+    {
+        path: '/penjualan',
+        component: PenjualanIndex,
+        name: 'indexPenjualan'
     },
 ]
 /**

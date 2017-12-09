@@ -8,7 +8,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Table Pelanggan</p>
+						<p class="panel-title">Pelanggan</p>
 					</div>
 					<div class="panel-body">
 						<div class="tambah">
@@ -21,50 +21,52 @@
 						<div class="pencarian">
 							<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
 						</div>
-						<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-							<thead>
-								<th>Kode Pelanggan</th>
-								<th>Nama Pelanggan</th>
-								<th>Tanggal Lahir</th>
-								<th>Nomor Telepon</th>
-								<th>Alamat</th>
-								<th>Aksi</th>
-							</thead>
-							<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
-								<tr v-for="pelanggan ,index in pelanggans">
-									<td>{{ pelanggan.kode_pelanggan }}</td>
-									<td>{{ pelanggan.nama_pelanggan }}</td>
-									<td>{{ pelanggan.tanggal_lahir }}</td>
-									<td>{{ pelanggan.nomor_telepon }}</td>
-									<td>{{ pelanggan.alamat }}</td>
+						<div class="table table-responsive">
+							<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+								<thead>
+									<th>Kode Pelanggan</th>
+									<th>Nama Pelanggan</th>
+									<th>Tanggal Lahir</th>
+									<th>Nomor Telepon</th>
+									<th>Alamat</th>
+									<th>Aksi</th>
+								</thead>
+								<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
+									<tr v-for="pelanggan ,index in pelanggans">
+										<td>{{ pelanggan.kode_pelanggan }}</td>
+										<td>{{ pelanggan.nama_pelanggan }}</td>
+										<td>{{ pelanggan.tanggal_lahir }}</td>
+										<td>{{ pelanggan.nomor_telepon }}</td>
+										<td>{{ pelanggan.alamat }}</td>
 
-									<td>
-										<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
-											Edit
-										</router-link>
-										<a href="#"
-										class="btn btn-xs btn-danger" 
-										v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
-										Delete
-									</a>
-								</td>
-							</tr>
-						</tbody>
-						<tbody v-else-if="loading == true" class="data-ada" >
-							<tr >
-								<td colspan="4"  class="text-center">
-									Sedang Memuat Data
-								</td>
-							</tr>
-						</tbody>
-						<tbody v-else class="tidak-ada-data">
-							<tr>
-								<td colspan="4"  class="text-center">
-									Tidak Ada Data
-								</td>
-							</tr>
-						</tbody>
-					</table>
+										<td>
+											<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
+												Edit
+											</router-link>
+											<a href="#"
+											class="btn btn-xs btn-danger" 
+											v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
+											Delete
+										</a>
+									</td>
+								</tr>
+							</tbody>
+							<tbody v-else-if="loading == true" class="data-ada" >
+								<tr >
+									<td colspan="4"  class="text-center">
+										Sedang Memuat Data
+									</td>
+								</tr>
+							</tbody>
+							<tbody v-else class="tidak-ada-data">
+								<tr>
+									<td colspan="4"  class="text-center">
+										Tidak Ada Data
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getPelanggans":limit="1" v-if="search == '' "></pagination></div>
 					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
@@ -117,20 +119,6 @@ export default {
     			alert("Could not load pelanggans");
     		});
     	},
-    	deleteEntry(id, index,nama_pelanggan) {
-    		if (confirm("Yakin Ingin Menghapus Pelanggan "+nama_pelanggan+" ?")) {
-    			var app = this;
-    			axios.delete(app.url+'/' + id)
-    			.then(function (resp) {
-    				app.getPelanggans();
-    				app.alert(nama_pelanggan)
-    				app.$router.replace('/pelanggan');
-    			})
-    			.catch(function (resp) {
-    				alert("Could not delete pelanggan");
-    			});
-    		}
-    	},
     	getHasilPencarian(page){
     		var app = this;
     		app.loading = true;
@@ -148,18 +136,38 @@ export default {
     			app.loading = false
     			alert("Could not load pelanggans");
     		});
-
-
     	},
-    	alert(nama_pelanggan) {
-    		this.$swal({
-    			title: "Berhasil!",
-    			text: "Berhasil Menghapus "+ nama_pelanggan,
-    			icon: "success",
-    		});
-    	}
-    }
 
+
+    	deleteEntry(id, index,nama_pelanggan) {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus "+nama_pelanggan+" ?",
+    			icon : "warning",
+    			buttons: true,
+    			dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    			if (willDelete) {
+    				var app = this;
+    				axios.delete(app.url+'/' + id)
+    				.then(function (resp) {
+    					app.getPelanggans();
+    					swal("Pelanggan Berhasil Dihapus!  ", {
+    						icon: "success",
+    					});
+    				})
+    				.catch(function (resp) {
+    					app.$router.replace('/pelanggan/');
+    					swal("Gagal Menghapus Pelanggan!", {
+    						icon: "warning",
+    					});
+    				});
+    			}
+    			this.$router.replace('/pelanggan/');
+    		});
+    	},
+    }
 }
 </script>
 

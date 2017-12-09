@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateKasMasuksTable extends Migration
 {
@@ -15,11 +15,10 @@ class CreateKasMasuksTable extends Migration
     {
         Schema::create('kas_masuks', function (Blueprint $table) {
             $table->increments('kas_masuk_id');
-            $table->integer('kas_id');
-            $table->integer('kategori_id');
+            $table->integer('type')->comment = "(1 = kas masuk), (2 = kas keluar)";
             $table->integer('jumlah');
             $table->string('keterangan');
-            $table->unsignedInteger('created_by')->nullable()->index();            
+            $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
