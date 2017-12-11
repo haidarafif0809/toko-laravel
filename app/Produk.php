@@ -18,9 +18,4 @@ class Produk extends Model
         return $this->hasOne('App\Satuan', 'id', 'produk_id');
     }
 
-    public function penjualan()
-    {
-        return $this->BelongsTo('App\Penjualan');
-    }
-
 }
