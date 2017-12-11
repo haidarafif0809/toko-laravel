@@ -7,32 +7,22 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p class="panel-title">Penjualan</p>
-					</div>
 					<div class="panel-body">
-						<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-							<thead>
-								<th>Semua</th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th></th>
-							</thead>
-							<tbody>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="panel-heading">
+							<div class="table-responsive">
+								<div class="nav">
+									<a class="nav-link" href="#">Minuman</a>
+									<a class="nav-link" href="#">Makanan</a>
+									<a class="nav-link" href="#">Cemilan</a>
+									<a class="nav-link" href="#">Gorengan</a>
+									<a class="nav-link" href="#">Semua</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+</div>
 </template>

@@ -81130,47 +81130,32 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _c("p", { staticClass: "panel-title" }, [_vm._v("Penjualan")])
-          ]),
-          _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table table-striped table-no-bordered table-hover",
-                staticStyle: { width: "100%" },
-                attrs: { cellspacing: "0", width: "100%" }
-              },
-              [
-                _c("thead", [
-                  _c("th", [_vm._v("Semua")]),
+            _c("div", { staticClass: "panel-heading" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("div", { staticClass: "nav" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Minuman")
+                  ]),
                   _vm._v(" "),
-                  _c("th"),
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Makanan")
+                  ]),
                   _vm._v(" "),
-                  _c("th"),
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Cemilan")
+                  ]),
                   _vm._v(" "),
-                  _c("th"),
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Gorengan")
+                  ]),
                   _vm._v(" "),
-                  _c("th")
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td"),
-                    _vm._v(" "),
-                    _c("td")
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _vm._v("Semua")
                   ])
                 ])
-              ]
-            )
+              ])
+            ])
           ])
         ])
       ])
