@@ -20,7 +20,7 @@ class Produk extends Model
 
     public function penjualan()
     {
-        return $this->hasMany('App\Penjualan');
+        return $this->BelongsTo('App\Penjualan');
     }
 
 }
