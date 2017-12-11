@@ -2,15 +2,15 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexKasMasuk'}">Kas Masuk</router-link></li>
-			<li class="active">Tambah Kas Masuk</li>
+			<li><router-link :to="{name: 'indexKasMasuk'}">Kas Masuk/Keluar</router-link></li>
+			<li class="active">Buat Kas Masuk/keluar</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Tambah Kas Masuk</p>
+						<p class="panel-title">Buat Kas Masuk/keluar</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 

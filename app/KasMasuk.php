@@ -11,7 +11,7 @@ class KasMasuk extends Model
 
     protected $primaryKey = 'kas_masuk_id';
     protected $fillable   = [
-        'type', 'jumlah', 'keterangan',
+        'toko_id', 'type', 'jumlah', 'keterangan',
     ];
 
     public function kas()
@@ -22,5 +22,21 @@ class KasMasuk extends Model
     public function kategoriTransaksi()
     {
         return $this->belongsTo('App\KategoriTransaksi', 'kategori_id', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'toko_id', 'id');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format(' d F Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['updated_at'])
+            ->diffForHumans();
     }
 }

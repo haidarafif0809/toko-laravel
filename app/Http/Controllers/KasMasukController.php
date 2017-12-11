@@ -156,4 +156,11 @@ class KasMasukController extends Controller
         $kategori_transaksi = KategoriTransaksi::all();
         return response()->json($kategori_transaksi);
     }
+
+    public function stafAktif()
+    {
+        $user = User::all();
+        return response()->json($user);
+
+    }
 }

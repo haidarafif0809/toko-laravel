@@ -2,68 +2,63 @@
     <div class="container">
         <ul class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">Staf</li>
+            <li class="active">Profil Toko</li>
         </ul>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Staf</p>
+                        <p class="panel-title">Profil Toko</p>
                     </div>
                     <div class="panel-body">
-                        <div class="tambah">
-                            <p>
-                                <router-link :to="{name: 'createUser'}" type="button" class="btn btn-primary">
-                                    Tambah Staf
-                                </router-link>
-                            </p>
-                        </div>
                         <div class="pencarian">
                          <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
                      </div>
                      <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                          <thead>
-                            <th>Nama</th>
+                            <th>Nama Toko</th>
+                            <th>Nama Pemilik</th>
                             <th>Email</th>
+                            <th>No. Tlp</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="users.length > 0 && loading == false" class="data-ada">
                             <tr v-for="user ,index in users">
-                               <td>{{ user.name }}</td>
+                               <td>{{ user.nama_toko }}</td>
+                               <td>{{ user.nama_pemilik }}</td>
                                <td>{{ user.email }}</td>
+                               <td>{{ user.no_tlp }}</td>
                                <td>
                                 <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default">
-                                    Edit
+                                    Ubah Toko
                                 </router-link>
                                 <a href="#"
                                 class="btn btn-xs btn-danger" 
-                                v-on:click="deleteEntry(user.id, index,user.name)">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody v-else-if="loading == true" class="data-ada" >
-                    <tr >
-                        <td colspan="4"  class="text-center">
-                            Sedang Memuat Data
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody v-else class="tidak-ada-data">
-                    <tr>
-                        <td colspan="4"  class="text-center">
-                            Tidak Ada Data
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-            <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getUsers" v-if="search == '' "></pagination></div>
-            <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+                                v-on:click="deleteEntry(user.id, index,user.nama_toko)">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else-if="loading == true" class="data-ada" >
+                        <tr >
+                            <td colspan="4"  class="text-center">
+                                Sedang Memuat Data
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else class="tidak-ada-data">
+                        <tr>
+                            <td colspan="4"  class="text-center">
+                                Tidak Ada Data
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <vue-simple-spinner v-if="loading"></vue-simple-spinner>
+                <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getUsers" v-if="search == '' "></pagination></div>
+                <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+            </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 
@@ -104,8 +99,9 @@ watch: {
     			app.loading = false
     			app.users = resp.data.data;
     			app.usersData = resp.data
+                console.log(resp)
 
-    		})
+            })
     		.catch(function (resp) {
     			alert("Could not load users");
     		});

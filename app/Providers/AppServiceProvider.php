@@ -26,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
         KasMasuk::observe(KasMasukObserver::class);
+        // untuk menyesuaikan waktu berdasarkan tempat
+        \Carbon\Carbon::setlocale('id');
+        // jika ingin menesuaikan dengan locale di laravel
+        // \Carbon\Carbon::setLocale(config('app.locale'));
 
         Validator::replacer('image64', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':values', join(",", $parameters), $message);

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -19,7 +19,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -49,9 +49,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'nama_toko'    => 'required|string|max:255',
+            'nama_pemilik' => 'required|string|max:255',
+            'email'        => 'required|string|email|max:255|unique:users',
+            'no_tlp'       => 'required|string|max:12|unique:users',
+            'password'     => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -65,9 +67,11 @@ class RegisterController extends Controller
     {
 
         $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
+            'nama_toko'    => $data['nama_toko'],
+            'nama_pemilik' => $data['nama_pemilik'],
+            'email'        => $data['email'],
+            'no_tlp'       => $data['no_tlp'],
+            'password'     => $data['password'],
         ]);
         $memberRole = Role::where('name', 'member')->first();
         $user->attachRole($memberRole);

@@ -44,6 +44,23 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            @role('admin')
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                Master Data
+                                <span class="caret">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <router-link :to="{name: 'indexUser'}">
+                                        Data Toko
+                                    </router-link>
+                                </li>
+                            </ul>
+                            @endif
+                        </li>
+                        @if (Auth::check())
                         <li>
                             <router-link :to="{name: 'indexDashboard'}">
                                 Dashboard
@@ -72,7 +89,6 @@
                                         Kategori Produk
                                     </router-link>
                                 </li>
-
                                 <li>
                                     <router-link :to="{name: 'indexProduk'}">
                                         Produk
@@ -90,31 +106,12 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                Transaksi
-                                <span class="caret">
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <router-link :to="{name: 'indexKasMasuk'}">
-                                        Kas Masuk/Kas Keluar
-                                    </router-link>
-                                </li>
-                               <!--  <li>
-                                    <router-link :to="{name: 'indexUser'}">
-                                        Kas Mutasi
-                                    </router-link>
-                                </li> -->
-                            </ul>
-                        </li>
-
                         <li>
-                            <router-link :to="{name: 'indexUser'}">
-                                Staf
+                            <router-link :to="{name: 'indexKasMasuk'}">
+                                Kelola Kas
                             </router-link>
                         </li>
+
 
                         <li>
                             <router-link :to="{name: 'indexPelanggan'}">
@@ -164,9 +161,9 @@
                                         Rekapitulasi Kas
                                     </router-link>
                                 </li>
-
                             </ul>
                         </li>
+                        @endif
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -185,7 +182,7 @@
                         @else
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->nama_toko }}
                                 <span class="caret">
                                 </span>
                             </a>
