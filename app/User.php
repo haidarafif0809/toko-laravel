@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Yajra\Auditable\AuditableTrait;
 
@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nama_toko', 'nama_pemilik', 'email', 'no_tlp', 'password',
     ];
 
     /**
@@ -32,7 +32,19 @@ class User extends Authenticatable
     ];
 
     public function setPasswordAttribute($password)
-    {    
+    {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format(' d F Y H:i:s');
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['updated_at'])
+            ->diffForHumans();
     }
 }

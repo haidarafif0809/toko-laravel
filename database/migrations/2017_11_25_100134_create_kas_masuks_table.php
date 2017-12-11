@@ -15,6 +15,7 @@ class CreateKasMasuksTable extends Migration
     {
         Schema::create('kas_masuks', function (Blueprint $table) {
             $table->increments('kas_masuk_id');
+            $table->integer('toko_id');
             $table->integer('type')->comment = "(1 = kas masuk), (2 = kas keluar)";
             $table->integer('jumlah');
             $table->string('keterangan');

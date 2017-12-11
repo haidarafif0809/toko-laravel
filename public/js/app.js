@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(348);
+module.exports = __webpack_require__(351);
 
 
 /***/ }),
@@ -29339,38 +29339,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_kategoriProduk_KategoriProdukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_kategoriProduk_KategoriProdukCreate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_kategoriProduk_KategoriProdukEdit_vue__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_kategoriProduk_KategoriProdukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21__components_kategoriProduk_KategoriProdukEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_KasMasukIndex_vue__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_KasMasukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_KasMasukIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukCreate_vue__ = __webpack_require__(304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue__ = __webpack_require__(313);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarEdit_vue__ = __webpack_require__(316);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiIndex_vue__ = __webpack_require__(319);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiCreate_vue__ = __webpack_require__(322);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue__ = __webpack_require__(325);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierIndex_vue__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierCreate_vue__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierEdit_vue__ = __webpack_require__(334);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_pelanggan_PelangganIndex_vue__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_pelanggan_PelangganIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34__components_pelanggan_PelangganIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganCreate_vue__ = __webpack_require__(340);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganCreate_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganEdit_vue__ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganEdit_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_StafAktif_vue__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_StafAktif_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_StafAktif_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukIndex_vue__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukCreate_vue__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasMasuk_KasMasukEdit_vue__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_kasMasuk_KasMasukEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_kasMasuk_KasMasukEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarIndex_vue__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarCreate_vue__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kasKeluar_KasKeluarEdit_vue__ = __webpack_require__(319);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_kasKeluar_KasKeluarEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_kasKeluar_KasKeluarEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiIndex_vue__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiCreate_vue__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_kategoriTransaksi_KategoriTransaksiEdit_vue__ = __webpack_require__(328);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_31__components_kategoriTransaksi_KategoriTransaksiEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierIndex_vue__ = __webpack_require__(331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierCreate_vue__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_suplier_SuplierEdit_vue__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__components_suplier_SuplierEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_34__components_suplier_SuplierEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganIndex_vue__ = __webpack_require__(340);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganCreate_vue__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29417,6 +29419,7 @@ window.Vue = __webpack_require__(28);
 
 
 // kas Masuk
+
 
 
 
@@ -29521,78 +29524,82 @@ var routes = [{
 },
 // kas Masuk
 {
+    path: '/kasMasuk/StafAktif',
+    component: __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_StafAktif_vue___default.a,
+    name: 'stafAktif'
+}, {
     path: '/kasMasuk',
-    component: __WEBPACK_IMPORTED_MODULE_22__components_kasMasuk_KasMasukIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukIndex_vue___default.a,
     name: 'indexKasMasuk'
 }, {
     path: '/kasMasuk/create',
-    component: __WEBPACK_IMPORTED_MODULE_23__components_kasMasuk_KasMasukCreate_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukCreate_vue___default.a,
     name: 'createKasMasuk'
 }, {
     path: '/kasMasuk/edit/:id',
-    component: __WEBPACK_IMPORTED_MODULE_24__components_kasMasuk_KasMasukEdit_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_25__components_kasMasuk_KasMasukEdit_vue___default.a,
     name: 'editKasMasuk'
 },
 // kas Keluar
 {
     path: '/kas-keluar',
-    component: __WEBPACK_IMPORTED_MODULE_25__components_kasKeluar_KasKeluarIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarIndex_vue___default.a,
     name: 'indexKasKeluar'
 }, {
     path: '/kas-keluar/create',
-    component: __WEBPACK_IMPORTED_MODULE_26__components_kasKeluar_KasKeluarCreate_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarCreate_vue___default.a,
     name: 'createKasKeluar'
 }, {
     path: '/kas-keluar/edit/:id',
-    component: __WEBPACK_IMPORTED_MODULE_27__components_kasKeluar_KasKeluarEdit_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_28__components_kasKeluar_KasKeluarEdit_vue___default.a,
     name: 'editKasKeluar'
 },
 // master data kategori transaksi
 {
     path: '/kategoriTransaksi',
-    component: __WEBPACK_IMPORTED_MODULE_28__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiIndex_vue___default.a,
     name: 'indexKategoriTransaksi'
 }, {
     path: '/kategoriTransaksi-create',
-    component: __WEBPACK_IMPORTED_MODULE_29__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiCreate_vue___default.a,
     name: 'createKategoriTransaksi'
 }, {
     path: '/kategoriTransaksi-edit',
-    component: __WEBPACK_IMPORTED_MODULE_30__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_31__components_kategoriTransaksi_KategoriTransaksiEdit_vue___default.a,
     name: 'editKategoriTransaksi'
 },
 // Suplier
 {
     path: '/suplier',
-    component: __WEBPACK_IMPORTED_MODULE_31__components_suplier_SuplierIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierIndex_vue___default.a,
     name: 'indexSuplier'
 }, {
     path: '/suplier/create',
-    component: __WEBPACK_IMPORTED_MODULE_32__components_suplier_SuplierCreate_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierCreate_vue___default.a,
     name: 'createSuplier'
 }, {
     path: '/suplier/edit/:id',
-    component: __WEBPACK_IMPORTED_MODULE_33__components_suplier_SuplierEdit_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_34__components_suplier_SuplierEdit_vue___default.a,
     name: 'editSuplier'
 },
 // Master data pelanggan
 {
     path: '/pelanggan',
-    component: __WEBPACK_IMPORTED_MODULE_34__components_pelanggan_PelangganIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganIndex_vue___default.a,
     name: 'indexPelanggan'
 }, {
     path: '/pelanggan-create',
-    component: __WEBPACK_IMPORTED_MODULE_35__components_pelanggan_PelangganCreate_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganCreate_vue___default.a,
     name: 'createPelanggan'
 }, {
     path: '/pelanggan-edit',
-    component: __WEBPACK_IMPORTED_MODULE_36__components_pelanggan_PelangganEdit_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue___default.a,
     name: 'editPelanggan'
 },
 // Kas Mutasi
 {
     path: '/kas-mutasi',
-    component: __WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue___default.a,
     name: 'indexKasMutasi'
 }];
 /**
@@ -67461,85 +67468,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            users: [],
-            usersData: {},
-            url: window.location.origin + window.location.pathname.replace("home", "user"),
-            search: '',
-            loading: true
+  data: function data() {
+    return {
+      users: [],
+      usersData: {},
+      url: window.location.origin + window.location.pathname.replace("home", "user"),
+      search: '',
+      loading: true
 
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.loading = true;
-        app.getUsers();
-    },
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.loading = true;
+    app.getUsers();
+  },
 
-    watch: {
-        // whenever question changes, this function will run
-        search: function search(newQuestion) {
-            this.getHasilPencarian();
-        }
-    },
-    methods: {
-        getUsers: function getUsers(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.loading = false;
-                app.users = resp.data.data;
-                app.usersData = resp.data;
-            }).catch(function (resp) {
-                alert("Could not load users");
-            });
-        },
-        deleteEntry: function deleteEntry(id, index, name) {
-            if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
-                var app = this;
-                axios.delete(app.url + '/' + id).then(function (resp) {
-                    app.getUsers();
-                    app.alert(name);
-                    app.$router.replace('/user');
-                }).catch(function (resp) {
-                    alert("Could not delete user");
-                });
-            }
-        },
-        getHasilPencarian: function getHasilPencarian(page) {
-            var app = this;
-            app.loading = true;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
-                app.loading = false;
-                app.users = resp.data.data;
-                app.usersData = resp.data;
-            }).catch(function (resp) {
-                console.log(resp);
-                app.loading = false;
-                alert("Could not load users");
-            });
-        },
-        alert: function alert(name) {
-            this.$swal({
-                title: "Berhasil!",
-                text: "Berhasil Menghapus " + name,
-                icon: "success"
-            });
-        }
+  watch: {
+    // whenever question changes, this function will run
+    search: function search(newQuestion) {
+      this.getHasilPencarian();
     }
+  },
+  methods: {
+    getUsers: function getUsers(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+        console.log(resp);
+      }).catch(function (resp) {
+        alert("Could not load users");
+      });
+    },
+    deleteEntry: function deleteEntry(id, index, name) {
+      if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
+        var app = this;
+        axios.delete(app.url + '/' + id).then(function (resp) {
+          app.getUsers();
+          app.alert(name);
+          app.$router.replace('/user');
+        }).catch(function (resp) {
+          alert("Could not delete user");
+        });
+      }
+    },
+    getHasilPencarian: function getHasilPencarian(page) {
+      var app = this;
+      app.loading = true;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+      }).catch(function (resp) {
+        console.log(resp);
+        app.loading = false;
+        alert("Could not load users");
+      });
+    },
+    alert: function alert(name) {
+      this.$swal({
+        title: "Berhasil!",
+        text: "Berhasil Menghapus " + name,
+        icon: "success"
+      });
+    }
+  }
 
 });
 
@@ -67563,7 +67566,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Staf")])
+      _c("li", { staticClass: "active" }, [_vm._v("Profil Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -67575,27 +67578,6 @@ var render = function() {
             "div",
             { staticClass: "panel-body" },
             [
-              _c("div", { staticClass: "tambah" }, [
-                _c(
-                  "p",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { to: { name: "createUser" }, type: "button" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Tambah Staf\n                                "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "pencarian" }, [
                 _c("input", {
                   directives: [
@@ -67641,9 +67623,13 @@ var render = function() {
                         { staticClass: "data-ada" },
                         _vm._l(_vm.users, function(user, index) {
                           return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(user.name))]),
+                            _c("td", [_vm._v(_vm._s(user.nama_toko))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.nama_pemilik))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.email))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.no_tlp))]),
                             _vm._v(" "),
                             _c(
                               "td",
@@ -67661,7 +67647,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Edit\n                                "
+                                      "\n                                    Ubah Toko\n                                "
                                     )
                                   ]
                                 ),
@@ -67676,16 +67662,12 @@ var render = function() {
                                         _vm.deleteEntry(
                                           user.id,
                                           index,
-                                          user.name
+                                          user.nama_toko
                                         )
                                       }
                                     }
                                   },
-                                  [
-                                    _vm._v(
-                                      "\n                                Delete\n                            "
-                                    )
-                                  ]
+                                  [_vm._v("Delete")]
                                 )
                               ],
                               1
@@ -67746,7 +67728,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Staf")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Profil Toko")])
     ])
   },
   function() {
@@ -67754,9 +67736,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", [_vm._v("Nama")]),
+      _c("th", [_vm._v("Nama Toko")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nama Pemilik")]),
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("No. Tlp")]),
       _vm._v(" "),
       _c("th", [_vm._v("Aksi")])
     ])
@@ -67768,7 +67754,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                            Sedang Memuat Data\n                        "
+          "\n                                Sedang Memuat Data\n                            "
         )
       ])
     ])
@@ -67780,7 +67766,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                            Tidak Ada Data\n                        "
+          "\n                                Tidak Ada Data\n                            "
         )
       ])
     ])
@@ -73782,6 +73768,406 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources\\assets\\js\\components\\kasMasuk\\StafAktif.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-27c1aff4", Component.options)
+  } else {
+    hotAPI.reload("data-v-27c1aff4", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 302 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      users: [],
+      usersData: {},
+      url: window.location.origin + window.location.pathname.replace("home", "user"),
+      search: '',
+      loading: true,
+      message: 'Klik tombol ini untuk membuat Kas Masuk/Keluar'
+
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.loading = true;
+    app.getUsers();
+  },
+
+  watch: {
+    // whenever question changes, this function will run
+    search: function search(newQuestion) {
+      this.getHasilPencarian();
+    }
+  },
+  methods: {
+    getUsers: function getUsers(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+      }).catch(function (resp) {
+        alert("Could not load users");
+      });
+    },
+    deleteEntry: function deleteEntry(id, index, name) {
+      if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
+        var app = this;
+        axios.delete(app.url + '/' + id).then(function (resp) {
+          app.getUsers();
+          app.alert(name);
+          app.$router.replace('/user');
+        }).catch(function (resp) {
+          alert("Could not delete user");
+        });
+      }
+    },
+    getHasilPencarian: function getHasilPencarian(page) {
+      var app = this;
+      app.loading = true;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+      }).catch(function (resp) {
+        console.log(resp);
+        app.loading = false;
+        alert("Could not load users");
+      });
+    },
+    alert: function alert(name) {
+      this.$swal({
+        title: "Berhasil!",
+        text: "Berhasil Menghapus " + name,
+        icon: "success"
+      });
+    }
+  }
+
+});
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Staf")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [
+              _c("div", { staticClass: "pencarian" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "search",
+                    placeholder: "Pencarian"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-striped table-no-bordered table-hover",
+                  staticStyle: { width: "100%" },
+                  attrs: { cellspacing: "0", width: "100%" }
+                },
+                [
+                  _vm._m(1, false, false),
+                  _vm._v(" "),
+                  _vm.users.length > 0 && _vm.loading == false
+                    ? _c(
+                        "tbody",
+                        { staticClass: "data-ada" },
+                        _vm._l(_vm.users, function(user, index) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(user.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("aktif")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(user.created_at))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-xs btn-default",
+                                    attrs: {
+                                      to: {
+                                        name: "indexKasMasuk",
+                                        params: { id: user.id }
+                                      },
+                                      title: _vm.message
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                  >\n                "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        })
+                      )
+                    : _vm.loading == true
+                      ? _c("tbody", { staticClass: "data-ada" }, [
+                          _vm._m(2, false, false)
+                        ])
+                      : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                          _vm._m(3, false, false)
+                        ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _vm.search == ""
+                    ? _c("pagination", {
+                        attrs: { data: _vm.usersData },
+                        on: { "pagination-change-page": _vm.getUsers }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _vm.search != ""
+                    ? _c("pagination", {
+                        attrs: { data: _vm.usersData },
+                        on: { "pagination-change-page": _vm.getHasilPencarian }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Staf")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama Staf")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Waktu")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n                Sedang Memuat Data\n              ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n                Tidak Ada Data\n              ")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-27c1aff4", module.exports)
+  }
+}
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(305)
+/* template */
+var __vue_template__ = __webpack_require__(306)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources\\assets\\js\\components\\kasMasuk\\KasMasukIndex.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
@@ -73805,7 +74191,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 302 */
+/* 305 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -73883,108 +74269,111 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            // buat nampilin data dlm bentuk array
-            kasMasuks: [],
-            // kas: [],
-            // kategori_transaksis: [],
-            // buat paginations
-            kasMasuksData: {},
-            pencarian: '',
-            message: '',
-            url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
-            loading: true
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.getKasMasuks();
-        // app.getDataKas();
-        // app.getDataTransaksi();
-    },
+  data: function data() {
+    return {
+      // buat nampilin data dlm bentuk array
+      kasMasuks: [],
+      // kas: [],
+      // kategori_transaksis: [],
+      // buat paginations
+      kasMasuksData: {},
+      pencarian: '',
+      message: '',
+      url: window.location.origin + window.location.pathname.replace("home", "kasMasuk"),
+      loading: true
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.getKasMasuks();
+    // app.getDataKas();
+    // app.getDataTransaksi();
+  },
 
-    watch: {
-        // whenever question changes, this function will run
-        pencarian: function pencarian(newQuestion) {
-            var app = this;
-            app.searchData();
-        }
-    },
-    methods: {
-        getKasMasuks: function getKasMasuks(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.kasMasuks = resp.data.data;
-                app.kasMasuksData = resp.data;
-                app.loading = false;
-                // buat cek ddi console
-                console.log(resp.data.data);
-            }).catch(function (resp) {
-                alert("Could not load KasMasuks");
-                app.loading = false;
-            });
-        },
-        searchData: function searchData(page) {
-            var app = this;
-            app.loading == true;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
-                app.kasMasuks = resp.data.data;
-                app.kasMasuksData = resp.data;
-                app.loading = false;
-            }).catch(function (resp) {
-                alert("data tidak ditemukan");
-                app.loading = false;
-            });
-        },
-        deleteKasMasuk: function deleteKasMasuk(id, index, type) {
-            var _this = this;
-
-            swal({
-                title: "Konfirmasi Hapus",
-                text: "Anda Yakin Ingin Menghapus " + type + " ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    var app = _this;
-                    axios.delete(app.url + '/' + id).then(function (resp) {
-                        app.getKasMasuks();
-                        swal("Berhasil Dihapus!  ", {
-                            icon: "success"
-                        });
-                    }).catch(function (resp) {
-                        app.$router.replace('/kategori-transaksi/');
-                        swal("Gagal Menghapus!", {
-                            icon: "warning"
-                        });
-                    });
-                }
-                _this.$router.replace('/kasMasuk/');
-            });
-        },
-        alert: function alert(type) {
-            this.$swal({
-                title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus Kas Masuk ' + type,
-                icon: "success"
-            });
-        }
+  watch: {
+    // whenever question changes, this function will run
+    pencarian: function pencarian(newQuestion) {
+      var app = this;
+      app.searchData();
     }
+  },
+  methods: {
+    getKasMasuks: function getKasMasuks(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.kasMasuks = resp.data.data;
+        app.kasMasuksData = resp.data;
+        app.loading = false;
+        // buat cek ddi console
+        console.log(resp.data.data);
+      }).catch(function (resp) {
+        alert("Could not load KasMasuks");
+        app.loading = false;
+      });
+    },
+    searchData: function searchData(page) {
+      var app = this;
+      app.loading == true;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+        app.kasMasuks = resp.data.data;
+        app.kasMasuksData = resp.data;
+        app.loading = false;
+      }).catch(function (resp) {
+        alert("data tidak ditemukan");
+        app.loading = false;
+      });
+    },
+    deleteKasMasuk: function deleteKasMasuk(id, index, type) {
+      var _this = this;
+
+      swal({
+        title: "Konfirmasi Hapus",
+        text: "Anda Yakin Ingin Menghapus " + type + " ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          var app = _this;
+          axios.delete(app.url + '/' + id).then(function (resp) {
+            app.getKasMasuks();
+            swal("Berhasil Dihapus!  ", {
+              icon: "success"
+            });
+          }).catch(function (resp) {
+            app.$router.replace('/kategori-transaksi/');
+            swal("Gagal Menghapus!", {
+              icon: "warning"
+            });
+          });
+        }
+        _this.$router.replace('/kasMasuk/');
+      });
+    },
+    alert: function alert(type) {
+      this.$swal({
+        title: "Berhasil!",
+        text: 'Sukses : Berhasil menghapus Kas Masuk ' + type,
+        icon: "success"
+      });
+    }
+  }
 
 });
 
 /***/ }),
-/* 303 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -73998,6 +74387,16 @@ var render = function() {
         [
           _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
             _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "stafAktif" } } }, [
+            _vm._v("Staf")
           ])
         ],
         1
@@ -74021,10 +74420,10 @@ var render = function() {
                   _c(
                     "router-link",
                     {
-                      staticClass: "btn btn-primary",
+                      staticClass: "btn btn-primary btn-md",
                       attrs: { to: { name: "createKasMasuk" } }
                     },
-                    [_vm._v("Tambah Kas Masuk")]
+                    [_vm._v("Tambah Kas Masuk/Keluar")]
                   )
                 ],
                 1
@@ -74097,11 +74496,7 @@ var render = function() {
                                   id: "edit-" + kasMasuk.kas_masuk_id
                                 }
                               },
-                              [
-                                _vm._v(
-                                  "\n                                 Edit  "
-                                )
-                              ]
+                              [_vm._v("\n                 Edit  ")]
                             ),
                             _vm._v(" "),
                             _c(
@@ -74181,9 +74576,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                 Sedang Memuat Data\n                             "
-        )
+        _vm._v("\n                 Sedang Memuat Data\n               ")
       ])
     ])
   },
@@ -74193,9 +74586,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                 Tidak Ada Data\n                             "
-        )
+        _vm._v("\n                 Tidak Ada Data\n               ")
       ])
     ])
   }
@@ -74210,15 +74601,15 @@ if (false) {
 }
 
 /***/ }),
-/* 304 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(305)
+var __vue_script__ = __webpack_require__(308)
 /* template */
-var __vue_template__ = __webpack_require__(306)
+var __vue_template__ = __webpack_require__(309)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -74258,7 +74649,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 305 */
+/* 308 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74398,7 +74789,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 306 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -74421,13 +74812,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexKasMasuk" } } }, [
-            _vm._v("Kas Masuk")
+            _vm._v("Kas Masuk/Keluar")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Kas Masuk")])
+      _c("li", { staticClass: "active" }, [_vm._v("Buat Kas Masuk/keluar")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -74632,7 +75023,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Kas Masuk")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Buat Kas Masuk/keluar")])
     ])
   },
   function() {
@@ -74663,15 +75054,15 @@ if (false) {
 }
 
 /***/ }),
-/* 307 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(308)
+var __vue_script__ = __webpack_require__(311)
 /* template */
-var __vue_template__ = __webpack_require__(309)
+var __vue_template__ = __webpack_require__(312)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -74711,7 +75102,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 308 */
+/* 311 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74843,7 +75234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 309 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -75038,15 +75429,15 @@ if (false) {
 }
 
 /***/ }),
-/* 310 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(311)
+var __vue_script__ = __webpack_require__(314)
 /* template */
-var __vue_template__ = __webpack_require__(312)
+var __vue_template__ = __webpack_require__(315)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -75086,7 +75477,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 311 */
+/* 314 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75250,7 +75641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 312 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -75516,15 +75907,15 @@ if (false) {
 }
 
 /***/ }),
-/* 313 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(314)
+var __vue_script__ = __webpack_require__(317)
 /* template */
-var __vue_template__ = __webpack_require__(315)
+var __vue_template__ = __webpack_require__(318)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -75564,7 +75955,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 314 */
+/* 317 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75721,7 +76112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 315 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -76044,15 +76435,15 @@ if (false) {
 }
 
 /***/ }),
-/* 316 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(317)
+var __vue_script__ = __webpack_require__(320)
 /* template */
-var __vue_template__ = __webpack_require__(318)
+var __vue_template__ = __webpack_require__(321)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -76092,7 +76483,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 317 */
+/* 320 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76247,7 +76638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 318 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -76540,15 +76931,15 @@ if (false) {
 }
 
 /***/ }),
-/* 319 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(320)
+var __vue_script__ = __webpack_require__(323)
 /* template */
-var __vue_template__ = __webpack_require__(321)
+var __vue_template__ = __webpack_require__(324)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -76588,7 +76979,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 320 */
+/* 323 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76755,7 +77146,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 321 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -77019,15 +77410,15 @@ if (false) {
 }
 
 /***/ }),
-/* 322 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(323)
+var __vue_script__ = __webpack_require__(326)
 /* template */
-var __vue_template__ = __webpack_require__(324)
+var __vue_template__ = __webpack_require__(327)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77067,7 +77458,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 323 */
+/* 326 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77147,7 +77538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 324 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -77304,15 +77695,15 @@ if (false) {
 }
 
 /***/ }),
-/* 325 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(326)
+var __vue_script__ = __webpack_require__(329)
 /* template */
-var __vue_template__ = __webpack_require__(327)
+var __vue_template__ = __webpack_require__(330)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77352,7 +77743,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 326 */
+/* 329 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77452,7 +77843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 327 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -77609,15 +78000,15 @@ if (false) {
 }
 
 /***/ }),
-/* 328 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(329)
+var __vue_script__ = __webpack_require__(332)
 /* template */
-var __vue_template__ = __webpack_require__(330)
+var __vue_template__ = __webpack_require__(333)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77657,7 +78048,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 329 */
+/* 332 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77803,7 +78194,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 330 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78033,15 +78424,15 @@ if (false) {
 }
 
 /***/ }),
-/* 331 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(332)
+var __vue_script__ = __webpack_require__(335)
 /* template */
-var __vue_template__ = __webpack_require__(333)
+var __vue_template__ = __webpack_require__(336)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78081,7 +78472,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 332 */
+/* 335 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78195,7 +78586,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 333 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78500,15 +78891,15 @@ if (false) {
 }
 
 /***/ }),
-/* 334 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(335)
+var __vue_script__ = __webpack_require__(338)
 /* template */
-var __vue_template__ = __webpack_require__(336)
+var __vue_template__ = __webpack_require__(339)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78548,7 +78939,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 335 */
+/* 338 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78678,7 +79069,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 336 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78946,15 +79337,15 @@ if (false) {
 }
 
 /***/ }),
-/* 337 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(338)
+var __vue_script__ = __webpack_require__(341)
 /* template */
-var __vue_template__ = __webpack_require__(339)
+var __vue_template__ = __webpack_require__(342)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78994,7 +79385,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 338 */
+/* 341 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79162,7 +79553,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 339 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79429,15 +79820,15 @@ if (false) {
 }
 
 /***/ }),
-/* 340 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(341)
+var __vue_script__ = __webpack_require__(344)
 /* template */
-var __vue_template__ = __webpack_require__(342)
+var __vue_template__ = __webpack_require__(345)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79477,7 +79868,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 341 */
+/* 344 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79591,7 +79982,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 342 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79948,15 +80339,15 @@ if (false) {
 }
 
 /***/ }),
-/* 343 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(344)
+var __vue_script__ = __webpack_require__(347)
 /* template */
-var __vue_template__ = __webpack_require__(345)
+var __vue_template__ = __webpack_require__(348)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79996,7 +80387,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 344 */
+/* 347 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80130,7 +80521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 345 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80487,7 +80878,7 @@ if (false) {
 }
 
 /***/ }),
-/* 346 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -80495,7 +80886,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(347)
+var __vue_template__ = __webpack_require__(350)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -80535,7 +80926,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 347 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80614,7 +81005,7 @@ if (false) {
 }
 
 /***/ }),
-/* 348 */
+/* 351 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

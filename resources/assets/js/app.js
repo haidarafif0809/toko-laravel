@@ -44,6 +44,7 @@ import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
 // kas Masuk
+import StafAktif from './components/kasMasuk/StafAktif.vue'
 import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
 import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
 import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
@@ -148,6 +149,10 @@ const routes = [{
     },
     // kas Masuk
     {
+        path: '/kasMasuk/StafAktif',
+        component: StafAktif,
+        name: 'stafAktif'
+    }, {
         path: '/kasMasuk',
         component: KasMasukIndex,
         name: 'indexKasMasuk'

@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         KasMasuk::observe(KasMasukObserver::class);
+        // untuk menyesuaikan waktu berdasarkan tempat
+        \Carbon\Carbon::setlocale('id');
+        // jika ingin menesuaikan dengan locale di laravel
+        // \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**
