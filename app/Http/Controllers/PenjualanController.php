@@ -32,6 +32,13 @@ class PenjualanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function view()
+    {
+        $penjualan_array = array();
+        foreach ($penjualan as $penjualans) {
+            $nama_produk = Produk::select('nama_produk')->where('id', $penjualans->$nama_produk)
+        }
+    }
     public function store(Request $request)
     {
         //

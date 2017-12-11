@@ -11,4 +11,9 @@ class KategoriProduk extends Model
     protected $fillable = [
         'nama_kategori_produk',
     ];
+
+    public function kategori_produk()
+    {
+        return $this->hasMany('App\Penjualan');
+    }
 }
