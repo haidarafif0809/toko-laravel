@@ -1,3 +1,8 @@
+<style scoped>
+   .shadow {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
 <template>
     <div class="container" >
         <ol class="breadcrumb">
@@ -67,9 +72,34 @@
 
                         </div>
                     </div>
+                    <div v-if="produk.foto != ''" class="form-group">
+                        <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
+                        <div v-if="produk.foto != null" class="col-md-4">
+                            <div v-if="produk.foto.length > 100">
+                                <img :src="produk.foto" class="img-responsive thumbnail shadow">
+                            </div>
+                            <div v-else>
+                                <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
+                            </div>
+                        </div>
+                        <div v-else class="col-md-4">
+                            <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto" class="col-md-2 control-label">Foto</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="file" name="foto" v-on:change="onFileChange">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-2">
-                            <button class="btn btn-primary" id="btnSimpanproduk" type="submit">Submit</button>
+                            <div v-if="produk.foto != null">
+                                <button class="btn btn-primary" id="btnSimpanproduk" type="submit">Submit</button>
+                            </div>
+                            <div v-else>
+                                <button class="btn btn-primary" id="btnSimpanproduk" @click="broken_img" type="submit">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -87,6 +117,8 @@ export default {
             kategori_produks_id: [],
             produkId: null,
             url : window.location.origin + (window.location.pathname).replace("home", "produk"),
+            url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
+            broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
             produk: {
                 kode_produk: '',        
                 nama_produk: '',
@@ -94,7 +126,8 @@ export default {
                 harga_beli: '',
                 satuans_id: '',
                 kategori_produks_id: '',
-                status_jual: ''
+                status_jual: '',
+                foto: ''
             },
             message : '',
             setting_satuan: {
@@ -112,6 +145,45 @@ export default {
         app.selectedKategoriProduksId();
     },
     methods: {
+        onFileChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return null;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            let reader = new FileReader();
+            let foto = this;
+            let ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
+            console.log(file);
+            
+            if(!file.name.match(ekstensiOk)) {
+                foto.produk.foto = null;
+                this.$swal({
+                    title: "File tidak didukung!",
+                    text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+                    icon: "warning",
+                    buttons: "Saya mengerti",
+                });
+            }
+            else {
+                reader.onload = (e) => {
+                    foto.produk.foto = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        broken_img() {
+            let anu = '';
+            console.log();
+            // let anu = 
+            // this.$swal({
+            //     title: "File tidak didukung!",
+            //     text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+            //     icon: "warning",
+            //     buttons: "Saya mengerti",
+            // });            
+        },
         saveForm() {
             var app = this;
             var newProduk = app.produk;
@@ -126,6 +198,7 @@ export default {
                 app.produk.satuans_id = ''
                 app.produk.kategori_produks_id = ''
                 app.produk.status_jual = ''
+                app.produk.foto = ''
                 app.errors = '';
                 app.$router.replace('/produk');
 

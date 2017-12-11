@@ -1,3 +1,8 @@
+<style scoped>
+	.shadow {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+</style>
 <template>  
 	<div class="container">
 		<ol class="breadcrumb">
@@ -11,6 +16,14 @@
 			<div class="panel-body">
 				<table class="table">
 					<tbody>
+						<tr>
+							<td>
+								Foto Produk:
+							</td>
+							<td width="40%">
+								<img class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
+							</td>
+						</tr>
 						<tr>
 							<td>
 								Kode Produk:
@@ -55,6 +68,7 @@ export default {
 			kategori_produk: [],
 			produkId: null,
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
+			url_foto_produk : window.location.origin+(window.location.pathname).replace("home", "foto_produk"),
 		} 
 	},
 	mounted(){

@@ -29373,6 +29373,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__components_pelanggan_PelangganEdit_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue__ = __webpack_require__(349);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_penjualan_PenjualanIndex_vue__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_penjualan_PenjualanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_penjualan_PenjualanIndex_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29440,6 +29442,8 @@ window.Vue = __webpack_require__(28);
 
 
 //Kas Mutasi
+
+//Penjualan
 
 var routes = [{
     path: '/',
@@ -29601,6 +29605,12 @@ var routes = [{
     path: '/kas-mutasi',
     component: __WEBPACK_IMPORTED_MODULE_38__components_kasMutasi_KasMutasiIndex_vue___default.a,
     name: 'indexKasMutasi'
+},
+//Penjualan
+{
+    path: '/penjualan',
+    component: __WEBPACK_IMPORTED_MODULE_39__components_penjualan_PenjualanIndex_vue___default.a,
+    name: 'indexPenjualan'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -69988,8 +69998,7 @@ var render = function() {
                                   to: {
                                     name: "detailProduk",
                                     params: { id: produk.produk_id }
-                                  },
-                                  id: "edit-" + produk.produk_id
+                                  }
                                 }
                               },
                               [
@@ -70117,17 +70126,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(359)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(273)
 /* template */
-var __vue_template__ = __webpack_require__(274)
+var __vue_template__ = __webpack_require__(361)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-6c596c71"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -70251,6 +70264,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -70259,6 +70300,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			satuans: [],
 			kategori_produks_id: [],
 			url: window.location.origin + window.location.pathname.replace("home", "produk"),
+			url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk"),
+			broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
 			produk: {
 				kode_produk: '',
 				nama_produk: '',
@@ -70266,7 +70309,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				harga_beli: '',
 				satuans_id: '',
 				kategori_produks_id: '',
-				status_jual: ''
+				status_jual: '',
+				foto: ''
 			},
 			message: '',
 			setting_satuan: {
@@ -70284,9 +70328,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
+		onFileChange: function onFileChange(e) {
+			var files = e.target.files || e.dataTransfer.files;
+			if (!files.length) return null;
+			this.createImage(files[0]);
+		},
+		createImage: function createImage(file) {
+			var reader = new FileReader();
+			var foto = this;
+			var ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
+			console.log(file);
+
+			if (!file.name.match(ekstensiOk)) {
+				foto.produk.foto = null;
+				this.$swal({
+					title: "File tidak didukung!",
+					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+					icon: "warning",
+					buttons: "Saya mengerti"
+				});
+			} else {
+				reader.onload = function (e) {
+					foto.produk.foto = e.target.result;
+				};
+			}
+			reader.readAsDataURL(file);
+		},
 		saveForm: function saveForm() {
 			var app = this;
 			var newProduk = app.produk;
+			// axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 			axios.post(app.url, newProduk).then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk ' + app.produk.nama_produk;
 				app.alert(app.message);
@@ -70297,6 +70368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.produk.satuans_id = '';
 				app.produk.kategori_produks_id = '';
 				app.produk.status_jual = '';
+				app.produk.foto = '';
 				app.errors = '';
 				app.$router.replace('/produk');
 			}).catch(function (resp) {
@@ -70331,440 +70403,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 274 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("ol", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Dashboard")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
-            _vm._v("Produk")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Produk")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Tambah Produk")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.saveForm()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "kode_produk" }
-                },
-                [_vm._v("Kode Produk")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.kode_produk,
-                      expression: "produk.kode_produk"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Kode Produk",
-                    type: "text",
-                    name: "kode_produk",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.kode_produk },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "kode_produk", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.kode_produk
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.kode_produk[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "nama_produk" }
-                },
-                [_vm._v("Nama")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.nama_produk,
-                      expression: "produk.nama_produk"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Nama produk",
-                    type: "text",
-                    name: "nama_produk",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.nama_produk },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "nama_produk", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.nama_produk
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.nama_produk[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "harga" }
-                },
-                [_vm._v("Harga Beli")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.harga_beli,
-                      expression: "produk.harga_beli"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Harga Beli",
-                    type: "text",
-                    name: "harga_beli",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.harga_beli },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "harga_beli", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.harga_beli
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.harga_beli[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "harga" }
-                },
-                [_vm._v("Harga Jual")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.harga_jual,
-                      expression: "produk.harga_jual"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Harga Jual",
-                    type: "text",
-                    name: "harga_jual",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.harga_jual },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "harga_jual", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.harga_jual
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.harga_jual[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "satuans_id" }
-                },
-                [_vm._v("Satuan")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-4" },
-                [
-                  _c(
-                    "selectize-component",
-                    {
-                      attrs: { settings: _vm.setting_satuan },
-                      model: {
-                        value: _vm.produk.satuans_id,
-                        callback: function($$v) {
-                          _vm.$set(_vm.produk, "satuans_id", $$v)
-                        },
-                        expression: "produk.satuans_id"
-                      }
-                    },
-                    _vm._l(_vm.satuans, function(satuan) {
-                      return _c("option", { domProps: { value: satuan.id } }, [
-                        _vm._v(_vm._s(satuan.nama_satuan))
-                      ])
-                    })
-                  ),
-                  _vm._v(" "),
-                  _vm.errors.satuans_id
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.satuans_id[0]))
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "kategori_produks_id" }
-                },
-                [_vm._v("Kategori Produk")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-4" },
-                [
-                  _c(
-                    "selectize-component",
-                    {
-                      attrs: { settings: _vm.setting_kategori_produk },
-                      model: {
-                        value: _vm.produk.kategori_produks_id,
-                        callback: function($$v) {
-                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
-                        },
-                        expression: "produk.kategori_produks_id"
-                      }
-                    },
-                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
-                      return _c(
-                        "option",
-                        { domProps: { value: kategori_produk.id } },
-                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
-                      )
-                    })
-                  ),
-                  _vm._v(" "),
-                  _vm.errors.kategori_produks_id
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "status_jual" }
-                },
-                [_vm._v("Status Jual")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.status_jual,
-                      expression: "produk.status_jual"
-                    }
-                  ],
-                  attrs: { type: "radio", name: "status_jual", value: "1" },
-                  domProps: { checked: _vm._q(_vm.produk.status_jual, "1") },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.produk, "status_jual", "1")
-                    }
-                  }
-                }),
-                _vm._v(" Aktif\n\t\t\t\t\t\t"),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.status_jual,
-                      expression: "produk.status_jual"
-                    }
-                  ],
-                  attrs: { type: "radio", name: "status_jual", value: "0" },
-                  domProps: { checked: _vm._q(_vm.produk.status_jual, "0") },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.produk, "status_jual", "0")
-                    }
-                  }
-                }),
-                _vm._v(" Tidak Aktif\n\t\t\t\t\t\t"),
-                _vm.errors.status_jual
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.status_jual[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0, false, false)
-          ]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "btnSimpanproduk", type: "submit" }
-          },
-          [_vm._v("Submit")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6c596c71", module.exports)
-  }
-}
-
-/***/ }),
+/* 274 */,
 /* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(362)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(276)
 /* template */
-var __vue_template__ = __webpack_require__(277)
+var __vue_template__ = __webpack_require__(364)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-041415bf"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -70883,6 +70541,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -70892,6 +70580,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             kategori_produks_id: [],
             produkId: null,
             url: window.location.origin + window.location.pathname.replace("home", "produk"),
+            url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk"),
+            broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
             produk: {
                 kode_produk: '',
                 nama_produk: '',
@@ -70899,7 +70589,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 harga_beli: '',
                 satuans_id: '',
                 kategori_produks_id: '',
-                status_jual: ''
+                status_jual: '',
+                foto: ''
             },
             message: '',
             setting_satuan: {
@@ -70918,6 +70609,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        onFileChange: function onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length) return null;
+            this.createImage(files[0]);
+        },
+        createImage: function createImage(file) {
+            var reader = new FileReader();
+            var foto = this;
+            var ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
+            console.log(file);
+
+            if (!file.name.match(ekstensiOk)) {
+                foto.produk.foto = null;
+                this.$swal({
+                    title: "File tidak didukung!",
+                    text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+                    icon: "warning",
+                    buttons: "Saya mengerti"
+                });
+            } else {
+                reader.onload = function (e) {
+                    foto.produk.foto = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        broken_img: function broken_img() {
+            var anu = '';
+            console.log();
+            // let anu = 
+            // this.$swal({
+            //     title: "File tidak didukung!",
+            //     text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+            //     icon: "warning",
+            //     buttons: "Saya mengerti",
+            // });            
+        },
         saveForm: function saveForm() {
             var app = this;
             var newProduk = app.produk;
@@ -70931,6 +70659,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.produk.satuans_id = '';
                 app.produk.kategori_produks_id = '';
                 app.produk.status_jual = '';
+                app.produk.foto = '';
                 app.errors = '';
                 app.$router.replace('/produk');
             }).catch(function (resp) {
@@ -70976,431 +70705,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 277 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("ol", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Dashboard")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
-            _vm._v("Produk")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit Produk")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Edit Produk " + _vm._s(_vm.produk.nama_produk))
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.saveForm()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "kode_produk" }
-                },
-                [_vm._v("Kode Produk")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.kode_produk,
-                      expression: "produk.kode_produk"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Kode Produk",
-                    type: "text",
-                    name: "kode_produk",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.kode_produk },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "kode_produk", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.kode_produk
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.kode_produk[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "nama_produk" }
-                },
-                [_vm._v("Nama Produk")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.nama_produk,
-                      expression: "produk.nama_produk"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Name",
-                    type: "text",
-                    name: "nama_produk",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.nama_produk },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "nama_produk", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.nama_produk
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.nama_produk[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "harga" }
-                },
-                [_vm._v("Harga")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.harga_beli,
-                      expression: "produk.harga_beli"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Harga Beli",
-                    type: "text",
-                    name: "harga_beli",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.harga_beli },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "harga_beli", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.harga_beli
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.harga_beli[0]))
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.harga_jual,
-                      expression: "produk.harga_jual"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    required: "",
-                    autocomplete: "off",
-                    placeholder: "Harga Jual",
-                    type: "text",
-                    name: "harga_jual",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.produk.harga_jual },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.produk, "harga_jual", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.harga_jual
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.harga_jual[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "satuans_id" }
-                },
-                [_vm._v("Satuan")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-4" },
-                [
-                  _c(
-                    "selectize-component",
-                    {
-                      attrs: { settings: _vm.setting_satuan },
-                      model: {
-                        value: _vm.produk.satuans_id,
-                        callback: function($$v) {
-                          _vm.$set(_vm.produk, "satuans_id", $$v)
-                        },
-                        expression: "produk.satuans_id"
-                      }
-                    },
-                    _vm._l(_vm.satuans, function(satuan) {
-                      return _c("option", { domProps: { value: satuan.id } }, [
-                        _vm._v(_vm._s(satuan.nama_satuan))
-                      ])
-                    })
-                  ),
-                  _vm._v(" "),
-                  _vm.errors.satuans_id
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.satuans_id[0]))
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "kategori_produks_id" }
-                },
-                [_vm._v("Kategori Produk")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-md-4" },
-                [
-                  _c(
-                    "selectize-component",
-                    {
-                      attrs: { settings: _vm.setting_kategori_produk },
-                      model: {
-                        value: _vm.produk.kategori_produks_id,
-                        callback: function($$v) {
-                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
-                        },
-                        expression: "produk.kategori_produks_id"
-                      }
-                    },
-                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
-                      return _c(
-                        "option",
-                        { domProps: { value: kategori_produk.id } },
-                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
-                      )
-                    })
-                  ),
-                  _vm._v(" "),
-                  _vm.errors.kategori_produks_id
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-2 control-label",
-                  attrs: { for: "status_jual" }
-                },
-                [_vm._v("Status Jual")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.status_jual,
-                      expression: "produk.status_jual"
-                    }
-                  ],
-                  attrs: { type: "radio", name: "status_jual", value: "1" },
-                  domProps: { checked: _vm._q(_vm.produk.status_jual, "1") },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.produk, "status_jual", "1")
-                    }
-                  }
-                }),
-                _vm._v(" Aktif\n                        "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.produk.status_jual,
-                      expression: "produk.status_jual"
-                    }
-                  ],
-                  attrs: { type: "radio", name: "status_jual", value: "0" },
-                  domProps: { checked: _vm._q(_vm.produk.status_jual, "0") },
-                  on: {
-                    change: function($event) {
-                      _vm.$set(_vm.produk, "status_jual", "0")
-                    }
-                  }
-                }),
-                _vm._v(" Tidak Aktif\n                        "),
-                _vm.errors.status_jual
-                  ? _c("span", { staticClass: "label label-danger" }, [
-                      _vm._v(_vm._s(_vm.errors.status_jual[0]))
-                    ])
-                  : _vm._e()
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0, false, false)
-          ]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "btnSimpanproduk", type: "submit" }
-          },
-          [_vm._v("Submit")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-041415bf", module.exports)
-  }
-}
-
-/***/ }),
+/* 277 */,
 /* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(365)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(279)
 /* template */
-var __vue_template__ = __webpack_require__(280)
+var __vue_template__ = __webpack_require__(367)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-460f9d74"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -71487,6 +70811,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -71495,7 +70832,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			satuan: [],
 			kategori_produk: [],
 			produkId: null,
-			url: window.location.origin + window.location.pathname.replace("home", "produk")
+			url: window.location.origin + window.location.pathname.replace("home", "produk"),
+			url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk")
 		};
 	},
 	mounted: function mounted() {
@@ -71548,108 +70886,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 280 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("ol", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Dashboard")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
-            _vm._v("Produk")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Detail")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Detail Produk " + _vm._s(_vm.produk.nama_produk))
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("table", { staticClass: "table" }, [
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("\n\t\t\t\t\t\t\tKode Produk:\n\t\t\t\t\t\t")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Harga Jual:")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Harga Beli:")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Satuan:")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.satuan.nama_satuan))])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Kategori Produk:")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm._v(_vm._s(_vm.kategori_produk.nama_kategori_produk))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("Status Jual:")]),
-              _vm._v(" "),
-              _c("td", [
-                _vm.produk.status_jual == 1
-                  ? _c("span", [_vm._v("Aktif")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.produk.status_jual == 0
-                  ? _c("span", [_vm._v("Tidak Aktif")])
-                  : _vm._e()
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-460f9d74", module.exports)
-  }
-}
-
-/***/ }),
+/* 280 */,
 /* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -79468,6 +78705,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79636,94 +78875,100 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c(
-                "table",
-                {
-                  staticClass:
-                    "table table-striped table-no-bordered table-hover",
-                  staticStyle: { width: "100%" },
-                  attrs: { cellspacing: "0", width: "100%" }
-                },
-                [
-                  _vm._m(1, false, false),
-                  _vm._v(" "),
-                  _vm.pelanggans.length > 0 && _vm.loading == false
-                    ? _c(
-                        "tbody",
-                        { staticClass: "data-ada" },
-                        _vm._l(_vm.pelanggans, function(pelanggan, index) {
-                          return _c("tr", [
-                            _c("td", [
-                              _vm._v(_vm._s(pelanggan.kode_pelanggan))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(pelanggan.nama_pelanggan))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(pelanggan.tanggal_lahir))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(pelanggan.nomor_telepon))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(pelanggan.alamat))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-xs btn-default",
-                                    attrs: {
-                                      to: {
-                                        name: "editPelanggan",
-                                        params: { id: pelanggan.id }
+              _c("div", { staticClass: "table table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-striped table-no-bordered table-hover",
+                    staticStyle: { width: "100%" },
+                    attrs: { cellspacing: "0", width: "100%" }
+                  },
+                  [
+                    _vm._m(1, false, false),
+                    _vm._v(" "),
+                    _vm.pelanggans.length > 0 && _vm.loading == false
+                      ? _c(
+                          "tbody",
+                          { staticClass: "data-ada" },
+                          _vm._l(_vm.pelanggans, function(pelanggan, index) {
+                            return _c("tr", [
+                              _c("td", [
+                                _vm._v(_vm._s(pelanggan.kode_pelanggan))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(pelanggan.nama_pelanggan))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(pelanggan.tanggal_lahir))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(_vm._s(pelanggan.nomor_telepon))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(pelanggan.alamat))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "btn btn-xs btn-default",
+                                      attrs: {
+                                        to: {
+                                          name: "editPelanggan",
+                                          params: { id: pelanggan.id }
+                                        }
                                       }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.deleteEntry(
-                                          pelanggan.id,
-                                          index,
-                                          pelanggan.nama_pelanggan
-                                        )
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-xs btn-danger",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteEntry(
+                                            pelanggan.id,
+                                            index,
+                                            pelanggan.nama_pelanggan
+                                          )
+                                        }
                                       }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t"
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          })
+                        )
+                      : _vm.loading == true
+                        ? _c("tbody", { staticClass: "data-ada" }, [
+                            _vm._m(2, false, false)
                           ])
-                        })
-                      )
-                    : _vm.loading == true
-                      ? _c("tbody", { staticClass: "data-ada" }, [
-                          _vm._m(2, false, false)
-                        ])
-                      : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                          _vm._m(3, false, false)
-                        ])
-                ]
-              ),
+                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                            _vm._m(3, false, false)
+                          ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
               _vm._v(" "),
@@ -79768,7 +79013,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Table Pelanggan")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Pelanggan")])
     ])
   },
   function() {
@@ -79795,7 +79040,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t\t\t")
       ])
     ])
   },
@@ -79805,7 +79050,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t")
       ])
     ])
   }
@@ -81009,6 +80254,1382 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(360);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("7ef0d08d", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c596c71\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukCreate.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6c596c71\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukCreate.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 360 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.margin-atas[data-v-6c596c71] {\n\tmargin-top: 5px;\n}\n.shadow[data-v-6c596c71] {\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 361 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Dashboard")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
+            _vm._v("Produk")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Produk")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Tambah Produk")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form-horizontal",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.saveForm()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kode_produk" }
+                },
+                [_vm._v("Kode Produk")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.kode_produk,
+                      expression: "produk.kode_produk"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Kode Produk",
+                    type: "text",
+                    name: "kode_produk",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.kode_produk },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "kode_produk", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.kode_produk
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.kode_produk[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "nama_produk" }
+                },
+                [_vm._v("Nama")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.nama_produk,
+                      expression: "produk.nama_produk"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Nama produk",
+                    type: "text",
+                    name: "nama_produk",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.nama_produk },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "nama_produk", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.nama_produk
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.nama_produk[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "harga" }
+                },
+                [_vm._v("Harga Beli")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.harga_beli,
+                      expression: "produk.harga_beli"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Harga Beli",
+                    type: "text",
+                    name: "harga_beli",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.harga_beli },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "harga_beli", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.harga_beli
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.harga_beli[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "harga" }
+                },
+                [_vm._v("Harga Jual")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.harga_jual,
+                      expression: "produk.harga_jual"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Harga Jual",
+                    type: "text",
+                    name: "harga_jual",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.harga_jual },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "harga_jual", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.harga_jual
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.harga_jual[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "satuans_id" }
+                },
+                [_vm._v("Satuan")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_satuan },
+                      model: {
+                        value: _vm.produk.satuans_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "satuans_id", $$v)
+                        },
+                        expression: "produk.satuans_id"
+                      }
+                    },
+                    _vm._l(_vm.satuans, function(satuan) {
+                      return _c("option", { domProps: { value: satuan.id } }, [
+                        _vm._v(_vm._s(satuan.nama_satuan))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.satuans_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.satuans_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kategori_produks_id" }
+                },
+                [_vm._v("Kategori Produk")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_kategori_produk },
+                      model: {
+                        value: _vm.produk.kategori_produks_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
+                        },
+                        expression: "produk.kategori_produks_id"
+                      }
+                    },
+                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
+                      return _c(
+                        "option",
+                        { domProps: { value: kategori_produk.id } },
+                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.kategori_produks_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "status_jual" }
+                },
+                [_vm._v("Status Jual")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4 margin-atas" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("label", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.produk.status_jual,
+                          expression: "produk.status_jual"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "status_jual", value: "1" },
+                      domProps: {
+                        checked: _vm._q(_vm.produk.status_jual, "1")
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.produk, "status_jual", "1")
+                        }
+                      }
+                    }),
+                    _vm._v(" Aktif\n\t\t\t\t\t\t\t")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("label", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.produk.status_jual,
+                          expression: "produk.status_jual"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "status_jual", value: "0" },
+                      domProps: {
+                        checked: _vm._q(_vm.produk.status_jual, "0")
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.$set(_vm.produk, "status_jual", "0")
+                        }
+                      }
+                    }),
+                    _vm._v(" Tidak Aktif\n\t\t\t\t\t\t\t")
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.status_jual
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.status_jual[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.produk.foto != ""
+              ? _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "pratinjau_foto_produk" }
+                    },
+                    [_vm._v("Pratinjau Foto")]
+                  ),
+                  _vm._v(" "),
+                  _vm.produk.foto != null
+                    ? _c("div", { staticClass: "col-md-4" }, [
+                        _c("img", {
+                          staticClass: "img-responsive thumbnail shadow",
+                          attrs: { src: _vm.produk.foto }
+                        })
+                      ])
+                    : _c("div", { staticClass: "col-md-4" }, [
+                        _c("img", {
+                          staticClass: "img-responsive thumbnail shadow",
+                          attrs: {
+                            src: _vm.broken_file,
+                            title: "File yang Anda masukkan tidak didukung"
+                          }
+                        })
+                      ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "foto" }
+                },
+                [_vm._v("Foto")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", name: "foto" },
+                  on: { change: _vm.onFileChange }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0, false, false)
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { id: "btnSimpanproduk", type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6c596c71", module.exports)
+  }
+}
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(363);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("e3149c30", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-041415bf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukEdit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-041415bf\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukEdit.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 363 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.shadow[data-v-041415bf] {\n     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Dashboard")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
+            _vm._v("Produk")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Produk")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _vm._v("Edit Produk " + _vm._s(_vm.produk.nama_produk))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form-horizontal",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.saveForm()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kode_produk" }
+                },
+                [_vm._v("Kode Produk")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.kode_produk,
+                      expression: "produk.kode_produk"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Kode Produk",
+                    type: "text",
+                    name: "kode_produk",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.kode_produk },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "kode_produk", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.kode_produk
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.kode_produk[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "nama_produk" }
+                },
+                [_vm._v("Nama Produk")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.nama_produk,
+                      expression: "produk.nama_produk"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Name",
+                    type: "text",
+                    name: "nama_produk",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.nama_produk },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "nama_produk", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.nama_produk
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.nama_produk[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "harga" }
+                },
+                [_vm._v("Harga")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.harga_beli,
+                      expression: "produk.harga_beli"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Harga Beli",
+                    type: "text",
+                    name: "harga_beli",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.harga_beli },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "harga_beli", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.harga_beli
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.harga_beli[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.harga_jual,
+                      expression: "produk.harga_jual"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    placeholder: "Harga Jual",
+                    type: "text",
+                    name: "harga_jual",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.produk.harga_jual },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.produk, "harga_jual", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.harga_jual
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.harga_jual[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "satuans_id" }
+                },
+                [_vm._v("Satuan")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_satuan },
+                      model: {
+                        value: _vm.produk.satuans_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "satuans_id", $$v)
+                        },
+                        expression: "produk.satuans_id"
+                      }
+                    },
+                    _vm._l(_vm.satuans, function(satuan) {
+                      return _c("option", { domProps: { value: satuan.id } }, [
+                        _vm._v(_vm._s(satuan.nama_satuan))
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.satuans_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.satuans_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "kategori_produks_id" }
+                },
+                [_vm._v("Kategori Produk")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-md-4" },
+                [
+                  _c(
+                    "selectize-component",
+                    {
+                      attrs: { settings: _vm.setting_kategori_produk },
+                      model: {
+                        value: _vm.produk.kategori_produks_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.produk, "kategori_produks_id", $$v)
+                        },
+                        expression: "produk.kategori_produks_id"
+                      }
+                    },
+                    _vm._l(_vm.kategori_produks_id, function(kategori_produk) {
+                      return _c(
+                        "option",
+                        { domProps: { value: kategori_produk.id } },
+                        [_vm._v(_vm._s(kategori_produk.nama_kategori_produk))]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _vm.errors.kategori_produks_id
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.kategori_produks_id[0]))
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "status_jual" }
+                },
+                [_vm._v("Status Jual")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "1" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "1") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "1")
+                    }
+                  }
+                }),
+                _vm._v(" Aktif\n                        "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.produk.status_jual,
+                      expression: "produk.status_jual"
+                    }
+                  ],
+                  attrs: { type: "radio", name: "status_jual", value: "0" },
+                  domProps: { checked: _vm._q(_vm.produk.status_jual, "0") },
+                  on: {
+                    change: function($event) {
+                      _vm.$set(_vm.produk, "status_jual", "0")
+                    }
+                  }
+                }),
+                _vm._v(" Tidak Aktif\n                        "),
+                _vm.errors.status_jual
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.status_jual[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.produk.foto != ""
+              ? _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-2 control-label",
+                      attrs: { for: "pratinjau_foto_produk" }
+                    },
+                    [_vm._v("Pratinjau Foto")]
+                  ),
+                  _vm._v(" "),
+                  _vm.produk.foto != null
+                    ? _c("div", { staticClass: "col-md-4" }, [
+                        _vm.produk.foto.length > 100
+                          ? _c("div", [
+                              _c("img", {
+                                staticClass: "img-responsive thumbnail shadow",
+                                attrs: { src: _vm.produk.foto }
+                              })
+                            ])
+                          : _c("div", [
+                              _c("img", {
+                                staticClass: "img-responsive thumbnail shadow",
+                                attrs: {
+                                  src:
+                                    _vm.url_foto_produk + "/" + _vm.produk.foto
+                                }
+                              })
+                            ])
+                      ])
+                    : _c("div", { staticClass: "col-md-4" }, [
+                        _c("img", {
+                          staticClass: "img-responsive thumbnail shadow",
+                          attrs: {
+                            src: _vm.broken_file,
+                            title: "File yang Anda masukkan tidak didukung"
+                          }
+                        })
+                      ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "foto" }
+                },
+                [_vm._v("Foto")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", name: "foto" },
+                  on: { change: _vm.onFileChange }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+                _vm.produk.foto != null
+                  ? _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { id: "btnSimpanproduk", type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ])
+                  : _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { id: "btnSimpanproduk", type: "submit" },
+                          on: { click: _vm.broken_img }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-041415bf", module.exports)
+  }
+}
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(366);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("263b0010", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-460f9d74\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukDetail.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-460f9d74\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProdukDetail.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.shadow[data-v-460f9d74] {\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Dashboard")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexProduk" } } }, [
+            _vm._v("Produk")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Detail")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _vm._v("Detail Produk " + _vm._s(_vm.produk.nama_produk))
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c("table", { staticClass: "table" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("\n\t\t\t\t\t\t\tFoto Produk:\n\t\t\t\t\t\t")]),
+              _vm._v(" "),
+              _c("td", { attrs: { width: "40%" } }, [
+                _c("img", {
+                  staticClass: "img-responsive thumbnail shadow",
+                  attrs: { src: _vm.url_foto_produk + "/" + _vm.produk.foto }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("\n\t\t\t\t\t\t\tKode Produk:\n\t\t\t\t\t\t")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Harga Jual:")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Harga Beli:")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Satuan:")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(_vm.satuan.nama_satuan))])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Kategori Produk:")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(_vm._s(_vm.kategori_produk.nama_kategori_produk))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Status Jual:")]),
+              _vm._v(" "),
+              _c("td", [
+                _vm.produk.status_jual == 1
+                  ? _c("span", [_vm._v("Aktif")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.produk.status_jual == 0
+                  ? _c("span", [_vm._v("Tidak Aktif")])
+                  : _vm._e()
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-460f9d74", module.exports)
+  }
+}
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(369)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\penjualan\\PenjualanIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-96dfc7e6", Component.options)
+  } else {
+    hotAPI.reload("data-v-96dfc7e6", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 369 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Penjualan")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _c(
+                "div",
+                { staticClass: "table-responsive" },
+                [
+                  _c("table", { staticClass: "table table-striped" }, [
+                    _vm.penjualans.length > 0 && _vm.loading == false
+                      ? _c(
+                          "tbody",
+                          { staticClass: "data-ada" },
+                          _vm._l(_vm.penjualans, function(penjualan, index) {
+                            return _c("tr", [
+                              _c("td", { staticClass: "nav-link" }, [
+                                _vm._v(_vm._s(penjualan.nama_kategori))
+                              ])
+                            ])
+                          })
+                        )
+                      : _vm.loading == true
+                        ? _c("tbody", { staticClass: "data-ada" }, [
+                            _vm._m(0, false, false)
+                          ])
+                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                            _vm._m(1, false, false)
+                          ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { align: "right" } },
+                    [
+                      _vm.search == ""
+                        ? _c("pagination", {
+                            attrs: { data: _vm.kasKeluarsData },
+                            on: { "pagination-change-page": _vm.getKasKeluars }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { align: "right" } },
+                    [
+                      _vm.search != ""
+                        ? _c("pagination", {
+                            attrs: { data: _vm.kasKeluarsData },
+                            on: {
+                              "pagination-change-page": _vm.getHasilPencarian
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("Sedang memuat")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n\t\t\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t\t\t"
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-96dfc7e6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

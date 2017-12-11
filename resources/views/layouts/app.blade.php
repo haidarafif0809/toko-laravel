@@ -120,7 +120,7 @@
                         </li>
 
                         <li>
-                            <router-link :to="{name: 'indexDashboard'}">
+                            <router-link :to="{name: 'indexPenjualan'}">
                                 Penjualan
                             </router-link>
                         </li>
@@ -206,7 +206,7 @@
     @yield('content')
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.19') }}">
+<script src="{{ asset('js/app.js?v=1.20') }}">
 </script>
 </body>
 </html>

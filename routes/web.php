@@ -88,3 +88,7 @@ Route::get('/pelanggan/pencarian', 'PelangganController@search');
 // Kas Mutasi
 Route::resource('kas-mutasi', 'KasMutasiController', ['except' => 'show']);
 Route::get('/kas-mutasi/view', 'KasMutasiController@view');
+
+// Penjualan
+Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
+Route::get('/penjualan/view', 'PenjualanController@view');
