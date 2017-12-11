@@ -81119,7 +81119,76 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Penjualan")])
     ]),
     _vm._v(" "),
-    _vm._m(0, false, false)
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _c(
+                "div",
+                { staticClass: "table-responsive" },
+                [
+                  _c("table", { staticClass: "table table-striped" }, [
+                    _vm.penjualans.length > 0 && _vm.loading == false
+                      ? _c(
+                          "tbody",
+                          { staticClass: "data-ada" },
+                          _vm._l(_vm.penjualans, function(penjualan, index) {
+                            return _c("tr", [
+                              _c("td", { staticClass: "nav-link" }, [
+                                _vm._v(_vm._s(penjualan.nama_kategori))
+                              ])
+                            ])
+                          })
+                        )
+                      : _vm.loading == true
+                        ? _c("tbody", { staticClass: "data-ada" }, [
+                            _vm._m(0, false, false)
+                          ])
+                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                            _vm._m(1, false, false)
+                          ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { align: "right" } },
+                    [
+                      _vm.search == ""
+                        ? _c("pagination", {
+                            attrs: { data: _vm.kasKeluarsData },
+                            on: { "pagination-change-page": _vm.getKasKeluars }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { attrs: { align: "right" } },
+                    [
+                      _vm.search != ""
+                        ? _c("pagination", {
+                            attrs: { data: _vm.kasKeluarsData },
+                            on: {
+                              "pagination-change-page": _vm.getHasilPencarian
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -81127,37 +81196,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("div", { staticClass: "nav" }, [
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Minuman")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Makanan")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Cemilan")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Gorengan")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Semua")
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("Sedang memuat")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n\t\t\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t\t\t"
+        )
       ])
     ])
   }

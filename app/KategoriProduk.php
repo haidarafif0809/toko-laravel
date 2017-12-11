@@ -12,8 +12,4 @@ class KategoriProduk extends Model
         'nama_kategori_produk',
     ];
 
-    public function kategori_Produk()
-    {
-        return $this->belongsTo('App\Penjualan');
-    }
 }

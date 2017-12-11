@@ -10,13 +10,28 @@
 					<div class="panel-body">
 						<div class="panel-heading">
 							<div class="table-responsive">
-								<div class="nav">
-									<a class="nav-link" href="#">Minuman</a>
-									<a class="nav-link" href="#">Makanan</a>
-									<a class="nav-link" href="#">Cemilan</a>
-									<a class="nav-link" href="#">Gorengan</a>
-									<a class="nav-link" href="#">Semua</a>
-								</div>
+								<table class="table table-striped">
+									<tbody v-if="penjualans.length > 0 && loading == false" class="data-ada">
+										<tr v-for="penjualan ,index in penjualans">
+											<td class="nav-link">{{penjualan.nama_kategori}}</td>
+										</tr>
+									</tbody>
+									<tbody v-else-if="loading == true" class="data-ada">
+										<tr>
+											<td colspan="4" class="text-center">Sedang memuat</td>
+										</tr>	
+									</tbody>
+									<tbody v-else class="tidak-ada-data">
+										<tr>
+											<td colspan="4"  class="text-center">
+												Tidak Ada Data
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+								<div align="right"><pagination :data="kasKeluarsData" v-on:pagination-change-page="getKasKeluars" v-if="search == '' "></pagination></div>
+								<div align="right"><pagination :data="kasKeluarsData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
 							</div>
 						</div>
 					</div>

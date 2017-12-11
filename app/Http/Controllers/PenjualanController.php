@@ -36,7 +36,8 @@ class PenjualanController extends Controller
     {
         $penjualan_array = array();
         foreach ($penjualan as $penjualans) {
-            $nama_produk = Produk::select('nama_produk')->where('id', $penjualans->$nama_produk)
+            $nama_kategori = KategoriProduk::select('nama_kategori_produk')->where('id', $penjualans->nama_kategori)->first();
+            array_push($kas_keluar_array, ['nama_kategori_produk' => $nama_kategori->nama_kategori, 'penjualan' => $penjualans]);
         }
     }
     public function store(Request $request)
