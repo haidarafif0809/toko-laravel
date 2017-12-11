@@ -51,6 +51,11 @@ class PenjualanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function kategori_produk()
+    {
+        $kategori_produk = KategoriProduk::all();
+        return response()->json($kategori_produk);
+    }
     public function show($id)
     {
         //

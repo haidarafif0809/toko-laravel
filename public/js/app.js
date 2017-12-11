@@ -81136,7 +81136,7 @@ var render = function() {
                           _vm._l(_vm.penjualans, function(penjualan, index) {
                             return _c("tr", [
                               _c("td", { staticClass: "nav-link" }, [
-                                _vm._v(_vm._s(penjualan.nama_kategori))
+                                _vm._v(_vm._s(penjualan.nama_kategori_produk))
                               ])
                             ])
                           })
@@ -81156,28 +81156,10 @@ var render = function() {
                     "div",
                     { attrs: { align: "right" } },
                     [
-                      _vm.search == ""
-                        ? _c("pagination", {
-                            attrs: { data: _vm.kasKeluarsData },
-                            on: { "pagination-change-page": _vm.getKasKeluars }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { attrs: { align: "right" } },
-                    [
-                      _vm.search != ""
-                        ? _c("pagination", {
-                            attrs: { data: _vm.kasKeluarsData },
-                            on: {
-                              "pagination-change-page": _vm.getHasilPencarian
-                            }
-                          })
-                        : _vm._e()
+                      _c("pagination", {
+                        attrs: { data: _vm.penjualansData },
+                        on: { "pagination-change-page": _vm.getPenjualans }
+                      })
                     ],
                     1
                   )

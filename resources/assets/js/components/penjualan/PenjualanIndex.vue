@@ -13,7 +13,7 @@
 								<table class="table table-striped">
 									<tbody v-if="penjualans.length > 0 && loading == false" class="data-ada">
 										<tr v-for="penjualan ,index in penjualans">
-											<td class="nav-link">{{penjualan.nama_kategori}}</td>
+											<td class="nav-link">{{penjualan.nama_kategori_produk}}</td>
 										</tr>
 									</tbody>
 									<tbody v-else-if="loading == true" class="data-ada">
@@ -30,8 +30,9 @@
 									</tbody>
 								</table>
 								<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-								<div align="right"><pagination :data="kasKeluarsData" v-on:pagination-change-page="getKasKeluars" v-if="search == '' "></pagination></div>
-								<div align="right"><pagination :data="kasKeluarsData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+								<div align="right">
+									<pagination :data="penjualansData" v-on:pagination-change-page="getPenjualans"></pagination>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -39,5 +40,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </template>
