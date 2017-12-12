@@ -79888,15 +79888,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79990,7 +79981,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("ul", { staticClass: "breadcrumb" }, [
+    _c("ol", { staticClass: "breadcrumb" }, [
       _c(
         "li",
         [
@@ -80004,208 +79995,172 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Pelanggan")])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _vm._m(0, false, false),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "panel-body" },
-            [
-              _c("div", { staticClass: "tambah" }, [
-                _c(
-                  "p",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: {
-                          to: { name: "createPelanggan" },
-                          type: "button"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tTambah Pelanggan\n\t\t\t\t\t\t\t\t"
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "pencarian" }, [
-                _c("input", {
-                  directives: [
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Pelanggan")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("div", { staticClass: "tambah" }, [
+              _c(
+                "p",
+                [
+                  _c(
+                    "router-link",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search,
-                      expression: "search"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "search",
-                    placeholder: "Pencarian"
-                  },
-                  domProps: { value: _vm.search },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.search = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "table table-responsive" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-striped table-no-bordered table-hover",
-                    staticStyle: { width: "100%" },
-                    attrs: { cellspacing: "0", width: "100%" }
-                  },
-                  [
-                    _vm._m(1, false, false),
-                    _vm._v(" "),
-                    _vm.pelanggans.length > 0 && _vm.loading == false
-                      ? _c(
-                          "tbody",
-                          { staticClass: "data-ada" },
-                          _vm._l(_vm.pelanggans, function(pelanggan, index) {
-                            return _c("tr", [
-                              _c("td", [
-                                _vm._v(_vm._s(pelanggan.kode_pelanggan))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(pelanggan.nama_pelanggan))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(pelanggan.tanggal_lahir))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(_vm._s(pelanggan.nomor_telepon))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(pelanggan.alamat))]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                [
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "btn btn-xs btn-default",
-                                      attrs: {
-                                        to: {
-                                          name: "editPelanggan",
-                                          params: { id: pelanggan.id }
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-xs btn-danger",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.deleteEntry(
-                                            pelanggan.id,
-                                            index,
-                                            pelanggan.nama_pelanggan
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t\t\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ])
-                          })
-                        )
-                      : _vm.loading == true
-                        ? _c("tbody", { staticClass: "data-ada" }, [
-                            _vm._m(2, false, false)
-                          ])
-                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                            _vm._m(3, false, false)
-                          ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.search == ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.pelanggansData, limit: 1 },
-                        on: { "pagination-change-page": _vm.getPelanggans }
-                      })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _vm.search != ""
-                    ? _c("pagination", {
-                        attrs: { data: _vm.pelanggansData, limit: 1 },
-                        on: { "pagination-change-page": _vm.getHasilPencarian }
-                      })
-                    : _vm._e()
+                      staticClass: "btn btn-primary",
+                      attrs: { to: { name: "createPelanggan" }, type: "button" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\tTambah Pelanggan")]
+                  )
                 ],
                 1
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pencarian" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "search",
+                  placeholder: "Pencarian"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table table-striped table-hover" }, [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm.pelanggans.length > 0 && _vm.loading == false
+                ? _c(
+                    "tbody",
+                    { staticClass: "data-ada" },
+                    _vm._l(_vm.pelanggans, function(pelanggan, index) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(pelanggan.kode_pelanggan))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(pelanggan.nama_pelanggan))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(pelanggan.tanggal_lahir))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(pelanggan.nomor_telepon))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(pelanggan.alamat))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-default",
+                                attrs: {
+                                  to: {
+                                    name: "editPelanggan",
+                                    params: { id: pelanggan.id }
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-xs btn-danger",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteEntry(
+                                      pelanggan.id,
+                                      index,
+                                      pelanggan.nama_pelanggan
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    })
+                  )
+                : _vm.loading == true
+                  ? _c("tbody", { staticClass: "data-ada" }, [
+                      _vm._m(1, false, false)
+                    ])
+                  : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                      _vm._m(2, false, false)
+                    ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { align: "right" } },
+            [
+              _vm.search == ""
+                ? _c("pagination", {
+                    attrs: { data: _vm.pelanggansData, limit: 1 },
+                    on: { "pagination-change-page": _vm.getPelanggans }
+                  })
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { align: "right" } },
+            [
+              _vm.search != ""
+                ? _c("pagination", {
+                    attrs: { data: _vm.pelanggansData, limit: 1 },
+                    on: { "pagination-change-page": _vm.getHasilPencarian }
+                  })
+                : _vm._e()
             ],
             1
           )
-        ])
-      ])
+        ],
+        1
+      )
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Pelanggan")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -80230,7 +80185,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t")
       ])
     ])
   },
@@ -80240,7 +80195,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t")
       ])
     ])
   }
