@@ -13,7 +13,7 @@
 								<table class="table table-striped">
 									<tbody v-if="penjualans.length > 0 && loading == false" class="data-ada">
 										<tr v-for="penjualan ,index in penjualans">
-											<td class="nav-link">{{kategoriproduk.nama_kategori_produk}}</td>
+											<td class="nav-link">{{kategoriproduk.$kategori_produk}}</td>
 										</tr>
 									</tbody>
 									<tbody v-else-if="loading == true" class="data-ada">

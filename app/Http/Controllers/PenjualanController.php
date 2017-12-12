@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\KategoriProduk;
+use App\Penjualan;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -34,11 +36,7 @@ class PenjualanController extends Controller
      */
     public function view()
     {
-        $penjualan_array = array();
-        foreach ($penjualan as $penjualans) {
-            $nama_kategori = KategoriProduk::select('nama_kategori_produk')->where('id', $penjualans->nama_kategori)->first();
-            array_push($kas_keluar_array, ['nama_kategori_produk' => $nama_kategori->nama_kategori, 'penjualan' => $penjualans]);
-        }
+        return Penjualan::with('KategoriProduk')->paginate(10);
     }
     public function store(Request $request)
     {
@@ -53,9 +51,9 @@ class PenjualanController extends Controller
      */
     public function kategori_produk()
     {
-        $kategori_produk = KategoriProduk::all();
-        return response()->json($kategori_produk);
+        return KategoriProduk::paginate(10);
     }
+
     public function show($id)
     {
         //
