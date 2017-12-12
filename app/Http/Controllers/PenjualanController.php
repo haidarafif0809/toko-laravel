@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\KategoriProduk;
-use App\Penjualan;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -36,7 +35,8 @@ class PenjualanController extends Controller
      */
     public function view()
     {
-        return Penjualan::with('KategoriProduk')->paginate(10);
+        // return Penjualan::with('KategoriProduk')->paginate(10);
+        return KategoriProduk::paginate(10);
     }
     public function store(Request $request)
     {

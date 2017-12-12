@@ -13,4 +13,9 @@ class Penjualan extends Model
     protected $fillable   = (['penjualan_id', 'nama_kategori',
     ]);
 
+    public function kategoriProduk()
+    {
+        return $this->hasOne('App\KategoriProduk', 'id', 'penjualan_id');
+    }
+
 }
