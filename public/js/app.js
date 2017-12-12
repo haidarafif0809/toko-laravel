@@ -81538,6 +81538,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -81600,51 +81603,53 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _c(
-                "div",
-                { staticClass: "table-responsive" },
-                [
-                  _c("table", { staticClass: "table table-striped" }, [
-                    _vm.penjualans.length > 0 && _vm.loading == false
-                      ? _c(
-                          "tbody",
-                          { staticClass: "data-ada" },
-                          _vm._l(_vm.penjualans, function(penjualan, index) {
-                            return _c("tr", [
-                              _c("td", { staticClass: "nav-link" }, [
+            _c(
+              "div",
+              { staticClass: "table-responsive" },
+              [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _vm.penjualans.length > 0 && _vm.loading == false
+                    ? _c(
+                        "tbody",
+                        { staticClass: "data-ada" },
+                        _vm._l(_vm.penjualans, function(penjualan, index) {
+                          return _c("tr", [
+                            _c("td", { staticClass: "nav-link" }, [
+                              _c("a", { attrs: { href: "" } }, [
                                 _vm._v(_vm._s(penjualan.nama_kategori_produk))
                               ])
                             ])
-                          })
-                        )
-                      : _vm.loading == true
-                        ? _c("tbody", { staticClass: "data-ada" }, [
-                            _vm._m(0, false, false)
                           ])
-                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                            _vm._m(1, false, false)
-                          ])
-                  ]),
-                  _vm._v(" "),
-                  _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { attrs: { align: "right" } },
-                    [
-                      _c("pagination", {
-                        attrs: { data: _vm.penjualansData },
-                        on: { "pagination-change-page": _vm.getPenjualans }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
+                        })
+                      )
+                    : _vm.loading == true
+                      ? _c("tbody", { staticClass: "data-ada" }, [
+                          _vm._m(1, false, false)
+                        ])
+                      : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                          _vm._m(2, false, false)
+                        ])
+                ]),
+                _vm._v(" "),
+                _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { attrs: { align: "right" } },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.penjualansData },
+                      on: { "pagination-change-page": _vm.getPenjualans }
+                    })
+                  ],
+                  1
+                )
+              ],
+              1
+            )
           ])
         ])
       ])
@@ -81652,6 +81657,16 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("p", { staticClass: "panel-title" }, [
+        _vm._v("\n\t\t\t\t\t\t\tPenjualan\n\t\t\t\t\t\t")
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -81668,9 +81683,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n\t\t\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t\t\t"
-        )
+        _vm._v("\n\t\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t\t")
       ])
     ])
   }
