@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(360);
+module.exports = __webpack_require__(359);
 
 
 /***/ }),
@@ -81401,9 +81401,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(358)
+var __vue_script__ = __webpack_require__(367)
 /* template */
-var __vue_template__ = __webpack_require__(359)
+var __vue_template__ = __webpack_require__(358)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81444,96 +81444,6 @@ module.exports = Component.exports
 
 /***/ }),
 /* 358 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			penjualans: [],
-			penjualansData: {},
-			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
-			loading: true
-		};
-	},
-
-	mounted: function mounted() {
-		var app = this;
-		app.getPenjualans();
-	},
-
-	methods: {
-		getPenjualans: function getPenjualans(page) {
-			var app = this;
-			if (typeof page === 'undefined') {
-				page = 1;
-			}
-
-			axios.get(app.url + '/view?page=' + page).then(function (resp) {
-				console.log(resp.data.data);
-				app.penjualans = resp.data.data;
-				app.penjualansData = resp.data;
-				app.loading = false;
-			}).catch(function (resp) {
-				alert("Could not load penjualans");
-				app.loading = false;
-			});
-		}
-	}
-});
-
-/***/ }),
-/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81653,10 +81563,107 @@ if (false) {
 }
 
 /***/ }),
-/* 360 */
+/* 359 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			penjualans: [],
+			penjualansData: {},
+			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
+			loading: true
+		};
+	},
+
+	mounted: function mounted() {
+		var app = this;
+		app.getPenjualans();
+	},
+
+	methods: {
+		getPenjualans: function getPenjualans(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url + '/view?page=' + page).then(function (resp) {
+				console.log(resp.data.data);
+				app.penjualans = resp.data.data;
+				app.penjualansData = resp.data;
+				app.loading = false;
+			}).catch(function (resp) {
+				alert("Could not load penjualans");
+				app.loading = false;
+			});
+		}
+	}
+});
 
 /***/ })
 /******/ ]);
