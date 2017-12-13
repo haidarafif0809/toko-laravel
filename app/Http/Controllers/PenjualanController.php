@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\KategoriProduk;
-use App\Penjualan;
+use App\Produk;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -36,8 +35,42 @@ class PenjualanController extends Controller
      */
     public function view()
     {
-        return Penjualan::with('KategoriProduk')->paginate(10);
+        // return Penjualan::with('Produk')->paginate(10);
+        // return Produk::paginate(5);
+        // return KategoriProduk::paginate(2);
+        $produk = Produk::paginate(8);
+        $array  = array();
+        foreach ($produk as $produks) {
+            array_push($array, [
+                'nama_produk' => $produks->nama_produk,
+                'harga_jual'  => $produks->harga_jual,
+            ]);
+
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $produk->currentPage();
+        $respons['data']           = $array;
+        $respons['first_page_url'] = url('/penjualan/view?page=' . $produk->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $produk->lastPage();
+        $respons['last_page_url']  = url('/penjualan/view?page=' . $produk->lastPage());
+        $respons['next_page_url']  = $produk->nextPageUrl();
+        $respons['path']           = url('/penjualan/');
+        $respons['per_page']       = $produk->perPage();
+        $respons['prev_page_url']  = $produk->previousPageUrl();
+        $respons['to']             = $produk->perPage();
+        $respons['total']          = $produk->total();
+        //
+        return response()->json($respons);
     }
+
+    public function search(Request $request)
+    {
+        $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        return response()->json($produk);
+    }
+
     public function store(Request $request)
     {
         //
@@ -52,6 +85,11 @@ class PenjualanController extends Controller
     public function kategori_produk()
     {
         return KategoriProduk::paginate(10);
+    }
+
+    public function produk()
+    {
+        return Produk::paginate(10);
     }
 
     public function show($id)
