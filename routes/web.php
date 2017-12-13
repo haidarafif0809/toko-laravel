@@ -92,3 +92,4 @@ Route::get('/kas-mutasi/view', 'KasMutasiController@view');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::get('/penjualan/view', 'PenjualanController@view');
+Route::get('/penjualan/pencarian', 'PenjualanController@search');

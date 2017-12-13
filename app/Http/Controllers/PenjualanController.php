@@ -36,8 +36,8 @@ class PenjualanController extends Controller
     public function view()
     {
         // return Penjualan::with('KategoriProduk')->paginate(10);
-        return Produk::paginate(10);
-        return KategoriProduk::paginate(10);
+        return Produk::paginate(5);
+        // return KategoriProduk::paginate(2);
     }
     public function store(Request $request)
     {
@@ -52,7 +52,7 @@ class PenjualanController extends Controller
      */
     public function kategori_produk()
     {
-        return Produk::paginate(10);
+        return KategoriProduk::paginate(10);
     }
 
     public function produk()

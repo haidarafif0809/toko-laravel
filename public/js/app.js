@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(359);
+module.exports = __webpack_require__(360);
 
 
 /***/ }),
@@ -81401,9 +81401,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(358)
 /* template */
-var __vue_template__ = __webpack_require__(358)
+var __vue_template__ = __webpack_require__(359)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81444,6 +81444,110 @@ module.exports = Component.exports
 
 /***/ }),
 /* 358 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			penjualan: [],
+			produks: [],
+			produksData: {},
+			pencarian: "",
+			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
+			loading: true
+		};
+	},
+	watch: {
+		// whenever question changes, this function will run
+		pencarian: function pencarian(newQuestion) {
+			this.searchData();
+		}
+	},
+	mounted: function mounted() {
+		var app = this;
+		app.getPenjualans();
+	},
+
+	methods: {
+		getPenjualans: function getPenjualans(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url + '/view?page=' + page).then(function (resp) {
+				app.produks = resp.data.data;
+				app.loading = false;
+			}).catch(function (resp) {
+				alert("Could not load produks");
+				app.loading = false;
+			});
+		},
+		searchData: function searchData(page) {
+			var app = this;
+			app.loading = true;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url + '/cari?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+				app.produks = resp.data.data;
+				app.penjualansData = resp.data;
+				app.loading = false;
+			}).catch(function (resp) {
+				alert("Tidak dapat memuat produk..");
+				app.loading = false;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81467,51 +81571,95 @@ var render = function() {
     _vm._v(" "),
     _c("div", [
       _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [_vm._v("List Produk")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Pencarian..." }
-                }),
+        _c(
+          "div",
+          { staticClass: "panel panel-default" },
+          [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v("List Produk")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "panel-body" },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.search,
+                          expression: "search"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "search",
+                        placeholder: "Pencarian"
+                      },
+                      domProps: { value: _vm.search },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.search = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-4" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "thumbnail",
-                        on: { click: function($event) {} }
-                      },
-                      [_vm._m(0, false, false)]
-                    )
+                _vm._l(_vm.produks, function(produk, index) {
+                  return _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "thumbnail",
+                          on: { click: function($event) {} }
+                        },
+                        [
+                          _c("div", { staticClass: "caption" }, [
+                            _c("h4", [_vm._v(_vm._s(produk.nama_produk))]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(produk.harga_jual))])
+                          ])
+                        ]
+                      )
+                    ])
                   ])
-                ])
-              ])
-            ])
-          ])
-        ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _c("pagination", {
+                  attrs: { data: _vm.produksData, limit: 1 },
+                  on: { "pagination-change-page": _vm.getPenjualans }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "caption" }, [
-      _c("h4"),
-      _vm._v(" "),
-      _c("p")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -81522,7 +81670,7 @@ if (false) {
 }
 
 /***/ }),
-/* 359 */
+/* 360 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

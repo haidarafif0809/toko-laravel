@@ -18,9 +18,9 @@ class Penjualan extends Model
         return $this->hasOne('App\KategoriProduk', 'id', 'penjualan_id');
     }
 
-    public function produk()
-    {
-        return $this->hasOne('App\Produk', 'id', 'produk_id');
-    }
+    // public function produk()
+    // {
+    //     return $this->hasOne('App\Produk', 'id', 'penjualan_id');
+    // }
 
 }
