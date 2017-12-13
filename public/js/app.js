@@ -81401,7 +81401,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(367)
+var __vue_script__ = null
 /* template */
 var __vue_template__ = __webpack_require__(358)
 /* template functional */
@@ -81465,56 +81465,35 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Penjualan")])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+    _c("div", [
+      _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "panel panel-default" }, [
-          _vm._m(0, false, false),
+          _c("div", { staticClass: "panel-heading" }, [_vm._v("List Produk")]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _c(
-              "div",
-              { staticClass: "table-responsive" },
-              [
-                _c("table", { staticClass: "table table-striped" }, [
-                  _vm.penjualans.length > 0 && _vm.loading == false
-                    ? _c(
-                        "tbody",
-                        { staticClass: "data-ada" },
-                        _vm._l(_vm.penjualans, function(penjualan, index) {
-                          return _c("tr", [
-                            _c("td", { staticClass: "nav-link" }, [
-                              _c("a", { attrs: { href: "" } }, [
-                                _vm._v(_vm._s(penjualan.nama_kategori_produk))
-                              ])
-                            ])
-                          ])
-                        })
-                      )
-                    : _vm.loading == true
-                      ? _c("tbody", { staticClass: "data-ada" }, [
-                          _vm._m(1, false, false)
-                        ])
-                      : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                          _vm._m(2, false, false)
-                        ])
-                ]),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Pencarian..." }
+                }),
                 _vm._v(" "),
-                _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+                _c("br"),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { attrs: { align: "right" } },
-                  [
-                    _c("pagination", {
-                      attrs: { data: _vm.penjualansData },
-                      on: { "pagination-change-page": _vm.getPenjualans }
-                    })
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "thumbnail",
+                        on: { click: function($event) {} }
+                      },
+                      [_vm._m(0, false, false)]
+                    )
+                  ])
+                ])
+              ])
+            ])
           ])
         ])
       ])
@@ -81526,30 +81505,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [
-        _vm._v("\n\t\t\t\t\t\t\tPenjualan\n\t\t\t\t\t\t")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("Sedang memuat")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t\t\t\t")
-      ])
+    return _c("div", { staticClass: "caption" }, [
+      _c("h4"),
+      _vm._v(" "),
+      _c("p")
     ])
   }
 ]
@@ -81567,103 +81526,6 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 360 */,
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			penjualans: [],
-			penjualansData: {},
-			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
-			loading: true
-		};
-	},
-
-	mounted: function mounted() {
-		var app = this;
-		app.getPenjualans();
-	},
-
-	methods: {
-		getPenjualans: function getPenjualans(page) {
-			var app = this;
-			if (typeof page === 'undefined') {
-				page = 1;
-			}
-
-			axios.get(app.url + '/view?page=' + page).then(function (resp) {
-				console.log(resp.data.data);
-				app.penjualans = resp.data.data;
-				app.penjualansData = resp.data;
-				app.loading = false;
-			}).catch(function (resp) {
-				alert("Could not load penjualans");
-				app.loading = false;
-			});
-		}
-	}
-});
 
 /***/ })
 /******/ ]);

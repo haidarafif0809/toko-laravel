@@ -4,40 +4,30 @@
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li class="active">Penjualan</li>
 		</ul>
-		<div class="row">
-			<div class="col-md-12">
+
+		<div>
+			<div class="col-md-8">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p class="panel-title">
-							Penjualan
-						</p>
-					</div>
+					<div class="panel-heading">List Produk</div>
 					<div class="panel-body">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<tbody v-if="penjualans.length > 0 && loading == false" class="data-ada">
-									<tr v-for="penjualan ,index in penjualans">
-										<td class="nav-link"><a href="">{{ penjualan.nama_kategori_produk }}</a></td>
-									</tr>
-								</tbody>
-								<tbody v-else-if="loading == true" class="data-ada">
-									<tr>
-										<td colspan="4" class="text-center">Sedang memuat</td>
-									</tr>	
-								</tbody>
-								<tbody v-else class="tidak-ada-data">
-									<tr>
-										<td colspan="4"  class="text-center">
-											Tidak Ada Data
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-							<div align="right">
-								<pagination :data="penjualansData" v-on:pagination-change-page="getPenjualans"></pagination>
+						<div class="row">
+
+							<div class="col-md-12">
+								<input type="text" class="form-control" placeholder="Pencarian...">
+								<br />
+								<div class="row">
+									<div class="col-md-4">
+										<div class="thumbnail" @click="">
+											<div class="caption">
+												<h4></h4>
+												<p></p>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -45,41 +35,5 @@
 	</div>
 </div>
 </div>
+</div>
 </template>
-<script>
-export default {
-	data: function () {
-		return {
-			penjualans: [],
-			penjualansData: {},
-			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
-			loading : true
-		}
-	},
-
-	mounted() {
-		var app = this;
-		app.getPenjualans();
-	},
-	methods: {
-		getPenjualans(page) {
-			var app = this;
-			if (typeof page === 'undefined') {
-				page = 1;
-			}
-
-			axios.get(app.url+'/view?page='+page)
-			.then(function (resp) {
-				console.log(resp.data.data);
-				app.penjualans = resp.data.data;
-				app.penjualansData = resp.data;
-				app.loading = false;
-			})
-			.catch(function (resp) {
-				alert("Could not load penjualans");
-				app.loading = false
-			});
-		},
-	}
-}
-</script>

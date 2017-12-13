@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\KategoriProduk;
+use App\Produk;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -36,6 +36,7 @@ class PenjualanController extends Controller
     public function view()
     {
         // return Penjualan::with('KategoriProduk')->paginate(10);
+        return Produk::paginate(10);
         return KategoriProduk::paginate(10);
     }
     public function store(Request $request)
@@ -51,7 +52,12 @@ class PenjualanController extends Controller
      */
     public function kategori_produk()
     {
-        return KategoriProduk::paginate(10);
+        return Produk::paginate(10);
+    }
+
+    public function produk()
+    {
+        return Produk::paginate(10);
     }
 
     public function show($id)
