@@ -53,8 +53,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <router-link :to="{name: 'indexUser'}">
+                                    <router-link :to="{name: 'indexToko'}">
                                         Data Toko
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'indexUser'}">
+                                        Data User
                                     </router-link>
                                 </li>
                             </ul>
@@ -66,6 +71,8 @@
                                 Dashboard
                             </router-link>
                         </li>
+                        @endif
+                        @if (auth()->check())
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                                 Produk
@@ -182,7 +189,7 @@
                         @else
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                {{ Auth::user()->nama_toko }}
+                                {{ Auth::user()->nama_pemilik }}
                                 <span class="caret">
                                 </span>
                             </a>
@@ -196,6 +203,12 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'profileToko'}">
+                                    Profile Toko
+                                </router-link>
+                            </li>
+
                         </ul>
                     </li>
                     @endguest

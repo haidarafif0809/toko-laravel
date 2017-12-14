@@ -2,31 +2,19 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Yajra\Auditable\AuditableTrait;
 
-class User extends Authenticatable
+class StafToko extends Model
 {
     use LaratrustUserTrait;
     use AuditableTrait;
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'toko_id', 'nama_pemilik', 'email', 'no_telp', 'password',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
