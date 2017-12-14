@@ -1,3 +1,12 @@
+<style type="text/css">
+.list-produk {
+
+	padding-left: 4px;
+	padding-right: 4px;
+
+}
+</style>
+
 <template>
 	<div class="container">
 		<ul class="breadcrumb">
@@ -17,8 +26,8 @@
 							</div>
 						</div>	
 						<br>
-						<div v-for="produk , index in produks" class="row">
-							<div class="col-md-4">
+						<div class="row">
+							<div v-for="produk , index in produks" class="col-md-6 list-produk">
 								<div class="thumbnail" @click="">
 									<div class="caption">
 										<h4>{{produk.nama_produk}}</h4>
@@ -31,7 +40,7 @@
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
 					<div align="right">
-						<pagination :data="produksData" v-on:pagination-change-page="getPenjualans":limit="1"></pagination>
+						<pagination :data="produksData" v-on:pagination-change-page="getPenjualans" :limit="3"></pagination>
 					</div>
 				</div>
 			</div>
@@ -71,6 +80,7 @@ methods: {
 		axios.get(app.url+'/view?page='+page)
 		.then(function (resp) {
 			app.produks = resp.data.data;
+			app.produksData = resp.data;
 			app.loading = false;
 		})
 		.catch(function (resp) {
@@ -78,24 +88,24 @@ methods: {
 			app.loading = false
 		});
 	},
-	searchData(page) {
-		var app = this;
-		app.loading = true;
-		if (typeof page === 'undefined') {
-			page = 1;
-		}
+	// searchData(page) {
+	// 	var app = this;
+	// 	app.loading = true;
+	// 	if (typeof page === 'undefined') {
+	// 		page = 1;
+	// 	}
 
-		axios.get(app.url+'/cari?pencarian='+app.pencarian+'&page='+page)
-		.then(function (resp) {
-			app.produks = resp.data.data;
-			app.penjualansData = resp.data;
-			app.loading = false    
-		})
-		.catch(function (resp) {
-			alert("Tidak dapat memuat produk..");
-			app.loading = false;
-		})
-	},
+		// axios.get(app.url+'/cari?pencarian='+app.pencarian+'&page='+page)
+		// .then(function (resp) {
+		// 	app.produks = resp.data.data;
+		// 	app.penjualansData = resp.data;
+		// 	app.loading = false    
+		// })
+		// .catch(function (resp) {
+		// 	alert("Tidak dapat memuat produk..");
+		// 	app.loading = false;
+		// })
+	// },
 	// deleteEntry(id, index,nama_produk) {
 	// 	if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
 	// 		var app = this;
