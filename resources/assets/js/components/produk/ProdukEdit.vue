@@ -189,7 +189,7 @@ export default {
             var newProduk = app.produk;
             axios.patch(app.url+'/' + app.produkId, newProduk)
             .then(function (resp) {
-                app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
+                app.message = 'Sukses : Berhasil Mengedit produk '+ app.produk.nama_produk;
                 app.alert(app.message);
                 app.produk.kode_produk = ''
                 app.produk.nama_produk = ''
@@ -243,6 +243,9 @@ export default {
             axios.get(app.url+'/' + id +'/edit')
             .then(function (resp) {
                 app.produk = resp.data;
+                if (app.produk.foto == null) {
+                    app.produk.foto = '';
+                }
             })
             .catch(function () {
                 alert("Could not load your produk");
