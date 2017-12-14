@@ -1,81 +1,72 @@
 <template>
 	<div class="container">
-		<ul class="breadcrumb">
+		<ol class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li class="active">Pelanggan</li>
-		</ul>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p class="panel-title">Pelanggan</p>
-					</div>
-					<div class="panel-body">
-						<div class="tambah">
-							<p>
-								<router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
-									Tambah Pelanggan
-								</router-link>
-							</p>
-						</div>
-						<div class="pencarian">
-							<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-						</div>
-						<div class="table table-responsive">
-							<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-								<thead>
-									<th>Kode Pelanggan</th>
-									<th>Nama Pelanggan</th>
-									<th>Tanggal Lahir</th>
-									<th>Nomor Telepon</th>
-									<th>Alamat</th>
-									<th>Aksi</th>
-								</thead>
-								<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
-									<tr v-for="pelanggan ,index in pelanggans">
-										<td>{{ pelanggan.kode_pelanggan }}</td>
-										<td>{{ pelanggan.nama_pelanggan }}</td>
-										<td>{{ pelanggan.tanggal_lahir }}</td>
-										<td>{{ pelanggan.nomor_telepon }}</td>
-										<td>{{ pelanggan.alamat }}</td>
+		</ol>
+		<div class="panel panel-default">
+			<div class="panel-heading">Pelanggan</div>
 
-										<td>
-											<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
-												Edit
-											</router-link>
-											<a href="#"
-											class="btn btn-xs btn-danger" 
-											v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
-											Delete
-										</a>
-									</td>
-								</tr>
-							</tbody>
-							<tbody v-else-if="loading == true" class="data-ada" >
-								<tr >
-									<td colspan="4"  class="text-center">
-										Sedang Memuat Data
-									</td>
-								</tr>
-							</tbody>
-							<tbody v-else class="tidak-ada-data">
-								<tr>
-									<td colspan="4"  class="text-center">
-										Tidak Ada Data
-									</td>
-								</tr>
-							</tbody>
-						</table>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<div class="tambah">
+						<p><router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
+						Tambah Pelanggan</router-link></p>
 					</div>
-					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getPelanggans":limit="1" v-if="search == '' "></pagination></div>
-					<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
-				</div>
+					<div class="pencarian">
+						<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+					</div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<th>Kode Pelanggan</th>
+							<th>Nama Pelanggan</th>
+							<th>Tanggal Lahir</th>
+							<th>Nomor Telepon</th>
+							<th>Alamat</th>
+							<th>Aksi</th>
+						</thead>
+						<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
+							<tr v-for="pelanggan ,index in pelanggans">
+								<td>{{ pelanggan.kode_pelanggan }}</td>
+								<td>{{ pelanggan.nama_pelanggan }}</td>
+								<td>{{ pelanggan.tanggal_lahir }}</td>
+								<td>{{ pelanggan.nomor_telepon }}</td>
+								<td>{{ pelanggan.alamat }}</td>
+
+								<td>
+									<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
+										Edit
+									</router-link>
+									<a href="#"
+									class="btn btn-xs btn-danger" 
+									v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
+									Delete
+								</a>
+							</td>
+						</tr>
+					</tbody>
+					<tbody v-else-if="loading == true" class="data-ada" >
+						<tr >
+							<td colspan="4"  class="text-center">
+								Sedang Memuat Data
+							</td>
+						</tr>
+					</tbody>
+					<tbody v-else class="tidak-ada-data">
+						<tr>
+							<td colspan="4"  class="text-center">
+								Tidak Ada Data
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+			<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+			<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getPelanggans":limit="1" v-if="search == '' "></pagination></div>
+			<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
 		</div>
 	</div>
 </div>
-
 </template>
 
 <script>

@@ -21,22 +21,28 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Validator::extend('image64', function ($attribute, $value, $parameters, $validator) {
-            $type = explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
-            if (in_array($type, $parameters)) {
-                return true;
+            if (!empty($value) && !empty($parameters)) {
+                $type = explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
+
+                if (in_array($type, $parameters)) {
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
             }
-            return false;
         });
+
+        Validator::replacer('image64', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':values', join(",", $parameters), $message);
+        });
+
         KasMasuk::observe(KasMasukObserver::class);
         Toko::observe(TokoObserver::class);
         // untuk menyesuaikan waktu berdasarkan tempat
         \Carbon\Carbon::setlocale('id');
         // jika ingin menesuaikan dengan locale di laravel
         // \Carbon\Carbon::setLocale(config('app.locale'));
-
-        Validator::replacer('image64', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':values', join(",", $parameters), $message);
-        });
     }
 
     /**

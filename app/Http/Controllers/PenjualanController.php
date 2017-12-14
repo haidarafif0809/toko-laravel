@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Produk;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -34,12 +35,42 @@ class PenjualanController extends Controller
      */
     public function view()
     {
-        $penjualan_array = array();
-        foreach ($penjualan as $penjualans) {
-            $nama_kategori = KategoriProduk::select('nama_kategori_produk')->where('id', $penjualans->nama_kategori)->first();
-            array_push($kas_keluar_array, ['nama_kategori_produk' => $nama_kategori->nama_kategori, 'penjualan' => $penjualans]);
+        // return Penjualan::with('Produk')->paginate(10);
+        // return Produk::paginate(5);
+        // return KategoriProduk::paginate(2);
+        $produk = Produk::paginate(8);
+        $array  = array();
+        foreach ($produk as $produks) {
+            array_push($array, [
+                'nama_produk' => $produks->nama_produk,
+                'harga_jual'  => $produks->harga_jual,
+            ]);
+
         }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $produk->currentPage();
+        $respons['data']           = $array;
+        $respons['first_page_url'] = url('/penjualan/view?page=' . $produk->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $produk->lastPage();
+        $respons['last_page_url']  = url('/penjualan/view?page=' . $produk->lastPage());
+        $respons['next_page_url']  = $produk->nextPageUrl();
+        $respons['path']           = url('/penjualan/');
+        $respons['per_page']       = $produk->perPage();
+        $respons['prev_page_url']  = $produk->previousPageUrl();
+        $respons['to']             = $produk->perPage();
+        $respons['total']          = $produk->total();
+        //
+        return response()->json($respons);
     }
+
+    public function search(Request $request)
+    {
+        $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        return response()->json($produk);
+    }
+
     public function store(Request $request)
     {
         //
@@ -53,9 +84,14 @@ class PenjualanController extends Controller
      */
     public function kategori_produk()
     {
-        $kategori_produk = KategoriProduk::all();
-        return response()->json($kategori_produk);
+        return KategoriProduk::paginate(10);
     }
+
+    public function produk()
+    {
+        return Produk::paginate(10);
+    }
+
     public function show($id)
     {
         //

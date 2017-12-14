@@ -92,21 +92,28 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         //validate
-        $this->validate($request, [
-            'kode_produk'         => 'required|unique:produks,kode_produk',
-            'nama_produk'         => 'required',
-            'kategori_produks_id' => 'required|exists:kategori_produks,id',
-            'harga_beli'          => 'required|numeric',
-            'harga_jual'          => 'numeric',
-            'satuans_id'          => 'required|exists:satuans,id',
-            'status_jual'         => 'required',
-            'foto'                => 'image64:jpeg,jpg,png|max:3072000',
-        ]);
 
-        $imageData = $request->foto;
-        $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-        $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
-        Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+        if ($request->foto !== null) {
+            $this->validate($request, [
+                'foto' => 'image64:jpeg,jpg,png|max:3072000',
+            ]);
+
+            $imageData = $request->foto;
+            $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+            Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+        } else {
+            $this->validate($request, [
+                'kode_produk'         => 'required|unique:produks,kode_produk',
+                'nama_produk'         => 'required',
+                'kategori_produks_id' => 'required|exists:kategori_produks,id',
+                'harga_beli'          => 'required|numeric',
+                'harga_jual'          => 'numeric',
+                'satuans_id'          => 'required|exists:satuans,id',
+                'status_jual'         => 'required',
+            ]);
+
+        }
 
         // insert
         $produk = Produk::create([
@@ -117,7 +124,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
-            'foto'                => $fileName,
+            'foto'                => (!empty($fileName) ? $fileName : ''),
         ]);
     }
 
@@ -154,32 +161,43 @@ class ProdukController extends Controller
  */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'kode_produk'         => 'required',
-            'nama_produk'         => 'required',
-            'kategori_produks_id' => 'required|exists:kategori_produks,id',
-            'harga_beli'          => 'required|numeric',
-            'harga_jual'          => 'numeric',
-            'satuans_id'          => 'required|exists:satuans,id',
-            'status_jual'         => 'required',
-            'foto'                => 'image64:jpeg,jpg,png|max:3072000',
-        ]);
-
-        $imageData = $request->foto;
-        $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-        $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
-        Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
-
         $produk = Produk::find($id);
-        if ($produk->foto) {
-            $oldImg   = $produk->foto;
-            $filePath = public_path('foto_produk/') . $produk->foto;
 
-            try {
-                File::delete($filePath);
-            } catch (FileNotFoundException $e) {
-                // File sudah dihapus/tidak ada
+        if ($request->foto !== null) {
+            $this->validate($request, [
+                // 'kode_produk'         => 'required',
+                // 'nama_produk'         => 'required',
+                // 'kategori_produks_id' => 'required|exists:kategori_produks,id',
+                // 'harga_beli'          => 'required|numeric',
+                // 'harga_jual'          => 'numeric',
+                // 'satuans_id'          => 'required|exists:satuans,id',
+                // 'status_jual'         => 'required',
+                'foto' => 'image64:jpeg,jpg,png|max:3072000',
+            ]);
+            $imageData = $request->foto;
+            $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+            Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            if ($produk->foto) {
+                $oldImg   = $produk->foto;
+                $filePath = public_path('foto_produk/') . $produk->foto;
+
+                try {
+                    File::delete($filePath);
+                } catch (FileNotFoundException $e) {
+                    // File sudah dihapus/tidak ada
+                }
             }
+        } else {
+            $this->validate($request, [
+                'kode_produk'         => 'required',
+                'nama_produk'         => 'required',
+                'kategori_produks_id' => 'required|exists:kategori_produks,id',
+                'harga_beli'          => 'required|numeric',
+                'harga_jual'          => 'numeric',
+                'satuans_id'          => 'required|exists:satuans,id',
+                'status_jual'         => 'required',
+            ]);
 
         }
 
@@ -191,7 +209,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
-            'foto'                => $fileName,
+            'foto'                => (!empty($fileName) ? $fileName : ''),
         ]);
 
         if ($produk == true) {

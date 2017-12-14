@@ -21,7 +21,8 @@
 								Foto Produk:
 							</td>
 							<td width="40%">
-								<img class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
+								<img v-if="produk.foto == null || produk.foto == ''" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
+								<img v-else class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
 							</td>
 						</tr>
 						<tr>

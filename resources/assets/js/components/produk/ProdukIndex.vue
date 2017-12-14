@@ -114,17 +114,33 @@ export default {
       })
     },
     deleteEntry(id, index,nama_produk) {
-      if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
-        var app = this;
-        axios.delete(app.url+'/' + id)
-        .then(function (resp) {
-          app.getProduks();
-          app.alert("Berhasil Menghapus produk "+nama_produk)
-        })
-        .catch(function (resp) {
-          alert("Tidak dapat menghapus produk!");
+      // if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
+      
+          this.$swal({
+            title: "Hapus?", 
+            text: "Yakin Ingin Menghapus produk "+ nama_produk +" ?", 
+            icon: "warning",
+            buttons: ['Batal', 'Hapus'],
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              var app = this;
+              axios.delete(app.url+'/' + id)
+              .then(function (resp) {
+                app.getProduks();
+                app.alert("Berhasil Menghapus produk "+nama_produk)
+              })
+              .catch(function (resp) {
+                app.alert("Tidak dapat menghapus produk!");
+              });
+            } 
+            else {
+              return;
+          }
         });
-      }
+      // if (hapus) {
+      // }
     },
     alert(pesan) {
       this.$swal({
