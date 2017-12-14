@@ -81572,6 +81572,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -81695,7 +81719,9 @@ var render = function() {
                         _c("div", { staticClass: "caption" }, [
                           _c("h4", [_vm._v(_vm._s(produk.nama_produk))]),
                           _vm._v(" "),
-                          _c("p", [_vm._v(_vm._s(produk.harga_jual))])
+                          _c("p", [
+                            _vm._v("Harga: " + _vm._s(produk.harga_jual))
+                          ])
                         ])
                       ]
                     )
@@ -81720,6 +81746,45 @@ var render = function() {
           ],
           1
         )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Cart")]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "list-group cart-item" }, [
+          _c("li", { staticClass: "list-group-item list-group-item-warning" }, [
+            _vm._v("Tidak ada item")
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "list-group-item",
+              attrs: { "track-by": "id" },
+              on: { click: function($event) {} }
+            },
+            [
+              _c("span", { staticClass: "pull-right" }, [
+                _c("i", {
+                  staticClass: "glyphicon glyphicon-remove cart-item-action",
+                  on: { click: function($event) {} }
+                })
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-footer" }, [
+          _vm._v("\n\t\t\t\tTotal Produk:\n\t\t\t\t"),
+          _c("span", { staticClass: "pull-right" }, [
+            _c("i", {
+              staticClass: "glyphicon glyphicon-refresh cart-item-action",
+              on: { click: function($event) {} }
+            })
+          ])
+        ])
       ])
     ])
   ])
