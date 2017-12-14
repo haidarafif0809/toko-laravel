@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\KasMasuk;
 use App\Observers\KasMasukObserver;
+use App\Observers\TokoObserver;
+use App\Toko;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Validator;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
         KasMasuk::observe(KasMasukObserver::class);
+        Toko::observe(TokoObserver::class);
         // untuk menyesuaikan waktu berdasarkan tempat
         \Carbon\Carbon::setlocale('id');
         // jika ingin menesuaikan dengan locale di laravel

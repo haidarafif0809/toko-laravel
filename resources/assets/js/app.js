@@ -44,7 +44,6 @@ import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
 // kas Masuk
-import StafAktif from './components/kasMasuk/StafAktif.vue'
 import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
 import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
 import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
@@ -68,6 +67,9 @@ import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
 import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
 //Penjualan
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
+// toko
+import TokoIndex from './components/toko/TokoIndex.vue'
+import ProfileToko from './components/profileToko/ProfileToko.vue'
 const routes = [{
         path: '/',
         components: {
@@ -149,12 +151,8 @@ const routes = [{
         component: KategoriProdukEdit,
         name: 'editKategoriProduk'
     },
-    // kas Masuk
+    // kas 
     {
-        path: '/kasMasuk/StafAktif',
-        component: StafAktif,
-        name: 'stafAktif'
-    }, {
         path: '/kasMasuk',
         component: KasMasukIndex,
         name: 'indexKasMasuk'
@@ -234,6 +232,18 @@ const routes = [{
         path: '/penjualan',
         component: PenjualanIndex,
         name: 'indexPenjualan'
+    },
+    // toko
+    {
+        path: '/toko',
+        component: TokoIndex,
+        name: 'indexToko'
+    },
+    // profile toko
+    {
+        path: '/profile-toko',
+        component: ProfileToko,
+        name: 'profileToko'
     },
 ]
 /**
