@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama_toko', 'nama_pemilik', 'email', 'no_tlp', 'password',
+        'toko_id', 'nama_pemilik', 'email', 'no_telp', 'password',
     ];
 
     /**
@@ -46,5 +46,10 @@ class User extends Authenticatable
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
             ->diffForHumans();
+    }
+
+    public function toko()
+    {
+        return $this->belongsTo('App\Toko');
     }
 }

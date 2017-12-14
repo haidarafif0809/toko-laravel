@@ -92,3 +92,12 @@ Route::get('/kas-mutasi/view', 'KasMutasiController@view');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::get('/penjualan/view', 'PenjualanController@view');
+
+// Toko
+Route::resource('toko', 'TokoController', ['except' => 'show']);
+Route::get('/kasMasuk/search', 'TokoController@search');
+Route::get('/toko/view', 'TokoController@view');
+
+// Profile Toko
+Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
+Route::get('/profile-toko/view', 'ProfileTokoController@view');
