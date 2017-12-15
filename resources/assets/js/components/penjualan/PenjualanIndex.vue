@@ -31,12 +31,13 @@
 								<div class="thumbnail" @click="">
 									<div class="caption">
 										<h4>{{produk.nama_produk}}</h4>
-										<p>{{produk.harga_jual}}</p>
+										<p>Harga: {{produk.harga_jual}}</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
 					<div align="right">
@@ -45,6 +46,29 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Cart</div>
+				<ul class="list-group cart-item">
+					<li class="list-group-item list-group-item-warning">Tidak ada item</li>
+					<li class="list-group-item" track-by="id" v-on:click="">
+						<span class="pull-right">
+
+							<i class="glyphicon glyphicon-remove cart-item-action" v-on:click=""></i>
+						</span>
+						<!-- <button class="pull-right" v-on:click="deleteItemFromCart(cartItem)">-</button> -->
+					</li>
+				</ul>
+				<div class="panel-footer">
+					Total Produk:
+					<span class="pull-right">
+
+						<i class="glyphicon glyphicon-refresh cart-item-action" v-on:click=""></i>
+					</span>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </template>
 

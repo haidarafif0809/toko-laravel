@@ -53,15 +53,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('no_tlp') ? ' has-error' : '' }}">
-                            <label for="no_tlp" class="col-md-4 control-label">No Telepon/Hp</label>
+                        <div class="form-group{{ $errors->has('no_telp') ? ' has-error' : '' }}">
+                            <label for="no_telp" class="col-md-4 control-label">No Telepon/Hp</label>
 
                             <div class="col-md-6">
-                                <input id="no_tlp" type="tel" class="form-control" name="no_tlp" value="{{ old('no_tlp') }}" required>
+                                <input id="no_telp" type="tel" class="form-control" name="no_telp" value="{{ old('no_telp') }}" required>
 
-                                @if ($errors->has('no_tlp'))
+                                @if ($errors->has('no_telp'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('no_tlp') }}</strong>
+                                    <strong>{{ $errors->first('no_telp') }}</strong>
                                 </span>
                                 @endif
                             </div>
