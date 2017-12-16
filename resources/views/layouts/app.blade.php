@@ -195,7 +195,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <router-link :to="{name: 'profileToko'}">
+                                    <router-link :to="{name: 'profileTokoIndex'}">
                                         Profile Toko
                                     </router-link>
                                 </li>

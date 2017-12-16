@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(366);
+module.exports = __webpack_require__(372);
 
 
 /***/ }),
@@ -29373,10 +29373,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__components_kasMutasi_KasMutasiIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_penjualan_PenjualanIndex_vue__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_penjualan_PenjualanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_penjualan_PenjualanIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__ = __webpack_require__(356);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileToko_vue__ = __webpack_require__(374);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileToko_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileToko_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__ = __webpack_require__(369);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29447,6 +29449,8 @@ window.Vue = __webpack_require__(28);
 //Penjualan
 
 // toko
+
+// profile toko
 
 
 var routes = [{
@@ -29621,8 +29625,12 @@ var routes = [{
 // profile toko
 {
     path: '/profile-toko',
-    component: __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileToko_vue___default.a,
-    name: 'profileToko'
+    component: __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue___default.a,
+    name: 'profileTokoIndex'
+}, {
+    path: '/profile-toko/edit/:id',
+    component: __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue___default.a,
+    name: 'editProfileToko'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -73318,7 +73326,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -73508,7 +73515,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                                   Edit  "
+                                  "\n                                 Edit  "
                                 )
                               ]
                             ),
@@ -73583,7 +73590,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
+          "\n                                 Sedang Memuat Data\n                             "
         )
       ])
     ])
@@ -73595,7 +73602,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
+          "\n                                 Tidak Ada Data\n                             "
         )
       ])
     ])
@@ -81037,13 +81044,13 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(379)
+  __webpack_require__(355)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(381)
+var __vue_script__ = __webpack_require__(357)
 /* template */
-var __vue_template__ = __webpack_require__(355)
+var __vue_template__ = __webpack_require__(358)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81084,6 +81091,144 @@ module.exports = Component.exports
 
 /***/ }),
 /* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(356);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("399de05d", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96dfc7e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./PenjualanIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96dfc7e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./PenjualanIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.list-produk {\r\n\r\n\tpadding-left: 4px;\r\n\tpadding-right: 4px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 357 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			penjualan: [],
+			produks: [],
+			produksData: {},
+			pencarian: "",
+			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
+			loading: true
+		};
+	},
+	watch: {
+		// whenever question changes, this function will run
+		pencarian: function pencarian(newQuestion) {
+			this.searchData();
+		}
+	},
+	mounted: function mounted() {
+		var app = this;
+		app.getPenjualans();
+	},
+
+	methods: {
+		getPenjualans: function getPenjualans(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url + '/view?page=' + page).then(function (resp) {
+				app.produks = resp.data.data;
+				app.produksData = resp.data;
+				app.loading = false;
+			}).catch(function (resp) {
+				alert("Could not load produks");
+				app.loading = false;
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81203,19 +81348,19 @@ if (false) {
 }
 
 /***/ }),
-/* 356 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(357)
+  __webpack_require__(360)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(359)
+var __vue_script__ = __webpack_require__(362)
 /* template */
-var __vue_template__ = __webpack_require__(360)
+var __vue_template__ = __webpack_require__(363)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81255,13 +81400,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 357 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(358);
+var content = __webpack_require__(361);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -81281,7 +81426,7 @@ if(false) {
 }
 
 /***/ }),
-/* 358 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(undefined);
@@ -81295,7 +81440,7 @@ exports.push([module.i, "\n.pencarian[data-v-56a4ec6d] {\r\n\tcolor: red;\r\n\r\
 
 
 /***/ }),
-/* 359 */
+/* 362 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81470,7 +81615,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 360 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81644,43 +81789,26 @@ if (false) {
 }
 
 /***/ }),
-/* 361 */,
-/* 362 */,
-/* 363 */,
 /* 364 */,
 /* 365 */,
-/* 366 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
+/* 366 */,
 /* 367 */,
 /* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(375)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(377)
+var __vue_script__ = __webpack_require__(370)
 /* template */
-var __vue_template__ = __webpack_require__(378)
+var __vue_template__ = __webpack_require__(371)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-7fa97c66"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -81691,7 +81819,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\profileToko\\ProfileToko.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profileToko\\ProfileTokoEdit.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -81701,9 +81829,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7fa97c66", Component.options)
+    hotAPI.createRecord("data-v-49334712", Component.options)
   } else {
-    hotAPI.reload("data-v-7fa97c66", Component.options)
+    hotAPI.reload("data-v-49334712", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -81714,47 +81842,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 375 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(376);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("016cea71", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7fa97c66\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileToko.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7fa97c66\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileToko.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 376 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.pencarian[data-v-7fa97c66] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 377 */
+/* 370 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81769,6 +81857,585 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	mounted: function mounted() {
+		this.getItem();
+	},
+
+
+	data: function data() {
+		return {
+			errors: [],
+			url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+			profileToko: {
+				nama_toko: '',
+				nama_pemilik: '',
+				email: '',
+				no_telp: '',
+				alamat: '',
+				logo: ''
+			},
+			profileTokoId: null,
+			message: ''
+		};
+	},
+	methods: {
+		saveForm: function saveForm() {
+			var app = this;
+			var newToko = app.profileToko;
+			axios.patch(app.url + '/' + app.profileTokoId, newToko).then(function (resp) {
+				app.message = 'Berhasil Merubah Profile Toko "' + app.profileToko.nama_pemilik + '"';
+				app.alert(app.message);
+				app.errors = '';
+				app.$router.replace('/profile-toko');
+			}).catch(function (resp) {
+				app.errors = resp.response.data.errors;
+			});
+		},
+		alert: function alert(pesan) {
+			this.$swal({
+				title: "Berhasil!",
+				text: pesan,
+				icon: "success"
+			});
+		},
+		getItem: function getItem() {
+
+			var app = this;
+			var id = app.$route.params.id;
+			app.profileTokoId = id;
+
+			axios.get(app.url + '/' + id + '/edit').then(function (resp) {
+				app.profileToko = resp.data;
+			}).catch(function () {
+				alert("Could not load your Profile Toko");
+			});
+		}
+	}
+
+});
+
+/***/ }),
+/* 371 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("ul", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+              _vm._v("Home")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "profileTokoIndex" } } }, [
+              _vm._v("Profile Toko")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Edit Profile Toko")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "form-horizontal",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.saveForm()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "nama_toko" }
+                  },
+                  [_vm._v("Nama Toko")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.nama_toko,
+                        expression: "profileToko.nama_toko"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "on",
+                      placeholder: "Nama Toko",
+                      type: "text",
+                      name: "nama_toko",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.nama_toko },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "nama_toko",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.nama_toko
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.nama_toko[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "nama_pemilik" }
+                  },
+                  [_vm._v("Nama Pemilik")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.nama_pemilik,
+                        expression: "profileToko.nama_pemilik"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Nama Pemilik",
+                      type: "text",
+                      name: "nama_pemilik",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.nama_pemilik },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "nama_pemilik",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.nama_pemilik
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.nama_pemilik[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "email" }
+                  },
+                  [_vm._v("Email")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.email,
+                        expression: "profileToko.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Email",
+                      type: "email",
+                      name: "email",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.profileToko, "email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.email
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.email[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "no_telp" }
+                  },
+                  [_vm._v("No. Telp")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.no_telp,
+                        expression: "profileToko.no_telp"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "No. Telp",
+                      type: "tel",
+                      name: "no_telp",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.no_telp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "no_telp",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.no_telp
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.no_telp[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "alamat" }
+                  },
+                  [_vm._v("Alamat")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.alamat,
+                        expression: "profileToko.alamat"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      autocomplete: "off",
+                      placeholder: "Alamat",
+                      type: "text",
+                      name: "alamat",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.alamat },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.profileToko, "alamat", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.alamat
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.alamat[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "logo" }
+                  },
+                  [_vm._v("Logo")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.logo,
+                        expression: "profileToko.logo"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      autocomplete: "off",
+                      placeholder: "Logo",
+                      type: "text",
+                      name: "logo",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.logo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.profileToko, "logo", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.logo
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.logo[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1, false, false)
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("h4", { staticClass: "panel-title" }, [_vm._v(" Profile Toko ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { id: "btnSimpanProfileToko", type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49334712", module.exports)
+  }
+}
+
+/***/ }),
+/* 372 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(383)
+/* template */
+var __vue_template__ = __webpack_require__(385)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\profileToko\\ProfileTokoIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-59c62796", Component.options)
+  } else {
+    hotAPI.reload("data-v-59c62796", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 381 */,
+/* 382 */,
+/* 383 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -81841,10 +82508,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             // buat nampilin data dlm bentuk array
-            tokos: [],
+            profileTokos: [],
             // buat paginations
-            tokosData: {},
-            pencarian: '',
+            profileTokosData: {},
             message: '',
             url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
             loading: true
@@ -81852,88 +82518,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         var app = this;
-        app.getTokos();
+        app.getProfileTokos();
     },
 
-    watch: {
-        // whenever question changes, this function will run
-        pencarian: function pencarian(newQuestion) {
-            var app = this;
-            app.searchData();
-        }
-    },
     methods: {
-        // method getkategoriProduk
-        getTokos: function getTokos(page) {
+        // method getprofileToko
+        getProfileTokos: function getProfileTokos(page) {
             var app = this;
             if (typeof page === 'undefined') {
                 page = 1;
             }
             axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.tokos = resp.data.data;
-                app.tokosData = resp.data;
+                app.profileTokos = resp.data.data;
+                app.profileTokosData = resp.data;
                 app.loading = false;
                 // buat cek ddi console
-                console.log(resp.data.data);
+                console.log(app.profileTokos);
             }).catch(function (resp) {
-                alert("Could not load tokos");
+                alert("Could not load Profile Tokos");
                 app.loading = false;
-            });
-        },
-        searchData: function searchData(page) {
-            var app = this;
-            app.loading == true;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
-                app.tokos = resp.data.data;
-                app.tokosData = resp.data;
-                app.loading = false;
-            }).catch(function (resp) {
-                alert("data tidak ditemukan");
-                app.loading = false;
-            });
-        },
-        deleteToko: function deleteToko(id, index, nama_toko) {
-            var _this = this;
-
-            swal({
-                title: "Konfirmasi Hapus",
-                text: "Anda Yakin Ingin Menghapus " + nama_toko + " ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    var app = _this;
-                    axios.delete(app.url + '/' + id).then(function (resp) {
-                        app.getTokos();
-                        swal("Berhasil Dihapus!  ", {
-                            icon: "success"
-                        });
-                    }).catch(function (resp) {
-                        app.$router.replace('/toko/');
-                        swal("Gagal Menghapus!", {
-                            icon: "warning"
-                        });
-                    });
-                }
-                _this.$router.replace('/toko/');
-            });
-        },
-        alert: function alert(nama_toko) {
-            this.$swal({
-                title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus Kas Masuk ' + nama_toko,
-                icon: "success"
             });
         }
     }
 });
 
 /***/ }),
-/* 378 */
+/* 384 */,
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81952,81 +82563,76 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Data Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Profile Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Data Toko")]),
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Profile Toko")]),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "panel-body" },
         [
           _c("div", { staticClass: "table-responsive" }, [
-            _c("div", { staticClass: "pencarian" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.pencarian,
-                    expression: "pencarian"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "pencarian",
-                  placeholder: "Pencarian"
-                },
-                domProps: { value: _vm.pencarian },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.pencarian = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
             _c("table", { staticClass: "table table-striped table-hover" }, [
               _vm._m(0, false, false),
               _vm._v(" "),
-              _vm.tokos.length > 0 && _vm.loading == false
+              _vm.profileTokos.length > 0 && _vm.loading == false
                 ? _c(
                     "tbody",
                     { staticClass: "data-ada" },
-                    _vm._l(_vm.tokos, function(toko, index) {
+                    _vm._l(_vm.profileTokos, function(profileToko, index) {
                       return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(toko.nama_toko))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(toko.nama_pemilik))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(toko.email))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(toko.alamat))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(toko.logo))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(toko.no_telp))]),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.nama_toko))
+                        ]),
                         _vm._v(" "),
                         _c("td", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteToko(toko.id, index, toko.nama_toko)
+                          _vm._v(_vm._s(profileToko.profileToko.nama_pemilik))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.email))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.no_telp))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.alamat))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.logo))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(profileToko.last_login))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-default",
+                                attrs: {
+                                  to: {
+                                    name: "editProfileToko",
+                                    params: { id: profileToko.profileToko.id }
+                                  },
+                                  id: "edit-" + profileToko.profileToko.id
                                 }
-                              }
-                            },
-                            [_vm._v("Delete")]
-                          )
-                        ])
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                   Edit  "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
                       ])
                     })
                   )
@@ -82047,8 +82653,8 @@ var render = function() {
             { attrs: { align: "right" } },
             [
               _c("pagination", {
-                attrs: { data: _vm.tokosData },
-                on: { "pagination-change-page": _vm.getTokos }
+                attrs: { data: _vm.profileTokosData },
+                on: { "pagination-change-page": _vm.getProfileTokos }
               })
             ],
             1
@@ -82071,11 +82677,13 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Email")]),
       _vm._v(" "),
+      _c("th", [_vm._v("No. Telp")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Alamat")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Logo Toko")]),
+      _c("th", [_vm._v("Logo")]),
       _vm._v(" "),
-      _c("th", [_vm._v("No. Telp")]),
+      _c("th", [_vm._v("Login Terakhir")]),
       _vm._v(" "),
       _c("th", [_vm._v("Aksi")])
     ])
@@ -82086,7 +82694,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t\t")
+        _vm._v(
+          "\n                                   Sedang Memuat Data\n                               "
+        )
       ])
     ])
   },
@@ -82096,7 +82706,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t\t")
+        _vm._v(
+          "\n                                   Tidak Ada Data\n                               "
+        )
       ])
     ])
   }
@@ -82106,147 +82718,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7fa97c66", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-59c62796", module.exports)
   }
 }
-
-/***/ }),
-/* 379 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(380);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("399de05d", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96dfc7e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./PenjualanIndex.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-96dfc7e6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./PenjualanIndex.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 380 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.list-produk {\r\n\r\n\tpadding-left: 4px;\r\n\tpadding-right: 4px;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 381 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			penjualan: [],
-			produks: [],
-			produksData: {},
-			pencarian: "",
-			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
-			loading: true
-		};
-	},
-	watch: {
-		// whenever question changes, this function will run
-		pencarian: function pencarian(newQuestion) {
-			this.searchData();
-		}
-	},
-	mounted: function mounted() {
-		var app = this;
-		app.getPenjualans();
-	},
-
-	methods: {
-		getPenjualans: function getPenjualans(page) {
-			var app = this;
-			if (typeof page === 'undefined') {
-				page = 1;
-			}
-
-			axios.get(app.url + '/view?page=' + page).then(function (resp) {
-				app.produks = resp.data.data;
-				app.produksData = resp.data;
-				app.loading = false;
-			}).catch(function (resp) {
-				alert("Could not load produks");
-				app.loading = false;
-			});
-		}
-	}
-});
 
 /***/ })
 /******/ ]);
