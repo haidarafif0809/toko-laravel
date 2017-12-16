@@ -195,6 +195,11 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
+                                    <router-link :to="{name: 'profileToko'}">
+                                        Profile Toko
+                                    </router-link>
+                                </li>
+                                <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     Logout
@@ -202,11 +207,6 @@
                                 <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                            </li>
-                            <li>
-                                <router-link :to="{name: 'profileToko'}">
-                                    Profile Toko
-                                </router-link>
                             </li>
 
                         </ul>
