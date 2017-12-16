@@ -71218,20 +71218,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 reader.readAsDataURL(file);
             }
         },
-        broken_img: function broken_img() {
-            var anu = '';
-            console.log();
-            // let anu = 
-            // this.$swal({
-            //     title: "File tidak didukung!",
-            //     text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
-            //     icon: "warning",
-            //     buttons: "Saya mengerti",
-            // });            
-        },
         saveForm: function saveForm() {
             var app = this;
             var newProduk = app.produk;
+            var image = document.getElementById('image');
+
+            if (image.value == '') {
+                newProduk.foto = null;
+            }
             axios.patch(app.url + '/' + app.produkId, newProduk).then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk ' + app.produk.nama_produk;
                 app.alert(app.message);
@@ -71676,7 +71670,7 @@ var render = function() {
                     [_vm._v("Pratinjau Foto")]
                   ),
                   _vm._v(" "),
-                  _vm.produk.foto != null
+                  _vm.produk.foto != null || _vm.produk.foto != ""
                     ? _c("div", { staticClass: "col-md-4" }, [
                         _vm.produk.foto.length > 100
                           ? _c("div", [
@@ -71720,7 +71714,7 @@ var render = function() {
               _c("div", { staticClass: "col-md-4" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { type: "file", name: "foto" },
+                  attrs: { type: "file", name: "foto", id: "image" },
                   on: { change: _vm.onFileChange }
                 })
               ])
@@ -71744,8 +71738,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { id: "btnSimpanproduk", type: "submit" },
-                          on: { click: _vm.broken_img }
+                          attrs: { id: "btnSimpanproduk", type: "submit" }
                         },
                         [_vm._v("Submit")]
                       )

@@ -74,7 +74,7 @@
                     </div>
                     <div v-if="produk.foto != ''" class="form-group">
                         <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-                        <div v-if="produk.foto != null" class="col-md-4">
+                        <div v-if="produk.foto != null || produk.foto != ''" class="col-md-4">
                             <div v-if="produk.foto.length > 100">
                                 <img :src="produk.foto" class="img-responsive thumbnail shadow">
                             </div>
@@ -89,7 +89,7 @@
                     <div class="form-group">
                         <label for="foto" class="col-md-2 control-label">Foto</label>
                         <div class="col-md-4">
-                            <input class="form-control" type="file" name="foto" v-on:change="onFileChange">
+                            <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
                         </div>
                     </div>
                     <div class="form-group">
@@ -98,7 +98,7 @@
                                 <button class="btn btn-primary" id="btnSimpanproduk" type="submit">Submit</button>
                             </div>
                             <div v-else>
-                                <button class="btn btn-primary" id="btnSimpanproduk" @click="broken_img" type="submit">Submit</button>
+                                <button class="btn btn-primary" id="btnSimpanproduk" type="submit">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -173,20 +173,14 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
-        broken_img() {
-            let anu = '';
-            console.log();
-            // let anu = 
-            // this.$swal({
-            //     title: "File tidak didukung!",
-            //     text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
-            //     icon: "warning",
-            //     buttons: "Saya mengerti",
-            // });            
-        },
         saveForm() {
             var app = this;
             var newProduk = app.produk;
+            var image = document.getElementById('image');
+
+            if (image.value == '') {
+                newProduk.foto = null;
+            }
             axios.patch(app.url+'/' + app.produkId, newProduk)
             .then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk '+ app.produk.nama_produk;
