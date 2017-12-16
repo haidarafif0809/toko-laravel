@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\KategoriProduk;
 use App\Produk;
 use App\Satuan;
+use Auth;
 use Carbon\Carbon;
 use File;
 use Illuminate\Http\Request;
@@ -19,12 +20,17 @@ class ProdukController extends Controller
  */
     public function index()
     {
-//
+
+    }
+
+    public function tes()
+    {
+        return Auth::user()->toko_id;
     }
 
     public function view()
     {
-        return Produk::with('satuan')->paginate(10);
+        return Produk::with('satuan')->orderBy('produk_id', 'desc')->paginate(10);
     }
 
     public function cari(Request $request)
@@ -163,20 +169,39 @@ class ProdukController extends Controller
     {
         $produk = Produk::find($id);
 
-        if ($request->foto !== null) {
+        $this->validate($request, [
+            'kode_produk'         => 'required',
+            'nama_produk'         => 'required',
+            'kategori_produks_id' => 'required|exists:kategori_produks,id',
+            'harga_beli'          => 'required|numeric',
+            'harga_jual'          => 'numeric',
+            'satuans_id'          => 'required|exists:satuans,id',
+            'status_jual'         => 'required',
+        ]);
+
+        $arrUpdateProduk = [
+            'kode_produk'         => $request->kode_produk,
+            'nama_produk'         => $request->nama_produk,
+            'kategori_produks_id' => $request->kategori_produks_id,
+            'harga_beli'          => $request->harga_beli,
+            'harga_jual'          => $request->harga_jual,
+            'satuans_id'          => $request->satuans_id,
+            'status_jual'         => $request->status_jual,
+        ];
+
+        if ($request->foto === null) {
+
+            return;
+
+        } else {
+
             $this->validate($request, [
-                // 'kode_produk'         => 'required',
-                // 'nama_produk'         => 'required',
-                // 'kategori_produks_id' => 'required|exists:kategori_produks,id',
-                // 'harga_beli'          => 'required|numeric',
-                // 'harga_jual'          => 'numeric',
-                // 'satuans_id'          => 'required|exists:satuans,id',
-                // 'status_jual'         => 'required',
                 'foto' => 'image64:jpeg,jpg,png|max:3072000',
             ]);
             $imageData = $request->foto;
             $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+
+            $fileName = Carbon::now()->timestamp . '.' . $ekstensi;
             Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
             if ($produk->foto) {
                 $oldImg   = $produk->foto;
@@ -188,29 +213,13 @@ class ProdukController extends Controller
                     // File sudah dihapus/tidak ada
                 }
             }
-        } else {
-            $this->validate($request, [
-                'kode_produk'         => 'required',
-                'nama_produk'         => 'required',
-                'kategori_produks_id' => 'required|exists:kategori_produks,id',
-                'harga_beli'          => 'required|numeric',
-                'harga_jual'          => 'numeric',
-                'satuans_id'          => 'required|exists:satuans,id',
-                'status_jual'         => 'required',
-            ]);
+
+            $arrUpdateProduk['foto'] = $fileName;
 
         }
 
-        $produk->update([
-            'kode_produk'         => $request->kode_produk,
-            'nama_produk'         => $request->nama_produk,
-            'kategori_produks_id' => $request->kategori_produks_id,
-            'harga_beli'          => $request->harga_beli,
-            'harga_jual'          => $request->harga_jual,
-            'satuans_id'          => $request->satuans_id,
-            'status_jual'         => $request->status_jual,
-            'foto'                => (!empty($fileName) ? $fileName : ''),
-        ]);
+        $produk->update($arrUpdateProduk);
+        // 'foto' => $fileName,
 
         if ($produk == true) {
             return response(200);

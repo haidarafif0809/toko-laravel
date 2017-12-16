@@ -21,16 +21,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Validator::extend('image64', function ($attribute, $value, $parameters, $validator) {
-            if (!empty($value) && !empty($parameters)) {
-                $type = explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
+            $type = explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
 
-                if (in_array($type, $parameters)) {
-                    return true;
-                }
-                return false;
-            } else {
-                return false;
+            if (in_array($type, $parameters)) {
+                return true;
             }
+            return false;
         });
 
         Validator::replacer('image64', function ($message, $attribute, $rule, $parameters) {
@@ -45,11 +41,11 @@ class AppServiceProvider extends ServiceProvider
         // \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
+/**
+ * Register any application services.
+ *
+ * @return void
+ */
     public function register()
     {
         //

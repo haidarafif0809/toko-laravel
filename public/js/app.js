@@ -71226,20 +71226,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 reader.readAsDataURL(file);
             }
         },
-        broken_img: function broken_img() {
-            var anu = '';
-            console.log();
-            // let anu = 
-            // this.$swal({
-            //     title: "File tidak didukung!",
-            //     text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
-            //     icon: "warning",
-            //     buttons: "Saya mengerti",
-            // });            
-        },
         saveForm: function saveForm() {
             var app = this;
             var newProduk = app.produk;
+            var image = document.getElementById('image');
+
+            if (image.value == '') {
+                newProduk.foto = null;
+            }
             axios.patch(app.url + '/' + app.produkId, newProduk).then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk ' + app.produk.nama_produk;
                 app.alert(app.message);
@@ -71684,7 +71678,7 @@ var render = function() {
                     [_vm._v("Pratinjau Foto")]
                   ),
                   _vm._v(" "),
-                  _vm.produk.foto != null
+                  _vm.produk.foto != null || _vm.produk.foto != ""
                     ? _c("div", { staticClass: "col-md-4" }, [
                         _vm.produk.foto.length > 100
                           ? _c("div", [
@@ -71728,7 +71722,7 @@ var render = function() {
               _c("div", { staticClass: "col-md-4" }, [
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: { type: "file", name: "foto" },
+                  attrs: { type: "file", name: "foto", id: "image" },
                   on: { change: _vm.onFileChange }
                 })
               ])
@@ -71752,8 +71746,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { id: "btnSimpanproduk", type: "submit" },
-                          on: { click: _vm.broken_img }
+                          attrs: { id: "btnSimpanproduk", type: "submit" }
                         },
                         [_vm._v("Submit")]
                       )
@@ -81185,29 +81178,111 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			penjualan: [],
+			pelanggans: [],
 			produks: [],
 			produksData: {},
-			pencarian: "",
+			search: '',
 			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
-			loading: true
+			loading: true,
+
+			setting_pelanggan: {
+				placeholder: 'Pilih Pelanggan'
+			}
 		};
-	},
-	watch: {
-		// whenever question changes, this function will run
-		pencarian: function pencarian(newQuestion) {
-			this.searchData();
-		}
 	},
 	mounted: function mounted() {
 		var app = this;
+		app.loading = true;
 		app.getPenjualans();
+		app.selectPelanggans();
 	},
 
+
+	// computed: {
+	// 	cartCount: function(){
+	// 		return this.cart.length
+	// 	},
+	// totalPrice: function(){
+	// 	return this.cart.reduce(function(prev, item){
+	// 		return prev + (item.price * item.quantity)
+	// 	}, 0)
+	// },
+	// amountDue: function() {
+	// 	return this.totalPrice - this.form.totalPayment
+	// }
+	// },
+
+	watch: {
+		// whenever question changes, this function will run
+		search: function search(newQuestion) {
+			this.getHasilPencarian();
+		}
+	},
 	methods: {
 		getPenjualans: function getPenjualans(page) {
 			var app = this;
@@ -81216,11 +81291,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}
 
 			axios.get(app.url + '/view?page=' + page).then(function (resp) {
+				app.loading = false;
 				app.produks = resp.data.data;
 				app.produksData = resp.data;
-				app.loading = false;
 			}).catch(function (resp) {
 				alert("Could not load produks");
+				app.loading = false;
+			});
+		},
+
+
+		// storeItemToCart: function(item) {
+		// 	var ids = _.map(this.cart, 'id')
+
+		// 	if (!_.includes(ids, item.id)) {
+		// 		item.quantity = 1
+		// 		this.cart.push(item)
+		// 	} else {
+		// 		var index = _.findIndex(this.cart, item)
+		// 		this.cart[index].quantity = this.cart[index].quantity + 1
+		// 	}
+		// },
+
+		selectPelanggans: function selectPelanggans() {
+			var app = this;
+			axios.get(app.url + '/pelanggan').then(function (resp) {
+				app.pelanggans = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load pelanggan");
+			});
+		},
+		getHasilPencarian: function getHasilPencarian(page) {
+			var app = this;
+			app.loading = true;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+				app.loading = false;
+				app.produks = resp.data.data;
+				app.penjualansData = resp.data;
+			}).catch(function (resp) {
+				alert("Tidak dapat memuat produk..");
 				app.loading = false;
 			});
 		}
@@ -81257,12 +81370,12 @@ var render = function() {
           { staticClass: "panel panel-default" },
           [
             _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("List Produk")
+              _vm._v("Daftar Produk")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "panel-body" }, [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "col-md-12 pencarian" }, [
                   _c("input", {
                     directives: [
                       {
@@ -81276,7 +81389,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "search",
-                      placeholder: "Pencarian"
+                      placeholder: "Pencarian Produk"
                     },
                     domProps: { value: _vm.search },
                     on: {
@@ -81297,7 +81410,7 @@ var render = function() {
                 "div",
                 { staticClass: "row" },
                 _vm._l(_vm.produks, function(produk, index) {
-                  return _c("div", { staticClass: "col-md-6 list-produk" }, [
+                  return _c("div", { staticClass: "col-md-4 list-produk" }, [
                     _c(
                       "div",
                       {
@@ -81308,7 +81421,9 @@ var render = function() {
                         _c("div", { staticClass: "caption" }, [
                           _c("h4", [_vm._v(_vm._s(produk.nama_produk))]),
                           _vm._v(" "),
-                          _c("p", [_vm._v(_vm._s(produk.harga_jual))])
+                          _c("p", [
+                            _vm._v("Harga: " + _vm._s(produk.harga_jual))
+                          ])
                         ])
                       ]
                     )
@@ -81329,15 +81444,144 @@ var render = function() {
                 })
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { align: "right" } },
+              [
+                _vm.search != ""
+                  ? _c("pagination", {
+                      attrs: { data: _vm.produksData, limit: 1 },
+                      on: { "pagination-change-page": _vm.getHasilPencarian }
+                    })
+                  : _vm._e()
+              ],
+              1
             )
           ],
           1
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Produk")]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "list-group cart-item" }, [
+          _c("li", { staticClass: "list-group-item list-group-item-warning" }, [
+            _vm._v("Tidak ada item")
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "list-group-item",
+              attrs: { "track-by": "id" },
+              on: { click: function($event) {} }
+            },
+            [_c("span", { staticClass: "pull-right" })]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0, false, false)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-body" }, [
+          _c("form", [
+            _vm._m(1, false, false),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { staticClass: "control-label" }, [
+                  _vm._v(" Nama Pelanggan:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "selectize-component",
+                  {
+                    attrs: { settings: _vm.setting_pelanggan },
+                    model: {
+                      value: _vm.penjualan.nama_pelanggan,
+                      callback: function($$v) {
+                        _vm.$set(_vm.penjualan, "nama_pelanggan", $$v)
+                      },
+                      expression: "penjualan.nama_pelanggan"
+                    }
+                  },
+                  _vm._l(_vm.pelanggans, function(pelanggan) {
+                    return _c("option", { domProps: { value: pelanggan.id } }, [
+                      _vm._v(_vm._s(pelanggan.nama_pelanggan))
+                    ])
+                  })
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(2, false, false),
+            _vm._v(" "),
+            _vm._m(3, false, false)
+          ])
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-footer" }, [
+      _vm._v("\n\t\t\t\t\tTotal Item:\n\t\t\t\t\t"),
+      _c("span", { staticClass: "pull-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "control-label" }, [_vm._v("Total Bayar")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v("\n\t\t\t\t\t\t\t0\n\t\t\t\t\t\t\t"),
+      _c("h2", { staticClass: "form-control-static text-warning" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "number", placeholder: "Pembayaran" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c("button", { staticClass: "btn btn-success" }, [_vm._v("Bayar")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "control-label" }, [_vm._v("Keterangan")]),
+      _vm._v(" "),
+      _c("textarea", { staticClass: "form-control" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

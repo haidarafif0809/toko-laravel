@@ -18,6 +18,11 @@ class Penjualan extends Model
         return $this->hasOne('App\KategoriProduk', 'id', 'penjualan_id');
     }
 
+    public function pelanggan()
+    {
+        return $this->hasOne('App\Pelanggan', 'id', 'produk_id');
+    }
+
     // public function produk()
     // {
     //     return $this->hasOne('App\Produk', 'id', 'penjualan_id');
