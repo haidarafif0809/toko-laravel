@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(372);
+module.exports = __webpack_require__(370);
 
 
 /***/ }),
@@ -29375,9 +29375,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_penjualan_PenjualanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_penjualan_PenjualanIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__ = __webpack_require__(380);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__ = __webpack_require__(369);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__ = __webpack_require__(367);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -81789,20 +81789,354 @@ if (false) {
 }
 
 /***/ }),
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(370)
+var __vue_script__ = __webpack_require__(365)
 /* template */
-var __vue_template__ = __webpack_require__(371)
+var __vue_template__ = __webpack_require__(366)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\profileToko\\ProfileTokoIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-59c62796", Component.options)
+  } else {
+    hotAPI.reload("data-v-59c62796", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 365 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            // buat nampilin data dlm bentuk array
+            profileTokos: [],
+            // buat paginations
+            profileTokosData: {},
+            message: '',
+            url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+            loading: true
+        };
+    },
+    mounted: function mounted() {
+        var app = this;
+        app.getProfileTokos();
+    },
+
+    methods: {
+        // method getprofileToko
+        getProfileTokos: function getProfileTokos(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.profileTokos = resp.data.data;
+                app.profileTokosData = resp.data;
+                app.loading = false;
+                // buat cek ddi console
+                console.log(app.profileTokos);
+            }).catch(function (resp) {
+                alert("Could not load Profile Tokos");
+                app.loading = false;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Profile Toko")])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Profile Toko")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "panel-body" },
+        [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-striped table-hover" }, [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _vm.profileTokos.length > 0 && _vm.loading == false
+                ? _c(
+                    "tbody",
+                    { staticClass: "data-ada" },
+                    _vm._l(_vm.profileTokos, function(profileToko, index) {
+                      return _c("tr", [
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.nama_toko))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.nama_pemilik))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.email))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.no_telp))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.alamat))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(profileToko.profileToko.logo))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(profileToko.last_login))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-default",
+                                attrs: {
+                                  to: {
+                                    name: "editProfileToko",
+                                    params: { id: profileToko.profileToko.id }
+                                  },
+                                  id: "edit-" + profileToko.profileToko.id
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                   Edit  "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    })
+                  )
+                : _vm.loading == true
+                  ? _c("tbody", { staticClass: "data-ada" }, [
+                      _vm._m(1, false, false)
+                    ])
+                  : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                      _vm._m(2, false, false)
+                    ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { attrs: { align: "right" } },
+            [
+              _c("pagination", {
+                attrs: { data: _vm.profileTokosData },
+                on: { "pagination-change-page": _vm.getProfileTokos }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama Toko")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Nama Pemilik")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("No. Telp")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Alamat")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Logo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Login Terakhir")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n                                   Sedang Memuat Data\n                               "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v(
+          "\n                                   Tidak Ada Data\n                               "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-59c62796", module.exports)
+  }
+}
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(368)
+/* template */
+var __vue_template__ = __webpack_require__(369)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81842,7 +82176,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 370 */
+/* 368 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81976,7 +82310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 371 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82368,359 +82702,10 @@ if (false) {
 }
 
 /***/ }),
-/* 372 */
+/* 370 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 373 */,
-/* 374 */,
-/* 375 */,
-/* 376 */,
-/* 377 */,
-/* 378 */,
-/* 379 */,
-/* 380 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(383)
-/* template */
-var __vue_template__ = __webpack_require__(385)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\profileToko\\ProfileTokoIndex.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-59c62796", Component.options)
-  } else {
-    hotAPI.reload("data-v-59c62796", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 381 */,
-/* 382 */,
-/* 383 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            // buat nampilin data dlm bentuk array
-            profileTokos: [],
-            // buat paginations
-            profileTokosData: {},
-            message: '',
-            url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
-            loading: true
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.getProfileTokos();
-    },
-
-    methods: {
-        // method getprofileToko
-        getProfileTokos: function getProfileTokos(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.profileTokos = resp.data.data;
-                app.profileTokosData = resp.data;
-                app.loading = false;
-                // buat cek ddi console
-                console.log(app.profileTokos);
-            }).catch(function (resp) {
-                alert("Could not load Profile Tokos");
-                app.loading = false;
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 384 */,
-/* 385 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("ul", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Home")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Profile Toko")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Profile Toko")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "panel-body" },
-        [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table table-striped table-hover" }, [
-              _vm._m(0, false, false),
-              _vm._v(" "),
-              _vm.profileTokos.length > 0 && _vm.loading == false
-                ? _c(
-                    "tbody",
-                    { staticClass: "data-ada" },
-                    _vm._l(_vm.profileTokos, function(profileToko, index) {
-                      return _c("tr", [
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.nama_toko))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.nama_pemilik))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.email))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.no_telp))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.alamat))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.logo))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(profileToko.last_login))]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-xs btn-default",
-                                attrs: {
-                                  to: {
-                                    name: "editProfileToko",
-                                    params: { id: profileToko.profileToko.id }
-                                  },
-                                  id: "edit-" + profileToko.profileToko.id
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                   Edit  "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    })
-                  )
-                : _vm.loading == true
-                  ? _c("tbody", { staticClass: "data-ada" }, [
-                      _vm._m(1, false, false)
-                    ])
-                  : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                      _vm._m(2, false, false)
-                    ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "div",
-            { attrs: { align: "right" } },
-            [
-              _c("pagination", {
-                attrs: { data: _vm.profileTokosData },
-                on: { "pagination-change-page": _vm.getProfileTokos }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Nama Toko")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Nama Pemilik")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("No. Telp")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Alamat")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Logo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Login Terakhir")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Aksi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-59c62796", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
