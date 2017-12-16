@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pelanggan;
 use App\Produk;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,12 @@ class PenjualanController extends Controller
         //
     }
 
+    public function pelanggan()
+    {
+        $pelanggan = Pelanggan::all();
+        return response()->json($pelanggan);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +45,7 @@ class PenjualanController extends Controller
         // return Penjualan::with('Produk')->paginate(10);
         // return Produk::paginate(5);
         // return KategoriProduk::paginate(2);
-        $produk = Produk::paginate(8);
+        $produk = Produk::paginate(9);
         $array  = array();
         foreach ($produk as $produks) {
             array_push($array, [
@@ -67,7 +74,7 @@ class PenjualanController extends Controller
 
     public function search(Request $request)
     {
-        $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $produk = Produk::where('nama_produk', 'LIKE', "%$request->search%")->paginate(9);
         return response()->json($produk);
     }
 
