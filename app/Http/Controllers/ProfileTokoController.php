@@ -77,17 +77,33 @@ class ProfileTokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // exit();
-        $this->validate($request, [
-            'nama_toko'    => 'required',
-            'nama_pemilik' => 'required',
-            'email'        => 'required|string|email|max:255|unique:tokos.email,' . $id,
-            'no_telp'      => 'required',
-            'alamat'       => 'required',
-            'logo'         => 'required',
-        ]);
+        //
+        $user_login = Toko::find($id);
+        if ($user_login->id != $id) {
+            Auth::logout();
+            return response()->view('error.403');
+        } else {
+            $this->validate($request, [
+                'nama_toko'    => 'required',
+                'nama_pemilik' => 'required',
+                'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
+                'no_telp'      => 'required',
+                'alamat'       => 'required',
+                'logo'         => 'required',
+            ]);
+            $user_login->update([
+                'nama_toko'    => $request->nama_toko,
+                'nama_pemilik' => $request->nama_pemilik,
+                'email'        => $request->email,
+                'no_telp'      => $request->no_telp,
+                'alamat'       => $request->alamat,
+                'logo'         => $request->logo,
+            ]);
+        }
+    }
 
-        return response(200);
+    public function proses_ubah_profil_toko(Request $request)
+    {
 
     }
 

@@ -67489,88 +67489,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-   data: function data() {
-      return {
-         users: [],
-         usersData: {},
-         url: window.location.origin + window.location.pathname.replace("home", "user"),
-         search: '',
-         loading: true
+  data: function data() {
+    return {
+      users: [],
+      usersData: {},
+      url: window.location.origin + window.location.pathname.replace("home", "user"),
+      search: '',
+      loading: true
 
-      };
-   },
-   mounted: function mounted() {
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.loading = true;
+    app.getUsers();
+  },
+
+  watch: {
+    // whenever question changes, this function will run
+    search: function search(newQuestion) {
+      this.getHasilPencarian();
+    }
+  },
+  methods: {
+    getUsers: function getUsers(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+        console.log(resp);
+      }).catch(function (resp) {
+        alert("Could not load users");
+      });
+    },
+    deleteEntry: function deleteEntry(id, index, name) {
+      if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
+        var app = this;
+        axios.delete(app.url + '/' + id).then(function (resp) {
+          app.getUsers();
+          app.alert(name);
+          app.$router.replace('/user');
+        }).catch(function (resp) {
+          alert("Could not delete user");
+        });
+      }
+    },
+    getHasilPencarian: function getHasilPencarian(page) {
       var app = this;
       app.loading = true;
-      app.getUsers();
-   },
-
-   watch: {
-      // whenever question changes, this function will run
-      search: function search(newQuestion) {
-         this.getHasilPencarian();
+      if (typeof page === 'undefined') {
+        page = 1;
       }
-   },
-   methods: {
-      getUsers: function getUsers(page) {
-         var app = this;
-         if (typeof page === 'undefined') {
-            page = 1;
-         }
-         axios.get(app.url + '/view?page=' + page).then(function (resp) {
-            app.loading = false;
-            app.users = resp.data.data;
-            app.usersData = resp.data;
-            console.log(resp);
-         }).catch(function (resp) {
-            alert("Could not load users");
-         });
-      },
-      deleteEntry: function deleteEntry(id, index, name) {
-         if (confirm("Yakin Ingin Menghapus Staf " + name + " ?")) {
-            var app = this;
-            axios.delete(app.url + '/' + id).then(function (resp) {
-               app.getUsers();
-               app.alert(name);
-               app.$router.replace('/user');
-            }).catch(function (resp) {
-               alert("Could not delete user");
-            });
-         }
-      },
-      getHasilPencarian: function getHasilPencarian(page) {
-         var app = this;
-         app.loading = true;
-         if (typeof page === 'undefined') {
-            page = 1;
-         }
-         axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
-            app.loading = false;
-            app.users = resp.data.data;
-            app.usersData = resp.data;
-         }).catch(function (resp) {
-            console.log(resp);
-            app.loading = false;
-            alert("Could not load users");
-         });
-      },
-      alert: function alert(name) {
-         this.$swal({
-            title: "Berhasil!",
-            text: "Berhasil Menghapus " + name,
-            icon: "success"
-         });
-      }
-   }
+      axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+        app.loading = false;
+        app.users = resp.data.data;
+        app.usersData = resp.data;
+      }).catch(function (resp) {
+        console.log(resp);
+        app.loading = false;
+        alert("Could not load users");
+      });
+    },
+    alert: function alert(name) {
+      this.$swal({
+        title: "Berhasil!",
+        text: "Berhasil Menghapus " + name,
+        icon: "success"
+      });
+    }
+  }
 
 });
 
@@ -67657,47 +67650,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(user.no_telp))]),
                             _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-xs btn-default",
-                                    attrs: {
-                                      to: {
-                                        name: "editUser",
-                                        params: { id: user.id }
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        Ubah Toko\n                                    "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.deleteEntry(
-                                          user.id,
-                                          index,
-                                          user.nama_toko
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Delete")]
-                                )
-                              ],
-                              1
-                            )
+                            _c("td", [_vm._v(_vm._s(user.last_login))])
                           ])
                         })
                       )
@@ -67768,7 +67721,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("No. Tlp")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Aksi")])
+      _c("th", [_vm._v("Login Terakhir")])
     ])
   },
   function() {
@@ -81762,100 +81715,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            // buat nampilin data dlm bentuk array
-            tokos: [],
-            // buat paginations
-            tokosData: {},
-            pencarian: '',
-            message: '',
-            url: window.location.origin + window.location.pathname.replace("home", "toko"),
-            loading: true
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.getTokos();
-    },
+  data: function data() {
+    return {
+      // buat nampilin data dlm bentuk array
+      tokos: [],
+      // buat paginations
+      tokosData: {},
+      pencarian: '',
+      message: '',
+      url: window.location.origin + window.location.pathname.replace("home", "toko"),
+      loading: true
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.getTokos();
+  },
 
-    watch: {
-        // whenever question changes, this function will run
-        pencarian: function pencarian(newQuestion) {
-            var app = this;
-            app.searchData();
-        }
-    },
-    methods: {
-        // method getkategoriProduk
-        getTokos: function getTokos(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.tokos = resp.data.data;
-                app.tokosData = resp.data;
-                app.loading = false;
-                // buat cek ddi console
-                console.log(app.tokos);
-            }).catch(function (resp) {
-                alert("Could not load tokos");
-                app.loading = false;
-            });
-        },
-        searchData: function searchData(page) {
-            var app = this;
-            app.loading == true;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
-                app.tokos = resp.data.data;
-                app.tokosData = resp.data;
-                app.loading = false;
-            }).catch(function (resp) {
-                alert("data tidak ditemukan");
-                app.loading = false;
-            });
-        },
-        deleteToko: function deleteToko(id, index, nama_toko) {
-            var _this = this;
-
-            swal({
-                title: "Konfirmasi Hapus",
-                text: "Anda Yakin Ingin Menghapus " + nama_toko + " ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    var app = _this;
-                    axios.delete(app.url + '/' + id).then(function (resp) {
-                        app.getTokos();
-                        swal("Berhasil Dihapus!  ", {
-                            icon: "success"
-                        });
-                    }).catch(function (resp) {
-                        app.$router.replace('/toko/');
-                        swal("Gagal Menghapus!", {
-                            icon: "warning"
-                        });
-                    });
-                }
-                _this.$router.replace('/toko/');
-            });
-        },
-        alert: function alert(nama_toko) {
-            this.$swal({
-                title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus Kas Masuk ' + nama_toko,
-                icon: "success"
-            });
-        }
+  watch: {
+    // whenever question changes, this function will run
+    pencarian: function pencarian(newQuestion) {
+      var app = this;
+      app.searchData();
     }
+  },
+  methods: {
+    // method getkategoriProduk
+    getTokos: function getTokos(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.tokos = resp.data.data;
+        app.tokosData = resp.data;
+        app.loading = false;
+        // buat cek ddi console
+        console.log(app.tokos);
+      }).catch(function (resp) {
+        alert("Could not load tokos");
+        app.loading = false;
+      });
+    },
+    searchData: function searchData(page) {
+      var app = this;
+      app.loading == true;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/search?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+        app.tokos = resp.data.data;
+        app.tokosData = resp.data;
+        app.loading = false;
+      }).catch(function (resp) {
+        alert("data tidak ditemukan");
+        app.loading = false;
+      });
+    },
+    deleteToko: function deleteToko(id, index, nama_toko) {
+      var _this = this;
+
+      swal({
+        title: "Konfirmasi Hapus",
+        text: "Anda Yakin Ingin Menghapus " + nama_toko + " ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          var app = _this;
+          axios.delete(app.url + '/' + id).then(function (resp) {
+            app.getTokos();
+            swal("Berhasil Dihapus!  ", {
+              icon: "success"
+            });
+          }).catch(function (resp) {
+            app.$router.replace('/toko/');
+            swal("Gagal Menghapus!", {
+              icon: "warning"
+            });
+          });
+        }
+        _this.$router.replace('/toko/');
+      });
+    },
+    alert: function alert(nama_toko) {
+      this.$swal({
+        title: "Berhasil!",
+        text: 'Sukses : Berhasil menghapus Kas Masuk ' + nama_toko,
+        icon: "success"
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -81934,6 +81889,8 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(toko.no_telp))]),
                         _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.created_at))]),
+                        _vm._v(" "),
                         _c("td", [
                           _c(
                             "a",
@@ -81995,6 +81952,8 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("No. Telp")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Dibuat Pada")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Aksi")])
     ])
   },
@@ -82004,9 +81963,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                Sedang Memuat Data\n                            "
-        )
+        _vm._v("\n                Sedang Memuat Data\n              ")
       ])
     ])
   },
@@ -82016,9 +81973,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                Tidak Ada Data\n                            "
-        )
+        _vm._v("\n                Tidak Ada Data\n              ")
       ])
     ])
   }
@@ -82153,6 +82108,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -82201,116 +82175,248 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("ul", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Home")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Profile Toko")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Profile Toko")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "panel-body" },
-        [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table table-striped table-hover" }, [
-              _vm._m(0, false, false),
-              _vm._v(" "),
-              _vm.profileTokos.length > 0 && _vm.loading == false
-                ? _c(
-                    "tbody",
-                    { staticClass: "data-ada" },
-                    _vm._l(_vm.profileTokos, function(profileToko, index) {
-                      return _c("tr", [
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.nama_toko))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.nama_pemilik))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.email))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.no_telp))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.alamat))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(profileToko.profileToko.logo))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(profileToko.last_login))]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "btn btn-xs btn-default",
-                                attrs: {
-                                  to: {
-                                    name: "editProfileToko",
-                                    params: { id: profileToko.profileToko.id }
-                                  },
-                                  id: "edit-" + profileToko.profileToko.id
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                   Edit  "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    })
-                  )
-                : _vm.loading == true
-                  ? _c("tbody", { staticClass: "data-ada" }, [
-                      _vm._m(1, false, false)
-                    ])
-                  : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                      _vm._m(2, false, false)
-                    ])
-            ])
-          ]),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("ul", { staticClass: "breadcrumb" }, [
+          _c(
+            "li",
+            [
+              _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+                _vm._v("Home")
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
-          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+          _c("li", { staticClass: "active" }, [_vm._v("Profile Toko")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [_vm._v("Profile Toko")]),
           _vm._v(" "),
           _c(
             "div",
-            { attrs: { align: "right" } },
+            { staticClass: "panel-body" },
             [
-              _c("pagination", {
-                attrs: { data: _vm.profileTokosData },
-                on: { "pagination-change-page": _vm.getProfileTokos }
-              })
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  { staticClass: "table table-striped table-hover" },
+                  [
+                    _vm.profileTokos.length > 0 && _vm.loading == false
+                      ? _c(
+                          "tbody",
+                          { staticClass: "data-ada" },
+                          [
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("NAMA TOKO")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(profileToko.profileToko.nama_toko)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("NAMA PEMILIK TOKO")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(
+                                        profileToko.profileToko.nama_pemilik
+                                      )
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("ALAMAT EMAIL")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " + _vm._s(profileToko.profileToko.email)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("ALAMAT/TEMPAT")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(profileToko.profileToko.alamat)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("LOGO TOKO")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " + _vm._s(profileToko.profileToko.logo)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("NOMOR TELP")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(profileToko.profileToko.no_telp)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("Dibuat Pada")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(
+                                    ": " +
+                                      _vm._s(profileToko.profileToko.created_at)
+                                  )
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("LOGIN TERAKHIR ")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(": " + _vm._s(profileToko.last_login))
+                                ])
+                              ])
+                            }),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              _vm._l(_vm.profileTokos, function(
+                                profileToko,
+                                index
+                              ) {
+                                return _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "btn btn-md btn-primary",
+                                        attrs: {
+                                          to: {
+                                            name: "editProfileToko",
+                                            params: {
+                                              id: profileToko.profileToko.id
+                                            }
+                                          },
+                                          id:
+                                            "edit-" + profileToko.profileToko.id
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    Edit  "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              })
+                            )
+                          ],
+                          2
+                        )
+                      : _vm.loading == true
+                        ? _c("tbody", { staticClass: "data-ada" }, [
+                            _vm._m(0, false, false)
+                          ])
+                        : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                            _vm._m(1, false, false)
+                          ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { align: "right" } },
+                [
+                  _c("pagination", {
+                    attrs: { data: _vm.profileTokosData },
+                    on: { "pagination-change-page": _vm.getProfileTokos }
+                  })
+                ],
+                1
+              )
             ],
             1
           )
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
@@ -82319,32 +82425,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Nama Toko")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Nama Pemilik")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Email")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("No. Telp")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Alamat")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Logo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Login Terakhir")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Aksi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Sedang Memuat Data\n                               "
+          "\n                                    Sedang Memuat Data\n                                "
         )
       ])
     ])
@@ -82356,7 +82440,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                   Tidak Ada Data\n                               "
+          "\n                                    Tidak Ada Data\n                                "
         )
       ])
     ])
@@ -82494,6 +82578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -82506,6 +82591,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
 			profileToko: {
+				id: '',
 				nama_toko: '',
 				nama_pemilik: '',
 				email: '',
@@ -82521,6 +82607,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		saveForm: function saveForm() {
 			var app = this;
 			var newToko = app.profileToko;
+			// var namaToko = app.profileToko.nama_toko;
+			// var namaPemilik = app.profileToko.nama_pemilik;
+			// var email = app.profileToko.email;
+			// var no_telp = app.profileToko.no_telp;
+			// var alamat = app.profileToko.alamat;
+			// var logo = app.profileToko.logo;
+			// var id = app.profileToko.id;
+			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
 			axios.patch(app.url + '/' + app.profileTokoId, newToko).then(function (resp) {
 				app.message = 'Berhasil Merubah Profile Toko "' + app.profileToko.nama_pemilik + '"';
 				app.alert(app.message);
@@ -82900,6 +82994,34 @@ var render = function() {
                     : _vm._e()
                 ])
               ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.profileToko.id,
+                    expression: "profileToko.id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  placeholder: "",
+                  type: "hidden",
+                  name: "id",
+                  autofocus: ""
+                },
+                domProps: { value: _vm.profileToko.id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.profileToko, "id", $event.target.value)
+                  }
+                }
+              }),
               _vm._v(" "),
               _vm._m(1, false, false)
             ]

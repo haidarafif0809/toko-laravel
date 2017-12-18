@@ -2,39 +2,56 @@
 
 <template>  
     <div class="container">
-        <ul class="breadcrumb">
-            <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">Profile Toko</li>
-        </ul>
-        <div class="panel panel-default">
-            <div class="panel-heading">Profile Toko</div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <th>Nama Toko</th>
-                            <th>Nama Pemilik</th>
-                            <th>Email</th>
-                            <th>No. Telp</th>
-                            <th>Alamat</th>
-                            <th>Logo</th>
-                            <th>Login Terakhir</th>
-                            <th>Aksi</th>
-                        </thead>
-                        <tbody v-if="profileTokos.length > 0 && loading == false" class="data-ada">
-                            <tr v-for="profileToko , index in profileTokos" >
-                                <td>{{profileToko.profileToko.nama_toko}}</td>
-                                <td>{{profileToko.profileToko.nama_pemilik}}</td>
-                                <td>{{profileToko.profileToko.email}}</td>
-                                <td>{{profileToko.profileToko.no_telp}}</td>
-                                <td>{{profileToko.profileToko.alamat}}</td>
-                                <td>{{profileToko.profileToko.logo}}</td>
-                                <td>{{profileToko.last_login}}</td>
-                                <td>
-                                    <router-link :to="{name: 'editProfileToko', params: {id: profileToko.profileToko.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + profileToko.profileToko.id" >
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <ul class="breadcrumb">
+                    <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+                    <li class="active">Profile Toko</li>
+                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Profile Toko</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                             <tbody v-if="profileTokos.length > 0 && loading == false" class="data-ada">
+                                <tr v-for="profileToko , index in profileTokos">
+                                  <td class="col-md 2">NAMA TOKO</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.nama_toko}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">NAMA PEMILIK TOKO</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.nama_pemilik}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">ALAMAT EMAIL</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.email}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">ALAMAT/TEMPAT</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.alamat}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">LOGO TOKO</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.logo}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">NOMOR TELP</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.no_telp}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">Dibuat Pada</td>
+                                  <td class="col-md-8">: {{profileToko.profileToko.created_at}}</td>
+                              </tr>
+                              <tr v-for="profileToko , index in profileTokos" >
+                                  <td class="col-md 2">LOGIN TERAKHIR </td>
+                                  <td class="col-md-8">: {{profileToko.last_login}}</td>
+                              </tr><br>
+                              <ul>
+                                  <span v-for="profileToko , index in profileTokos">
+                                    <router-link :to="{name: 'editProfileToko', params: {id: profileToko.profileToko.id}}" class="btn btn-md btn-primary" v-bind:id="'edit-' + profileToko.profileToko.id" >
                                     Edit  </router-link> 
-                                </td>
-                            </tr>
+                                </span>
+                            </ul>
                         </tbody>
 
                         <tbody v-else-if="loading == true" class="data-ada" >
@@ -62,6 +79,8 @@
          </div>
      </div>
  </div>
+</div>
+</div>
 </template>
 
 

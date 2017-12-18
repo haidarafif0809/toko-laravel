@@ -54,6 +54,7 @@
 								<span v-if="errors.logo" class="label label-danger">{{ errors.logo[0] }}</span>
 							</div>
 						</div>
+						<input class="form-control" autocomplete="off" placeholder="" type="hidden" v-model="profileToko.id" name="id"  autofocus="">
 						<div class="form-group">
 							<div class="col-md-4 col-md-offset-2">
 								<button class="btn btn-primary" id="btnSimpanProfileToko" type="submit">Submit</button>
@@ -78,6 +79,7 @@ export default {
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "profile-toko"),
 			profileToko: {
+				id: '',
 				nama_toko: '',
 				nama_pemilik: '',
 				email: '',
@@ -93,6 +95,14 @@ export default {
 		saveForm() {
 			var app = this;
 			var newToko = app.profileToko;
+			// var namaToko = app.profileToko.nama_toko;
+			// var namaPemilik = app.profileToko.nama_pemilik;
+			// var email = app.profileToko.email;
+			// var no_telp = app.profileToko.no_telp;
+			// var alamat = app.profileToko.alamat;
+			// var logo = app.profileToko.logo;
+			// var id = app.profileToko.id;
+			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
 			axios.patch(app.url+'/' + app.profileTokoId, newToko)
 			.then(function (resp) {
 				app.message = 'Berhasil Merubah Profile Toko "'+app.profileToko.nama_pemilik+'"'

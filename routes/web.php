@@ -97,9 +97,13 @@ Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 
 // Toko
 Route::resource('toko', 'TokoController', ['except' => 'show']);
-Route::get('/kasMasuk/search', 'TokoController@search');
+Route::get('/toko/search', 'TokoController@search');
 Route::get('/toko/view', 'TokoController@view');
 
 // Profile Toko
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
 Route::get('/profile-toko/view', 'ProfileTokoController@view');
+Route::get('/profile-toko/edit', [
+    'as'   => 'profile_toko.proses_ubah_profil_toko',
+    'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
+]);

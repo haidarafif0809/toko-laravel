@@ -12,28 +12,21 @@
                     </div>
                     <div class="panel-body">
                         <div class="pencarian">
-                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                       </div>
-                       <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                           <thead>
+                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                     </div>
+                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                         <thead>
                             <th>Nama Pemilik</th>
                             <th>Email</th>
                             <th>No. Tlp</th>
-                            <th>Aksi</th>
+                            <th>Login Terakhir</th>
                         </thead>
                         <tbody v-if="users.length > 0 && loading == false" class="data-ada">
                             <tr v-for="user ,index in users">
                                 <td>{{ user.nama_pemilik }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.no_telp }}</td>
-                                <td>
-                                    <router-link :to="{name: 'editUser', params: {id:user.id}}" class="btn btn-xs btn-default">
-                                        Ubah Toko
-                                    </router-link>
-                                    <a href="#"
-                                    class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteEntry(user.id, index,user.nama_toko)">Delete</a>
-                                </td>
+                                <td>{{ user.last_login }}</td>
                             </tr>
                         </tbody>
                         <tbody v-else-if="loading == true" class="data-ada" >
@@ -64,17 +57,17 @@
 
 <script>
 export default {
-   data: function () {
-      return {
-         users: [],
-         usersData: {},
-         url : window.location.origin+(window.location.pathname).replace("home","user"),
-         search : '',
-         loading : true
+ data: function () {
+  return {
+   users: [],
+   usersData: {},
+   url : window.location.origin+(window.location.pathname).replace("home","user"),
+   search : '',
+   loading : true
 
-     }
- },
- mounted() {
+}
+},
+mounted() {
   var app = this;
   app.loading = true
   app.getUsers();	
