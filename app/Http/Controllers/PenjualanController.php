@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pelanggan;
 use App\Produk;
 use App\TbsPenjualan;
+use DB;
 use Illuminate\Http\Request;
 use Session;
 
@@ -79,6 +80,20 @@ class PenjualanController extends Controller
         return response()->json($produk);
     }
 
+    public function tbsPenjualan()
+    {
+        $produk = Produk::select('nama_produk')->get();
+        // $tbsPenjualan = TbsPenjualan::with('produk')->select(['nama_produk', 'harga_produk'])->get();
+        $tbsPenjualan = DB::table('tbs_penjualans')
+            ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
+            ->select('nama_produk', 'harga_produk', 'jumlah_produk')
+            ->get();
+        // print_r($tbsPenjualan);
+        // print_r($produk);
+        // return;
+        return response()->json($tbsPenjualan);
+    }
+
     public function store(Request $request)
     {
         //
@@ -107,17 +122,27 @@ class PenjualanController extends Controller
 
     public function prosesTbsPenjualan(Request $request)
     {
-        $session_id = session()->getId();
-        $subtotal   = $request->jumlah * $request->harga;
-        TbsPenjualan::create([
-            'session_id'    => $session_id,
-            'produk_id'     => $request->produk_id,
-            'jumlah_produk' => $request->jumlah,
-            'harga_produk'  => $request->harga,
-            'satuan_id'     => $request->satuan,
-            'subtotal'      => $subtotal,
-            'toko_id'       => 1,
-        ]);
+
+        $itemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id);
+        if (count($itemTbsPenjualan->get()) > 0) {
+            $item = TbsPenjualan::select()->where('produk_id', $request->produk_id)->first();
+            $itemTbsPenjualan->update([
+                'jumlah_produk' => $item->jumlah_produk + $request->jumlah,
+            ]);
+        } else {
+            $session_id = session()->getId();
+            $subtotal   = $request->jumlah * $request->harga;
+
+            TbsPenjualan::create([
+                'session_id'    => $session_id,
+                'produk_id'     => $request->produk_id,
+                'jumlah_produk' => $request->jumlah,
+                'harga_produk'  => $request->harga,
+                'satuan_id'     => $request->satuan,
+                'subtotal'      => $subtotal,
+                'toko_id'       => 1,
+            ]);
+        }
 
         return response(200);
     }

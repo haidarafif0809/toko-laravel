@@ -50,63 +50,74 @@
 
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading">Produk</div>
+				<div class="panel-heading">Pesanan</div>
 				<ul class="list-group cart-item">
-					<li class="list-group-item list-group-item-warning">Tidak ada item</li>
-					<li class="list-group-item" track-by="id" v-for="tbsPenjualan ,index in tbs_penjualans">
-						{{ tbsPenjualan.produk_id }}
+
+					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
+					<div v-if="tbs_penjualans.length > 0 && loading == false" class="data-ada">	
+						<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
+							{{ tbsPenjualan.nama_produk }} 
+							<!-- <span class="pull-right">  -->
+								<!-- <i class="glyphicon glyphicon-remove cart-item-action" v-on:click=""></i> --> 
+								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) 
+								X 
+								<!-- ({{ tbsPenjualan.subtotal }})  -->
+								<!-- </span> -->
+							</li>
+						</div>
+						<div v-else-if="loading == true" class="text-center">
+							<li>Sedang Memuat Produk</li>
+						</div>
+						<div v-else class="list-group-item list-group-item-warning">
+							Tidak Ada Produk
+						</div>
+						<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+					</ul>
+
+					<div class="panel-footer">
+						Total Item: {{ tbs_penjualans.length }}
 						<span class="pull-right">
-							({{ tbsPenjualan.harga_produk }} x 1)
-							X
+							<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
 						</span>
-						<!-- <button class="pull-right">-</button> -->
-					</li>
-				</ul>
-
-				<div class="panel-footer">
-					Total Item:
-					<span class="pull-right">
-						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-					</span>
+					</div>
 				</div>
-			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form>
-						<div class="form-group">
-							<label class="control-label">Total Bayar</label>
-							<br>
-							0
-							<h2 class="form-control-static text-warning"></h2>
-						</div>
-
-						<div  class="form-group">
-							<label class="control-label"> Nama Pelanggan:</label>
-							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-							</selectize-component>
-						</div>
-
-						<div class="form-group">
-							<div class="input-group">
-								<input type="number" class="form-control" placeholder="Pembayaran">
-								<span class="input-group-btn">
-									<button class="btn btn-success">Bayar</button>
-								</span>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form>
+							<div class="form-group">
+								<label class="control-label">Total Bayar</label>
+								<br>
+								0
+								<h2 class="form-control-static text-warning"></h2>
 							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="control-label">Keterangan</label>
-							<textarea class="form-control"></textarea>
-						</div> 
-					</form>
+							<div  class="form-group">
+								<label class="control-label"> Nama Pelanggan:</label>
+								<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+									<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+								</selectize-component>
+							</div>
+
+							<div class="form-group">
+								<div class="input-group">
+									<input type="number" class="form-control" placeholder="Pembayaran">
+									<span class="input-group-btn">
+										<button class="btn btn-success">Bayar</button>
+									</span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Keterangan</label>
+								<textarea class="form-control"></textarea>
+							</div> 
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>
@@ -116,6 +127,7 @@ export default {
 			penjualan:[],
 			pelanggans:[],
 			produks: [],
+			tbs_penjualans: [],
 			produksData:{},
 			inputTbsPenjualan: {
 				satuan:'',
@@ -137,6 +149,7 @@ export default {
 		var app = this;
 		app.loading = true
 		app.getPenjualans();
+		app.getTbsPenjualan();
 		app.selectPelanggans();
 	},
 
@@ -177,6 +190,19 @@ export default {
 				alert("Could not load produks");
 				app.loading = false
 			});
+		},
+		getTbsPenjualan() {
+			var app = this;
+			axios.get(app.url +'/tbs-penjualan')
+			.then(function (resp) {
+				app.tbs_penjualans = resp.data;
+				// app.tbs_penjualans.total_item = 
+				
+			})	
+			.catch(function () {
+				alert("Could not load tbs penjualan");
+			});
+
 		},
 
 		// storeItemToCart: function(item) {
@@ -230,9 +256,11 @@ export default {
 
 			axios.post(app.urlTbs, newTbs)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Produk '+ produk.data_produk.nama_produk;
+				app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
 				app.alert(app.message);
 				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+				app.$swal.close();
 			})
 			.catch(function (resp) {
 				console.log(resp)
