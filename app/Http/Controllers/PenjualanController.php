@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Pelanggan;
 use App\Produk;
+use App\TbsPenjualan;
 use Illuminate\Http\Request;
+use Session;
 
 class PenjualanController extends Controller
 {
@@ -49,8 +51,7 @@ class PenjualanController extends Controller
         $array  = array();
         foreach ($produk as $produks) {
             array_push($array, [
-                'nama_produk' => $produks->nama_produk,
-                'harga_jual'  => $produks->harga_jual,
+                'data_produk' => $produks,
             ]);
 
         }
@@ -89,10 +90,10 @@ class PenjualanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function kategori_produk()
-    {
-        return KategoriProduk::paginate(10);
-    }
+    // public function kategori_produk()
+    // {
+    //     return KategoriProduk::paginate(10);
+    // }
 
     public function produk()
     {
@@ -102,6 +103,23 @@ class PenjualanController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function prosesTbsPenjualan(Request $request)
+    {
+        $session_id = session()->getId();
+        $subtotal   = $request->jumlah * $request->harga;
+        TbsPenjualan::create([
+            'session_id'    => $session_id,
+            'produk_id'     => $request->produk_id,
+            'jumlah_produk' => $request->jumlah,
+            'harga_produk'  => $request->harga,
+            'satuan_id'     => $request->satuan,
+            'subtotal'      => $subtotal,
+            'toko_id'       => 1,
+        ]);
+
+        return response(200);
     }
 
     /**

@@ -94,6 +94,7 @@ Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
+Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 
 // Toko
 Route::resource('toko', 'TokoController', ['except' => 'show']);

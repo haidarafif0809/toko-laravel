@@ -1,9 +1,7 @@
-<style type="text/css">
-.list-produk {
-
-	padding-left: 4px;
-	padding-right: 4px;
-
+<style scoped>
+.cart-item {
+	max-height: 160px;
+	overflow-y: scroll;
 }
 </style>
 
@@ -28,10 +26,10 @@
 						<br>
 						<div class="row">
 							<div v-for="produk , index in produks" class="col-md-4 list-produk">
-								<div class="thumbnail" @click="">
-									<div class="caption">
-										<h4>{{produk.nama_produk}}</h4>
-										<p>Harga: {{produk.harga_jual}}</p>
+								<div class="thumbnail">
+									<div class="caption"  @click="submitTbsPenjualan(produk)">
+										<h4>{{produk.data_produk.nama_produk}}</h4>
+										<p>Harga: {{produk.data_produk.harga_jual}}</p>
 									</div>
 								</div>
 							</div>
@@ -55,13 +53,16 @@
 				<div class="panel-heading">Produk</div>
 				<ul class="list-group cart-item">
 					<li class="list-group-item list-group-item-warning">Tidak ada item</li>
-					<li class="list-group-item" track-by="id" v-on:click="">
+					<li class="list-group-item" track-by="id" v-for="tbsPenjualan ,index in tbs_penjualans">
+						{{ tbsPenjualan.produk_id }}
 						<span class="pull-right">
-							<!-- <i class="glyphicon glyphicon-remove cart-item-action" v-on:click=""></i> -->
+							({{ tbsPenjualan.harga_produk }} x 1)
+							X
 						</span>
-						<!-- <button class="pull-right" v-on:click="deleteItemFromCart(cartItem)">-</button> -->
+						<!-- <button class="pull-right">-</button> -->
 					</li>
 				</ul>
+
 				<div class="panel-footer">
 					Total Item:
 					<span class="pull-right">
@@ -116,8 +117,15 @@ export default {
 			pelanggans:[],
 			produks: [],
 			produksData:{},
+			inputTbsPenjualan: {
+				satuan:'',
+				produk_id:'',
+				jumlah: '',
+				harga:'',
+			},
 			search: '',
 			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
+			urlTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
 			loading : true,
 
 			setting_pelanggan:{
@@ -212,6 +220,27 @@ export default {
 				app.loading = false;
 			});
 		},
+		submitTbsPenjualan(produk){
+			var app = this;
+			app.inputTbsPenjualan.produk_id = produk.data_produk.produk_id;
+			app.inputTbsPenjualan.harga = produk.data_produk.harga_jual;
+			app.inputTbsPenjualan.satuan = produk.data_produk.satuans_id;
+			app.inputTbsPenjualan.jumlah = 1;
+			var newTbs = app.inputTbsPenjualan;
+
+			axios.post(app.urlTbs, newTbs)
+			.then(function (resp) {
+				app.message = 'Sukses : Berhasil Menambah Produk '+ produk.data_produk.nama_produk;
+				app.alert(app.message);
+				app.$router.replace('/penjualan');
+			})
+			.catch(function (resp) {
+				console.log(resp)
+
+				app.success = false;
+				app.errors = resp.response.data.errors;
+			});
+		},
 	// deleteEntry(id, index,nama_produk) {
 	// 	if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
 	// 		var app = this;
@@ -225,13 +254,13 @@ export default {
 	// 		});
 	// 	}
 	// },
-	// alert(pesan) {
-	// 	this.$swal({
-	// 		title: "Berhasil!",
-	// 		text: pesan,
-	// 		icon: "success",
-	// 	});
-	// }
+	alert(pesan) {
+		this.$swal({
+			title: "Berhasil!",
+			text: pesan,
+			icon: "success",
+		});
+	}
 
 }
 }

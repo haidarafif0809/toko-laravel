@@ -14,9 +14,19 @@ class CreatePenjualansTable extends Migration
     public function up()
     {
         Schema::create('penjualans', function (Blueprint $table) {
-            $table->increments('penjualan_id');
-            $table->string('kategori_id')->nullable();
-            $table->string('produk_id')->nullable();
+            $table->increments('id_penjualan');
+            $table->string('total');
+            $table->string('pelanggan_id');
+            $table->string('status_pembelian');
+            $table->string('tunai');
+            $table->string('kembalian');
+            $table->string('kredit');
+            $table->string('nilai_kredit');
+            $table->string('cara_bayar');
+            $table->string('status_beli_awal');
+            $table->string('tanggal_jt_tempo');
+            $table->string('keterangan')->nullable();
+            $table->string('toko_id');
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
