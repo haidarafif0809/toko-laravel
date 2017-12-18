@@ -69,7 +69,9 @@ import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 // toko
 import TokoIndex from './components/toko/TokoIndex.vue'
-import ProfileToko from './components/profileToko/ProfileToko.vue'
+// profile toko
+import ProfileTokoIndex from './components/profileToko/ProfileTokoIndex.vue'
+import ProfileTokoEdit from './components/profileToko/ProfileTokoEdit.vue'
 const routes = [{
         path: '/',
         components: {
@@ -242,8 +244,12 @@ const routes = [{
     // profile toko
     {
         path: '/profile-toko',
-        component: ProfileToko,
-        name: 'profileToko'
+        component: ProfileTokoIndex,
+        name: 'profileTokoIndex'
+    }, {
+        path: '/profile-toko/edit/:id',
+        component: ProfileTokoEdit,
+        name: 'editProfileToko'
     },
 ]
 /**

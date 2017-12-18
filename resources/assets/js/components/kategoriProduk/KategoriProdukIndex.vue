@@ -13,7 +13,6 @@
             <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
             <li class="active">Kategori Produk</li>
         </ul>
-
         <div class="panel panel-default">
             <div class="panel-heading">Kategori Produk</div>
             <div class="panel-body">
@@ -62,11 +61,11 @@
                 <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
                 <div align="right">
-                 <pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
-             </div>
-         </div>
-     </div>
- </div>
+                   <pagination :data="kategoriProduksData" v-on:pagination-change-page="getKategoriProduks"></pagination>
+               </div>
+           </div>
+       </div>
+   </div>
 </template>
 
 

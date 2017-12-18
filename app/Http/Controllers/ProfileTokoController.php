@@ -64,7 +64,8 @@ class ProfileTokoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $toko = Toko::find($id);
+        return response()->json($toko);
     }
 
     /**
@@ -77,6 +78,33 @@ class ProfileTokoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user_login = Toko::find($id);
+        if ($user_login->id != $id) {
+            Auth::logout();
+            return response()->view('error.403');
+        } else {
+            $this->validate($request, [
+                'nama_toko'    => 'required',
+                'nama_pemilik' => 'required',
+                'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
+                'no_telp'      => 'required',
+                'alamat'       => 'required',
+                'logo'         => 'required',
+            ]);
+            $user_login->update([
+                'nama_toko'    => $request->nama_toko,
+                'nama_pemilik' => $request->nama_pemilik,
+                'email'        => $request->email,
+                'no_telp'      => $request->no_telp,
+                'alamat'       => $request->alamat,
+                'logo'         => $request->logo,
+            ]);
+        }
+    }
+
+    public function proses_ubah_profil_toko(Request $request)
+    {
+
     }
 
     /**
@@ -93,7 +121,27 @@ class ProfileTokoController extends Controller
     public function view()
     {
 
-        $profile_toko = Toko::with('user')->where('id', Auth::user()->toko_id)->paginate(10);
-        return response()->json($profile_toko);
+        $profile_toko       = Toko::with('user')->where('id', Auth::user()->toko_id)->paginate(10);
+        $profile_toko_array = array();
+        foreach ($profile_toko as $profile_tokos) {
+            $user = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
+            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos]);
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $profile_toko->currentPage();
+        $respons['data']           = $profile_toko_array;
+        $respons['first_page_url'] = url('/profile-toko/view?page=' . $profile_toko->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $profile_toko->lastPage();
+        $respons['last_page_url']  = url('/profile-toko/view?page=' . $profile_toko->lastPage());
+        $respons['next_page_url']  = $profile_toko->nextPageUrl();
+        $respons['path']           = url('/profile-toko/view');
+        $respons['per_page']       = $profile_toko->perPage();
+        $respons['prev_page_url']  = $profile_toko->previousPageUrl();
+        $respons['to']             = $profile_toko->perPage();
+        $respons['total']          = $profile_toko->total();
+        //DATA PAGINATION
+        return response()->json($respons);
     }
 }
