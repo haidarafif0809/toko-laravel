@@ -2,17 +2,16 @@
   <div class="container">
     <ul class="breadcrumb">
       <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-      <li><router-link :to="{name: 'stafAktif'}">Staf</router-link></li>
-      <li class="active">Kas Masuk</li>
+      <li class="active">Kelola Kas</li>
     </ul>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Kas Masuk</div>
+      <div class="panel-heading">Kelola Kas</div>
       <div class="panel-body">
         <div class="table-responsive">
           <div class="tambah">
             <p>
-              <router-link :to="{name: 'createKasMasuk'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
+              <router-link :to="{name: 'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
             </p>
           </div>
           <div class="pencarian">
@@ -27,22 +26,22 @@
               <th>Waktu</th>
               <th>Aksi</th>
             </thead>
-            <tbody v-if="kasMasuks.length > 0 && loading == false" class="data-ada">
-              <tr v-for = "kasMasuk, index in kasMasuks">
-                <td>{{kasMasuk.kas_masuk_id}}</td>
+            <tbody v-if="kelolaKas.length > 0 && loading == false" class="data-ada">
+              <tr v-for = "kelolaKasData, index in kelolaKas">
+                <td>{{kelolaKasData.kelola_kas_id}}</td>
                 <td>
-                  <span v-if="kasMasuk.type == 1">Kas Masuk</span>
+                  <span v-if="kelolaKasData.type == 1">Kas Masuk</span>
                   <span v-else> Kas Keluar</span>
                 </td>
-                <td>{{kasMasuk.jumlah}}</td>
-                <td>{{kasMasuk.keterangan}}</td>
-                <td>{{kasMasuk.created_at}}</td>
+                <td>{{kelolaKasData.jumlah}}</td>
+                <td>{{kelolaKasData.keterangan}}</td>
+                <td>{{kelolaKasData.created_at}}</td>
                 <td>
-                  <router-link :to="{name: 'editKasMasuk', params: {id: kasMasuk.kas_masuk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kasMasuk.kas_masuk_id" >
+                  <router-link :to="{name: 'editKelolaKas', params: {id: kelolaKasData.kelola_kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kelolaKasData.kelola_kas_id" >
                   Edit  </router-link> 
                   <a href="#"
                   class="btn btn-xs btn-danger" 
-                  v-on:click="deleteKasMasuk(kasMasuk.kas_masuk_id, index,kasMasuk.type)">Hapus</a>
+                  v-on:click="deletekelolaKas(kelolaKasData.kelola_kas_id, index,kelolaKasData.type)">Hapus</a>
                 </td>
               </tr>
             </tbody>
@@ -66,7 +65,7 @@
         <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
         <div align="right">
-         <pagination :data="kasMasuksData" v-on:pagination-change-page="getKasMasuks"></pagination>
+         <pagination :data="kelolaKasDatas" v-on:pagination-change-page="getKelolaKas"></pagination>
        </div>
      </div>
    </div>
@@ -79,20 +78,21 @@ export default {
   data: function () {
     return {
       // buat nampilin data dlm bentuk array
-      kasMasuks: [],
+      kelolaKas: [],
       // kas: [],
       // kategori_transaksis: [],
       // buat paginations
-      kasMasuksData: {},
+      kelolaKasDatas: {},
       pencarian: '',
       message : '',
-      url : window.location.origin+(window.location.pathname).replace("home", "kasMasuk"),
+      url : window.location.origin+(window.location.pathname).replace("home", "kelola-kas"),
       loading : true
     }
   },
   mounted() {
    var app = this;
-   app.getKasMasuks();
+   app.getKelolaKas();
+   app.loading = true
     // app.getDataKas();
     // app.getDataTransaksi();
   },
@@ -104,34 +104,34 @@ export default {
         }
       },
       methods: {
-        getKasMasuks(page) {
+        getKelolaKas(page) {
         	var app = this;
         	if (typeof page === 'undefined') {
         		page = 1;
         	}
         	axios.get(app.url+'/view?page='+page)
         	.then(function (resp) {
-        		app.kasMasuks = resp.data.data;
-        		app.kasMasuksData = resp.data;
+        		app.kelolaKas = resp.data.data;
+        		app.kelolaKasDatas = resp.data;
             app.loading = false;
         // buat cek ddi console
         console.log(resp.data.data);
       })
           .catch(function (resp) {
-            alert("Could not load KasMasuks");
+            alert("Could not load KelolaKas");
             app.loading = false
           });
         },
         searchData(page) {
         	var app = this;
-        	app.loading == true;
+        	app.loading = true;
         	if (typeof page === 'undefined') {
         		page = 1;
         	}
         	axios.get(app.url+'/search?pencarian='+app.pencarian+'&page='+page)
         	.then(function(resp) {
-        		app.kasMasuks = resp.data.data;
-        		app.kasMasuksData = resp.data;
+        		app.kelolaKas = resp.data.data;
+        		app.kelolaKasDatas = resp.data;
         		app.loading = false;
 
         	})
@@ -140,10 +140,16 @@ export default {
         		app.loading = false
         	});
         },
-        deleteKasMasuk(id, index,type) {
+        deletekelolaKas(id, index,type) {
+          if (type == 1){
+            var typeKas = "Kas Masuk";
+          }
+          else{
+            var typeKas = "Kas Keluar";
+          }
          swal({
           title: "Konfirmasi Hapus",
-          text : "Anda Yakin Ingin Menghapus "+type+" ?",
+          text : "Anda Yakin Ingin Menghapus "+typeKas+" ini ?",
           icon : "warning",
           buttons: true,
           dangerMode: true,
@@ -153,7 +159,7 @@ export default {
             var app = this;
             axios.delete(app.url+'/' + id)
             .then(function (resp) {
-              app.getKasMasuks();
+              app.getKelolaKas();
               swal("Berhasil Dihapus!  ", {
                 icon: "success",
               });
@@ -165,7 +171,7 @@ export default {
               });
             });
           }
-          this.$router.replace('/kasMasuk/');
+          this.$router.replace('/kelola-kas/');
         });
        },
        alert(type) {

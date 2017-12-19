@@ -114,7 +114,7 @@
                             </ul>
                         </li>
                         <li>
-                            <router-link :to="{name: 'indexKasMasuk'}">
+                            <router-link :to="{name: 'indexKelolaKas'}">
                                 Kelola Kas
                             </router-link>
                         </li>
@@ -219,7 +219,7 @@
     @yield('content')
 </div>
 <!-- Scripts -->
-<script src="{{ asset('js/app.js?v=1.23') }}">
+<script src="{{ asset('js/app.js?v=1.24') }}">
 </script>
 </body>
 </html>
