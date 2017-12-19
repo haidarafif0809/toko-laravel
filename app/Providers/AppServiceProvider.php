@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\KasMasuk;
-use App\Observers\KasMasukObserver;
+use App\KelolaKas;
+use App\Observers\KelolaKasObserver;
 use App\Observers\TokoObserver;
 use App\Toko;
 use Illuminate\Support\Facades\Schema;
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             return str_replace(':values', join(",", $parameters), $message);
         });
 
-        KasMasuk::observe(KasMasukObserver::class);
+        KelolaKas::observe(KelolaKasObserver::class);
         Toko::observe(TokoObserver::class);
         // untuk menyesuaikan waktu berdasarkan tempat
         \Carbon\Carbon::setlocale('id');

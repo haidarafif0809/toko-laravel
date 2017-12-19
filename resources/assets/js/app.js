@@ -43,14 +43,6 @@ import SatuanEdit from './components/satuan/SatuanEdit.vue'
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
-// kas Masuk
-import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
-import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
-import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
-// kas Keluar
-import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
-import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
-import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 // Kategori Transaksi
 import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
 import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
@@ -72,6 +64,10 @@ import TokoIndex from './components/toko/TokoIndex.vue'
 // profile toko
 import ProfileTokoIndex from './components/profileToko/ProfileTokoIndex.vue'
 import ProfileTokoEdit from './components/profileToko/ProfileTokoEdit.vue'
+// Kelola Kas
+import KelolaKasIndex from './components/kelolaKas/KelolaKasIndex.vue'
+import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
+import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
 const routes = [{
         path: '/',
         components: {
@@ -153,34 +149,6 @@ const routes = [{
         component: KategoriProdukEdit,
         name: 'editKategoriProduk'
     },
-    // kas 
-    {
-        path: '/kasMasuk',
-        component: KasMasukIndex,
-        name: 'indexKasMasuk'
-    }, {
-        path: '/kasMasuk/create',
-        component: KasMasukCreate,
-        name: 'createKasMasuk'
-    }, {
-        path: '/kasMasuk/edit/:id',
-        component: KasMasukEdit,
-        name: 'editKasMasuk'
-    },
-    // kas Keluar
-    {
-        path: '/kas-keluar',
-        component: KasKeluarIndex,
-        name: 'indexKasKeluar'
-    }, {
-        path: '/kas-keluar/create',
-        component: KasKeluarCreate,
-        name: 'createKasKeluar'
-    }, {
-        path: '/kas-keluar/edit/:id',
-        component: KasKeluarEdit,
-        name: 'editKasKeluar'
-    },
     // master data kategori transaksi
     {
         path: '/kategoriTransaksi',
@@ -250,6 +218,20 @@ const routes = [{
         path: '/profile-toko/edit/:id',
         component: ProfileTokoEdit,
         name: 'editProfileToko'
+    },
+    // Kelola Kas
+    {
+        path: '/kelola-kas',
+        component: KelolaKasIndex,
+        name: 'indexKelolaKas'
+    }, {
+        path: '/kelola-kas/create',
+        component: KelolaKasCreate,
+        name: 'createKelolaKas'
+    }, {
+        path: '/kelola-kas/edit/:id',
+        component: KelolaKasEdit,
+        name: 'editKelolaKas'
     },
 ]
 /**
