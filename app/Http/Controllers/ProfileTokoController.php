@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Toko;
 use App\User;
 use Auth;
+use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
+use Image;
 
 class ProfileTokoController extends Controller
 {
@@ -89,7 +92,6 @@ class ProfileTokoController extends Controller
                 'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
                 'no_telp'      => 'required',
                 'alamat'       => 'required',
-                'logo'         => 'required',
             ]);
             $user_login->update([
                 'nama_toko'    => $request->nama_toko,
@@ -97,8 +99,43 @@ class ProfileTokoController extends Controller
                 'email'        => $request->email,
                 'no_telp'      => $request->no_telp,
                 'alamat'       => $request->alamat,
-                'logo'         => $request->logo,
             ]);
+        }if ($request->foto === null) {
+
+            return;
+
+        } else {
+
+            $this->validate($request, [
+                'foto' => 'image64:jpeg,jpg,png|max:3072000',
+            ]);
+            $imageData = $request->foto;
+            $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+
+            $fileName = Carbon::now()->timestamp . '.' . $ekstensi;
+            Image::make($request->foto)->save(public_path('logo/') . $fileName);
+            if ($user_login->foto) {
+                $oldImg   = $user_login->foto;
+                $filePath = public_path('logo/') . $user_login->foto;
+
+                try {
+                    File::delete($filePath);
+                } catch (FileNotFoundException $e) {
+                    // File sudah dihapus/tidak ada
+                }
+            }
+
+            $user_login->foto = $fileName;
+            $user_login->save();
+
+        }
+
+        // 'foto' => $fileName,
+
+        if ($user_login == true) {
+            return response(200);
+        } else {
+            return response(500);
         }
     }
 
@@ -107,12 +144,12 @@ class ProfileTokoController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param  int  $id
+ * @return \Illuminate\Http\Response
+ */
     public function destroy($id)
     {
         //

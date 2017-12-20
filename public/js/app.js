@@ -29288,7 +29288,7 @@ var PopOver = function (_ToolTip) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(370);
+module.exports = __webpack_require__(374);
 
 
 /***/ }),
@@ -29377,7 +29377,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_toko_TokoIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__ = __webpack_require__(364);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_profileToko_ProfileTokoIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__ = __webpack_require__(367);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__ = __webpack_require__(369);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_profileToko_ProfileTokoEdit_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -70994,7 +70994,7 @@ exports = module.exports = __webpack_require__(6)(undefined);
 
 
 // module
-exports.push([module.i, "\n.shadow[data-v-041415bf] {\n     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n", ""]);
+exports.push([module.i, "\n.shadow[data-v-041415bf] {\r\n    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\r\n", ""]);
 
 // exports
 
@@ -81833,11 +81833,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Data Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Data User")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Data Toko")]),
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Data User")]),
       _vm._v(" "),
       _c(
         "div",
@@ -81992,15 +81992,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(365)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(365)
+var __vue_script__ = __webpack_require__(367)
 /* template */
-var __vue_template__ = __webpack_require__(366)
+var __vue_template__ = __webpack_require__(368)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -82037,6 +82041,46 @@ module.exports = Component.exports
 
 /***/ }),
 /* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(366);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("d5f22904", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-59c62796\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-59c62796\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\nimg {\r\n  width: 50%;\r\n  margin: auto;\r\n  display: block;\r\n  -webkit-box-shadow: 10px 10px 5px 5px;\r\n          box-shadow: 10px 10px 5px 5px;\r\n  border-radius: 5px;\r\n  margin-bottom: 10px;\n}\nbutton {\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 367 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82127,47 +82171,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            // buat nampilin data dlm bentuk array
-            profileTokos: [],
-            // buat paginations
-            profileTokosData: {},
-            message: '',
-            url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
-            loading: true
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.getProfileTokos();
-    },
+  data: function data() {
+    return {
+      // buat nampilin data dlm bentuk array
+      profileTokos: [],
+      // buat paginations
+      profileTokosData: {},
+      message: '',
+      url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+      url_img: window.location.origin + window.location.pathname.replace("home", "logo/"),
+      loading: true
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.getProfileTokos();
+  },
 
-    methods: {
-        // method getprofileToko
-        getProfileTokos: function getProfileTokos(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.profileTokos = resp.data.data;
-                app.profileTokosData = resp.data;
-                app.loading = false;
-                // buat cek ddi console
-                console.log(app.profileTokos);
-            }).catch(function (resp) {
-                alert("Could not load Profile Tokos");
-                app.loading = false;
-            });
-        }
+  methods: {
+    // method getprofileToko
+    getProfileTokos: function getProfileTokos(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.profileTokos = resp.data.data;
+        app.profileTokosData = resp.data;
+        app.loading = false;
+        // buat cek ddi console
+        console.log(app.profileTokos);
+      }).catch(function (resp) {
+        alert("Could not load Profile Tokos");
+        app.loading = false;
+      });
     }
+  }
 });
 
 /***/ }),
-/* 366 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82291,9 +82351,25 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("td", { staticClass: "col-md-8" }, [
-                                  _vm._v(
-                                    ": " + _vm._s(profileToko.profileToko.logo)
-                                  )
+                                  _vm._v(": \n                    "),
+                                  profileToko.profileToko.foto == null
+                                    ? _c("img", {
+                                        staticClass:
+                                          "img-responsive thumbnail shadow",
+                                        attrs: {
+                                          src:
+                                            "https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif"
+                                        }
+                                      })
+                                    : _c("img", {
+                                        staticClass:
+                                          " img-responsive thumbnail shadow",
+                                        attrs: {
+                                          src:
+                                            _vm.url_img +
+                                            profileToko.profileToko.foto
+                                        }
+                                      })
                                 ])
                               ])
                             }),
@@ -82374,11 +82450,7 @@ var render = function() {
                                             "edit-" + profileToko.profileToko.id
                                         }
                                       },
-                                      [
-                                        _vm._v(
-                                          "\n                                    Edit  "
-                                        )
-                                      ]
+                                      [_vm._v("\n                    Edit  ")]
                                     )
                                   ],
                                   1
@@ -82427,9 +82499,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                    Sedang Memuat Data\n                                "
-        )
+        _vm._v("\n                    Sedang Memuat Data\n                  ")
       ])
     ])
   },
@@ -82439,9 +82509,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                    Tidak Ada Data\n                                "
-        )
+        _vm._v("\n                    Tidak Ada Data\n                  ")
       ])
     ])
   }
@@ -82456,21 +82524,25 @@ if (false) {
 }
 
 /***/ }),
-/* 367 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(382)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(368)
+var __vue_script__ = __webpack_require__(372)
 /* template */
-var __vue_template__ = __webpack_require__(369)
+var __vue_template__ = __webpack_require__(384)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-49334712"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -82504,11 +82576,36 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 368 */
+/* 370 */,
+/* 371 */,
+/* 372 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82590,6 +82687,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+			url_img: window.location.origin + window.location.pathname.replace("home", "logo/"),
+			broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
 			profileToko: {
 				id: '',
 				nama_toko: '',
@@ -82597,30 +82696,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				email: '',
 				no_telp: '',
 				alamat: '',
-				logo: ''
+				foto: ''
 			},
 			profileTokoId: null,
 			message: ''
 		};
 	},
 	methods: {
+		onFileChange: function onFileChange(e) {
+			var files = e.target.files || e.dataTransfer.files;
+			if (!files.length) return null;
+			this.createImage(files[0]);
+		},
+		createImage: function createImage(file) {
+			var reader = new FileReader();
+			var app = this;
+			var ekstensi = /(\.jpg|\.jpeg|\.png)/i;
+
+			if (!file.name.match(ekstensi)) {
+				app.profileToko.foto = null;
+				this.$swal({
+					title: "File tidak didukung!",
+					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+					icon: "warning",
+					buttons: "Saya mengerti"
+				});
+			} else {
+				reader.onload = function (e) {
+					app.profileToko.foto = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			}
+		},
 		saveForm: function saveForm() {
 			var app = this;
-			var newToko = app.profileToko;
-			// var namaToko = app.profileToko.nama_toko;
-			// var namaPemilik = app.profileToko.nama_pemilik;
-			// var email = app.profileToko.email;
-			// var no_telp = app.profileToko.no_telp;
-			// var alamat = app.profileToko.alamat;
-			// var logo = app.profileToko.logo;
-			// var id = app.profileToko.id;
-			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
-			axios.patch(app.url + '/' + app.profileTokoId, newToko).then(function (resp) {
+			var newProfileToko = app.profileToko;
+			var image = document.getElementById('image');
+
+			if (image.value == '') {
+				newProfileToko.foto = null;
+			}
+			axios.patch(app.url + '/' + app.profileTokoId, newProfileToko).then(function (resp) {
 				app.message = 'Berhasil Merubah Profile Toko "' + app.profileToko.nama_pemilik + '"';
 				app.alert(app.message);
+				app.profileToko.nama_toko = '';
+				app.profileToko.nama_pemilik = '';
+				app.profileToko.email = '';
+				app.profileToko.no_telp = '';
+				app.profileToko.alamat = '';
+				app.profileToko.foto = '';
 				app.errors = '';
 				app.$router.replace('/profile-toko');
+				console.log(resp);
 			}).catch(function (resp) {
+
 				app.errors = resp.response.data.errors;
 			});
 		},
@@ -82639,16 +82768,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.get(app.url + '/' + id + '/edit').then(function (resp) {
 				app.profileToko = resp.data;
+				console.log(resp.data.foto);
 			}).catch(function () {
 				alert("Could not load your Profile Toko");
 			});
 		}
 	}
 
+	// var namaToko = app.profileToko.nama_toko;
+	// var namaPemilik = app.profileToko.nama_pemilik;
+	// var email = app.profileToko.email;
+	// var no_telp = app.profileToko.no_telp;
+	// var alamat = app.profileToko.alamat;
+	// var logo = app.profileToko.logo;
+	// var id = app.profileToko.id;
+	// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
 });
 
 /***/ }),
-/* 369 */
+/* 373 */,
+/* 374 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(383);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("05439106", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49334712\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoEdit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49334712\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoEdit.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.shadow[data-v-49334712] {\r\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\nimg[data-v-49334712] {\r\n\twidth: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82953,45 +83145,54 @@ var render = function() {
                   "label",
                   {
                     staticClass: "col-md-2 control-label",
-                    attrs: { for: "logo" }
+                    attrs: { for: "foto" }
                   },
                   [_vm._v("Logo")]
                 ),
                 _vm._v(" "),
+                _vm.profileToko.foto != null || _vm.profileToko.foto != ""
+                  ? _c("div", { staticClass: "col-md-4" }, [
+                      _vm.profileToko.foto.length > 100
+                        ? _c("div", [
+                            _c("img", {
+                              staticClass: "img-responsive thumbnail shadow",
+                              attrs: { src: _vm.profileToko.foto }
+                            })
+                          ])
+                        : _c("div", [
+                            _c("img", {
+                              staticClass: "img-responsive thumbnail shadow",
+                              attrs: { src: _vm.url_img + _vm.profileToko.foto }
+                            })
+                          ])
+                    ])
+                  : _c("div", { staticClass: "col-md-4" }, [
+                      _c("img", {
+                        staticClass: "img-responsive thumbnail shadow",
+                        attrs: {
+                          src: _vm.broken_file,
+                          title: "File yang Anda masukkan tidak didukung"
+                        }
+                      })
+                    ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "foto" }
+                  },
+                  [_vm._v("Foto")]
+                ),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.logo,
-                        expression: "profileToko.logo"
-                      }
-                    ],
                     staticClass: "form-control",
-                    attrs: {
-                      autocomplete: "off",
-                      placeholder: "Logo",
-                      type: "text",
-                      name: "logo",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.logo },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.profileToko, "logo", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.logo
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.logo[0]))
-                      ])
-                    : _vm._e()
+                    attrs: { type: "file", name: "foto", id: "image" },
+                    on: { change: _vm.onFileChange }
+                  })
                 ])
               ]),
               _vm._v(" "),
@@ -83066,12 +83267,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-49334712", module.exports)
   }
 }
-
-/***/ }),
-/* 370 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
