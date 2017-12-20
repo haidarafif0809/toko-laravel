@@ -65,7 +65,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 367:
+/***/ 361:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -76,7 +76,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(60);
-module.exports = __webpack_require__(367);
+module.exports = __webpack_require__(361);
 
 
 /***/ }),
@@ -85,7 +85,7 @@ module.exports = __webpack_require__(367);
 /***/ (function(module, __webpack_exports__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: D:/xampp/htdocs/toko_dasar/resources/assets/js/app.js: Unexpected token (73:0)\n\n  71 | // Laporan\n  72 | import LaporanIndex from './components/laporan/LaporanIndex.vue'\n> 73 | <<<<<<< HEAD\n     | ^\n  74 | import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'\n  75 | =======\n  76 | import RekapKas from './components/laporan/RekapKas.vue'\n");
+throw new Error("Module build failed: SyntaxError: C:/xampp/htdocs/toko-dasar/resources/assets/js/app.js: Unexpected token (73:0)\n\n  71 | // Laporan\n  72 | import LaporanIndex from './components/laporan/LaporanIndex.vue'\n> 73 | <<<<<<< HEAD\n     | ^\n  74 | import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'\n  75 | =======\n  76 | import RekapKas from './components/laporan/RekapKas.vue'\n");
 
 /***/ })
 
