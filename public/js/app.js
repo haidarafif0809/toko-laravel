@@ -80175,42 +80175,48 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "foto" }
-                  },
-                  [_vm._v("Logo")]
-                ),
-                _vm._v(" "),
-                _vm.profileToko.foto != null || _vm.profileToko.foto != ""
-                  ? _c("div", { staticClass: "col-md-4" }, [
-                      _vm.profileToko.foto.length > 100
-                        ? _c("div", [
-                            _c("img", {
-                              staticClass: "img-responsive thumbnail shadow",
-                              attrs: { src: _vm.profileToko.foto }
-                            })
-                          ])
-                        : _c("div", [
-                            _c("img", {
-                              staticClass: "img-responsive thumbnail shadow",
-                              attrs: { src: _vm.url_img + _vm.profileToko.foto }
-                            })
-                          ])
-                    ])
-                  : _c("div", { staticClass: "col-md-4" }, [
-                      _c("img", {
-                        staticClass: "img-responsive thumbnail shadow",
-                        attrs: {
-                          src: _vm.broken_file,
-                          title: "File yang Anda masukkan tidak didukung"
-                        }
-                      })
-                    ])
-              ]),
+              _vm.profileToko.foto != ""
+                ? _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-2 control-label",
+                        attrs: { for: "foto" }
+                      },
+                      [_vm._v("Logo")]
+                    ),
+                    _vm._v(" "),
+                    _vm.profileToko.foto != null
+                      ? _c("div", { staticClass: "col-md-4" }, [
+                          _vm.profileToko.foto.length > 100
+                            ? _c("div", [
+                                _c("img", {
+                                  staticClass:
+                                    "img-responsive thumbnail shadow",
+                                  attrs: { src: _vm.profileToko.foto }
+                                })
+                              ])
+                            : _c("div", [
+                                _c("img", {
+                                  staticClass:
+                                    "img-responsive thumbnail shadow",
+                                  attrs: {
+                                    src: _vm.url_img + _vm.profileToko.foto
+                                  }
+                                })
+                              ])
+                        ])
+                      : _c("div", { staticClass: "col-md-4" }, [
+                          _c("img", {
+                            staticClass: "img-responsive thumbnail shadow",
+                            attrs: {
+                              src: _vm.broken_file,
+                              title: "File yang Anda masukkan tidak didukung"
+                            }
+                          })
+                        ])
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c(
