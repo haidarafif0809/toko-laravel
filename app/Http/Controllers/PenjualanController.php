@@ -48,36 +48,51 @@ class PenjualanController extends Controller
         // return Penjualan::with('Produk')->paginate(10);
         // return Produk::paginate(5);
         // return KategoriProduk::paginate(2);
-        $produk = Produk::paginate(9);
-        $array  = array();
-        foreach ($produk as $produks) {
-            array_push($array, [
-                'data_produk' => $produks,
-            ]);
+        $produks = Produk::paginate(9);
+        $array   = [];
+        $num     = 0;
+        foreach ($produks as $produk) {
+            // array_push($array, [
+            //     'data_produk' => $produk,
+            // ]);
+            $array[$num]['data_produk'] = $produk;
+            $num++;
 
         }
 
         //DATA PAGINATION
-        $respons['current_page']   = $produk->currentPage();
+        $respons['current_page']   = $produks->currentPage();
         $respons['data']           = $array;
-        $respons['first_page_url'] = url('/penjualan/view?page=' . $produk->firstItem());
+        $respons['first_page_url'] = url('/penjualan/view?page=' . $produks->firstItem());
         $respons['from']           = 1;
-        $respons['last_page']      = $produk->lastPage();
-        $respons['last_page_url']  = url('/penjualan/view?page=' . $produk->lastPage());
-        $respons['next_page_url']  = $produk->nextPageUrl();
+        $respons['last_page']      = $produks->lastPage();
+        $respons['last_page_url']  = url('/penjualan/view?page=' . $produks->lastPage());
+        $respons['next_page_url']  = $produks->nextPageUrl();
         $respons['path']           = url('/penjualan/');
-        $respons['per_page']       = $produk->perPage();
-        $respons['prev_page_url']  = $produk->previousPageUrl();
-        $respons['to']             = $produk->perPage();
-        $respons['total']          = $produk->total();
+        $respons['per_page']       = $produks->perPage();
+        $respons['prev_page_url']  = $produks->previousPageUrl();
+        $respons['to']             = $produks->perPage();
+        $respons['total']          = $produks->total();
         //
         return response()->json($respons);
     }
 
     public function search(Request $request)
     {
-        $produk = Produk::where('nama_produk', 'LIKE', "%$request->search%")->paginate(9);
-        return response()->json($produk);
+        $produks = Produk::where('nama_produk', 'LIKE', "%$request->search%")->paginate(9);
+        $array   = [];
+        $respons = [];
+        $num     = 0;
+        foreach ($produks as $produk) {
+            // array_push($array, [
+            //     'data_produk' => $produk,
+            // ]);
+            $array[$num]['data_produk'] = $produk;
+            $num++;
+
+        }
+        $respons = $array;
+        return response()->json($respons);
     }
 
     public function tbsPenjualan()
@@ -86,23 +101,27 @@ class PenjualanController extends Controller
             ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
             ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal')
             ->get();
+        if (count($tbsPenjualan) > 0) {
 
-        $json_tbs = json_decode($tbsPenjualan, true);
-        for ($i = 0; $i < count($json_tbs); $i++) {
-            $arraySubtotal[] = $json_tbs[$i]['subtotal'];
+            $json_tbs = json_decode($tbsPenjualan, true);
+            for ($i = 0; $i < count($json_tbs); $i++) {
+                $arraySubtotal[] = $json_tbs[$i]['subtotal'];
+            }
+
+            foreach ($arraySubtotal as $key => $val) {
+                $subtotalData[] = $val;
+            }
+
+            $dataArray = [
+                $tbsPenjualan,
+                array_sum($subtotalData),
+            ];
+            return response()->json($dataArray);
+        } else {
+
+            return response()->json($tbsPenjualan);
         }
 
-        foreach ($arraySubtotal as $key => $val) {
-            $subtotalData[] = $val;
-        }
-
-        $dataArray = [
-            $tbsPenjualan,
-            array_sum($subtotalData),
-        ];
-        // print_r($arraySubtotal);
-
-        return response()->json($dataArray);
     }
 
     public function store(Request $request)

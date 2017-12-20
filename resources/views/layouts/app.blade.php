@@ -12,7 +12,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
 </link>
 </link>
 </meta>
@@ -167,6 +168,8 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js?v=1.24') }}">
+    <script src="{{ asset('js/bootstrap.min.js') }}">
+    <script src="{{ asset('js/jquery.min.js') }}">
 </script>
 </body>
 </html>
