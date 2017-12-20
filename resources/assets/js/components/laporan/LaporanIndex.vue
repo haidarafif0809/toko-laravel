@@ -30,13 +30,17 @@ i{margin-bottom: 20px}
 
 <template>
 	<div class="container">
+		<ul class="breadcrumb">
+	      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+	      <li class="active">Laporan</li>
+	    </ul>
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<span class="panel-title">Laporan</span>
 			</div>
 			<div class="panel-body text-center">
 	            <div class="col-md-4">
-	            	<router-link :to="{name: 'indexDashboard'}">
+	            	<router-link :to="{name: 'indexLaporanRingkas'}">
 	            	<div class="box">
 	            		<i class="fa fa-book fa-3x"></i>
 	            		<p class="judul">Laporan Ringkas</p>
