@@ -29375,12 +29375,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kelolaKas_KelolaKasEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_kelolaKas_KelolaKasEdit_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__ = __webpack_require__(375);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue__ = __webpack_require__(385);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue__ = __webpack_require__(375);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29452,7 +29450,6 @@ window.Vue = __webpack_require__(28);
 
 
 // Laporan
-
 
 
 
@@ -29628,12 +29625,12 @@ var routes = [{
     name: 'indexLaporan'
 }, {
     path: '/laporan-ringkas',
-    component: __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue___default.a,
+    component: __WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue___default.a,
     name: 'indexLaporanRingkas'
 }, {
     path: '/laporan/rekap_kas',
-    component: __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__["default"],
-    name: 'rekapKas'
+    component: __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue___default.a,
+    name: 'indexRekapKas'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -81867,12 +81864,7 @@ if (false) {
 }
 
 /***/ }),
-/* 365 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\xampp\\htdocs\\toko-laravel\\resources\\assets\\js\\components\\laporan\\RekapKas.vue'");
-
-/***/ }),
+/* 365 */,
 /* 366 */,
 /* 367 */
 /***/ (function(module, exports) {
