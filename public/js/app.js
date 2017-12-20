@@ -29377,6 +29377,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__ = __webpack_require__(375);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29448,6 +29452,8 @@ window.Vue = __webpack_require__(28);
 
 
 // Laporan
+
+
 
 
 var routes = [{
@@ -29621,9 +29627,13 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default.a,
     name: 'indexLaporan'
 }, {
-    path: '/laporan-rekap_kas',
-    component: __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue___default.a,
-    name: 'indexRekapKas'
+    path: '/laporan-ringkas',
+    component: __WEBPACK_IMPORTED_MODULE_41__components_laporan_LaporanRingkasIndex_vue___default.a,
+    name: 'indexLaporanRingkas'
+}, {
+    path: '/laporan/rekap_kas',
+    component: __WEBPACK_IMPORTED_MODULE_42__components_laporan_RekapKas_vue__["default"],
+    name: 'rekapKas'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -70988,7 +70998,7 @@ exports = module.exports = __webpack_require__(6)(undefined);
 
 
 // module
-exports.push([module.i, "\n.shadow[data-v-041415bf] {\n     -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n", ""]);
+exports.push([module.i, "\n.shadow[data-v-041415bf] {\r\n    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\r\n", ""]);
 
 // exports
 
@@ -78416,15 +78426,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			penjualan: [],
 			pelanggans: [],
-			produks: [],
+			produksPenjualan: [],
 			tbs_penjualans: [],
-			produksData: {},
+			dataProduksPenjualan: {},
 			inputTbsPenjualan: {
 				satuan: '',
 				produk_id: '',
@@ -78436,6 +78480,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
 			urlTbs: window.location.origin + window.location.pathname.replace("home", "proses-tbs-penjualan"),
 			loading: true,
+			loadingTbs: true,
 
 			setting_pelanggan: {
 				placeholder: 'Pilih Pelanggan'
@@ -78445,25 +78490,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {
 		var app = this;
 		app.loading = true;
-		app.getPenjualans();
+		app.loadingTbs = true;
+		app.getProduksPenjualan();
 		app.getTbsPenjualan();
 		app.selectPelanggans();
 	},
 
-
-	// computed: {
-	// 	cartCount: function(){
-	// 		return this.cart.length
-	// 	},
-	// totalPrice: function(){
-	// 	return this.cart.reduce(function(prev, item){
-	// 		return prev + (item.price * item.quantity)
-	// 	}, 0)
-	// },
-	// amountDue: function() {
-	// 	return this.totalPrice - this.form.totalPayment
-	// }
-	// },
 
 	watch: {
 		// whenever question changes, this function will run
@@ -78472,7 +78504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
-		getPenjualans: function getPenjualans(page) {
+		getProduksPenjualan: function getProduksPenjualan(page) {
 			var app = this;
 			if (typeof page === 'undefined') {
 				page = 1;
@@ -78480,38 +78512,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.get(app.url + '/view?page=' + page).then(function (resp) {
 				app.loading = false;
-				app.produks = resp.data.data;
-				app.produksData = resp.data;
+				app.produksPenjualan = resp.data.data;
+				app.dataProduksPenjualan = resp.data;
+				console.log(resp.data.data);
 			}).catch(function (resp) {
-				alert("Could not load produks");
+				alert("Could not load produksPenjualan");
 				app.loading = false;
 			});
 		},
 		getTbsPenjualan: function getTbsPenjualan() {
 			var app = this;
 			axios.get(app.url + '/tbs-penjualan').then(function (resp) {
-				app.tbs_penjualans = resp.data[0];
-				app.tbs_penjualans.total_bayar = resp.data[1];
-				// console.log(resp.data);
+				if (resp.data.length == 2) {
+
+					app.tbs_penjualans = resp.data[0];
+					app.tbs_penjualans.total_bayar = resp.data[1];
+					app.loadingTbs = false;
+				} else {
+
+					app.tbs_penjualans = resp.data;
+				}
+				// console.log(resp.data.length);
 				// app.tbs_penjualans.total_item = 
 			}).catch(function () {
 				alert("Could not load tbs penjualan");
 			});
 		},
-
-
-		// storeItemToCart: function(item) {
-		// 	var ids = _.map(this.cart, 'id')
-
-		// 	if (!_.includes(ids, item.id)) {
-		// 		item.quantity = 1
-		// 		this.cart.push(item)
-		// 	} else {
-		// 		var index = _.findIndex(this.cart, item)
-		// 		this.cart[index].quantity = this.cart[index].quantity + 1
-		// 	}
-		// },
-
 		selectPelanggans: function selectPelanggans() {
 			var app = this;
 			axios.get(app.url + '/pelanggan').then(function (resp) {
@@ -78529,8 +78555,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
 				app.loading = false;
-				app.produks = resp.data.data;
-				app.penjualansData = resp.data;
+				app.produksPenjualan = resp.data;
+				app.dataProduksPenjualan = resp;
+				console.log(resp.data);
 			}).catch(function (resp) {
 				alert("Tidak dapat memuat produk..");
 				app.loading = false;
@@ -78647,38 +78674,137 @@ var render = function() {
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.produks, function(produk, index) {
-                  return _c("div", { staticClass: "col-md-4 list-produk" }, [
-                    _c("div", { staticClass: "thumbnail" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "caption",
-                          on: {
-                            click: function($event) {
-                              _vm.submitTbsPenjualan(produk)
-                            }
-                          }
-                        },
-                        [
-                          _c("h4", [
-                            _vm._v(_vm._s(produk.data_produk.nama_produk))
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "Harga: " + _vm._s(produk.data_produk.harga_jual)
-                            )
-                          ])
-                        ]
-                      )
+              _c("div", { staticClass: "row" }, [
+                _vm.produksPenjualan.length > 0 && _vm.loading == false
+                  ? _c("div", { staticClass: "data-ada" }, [
+                      _vm.produksPenjualan.length == 1
+                        ? _c(
+                            "div",
+                            _vm._l(_vm.produksPenjualan, function(
+                              produk,
+                              index
+                            ) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-4 list-produk" },
+                                [
+                                  _c("div", { staticClass: "thumbnail" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(produk)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        produk.data_produk.nama_produk.length >
+                                        15
+                                          ? _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk.nama_produk.slice(
+                                                      0,
+                                                      15
+                                                    )
+                                                  ) +
+                                                  "...\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ])
+                                          : _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk
+                                                      .nama_produk
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Harga: " +
+                                              _vm._s(
+                                                produk.data_produk.harga_jual
+                                              )
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          )
+                        : _c(
+                            "div",
+                            _vm._l(_vm.produksPenjualan, function(
+                              produk,
+                              index
+                            ) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-4 list-produk" },
+                                [
+                                  _c("div", { staticClass: "thumbnail" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(produk)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        produk.data_produk.nama_produk.length >
+                                        15
+                                          ? _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk.nama_produk.slice(
+                                                      0,
+                                                      15
+                                                    )
+                                                  ) +
+                                                  "...\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ])
+                                          : _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk
+                                                      .nama_produk
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Harga: " +
+                                              _vm._s(
+                                                produk.data_produk.harga_jual
+                                              )
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          )
                     ])
-                  ])
-                })
-              )
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
             _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
@@ -78688,26 +78814,14 @@ var render = function() {
               { attrs: { align: "right" } },
               [
                 _c("pagination", {
-                  attrs: { data: _vm.produksData, limit: 3 },
-                  on: { "pagination-change-page": _vm.getPenjualans }
+                  attrs: { data: _vm.dataProduksPenjualan, limit: 3 },
+                  on: { "pagination-change-page": _vm.getProduksPenjualan }
                 })
               ],
               1
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              { attrs: { align: "right" } },
-              [
-                _vm.search != ""
-                  ? _c("pagination", {
-                      attrs: { data: _vm.produksData, limit: 1 },
-                      on: { "pagination-change-page": _vm.getHasilPencarian }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
+            _c("div", { attrs: { align: "right" } })
           ],
           1
         )
@@ -78722,7 +78836,7 @@ var render = function() {
           "ul",
           { staticClass: "list-group cart-item" },
           [
-            _vm.tbs_penjualans.length > 0 && _vm.loading == false
+            _vm.tbs_penjualans.length > 0 && _vm.loadingTbs == false
               ? _c(
                   "div",
                   { staticClass: "data-ada" },
@@ -78735,20 +78849,42 @@ var render = function() {
                       },
                       [
                         _c("div", [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t\t" +
-                              _vm._s(tbsPenjualan.nama_produk) +
-                              "\n\t\t\t\t\t\t\t\t"
-                          ),
-                          _c("span", { staticStyle: { float: "right" } }, [
-                            _vm._v(
-                              "\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t(" +
-                                _vm._s(tbsPenjualan.harga_produk) +
-                                " x " +
-                                _vm._s(tbsPenjualan.jumlah_produk) +
-                                ") : " +
-                                _vm._s(tbsPenjualan.subtotal) +
-                                "\n\t\t\t\t\t\t\t\t"
+                          _c("small", [
+                            tbsPenjualan.nama_produk.length > 15
+                              ? _c("span", { staticClass: "small" }, [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t" +
+                                      _vm._s(
+                                        tbsPenjualan.nama_produk.slice(0, 15)
+                                      ) +
+                                      "...\n\t\t\t\t\t\t\t"
+                                  )
+                                ])
+                              : _c("span", { staticClass: "small" }, [
+                                  _vm._v(
+                                    "\n\t\t\t\t\t\t\t\t" +
+                                      _vm._s(tbsPenjualan.nama_produk) +
+                                      "\n\t\t\t\t\t\t\t"
+                                  )
+                                ]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "small",
+                                staticStyle: { float: "right" }
+                              },
+                              [
+                                _vm._v(
+                                  "\t\t\t\t\t\n\t\t\t\t\t\t\t\t(" +
+                                    _vm._s(tbsPenjualan.harga_produk) +
+                                    " x " +
+                                    _vm._s(tbsPenjualan.jumlah_produk) +
+                                    ") : " +
+                                    _vm._s(tbsPenjualan.subtotal) +
+                                    "\n\t\t\t\t\t\t\t"
+                                )
+                              ]
                             )
                           ])
                         ])
@@ -78756,26 +78892,26 @@ var render = function() {
                     )
                   })
                 )
-              : _vm.loading == true
+              : _vm.loadingTbs == true
                 ? _c("div", { staticClass: "text-center" }, [
                     _c("li", [_vm._v("Sedang Memuat Produk")])
                   ])
                 : _c(
                     "div",
                     { staticClass: "list-group-item list-group-item-warning" },
-                    [_vm._v("\n\t\t\t\t\t\tTidak Ada Produk\n\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\tTidak Ada Produk\n\t\t\t")]
                   ),
             _vm._v(" "),
-            _vm.loading ? _c("vue-simple-spinner") : _vm._e()
+            _vm.loadingTbs ? _c("vue-simple-spinner") : _vm._e()
           ],
           1
         ),
         _vm._v(" "),
         _c("div", { staticClass: "panel-footer" }, [
           _vm._v(
-            "\n\t\t\t\t\tTotal Item: " +
+            "\n\t\t\tTotal Item: " +
               _vm._s(_vm.tbs_penjualans.length) +
-              "\n\t\t\t\t\t"
+              "\n\t\t\t"
           ),
           _c("span", { staticClass: "pull-right" })
         ])
@@ -79166,11 +79302,11 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Data Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Data User")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Data Toko")]),
+      _c("div", { staticClass: "panel-heading" }, [_vm._v("Data User")]),
       _vm._v(" "),
       _c(
         "div",
@@ -79325,6 +79461,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(380)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(347)
@@ -79333,7 +79473,7 @@ var __vue_template__ = __webpack_require__(348)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -79460,43 +79600,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            // buat nampilin data dlm bentuk array
-            profileTokos: [],
-            // buat paginations
-            profileTokosData: {},
-            message: '',
-            url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
-            loading: true
-        };
-    },
-    mounted: function mounted() {
-        var app = this;
-        app.getProfileTokos();
-    },
+  data: function data() {
+    return {
+      // buat nampilin data dlm bentuk array
+      profileTokos: [],
+      // buat paginations
+      profileTokosData: {},
+      message: '',
+      url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+      url_img: window.location.origin + window.location.pathname.replace("home", "logo/"),
+      loading: true
+    };
+  },
+  mounted: function mounted() {
+    var app = this;
+    app.getProfileTokos();
+  },
 
-    methods: {
-        // method getprofileToko
-        getProfileTokos: function getProfileTokos(page) {
-            var app = this;
-            if (typeof page === 'undefined') {
-                page = 1;
-            }
-            axios.get(app.url + '/view?page=' + page).then(function (resp) {
-                app.profileTokos = resp.data.data;
-                app.profileTokosData = resp.data;
-                app.loading = false;
-                // buat cek ddi console
-                console.log(app.profileTokos);
-            }).catch(function (resp) {
-                alert("Could not load Profile Tokos");
-                app.loading = false;
-            });
-        }
+  methods: {
+    // method getprofileToko
+    getProfileTokos: function getProfileTokos(page) {
+      var app = this;
+      if (typeof page === 'undefined') {
+        page = 1;
+      }
+      axios.get(app.url + '/view?page=' + page).then(function (resp) {
+        app.profileTokos = resp.data.data;
+        app.profileTokosData = resp.data;
+        app.loading = false;
+        // buat cek ddi console
+        console.log(app.profileTokos);
+      }).catch(function (resp) {
+        alert("Could not load Profile Tokos");
+        app.loading = false;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -79624,9 +79780,25 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("td", { staticClass: "col-md-8" }, [
-                                  _vm._v(
-                                    ": " + _vm._s(profileToko.profileToko.logo)
-                                  )
+                                  _vm._v(": \n                    "),
+                                  profileToko.profileToko.foto == null
+                                    ? _c("img", {
+                                        staticClass:
+                                          "img-responsive thumbnail shadow",
+                                        attrs: {
+                                          src:
+                                            "https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif"
+                                        }
+                                      })
+                                    : _c("img", {
+                                        staticClass:
+                                          " img-responsive thumbnail shadow",
+                                        attrs: {
+                                          src:
+                                            _vm.url_img +
+                                            profileToko.profileToko.foto
+                                        }
+                                      })
                                 ])
                               ])
                             }),
@@ -79707,11 +79879,7 @@ var render = function() {
                                             "edit-" + profileToko.profileToko.id
                                         }
                                       },
-                                      [
-                                        _vm._v(
-                                          "\n                                    Edit  "
-                                        )
-                                      ]
+                                      [_vm._v("\n                    Edit  ")]
                                     )
                                   ],
                                   1
@@ -79760,9 +79928,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                    Sedang Memuat Data\n                                "
-        )
+        _vm._v("\n                    Sedang Memuat Data\n                  ")
       ])
     ])
   },
@@ -79772,9 +79938,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v(
-          "\n                                    Tidak Ada Data\n                                "
-        )
+        _vm._v("\n                    Tidak Ada Data\n                  ")
       ])
     ])
   }
@@ -79793,17 +79957,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(382)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(350)
 /* template */
-var __vue_template__ = __webpack_require__(351)
+var __vue_template__ = __webpack_require__(384)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-49334712"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -79912,6 +80080,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -79923,6 +80114,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "profile-toko"),
+			url_img: window.location.origin + window.location.pathname.replace("home", "logo/"),
+			broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
 			profileToko: {
 				id: '',
 				nama_toko: '',
@@ -79930,30 +80123,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				email: '',
 				no_telp: '',
 				alamat: '',
-				logo: ''
+				foto: ''
 			},
 			profileTokoId: null,
 			message: ''
 		};
 	},
 	methods: {
+		onFileChange: function onFileChange(e) {
+			var files = e.target.files || e.dataTransfer.files;
+			if (!files.length) return null;
+			this.createImage(files[0]);
+		},
+		createImage: function createImage(file) {
+			var reader = new FileReader();
+			var app = this;
+			var ekstensi = /(\.jpg|\.jpeg|\.png)/i;
+
+			if (!file.name.match(ekstensi)) {
+				app.profileToko.foto = null;
+				this.$swal({
+					title: "File tidak didukung!",
+					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+					icon: "warning",
+					buttons: "Saya mengerti"
+				});
+			} else {
+				reader.onload = function (e) {
+					app.profileToko.foto = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			}
+		},
 		saveForm: function saveForm() {
 			var app = this;
-			var newToko = app.profileToko;
-			// var namaToko = app.profileToko.nama_toko;
-			// var namaPemilik = app.profileToko.nama_pemilik;
-			// var email = app.profileToko.email;
-			// var no_telp = app.profileToko.no_telp;
-			// var alamat = app.profileToko.alamat;
-			// var logo = app.profileToko.logo;
-			// var id = app.profileToko.id;
-			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
-			axios.patch(app.url + '/' + app.profileTokoId, newToko).then(function (resp) {
+			var newProfileToko = app.profileToko;
+			var image = document.getElementById('image');
+
+			if (image.value == '') {
+				newProfileToko.foto = null;
+			}
+			axios.patch(app.url + '/' + app.profileTokoId, newProfileToko).then(function (resp) {
 				app.message = 'Berhasil Merubah Profile Toko "' + app.profileToko.nama_pemilik + '"';
 				app.alert(app.message);
+				app.profileToko.nama_toko = '';
+				app.profileToko.nama_pemilik = '';
+				app.profileToko.email = '';
+				app.profileToko.no_telp = '';
+				app.profileToko.alamat = '';
+				app.profileToko.foto = '';
 				app.errors = '';
 				app.$router.replace('/profile-toko');
+				console.log(resp);
 			}).catch(function (resp) {
+
 				app.errors = resp.response.data.errors;
 			});
 		},
@@ -79972,435 +80195,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.get(app.url + '/' + id + '/edit').then(function (resp) {
 				app.profileToko = resp.data;
+				console.log(resp.data.foto);
 			}).catch(function () {
 				alert("Could not load your Profile Toko");
 			});
 		}
 	}
 
+	// var namaToko = app.profileToko.nama_toko;
+	// var namaPemilik = app.profileToko.nama_pemilik;
+	// var email = app.profileToko.email;
+	// var no_telp = app.profileToko.no_telp;
+	// var alamat = app.profileToko.alamat;
+	// var logo = app.profileToko.logo;
+	// var id = app.profileToko.id;
+	// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
 });
 
 /***/ }),
-/* 351 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("ul", { staticClass: "breadcrumb" }, [
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-              _vm._v("Home")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "profileTokoIndex" } } }, [
-              _vm._v("Profile Toko")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("li", { staticClass: "active" }, [_vm._v("Edit Profile Toko")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _vm._m(0, false, false),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              staticClass: "form-horizontal",
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.saveForm()
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "nama_toko" }
-                  },
-                  [_vm._v("Nama Toko")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.nama_toko,
-                        expression: "profileToko.nama_toko"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "on",
-                      placeholder: "Nama Toko",
-                      type: "text",
-                      name: "nama_toko",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.nama_toko },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.profileToko,
-                          "nama_toko",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.nama_toko
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.nama_toko[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "nama_pemilik" }
-                  },
-                  [_vm._v("Nama Pemilik")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.nama_pemilik,
-                        expression: "profileToko.nama_pemilik"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      placeholder: "Nama Pemilik",
-                      type: "text",
-                      name: "nama_pemilik",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.nama_pemilik },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.profileToko,
-                          "nama_pemilik",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.nama_pemilik
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.nama_pemilik[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Email")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.email,
-                        expression: "profileToko.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      placeholder: "Email",
-                      type: "email",
-                      name: "email",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.profileToko, "email", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.email
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.email[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "no_telp" }
-                  },
-                  [_vm._v("No. Telp")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.no_telp,
-                        expression: "profileToko.no_telp"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      placeholder: "No. Telp",
-                      type: "tel",
-                      name: "no_telp",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.no_telp },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.profileToko,
-                          "no_telp",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.no_telp
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.no_telp[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "alamat" }
-                  },
-                  [_vm._v("Alamat")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.alamat,
-                        expression: "profileToko.alamat"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      autocomplete: "off",
-                      placeholder: "Alamat",
-                      type: "text",
-                      name: "alamat",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.alamat },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.profileToko, "alamat", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.alamat
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.alamat[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-2 control-label",
-                    attrs: { for: "logo" }
-                  },
-                  [_vm._v("Logo")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.profileToko.logo,
-                        expression: "profileToko.logo"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      autocomplete: "off",
-                      placeholder: "Logo",
-                      type: "text",
-                      name: "logo",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.profileToko.logo },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.profileToko, "logo", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.logo
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.logo[0]))
-                      ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.profileToko.id,
-                    expression: "profileToko.id"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  autocomplete: "off",
-                  placeholder: "",
-                  type: "hidden",
-                  name: "id",
-                  autofocus: ""
-                },
-                domProps: { value: _vm.profileToko.id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.profileToko, "id", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm._m(1, false, false)
-            ]
-          )
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("h4", { staticClass: "panel-title" }, [_vm._v(" Profile Toko ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "btnSimpanProfileToko", type: "submit" }
-          },
-          [_vm._v("Submit")]
-        )
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-49334712", module.exports)
-  }
-}
-
-/***/ }),
+/* 351 */,
 /* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -81885,6 +81698,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "active" }, [_vm._v("Laporan")])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "panel panel-info" }, [
       _vm._m(0, false, false),
       _vm._v(" "),
@@ -81893,17 +81720,23 @@ var render = function() {
           "div",
           { staticClass: "col-md-4" },
           [
-            _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-              _c("div", { staticClass: "box" }, [
-                _c("i", { staticClass: "fa fa-book fa-3x" }),
-                _vm._v(" "),
-                _c("p", { staticClass: "judul" }, [_vm._v("Laporan Ringkas")]),
-                _vm._v(" "),
-                _c("p", { staticClass: "keterangan" }, [
-                  _vm._v("Menunjukkan laporan penjualan secara umum.")
+            _c(
+              "router-link",
+              { attrs: { to: { name: "indexLaporanRingkas" } } },
+              [
+                _c("div", { staticClass: "box" }, [
+                  _c("i", { staticClass: "fa fa-book fa-3x" }),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "judul" }, [
+                    _vm._v("Laporan Ringkas")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "keterangan" }, [
+                    _vm._v("Menunjukkan laporan penjualan secara umum.")
+                  ])
                 ])
-              ])
-            ])
+              ]
+            )
           ],
           1
         ),
@@ -82034,7 +81867,12 @@ if (false) {
 }
 
 /***/ }),
-/* 365 */,
+/* 365 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\xampp\\htdocs\\toko-laravel\\resources\\assets\\js\\components\\laporan\\RekapKas.vue'");
+
+/***/ }),
 /* 366 */,
 /* 367 */
 /***/ (function(module, exports) {
@@ -82185,6 +82023,734 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-cf32b878", module.exports)
+  }
+}
+
+/***/ }),
+/* 380 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(381);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("d5f22904", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-59c62796\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-59c62796\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\nimg {\r\n  width: 50%;\r\n  margin: auto;\r\n  display: block;\r\n  -webkit-box-shadow: 10px 10px 5px 5px;\r\n          box-shadow: 10px 10px 5px 5px;\r\n  border-radius: 5px;\r\n  margin-bottom: 10px;\n}\nbutton {\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(383);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("05439106", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49334712\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoEdit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49334712\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./ProfileTokoEdit.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.shadow[data-v-49334712] {\r\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\nimg[data-v-49334712] {\r\n\twidth: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 384 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("ul", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+              _vm._v("Home")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "profileTokoIndex" } } }, [
+              _vm._v("Profile Toko")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Edit Profile Toko")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "form-horizontal",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  _vm.saveForm()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "nama_toko" }
+                  },
+                  [_vm._v("Nama Toko")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.nama_toko,
+                        expression: "profileToko.nama_toko"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "on",
+                      placeholder: "Nama Toko",
+                      type: "text",
+                      name: "nama_toko",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.nama_toko },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "nama_toko",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.nama_toko
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.nama_toko[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "nama_pemilik" }
+                  },
+                  [_vm._v("Nama Pemilik")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.nama_pemilik,
+                        expression: "profileToko.nama_pemilik"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Nama Pemilik",
+                      type: "text",
+                      name: "nama_pemilik",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.nama_pemilik },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "nama_pemilik",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.nama_pemilik
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.nama_pemilik[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "email" }
+                  },
+                  [_vm._v("Email")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.email,
+                        expression: "profileToko.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Email",
+                      type: "email",
+                      name: "email",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.profileToko, "email", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.email
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.email[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "no_telp" }
+                  },
+                  [_vm._v("No. Telp")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.no_telp,
+                        expression: "profileToko.no_telp"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "No. Telp",
+                      type: "tel",
+                      name: "no_telp",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.no_telp },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.profileToko,
+                          "no_telp",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.no_telp
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.no_telp[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "alamat" }
+                  },
+                  [_vm._v("Alamat")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.profileToko.alamat,
+                        expression: "profileToko.alamat"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      autocomplete: "off",
+                      placeholder: "Alamat",
+                      type: "text",
+                      name: "alamat",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.profileToko.alamat },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.profileToko, "alamat", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.alamat
+                    ? _c("span", { staticClass: "label label-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.alamat[0]))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "foto" }
+                  },
+                  [_vm._v("Logo")]
+                ),
+                _vm._v(" "),
+                _vm.profileToko.foto != null || _vm.profileToko.foto != ""
+                  ? _c("div", { staticClass: "col-md-4" }, [
+                      _vm.profileToko.foto.length > 100
+                        ? _c("div", [
+                            _c("img", {
+                              staticClass: "img-responsive thumbnail shadow",
+                              attrs: { src: _vm.profileToko.foto }
+                            })
+                          ])
+                        : _c("div", [
+                            _c("img", {
+                              staticClass: "img-responsive thumbnail shadow",
+                              attrs: { src: _vm.url_img + _vm.profileToko.foto }
+                            })
+                          ])
+                    ])
+                  : _c("div", { staticClass: "col-md-4" }, [
+                      _c("img", {
+                        staticClass: "img-responsive thumbnail shadow",
+                        attrs: {
+                          src: _vm.broken_file,
+                          title: "File yang Anda masukkan tidak didukung"
+                        }
+                      })
+                    ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-2 control-label",
+                    attrs: { for: "foto" }
+                  },
+                  [_vm._v("Foto")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "file", name: "foto", id: "image" },
+                    on: { change: _vm.onFileChange }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.profileToko.id,
+                    expression: "profileToko.id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  autocomplete: "off",
+                  placeholder: "",
+                  type: "hidden",
+                  name: "id",
+                  autofocus: ""
+                },
+                domProps: { value: _vm.profileToko.id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.profileToko, "id", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(1, false, false)
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("h4", { staticClass: "panel-title" }, [_vm._v(" Profile Toko ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { id: "btnSimpanProfileToko", type: "submit" }
+          },
+          [_vm._v("Submit")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49334712", module.exports)
+  }
+}
+
+/***/ }),
+/* 385 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(386)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(388)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-26818118"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\laporan\\LaporanRingkasIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-26818118", Component.options)
+  } else {
+    hotAPI.reload("data-v-26818118", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 386 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(387);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("34ddfc9a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26818118\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./LaporanRingkasIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-26818118\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./LaporanRingkasIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 387 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 388 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0, false, false)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-3 col-sm-offset-1" }, [
+          _c("div", { staticClass: "panel panel-default" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _c("p", { staticClass: "panel-title" }, [_vm._v("Filter")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body text-center" }, [
+              _c("div", { staticClass: "btn-group-vertical" }, [
+                _c("button", { staticClass: "btn btn-primary active" }, [
+                  _vm._v("Harian")
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v("Mingguan")
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v("Bulanan")
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-primary" }, [
+                  _vm._v("Tahunan")
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-7" }, [
+          _c("div", { staticClass: "panel panel-default" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _c("p", { staticClass: "panel-title" }, [
+                _vm._v("Laporan Ringkas")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "panel-body" }, [
+              _c(
+                "table",
+                { staticClass: "table table-striped table-condensed" },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("Jenis Laporan")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Total Nominal(Rp)")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", [_vm._v("Penjualan")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Diskon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Pembatalan")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Penjualan bersih")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Pajak")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Pembulatan")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Total Penerimaan")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("0,00")])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-26818118", module.exports)
   }
 }
 

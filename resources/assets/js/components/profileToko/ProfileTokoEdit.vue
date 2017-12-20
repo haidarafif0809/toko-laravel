@@ -1,3 +1,11 @@
+<style scoped>
+.shadow {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+img {
+	width: 100%;
+}
+</style>
 <template>
 	<div class="container">
 		<div class="row">
@@ -48,12 +56,27 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="logo" class="col-md-2 control-label">Logo</label>
-							<div class="col-md-4">
-								<input class="form-control" autocomplete="off" placeholder="Logo" type="text" v-model="profileToko.logo" name="logo"  autofocus="">
-								<span v-if="errors.logo" class="label label-danger">{{ errors.logo[0] }}</span>
+							<label for="foto" class="col-md-2 control-label">Logo</label>
+							<div v-if="profileToko.foto != null || profileToko.foto != '' " class="col-md-4">		
+								<div v-if="profileToko.foto.length > 100">
+									<img :src="profileToko.foto" class="img-responsive thumbnail shadow">
+								</div>		
+								<div v-else>
+									<img :src="url_img + profileToko.foto" class="img-responsive thumbnail shadow">
+								</div>
+							</div>
+							<div v-else class="col-md-4">
+								<img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="foto" class="col-md-2 control-label">Foto</label>
+							<div class="col-md-4">
+								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
+							</div>
+						</div>
+
 						<input class="form-control" autocomplete="off" placeholder="" type="hidden" v-model="profileToko.id" name="id"  autofocus="">
 						<div class="form-group">
 							<div class="col-md-4 col-md-offset-2">
@@ -78,6 +101,8 @@ export default {
 		return {
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "profile-toko"),
+			url_img : window.location.origin+(window.location.pathname).replace("home", "logo/"),
+			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
 			profileToko: {
 				id: '',
 				nama_toko: '',
@@ -85,32 +110,64 @@ export default {
 				email: '',
 				no_telp: '',
 				alamat: '',
-				logo: '',
+				foto: '',
 			},
 			profileTokoId: null,
 			message: ''
 		}
 	},
 	methods: {
+		onFileChange(e) {
+			let files = e.target.files || e.dataTransfer.files;
+			if (!files.length)
+				return null;
+			this.createImage(files[0]);
+		},
+		createImage(file) {
+			let reader = new FileReader();
+			let app = this;
+			let ekstensi = /(\.jpg|\.jpeg|\.png)/i;
+
+			if(!file.name.match(ekstensi)) {
+				app.profileToko.foto = null;
+				this.$swal({
+					title: "File tidak didukung!",
+					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+					icon: "warning",
+					buttons: "Saya mengerti",
+				});
+			}
+			else {
+				reader.onload = (e) => {
+					app.profileToko.foto = e.target.result;
+				};
+				reader.readAsDataURL(file);
+			}
+		},
 		saveForm() {
 			var app = this;
-			var newToko = app.profileToko;
-			// var namaToko = app.profileToko.nama_toko;
-			// var namaPemilik = app.profileToko.nama_pemilik;
-			// var email = app.profileToko.email;
-			// var no_telp = app.profileToko.no_telp;
-			// var alamat = app.profileToko.alamat;
-			// var logo = app.profileToko.logo;
-			// var id = app.profileToko.id;
-			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
-			axios.patch(app.url+'/' + app.profileTokoId, newToko)
+			var newProfileToko = app.profileToko;
+			var image = document.getElementById('image');
+
+			if (image.value == '') {
+				newProfileToko.foto = null;
+			}
+			axios.patch(app.url+'/' + app.profileTokoId, newProfileToko)
 			.then(function (resp) {
 				app.message = 'Berhasil Merubah Profile Toko "'+app.profileToko.nama_pemilik+'"'
 				app.alert(app.message);
+				app.profileToko.nama_toko=''
+				app.profileToko.nama_pemilik=''
+				app.profileToko.email=''
+				app.profileToko.no_telp=''
+				app.profileToko.alamat=''
+				app.profileToko.foto=''
 				app.errors = '';
 				app.$router.replace('/profile-toko');
+				console.log(resp)
 			})
 			.catch(function (resp) {
+				
 				app.errors = resp.response.data.errors;
 			});
 		},
@@ -130,6 +187,7 @@ export default {
 			axios.get(app.url+'/' + id + '/edit')
 			.then(function (resp) {
 				app.profileToko = resp.data;
+				console.log(resp.data.foto);
 			})
 			.catch(function () {
 				alert("Could not load your Profile Toko")
@@ -138,5 +196,13 @@ export default {
 
 	}
 
-}
-</script>
+			// var namaToko = app.profileToko.nama_toko;
+			// var namaPemilik = app.profileToko.nama_pemilik;
+			// var email = app.profileToko.email;
+			// var no_telp = app.profileToko.no_telp;
+			// var alamat = app.profileToko.alamat;
+			// var logo = app.profileToko.logo;
+			// var id = app.profileToko.id;
+			// axios.get(app.url+'/edit?nama_toko='+namaToko+'&nama_pemilik='+namaPemilik+'&email='+email+'&no_telp='+no_telp+'&alamat='+alamat+'&logo='+logo+'&id='+id)
+		}
+		</script>

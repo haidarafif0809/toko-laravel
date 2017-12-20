@@ -25,12 +25,38 @@
 						</div>	
 						<br>
 						<div class="row">
-							<div v-for="produk , index in produks" class="col-md-4 list-produk">
-								<div class="thumbnail">
-									<div class="caption"  @click="submitTbsPenjualan(produk)">
-										<h4>{{produk.data_produk.nama_produk}}</h4>
-										<p>Harga: {{produk.data_produk.harga_jual}}</p>
+							<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
+								<div v-if="produksPenjualan.length == 1">
+									<div v-for="produk , index in produksPenjualan" class="col-md-4 list-produk">
+										<div class="thumbnail">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 v-if="produk.data_produk.nama_produk.length > 15">
+													{{produk.data_produk.nama_produk.slice(0, 15)}}...
+												</h4>
+												<h4 v-else>
+													{{produk.data_produk.nama_produk}}
+												</h4>
+												<p>Harga: {{produk.data_produk.harga_jual}}</p>
+											</div>
+										</div>
 									</div>
+									
+								</div>
+								<div v-else>
+									<div v-for="produk , index in produksPenjualan" class="col-md-4 list-produk">
+										<div class="thumbnail">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 v-if="produk.data_produk.nama_produk.length > 15">
+													{{produk.data_produk.nama_produk.slice(0, 15)}}...
+												</h4>
+												<h4 v-else>
+													{{produk.data_produk.nama_produk}}
+												</h4>
+												<p>Harga: {{produk.data_produk.harga_jual}}</p>
+											</div>
+										</div>
+									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -39,91 +65,99 @@
 					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
 					<div align="right">
-						<pagination :data="produksData" v-on:pagination-change-page="getPenjualans" :limit="3"></pagination>
+						<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
 					</div>
 					<div align="right">
-						<pagination :data="produksData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination>
+<!-- 						<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination>
+-->					</div>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+	<div class="panel panel-default">
+		<div class="panel-heading">Pesanan</div>
+		<ul class="list-group cart-item">
+
+
+
+
+			<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
+			<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
+				<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
+					<div>
+						<small>
+							<span class="small" v-if="tbsPenjualan.nama_produk.length > 15">
+								{{ tbsPenjualan.nama_produk.slice(0, 15) }}...
+							</span>
+							<span class="small" v-else>
+								{{ tbsPenjualan.nama_produk}}
+							</span>
+
+							<span class="small" style="float: right;">					
+								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }}
+							</span>
+						</small>
 					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">Pesanan</div>
-				<ul class="list-group cart-item">
-
-
-
-
-					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
-					<div v-if="tbs_penjualans.length > 0 && loading == false" class="data-ada">	
-						<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
-							<div>
-								{{ tbsPenjualan.nama_produk }}
-								<span style="float: right">					
-									({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }}
-								</span>
-							</div>
-						</li>
-					</div>
-
-
-
-
-					<div v-else-if="loading == true" class="text-center">
-						<li>Sedang Memuat Produk</li>
-					</div>
-					<div v-else class="list-group-item list-group-item-warning">
-						Tidak Ada Produk
-					</div>
-					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-				</ul>
-
-				<div class="panel-footer">
-					Total Item: {{ tbs_penjualans.length }}
-					<span class="pull-right">
-						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-					</span>
-				</div>
+				</li>
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form>
-						<div class="form-group">
-							<label class="control-label">Total Bayar</label>
-							<br>
-							<br>
-							<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b></h1>
-							<h2 class="form-control-static text-warning"></h2>
-						</div>
 
-						<div  class="form-group">
-							<label class="control-label"> Nama Pelanggan:</label>
-							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-							</selectize-component>
-						</div>
 
-						<div class="form-group">
-							<div class="input-group">
-								<input type="number" class="form-control" placeholder="Pembayaran">
-								<span class="input-group-btn">
-									<button class="btn btn-success">Bayar</button>
-								</span>
-							</div>
-						</div>
 
-						<div class="form-group">
-							<label class="control-label">Keterangan</label>
-							<textarea class="form-control"></textarea>
-						</div> 
-					</form>
-				</div>
+			<div v-else-if="loadingTbs == true" class="text-center">
+				<li>Sedang Memuat Produk</li>
 			</div>
+			<div v-else class="list-group-item list-group-item-warning">
+				Tidak Ada Produk
+			</div>
+			<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
+		</ul>
+
+		<div class="panel-footer">
+			Total Item: {{ tbs_penjualans.length }}
+			<span class="pull-right">
+				<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
+			</span>
 		</div>
 	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<label class="control-label">Total Bayar</label>
+					<br>
+					<br>
+					<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b><!-- <span class="glyphicon glyphicon-remove"></span> --></h1>
+					<h2 class="form-control-static text-warning"></h2>
+				</div>
+
+				<div  class="form-group">
+					<label class="control-label"> Nama Pelanggan:</label>
+					<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+						<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+					</selectize-component>
+				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<input type="number" class="form-control" placeholder="Pembayaran">
+						<span class="input-group-btn">
+							<button class="btn btn-success">Bayar</button>
+						</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label">Keterangan</label>
+					<textarea class="form-control"></textarea>
+				</div> 
+			</form>
+		</div>
+	</div>
+</div>
+</div>
 </div>
 </template>
 
@@ -133,9 +167,9 @@ export default {
 		return {
 			penjualan:[],
 			pelanggans:[],
-			produks: [],
+			produksPenjualan: [],
 			tbs_penjualans: [],
-			produksData:{},
+			dataProduksPenjualan:{},
 			inputTbsPenjualan: {
 				satuan:'',
 				produk_id:'',
@@ -147,6 +181,7 @@ export default {
 			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
 			urlTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
 			loading : true,
+			loadingTbs : true,
 
 			setting_pelanggan:{
 				placeholder: 'Pilih Pelanggan'
@@ -156,24 +191,11 @@ export default {
 	mounted() {
 		var app = this;
 		app.loading = true
-		app.getPenjualans();
+		app.loadingTbs = true
+		app.getProduksPenjualan();
 		app.getTbsPenjualan();
 		app.selectPelanggans();
 	},
-
-	// computed: {
-	// 	cartCount: function(){
-	// 		return this.cart.length
-	// 	},
-		// totalPrice: function(){
-		// 	return this.cart.reduce(function(prev, item){
-		// 		return prev + (item.price * item.quantity)
-		// 	}, 0)
-		// },
-		// amountDue: function() {
-		// 	return this.totalPrice - this.form.totalPayment
-		// }
-	// },
 
 	watch: {
 	    // whenever question changes, this function will run
@@ -182,7 +204,7 @@ export default {
 	    }
 	},
 	methods: {
-		getPenjualans(page) {
+		getProduksPenjualan(page) {
 			var app = this;
 			if (typeof page === 'undefined') {
 				page = 1;
@@ -191,11 +213,13 @@ export default {
 			axios.get(app.url+'/view?page='+page)
 			.then(function (resp) {
 				app.loading = false;
-				app.produks = resp.data.data;
-				app.produksData = resp.data;
+				app.produksPenjualan = resp.data.data;
+				app.dataProduksPenjualan = resp.data;
+				console.log(resp.data.data);
+
 			})
 			.catch(function (resp) {
-				alert("Could not load produks");
+				alert("Could not load produksPenjualan");
 				app.loading = false
 			});
 		},
@@ -203,9 +227,17 @@ export default {
 			var app = this;
 			axios.get(app.url +'/tbs-penjualan')
 			.then(function (resp) {
-				app.tbs_penjualans = resp.data[0];
-				app.tbs_penjualans.total_bayar = resp.data[1]
-				// console.log(resp.data);
+				if (resp.data.length == 2) {
+
+					app.tbs_penjualans = resp.data[0];
+					app.tbs_penjualans.total_bayar = resp.data[1]
+					app.loadingTbs = false;
+				}
+				else {
+					
+					app.tbs_penjualans = resp.data;
+				}
+				// console.log(resp.data.length);
 				// app.tbs_penjualans.total_item = 
 				
 			})	
@@ -214,18 +246,6 @@ export default {
 			});
 
 		},
-
-		// storeItemToCart: function(item) {
-		// 	var ids = _.map(this.cart, 'id')
-
-		// 	if (!_.includes(ids, item.id)) {
-		// 		item.quantity = 1
-		// 		this.cart.push(item)
-		// 	} else {
-		// 		var index = _.findIndex(this.cart, item)
-		// 		this.cart[index].quantity = this.cart[index].quantity + 1
-		// 	}
-		// },
 
 		selectPelanggans() {
 			var app = this;
@@ -248,8 +268,9 @@ export default {
 			axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
 			.then(function (resp) {
 				app.loading = false    
-				app.produks = resp.data.data;
-				app.penjualansData = resp.data;
+				app.produksPenjualan = resp.data;
+				app.dataProduksPenjualan = resp;
+				console.log(resp.data);
 			})
 			.catch(function (resp) {
 				alert("Tidak dapat memuat produk..");
