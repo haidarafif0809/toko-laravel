@@ -29375,8 +29375,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__components_kelolaKas_KelolaKasEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_38__components_kelolaKas_KelolaKasEdit_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue__ = __webpack_require__(361);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKas_vue__ = __webpack_require__(365);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKas_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKas_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__ = __webpack_require__(375);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29621,9 +29621,9 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default.a,
     name: 'indexLaporan'
 }, {
-    path: '/laporan/rekap_kas',
-    component: __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKas_vue___default.a,
-    name: 'rekapKas'
+    path: '/laporan-rekap_kas',
+    component: __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKasIndex_vue___default.a,
+    name: 'indexRekapKas'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -82034,21 +82034,40 @@ if (false) {
 }
 
 /***/ }),
-/* 365 */
+/* 365 */,
+/* 366 */,
+/* 367 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(377)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(366)
+var __vue_template__ = __webpack_require__(379)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-cf32b878"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -82059,7 +82078,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\laporan\\RekapKas.vue"
+Component.options.__file = "resources\\assets\\js\\components\\laporan\\RekapKasIndex.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -82069,9 +82088,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-03e2ccde", Component.options)
+    hotAPI.createRecord("data-v-cf32b878", Component.options)
   } else {
-    hotAPI.reload("data-v-03e2ccde", Component.options)
+    hotAPI.reload("data-v-cf32b878", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -82082,7 +82101,48 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 366 */
+/* 376 */,
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(378);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("981747ba", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cf32b878\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./RekapKasIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cf32b878\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./RekapKasIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 378 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n*[data-v-cf32b878] {\r\n\t-webkit-box-sizing: border-box;\r\n\t        box-sizing: border-box;\n}\n.row[data-v-cf32b878]::after {\r\n\tcontent: \"\";\r\n\tclear: both;\r\n\tdisplay: table;\n}\n[class*=\"col-\"][data-v-cf32b878] {\r\n\tfloat: left;\r\n\tpadding: 15px;\n}\n.col-1[data-v-cf32b878] {width: 8.33%;\n}\n.col-2[data-v-cf32b878] {width: 16.66%;\n}\n.col-3[data-v-cf32b878] {width: 25%;\n}\n.col-4[data-v-cf32b878] {width: 33.33%;\n}\n.col-5[data-v-cf32b878] {width: 41.66%;\n}\n.col-6[data-v-cf32b878] {width: 50%;\n}\n.col-7[data-v-cf32b878] {width: 58.33%;\n}\n.col-8[data-v-cf32b878] {width: 66.66%;\n}\n.col-9[data-v-cf32b878] {width: 75%;\n}\n.col-10[data-v-cf32b878] {width: 83.33%;\n}\n.col-11[data-v-cf32b878] {width: 91.66%;\n}\n.col-12[data-v-cf32b878] {width: 100%;\n}\n.menu ul[data-v-cf32b878] {\r\n\tlist-style-type: none;\r\n\tmargin: ;\r\n\tpadding: ;\n}\n.menu li[data-v-cf32b878] {\r\n\tpadding: 8px;\r\n\tmargin-bottom: 7px;\r\n\tbackground-color: #33b5e5;\r\n\tcolor: #ffffff;\r\n\t-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\r\n\t        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);\n}\n.menu li[data-v-cf32b878]:hover {\r\n\tbackground-color: #0099cc;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -82099,7 +82159,21 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "panel panel-info" }, [
         _c("div", { staticClass: "panel-heading" }, [
-          _c("span", { staticClass: "panel-title" }, [_vm._v("Laporan")])
+          _c("span", { staticClass: "panel-title" }, [
+            _vm._v("Laporan Rekapitulasi Kas")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3 menu" }, [
+          _c("ul", [
+            _c("li", [_vm._v("Harian")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Bulan")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Tahun")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Rentang Waktu")])
+          ])
         ])
       ])
     ])
@@ -82110,15 +82184,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-03e2ccde", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-cf32b878", module.exports)
   }
 }
-
-/***/ }),
-/* 367 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
