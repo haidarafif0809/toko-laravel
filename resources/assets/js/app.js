@@ -70,7 +70,8 @@ import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
 import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
 // Laporan
 import LaporanIndex from './components/laporan/LaporanIndex.vue'
-import RekapKas from './components/laporan/RekapKas.vue'
+import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'
+import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 const routes = [{
         path: '/',
         components: {
@@ -242,9 +243,13 @@ const routes = [{
         component: LaporanIndex,
         name: 'indexLaporan'
     }, {
+        path: '/laporan-ringkas',
+        component: LaporanRingkasIndex,
+        name: 'indexLaporanRingkas'
+    }, {
         path: '/laporan/rekap_kas',
-        component: RekapKas,
-        name: 'rekapKas'
+        component: RekapKasIndex,
+        name: 'indexRekapKas'
     },
 ]
 /**
