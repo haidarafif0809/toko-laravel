@@ -242,7 +242,7 @@ const routes = [{
         component: LaporanIndex,
         name: 'indexLaporan'
     }, {
-        path: '/laporan',
+        path: '/laporan/rekap_kas',
         component: RekapKas,
         name: 'rekapKas'
     },
