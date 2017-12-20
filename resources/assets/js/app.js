@@ -70,6 +70,7 @@ import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
 import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
 // Laporan
 import LaporanIndex from './components/laporan/LaporanIndex.vue'
+import RekapKas from './components/laporan/RekapKas.vue'
 const routes = [{
         path: '/',
         components: {
@@ -240,6 +241,10 @@ const routes = [{
         path: '/laporan',
         component: LaporanIndex,
         name: 'indexLaporan'
+    }, {
+        path: '/laporan',
+        component: RekapKas,
+        name: 'rekapKas'
     },
 ]
 /**
