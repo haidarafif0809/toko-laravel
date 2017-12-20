@@ -55,9 +55,9 @@ img {
 								<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat [0] }}</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div v-if="profileToko.foto != ''" class="form-group">
 							<label for="foto" class="col-md-2 control-label">Logo</label>
-							<div v-if="profileToko.foto != null || profileToko.foto != '' " class="col-md-4">		
+							<div v-if="profileToko.foto != null" class="col-md-4">		
 								<div v-if="profileToko.foto.length > 100">
 									<img :src="profileToko.foto" class="img-responsive thumbnail shadow">
 								</div>		
