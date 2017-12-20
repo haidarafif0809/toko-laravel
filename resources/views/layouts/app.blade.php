@@ -12,6 +12,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </link>
 </link>
 </meta>
@@ -80,17 +81,6 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-
-                                <!-- <li>
-                                    <router-link :to="{name: 'indexSuplier'}">
-                                        Supplier
-                                    </router-link>
-                                </li> -->
-                                <!-- <li>
-                                    <router-link :to="{name: 'indexSatuan'}">
-                                        Satuan
-                                    </router-link>
-                                </li> -->
                                 <li>
                                     <router-link :to="{name: 'indexKategoriProduk'}">
                                         Kategori Produk
@@ -101,16 +91,6 @@
                                         Produk
                                     </router-link>
                                 </li>
-                                <!-- <li>
-                                    <router-link :to="{name: 'indexKas'}">
-                                        Kas
-                                    </router-link>
-                                </li> -->
-                                <!-- <li>
-                                    <router-link :to="{name: 'indexKategoriTransaksi'}">
-                                        Kategori Transaksi
-                                    </router-link>
-                                </li> -->
                             </ul>
                         </li>
                         <li>
@@ -131,45 +111,12 @@
                                 Penjualan
                             </router-link>
                         </li>
-
-                        <li class="dropdown">
-                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                        <li>
+                            <router-link :to="{name: 'indexLaporan'}">
                                 Laporan
-                                <span class="caret">
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
-                                        Laporan Ringkas
-                                    </router-link>
-                                </li>
-
-                                <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
-                                        Analisa Penjualan Harian
-                                    </router-link>
-                                </li>
-
-                                <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
-                                        Analisa Penjualan Per Jam
-                                    </router-link>
-                                </li>
-
-                                <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
-                                        Data Transaksi Penjualan
-                                    </router-link>
-                                </li>
-
-                                <li>
-                                    <router-link :to="{name: 'indexDashboard'}">
-                                        Rekapitulasi Kas
-                                    </router-link>
-                                </li>
-                            </ul>
+                            </router-link>
                         </li>
+
                         @endif
                     </ul>
                     <!-- Right Side Of Navbar -->

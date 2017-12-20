@@ -68,6 +68,8 @@ import ProfileTokoEdit from './components/profileToko/ProfileTokoEdit.vue'
 import KelolaKasIndex from './components/kelolaKas/KelolaKasIndex.vue'
 import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
 import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
+// Laporan
+import LaporanIndex from './components/laporan/LaporanIndex.vue'
 const routes = [{
         path: '/',
         components: {
@@ -232,6 +234,12 @@ const routes = [{
         path: '/kelola-kas/edit/:id',
         component: KelolaKasEdit,
         name: 'editKelolaKas'
+    },
+    // Laporan
+    {
+        path: '/laporan',
+        component: LaporanIndex,
+        name: 'indexLaporan'
     },
 ]
 /**
