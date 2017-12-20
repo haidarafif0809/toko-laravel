@@ -3,6 +3,10 @@
 </style>
 <template>
 	<div class="container">
+		<ul class="breadcrumb">
+	      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+	      <li class="active">Laporan Ringkas</li>
+	    </ul>
 		<div class="row">	
 			<div class="col-md-3 col-sm-offset-1">
 				<div class="panel panel-default">
