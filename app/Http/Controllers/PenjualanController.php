@@ -82,16 +82,27 @@ class PenjualanController extends Controller
 
     public function tbsPenjualan()
     {
-        $produk = Produk::select('nama_produk')->get();
-        // $tbsPenjualan = TbsPenjualan::with('produk')->select(['nama_produk', 'harga_produk'])->get();
         $tbsPenjualan = DB::table('tbs_penjualans')
             ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-            ->select('nama_produk', 'harga_produk', 'jumlah_produk')
+            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal')
             ->get();
-        // print_r($tbsPenjualan);
-        // print_r($produk);
-        // return;
-        return response()->json($tbsPenjualan);
+
+        $json_tbs = json_decode($tbsPenjualan, true);
+        for ($i = 0; $i < count($json_tbs); $i++) {
+            $arraySubtotal[] = $json_tbs[$i]['subtotal'];
+        }
+
+        foreach ($arraySubtotal as $key => $val) {
+            $subtotalData[] = $val;
+        }
+
+        $dataArray = [
+            $tbsPenjualan,
+            array_sum($subtotalData),
+        ];
+        // print_r($arraySubtotal);
+
+        return response()->json($dataArray);
     }
 
     public function store(Request $request)
@@ -125,13 +136,14 @@ class PenjualanController extends Controller
 
         $itemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id);
         if (count($itemTbsPenjualan->get()) > 0) {
-            $item = TbsPenjualan::select()->where('produk_id', $request->produk_id)->first();
+            $item     = TbsPenjualan::select()->where('produk_id', $request->produk_id)->first();
+            $subtotal = ($item->jumlah_produk + 1) * $item->harga_produk;
             $itemTbsPenjualan->update([
                 'jumlah_produk' => $item->jumlah_produk + $request->jumlah,
+                'subtotal'      => $subtotal,
             ]);
         } else {
             $session_id = session()->getId();
-            $subtotal   = $request->jumlah * $request->harga;
 
             TbsPenjualan::create([
                 'session_id'    => $session_id,
@@ -139,7 +151,7 @@ class PenjualanController extends Controller
                 'jumlah_produk' => $request->jumlah,
                 'harga_produk'  => $request->harga,
                 'satuan_id'     => $request->satuan,
-                'subtotal'      => $subtotal,
+                'subtotal'      => $request->harga,
                 'toko_id'       => 1,
             ]);
         }

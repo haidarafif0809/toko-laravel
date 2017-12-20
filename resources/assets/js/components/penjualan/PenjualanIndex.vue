@@ -53,71 +53,78 @@
 				<div class="panel-heading">Pesanan</div>
 				<ul class="list-group cart-item">
 
+
+
+
 					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
 					<div v-if="tbs_penjualans.length > 0 && loading == false" class="data-ada">	
 						<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
-							{{ tbsPenjualan.nama_produk }} 
-							<!-- <span class="pull-right">  -->
-								<!-- <i class="glyphicon glyphicon-remove cart-item-action" v-on:click=""></i> --> 
-								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) 
-								X 
-								<!-- ({{ tbsPenjualan.subtotal }})  -->
-								<!-- </span> -->
-							</li>
-						</div>
-						<div v-else-if="loading == true" class="text-center">
-							<li>Sedang Memuat Produk</li>
-						</div>
-						<div v-else class="list-group-item list-group-item-warning">
-							Tidak Ada Produk
-						</div>
-						<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-					</ul>
-
-					<div class="panel-footer">
-						Total Item: {{ tbs_penjualans.length }}
-						<span class="pull-right">
-							<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-						</span>
+							<div>
+								{{ tbsPenjualan.nama_produk }}
+								<span style="float: right">					
+									({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }}
+								</span>
+							</div>
+						</li>
 					</div>
+
+
+
+
+					<div v-else-if="loading == true" class="text-center">
+						<li>Sedang Memuat Produk</li>
+					</div>
+					<div v-else class="list-group-item list-group-item-warning">
+						Tidak Ada Produk
+					</div>
+					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+				</ul>
+
+				<div class="panel-footer">
+					Total Item: {{ tbs_penjualans.length }}
+					<span class="pull-right">
+						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
+					</span>
 				</div>
+			</div>
 
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<form>
-							<div class="form-group">
-								<label class="control-label">Total Bayar</label>
-								<br>
-								0
-								<h2 class="form-control-static text-warning"></h2>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label class="control-label">Total Bayar</label>
+							<br>
+							<br>
+							<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b></h1>
+							<h2 class="form-control-static text-warning"></h2>
+						</div>
+
+						<div  class="form-group">
+							<label class="control-label"> Nama Pelanggan:</label>
+							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+							</selectize-component>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<input type="number" class="form-control" placeholder="Pembayaran">
+								<span class="input-group-btn">
+									<button class="btn btn-success">Bayar</button>
+								</span>
 							</div>
+						</div>
 
-							<div  class="form-group">
-								<label class="control-label"> Nama Pelanggan:</label>
-								<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-									<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-								</selectize-component>
-							</div>
-
-							<div class="form-group">
-								<div class="input-group">
-									<input type="number" class="form-control" placeholder="Pembayaran">
-									<span class="input-group-btn">
-										<button class="btn btn-success">Bayar</button>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="control-label">Keterangan</label>
-								<textarea class="form-control"></textarea>
-							</div> 
-						</form>
-					</div>
+						<div class="form-group">
+							<label class="control-label">Keterangan</label>
+							<textarea class="form-control"></textarea>
+						</div> 
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </template>
 
 <script>
@@ -134,6 +141,7 @@ export default {
 				produk_id:'',
 				jumlah: '',
 				harga:'',
+				total_bayar: '',
 			},
 			search: '',
 			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
@@ -195,7 +203,9 @@ export default {
 			var app = this;
 			axios.get(app.url +'/tbs-penjualan')
 			.then(function (resp) {
-				app.tbs_penjualans = resp.data;
+				app.tbs_penjualans = resp.data[0];
+				app.tbs_penjualans.total_bayar = resp.data[1]
+				// console.log(resp.data);
 				// app.tbs_penjualans.total_item = 
 				
 			})	
