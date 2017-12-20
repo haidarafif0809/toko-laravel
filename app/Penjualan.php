@@ -9,8 +9,7 @@ class Penjualan extends Model
 {
     //
     use AuditableTrait;
-    protected $primaryKey = 'penjualan_id';
-    protected $fillable   = (['penjualan_id', 'kategori_id', 'produk_id',
+    protected $fillable = (['penjualan_id', 'total', 'pelanggan_id', 'status_pembelian', 'tunai', 'kembalian', 'kredit', 'nilai_kredit', 'cara_bayar', 'status_beli_awal', 'tanggal_jt_tempo', 'keterangan', 'warung_id',
     ]);
 
     public function kategoriProduk()
@@ -21,6 +20,11 @@ class Penjualan extends Model
     public function pelanggan()
     {
         return $this->hasOne('App\Pelanggan', 'id', 'produk_id');
+    }
+
+    public function tbsPenjualan()
+    {
+        return $this->hasOne('App\TbsPenjualan', 'id_tbs_pembelian', 'produk_id');
     }
 
     // public function produk()

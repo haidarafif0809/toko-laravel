@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Yajra\Auditable\AuditableTrait;
 
-class KasMasuk extends Model
+class KelolaKas extends Model
 {
     use AuditableTrait;
 
-    protected $primaryKey = 'kas_masuk_id';
+    protected $primaryKey = 'kelola_kas_id';
     protected $fillable   = [
         'toko_id', 'type', 'jumlah', 'keterangan',
     ];
@@ -19,13 +19,17 @@ class KasMasuk extends Model
         return $this->belongsTo('App\Kas', 'kas_id', 'id');
     }
 
-    public function kategoriTransaksi()
-    {
-        return $this->belongsTo('App\KategoriTransaksi', 'kategori_id', 'id');
-    }
+    // public function kategoriTransaksi()
+    // {
+    //     return $this->belongsTo('App\KategoriTransaksi', 'kategori_id', 'id');
+    // }
     public function user()
     {
         return $this->belongsTo('App\User', 'toko_id', 'id');
+    }
+    public function toko()
+    {
+        return $this->belongsTo('App\Toko', 'toko_id', 'id');
     }
 
     public function getCreatedAtAttribute()

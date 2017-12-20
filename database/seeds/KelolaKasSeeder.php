@@ -1,9 +1,9 @@
 <?php
 
-use App\KasMasuk;
+use App\KelolaKas;
 use Illuminate\Database\Seeder;
 
-class KasMasukSeeder extends Seeder
+class KelolaKasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class KasMasukSeeder extends Seeder
      */
     public function run()
     {
-        KasMasuk::create([
+        KelolaKas::create([
             'toko_id' => 1, 'type' => 1, 'jumlah' => 1000, 'keterangan' => 'lunas',
         ]);
     }
