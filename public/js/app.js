@@ -29621,7 +29621,7 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_39__components_laporan_LaporanIndex_vue___default.a,
     name: 'indexLaporan'
 }, {
-    path: '/laporan',
+    path: '/laporan/rekap_kas',
     component: __WEBPACK_IMPORTED_MODULE_40__components_laporan_RekapKas_vue___default.a,
     name: 'rekapKas'
 }];
@@ -82228,9 +82228,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0, false, false)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "panel panel-info" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c("span", { staticClass: "panel-title" }, [_vm._v("Laporan")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
