@@ -75,7 +75,7 @@ import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 // staf toko
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
-import StafTokoEdt from './components/stafToko/StafTokoEdit.vue'
+import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 const routes = [{
         path: '/',
         components: {
