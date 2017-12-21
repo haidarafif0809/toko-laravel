@@ -71,6 +71,10 @@
                             <router-link :to="{name: 'indexDashboard'}">
                                 Dashboard
                             </router-link>
+                        </li> <li>
+                            <router-link :to="{name: 'indexStafToko'}">
+                                Dashboard
+                            </router-link>
                         </li>
                         @endif
                         @if (auth()->check())

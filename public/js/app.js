@@ -29379,6 +29379,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_40__components_laporan_LaporanRingkasIndex_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue__ = __webpack_require__(373);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_stafToko_StafTokoIndex_vue__ = __webpack_require__(385);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__components_stafToko_StafTokoIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_42__components_stafToko_StafTokoIndex_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_stafToko_StafTokoCreate_vue__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__components_stafToko_StafTokoCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_43__components_stafToko_StafTokoCreate_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_stafToko_StafTokoEdit_vue__ = __webpack_require__(387);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_stafToko_StafTokoEdit_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_44__components_stafToko_StafTokoEdit_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -29450,6 +29456,10 @@ window.Vue = __webpack_require__(28);
 
 
 // Laporan
+
+
+
+// staf toko
 
 
 
@@ -29631,6 +29641,20 @@ var routes = [{
     path: '/laporan/rekap_kas',
     component: __WEBPACK_IMPORTED_MODULE_41__components_laporan_RekapKasIndex_vue___default.a,
     name: 'indexRekapKas'
+},
+// staf toko
+{
+    path: '/staf-toko',
+    component: __WEBPACK_IMPORTED_MODULE_42__components_stafToko_StafTokoIndex_vue___default.a,
+    name: 'indexStafToko'
+}, {
+    path: '/staf-toko/create',
+    component: __WEBPACK_IMPORTED_MODULE_43__components_stafToko_StafTokoCreate_vue___default.a,
+    name: 'createStafToko'
+}, {
+    path: '/staf-toko/edit/:id',
+    component: StafTokoEdit,
+    name: 'editStafToko'
 }];
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -79652,6 +79676,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -79734,6 +79762,21 @@ var render = function() {
                           "tbody",
                           { staticClass: "data-ada" },
                           [
+                            _vm._l(_vm.profileTokos, function(
+                              profileToko,
+                              index
+                            ) {
+                              return _c("tr", [
+                                _c("td", { staticClass: "col-md 2" }, [
+                                  _vm._v("NAMA kunci")
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "col-md-8" }, [
+                                  _vm._v(": " + _vm._s(profileToko.rumah))
+                                ])
+                              ])
+                            }),
+                            _vm._v(" "),
                             _vm._l(_vm.profileTokos, function(
                               profileToko,
                               index
@@ -82761,6 +82804,106 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 378 */,
+/* 379 */,
+/* 380 */,
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\stafToko\\StafTokoIndex.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 386 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\stafToko\\StafTokoCreate.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 387 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = null
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\stafToko\\StafTokoEdit.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+module.exports = Component.exports
+
 
 /***/ })
 /******/ ]);

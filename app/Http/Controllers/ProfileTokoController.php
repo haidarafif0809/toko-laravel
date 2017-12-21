@@ -157,12 +157,12 @@ class ProfileTokoController extends Controller
 
     public function view()
     {
-
+        $toko               = 'kunci';
         $profile_toko       = Toko::with('user')->where('id', Auth::user()->toko_id)->paginate(10);
         $profile_toko_array = array();
         foreach ($profile_toko as $profile_tokos) {
             $user = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
-            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos]);
+            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos, 'rumah' => $toko]);
         }
 
         //DATA PAGINATION

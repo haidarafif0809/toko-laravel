@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class StafTokoController extends Controller
@@ -79,6 +80,11 @@ class StafTokoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::paginate(10);
+    }
+
+    public function view($id)
+    {
+
     }
 }

@@ -99,3 +99,7 @@ Route::get('/kelola-kas/view', 'KelolaKasController@view');
 Route::get('/kelola-kas/kas', 'KelolaKasController@kas');
 //Route::get('/kelola-kas/kategoriTransaksi', 'KelolaKasController@kategoriTransaksi');
 Route::get('/kelola-kas/StafAktif', 'KelolaKasController@stafAktif');
+// staf toko
+Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
+Route::get('staf-toko/view', 'StafTokoController@view');
+Route::get('staf-toko/search', 'StafTokoController@search');
