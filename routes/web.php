@@ -78,6 +78,7 @@ Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
+Route::get('/penjualan/hapus-tbs-penjualan/{id}', 'PenjualanController@hapusTbsPenjualan');
 Route::get('/penjualan/tbs-penjualan', 'PenjualanController@tbsPenjualan');
 
 // Toko
