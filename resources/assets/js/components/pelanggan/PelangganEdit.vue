@@ -50,7 +50,9 @@
 							<div class="form-group">
 								<label for="alamat" class="col-md-2 control-label">Alamat</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat"  autofocus="">
+									<!-- <input class="form-control" required autocomplete="off" placeholder="Alamat" type="textarea" v-model="pelanggan.alamat" name="alamat"  autofocus=""> -->
+									<textarea class="form-control" required autocomplete="off" placeholder="Alamat" v-model="pelanggan.alamat" name="alamat"  autofocus=""></textarea>
+									<!-- <textarea v-model="message" placeholder="add multiple lines"></textarea> -->
 									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
 								</div>
 							</div>
