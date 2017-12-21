@@ -72,6 +72,10 @@ import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
 import LaporanIndex from './components/laporan/LaporanIndex.vue'
 import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'
 import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
+// staf toko
+import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
+import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
+import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 const routes = [{
         path: '/',
         components: {
@@ -251,6 +255,20 @@ const routes = [{
         component: RekapKasIndex,
         name: 'indexRekapKas'
     },
+    // staf toko
+    {
+        path: '/staf-toko',
+        component: StafTokoIndex,
+        name: 'indexStafToko',
+    }, {
+        path: '/staf-toko/create',
+        component: StafTokoCreate,
+        name: 'createStafToko',
+    }, {
+        path: '/staf-toko/edit/:id',
+        component: StafTokoEdit,
+        name: 'editStafToko',
+    }
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

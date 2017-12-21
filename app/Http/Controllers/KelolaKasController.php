@@ -122,8 +122,12 @@ class KelolaKasController extends Controller
 
     public function view()
     {
-        $user       = Auth::user()->toko_id;
-        $kelola_kas = KelolaKas::where('toko_id', $user)->orderBy('kelola_kas_id', 'desc')->paginate(10);
+        $array             = [];
+        $user              = Auth::user()->toko_id;
+        $kelola_kas        = KelolaKas::where('toko_id', $user)->orderBy('kelola_kas_id', 'desc')->paginate(10);
+        $jumlah            = $kelola_kas->count();
+        $array['data_kas'] = $kelola_kas;
+        $array['jumlah']   = $jumlah;
 
         // $kelola_kas_array = array();
         // foreach ($kelola_kas as $kelola_kass) {
@@ -147,7 +151,7 @@ class KelolaKasController extends Controller
         // $respons['total']          = $kelola_kas->total();
         // //DATA PAGINATION
 
-        return response()->json($kelola_kas);
+        return response()->json($array);
     }
 
     public function search(Request $request)
