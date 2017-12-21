@@ -4,9 +4,8 @@
       <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
       <li class="active">Kelola Kas</li>
     </ul>
-
     <div class="panel panel-default">
-      <div class="panel-heading">Kelola Kas</div>
+      <div class="panel-heading">Kelola Kas ( {{ kelolaKasJumlah }} )</div>
       <div class="panel-body">
         <div class="table-responsive">
           <div class="tambah">
@@ -79,6 +78,7 @@ export default {
     return {
       // buat nampilin data dlm bentuk array
       kelolaKas: [],
+      kelolaKasJumlah: [],
       // kas: [],
       // kategori_transaksis: [],
       // buat paginations
@@ -111,11 +111,12 @@ export default {
         	}
         	axios.get(app.url+'/view?page='+page)
         	.then(function (resp) {
-        		app.kelolaKas = resp.data.data;
-        		app.kelolaKasDatas = resp.data;
+        		app.kelolaKas = resp.data.data_kas.data;
+            app.kelolaKasDatas = resp.data;
+        		app.kelolaKasJumlah = resp.data.jumlah;
             app.loading = false;
         // buat cek ddi console
-        console.log(resp.data.data);
+        console.log(resp.data.data_kas.data);
       })
           .catch(function (resp) {
             alert("Could not load KelolaKas");

@@ -1,34 +1,31 @@
 <style scoped>
-
+.tombol-export{
+	float: right;
+}
 </style>
 <template>
 	<div class="container">
 		<ul class="breadcrumb">
 	      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+	      <li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
 	      <li class="active">Laporan Ringkas</li>
 	    </ul>
-		<div class="row">	
-			<div class="col-md-3 col-sm-offset-1">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p class="panel-title">Filter</p>
-					</div>
-					<div class="panel-body text-center">
-						<div class="btn-group-vertical">
-							<button class="btn btn-primary active">Harian</button>
-							<button class="btn btn-primary">Mingguan</button>	
-							<button class="btn btn-primary">Bulanan</button>
-							<button class="btn btn-primary">Tahunan</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-7">
+		<div class="row">
+			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<p class="panel-title">Laporan Ringkas</p>
 					</div>
 					<div class="panel-body">
+						<div class="btn-group">
+							<button class="btn btn-primary active">Harian</button>
+							<button class="btn btn-primary">Mingguan</button>	
+							<button class="btn btn-primary">Bulanan</button>
+							<button class="btn btn-primary">Tahunan</button>
+						</div>
+						<div class="tombol-export">
+							<button class="btn btn-primary">Excel</button>
+						</div>
 						<table class="table table-striped table-condensed">
 							<thead>
 								<tr>
