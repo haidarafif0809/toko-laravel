@@ -40,10 +40,6 @@
 							<td>{{ produk.harga_beli }}</td>
 						</tr>
 						<tr>
-							<td>Satuan:</td>
-							<td>{{ satuan.nama_satuan }}</td>
-						</tr>
-						<tr>
 							<td>Kategori Produk:</td>
 							<td>{{ kategori_produk.nama_kategori_produk }}</td>
 						</tr>
@@ -65,7 +61,6 @@ export default {
 	data: function () {
 		return {
 			produk: [],
-			satuan: [],
 			kategori_produk: [],
 			produkId: null,
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
@@ -75,7 +70,6 @@ export default {
 	mounted(){
 		var app = this;
 		app.getDataProduk();
-		app.getDataSatuanDariProduk();
 		app.getDataKategoriProdukDariProduk();
 	},
 	methods: {
@@ -97,18 +91,6 @@ export default {
 			})
 			.catch(function () {
 				alert("Could not load your produk");
-			});
-		},
-		getDataSatuanDariProduk() {
-			let app = this;
-			let id = app.$route.params.id;
-
-			axios.get(app.url+'/detailSatuanDariProduk/' + id)
-			.then(function (resp) {
-				app.satuan = resp.data;
-			})
-			.catch(function () {
-				alert("Could not load your satuan");
 			});
 		},
 		getDataKategoriProdukDariProduk() {

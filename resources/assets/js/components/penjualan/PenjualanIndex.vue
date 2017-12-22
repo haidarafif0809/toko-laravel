@@ -95,7 +95,7 @@
 							</span>
 
 							<span class="small" style="float: right;">					
-								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }}
+								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }} <span @click="deleteTbsPenjualan(1)" style="color: red;">x</span>
 							</span>
 						</small>
 					</div>
@@ -177,9 +177,13 @@ export default {
 				harga:'',
 				total_bayar: '',
 			},
+			deleteProdukTbsPenjualan: {
+				produk_id: ''
+			},
 			search: '',
 			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
-			urlTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
 			loading : true,
 			loadingTbs : true,
 
@@ -236,6 +240,7 @@ export default {
 				else {
 					
 					app.tbs_penjualans = resp.data;
+					app.loadingTbs = false;
 				}
 				// console.log(resp.data.length);
 				// app.tbs_penjualans.total_item = 
@@ -285,7 +290,7 @@ export default {
 			app.inputTbsPenjualan.jumlah = 1;
 			var newTbs = app.inputTbsPenjualan;
 
-			axios.post(app.urlTbs, newTbs)
+			axios.post(app.urlTambahTbs, newTbs)
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
 				app.alert(app.message);
@@ -298,6 +303,21 @@ export default {
 
 				app.success = false;
 				app.errors = resp.response.data.errors;
+			});
+		},
+		deleteTbsPenjualan(produk) {
+			var app = this;
+			console.log(app.urlHapusTbs +'/'+ produk);
+			axios.delete(app.urlHapusTbs +'/'+ produk)
+			.then(function (resp) {
+				app.getTbsPenjualan();
+				app.alert("berhasil menghapus");
+			})
+			.catch(function (resp) {
+				app.$swal({
+					text: "tidak dapat menghapus", 
+					icon: "warning",
+				});
 			});
 		},
 	// deleteEntry(id, index,nama_produk) {
