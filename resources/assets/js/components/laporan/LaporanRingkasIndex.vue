@@ -26,7 +26,9 @@
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
 						</div>
-						<table class="table table-striped table-condensed">
+						<br>
+						<br>
+						<table class="table table-striped table-condensed table-responsive">
 							<thead>
 								<tr>
 								<th>Jenis Laporan</th>

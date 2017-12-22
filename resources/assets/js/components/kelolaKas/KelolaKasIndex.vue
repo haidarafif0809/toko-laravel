@@ -5,9 +5,10 @@
       <li class="active">Kelola Kas</li>
     </ul>
     <div class="panel panel-default">
-      <div class="panel-heading">Kelola Kas ( {{ kelolaKasJumlah }} )</div>
+      <div class="panel-heading">Kelola Kas</div>
       <div class="panel-body">
         <div class="table-responsive">
+          <div class="text-center">TOTAL KAS =  {{ kelolaKasJumlah }} </div>
           <div class="tambah">
             <p>
               <router-link :to="{name: 'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
