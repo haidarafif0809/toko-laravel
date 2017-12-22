@@ -18,7 +18,6 @@ class ProdukSeeder extends Seeder
         $produk->nama_produk         = "Beras 10kg";
         $produk->harga_beli          = "85000";
         $produk->harga_jual          = "90000";
-        $produk->satuans_id          = "1";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
         $produk->save();
@@ -29,7 +28,6 @@ class ProdukSeeder extends Seeder
         $produk->nama_produk         = "TABUNG GAS";
         $produk->harga_beli          = "11200";
         $produk->harga_jual          = "115000";
-        $produk->satuans_id          = "5";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
         $produk->save();
@@ -40,7 +38,6 @@ class ProdukSeeder extends Seeder
         $produk->nama_produk         = "DETERGEN BOOM 450 G";
         $produk->harga_beli          = "4167";
         $produk->harga_jual          = "417700";
-        $produk->satuans_id          = "8";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
         $produk->save();

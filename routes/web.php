@@ -33,7 +33,6 @@ Route::get('/kas/pencarian', 'KasController@pencarian');
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
 Route::get('/produk/view', 'ProdukController@view');
 Route::get('/produk/cari', 'ProdukController@cari');
-Route::get('/produk/satuan', 'ProdukController@satuan');
 
 Route::get('/produk/kategori_produks_id', 'ProdukController@kategoriProduksId');
 Route::get('/produk/kategori_produks_id/{id}', 'ProdukController@detailKategoriProdukDariProduk');

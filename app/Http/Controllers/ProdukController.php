@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\KategoriProduk;
 use App\Produk;
-use App\Satuan;
 use Auth;
 use Carbon\Carbon;
 use File;
@@ -25,7 +24,7 @@ class ProdukController extends Controller
 
     public function tes()
     {
-        return Auth::user()->toko_id;
+        return Auth::user()->id;
     }
 
     public function view()
@@ -37,12 +36,6 @@ class ProdukController extends Controller
     {
         $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
         return response()->json($produk);
-    }
-
-    public function satuan()
-    {
-        $satuan = Satuan::all();
-        return response()->json($satuan);
     }
 
     public function detail($id)
@@ -115,7 +108,6 @@ class ProdukController extends Controller
                 'kategori_produks_id' => 'required|exists:kategori_produks,id',
                 'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'numeric',
-                'satuans_id'          => 'required|exists:satuans,id',
                 'status_jual'         => 'required',
             ]);
 
@@ -175,7 +167,6 @@ class ProdukController extends Controller
             'kategori_produks_id' => 'required|exists:kategori_produks,id',
             'harga_beli'          => 'required|numeric',
             'harga_jual'          => 'numeric',
-            'satuans_id'          => 'required|exists:satuans,id',
             'status_jual'         => 'required',
         ]);
 
@@ -185,7 +176,6 @@ class ProdukController extends Controller
             'kategori_produks_id' => $request->kategori_produks_id,
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
-            'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
         ];
 
