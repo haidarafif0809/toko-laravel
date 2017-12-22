@@ -52,23 +52,6 @@ Route::resource('satuan', 'SatuanController', ['except' => 'show']);
 Route::get('/satuan/view', 'SatuanController@view');
 Route::get('/satuan/pencarian', 'SatuanController@search');
 
-// kas masuk
-Route::resource('kasMasuk', 'KasMasukController', ['except' => 'show']);
-Route::get('/kasMasuk/view', 'KasMasukController@view');
-Route::get('/kasMasuk/search', 'KasMasukController@search');
-Route::get('/kasMasuk/kas', 'KasMasukController@kas');
-Route::get('/kasMasuk/kategoriTransaksi', 'KasMasukController@kategoriTransaksi');
-Route::get('/kasMasuk/StafAktif', 'kasMasukController@stafAktif');
-// Route::get('/kasMasuk/dataKas/{id}', 'KasMasukController@dataKas');
-// Route::get('/kasMasuk/dataTransaksi/{id}', 'KasMasukController@dataTransaksi');
-
-// KAS KELUAR
-Route::resource('kas-keluar', 'KasKeluarController', ['except' => 'show']);
-Route::get('/kas-keluar/view', 'KasKeluarController@view');
-Route::get('/kas-keluar/pencarian', 'KasKeluarController@pencarian');
-Route::get('/kas-keluar/kas', 'KasKeluarController@kas');
-Route::get('/kas-keluar/kategoriTransaksi', 'KasKeluarController@kategoriTransaksi');
-
 // Kategori Transaksi
 Route::resource('kategoriTransaksi', 'KategoriTransaksiController', ['except' => 'show']);
 Route::get('/kategoriTransaksi/view', 'KategoriTransaksiController@view');
@@ -92,12 +75,31 @@ Route::get('/kas-mutasi/view', 'KasMutasiController@view');
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
+Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
+Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
+Route::get('/penjualan/hapus-tbs-penjualan/{id}', 'PenjualanController@hapusTbsPenjualan');
+Route::get('/penjualan/tbs-penjualan', 'PenjualanController@tbsPenjualan');
 
 // Toko
 Route::resource('toko', 'TokoController', ['except' => 'show']);
-Route::get('/kasMasuk/search', 'TokoController@search');
+Route::get('/toko/search', 'TokoController@search');
 Route::get('/toko/view', 'TokoController@view');
 
 // Profile Toko
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
 Route::get('/profile-toko/view', 'ProfileTokoController@view');
+Route::get('/profile-toko/edit', [
+    'as'   => 'profile_toko.proses_ubah_profil_toko',
+    'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
+]);
+// Kelola Kas
+Route::resource('kelola-kas', 'KelolaKasController', ['except' => 'show']);
+Route::get('/kelola-kas/search', 'KelolaKasController@search');
+Route::get('/kelola-kas/view', 'KelolaKasController@view');
+Route::get('/kelola-kas/kas', 'KelolaKasController@kas');
+//Route::get('/kelola-kas/kategoriTransaksi', 'KelolaKasController@kategoriTransaksi');
+Route::get('/kelola-kas/StafAktif', 'KelolaKasController@stafAktif');
+// staf toko
+Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
+Route::get('staf-toko/view', 'StafTokoController@view');
+Route::get('staf-toko/search', 'StafTokoController@search');

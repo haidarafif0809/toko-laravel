@@ -20,7 +20,7 @@ class CreateTokosTable extends Migration
             $table->string('email')->unique();
             $table->string('no_telp');
             $table->string('alamat')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('foto')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();

@@ -1,10 +1,10 @@
 <style scoped>
-	.margin-atas {
-		margin-top: 5px;
-	}
-	.shadow {
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
+.margin-atas {
+	margin-top: 5px;
+}
+.shadow {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 </style>
 <template>
 	<div class="container">
@@ -18,7 +18,7 @@
 			<div class="panel-body">
 
 				<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
-					 <div class="form-group">
+					<div class="form-group">
 						<label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
 						<div class="col-md-4">
 							<input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
@@ -79,10 +79,10 @@
 					<div v-if="produk.foto != ''" class="form-group">
 						<label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
 						<div v-if="produk.foto != null" class="col-md-4">
-				            <img :src="produk.foto" class="img-responsive thumbnail shadow">
+							<img :src="produk.foto" class="img-responsive thumbnail shadow">
 						</div>
 						<div v-else class="col-md-4">
-				            <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+							<img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
 						</div>
 					</div>
 					<div class="form-group">
@@ -137,36 +137,37 @@ export default {
 	},
 	methods: {
 		onFileChange(e) {
-            let files = e.target.files || e.dataTransfer.files;
-            if (!files.length)
-                return null;
-            this.createImage(files[0]);
-        },
-        createImage(file) {
-            let reader = new FileReader();
-            let foto = this;
-            let ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
-            console.log(file);
-            
-            if(!file.name.match(ekstensiOk)) {
-            	foto.produk.foto = null;
-            	this.$swal({
+			let files = e.target.files || e.dataTransfer.files;
+			if (!files.length)
+				return null;
+			this.createImage(files[0]);
+		},
+		createImage(file) {
+			let reader = new FileReader();
+			let foto = this;
+			let ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
+			console.log(file);
+			
+			if(!file.name.match(ekstensiOk)) {
+				foto.produk.foto = null;
+				this.$swal({
 					title: "File tidak didukung!",
 					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
 					icon: "warning",
 					buttons: "Saya mengerti",
 				});
-            }
-            else {
-	            reader.onload = (e) => {
-	                foto.produk.foto = e.target.result;
-	            };
-            }
-            reader.readAsDataURL(file);
-        },
+			}
+			else {
+				reader.onload = (e) => {
+					foto.produk.foto = e.target.result;
+				};
+			}
+			reader.readAsDataURL(file);
+		},
 		saveForm() {
 			var app = this;
 			var newProduk = app.produk;
+			console.log(newProduk);
 			// axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 			axios.post(app.url, newProduk)
 			.then(function (resp) {

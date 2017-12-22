@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Kas;
-use App\KasMasuk;
-use App\KategoriTransaksi;
+use App\KelolaKas;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
-class KasMasukController extends Controller
+class KelolaKasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -49,7 +50,8 @@ class KasMasukController extends Controller
             'keterangan' => 'required',
         ]);
 
-        $kas_masuk = KasMasuk::create([
+        $kelola_kas = KelolaKas::create([
+            'toko_id'    => Auth::user()->toko_id,
             'type'       => $request->type,
             'jumlah'     => $request->jumlah,
             'keterangan' => $request->keterangan,
@@ -75,7 +77,7 @@ class KasMasukController extends Controller
      */
     public function edit($id)
     {
-        return KasMasuk::find($id);
+        return KelolaKas::find($id);
 
     }
 
@@ -89,10 +91,12 @@ class KasMasukController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'type'       => 'required',
             'jumlah'     => 'required|numeric',
             'keterangan' => 'required',
         ]);
-        $update = KasMasuk::find($id)->update([
+        $update = KelolaKas::find($id)->update([
+            'type'       => $request->type,
             'jumlah'     => $request->jumlah,
             'keterangan' => $request->keterangan,
         ]);
@@ -112,42 +116,53 @@ class KasMasukController extends Controller
      */
     public function destroy($id)
     {
-        $destroy = KasMasuk::destroy($id);
+        $destroy = KelolaKas::destroy($id);
         return $destroy;
     }
 
     public function view()
     {
-        $kas_masuk = KasMasuk::orderBy('kas_masuk_id', 'desc')->paginate(10);
+        $array             = [];
+        $user              = Auth::user()->toko_id;
+        $kelola_kas        = KelolaKas::where('toko_id', $user)->orderBy('kelola_kas_id', 'desc')->paginate(10);
+        $jumlah            = $kelola_kas->count();
+        $array['data_kas'] = $kelola_kas;
+        $array['jumlah']   = $jumlah;
 
-        // $kas_masuk_array = array();
-        // foreach ($kas_masuk as $kas_masuks) {
-        //     $nama_kategori_transaksi = KategoriTransaksi::select('nama_kategori_transaksi')->where('id', $kas_masuks->kategori_id)->first();
-        //     $nama_kas                = Kas::select('nama_kas')->where('id', $kas_masuks->kas_id)->first();
-        //     array_push($kas_masuk_array, ['nama_kas' => $nama_kas->nama_kas, 'kas_masuk' => $kas_masuks, 'nama_kategori_transaksi' => $nama_kategori_transaksi->nama_kategori_transaksi]);
+        // $kelola_kas_array = array();
+        // foreach ($kelola_kas as $kelola_kass) {
+        //     $nama_kategori_transaksi = KategoriTransaksi::select('nama_kategori_transaksi')->where('id', $kelola_kass->kategori_id)->first();
+        //     $nama_kas                = Kas::select('nama_kas')->where('id', $kelola_kass->kas_id)->first();
+        //     array_push($kelola_kas_array, ['nama_kas' => $nama_kas->nama_kas, 'kelola_kas' => $kelola_kass, 'nama_kategori_transaksi' => $nama_kategori_transaksi->nama_kategori_transaksi]);
         // }
 
         // //DATA PAGINATION
-        // $respons['current_page']   = $kas_masuk->currentPage();
-        // $respons['data']           = $kas_masuk_array;
-        // $respons['first_page_url'] = url('/kasMasuk/view?page=' . $kas_masuk->firstItem());
+        // $respons['current_page']   = $kelola_kas->currentPage();
+        // $respons['data']           = $kelola_kas_array;
+        // $respons['first_page_url'] = url('/KelolaKas/view?page=' . $kelola_kas->firstItem());
         // $respons['from']           = 1;
-        // $respons['last_page']      = $kas_masuk->lastPage();
-        // $respons['last_page_url']  = url('/kasMasuk/view?page=' . $kas_masuk->lastPage());
-        // $respons['next_page_url']  = $kas_masuk->nextPageUrl();
-        // $respons['path']           = url('/kasMasuk/view');
-        // $respons['per_page']       = $kas_masuk->perPage();
-        // $respons['prev_page_url']  = $kas_masuk->previousPageUrl();
-        // $respons['to']             = $kas_masuk->perPage();
-        // $respons['total']          = $kas_masuk->total();
+        // $respons['last_page']      = $kelola_kas->lastPage();
+        // $respons['last_page_url']  = url('/KelolaKas/view?page=' . $kelola_kas->lastPage());
+        // $respons['next_page_url']  = $kelola_kas->nextPageUrl();
+        // $respons['path']           = url('/KelolaKas/view');
+        // $respons['per_page']       = $kelola_kas->perPage();
+        // $respons['prev_page_url']  = $kelola_kas->previousPageUrl();
+        // $respons['to']             = $kelola_kas->perPage();
+        // $respons['total']          = $kelola_kas->total();
         // //DATA PAGINATION
 
-        return response()->json($kas_masuk);
+        return response()->json($array);
     }
 
     public function search(Request $request)
     {
-        $search = KasMasuk::where('type', 'LIKE', "%$request->pencarian%")->orWhere('jumlah', 'LIKE', "%$request->pencarian%")->orWhere('keterangan', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $search = KelolaKas::where('toko_id', Auth::user()->toko_id)
+            ->where(function ($query) use ($request) {
+                $query->orwhere('type', 'LIKE', "%$request->pencarian%")
+                    ->orWhere('jumlah', 'LIKE', "%$request->pencarian%")
+                    ->orWhere('keterangan', 'LIKE', "%$request->pencarian%");
+            })->orderBy('kelola_kas_id', 'desc')->paginate(10);
+
         return response()->json($search);
     }
 
@@ -157,11 +172,11 @@ class KasMasukController extends Controller
         return response()->json($kas);
     }
 
-    public function kategoriTransaksi()
-    {
-        $kategori_transaksi = KategoriTransaksi::all();
-        return response()->json($kategori_transaksi);
-    }
+    // public function kategoriTransaksi()
+    // {
+    //     $kategori_transaksi = KategoriTransaksi::all();
+    //     return response()->json($kategori_transaksi);
+    // }
 
     public function stafAktif()
     {

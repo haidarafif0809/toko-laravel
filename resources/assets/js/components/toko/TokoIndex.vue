@@ -8,73 +8,75 @@
 </style>
 
 <template>  
-    <div class="container">
-        <ul class="breadcrumb">
-            <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">Data Toko</li>
-        </ul>
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+      <li class="active">Data User</li>
+    </ul>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Data Toko</div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <div class="pencarian">
-                        <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
-                    </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <th>Nama Toko</th>
-                            <th>Nama Pemilik</th>
-                            <th>Email</th>
-                            <th>No. Telp</th>
-                            <th>Aksi</th>
-                        </thead>
-                        <tbody v-if="tokos.length > 0 && loading == false" class="data-ada">
-                            <tr v-for="toko , index in tokos" >
-                                <td>{{toko.nama_toko}}</td>
-                                <td>{{toko.nama_pemilik}}</td>
-                                <td>{{toko.email}}</td>
-                                <td>{{toko.no_telp}}</td>
-                                <td>
-                                    <a href="#"
-                                    class="btn btn-xs btn-danger" 
-                                    v-on:click="deleteToko(toko.id, index,toko.nama_toko)">Delete</a>
-                                </td>
-                            </tr>
-                        </tbody>
+    <div class="panel panel-default">
+      <div class="panel-heading">Data User</div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <div class="pencarian">
+            <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
+          </div>
+          <table class="table table-striped table-hover">
+            <thead>
+              <th>Nama Toko</th>
+              <th>Nama Pemilik</th>
+              <th>Email</th>
+              <th>No. Telp</th>
+              <th>Dibuat Pada</th>
+              <th>Aksi</th>
+            </thead>
+            <tbody v-if="tokos.length > 0 && loading == false" class="data-ada">
+              <tr v-for="toko , index in tokos" >
+                <td>{{toko.nama_toko}}</td>
+                <td>{{toko.nama_pemilik}}</td>
+                <td>{{toko.email}}</td>
+                <td>{{toko.no_telp}}</td>
+                <td>{{toko.created_at}}</td>
+                <td>
+                  <a href="#"
+                  class="btn btn-xs btn-danger" 
+                  v-on:click="deleteToko(toko.id, index,toko.nama_toko)">Delete</a>
+                </td>
+              </tr>
+            </tbody>
 
-                        <tbody v-else-if="loading == true" class="data-ada" >
-                            <tr >
-                                <td colspan="4"  class="text-center">
-                                    Sedang Memuat Data
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody v-else class="tidak-ada-data">
-                            <tr>
-                                <td colspan="4"  class="text-center">
-                                    Tidak Ada Data
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <tbody v-else-if="loading == true" class="data-ada" >
+              <tr >
+                <td colspan="4"  class="text-center">
+                  Sedang Memuat Data
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else class="tidak-ada-data">
+              <tr>
+                <td colspan="4"  class="text-center">
+                  Tidak Ada Data
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-                </div>
-                <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-                <div align="right">
-                    <pagination :data="tokosData" v-on:pagination-change-page="getTokos"></pagination>
-                </div>
-            </div>
         </div>
+        <vue-simple-spinner v-if="loading"></vue-simple-spinner>
+
+        <div align="right">
+          <pagination :data="tokosData" v-on:pagination-change-page="getTokos"></pagination>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 
 <script>
 export default {
-    data: function () {
-      return {
+  data: function () {
+    return {
       // buat nampilin data dlm bentuk array
       tokos: [],
       // buat paginations
@@ -83,20 +85,20 @@ export default {
       message : '',
       url : window.location.origin+(window.location.pathname).replace("home", "toko"),
       loading : true
-  }
-},
-mounted() {
-	var app = this;
-	app.getTokos();
-},
-watch: {
+    }
+  },
+  mounted() {
+   var app = this;
+   app.getTokos();
+ },
+ watch: {
         // whenever question changes, this function will run
         pencarian: function (newQuestion) {
         	var app = this;
         	app.searchData()
         }
-    },
-    methods: {
+      },
+      methods: {
         // method getkategoriProduk
         getTokos(page) {
         	var app = this;
@@ -110,7 +112,7 @@ watch: {
         		app.loading = false;
         // buat cek ddi console
         console.log(app.tokos)
-    })
+      })
         	.catch(function (resp) {
         		alert("Could not load tokos");
         		app.loading = false
@@ -141,7 +143,7 @@ watch: {
           icon : "warning",
           buttons: true,
           dangerMode: true,
-      })
+        })
          .then((willDelete) => {
           if (willDelete) {
             var app = this;
@@ -150,25 +152,25 @@ watch: {
               app.getTokos();
               swal("Berhasil Dihapus!  ", {
                 icon: "success",
-            });
-          })
+              });
+            })
             .catch(function (resp) {
               app.$router.replace('/toko/');
               swal("Gagal Menghapus!", {
                 icon: "warning",
+              });
             });
-          });
-        }
-        this.$router.replace('/toko/');
-    });
-     },
-     alert(nama_toko) {
+          }
+          this.$router.replace('/toko/');
+        });
+       },
+       alert(nama_toko) {
          this.$swal({
           title: "Berhasil!",
           text: 'Sukses : Berhasil menghapus Kas Masuk '+ nama_toko,
           icon: "success",
-      });
+        });
+       }
      }
- }
-}
-</script>
+   }
+   </script>

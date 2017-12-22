@@ -43,14 +43,6 @@ import SatuanEdit from './components/satuan/SatuanEdit.vue'
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
-// kas Masuk
-import KasMasukIndex from './components/kasMasuk/KasMasukIndex.vue'
-import KasMasukCreate from './components/kasMasuk/KasMasukCreate.vue'
-import KasMasukEdit from './components/kasMasuk/KasMasukEdit.vue'
-// kas Keluar
-import KasKeluarIndex from './components/kasKeluar/KasKeluarIndex.vue'
-import KasKeluarCreate from './components/kasKeluar/KasKeluarCreate.vue'
-import KasKeluarEdit from './components/kasKeluar/KasKeluarEdit.vue'
 // Kategori Transaksi
 import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
 import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
@@ -69,7 +61,21 @@ import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 // toko
 import TokoIndex from './components/toko/TokoIndex.vue'
-import ProfileToko from './components/profileToko/ProfileToko.vue'
+// profile toko
+import ProfileTokoIndex from './components/profileToko/ProfileTokoIndex.vue'
+import ProfileTokoEdit from './components/profileToko/ProfileTokoEdit.vue'
+// Kelola Kas
+import KelolaKasIndex from './components/kelolaKas/KelolaKasIndex.vue'
+import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
+import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
+// Laporan
+import LaporanIndex from './components/laporan/LaporanIndex.vue'
+import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'
+import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
+// staf toko
+import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
+import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
+import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 const routes = [{
         path: '/',
         components: {
@@ -151,34 +157,6 @@ const routes = [{
         component: KategoriProdukEdit,
         name: 'editKategoriProduk'
     },
-    // kas 
-    {
-        path: '/kasMasuk',
-        component: KasMasukIndex,
-        name: 'indexKasMasuk'
-    }, {
-        path: '/kasMasuk/create',
-        component: KasMasukCreate,
-        name: 'createKasMasuk'
-    }, {
-        path: '/kasMasuk/edit/:id',
-        component: KasMasukEdit,
-        name: 'editKasMasuk'
-    },
-    // kas Keluar
-    {
-        path: '/kas-keluar',
-        component: KasKeluarIndex,
-        name: 'indexKasKeluar'
-    }, {
-        path: '/kas-keluar/create',
-        component: KasKeluarCreate,
-        name: 'createKasKeluar'
-    }, {
-        path: '/kas-keluar/edit/:id',
-        component: KasKeluarEdit,
-        name: 'editKasKeluar'
-    },
     // master data kategori transaksi
     {
         path: '/kategoriTransaksi',
@@ -242,9 +220,55 @@ const routes = [{
     // profile toko
     {
         path: '/profile-toko',
-        component: ProfileToko,
-        name: 'profileToko'
+        component: ProfileTokoIndex,
+        name: 'profileTokoIndex'
+    }, {
+        path: '/profile-toko/edit/:id',
+        component: ProfileTokoEdit,
+        name: 'editProfileToko'
     },
+    // Kelola Kas
+    {
+        path: '/kelola-kas',
+        component: KelolaKasIndex,
+        name: 'indexKelolaKas'
+    }, {
+        path: '/kelola-kas/create',
+        component: KelolaKasCreate,
+        name: 'createKelolaKas'
+    }, {
+        path: '/kelola-kas/edit/:id',
+        component: KelolaKasEdit,
+        name: 'editKelolaKas'
+    },
+    // Laporan
+    {
+        path: '/laporan',
+        component: LaporanIndex,
+        name: 'indexLaporan'
+    }, {
+        path: '/laporan-ringkas',
+        component: LaporanRingkasIndex,
+        name: 'indexLaporanRingkas'
+    }, {
+        path: '/laporan/rekap_kas',
+        component: RekapKasIndex,
+        name: 'indexRekapKas'
+    },
+    // staf toko
+    {
+        path: '/staf-toko',
+        component: StafTokoIndex,
+        name: 'indexStafToko',
+    }, {
+        path: '/staf-toko/create',
+        component: StafTokoCreate,
+        name: 'createStafToko',
+    }, {
+        path: '/staf-toko/edit/:id',
+        component: StafTokoEdit,
+        name: 'editStafToko',
+    }
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

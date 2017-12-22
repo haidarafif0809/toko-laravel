@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKasMasuksTable extends Migration
+class CreateTbsPenjualansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateKasMasuksTable extends Migration
      */
     public function up()
     {
-        Schema::create('kas_masuks', function (Blueprint $table) {
-            $table->increments('kas_masuk_id');
+        Schema::create('tbs_penjualans', function (Blueprint $table) {
+            $table->increments('id_tbs_penjualan');
+            $table->string('session_id')->nullable();
+            $table->string('satuan_id');
+            $table->integer('produk_id');
+            $table->string('jumlah_produk');
+            $table->string('harga_produk');
+            $table->string('subtotal');
             $table->integer('toko_id');
-            $table->integer('type')->comment = "(1 = kas masuk), (2 = kas keluar)";
-            $table->integer('jumlah');
-            $table->string('keterangan');
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
@@ -32,6 +35,6 @@ class CreateKasMasuksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kas_masuks');
+        Schema::dropIfExists('tbs_penjualans');
     }
 }
