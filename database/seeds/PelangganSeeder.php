@@ -12,7 +12,7 @@ class PelangganSeeder extends Seeder
      */
     public function run()
     {
-        $Pelanggan1 = Pelanggan::create(['kode_pelanggan' => '1', 'nama_pelanggan' => 'Galang Cahya Pamungkas', 'tanggal_lahir' => '1997-12-17', 'nomor_telepon' => '085357203602', 'alamat' => 'punggur', 'toko_id' => '2']);
-        $Pelanggan2 = Pelanggan::create(['kode_pelanggan' => '2', 'nama_pelanggan' => 'adi', 'tanggal_lahir' => '1999-10-12', 'nomor_telepon' => '085373967352', 'alamat' => 'bandar lampung', 'toko_id' => '3']);
+        $Pelanggan1 = Pelanggan::create(['kode_pelanggan' => '1', 'nama_pelanggan' => 'Galang Cahya Pamungkas', 'jenis_kelamin' => '1', 'tanggal_lahir' => '1997-12-17', 'nomor_telepon' => '085357203602', 'email' => 'galangcahyapamungkas@gmail.com', 'alamat' => 'punggur', 'kota' => 'Lampung Tengah', 'kode_pos' => '12345', 'catatan' => 'tidak ada', 'toko_id' => '2']);
+        $Pelanggan2 = Pelanggan::create(['kode_pelanggan' => '2', 'nama_pelanggan' => 'adi', 'jenis_kelamin' => '1', 'tanggal_lahir' => '1999-10-12', 'nomor_telepon' => '085373967352', 'email' => 'galangcahyapamungkas@gmail.com', 'alamat' => 'kedaton', 'kota' => 'bandar lampung', 'kode_pos' => '12346', 'catatan' => 'tidak ada', 'toko_id' => '3']);
     }
 }

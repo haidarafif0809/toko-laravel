@@ -28,7 +28,9 @@ class UserSeeder extends Seeder
         $memberRole->save();
 
         // Membuat sample admin
+        $type1               = 0;
         $admin               = new User();
+        $admin->type         = $type1;
         $admin->nama_pemilik = "admin";
         $admin->email        = "admin@gmail.com";
         $admin->no_telp      = "085764688661";
@@ -36,18 +38,20 @@ class UserSeeder extends Seeder
         $admin->save();
         $admin->attachRole($adminRole);
 
-        $toko2               = new Toko();
-        $toko2->nama_toko    = 'Toko Sample';
-        $toko2->nama_pemilik = 'member';
-        $toko2->email        = 'member@gmail.com';
-        $toko2->no_telp      = '1234567';
-        $toko2->save();
+        $toko1               = new Toko();
+        $toko1->nama_toko    = 'Toko Sample';
+        $toko1->nama_pemilik = 'member';
+        $toko1->email        = 'member@gmail.com';
+        $toko1->no_telp      = '1134567';
+        $toko1->save();
         // Membuat sample member
+        $type                 = 1;
         $member               = new User();
-        $member->toko_id      = $toko2->id;
-        $member->nama_pemilik = $toko2->nama_pemilik;
-        $member->email        = $toko2->email;
-        $member->no_telp      = $toko2->no_telp;
+        $member->type         = $type;
+        $member->toko_id      = $toko1->id;
+        $member->nama_pemilik = $toko1->nama_pemilik;
+        $member->email        = $toko1->email;
+        $member->no_telp      = $toko1->no_telp;
         $member->password     = $password;
         $member->save();
         $member->attachRole($memberRole);
@@ -56,7 +60,7 @@ class UserSeeder extends Seeder
         // $toko1->nama_toko    = 'toko bagus';
         // $toko1->nama_pemilik = 'bagus';
         // $toko1->email        = 'tokobagus@gmail.com';
-        // $toko1->no_telp      = '1234567';
+        // $toko1->no_telp      = '1134567';
         // $toko1->save();
     }
 }
