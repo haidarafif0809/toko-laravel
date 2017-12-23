@@ -81,14 +81,14 @@ export default {
 				placeholder: 'Kategori'
 			},
 			price: 123.45,
-        money: {
-          decimal: ',',
-          thousands: '.',
-          prefix: 'Rp',
-          //suffix: ' #',
-          precision: 2,
-          masked: false
-        }
+	        money: {
+	          decimal: ',',
+	          thousands: '.',
+	          prefix: 'Rp',
+	          //suffix: ' #',
+	          precision: 2,
+	          masked: false
+	        }
 		}
 	},
 	methods: {

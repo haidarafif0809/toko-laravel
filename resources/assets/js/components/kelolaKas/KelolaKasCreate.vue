@@ -87,7 +87,7 @@ export default {
 	          prefix: 'Rp',
 	          //suffix: ' #',
 	          precision: 2,
-	          masked: true
+	          masked: false
 	        }
 
 		}
