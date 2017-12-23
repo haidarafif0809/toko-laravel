@@ -46,7 +46,7 @@ class KelolaKasController extends Controller
     {
         $this->validate($request, [
             'type'       => 'required',
-            'jumlah'     => 'required|numeric',
+            'jumlah'     => 'required',
             'keterangan' => 'required',
         ]);
 
@@ -92,7 +92,7 @@ class KelolaKasController extends Controller
     {
         $this->validate($request, [
             'type'       => 'required',
-            'jumlah'     => 'required|numeric',
+            'jumlah'     => 'required',
             'keterangan' => 'required',
         ]);
         $update = KelolaKas::find($id)->update([
@@ -125,27 +125,31 @@ class KelolaKasController extends Controller
         $array            = [];
         $tokoIdUserOnline = Auth::user()->toko_id;
         $kelola_kas       = KelolaKas::where('toko_id', $tokoIdUserOnline)->orderBy('kelola_kas_id', 'desc')->paginate(10);
-        $jumlah           = KelolaKas::select('jumlah')->where([
+        $jumlahKasMasuk   = KelolaKas::select('jumlah')->where([
             ['type', '=', 1],
             ['toko_id', '=', $tokoIdUserOnline],
         ])->get();
-        $jumlah      = json_decode($jumlah, true);
-        $arrayJumlah = [];
-        foreach ($jumlah as $key => $val) {
-            $arrayJumlah[] = $val['jumlah'];
+        $jumlahKasMasuk = json_decode($jumlahKasMasuk, true);
+        $arrayJumlah    = [];
+        foreach ($jumlahKasMasuk as $key => $val) {
+            $arrayJumlahKasMasuk[] = $val['jumlah'];
         }
-        $array['jumlah'] = array_sum($arrayJumlah);
+        $totalKasMasuk = array_sum($arrayJumlahKasMasuk);
 
-        $jumlah2 = KelolaKas::select('jumlah')->where([
+        $jumlahKasKelu = KelolaKas::select('jumlah')->where([
             ['type', '=', 2],
             ['toko_id', '=', $tokoIdUserOnline],
         ])->get();
-        $jumlah2      = json_decode($jumlah2, true);
-        $arrayJumlah2 = [];
-        foreach ($jumlah2 as $key => $val) {
-            $arrayJumlah2[] = $val['jumlah'];
+        $jumlahKasKelu      = json_decode($jumlahKasKelu, true);
+        $arrayJumlahKasKelu = [];
+        foreach ($jumlahKasKelu as $key => $val) {
+            $arrayJumlahKasKelu[] = $val['jumlah'];
         }
-        $array['jumlah2']  = array_sum($arrayJumlah2);
+        $totalKasKelu = array_sum($arrayJumlahKasKelu);
+
+        $hasil1            = $totalKasMasuk - $totalKasKelu;
+        $hasil2            = "Rp" . number_format($hasil1, 2, ',', '.');
+        $array['jumlah']   = $hasil2;
         $array['data_kas'] = $kelola_kas;
 
         // $kelola_kas_array = array();

@@ -8,7 +8,7 @@
       <div class="panel-heading">Kelola Kas</div>
       <div class="panel-body">
         <div class="table-responsive">
-        <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah - kelolaKasJumlah2 }}</div>
+        <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah }}</div>
         <div class="tambah">
         <p>
           <router-link :to="{name:'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
@@ -80,9 +80,6 @@ export default {
       // buat nampilin data dlm bentuk array
       kelolaKas: [],
       kelolaKasJumlah: [],
-      kelolaKasJumlah2: [],
-      // kas: [],
-      // kategori_transaksis: [],
       // buat paginations
       kelolaKasDatas: {},
       pencarian: '',
@@ -95,8 +92,6 @@ export default {
    var app = this;
    app.getKelolaKas();
    app.loading = true
-    // app.getDataKas();
-    // app.getDataTransaksi();
   },
   watch: {
         // whenever question changes, this function will run
@@ -116,10 +111,9 @@ export default {
         		app.kelolaKas = resp.data.data_kas.data;
             app.kelolaKasDatas = resp.data;
             app.kelolaKasJumlah = resp.data.jumlah;
-        		app.kelolaKasJumlah2 = resp.data.jumlah2;
             app.loading = false;
         // buat cek ddi console
-        console.log(resp.data.data_kas.data);
+        console.log(resp.data.data_kas);
       })
           .catch(function (resp) {
             alert("Could not load KelolaKas");
