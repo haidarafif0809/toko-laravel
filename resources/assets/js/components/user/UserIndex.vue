@@ -2,20 +2,20 @@
     <div class="container">
         <ul class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">Data Toko</li>
+            <li class="active">User Toko</li>
         </ul>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <p class="panel-title">Data Toko</p>
+                        <p class="panel-title">User Toko</p>
                     </div>
                     <div class="panel-body">
                         <div class="pencarian">
-                         <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-                     </div>
-                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                         <thead>
+                           <input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+                       </div>
+                       <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                           <thead>
                             <th>Nama Pemilik</th>
                             <th>Email</th>
                             <th>No. Tlp</th>
@@ -57,17 +57,17 @@
 
 <script>
 export default {
- data: function () {
-  return {
-   users: [],
-   usersData: {},
-   url : window.location.origin+(window.location.pathname).replace("home","user"),
-   search : '',
-   loading : true
+   data: function () {
+      return {
+         users: [],
+         usersData: {},
+         url : window.location.origin+(window.location.pathname).replace("home","user"),
+         search : '',
+         loading : true
 
-}
-},
-mounted() {
+     }
+ },
+ mounted() {
   var app = this;
   app.loading = true
   app.getUsers();	

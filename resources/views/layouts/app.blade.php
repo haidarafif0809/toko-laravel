@@ -50,7 +50,11 @@
                             <router-link :to="{name: 'indexDashboard'}">
                                 Dashboard
                             </router-link>
-                        </li> 
+                        </li> <li>
+                            <router-link :to="{name: 'indexStafToko'}">
+                                Staf Toko
+                            </router-link>
+                        </li>
                         @endif
                         <li class="dropdown">
                             @role('admin')
@@ -62,18 +66,18 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <router-link :to="{name: 'indexToko'}">
-                                        Data Toko
+                                        Toko
                                     </router-link>
                                 </li>
                                 <li>
                                     <router-link :to="{name: 'indexUser'}">
-                                        Data User
+                                        User Toko
                                     </router-link>
                                 </li>
                             </ul>
                             @endif
                         </li>
-                        
+
                         @if (auth()->check())
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">

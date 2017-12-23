@@ -11,11 +11,11 @@
   <div class="container">
     <ul class="breadcrumb">
       <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-      <li class="active">Data User</li>
+      <li class="active">Toko</li>
     </ul>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Data User</div>
+      <div class="panel-heading">Toko</div>
       <div class="panel-body">
         <div class="table-responsive">
           <div class="pencarian">
