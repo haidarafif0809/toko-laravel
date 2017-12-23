@@ -12,6 +12,11 @@ import VueSwal from 'vue-swal'
 import Spinner from 'vue-simple-spinner'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vue from 'vue'
+import money from 'v-money'
+Vue.use(money, {
+    precision: 4
+})
 Vue.use(BootstrapVue);
 window.Vue.use(VueSwal)
 window.Vue.use(Spinner)

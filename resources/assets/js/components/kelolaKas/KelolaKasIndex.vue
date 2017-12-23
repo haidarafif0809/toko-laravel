@@ -8,68 +8,68 @@
       <div class="panel-heading">Kelola Kas</div>
       <div class="panel-body">
         <div class="table-responsive">
-          <div class="text-center">TOTAL KAS =  {{ kelolaKasJumlah }} </div>
-          <div class="tambah">
-            <p>
-              <router-link :to="{name: 'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
-            </p>
-          </div>
-          <div class="pencarian">
-            <input type="text" class="form-control" name="pencarian" placeholder="Pencarian"  v-model="pencarian" >
-          </div>
-          <table class="table table-striped table-hover">
-            <thead>
-              <th>No TRQ</th>
-              <th>type</th>
-              <th>Jumlah</th>
-              <th>Keterangan</th>
-              <th>Waktu</th>
-              <th>Aksi</th>
-            </thead>
-            <tbody v-if="kelolaKas.length > 0 && loading == false" class="data-ada">
-              <tr v-for = "kelolaKasData, index in kelolaKas">
-                <td>{{kelolaKasData.kelola_kas_id}}</td>
-                <td>
-                  <span v-if="kelolaKasData.type == 1">Kas Masuk</span>
-                  <span v-else> Kas Keluar</span>
-                </td>
-                <td>{{kelolaKasData.jumlah}}</td>
-                <td>{{kelolaKasData.keterangan}}</td>
-                <td>{{kelolaKasData.created_at}}</td>
-                <td>
-                  <router-link :to="{name: 'editKelolaKas', params: {id: kelolaKasData.kelola_kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kelolaKasData.kelola_kas_id" >
-                  Edit  </router-link> 
-                  <a href="#"
-                  class="btn btn-xs btn-danger" 
-                  v-on:click="deletekelolaKas(kelolaKasData.kelola_kas_id, index,kelolaKasData.type)">Hapus</a>
-                </td>
-              </tr>
-            </tbody>
-
-            <tbody v-else-if="loading == true" class="data-ada" >
-              <tr >
-                <td colspan="4"  class="text-center">
-                  Sedang Memuat Data
-                </td>
-              </tr>
-            </tbody>
-            <tbody v-else class="tidak-ada-data">
-              <tr>
-                <td colspan="4"  class="text-center">
-                  Tidak Ada Data
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah }}</div>
+        <div class="tambah">
+        <p>
+          <router-link :to="{name:'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
+        </p>
         </div>
+        <div class="pencarian">
+        <input type="text" class="form-control" name="pencarian" placeholder="Pencarian"  v-model="pencarian" >
+        </div>
+        <table class="table table-striped table-hover">
+          <thead>
+            <th>No TRQ</th>
+            <th>type</th>
+            <th>Jumlah</th>
+            <th>Keterangan</th>
+            <th>Waktu</th>
+            <th>Aksi</th>
+          </thead>
+          <tbody v-if="kelolaKas.length > 0 && loading == false" class="data-ada">
+            <tr v-for = "kelolaKasData, index in kelolaKas">
+              <td>{{kelolaKasData.kelola_kas_id}}</td>
+              <td>
+                <span v-if="kelolaKasData.type == 1">Kas Masuk</span>
+                <span v-else> Kas Keluar</span>
+              </td>
+              <td>{{kelolaKasData.jumlah}}</td>
+              <td>{{kelolaKasData.keterangan}}</td>
+              <td>{{kelolaKasData.created_at}}</td>
+              <td>
+                <router-link :to="{name: 'editKelolaKas', params: {id: kelolaKasData.kelola_kas_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kelolaKasData.kelola_kas_id" >
+                Edit  </router-link> 
+                <a href="#"
+                class="btn btn-xs btn-danger" 
+                v-on:click="deletekelolaKas(kelolaKasData.kelola_kas_id, index,kelolaKasData.type)">Hapus</a>
+              </td>
+            </tr>
+          </tbody>
+
+          <tbody v-else-if="loading == true" class="data-ada" >
+            <tr >
+              <td colspan="4"  class="text-center">
+              Sedang Memuat Data
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else class="tidak-ada-data">
+            <tr>
+              <td colspan="4"  class="text-center">
+              Tidak Ada Data
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
         <vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
         <div align="right">
-         <pagination :data="kelolaKasDatas" v-on:pagination-change-page="getKelolaKas"></pagination>
-       </div>
-     </div>
-   </div>
- </div>
+        <pagination :data="kelolaKasDatas" v-on:pagination-change-page="getKelolaKas"></pagination>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -80,8 +80,6 @@ export default {
       // buat nampilin data dlm bentuk array
       kelolaKas: [],
       kelolaKasJumlah: [],
-      // kas: [],
-      // kategori_transaksis: [],
       // buat paginations
       kelolaKasDatas: {},
       pencarian: '',
@@ -94,8 +92,6 @@ export default {
    var app = this;
    app.getKelolaKas();
    app.loading = true
-    // app.getDataKas();
-    // app.getDataTransaksi();
   },
   watch: {
         // whenever question changes, this function will run
@@ -114,10 +110,10 @@ export default {
         	.then(function (resp) {
         		app.kelolaKas = resp.data.data_kas.data;
             app.kelolaKasDatas = resp.data;
-        		app.kelolaKasJumlah = resp.data.jumlah;
+            app.kelolaKasJumlah = resp.data.jumlah;
             app.loading = false;
         // buat cek ddi console
-        console.log(resp.data.data_kas.data);
+        console.log(resp.data.data_kas);
       })
           .catch(function (resp) {
             alert("Could not load KelolaKas");
