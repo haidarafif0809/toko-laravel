@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class StafTokoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,7 @@ class StafTokoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +42,26 @@ class StafTokoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama_pemilik' => 'required',
+            'email'        => 'required|email|unique:users,email',
+            'no_telp'      => 'required',
+            'password'     => 'required|string|min:6',
+
+        ]);
+        $password    = 'rahasia';
+        $type        = 2;
+        $tambah_user = User::create([
+            'type'         => $type,
+            'toko_id'      => Auth::user()->toko_id,
+            'nama_pemilik' => $request->nama_pemilik,
+            'password'     => $request->password,
+            'email'        => $request->email,
+            'no_telp'      => $request->no_telp,
+        ]);
+        $memberRole = Role::where('name', 'member')->first();
+        $tambah_user->attachRole($memberRole);
+        return $tambah_user;
     }
 
     /**
@@ -57,7 +83,7 @@ class StafTokoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -69,7 +95,17 @@ class StafTokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama_pemilik' => 'required',
+            'email'        => 'required|email|unique:users,email,' . $id,
+            'no_telp'      => 'required',
+
+        ]);
+        User::find($id)->update([
+            'nama_pemilik' => $request->nama_pemilik,
+            'email'        => $request->email,
+            'no_telp'      => $request->no_telp,
+        ]);
     }
 
     /**
@@ -80,11 +116,18 @@ class StafTokoController extends Controller
      */
     public function destroy($id)
     {
-        User::paginate(10);
+        return User::destroy($id);
     }
 
-    public function view($id)
+    public function view()
     {
-
+        return User::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(10);
     }
+
+    public function search(Request $request)
+    {
+        $user = User::where('toko_id', Auth::user()->toko_id)->where('nama_pemilik', 'LIKE', "%$request->search%")->paginate(10);
+        return response()->json($user);
+    }
+
 }
