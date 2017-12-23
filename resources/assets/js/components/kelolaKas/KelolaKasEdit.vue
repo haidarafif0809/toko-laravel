@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label for="jumlah" class="col-md-2 control-label">Jumlah</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Jumlah" type="number" v-model="kelolaKas.jumlah" name="jumlah"  autofocus="">
+									<money class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="kelolaKas.jumlah" v-bind="money" name="jumlah"  autofocus=""></money>
 									<span v-if="errors.jumlah" class="label label-danger">{{ errors.jumlah[0] }}</span>
 								</div>
 							</div>
@@ -79,7 +79,16 @@ export default {
 			},
 			setting: {
 				placeholder: 'Kategori'
-			}
+			},
+			price: 123.45,
+        money: {
+          decimal: ',',
+          thousands: '.',
+          prefix: 'Rp',
+          //suffix: ' #',
+          precision: 2,
+          masked: false
+        }
 		}
 	},
 	methods: {

@@ -27,10 +27,6 @@ button {
               <table class="table table-striped table-hover">
                <tbody v-if="profileTokos.length > 0 && loading == false" class="data-ada">
                 <tr v-for="profileToko , index in profileTokos">
-                  <td class="col-md 2">NAMA kunci</td>
-                  <td class="col-md-8">: {{profileToko.rumah}}</td>
-                </tr> 
-                <tr v-for="profileToko , index in profileTokos">
                   <td class="col-md 2">NAMA TOKO</td>
                   <td class="col-md-8">: {{profileToko.profileToko.nama_toko}}</td>
                 </tr>

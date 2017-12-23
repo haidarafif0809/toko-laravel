@@ -66,7 +66,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        // type 1 = user toko, 2 = staf toko
+        $type = 1;
         $toko = Toko::create([
             'nama_toko'    => $data['nama_toko'],
             'nama_pemilik' => $data['nama_pemilik'],
@@ -74,6 +75,7 @@ class RegisterController extends Controller
             'no_telp'      => $data['no_telp'],
         ]);
         $user = User::create([
+            'type'         => $type,
             'toko_id'      => $toko->id,
             'nama_pemilik' => $toko->nama_pemilik,
             'email'        => $toko->email,
