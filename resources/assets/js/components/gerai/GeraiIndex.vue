@@ -15,30 +15,110 @@
 				</div>
 
 				<div class="pencarian">
-					<input type="text" class="form-control" placeholder="Cari gerai.." >
+					<input type="text" class="form-control" placeholder="Cari gerai.." 
+					v-model="search">
 				</div>
-				<div class="pencarian">
-					<input type="text" class="form-control" placeholder="Cari kota.." >
-				</div>
-
+				
 				<table class="table table-striped">
 					<thead>
 						<th>Nama</th>
 						<th>Kota</th>
 						<th>Aksi</th>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Toko Athacom 1</td>
-							<td></td>
+					<tbody v-if="gerais.length > 0 && loading == false" class="data-ada">
+						<tr v-for="gerai, index in gerais">
+							<td>{{gerai.nama_gerai}}</td>
+							<td>{{gerai.kota}}</td>
 							<td>
 								<button type="button" class="btn btn-primary">Edit</button>
 								<button type="button" class="btn btn-danger">Hapus</button>
 							</td>
 						</tr>
 					</tbody>
+					<tbody v-else-if="loading == true" class="data-ada">
+						<tr>
+							<td colspan="4" class="text-center">
+								Sedang Memuat Data
+							</td>
+						</tr>
+					</tbody>
+					<tbody v-else class="tidak-ada-data">
+						<tr>
+							<td colspan="4"  class="text-center">
+								Tidak Ada Data
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
+			<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+			<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search == '' "></pagination></div>
+			<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search != '' "></pagination></div>
 		</div>
 	</div>
 </template>
+<script>
+export default {
+	data: function () {
+		return {
+			gerais: [],
+			geraisData: {},
+			url : window.location.origin+(window.location.pathname).replace("home","gerai"),
+			search : '',
+			loading : true
+
+		}
+	},
+	watch: {
+        // whenever question changes, this function will run
+        search: function (newQuestion) {
+        	this.getHasilPencarian();  
+        }
+    },
+    mounted() {
+    	var app = this;
+    	app.loading = true
+    	app.getGerai();	
+
+    },
+    methods: { 
+    	getGerai(page) {
+    		var app = this;
+    		if (typeof page === 'undefined') {
+    			page = 1;
+    		}
+    		axios.get(app.url+'/view?page='+page)
+    		.then(function (resp) {
+    			app.loading = false
+    			app.gerais = resp.data.data;
+    			app.geraisData = resp.data
+               // console.log(app.kas)
+
+
+           })
+    		.catch(function (resp) {
+    			alert("Could not load gerai");
+    		});
+
+    	},
+    	getHasilPencarian(page){
+    		var app = this;
+    		app.loading = true;
+    		if (typeof page === 'undefined') {
+    			page = 1;
+    		}
+    		axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
+    		.then(function (resp) {
+    			app.loading = false
+    			app.gerais = resp.data.data;
+    			app.geraisData = resp.data;
+    		})
+    		.catch(function (resp) {
+    			console.log(resp);
+    			app.loading = false
+    			alert("Could not load gerais");
+    		});
+    	},
+    }
+}	
+</script>
