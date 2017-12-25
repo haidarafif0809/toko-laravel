@@ -17,10 +17,7 @@
 				<div class="pencarian">
 					<input type="text" class="form-control" placeholder="Cari gerai.." >
 				</div>
-				<div class="pencarian">
-					<input type="text" class="form-control" placeholder="Cari kota.." >
-				</div>
-
+				
 				<table class="table table-striped">
 					<thead>
 						<th>Nama</th>
