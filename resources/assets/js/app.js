@@ -273,7 +273,17 @@ const routes = [{
         path: '/staf-toko/edit/:id',
         component: StafTokoEdit,
         name: 'editStafToko',
-    }
+    },
+    // Gerai
+    {
+        path: '/gerai',
+        component: GeraiIndex,
+        name: 'indexGerai'
+    }, {
+        path: '/gerai/create',
+        component: GeraiCreate,
+        name: 'createGerai'
+    },
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
