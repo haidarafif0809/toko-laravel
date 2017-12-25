@@ -85072,7 +85072,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(403)
 /* template */
 var __vue_template__ = __webpack_require__(390)
 /* template functional */
@@ -85144,32 +85144,113 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Gerai")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("div", { staticClass: "tambah" }, [
-          _c(
-            "p",
-            [
-              _c(
-                "router-link",
+    _c(
+      "div",
+      { staticClass: "panel panel-default" },
+      [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Gerai")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "tambah" }, [
+            _c(
+              "p",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { to: { name: "createGerai" } }
+                  },
+                  [_vm._v("Tambah Gerai")]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pencarian" }, [
+            _c("input", {
+              directives: [
                 {
-                  staticClass: "btn btn-primary",
-                  attrs: { to: { name: "createGerai" } }
-                },
-                [_vm._v("Tambah Gerai")]
-              )
-            ],
-            1
-          )
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Cari gerai.." },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _vm.gerais.length > 0 && _vm.loading == false
+              ? _c(
+                  "tbody",
+                  { staticClass: "data-ada" },
+                  _vm._l(_vm.gerais, function(gerai, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(gerai.nama_gerai))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(gerai.kota))]),
+                      _vm._v(" "),
+                      _vm._m(1, true, false)
+                    ])
+                  })
+                )
+              : _vm.loading == true
+                ? _c("tbody", { staticClass: "data-ada" }, [
+                    _vm._m(2, false, false)
+                  ])
+                : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                    _vm._m(3, false, false)
+                  ])
+          ])
         ]),
         _vm._v(" "),
-        _vm._m(0, false, false),
+        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
         _vm._v(" "),
-        _vm._m(1, false, false)
-      ])
-    ])
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _vm.search == ""
+              ? _c("pagination", {
+                  attrs: { data: _vm.geraisData, limit: 1 },
+                  on: { "pagination-change-page": _vm.getGerai }
+                })
+              : _vm._e()
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _vm.search != ""
+              ? _c("pagination", {
+                  attrs: { data: _vm.geraisData, limit: 1 },
+                  on: { "pagination-change-page": _vm.getGerai }
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -85177,46 +85258,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pencarian" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Cari gerai.." }
-      })
+    return _c("thead", [
+      _c("th", [_vm._v("Nama")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Kota")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table table-striped" }, [
-      _c("thead", [
-        _c("th", [_vm._v("Nama")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Kota")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Aksi")])
-      ]),
+    return _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v("Edit")]
+      ),
       _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("td", [_vm._v("Toko Athacom 1")]),
-          _vm._v(" "),
-          _c("td"),
-          _vm._v(" "),
-          _c("td", [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("Edit")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-danger", attrs: { type: "button" } },
-              [_vm._v("Hapus")]
-            )
-          ])
-        ])
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", attrs: { type: "button" } },
+        [_vm._v("Hapus")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t")
       ])
     ])
   }
@@ -85589,6 +85673,137 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            gerais: [],
+            geraisData: {},
+            url: window.location.origin + window.location.pathname.replace("home", "gerai"),
+            search: '',
+            loading: true
+
+        };
+    },
+    watch: {
+        // whenever question changes, this function will run
+        search: function search(newQuestion) {
+            this.getHasilPencarian();
+        }
+    },
+    mounted: function mounted() {
+        var app = this;
+        app.loading = true;
+        app.getGerai();
+    },
+
+    methods: {
+        getGerai: function getGerai(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.loading = false;
+                app.gerais = resp.data.data;
+                app.geraisData = resp.data;
+                // console.log(app.kas)
+
+            }).catch(function (resp) {
+                alert("Could not load gerai");
+            });
+        },
+        getHasilPencarian: function getHasilPencarian(page) {
+            var app = this;
+            app.loading = true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url + '/pencarian?search=' + app.search + '&page=' + page).then(function (resp) {
+                app.loading = false;
+                app.gerais = resp.data.data;
+                app.geraisData = resp.data;
+            }).catch(function (resp) {
+                console.log(resp);
+                app.loading = false;
+                alert("Could not load gerais");
+            });
+        }
+    }
+});
 
 /***/ })
 /******/ ]);

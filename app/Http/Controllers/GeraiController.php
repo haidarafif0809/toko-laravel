@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gerai;
 use Illuminate\Http\Request;
 
 class GeraiController extends Controller
@@ -21,6 +22,25 @@ class GeraiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function view()
+    {
+        return Gerai::orderBy('id', 'desc')->paginate(10);
+    }
+
+    public function search(Request $request)
+    {
+        $cari_gerai = Gerai::where('nama_gerai', 'LIKE', "%$request->search%")
+            ->orWhere('alamat_gerai', 'LIKE', "%$request->search%")
+            ->orWhere('kota', 'LIKE', "%$request->search%")
+            ->orWhere('no_telepon_1', 'LIKE', "%$request->search%")
+            ->orWhere('no_telepon_2', 'LIKE', "%$request->search%")
+            ->orWhere('notes', 'LIKE', "%$request->search%")
+            ->orWhere('nama_pajak', 'LIKE', "%$request->search%")
+            ->orWhere('rasio', 'LIKE', "%$request->search%")
+            ->orWhere('meja', 'LIKE', "%$request->search%")
+            ->paginate(10);
+        return $cari_gerai;
+    }
     public function create()
     {
         //
@@ -34,7 +54,23 @@ class GeraiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validasi
+        $this->validate($request, [
+            'no_telepon_1' => 'required|unique:gerais,no_telepon_1',
+            'no_telepon_2' => 'required|unique:gerais,no_telepon_2',
+
+        ]);
+        $Gerai = Gerai::create([
+            'nama_gerai'   => $request->nama_gerai,
+            'alamat_gerai' => $request->alamat_gerai,
+            'kota'         => $request->kota,
+            'no_telepon_1' => $request->no_telepon_1,
+            'no_telepon_2' => $request->no_telepon_2,
+            'notes'        => $request->notes,
+            'nama_pajak'   => $request->nama_pajak,
+            'rasio'        => $request->rasio,
+            'meja'         => $request->meja,
+        ]);
     }
 
     /**
