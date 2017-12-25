@@ -26,16 +26,22 @@ class PelangganController extends Controller
     {
         $cari_pelanggan = Pelanggan::where('kode_pelanggan', 'LIKE', "%$request->search%")
             ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-            ->orWhere('tanggal_lahir', 'LIKE', "%$request->search%")
+        // ->orWhere('tanggal_lahir', 'LIKE', "%$request->search%")
             ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-            ->orWhere('alamat', 'LIKE', "%$request->search%")
-            ->orWhere('jenis_kelamin', 'LIKE', "%$request->search%")
-            ->orWhere('email', 'LIKE', "%$request->search%")
-            ->orWhere('kota', 'LIKE', "%$request->search%")
-            ->orWhere('kode_pos', 'LIKE', "%$request->search%")
-            ->orWhere('catatan', 'LIKE', "%$request->search%")
+        // ->orWhere('alamat', 'LIKE', "%$request->search%")
+        // ->orWhere('jenis_kelamin', 'LIKE', "%$request->search%")
+        // ->orWhere('email', 'LIKE', "%$request->search%")
+        // ->orWhere('kota', 'LIKE', "%$request->search%")
+        // ->orWhere('kode_pos', 'LIKE', "%$request->search%")
+        // ->orWhere('catatan', 'LIKE', "%$request->search%")
             ->paginate(10);
         return $cari_pelanggan;
+    }
+
+    public function detail($id)
+    {
+        $detailPelanggan = Pelanggan::where('id', $id)->first();
+        return response()->json($detailPelanggan);
     }
 
     public function store(Request $request)

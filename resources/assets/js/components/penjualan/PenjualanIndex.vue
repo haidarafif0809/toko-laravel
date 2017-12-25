@@ -68,96 +68,95 @@
 						<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
 					</div>
 					<div align="right">
-<!-- 						<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination>
--->					</div>
-</div>
-</div>
-</div>
-
-<div class="col-md-4">
-	<div class="panel panel-default">
-		<div class="panel-heading">Pesanan</div>
-		<ul class="list-group cart-item">
-
-
-
-
-			<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
-			<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
-				<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
-					<div>
-						<small>
-							<span class="small" v-if="tbsPenjualan.nama_produk.length > 15">
-								{{ tbsPenjualan.nama_produk.slice(0, 15) }}...
-							</span>
-							<span class="small" v-else>
-								{{ tbsPenjualan.nama_produk}}
-							</span>
-
-							<span class="small" style="float: right;">					
-								({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }} <span @click="deleteTbsPenjualan(1)" style="color: red;">x</span>
-							</span>
-						</small>
-					</div>
-				</li>
-			</div>
-
-
-
-
-			<div v-else-if="loadingTbs == true" class="text-center">
-				<li>Sedang Memuat Produk</li>
-			</div>
-			<div v-else class="list-group-item list-group-item-warning">
-				Tidak Ada Produk
-			</div>
-			<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
-		</ul>
-
-		<div class="panel-footer">
-			Total Item: {{ tbs_penjualans.length }}
-			<span class="pull-right">
-				<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-			</span>
-		</div>
-	</div>
-
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<form>
-				<div class="form-group">
-					<label class="control-label">Total Bayar</label>
-					<br>
-					<br>
-					<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b><!-- <span class="glyphicon glyphicon-remove"></span> --></h1>
-					<h2 class="form-control-static text-warning"></h2>
-				</div>
-
-				<div  class="form-group">
-					<label class="control-label"> Nama Pelanggan:</label>
-					<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-						<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-					</selectize-component>
-				</div>
-
-				<div class="form-group">
-					<div class="input-group">
-						<input type="number" class="form-control" placeholder="Pembayaran">
-						<span class="input-group-btn">
-							<button class="btn btn-success">Bayar</button>
-						</span>
 					</div>
 				</div>
+			</div>
+		</div>
 
-				<div class="form-group">
-					<label class="control-label">Keterangan</label>
-					<textarea class="form-control"></textarea>
-				</div> 
-			</form>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">Pesanan</div>
+				<ul class="list-group cart-item">
+
+
+
+
+					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
+					<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
+						<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
+							<div>
+								<small>
+									<span class="small" v-if="tbsPenjualan.nama_produk.length > 15">
+										{{ tbsPenjualan.nama_produk.slice(0, 15) }}...
+									</span>
+									<span class="small" v-else>
+										{{ tbsPenjualan.nama_produk}}
+									</span>
+
+									<span class="small" style="float: right;">					
+										({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }} <span @click="deleteTbsPenjualan(1)" style="color: red;">x</span>
+									</span>
+								</small>
+							</div>
+						</li>
+					</div>
+
+
+
+
+					<div v-else-if="loadingTbs == true" class="text-center">
+						<li>Sedang Memuat Produk</li>
+					</div>
+					<div v-else class="list-group-item list-group-item-warning">
+						Tidak Ada Produk
+					</div>
+					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
+				</ul>
+
+				<div class="panel-footer">
+					Total Item: {{ tbs_penjualans.length }}
+					<span class="pull-right">
+						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
+					</span>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label class="control-label">Total Bayar</label>
+							<br>
+							<br>
+							<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b><!-- <span class="glyphicon glyphicon-remove"></span> --></h1>
+							<h2 class="form-control-static text-warning"></h2>
+						</div>
+
+						<div  class="form-group">
+							<label class="control-label"> Nama Pelanggan:</label>
+							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+							</selectize-component>
+						</div>
+
+						<div class="form-group">
+							<div class="input-group">
+								<input type="number" class="form-control" placeholder="Pembayaran">
+								<span class="input-group-btn">
+									<button class="btn btn-success">Bayar</button>
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label">Keterangan</label>
+							<textarea class="form-control"></textarea>
+						</div> 
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-</div>
 </div>
 </template>
 

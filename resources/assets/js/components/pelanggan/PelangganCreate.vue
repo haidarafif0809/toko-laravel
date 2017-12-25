@@ -72,19 +72,19 @@
 							</div>
 
 							<div class="form-group">
+								<label for="kota" class="col-md-3 control-label">Kota</label>
+								<div class="col-md-4">
+									<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="">
+									<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
+								</div>
+							</div>
+
+							<div class="form-group">
 								<label for="alamat" class="col-md-3 control-label">Alamat</label>
 								<div class="col-md-4">
 									<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="">
 
 									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="kota" class="col-md-3 control-label">Kota</label>
-								<div class="col-md-4">
-									<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="">
-									<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
 								</div>
 							</div>
 

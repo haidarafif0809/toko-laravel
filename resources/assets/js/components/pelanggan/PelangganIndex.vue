@@ -15,35 +15,27 @@
 					</div>
 					<div class="pencarian">
 						<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+						<!-- <p>Pencarian berdasarkan kode, nama, nomor telepon</p>	 -->
 					</div>
 					<table class="table table-striped table-hover">
 						<thead>
 							<th>Kode Pelanggan</th>
 							<th>Nama Pelanggan</th>
 							<th>Jenis Kelamin</th>
-							<th>Tanggal Lahir</th>
 							<th>Nomor Telepon</th>
-							<th>Email</th>
-							<th>Alamat</th>
-							<th>Kota</th>
-							<th>Kode Pos</th>
-							<th>Catatan</th>
 							<th>Aksi</th>
 						</thead>
 						<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
 							<tr v-for="pelanggan ,index in pelanggans">
 								<td>{{ pelanggan.kode_pelanggan }}</td>
-								<td>{{ pelanggan.nama_pelanggan }}</td>
+								<td>
+									<router-link :to="{name: 'detailPelanggan', params: {id: pelanggan.id}}">
+										{{pelanggan.nama_pelanggan}}
+									</router-link>							
+								</td>
 								<td v-if="pelanggan.jenis_kelamin == 1">Laki-laki</td>
 								<td v-else>Perempuan</td>
-								<td>{{ pelanggan.tanggal_lahir }}</td>
 								<td>{{ pelanggan.nomor_telepon }}</td>
-								<td>{{ pelanggan.email }}</td>
-								<td>{{ pelanggan.alamat }}</td>
-								<td>{{ pelanggan.kota }}</td>
-								<td>{{ pelanggan.kode_pos }}</td>
-								<td>{{ pelanggan.catatan }}</td>
-
 								<td>
 									<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
 										Edit
