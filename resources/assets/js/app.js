@@ -60,6 +60,7 @@ import SuplierEdit from './components/suplier/SuplierEdit.vue'
 import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
 import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
 import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
+import PelangganDetail from './components/pelanggan/PelangganDetail.vue'
 //Kas Mutasi
 import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
 //Penjualan
@@ -81,6 +82,9 @@ import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
 import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
+//gerai
+import GeraiIndex from './components/gerai/GeraiIndex.vue'
+import GeraiCreate from './components/gerai/GeraiCreate.vue'
 const routes = [{
         path: '/',
         components: {
@@ -203,6 +207,10 @@ const routes = [{
         path: '/pelanggan-edit',
         component: PelangganEdit,
         name: 'editPelanggan'
+    }, {
+        path: '/pelanggan/detail/:id',
+        component: PelangganDetail,
+        name: 'detailPelanggan'
     },
     // Kas Mutasi
     {
@@ -273,7 +281,17 @@ const routes = [{
         path: '/staf-toko/edit/:id',
         component: StafTokoEdit,
         name: 'editStafToko',
-    }
+    },
+    // Gerai
+    {
+        path: '/gerai',
+        component: GeraiIndex,
+        name: 'indexGerai'
+    }, {
+        path: '/gerai/create',
+        component: GeraiCreate,
+        name: 'createGerai'
+    },
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
