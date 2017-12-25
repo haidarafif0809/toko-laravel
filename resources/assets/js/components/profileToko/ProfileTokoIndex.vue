@@ -39,6 +39,14 @@ button {
                   <td class="col-md-8">: {{profileToko.profileToko.email}}</td>
                 </tr>
                 <tr v-for="profileToko , index in profileTokos" >
+                  <td class="col-md 2">Provinsi </td>
+                  <td class="col-md-8">: {{profileToko.provinsi}}</td>
+                </tr>                
+                <tr v-for="profileToko , index in profileTokos" >
+                  <td class="col-md 2">Kabupaten </td>
+                  <td class="col-md-8">: {{profileToko.kabupaten}}</td>
+                </tr>
+                <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">ALAMAT/TEMPAT</td>
                   <td class="col-md-8">: {{profileToko.profileToko.alamat}}</td>
                 </tr>
@@ -60,7 +68,8 @@ button {
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">LOGIN TERAKHIR </td>
                   <td class="col-md-8">: {{profileToko.last_login}}</td>
-                </tr><br>
+                </tr>                
+                <br>
                 <ul>
                   <span v-for="profileToko , index in profileTokos">
                     <router-link :to="{name: 'editProfileToko', params: {id: profileToko.profileToko.id}}" class="btn btn-md btn-primary" v-bind:id="'edit-' + profileToko.profileToko.id" >

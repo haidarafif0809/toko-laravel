@@ -92,6 +92,8 @@ Route::get('/profile-toko/edit', [
     'as'   => 'profile_toko.proses_ubah_profil_toko',
     'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
 ]);
+Route::get('/profile-toko/provinsi', 'ProfileTokoController@provinsi');
+Route::get('/profile-toko/kabupaten/{id}/{type}', 'ProfileTokoController@kabupaten');
 // Kelola Kas
 Route::resource('kelola-kas', 'KelolaKasController', ['except' => 'show']);
 Route::get('/kelola-kas/search', 'KelolaKasController@search');

@@ -49,12 +49,31 @@ img {
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="alamat" class="col-md-2 control-label">Alamat</label>
+							<label for="provinsi" class="col-md-2 control-label">Provinsi</label>
 							<div class="col-md-4">
-								<textarea class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="profileToko.alamat" name="alamat"  autofocus=""></textarea>
-								<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat [0] }}</span>
+								<selectize-component required v-model="profileToko.provinsi" :settings="setting_provinsi">
+									<option v-for="provinsis in provinsi" v-bind:value="provinsis.id" >{{ provinsis.name }}</option>
+								</selectize-component>
+								<span v-if="errors.provinsi" class="label label-danger">{{ errors.provinsi[0] }}</span>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="kabupaten" class="col-md-2 control-label">Kabupaten </label>
+							<div class="col-md-4">
+								<selectize-component required v-model="profileToko.kabupaten" :settings="setting_kabupaten">
+									<option v-for="kabupatens in kabupaten" v-bind:value="kabupatens.id" >{{ kabupatens.name }}</option>
+								</selectize-component>
+								<span v-if="errors.kabupaten" class="label label-danger">{{ errors.kabupaten[0] }}</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="alamat" class="col-md-2 control-label">Alamat Lengkap </label>
+							<div class="col-md-4">
+								<textarea class="form-control" type="text" name="alamat" v-model="profileToko.alamat" required placeholder="Lengkapi Alamat Anda"></textarea> 
+								<span v-if="errors.kabupaten" class="label label-danger">{{ errors.kabupaten[0] }}</span>
+							</div>
+						</div>
+
 						<div v-if="profileToko.foto != ''" class="form-group">
 							<label for="foto" class="col-md-2 control-label">Logo</label>
 							<div v-if="profileToko.foto != null" class="col-md-4">		
@@ -95,10 +114,14 @@ img {
 export default {
 	mounted() {
 		this.getItem();
+		this.dataProvinsi();
+		this.dataKabupaten();
 	},
 
 	data: function () {
 		return {
+			provinsi: [],
+			kabupaten: [],
 			errors: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "profile-toko"),
 			url_img : window.location.origin+(window.location.pathname).replace("home", "logo/"),
@@ -109,9 +132,18 @@ export default {
 				nama_pemilik: '',
 				email: '',
 				no_telp: '',
+				provinsi: '',
+				kabupaten: '',
 				alamat: '',
 				foto: '',
 			},
+			setting_provinsi: {
+				placeholder:"Pilih Provinsi"
+			},
+			setting_kabupaten: {
+				placeholder:"Pilih Kabupaten"
+			},
+
 			profileTokoId: null,
 			message: ''
 		}
@@ -167,7 +199,7 @@ export default {
 				console.log(resp)
 			})
 			.catch(function (resp) {
-				
+
 				app.errors = resp.response.data.errors;
 			});
 		},
@@ -192,8 +224,36 @@ export default {
 			.catch(function () {
 				alert("Could not load your Profile Toko")
 			});
+		},
+		dataProvinsi() {
+			let app = this;
+			axios.get(app.url+'/provinsi')
+			.then(function(resp) {
+				app.provinsi = resp.data;
+			})
+			.catch(function(resp) {
+				alert("Could not load your Provinsi")
+			});
+		},
+		dataKabupaten(provinsi_id) {
+			let app = this;
+			var type = 'kabupaten';
+			axios.get(app.url+'/kabupaten/'+provinsi_id+'/'+type)
+			.then(function(resp) {
+				app.kabupaten = resp.data;
+			})
+			.catch(function(resp) {
+				alert("Could not load your Kabupaten")
+			});
 		}
 
+	},
+	watch: {
+		'profileToko.provinsi': function (newVal, oldVal) {
+			if (newVal !== " ") {
+				this.dataKabupaten(newVal);
+			}
+		}
 	}
 
 			// var namaToko = app.profileToko.nama_toko;
