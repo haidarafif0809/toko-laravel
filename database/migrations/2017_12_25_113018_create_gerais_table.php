@@ -22,8 +22,10 @@ class CreateGeraisTable extends Migration
             $table->string('no_telepon_2');
             $table->string('notes');
             $table->string('nama_pajak');
-            $table->string('rasio_');
-            $table->boolean('meja')->default(false);
+            $table->string('rasio');
+            $table->boolean('meja')->default(0)->nullable()->comment = "0 = kosong, 1 = meja";
+            $table->unsignedInteger('created_by')->nullable()->index();
+            $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
         });
     }

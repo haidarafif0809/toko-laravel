@@ -103,3 +103,8 @@ Route::get('/kelola-kas/StafAktif', 'KelolaKasController@stafAktif');
 Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
 Route::get('staf-toko/view', 'StafTokoController@view');
 Route::get('staf-toko/search', 'StafTokoController@search');
+
+// Gerai
+Route::resource('gerai', 'GeraiController', ['except' => 'show']);
+Route::get('gerai/view', 'GeraiController@view');
+Route::get('gerai/search', 'GeraiController@search');
