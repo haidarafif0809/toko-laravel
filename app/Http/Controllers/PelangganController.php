@@ -20,7 +20,7 @@ class PelangganController extends Controller
 
     public function view()
     {
-        return Pelanggan::orderBy('id', 'desc')->paginate(10);
+        return Pelanggan::orderBy('created_at', 'desc')->paginate(10);
     }
     public function search(Request $request)
     {

@@ -79,7 +79,7 @@ export default {
 				// console.log(app.pelanggan);
 			})
 			.catch(function () {
-				alert("Could not load your pelanggan");
+				alert("Tidak dapat memuat pelanggan");
 			});
 		},
 	}
