@@ -16,13 +16,13 @@ class CreateGeraisTable extends Migration
         Schema::create('gerais', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_gerai');
-            $table->string('alamat_gerai');
-            $table->string('kota');
-            $table->string('no_telepon_1');
-            $table->string('no_telepon_2');
-            $table->string('notes');
-            $table->string('nama_pajak');
-            $table->string('rasio');
+            $table->string('alamat_gerai')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('no_telepon_1')->nullable();
+            $table->string('no_telepon_2')->nullable();
+            $table->string('notes')->nullable();
+            $table->string('nama_pajak')->nullable();
+            $table->string('rasio')->nullable();
             $table->integer('meja')->default(0)->nullable()->comment = "0 = null, 1 = meja";
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();

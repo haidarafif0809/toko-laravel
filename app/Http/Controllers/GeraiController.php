@@ -56,9 +56,10 @@ class GeraiController extends Controller
     {
         //Validasi
         $this->validate($request, [
-            'no_telepon_1' => 'required|unique:gerais,no_telepon_1',
-            'no_telepon_2' => 'required|unique:gerais,no_telepon_2',
-
+            'nama_gerai'   => 'required',
+            'alamat_gerai' => 'max:225',
+            'no_telepon_1' => 'required|unique:gerais',
+            'no_telepon_2' => 'required|unique:gerais',
         ]);
         $Gerai = Gerai::create([
             'nama_gerai'   => $request->nama_gerai,
@@ -71,6 +72,8 @@ class GeraiController extends Controller
             'rasio'        => $request->rasio,
             'meja'         => $request->meja,
         ]);
+
+        return $Gerai;
     }
 
     /**

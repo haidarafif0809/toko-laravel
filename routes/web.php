@@ -107,4 +107,4 @@ Route::get('staf-toko/search', 'StafTokoController@search');
 // Gerai
 Route::resource('gerai', 'GeraiController', ['except' => 'show']);
 Route::get('gerai/view', 'GeraiController@view');
-Route::get('gerai/search', 'GeraiController@search');
+Route::get('gerai/pencarian', 'GeraiController@search');
