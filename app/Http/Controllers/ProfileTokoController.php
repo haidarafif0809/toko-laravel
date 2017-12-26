@@ -164,11 +164,19 @@ class ProfileTokoController extends Controller
     {
         $profile_toko       = Toko::with('user')->where('id', Auth::user()->toko_id)->paginate(10);
         $profile_toko_array = array();
+
         foreach ($profile_toko as $profile_tokos) {
-            $provinsi  = Indonesia::allProvinces()->where('id', $profile_tokos->provinsi)->first();
-            $kabupaten = Indonesia::allCities()->where('id', $profile_tokos->kabupaten)->first();
-            $user      = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
-            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos, 'provinsi' => $provinsi->name, 'kabupaten' => $kabupaten->name]);
+            $user = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
+
+            if ($profile_tokos->provinsi == null) {
+                $provinsi  = '';
+                $kabupaten = '';
+            } else {
+                $provinsi  = Indonesia::findProvince($profile_tokos->provinsi);
+                $kabupaten = Indonesia::findCity($profile_tokos->kabupaten);
+            }
+
+            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten]);
         }
 
         //DATA PAGINATION
