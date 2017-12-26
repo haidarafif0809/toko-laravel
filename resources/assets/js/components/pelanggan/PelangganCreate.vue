@@ -91,7 +91,7 @@
 							<div class="form-group">
 								<label for="kode_pos" class="col-md-3 control-label">Kode Pos</label>
 								<div class="col-md-4">
-									<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="" >
 									<span v-if="errors.kode_pos" id="email_error" class="label label-danger">{{ errors.kode_pos[0] }}</span>
 								</div>
 							</div>

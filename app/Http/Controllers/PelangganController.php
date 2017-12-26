@@ -52,6 +52,7 @@ class PelangganController extends Controller
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon',
+            'kode_pos'       => 'max:5',
 
         ]);
         $pelanggan = Pelanggan::create([
@@ -89,7 +90,7 @@ class PelangganController extends Controller
             // 'email'          => '',
             // 'alamat'         => '',
             // 'kota'           => '',
-            // 'kode_pos'       => '',
+            'kode_pos'       => 'max:5',
             // 'catatan'        => '',
         ]);
         $pelanggan = Pelanggan::find($id)->update([
