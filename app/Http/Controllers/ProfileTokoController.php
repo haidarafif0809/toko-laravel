@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use File;
 use Illuminate\Http\Request;
 use Image;
+use Indonesia;
 
 class ProfileTokoController extends Controller
 {
@@ -80,7 +81,7 @@ class ProfileTokoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $provinsi   = Indonesia::allProvinces();
         $user_login = Toko::find($id);
         if ($user_login->id != $id) {
             Auth::logout();
@@ -91,6 +92,8 @@ class ProfileTokoController extends Controller
                 'nama_pemilik' => 'required',
                 'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
                 'no_telp'      => 'required',
+                'provinsi'     => 'required',
+                'kabupaten'    => 'required',
                 'alamat'       => 'required',
             ]);
             $user_login->update([
@@ -98,6 +101,8 @@ class ProfileTokoController extends Controller
                 'nama_pemilik' => $request->nama_pemilik,
                 'email'        => $request->email,
                 'no_telp'      => $request->no_telp,
+                'provinsi'     => $request->provinsi,
+                'kabupaten'    => $request->kabupaten,
                 'alamat'       => $request->alamat,
             ]);
         }if ($request->foto === null) {
@@ -157,12 +162,21 @@ class ProfileTokoController extends Controller
 
     public function view()
     {
-        $toko               = 'kunci';
         $profile_toko       = Toko::with('user')->where('id', Auth::user()->toko_id)->paginate(10);
         $profile_toko_array = array();
+
         foreach ($profile_toko as $profile_tokos) {
             $user = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
-            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos, 'rumah' => $toko]);
+
+            if ($profile_tokos->provinsi == null) {
+                $provinsi  = '';
+                $kabupaten = '';
+            } else {
+                $provinsi  = Indonesia::findProvince($profile_tokos->provinsi);
+                $kabupaten = Indonesia::findCity($profile_tokos->kabupaten);
+            }
+
+            array_push($profile_toko_array, ['last_login' => $user->last_login, 'profileToko' => $profile_tokos, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten]);
         }
 
         //DATA PAGINATION
@@ -180,5 +194,21 @@ class ProfileTokoController extends Controller
         $respons['total']          = $profile_toko->total();
         //DATA PAGINATION
         return response()->json($respons);
+    }
+    public function provinsi()
+    {
+        $alamat = Indonesia::allProvinces();
+        return response()->json($alamat);
+    }
+
+    public function kabupaten($id, $type)
+    {
+        // proses loding data kabupaten sesuai provinsi
+        switch ($type) {
+            case 'kabupaten':
+                $kabupaten = Indonesia::allCities()->where('province_id', $id);
+                return response()->json($kabupaten);
+                break;
+        }
     }
 }

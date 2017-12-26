@@ -17,9 +17,15 @@ class CreatePelanggansTable extends Migration
             $table->increments('id');
             $table->string('kode_pelanggan');
             $table->string('nama_pelanggan');
-            $table->date('tanggal_lahir');
+            $table->date('tanggal_lahir')->nullable();
             $table->string('nomor_telepon');
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
+            $table->integer('jenis_kelamin')->comment = "1 = laki_laki , 2 = perempuan";
+            $table->string('email')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('kode_pos')->nullable();
+            $table->string('catatan')->nullable();
+            $table->string('toko_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();

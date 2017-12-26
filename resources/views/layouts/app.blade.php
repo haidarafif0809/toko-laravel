@@ -45,6 +45,17 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @if (Auth::check())
+                        <li>
+                            <router-link :to="{name: 'indexDashboard'}">
+                                Dashboard
+                            </router-link>
+                        </li> <li>
+                            <router-link :to="{name: 'indexStafToko'}">
+                                Staf Toko
+                            </router-link>
+                        </li>
+                        @endif
                         <li class="dropdown">
                             @role('admin')
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
@@ -55,28 +66,18 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <router-link :to="{name: 'indexToko'}">
-                                        Data Toko
+                                        Toko
                                     </router-link>
                                 </li>
                                 <li>
                                     <router-link :to="{name: 'indexUser'}">
-                                        Data User
+                                        User Toko
                                     </router-link>
                                 </li>
                             </ul>
                             @endif
                         </li>
-                        @if (Auth::check())
-                        <li>
-                            <router-link :to="{name: 'indexDashboard'}">
-                                Dashboard
-                            </router-link>
-                        </li> <li>
-                            <router-link :to="{name: 'indexStafToko'}">
-                                Dashboard
-                            </router-link>
-                        </li>
-                        @endif
+
                         @if (auth()->check())
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">

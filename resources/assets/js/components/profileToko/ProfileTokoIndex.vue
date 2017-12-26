@@ -27,10 +27,6 @@ button {
               <table class="table table-striped table-hover">
                <tbody v-if="profileTokos.length > 0 && loading == false" class="data-ada">
                 <tr v-for="profileToko , index in profileTokos">
-                  <td class="col-md 2">NAMA kunci</td>
-                  <td class="col-md-8">: {{profileToko.rumah}}</td>
-                </tr> 
-                <tr v-for="profileToko , index in profileTokos">
                   <td class="col-md 2">NAMA TOKO</td>
                   <td class="col-md-8">: {{profileToko.profileToko.nama_toko}}</td>
                 </tr>
@@ -41,6 +37,14 @@ button {
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">ALAMAT EMAIL</td>
                   <td class="col-md-8">: {{profileToko.profileToko.email}}</td>
+                </tr>
+                <tr v-for="profileToko , index in profileTokos" >
+                  <td class="col-md 2">Provinsi </td>
+                  <td class="col-md-8">: {{profileToko.provinsi.name}}</td>
+                </tr>                
+                <tr v-for="profileToko , index in profileTokos" >
+                  <td class="col-md 2">Kabupaten </td>
+                  <td class="col-md-8">: {{profileToko.kabupaten.name}}</td>
                 </tr>
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">ALAMAT/TEMPAT</td>
@@ -64,7 +68,8 @@ button {
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">LOGIN TERAKHIR </td>
                   <td class="col-md-8">: {{profileToko.last_login}}</td>
-                </tr><br>
+                </tr>                
+                <br>
                 <ul>
                   <span v-for="profileToko , index in profileTokos">
                     <router-link :to="{name: 'editProfileToko', params: {id: profileToko.profileToko.id}}" class="btn btn-md btn-primary" v-bind:id="'edit-' + profileToko.profileToko.id" >

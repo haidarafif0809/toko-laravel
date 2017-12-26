@@ -6,8 +6,15 @@
 		</ol>
 		<div class="panel panel-default">
 			<div class="panel-heading">Pelanggan</div>
-
+			<table>
+				<section class="range-slider">
+					<span class="rangeValues"></span>
+					<input value="500" min="500" max="50000" step="500" type="range">
+					<input value="50000" min="500" max="50000" step="500" type="range">
+				</section>
+			</table>
 			<div class="panel-body">
+				
 				<div class="table-responsive">
 					<div class="tambah">
 						<p><router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
@@ -15,24 +22,27 @@
 					</div>
 					<div class="pencarian">
 						<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
+						<!-- <p>Pencarian berdasarkan kode, nama, nomor telepon</p>	 -->
 					</div>
 					<table class="table table-striped table-hover">
 						<thead>
 							<th>Kode Pelanggan</th>
 							<th>Nama Pelanggan</th>
-							<th>Tanggal Lahir</th>
+							<th>Jenis Kelamin</th>
 							<th>Nomor Telepon</th>
-							<th>Alamat</th>
 							<th>Aksi</th>
 						</thead>
 						<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
 							<tr v-for="pelanggan ,index in pelanggans">
 								<td>{{ pelanggan.kode_pelanggan }}</td>
-								<td>{{ pelanggan.nama_pelanggan }}</td>
-								<td>{{ pelanggan.tanggal_lahir }}</td>
+								<td>
+									<router-link :to="{name: 'detailPelanggan', params: {id: pelanggan.id}}">
+										{{pelanggan.nama_pelanggan}}
+									</router-link>							
+								</td>
+								<td v-if="pelanggan.jenis_kelamin == 1">Laki-laki</td>
+								<td v-else>Perempuan</td>
 								<td>{{ pelanggan.nomor_telepon }}</td>
-								<td>{{ pelanggan.alamat }}</td>
-
 								<td>
 									<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
 										Edit

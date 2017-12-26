@@ -66,6 +66,7 @@ Route::get('/suplier/search', 'SuplierController@search');
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
+Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
 
 // Kas Mutasi
 Route::resource('kas-mutasi', 'KasMutasiController', ['except' => 'show']);
@@ -92,6 +93,8 @@ Route::get('/profile-toko/edit', [
     'as'   => 'profile_toko.proses_ubah_profil_toko',
     'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
 ]);
+Route::get('/profile-toko/provinsi', 'ProfileTokoController@provinsi');
+Route::get('/profile-toko/kabupaten/{id}/{type}', 'ProfileTokoController@kabupaten');
 // Kelola Kas
 Route::resource('kelola-kas', 'KelolaKasController', ['except' => 'show']);
 Route::get('/kelola-kas/search', 'KelolaKasController@search');
@@ -103,3 +106,8 @@ Route::get('/kelola-kas/StafAktif', 'KelolaKasController@stafAktif');
 Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
 Route::get('staf-toko/view', 'StafTokoController@view');
 Route::get('staf-toko/search', 'StafTokoController@search');
+
+// Gerai
+Route::resource('gerai', 'GeraiController', ['except' => 'show']);
+Route::get('gerai/view', 'GeraiController@view');
+Route::get('gerai/pencarian', 'GeraiController@search');
