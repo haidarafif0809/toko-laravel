@@ -52,6 +52,7 @@ class GeraiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //Validasi
@@ -93,10 +94,6 @@ class GeraiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -105,9 +102,34 @@ class GeraiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function edit($id)
+    {
+        return Gerai::find($id);
+    }
+
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama_gerai'   => 'required',
+            'alamat_gerai' => 'max:225',
+        ]);
+
+        $gerai = Gerai::find($id)->update([
+            'nama_gerai'   => $request->nama_gerai,
+            'alamat_gerai' => $request->alamat_gerai,
+            'kota'         => $request->kota,
+            'no_telepon_1' => $request->no_telepon_1,
+            'no_telepon_2' => $request->no_telepon_2,
+            'notes'        => $request->notes,
+            'nama_pajak'   => $request->nama_pajak,
+            'rasio'        => $request->rasio,
+            'meja'         => $request->meja,
+        ]);
+        if ($gerai == true) {
+            return response(200);
+        } else {
+            return response(500);
+        }
     }
 
     /**
@@ -118,6 +140,7 @@ class GeraiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hapus_gerai = Gerai::destroy($id);
+        return $hapus_gerai;
     }
 }
