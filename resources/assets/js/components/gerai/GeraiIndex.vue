@@ -30,32 +30,38 @@
 							<td>{{gerai.nama_gerai}}</td>
 							<td>{{gerai.kota}}</td>
 							<td>
-								<button type="button" class="btn btn-primary">Edit</button>
-								<button type="button" class="btn btn-danger">Hapus</button>
-							</td>
-						</tr>
-					</tbody>
-					<tbody v-else-if="loading == true" class="data-ada">
-						<tr>
-							<td colspan="4" class="text-center">
-								Sedang Memuat Data
-							</td>
-						</tr>
-					</tbody>
-					<tbody v-else class="tidak-ada-data">
-						<tr>
-							<td colspan="4"  class="text-center">
-								Tidak Ada Data
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-			<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search == '' "></pagination></div>
-			<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search != '' "></pagination></div>
+								<router-link :to="{name: 'editGerai', params: {id: gerai.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + gerai.id" >
+									Edit 
+								</router-link> 
+								<a href="#"
+								class="btn btn-xs btn-danger" 
+								v-on:click="deleteEntry(gerai.id, index,gerai.nama_gerai)">
+								Delete
+							</a>
+						</td>
+					</tr>
+				</tbody>
+				<tbody v-else-if="loading == true" class="data-ada">
+					<tr>
+						<td colspan="4" class="text-center">
+							Sedang Memuat Data
+						</td>
+					</tr>
+				</tbody>
+				<tbody v-else class="tidak-ada-data">
+					<tr>
+						<td colspan="4"  class="text-center">
+							Tidak Ada Data
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+		<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+		<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search == '' "></pagination></div>
+		<div align="right"><pagination :data="geraisData" v-on:pagination-change-page="getGerai":limit="1" v-if="search != '' "></pagination></div>
 	</div>
+</div>
 </template>
 <script>
 export default {
@@ -119,6 +125,28 @@ export default {
     			alert("Could not load gerais");
     		});
     	},
+
+    	deleteEntry(id, index,nama_gerai) {
+    		if (confirm("Yakin Ingin Menghapus Gerai "+nama_gerai+" ?")) {
+    			var app = this;
+    			axios.delete(app.url+'/' + id)
+    			.then(function (resp) {
+    				app.getGerai();
+    				app.alert(nama_gerai)
+    			})
+    			.catch(function (resp) {
+    				alert("Tidak bisa menghapus gerai");
+    			});
+    		}
+    	},
+
+    	alert(nama_gerai) {
+    		this.$swal({
+    			title: "Berhasil!",
+    			text: "Berhasil Menghapus Gerai "+ nama_gerai,
+    			icon: "success",
+    		});
+    	}
     }
 }	
 </script>
