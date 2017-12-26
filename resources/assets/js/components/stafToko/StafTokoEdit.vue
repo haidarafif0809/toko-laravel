@@ -39,7 +39,7 @@
 
 							<div class="form-group">
 								<label for="no_telp" class="col-md-2 control-label">
-									No Telp
+									No. Telp
 								</label>
 								<div class="col-md-4">
 									<input class="form-control" required autocomplete="off" placeholder="Isi No. telp" type="tel" v-model="user.no_telp" name="no_telp" autofocus="">

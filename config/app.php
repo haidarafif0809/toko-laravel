@@ -177,6 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        // laravolt indonesia
+        Laravolt\Indonesia\ServiceProvider::class,
 
     ],
 
@@ -228,6 +230,7 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
 
         'Agent'        => Jenssegers\Agent\Facades\Agent::class,
+        'Indonesia'    => Laravolt\Indonesia\Facade::class,
     ],
 
 ];

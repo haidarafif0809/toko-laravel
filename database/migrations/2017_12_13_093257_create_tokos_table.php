@@ -19,6 +19,8 @@ class CreateTokosTable extends Migration
             $table->string('nama_pemilik');
             $table->string('email')->unique();
             $table->string('no_telp');
+            $table->string('provinsi')->nullable();
+            $table->string('kabupaten')->nullable();
             $table->string('alamat')->nullable();
             $table->string('foto')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
