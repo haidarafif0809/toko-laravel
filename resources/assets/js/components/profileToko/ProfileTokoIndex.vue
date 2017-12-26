@@ -40,11 +40,11 @@ button {
                 </tr>
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">Provinsi </td>
-                  <td class="col-md-8">: {{profileToko.provinsi}}</td>
+                  <td class="col-md-8">: {{profileToko.provinsi.name}}</td>
                 </tr>                
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">Kabupaten </td>
-                  <td class="col-md-8">: {{profileToko.kabupaten}}</td>
+                  <td class="col-md-8">: {{profileToko.kabupaten.name}}</td>
                 </tr>
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">ALAMAT/TEMPAT</td>

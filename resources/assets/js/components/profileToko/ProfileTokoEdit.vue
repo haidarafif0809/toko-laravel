@@ -92,7 +92,7 @@ img {
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Foto</label>
 							<div class="col-md-4">
-								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
+								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" required>
 							</div>
 						</div>
 
