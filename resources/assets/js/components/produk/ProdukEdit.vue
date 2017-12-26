@@ -72,9 +72,9 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="produk.foto != ''" class="form-group">
+                    <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
                         <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-                        <div v-if="produk.foto != null || produk.foto != ''" class="col-md-4">
+                        <div class="col-md-4">
                             <div v-if="produk.foto.length > 100">
                                 <img :src="produk.foto" class="img-responsive thumbnail shadow">
                             </div>
@@ -82,7 +82,7 @@
                                 <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
                             </div>
                         </div>
-                        <div v-else class="col-md-4">
+                        <div v-if="produk.foto == ''" class="col-md-4">
                             <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
                         </div>
                     </div>
@@ -152,13 +152,12 @@ export default {
             let reader = new FileReader();
             let foto = this;
             let ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
-            console.log(file);
 
             if(!file.name.match(ekstensiOk)) {
                 foto.produk.foto = null;
                 this.$swal({
                     title: "File tidak didukung!",
-                    text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
+                    text: "Pilih file gambar dengan format .jpg, .jpeg, atau .png.",
                     icon: "warning",
                     buttons: "Saya mengerti",
                 });
@@ -172,23 +171,24 @@ export default {
         },
         saveForm() {
             var app = this;
-            var newProduk = app.produk;
+            console.log(app.produk);
+            // var newProduk = app.produk;
             var image = document.getElementById('image');
 
             if (image.value == '') {
-                newProduk.foto = null;
+                app.produk.foto = null;
             }
-            axios.patch(app.url+'/' + app.produkId, newProduk)
+            axios.patch(app.url+'/' + app.produkId, app.produk)
             .then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk '+ app.produk.nama_produk;
                 app.alert(app.message);
-                app.produk.kode_produk = ''
-                app.produk.nama_produk = ''
-                app.produk.harga_jual = ''
-                app.produk.harga_beli = ''
-                app.produk.kategori_produks_id = ''
-                app.produk.status_jual = ''
-                app.produk.foto = ''
+                // app.produk.kode_produk = ''
+                // app.produk.nama_produk = ''
+                // app.produk.harga_jual = ''
+                // app.produk.harga_beli = ''
+                // app.produk.kategori_produks_id = ''
+                // app.produk.status_jual = ''
+                // app.produk.foto = ''
                 app.errors = '';
                 app.$router.replace('/produk');
 
@@ -226,6 +226,7 @@ export default {
                 if (app.produk.foto == null) {
                     app.produk.foto = '';
                 }
+                // console.log(app.produk);
             })
             .catch(function () {
                 alert("Could not load your produk");
