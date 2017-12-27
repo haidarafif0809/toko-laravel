@@ -32,8 +32,8 @@ class GeraiController extends Controller
         $cari_gerai = Gerai::where('nama_gerai', 'LIKE', "%$request->search%")
             ->orWhere('alamat_gerai', 'LIKE', "%$request->search%")
             ->orWhere('kota', 'LIKE', "%$request->search%")
-            ->orWhere('no_telepon_1', 'LIKE', "%$request->search%")
-            ->orWhere('no_telepon_2', 'LIKE', "%$request->search%")
+            ->orWhere('no_telepon_a', 'LIKE', "%$request->search%")
+            ->orWhere('no_telepon_b', 'LIKE', "%$request->search%")
             ->orWhere('notes', 'LIKE', "%$request->search%")
             ->orWhere('nama_pajak', 'LIKE', "%$request->search%")
             ->orWhere('rasio', 'LIKE', "%$request->search%")
@@ -57,17 +57,15 @@ class GeraiController extends Controller
     {
         //Validasi
         $this->validate($request, [
-            'nama_gerai'   => 'required',
-            'alamat_gerai' => 'max:225',
-            'no_telepon_1' => 'required|unique:gerais',
-            'no_telepon_2' => 'required|unique:gerais',
+            'nama_gerai' => 'required',
+
         ]);
         $Gerai = Gerai::create([
             'nama_gerai'   => $request->nama_gerai,
             'alamat_gerai' => $request->alamat_gerai,
             'kota'         => $request->kota,
-            'no_telepon_1' => $request->no_telepon_1,
-            'no_telepon_2' => $request->no_telepon_2,
+            'no_telepon_a' => $request->no_telepon_a,
+            'no_telepon_b' => $request->no_telepon_b,
             'notes'        => $request->notes,
             'nama_pajak'   => $request->nama_pajak,
             'rasio'        => $request->rasio,
@@ -118,8 +116,8 @@ class GeraiController extends Controller
             'nama_gerai'   => $request->nama_gerai,
             'alamat_gerai' => $request->alamat_gerai,
             'kota'         => $request->kota,
-            'no_telepon_1' => $request->no_telepon_1,
-            'no_telepon_2' => $request->no_telepon_2,
+            'no_telepon_a' => $request->no_telepon_a,
+            'no_telepon_b' => $request->no_telepon_b,
             'notes'        => $request->notes,
             'nama_pajak'   => $request->nama_pajak,
             'rasio'        => $request->rasio,

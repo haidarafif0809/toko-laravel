@@ -9,6 +9,6 @@ class Gerai extends Model
 {
     use AuditableTrait;
     //
-    protected $fillable = (['nama_gerai', 'alamat_gerai', 'kota', 'nomor_telepon_1', 'nomor_telepon_2', 'notes', 'nama_pajak', 'rasio', 'meja',
+    protected $fillable = (['nama_gerai', 'alamat_gerai', 'kota', 'nomor_telepon_a', 'nomor_telepon_b', 'notes', 'nama_pajak', 'rasio', 'meja',
     ]);
 }

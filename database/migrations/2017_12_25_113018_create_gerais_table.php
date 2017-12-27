@@ -18,8 +18,8 @@ class CreateGeraisTable extends Migration
             $table->string('nama_gerai');
             $table->string('alamat_gerai')->nullable();
             $table->string('kota')->nullable();
-            $table->string('no_telepon_1')->nullable();
-            $table->string('no_telepon_2')->nullable();
+            $table->string('no_telepon_a')->nullable();
+            $table->string('no_telepon_b')->nullable();
             $table->string('notes')->nullable();
             $table->string('nama_pajak')->nullable();
             $table->string('rasio')->nullable();
