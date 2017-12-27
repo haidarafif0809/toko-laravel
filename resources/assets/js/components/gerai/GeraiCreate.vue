@@ -63,7 +63,7 @@
 									No Telepon Gerai 1
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="tell" v-model="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model.number="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
 									<span v-if="errors.no_telepon_a" id="no_telepon_a_error" class="label label-danger">
 										{{ errors.no_telepon_a[0] }}
 									</span>
@@ -75,7 +75,7 @@
 									No Telepon Gerai 2
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="tell" v-model="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model.phone="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
 									<span v-if="errors.no_telepon_b" id="no_telepon_b_error" class="label label-danger">
 										{{ errors.no_telepon_b[0] }}
 									</span>
