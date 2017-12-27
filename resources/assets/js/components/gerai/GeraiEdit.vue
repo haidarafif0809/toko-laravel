@@ -15,9 +15,14 @@
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
+
+							<div class="form-group">
+								<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+							</div>
+
 							<div class="form-group">
 								<label for="nama_gerai" class="col-md-2 control-label">
-									Nama Gerai
+									Nama Gerai <font size="5px" color="red">*</font>
 								</label>
 								<div class="col-md-5">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Gerai" type="text" v-model="gerai.nama_gerai" name="nama_gerai"  autofocus="">
@@ -56,7 +61,7 @@
 									No Telepon Gerai 1
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model.phone="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
 									<span v-if="errors.no_telepon_a" id="no_telepon_a_error" class="label label-danger">
 										{{ errors.no_telepon_a[0] }}
 									</span>
@@ -68,7 +73,7 @@
 									No Telepon Gerai 2
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model.phone="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
 									<span v-if="errors.no_telepon_b" id="no_telepon_b_error" class="label label-danger">
 										{{ errors.no_telepon_b[0] }}
 									</span>

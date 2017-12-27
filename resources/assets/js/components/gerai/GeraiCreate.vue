@@ -23,8 +23,13 @@
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 
 							<div class="form-group">
+								<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+							</div>
+
+							<div class="form-group">
 								<label for="nama_gerai" class="col-md-2 control-label">
 									Nama Gerai
+									<font size="5px" color="red">*</font>
 								</label>
 								<div class="col-md-5">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Gerai" type="text" v-model="gerai.nama_gerai" name="nama_gerai"  autofocus="">
@@ -129,7 +134,7 @@
 									</span>
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
 									<button class="btn btn-primary" id="btnSimpanGerai" type="submit"> 
@@ -207,7 +212,7 @@ export default {
 		alert() {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai",
+				text: "Berhasil menambahkan gerai"+ app.gerai.nama_gerai,
 				icon: "success",
 			});
 		}

@@ -86216,6 +86216,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -86274,7 +86279,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		alert: function alert() {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai",
+				text: "Berhasil menambahkan gerai" + app.gerai.nama_gerai,
 				icon: "success"
 			});
 		}
@@ -86337,11 +86342,32 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
+                    { staticClass: "col-md-4" },
+                    [
+                      _vm._v("Kolom bertanda "),
+                      _c("font", { attrs: { size: "5px", color: "red" } }, [
+                        _vm._v("*")
+                      ]),
+                      _vm._v(" wajib diisi.")
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
                     {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_gerai" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Gerai\n\t\t\t\t\t\t\t")]
+                    [
+                      _vm._v("\n\t\t\t\t\t\t\t\tNama Gerai\n\t\t\t\t\t\t\t\t"),
+                      _c("font", { attrs: { size: "5px", color: "red" } }, [
+                        _vm._v("*")
+                      ])
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-5" }, [
@@ -87138,6 +87164,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -87263,11 +87294,32 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
+                    { staticClass: "col-md-4" },
+                    [
+                      _vm._v("Kolom bertanda "),
+                      _c("font", { attrs: { size: "5px", color: "red" } }, [
+                        _vm._v("*")
+                      ]),
+                      _vm._v(" wajib diisi.")
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
                     {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_gerai" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Gerai\n\t\t\t\t\t\t\t")]
+                    [
+                      _vm._v("\n\t\t\t\t\t\t\t\tNama Gerai "),
+                      _c("font", { attrs: { size: "5px", color: "red" } }, [
+                        _vm._v("*")
+                      ])
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-5" }, [
@@ -87458,10 +87510,9 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model.phone",
+                          rawName: "v-model",
                           value: _vm.gerai.no_telepon_a,
-                          expression: "gerai.no_telepon_a",
-                          modifiers: { phone: true }
+                          expression: "gerai.no_telepon_a"
                         }
                       ],
                       staticClass: "form-control",
@@ -87525,10 +87576,9 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model.phone",
+                          rawName: "v-model",
                           value: _vm.gerai.no_telepon_b,
-                          expression: "gerai.no_telepon_b",
-                          modifiers: { phone: true }
+                          expression: "gerai.no_telepon_b"
                         }
                       ],
                       staticClass: "form-control",
