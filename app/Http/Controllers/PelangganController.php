@@ -51,7 +51,7 @@ class PelangganController extends Controller
             'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
-            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon',
+            'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
             'kode_pos'       => 'max:5',
 
         ]);
@@ -86,7 +86,7 @@ class PelangganController extends Controller
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             // 'tanggal_lahir'  => '',
-            'nomor_telepon'  => 'required|unique:pelanggans,nomor_telepon,' . $id,
+            'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon,' . $id,
             // 'email'          => '',
             // 'alamat'         => '',
             // 'kota'           => '',
