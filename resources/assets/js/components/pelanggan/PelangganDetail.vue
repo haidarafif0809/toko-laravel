@@ -39,6 +39,11 @@
 								<td>{{ pelanggan.catatan }}</td>
 							</tr>
 
+							<tr>
+								<td>Tanggal Mendaftar:</td>
+								<td>{{ pelanggan.created_at }}</td>
+							</tr>
+
 						</tbody>
 					</table>
 				</div>

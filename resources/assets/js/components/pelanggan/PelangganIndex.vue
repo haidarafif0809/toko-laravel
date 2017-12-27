@@ -6,8 +6,15 @@
 		</ol>
 		<div class="panel panel-default">
 			<div class="panel-heading">Pelanggan</div>
-
+			<table>
+				<section class="range-slider">
+					<span class="rangeValues"></span>
+					<input value="500" min="500" max="50000" step="500" type="range">
+					<input value="50000" min="500" max="50000" step="500" type="range">
+				</section>
+			</table>
 			<div class="panel-body">
+				
 				<div class="table-responsive">
 					<div class="tambah">
 						<p><router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
