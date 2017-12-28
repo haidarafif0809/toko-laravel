@@ -179,12 +179,7 @@ class ProdukController extends Controller
             'status_jual'         => $request->status_jual,
         ];
 
-        if ($request->foto === null) {
-
-            return;
-
-        } else {
-
+        if ($request->foto !== null) {
             $this->validate($request, [
                 'foto' => 'image64:jpeg,jpg,png|max:3072000',
             ]);

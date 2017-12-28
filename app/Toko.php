@@ -14,13 +14,13 @@ class Toko extends Model
     use AuditableTrait;
     use Notifiable;
     protected $fillable = [
-        'alamat', 'foto', 'nama_toko', 'nama_pemilik', 'email', 'no_telp',
+        'provinsi', 'kabupaten', 'alamat', 'foto', 'nama_toko', 'nama_pemilik', 'email', 'no_telp',
     ];
 
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
-            ->format(' d F Y H:i:s');
+            ->format(' d-m-Y ');
     }
 
     public function getUpdatedAtAttribute()
