@@ -1,7 +1,12 @@
 <style scoped>
 .row{
 	border-color:#FDA698;
+
 }
+#icon:hover{
+	background-color: #00BCD4;
+}
+
 </style>
 <template>
 	<div class="container-fluid">
@@ -23,9 +28,15 @@
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 
 							<div class="form-group">
+								<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+							</div>
+
+
+							<div class="form-group">
 								<label for="nama_gerai" class="col-md-2 control-label">
-									Nama Gerai
+									Nama Gerai <font size="5px" color="red">*</font>
 								</label>
+
 								<div class="col-md-5">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Gerai" type="text" v-model="gerai.nama_gerai" name="nama_gerai"  autofocus="">
 									<span v-if="errors.nama_gerai" id="nama_gerai_error" class="label label-danger">
@@ -63,7 +74,7 @@
 									No Telepon Gerai 1
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model.number="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
 									<span v-if="errors.no_telepon_a" id="no_telepon_a_error" class="label label-danger">
 										{{ errors.no_telepon_a[0] }}
 									</span>
@@ -75,7 +86,7 @@
 									No Telepon Gerai 2
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model.phone="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
 									<span v-if="errors.no_telepon_b" id="no_telepon_b_error" class="label label-danger">
 										{{ errors.no_telepon_b[0] }}
 									</span>
@@ -87,10 +98,40 @@
 									Notes
 								</label>
 								<div class="col-md-5">
+									(Akan muncul di bagian bawah struk)
 									<input class="form-control" autocomplete="off" placeholder="Notes" type="text" v-model="gerai.notes" name="notes"  autofocus="">
 									<span v-if="errors.notes" id="notes_error" class="label label-danger">
 										{{ errors.notes[0] }}
 									</span>
+								</div>
+							</div>
+							
+							<div class="form-group" >
+								<label for="icon" class="col-md-2 control-label">Icon Gerai</label>
+								<!-- Button trigger modal -->
+								<button type="button" class="col-md-2" data-toggle="modal" data-target="#exampleModalLong" id="icon">
+									<i class="fa fa-home fa-5x"></i>
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -99,6 +140,7 @@
 									Nama Pajak
 								</label>
 								<div class="col-md-5">
+									(Misal: Pajak, Service Charge)
 									<input class="form-control" autocomplete="off" placeholder="Nama Pajak" type="text" v-model="gerai.nama_pajak" name="nama_pajak"  autofocus="">
 									<span v-if="errors.nama_pajak" id="nama_pajak_error" class="label label-danger">
 										{{ errors.nama_pajak[0] }}
@@ -111,7 +153,12 @@
 									Rasio
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="%" type="text" v-model="gerai.rasio" name="rasio"  autofocus="">
+									<div class="input-group">
+										<input class="form-control" autocomplete="off" placeholder="Rasio" type="text" v-model="gerai.rasio" name="rasio"  autofocus="" maxlength="2" value="0" id="rasio">
+										<div class="input-group-addon">
+											%
+										</div>
+									</div>
 									<span v-if="errors.rasio" id="rasio_error" class="label label-danger">
 										{{ errors.rasio[0] }}
 									</span>
@@ -123,13 +170,14 @@
 									Meja
 								</label>
 								<div class="col-md-5">
+									Modul Yang Diaktifkan di Lokasi ini : <br>
 									<input class="form-check" autocomplete="off" placeholder="Meja" type="checkbox" v-model="gerai.meja" name="meja"  autofocus="">
 									<span v-if="errors.meja" id="meja_error" class="label label-danger">
 										{{ errors.meja[0] }}
 									</span>
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
 									<button class="btn btn-primary" id="btnSimpanGerai" type="submit"> 
@@ -167,47 +215,48 @@ export default {
 
 	},
 	methods: {
-		// saveForm() {
-		// 	var app = this;
-		// 	var newgerai = app.gerai;
-		// 	axios.post(app.url, newgerai)
-		// 	.then(function (resp) {
-		// 		app.message = 'Sukses : Berhasil Menambah Gerai '+ app.gerai.nama_gerai;
-		// 		app.alert(app.message);
-		// 		app.gerai.nama_gerai = ''
-		// 		app.gerai.alamat_gerai = ''
-		// 		app.gerai.kota = ''
-		// 		app.gerai.no_telepon_a = ''
-		// 		app.gerai.no_telepon_b = ''
-		// 		app.gerai.notes = ''
-		// 		app.gerai.nama_pajak = ''
-		// 		app.gerai.rasio = ''
-		// 		app.gerai.meja = ''
-		// 		app.errors = '';
-		// 		app.$router.replace('/gerai');
-		// 	})
-		// 	.catch(function (resp) {
-		// 		app.success = false;
-		// 		app.errors = resp.response.data.errors;
-		// 	});
-		// },
 		saveForm() {
 			var app = this;
 			var newgerai = app.gerai;
 			axios.post(app.url, newgerai)
 			.then(function (resp) {
-				app.alert();
+				app.message = 'Sukses : Berhasil Menambah Gerai '+ app.gerai.nama_gerai;
+				app.alert(app.message);
+				app.gerai.nama_gerai = ''
+				app.gerai.alamat_gerai = ''
+				app.gerai.kota = ''
+				app.gerai.no_telepon_a = ''
+				app.gerai.no_telepon_b = ''
+				app.gerai.notes = ''
+				app.gerai.nama_pajak = ''
+				app.gerai.rasio = ''
+				app.gerai.meja = ''
+				app.errors = '';
 				app.$router.replace('/gerai');
-
 			})
 			.catch(function (resp) {
+				app.success = false;
 				app.errors = resp.response.data.errors;
 			});
 		},
-		alert() {
+
+		// saveForm() {
+		// 	var app = this;
+		// 	var newgerai = app.gerai;
+		// 	axios.post(app.url, newgerai)
+		// 	.then(function (resp) {
+		// 		app.alert();
+		// 		app.$router.replace('/gerai');
+
+		// 	})
+		// 	.catch(function (resp) {
+		// 		app.errors = resp.response.data.errors;
+		// 	});
+		// },
+		alert(pesan) {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai",
+				text: pesan,
 				icon: "success",
 			});
 		}
