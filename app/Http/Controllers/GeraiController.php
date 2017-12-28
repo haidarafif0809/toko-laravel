@@ -58,7 +58,7 @@ class GeraiController extends Controller
         //Validasi
         $this->validate($request, [
             'nama_gerai' => 'required',
-
+            'rasio'      => 'max:2',
         ]);
         $Gerai = Gerai::create([
             'nama_gerai'   => $request->nama_gerai,

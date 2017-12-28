@@ -6,6 +6,7 @@
 #icon:hover{
 	background-color: #00BCD4;
 }
+
 </style>
 <template>
 	<div class="container-fluid">
@@ -102,13 +103,11 @@
 									</span>
 								</div>
 							</div>
-							<div class="form-group">
+							<div class="form-group" >
 								<label for="icon" class="col-md-2 control-label">Icon Gerai</label>
 								<!-- Button trigger modal -->
-								<button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong" id="icon">
-									<div class="col-md-2" >
-										<i class="fa fa-home fa-5x"></i>
-									</div>
+								<button type="button" class="col-md-2" data-toggle="modal" data-target="#exampleModalLong" id="icon">
+									<i class="fa fa-home fa-5x"></i>
 								</button>
 
 								<!-- Modal -->
@@ -151,7 +150,7 @@
 								</label>
 								<div class="col-md-5">
 									<div class="input-group">
-										<input class="form-control" autocomplete="off" placeholder="Rasio" type="text" v-model="gerai.rasio" name="rasio"  autofocus="">
+										<input class="form-control" autocomplete="off" placeholder="Rasio" type="text" v-model="gerai.rasio" name="rasio"  autofocus="" maxlength="2" value="0" id="rasio">
 										<div class="input-group-addon">
 											%
 										</div>
@@ -211,48 +210,48 @@ export default {
 
 	},
 	methods: {
-		// saveForm() {
-		// 	var app = this;
-		// 	var newgerai = app.gerai;
-		// 	axios.post(app.url, newgerai)
-		// 	.then(function (resp) {
-		// 		app.message = 'Sukses : Berhasil Menambah Gerai '+ app.gerai.nama_gerai;
-		// 		app.alert(app.message);
-		// 		app.gerai.nama_gerai = ''
-		// 		app.gerai.alamat_gerai = ''
-		// 		app.gerai.kota = ''
-		// 		app.gerai.no_telepon_a = ''
-		// 		app.gerai.no_telepon_b = ''
-		// 		app.gerai.notes = ''
-		// 		app.gerai.nama_pajak = ''
-		// 		app.gerai.rasio = ''
-		// 		app.gerai.meja = ''
-		// 		app.errors = '';
-		// 		app.$router.replace('/gerai');
-		// 	})
-		// 	.catch(function (resp) {
-		// 		app.success = false;
-		// 		app.errors = resp.response.data.errors;
-		// 	});
-		// },
-
 		saveForm() {
 			var app = this;
 			var newgerai = app.gerai;
 			axios.post(app.url, newgerai)
 			.then(function (resp) {
-				app.alert();
+				app.message = 'Sukses : Berhasil Menambah Gerai '+ app.gerai.nama_gerai;
+				app.alert(app.message);
+				app.gerai.nama_gerai = ''
+				app.gerai.alamat_gerai = ''
+				app.gerai.kota = ''
+				app.gerai.no_telepon_a = ''
+				app.gerai.no_telepon_b = ''
+				app.gerai.notes = ''
+				app.gerai.nama_pajak = ''
+				app.gerai.rasio = ''
+				app.gerai.meja = ''
+				app.errors = '';
 				app.$router.replace('/gerai');
-
 			})
 			.catch(function (resp) {
+				app.success = false;
 				app.errors = resp.response.data.errors;
 			});
 		},
-		alert() {
+
+		// saveForm() {
+		// 	var app = this;
+		// 	var newgerai = app.gerai;
+		// 	axios.post(app.url, newgerai)
+		// 	.then(function (resp) {
+		// 		app.alert();
+		// 		app.$router.replace('/gerai');
+
+		// 	})
+		// 	.catch(function (resp) {
+		// 		app.errors = resp.response.data.errors;
+		// 	});
+		// },
+		alert(pesan) {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai"+app.gerai.nama.gerai,
+				text: pesan,
 				icon: "success",
 			});
 		}
