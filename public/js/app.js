@@ -86058,7 +86058,7 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\r\n", ""]);
+exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\n#icon[data-v-5720b6d1]:hover{\r\n\tbackground-color: #00BCD4;\n}\r\n", ""]);
 
 // exports
 
@@ -86069,6 +86069,45 @@ exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -86266,6 +86305,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		// 		app.errors = resp.response.data.errors;
 		// 	});
 		// },
+
 		saveForm: function saveForm() {
 			var app = this;
 			var newgerai = app.gerai;
@@ -86279,7 +86319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		alert: function alert() {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai" + app.gerai.nama_gerai,
+				text: "Berhasil menambahkan gerai" + app.gerai.nama.gerai,
 				icon: "success"
 			});
 		}
@@ -86362,7 +86402,7 @@ var render = function() {
                       attrs: { for: "nama_gerai" }
                     },
                     [
-                      _vm._v("\n\t\t\t\t\t\t\t\tNama Gerai\n\t\t\t\t\t\t\t\t"),
+                      _vm._v("\n\t\t\t\t\t\t\t\tNama Gerai "),
                       _c("font", { attrs: { size: "5px", color: "red" } }, [
                         _vm._v("*")
                       ])
@@ -86558,10 +86598,9 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model.number",
+                          rawName: "v-model",
                           value: _vm.gerai.no_telepon_a,
-                          expression: "gerai.no_telepon_a",
-                          modifiers: { number: true }
+                          expression: "gerai.no_telepon_a"
                         }
                       ],
                       staticClass: "form-control",
@@ -86581,11 +86620,8 @@ var render = function() {
                           _vm.$set(
                             _vm.gerai,
                             "no_telepon_a",
-                            _vm._n($event.target.value)
+                            $event.target.value
                           )
-                        },
-                        blur: function($event) {
-                          _vm.$forceUpdate()
                         }
                       }
                     }),
@@ -86628,10 +86664,9 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model.phone",
+                          rawName: "v-model",
                           value: _vm.gerai.no_telepon_b,
-                          expression: "gerai.no_telepon_b",
-                          modifiers: { phone: true }
+                          expression: "gerai.no_telepon_b"
                         }
                       ],
                       staticClass: "form-control",
@@ -86734,6 +86769,8 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _vm._m(1, false, false),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c(
                     "label",
@@ -86803,33 +86840,39 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-5" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.gerai.rasio,
-                          expression: "gerai.rasio"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        autocomplete: "off",
-                        placeholder: "%",
-                        type: "text",
-                        name: "rasio",
-                        autofocus: ""
-                      },
-                      domProps: { value: _vm.gerai.rasio },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "input-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.gerai.rasio,
+                            expression: "gerai.rasio"
                           }
-                          _vm.$set(_vm.gerai, "rasio", $event.target.value)
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          autocomplete: "off",
+                          placeholder: "Rasio",
+                          type: "text",
+                          name: "rasio",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.gerai.rasio },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.gerai, "rasio", $event.target.value)
+                          }
                         }
-                      }
-                    }),
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group-addon" }, [
+                        _vm._v("\n\t\t\t\t\t\t\t\t\t\t%\n\t\t\t\t\t\t\t\t\t")
+                      ])
+                    ]),
                     _vm._v(" "),
                     _vm.errors.rasio
                       ? _c(
@@ -86925,7 +86968,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, false, false)
+                _vm._m(2, false, false)
               ]
             )
           ])
@@ -86941,6 +86984,109 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
       _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Gerai")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-2 control-label", attrs: { for: "icon" } },
+        [_vm._v("Icon Gerai")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "button",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModalLong",
+            id: "icon"
+          }
+        },
+        [
+          _c("div", { staticClass: "col-md-2" }, [
+            _c("i", { staticClass: "fa fa-home fa-5x" })
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "exampleModalLong",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLongTitle",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "exampleModalLongTitle" }
+                    },
+                    [_vm._v("Modal title")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Save changes")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
     ])
   },
   function() {

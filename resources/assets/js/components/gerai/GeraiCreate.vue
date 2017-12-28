@@ -1,6 +1,10 @@
 <style scoped>
 .row{
 	border-color:#FDA698;
+
+}
+#icon:hover{
+	background-color: #00BCD4;
 }
 </style>
 <template>
@@ -26,10 +30,10 @@
 								<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
 							</div>
 
+
 							<div class="form-group">
 								<label for="nama_gerai" class="col-md-2 control-label">
-									Nama Gerai
-									<font size="5px" color="red">*</font>
+									Nama Gerai <font size="5px" color="red">*</font>
 								</label>
 								<div class="col-md-5">
 									<input class="form-control" required autocomplete="off" placeholder="Nama Gerai" type="text" v-model="gerai.nama_gerai" name="nama_gerai"  autofocus="">
@@ -68,7 +72,7 @@
 									No Telepon Gerai 1
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model.number="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
 									<span v-if="errors.no_telepon_a" id="no_telepon_a_error" class="label label-danger">
 										{{ errors.no_telepon_a[0] }}
 									</span>
@@ -80,7 +84,7 @@
 									No Telepon Gerai 2
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model.phone="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
+									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
 									<span v-if="errors.no_telepon_b" id="no_telepon_b_error" class="label label-danger">
 										{{ errors.no_telepon_b[0] }}
 									</span>
@@ -96,6 +100,36 @@
 									<span v-if="errors.notes" id="notes_error" class="label label-danger">
 										{{ errors.notes[0] }}
 									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="icon" class="col-md-2 control-label">Icon Gerai</label>
+								<!-- Button trigger modal -->
+								<button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong" id="icon">
+									<div class="col-md-2" >
+										<i class="fa fa-home fa-5x"></i>
+									</div>
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save changes</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -116,7 +150,12 @@
 									Rasio
 								</label>
 								<div class="col-md-5">
-									<input class="form-control" autocomplete="off" placeholder="%" type="text" v-model="gerai.rasio" name="rasio"  autofocus="">
+									<div class="input-group">
+										<input class="form-control" autocomplete="off" placeholder="Rasio" type="text" v-model="gerai.rasio" name="rasio"  autofocus="">
+										<div class="input-group-addon">
+											%
+										</div>
+									</div>
 									<span v-if="errors.rasio" id="rasio_error" class="label label-danger">
 										{{ errors.rasio[0] }}
 									</span>
@@ -196,6 +235,7 @@ export default {
 		// 		app.errors = resp.response.data.errors;
 		// 	});
 		// },
+
 		saveForm() {
 			var app = this;
 			var newgerai = app.gerai;
@@ -212,7 +252,7 @@ export default {
 		alert() {
 			this.$swal({
 				title: "Berhasil!",
-				text: "Berhasil menambahkan gerai"+ app.gerai.nama_gerai,
+				text: "Berhasil menambahkan gerai"+app.gerai.nama.gerai,
 				icon: "success",
 			});
 		}
