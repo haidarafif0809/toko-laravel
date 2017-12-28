@@ -4,77 +4,220 @@
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li class="active">Pelanggan</li>
 		</ol>
-		<div class="panel panel-default">
-			<div class="panel-heading">Pelanggan</div>
-			<table>
-				<section class="range-slider">
-					<span class="rangeValues"></span>
-					<input value="500" min="500" max="50000" step="500" type="range">
-					<input value="50000" min="500" max="50000" step="500" type="range">
-				</section>
-			</table>
+
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Filter Pelanggan</div>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div data-role="page">
+						<div data-role="main" class="ui-content">
+							<form method="post" action="/action_page_post.php">
+								<div data-role="rangeslider">
+									<label for="price-min">Price:</label>
+									<input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+									<label for="price-max">Price:</label>
+									<input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+								</div>
+							</form>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
 			<div class="panel-body">
-				
-				<div class="table-responsive">
-					<div class="tambah">
-						<p><router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
-						Tambah Pelanggan</router-link></p>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<button class="btn btn-success">import</button>
+						<button class="btn btn-primary">unduh</button>
+						<span><router-link :to="{name: 'createPelanggan'}" type="button" class="btn btn-primary">
+						Tambah</router-link></span>
+						<!-- <button class="btn btn-primary">tambah</button> -->
 					</div>
-					<div class="pencarian">
-						<input type="text" class="form-control" name="search" placeholder="Pencarian"  v-model="search" >
-						<!-- <p>Pencarian berdasarkan kode, nama, nomor telepon</p>	 -->
+					<ul class="list-group cart-item">
+					</ul>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="panel-default">
+					<div class="panel-heading"> Menemukan : {{ pelanggans.length }} Pelanggan </div>
+					<div v-for="pelanggan ,index in pelanggans">
+						<div class="row">
+							<div class="col-md-12 list-pelanggan">
+								<div class="thumbnail">
+									<font>{{pelanggan.nama_pelanggan}}</font>										
+
+									<p>{{pelanggan.nomor_telepon}}</p>
+								</div>
+							</div>
+						</div>
 					</div>
-					<table class="table table-striped table-hover">
-						<thead>
-							<th>Kode Pelanggan</th>
-							<th>Nama Pelanggan</th>
-							<th>Jenis Kelamin</th>
-							<th>Nomor Telepon</th>
-							<th>Aksi</th>
-						</thead>
-						<tbody v-if="pelanggans.length > 0 && loading == false" class="data-ada">
-							<tr v-for="pelanggan ,index in pelanggans">
-								<td>{{ pelanggan.kode_pelanggan }}</td>
-								<td>
-									<router-link :to="{name: 'detailPelanggan', params: {id: pelanggan.id}}">
-										{{pelanggan.nama_pelanggan}}
-									</router-link>							
-								</td>
-								<td v-if="pelanggan.jenis_kelamin == 1">Laki-laki</td>
-								<td v-else>Perempuan</td>
-								<td>{{ pelanggan.nomor_telepon }}</td>
-								<td>
-									<router-link :to="{name: 'editPelanggan', params: {id:pelanggan.id}}" class="btn btn-xs btn-default">
-										Edit
-									</router-link>
-									<a href="#"
-									class="btn btn-xs btn-danger" 
-									v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
-									Delete
-								</a>
-							</td>
-						</tr>
-					</tbody>
-					<tbody v-else-if="loading == true" class="data-ada" >
-						<tr >
-							<td colspan="4"  class="text-center">
-								Sedang Memuat Data
-							</td>
-						</tr>
-					</tbody>
-					<tbody v-else class="tidak-ada-data">
-						<tr>
-							<td colspan="4"  class="text-center">
-								Tidak Ada Data
-							</td>
-						</tr>
-					</tbody>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">INFORMASI PELANGGAN</div>
+			</div>
+			<div class="panel panel-default">
+				<table border="3px">
+					<th>  TENTANG PELANGGAN  </th>
+					<th>  RIWAYAT TRANSAKSI  </th>
+					<th>   PERILAKU    </th>
 				</table>
 			</div>
-			<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-			<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getPelanggans":limit="1" v-if="search == '' "></pagination></div>
-			<div align="right"><pagination :data="pelanggansData" v-on:pagination-change-page="getHasilPencarian":limit="1" v-if="search != '' "></pagination></div>
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form >
+						<div class="row">
+							<div class="form-group">
+								<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="kode_pelanggan" class="col-md-3 control-label">Kode<font size="5px" color="red">*</font></label>
+								<div class="col-md-8">
+									<input class="form-control" required autocomplete="off" placeholder="Kode Pelanggan" type="text" autofocus="">
+								</div>
+							</div>
+						</div>
+
+						<div class="row"> 
+							<div class="form-group">
+								<label class="col-md-3 control-label">Nama<font size="5px" color="red">*</font></label>
+								<div class="col-md-8">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" autofocus="">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="jenis_kelamin'" class="col-md-3 control-label">Jenis Kelamin <font size="5px" color="red">*</font></label>
+								<div class="col-md-8">
+									<selectize-component placeholder="jenis kelamin"> 
+										<option value="1"  >laki-laki</option>
+										<option value="2"  >perempuan</option>
+									</selectize-component>
+									<!-- <span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="tanggal_lahir" class="col-md-3 control-label">Tanggal Lahir</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date"  autofocus="">
+									<!-- <span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="nomor_telepon" class="col-md-3 control-label">Nomor Telepon <font size="5px" color="red">*</font></label>
+								<div class="col-md-8">
+									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number"autofocus="">
+									<!-- <span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label">Email</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Email" type="email"  autofocus="">
+									<!-- <span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="kota" class="col-md-3 control-label">Kota</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Kota" type="text" autofocus="">
+									<!-- <span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="alamat" class="col-md-3 control-label">Alamat</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Alamat" type="text"  autofocus="">
+									<!-- <span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="kode_pos" class="col-md-3 control-label">Kode Pos</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number"  autofocus="" >
+									<!-- <span v-if="errors.kode_pos" id="email_error" class="label label-danger">{{ errors.kode_pos[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label">Catatan</label>
+								<div class="col-md-8">
+									<textarea class="form-control" autocomplete="off" placeholder="Catatan" autofocus=""></textarea>
+									<!-- <span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-4 col-md-offset-2">
+									<button class="btn btn-primary" id="btnSimpanPelanggan" type="submit">Submit</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</div>
 </div>
 </template>
