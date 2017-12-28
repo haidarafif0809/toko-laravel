@@ -129,26 +129,26 @@ class KelolaKasController extends Controller
             ['type', '=', 1],
             ['toko_id', '=', $tokoIdUserOnline],
         ])->get();
-        $jumlahKasMasuk = json_decode($jumlahKasMasuk, true);
-        $arrayJumlah    = [];
+        $jumlahKasMasuk      = json_decode($jumlahKasMasuk, true);
+        $arrayJumlahKasMasuk = [];
         foreach ($jumlahKasMasuk as $key => $val) {
             $arrayJumlahKasMasuk[] = $val['jumlah'];
         }
         $totalKasMasuk = array_sum($arrayJumlahKasMasuk);
 
-        $jumlahKasKelu = KelolaKas::select('jumlah')->where([
+        $jumlahKasKeluar = KelolaKas::select('jumlah')->where([
             ['type', '=', 2],
             ['toko_id', '=', $tokoIdUserOnline],
         ])->get();
-        $jumlahKasKelu      = json_decode($jumlahKasKelu, true);
-        $arrayJumlahKasKelu = [];
-        foreach ($jumlahKasKelu as $key => $val) {
-            $arrayJumlahKasKelu[] = $val['jumlah'];
+        $jumlahKasKeluar      = json_decode($jumlahKasKeluar, true);
+        $arrayJumlahKasKeluar = [];
+        foreach ($jumlahKasKeluar as $key => $val) {
+            $arrayJumlahKasKeluar[] = $val['jumlah'];
         }
-        $totalKasKelu = array_sum($arrayJumlahKasKelu);
+        $totalKasKeluar = array_sum($arrayJumlahKasKeluar);
 
-        $hasil1            = $totalKasMasuk - $totalKasKelu;
-        $hasil2            = "Rp" . number_format($hasil1, 2, ',', '.');
+        $hasil1            = $totalKasMasuk - $totalKasKeluar;
+        $hasil2            = "Rp" . number_format($hasil1, 0, ',', '.');
         $array['jumlah']   = $hasil2;
         $array['data_kas'] = $kelola_kas;
 
