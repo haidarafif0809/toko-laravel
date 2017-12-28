@@ -1,14 +1,15 @@
 .container {
     width: 100%;
 }
-@font-face {
+/*@font-face {
     font-family: proxi;
     src: url(fonts/proximanova-regular-webfont.ttf);
 }
 @font-face {
     font-family: hironde;
     src: url(fonts/HirondellesdesAlpes_0.ttf);
-}
+}*/
+
 * {
     margin: 0;
     padding: 0;
@@ -69,28 +70,29 @@
 }
 .w-lnk {
     list-style: none;
-    text-align: center;
+    text-align: left;
     margin-top: 10px;
+    padding-left: 20px;
 }
 .w-lnk a {
-    color: white;
+    color: #98a2b3;
     display: block;
     padding: 10px;
     padding-left: 0;
     font-weight: 100;
     letter-spacing: 1.5px;
-    font-family: proxi;
+    font-family: raleway;
 }
 .w-lnk a, .w-lnk a:active, .w-lnk a:visited, .w-lnk a:focus {
     text-decoration: none;
-    color: white;
+    color: #e2e4e9;
 }
 .w-lnk a:hover {
     text-decoration: none;
-    color: #0090ff;
+    color: #ffffff;
 }
-#words>li:hover {
-    background-color: white;
+#menu_teks>li:hover {
+    background-color: #414958;
 }
 #icons {
     margin-top: 70px;
@@ -99,12 +101,11 @@
     margin-top: 20px;
     text-align: center;
 }
-/*.fa {
-    color: white;
-}*/
-
+#icons i {
+    color: #F5B83A;
+}
 .nav_txt {
-    font-family: proxi;
+    font-family: raleway;
     letter-spacing: 1px;
     display: block;
     text-align: center;
@@ -120,8 +121,22 @@
 }
 */
 
-#menu-atas {
-    margin-left: 0px;
+#menu_teks a {
+    text-decoration: none;
+    color: #fff;
+}
+#menu_teks i {
+    font-size: 10px;
+    margin-left: 20px;
+}
+#menu_teks li:hover {
+    background-color: #414958;
+}
+#menu_teks li p {
+    font-weight: 100;
+    margin-top: 10px;
+    padding: 10px;
+    padding-left: 20px;
 }
 .main-container {
     margin-left: 65px;
