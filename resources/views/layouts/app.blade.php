@@ -96,19 +96,19 @@
                     <span class='nav_txt'>Home</span>
 
                     <li><router-link :to="{name: 'indexStafToko'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-user-circle-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Staf Toko</span>
                     @endif
                     @role('admin')
 
                     <li><router-link :to="{name: 'indexToko'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-windows fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Toko</span>
 
                     <li><router-link :to="{name: 'indexUser'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-user-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>User Toko</span>
                     @endrole
@@ -120,27 +120,27 @@
                     <span class='nav_txt'>Produk</span>
 
                     <li><router-link :to="{name: 'indexKategoriProduk'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-filter fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Kategori Produk</span>
 
                     <li><router-link :to="{name: 'indexKelolaKas'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-money fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Kelola Kas</span>
 
                     <li><router-link :to="{name: 'indexPelanggan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-users fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Pelanggan</span>
 
                     <li><router-link :to="{name: 'indexPenjualan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-shopping-bag fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Penjualan</span>
 
                     <li><router-link :to="{name: 'indexLaporan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-file-archive-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Laporan</span>
                     @endif
@@ -156,7 +156,7 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <p class="navbar-brand">
-                            <i class="fa fa-info-circle"></i> VERSI PERCOBAAN - MASA PERCOBAAN ANDA BERAKHIR 2 HARI LAGI.
+                            <i class="fa fa-info-circle"></i> Disini Buat Pengumuman Atau Sejenisnya.
                         </p>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
