@@ -4,7 +4,7 @@ var lgo = document.getElementsByClassName('img-holder');
 var nav = document.getElementsByClassName('link-container')[0];
 var nav_txt = document.getElementsByClassName('nav_txt');
 var bar2 = document.getElementsByClassName('bar2')[0];
-var links = document.getElementById('words');
+var links = document.getElementById('menu_teks');
 var iconLink = document.getElementById('icons');
 var ttleHolder = document.getElementsByClassName('title-holder');
 var ttleHolder2 = document.getElementById('title-holder2');
@@ -15,7 +15,7 @@ var ic = document.getElementsByClassName('fa');
 var main_container = document.getElementsByClassName('main-container')[0];
 lgo[0].style.display = 'none';
 ttleHolder[0].style.display = 'none';
-words.style.display = 'none';
+menu_teks.style.display = 'none';
 nav.style.width = '60px';
 
 function easeInOut(val) {
@@ -49,7 +49,7 @@ function toggle() {
         nav.style.width = '200px';
         main_container.style.marginLeft = 215 + 'px';
         main_container.style.transition = ".3s";
-        words.style.display = 'block';
+        menu_teks.style.display = 'block';
         iconLink.style.display = 'none';
         bar2.style.margin = 3 + "px 0 0 0";
         barMid.style.margin = 3 + "px 0 0 0";
@@ -67,7 +67,7 @@ function toggle() {
         ttleHolder[0].style.display = 'none';
         nav.style.width = '60px';
         main_container.style.marginLeft = 65 + 'px';
-        words.style.display = 'none';
+        menu_teks.style.display = 'none';
         iconLink.style.display = 'block';
         bar2.style.margin = "3px auto 0 auto";
         barMid.style.margin = "3px auto 0 auto";

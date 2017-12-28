@@ -28,14 +28,14 @@
                 <!-- ////logo and title -->
                 <div class='lgo'>
                     <div class='img-holder'>
-                        <img src="{{ asset('images/selesai.gif') }}" class="img-circle" width="100" height="100" />
+                        <img src="{{ asset('images/logo.png') }}" class="img-circle" width="100" height="100" />
                     </div>
                     <div class='title-holder'>
-                        <span>Toko Dasar</span>
+                        {{-- <span>Toko Dasar</span> --}}
                     </div>
                 </div>  
                 <!-- word navigations -->
-                <ul id='words'>
+                <ul id='menu_teks'>
                     @if (Auth::check())
                     <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                         Dashboard
@@ -47,25 +47,43 @@
                     @endif
                     @role('admin')
                     {{-- dropdown MASTER DATA --}}
-                    <li class='w-lnk'><router-link :to="{name: 'indexToko'}">
-                        Toko
-                    </router-link></li>
+                    <a href="">
+                        <li data-toggle="collapse" href="#master-data-collapse">
+                        <p>Master Data <i class="fa fa-chevron-down"></i></p>
+                        </li>
+                    </a>
+                    <div class="collapse" id="master-data-collapse">
+                        <ul>
+                            <li class='w-lnk'><router-link :to="{name: 'indexToko'}">
+                                <i class="fa fa-circle"></i> Toko
+                            </router-link></li>
 
-                    <li class='w-lnk'><router-link :to="{name: 'indexUser'}">
-                        User Toko
-                    </router-link></li>
+                            <li class='w-lnk'><router-link :to="{name: 'indexUser'}">
+                                <i class="fa fa-circle"></i> User Toko
+                            </router-link></li>
+                        </ul>
+                    </div>
                     {{-- dropdown --}}
                     @endrole
                     @if (auth()->check())
 
                     {{-- dropdown PRODUK--}}
-                    <li class='w-lnk'><router-link :to="{name: 'indexProduk'}">
-                        Produk
-                    </router-link></li>
+                    <a href="">
+                        <li data-toggle="collapse" href="#produk-collapse">
+                            <p>Produk <i class="fa fa-chevron-down"></i></p>
+                        </li>
+                    </a>
+                    <div class="collapse" id="produk-collapse">
+                        <ul>
+                            <li class='w-lnk'><router-link :to="{name: 'indexProduk'}">
+                                <i class="fa fa-circle"></i> Produk
+                            </router-link></li>
 
-                    <li class='w-lnk'><router-link :to="{name: 'indexKategoriProduk'}">
-                        Kategori Produk
-                    </router-link></li>
+                            <li class='w-lnk'><router-link :to="{name: 'indexKategoriProduk'}">
+                                <i class="fa fa-circle"></i> Kategori Produk
+                            </router-link></li>
+                        </ul>
+                    </div>
                     {{-- dropdown --}}
 
                     <li class='w-lnk'><router-link :to="{name: 'indexKelolaKas'}">
@@ -96,51 +114,66 @@
                     <span class='nav_txt'>Home</span>
 
                     <li><router-link :to="{name: 'indexStafToko'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-user-circle-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Staf Toko</span>
                     @endif
                     @role('admin')
+                    <a href="">
+                        <li data-toggle="collapse" href="#logo-masterdata-collapse">
+                            <i class="fa fa-database fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
+                        </li>
+                    </a>
+                    <span class="nav_txt">Master Data</span>
+                    <ul id="logo-masterdata-collapse" class="collapse">
+                        <li><router-link :to="{name: 'indexToko'}">
+                            <i class="fa fa-windows fa-2x"></i>
+                        </router-link></li>
+                        <span class='nav_txt'>Toko</span>
 
-                    <li><router-link :to="{name: 'indexToko'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
-                    </router-link></li>
-                    <span class='nav_txt'>Toko</span>
+                        <li><router-link :to="{name: 'indexUser'}">
+                            <i class="fa fa-user-o fa-2x"></i>
+                        </router-link></li>
+                        <span class='nav_txt'>User Toko</span>
+                    </ul>
 
-                    <li><router-link :to="{name: 'indexUser'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
-                    </router-link></li>
-                    <span class='nav_txt'>User Toko</span>
                     @endrole
                     @if (auth()->check())
+                    <a href="">
+                        <li data-toggle="collapse" href="#logo-produk-collapse">
+                            <i class="fa fa-briefcase fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
+                        </li>
+                    </a>
+                    <span class="nav_txt">Produk</span>
+                    <ul id="logo-produk-collapse" class="collapse">
+                        <li><router-link :to="{name: 'indexProduk'}">
+                            <i class="fa fa-tag fa-2x"></i>
+                        </router-link></li>
+                        <span class='nav_txt'>Produk</span>
 
-                    <li><router-link :to="{name: 'indexProduk'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
-                    </router-link></li>
-                    <span class='nav_txt'>Produk</span>
-
-                    <li><router-link :to="{name: 'indexKategoriProduk'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
-                    </router-link></li>
-                    <span class='nav_txt'>Kategori Produk</span>
+                        <li><router-link :to="{name: 'indexKategoriProduk'}">
+                            <i class="fa fa-filter fa-2x"></i>
+                        </router-link></li>
+                        <span class='nav_txt'>Kategori Produk</span>
+                    </ul>
 
                     <li><router-link :to="{name: 'indexKelolaKas'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-money fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Kelola Kas</span>
 
                     <li><router-link :to="{name: 'indexPelanggan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-users fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Pelanggan</span>
 
                     <li><router-link :to="{name: 'indexPenjualan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-shopping-bag fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Penjualan</span>
 
                     <li><router-link :to="{name: 'indexLaporan'}">
-                        <i class="fa fa-briefcase fa-2x"></i>
+                        <i class="fa fa-file-archive-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Laporan</span>
                     @endif
@@ -152,11 +185,11 @@
 
     <section>
         <div class='main-container'>
-            <nav class="navbar navbar-default" id="menu-atas">
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <p class="navbar-brand">
-                            <i class="fa fa-info-circle"></i> VERSI PERCOBAAN - MASA PERCOBAAN ANDA BERAKHIR 2 HARI LAGI.
+                            <i class="fa fa-info-circle"></i> Disini Buat Pengumuman Atau Sejenisnya.
                         </p>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
@@ -171,10 +204,9 @@
                         @else
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                <img src="{{ asset('images/logo.jpg') }}" class="img-circle" width="30px" height="30px">
+                                <img src="{{ asset('images/profile.jpg') }}" class="img-circle" width="30px" height="30px">
                                 {{ Auth::user()->nama_pemilik }}
-                                <span class="caret">
-                                </span>
+                                <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
