@@ -1,0 +1,128 @@
+.container {
+    width: 100%;
+}
+@font-face {
+    font-family: proxi;
+    src: url(fonts/proximanova-regular-webfont.ttf);
+}
+@font-face {
+    font-family: hironde;
+    src: url(fonts/HirondellesdesAlpes_0.ttf);
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.hum-container {
+    margin-top: 10px;
+    cursor: pointer;
+}
+.bar2 {
+    border-radius: 10px;
+    width: 25px;
+    background-color: white;
+    height: 4px;
+    margin: 3px auto 0 auto;
+}
+.bar-mid {
+    border-radius: 10px;
+    width: 25px;
+    background-color: white;
+    height: 4px;
+    margin: 3px auto 0 auto;
+}
+.bar3 {
+    border-radius: 10px;
+    width: 25px;
+    background-color: white;
+    height: 4px;
+    margin: 3px auto 0 auto;
+}
+.link-container::-webkit-scrollbar {
+    width: 6px;
+}
+.link-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+.link-container::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+.link-container {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    background-image: url("gambar.png");
+    height: 100%;
+    overflow-y: auto;
+}
+.lgo {
+    margin-top: 40px;
+}
+.img-holder {
+    text-align: center;
+}
+.title-holder {
+    text-align: center;
+    font-family: hironde;
+    font-size: 2.5em;
+    color: white;
+}
+.w-lnk {
+    list-style: none;
+    text-align: center;
+    margin-top: 10px;
+}
+.w-lnk a {
+    color: white;
+    display: block;
+    padding: 10px;
+    padding-left: 0;
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    font-family: proxi;
+}
+.w-lnk a, .w-lnk a:active, .w-lnk a:visited, .w-lnk a:focus {
+    text-decoration: none;
+    color: white;
+}
+.w-lnk a:hover {
+    text-decoration: none;
+    color: #0090ff;
+}
+#words>li:hover {
+    background-color: white;
+}
+#icons {
+    margin-top: 70px;
+}
+#icons li {
+    margin-top: 20px;
+    text-align: center;
+}
+/*.fa {
+    color: white;
+}*/
+
+.nav_txt {
+    font-family: proxi;
+    letter-spacing: 1px;
+    display: block;
+    text-align: center;
+    position: relative;
+    right: 100%;
+    margin: 10px auto 0 auto;
+    font-size: .8em;
+    color: white;
+}
+/*section{
+  padding-left:20px;
+  
+}
+*/
+
+#menu-atas {
+    margin-left: 0px;
+}
+.main-container {
+    margin-left: 65px;
+}

@@ -1,6 +1,6 @@
 <style type="text/css">
 
-img {
+.logo-toko {
   width: 50%;
   margin: auto;
   display: block;
@@ -53,8 +53,8 @@ button {
                 <tr v-for="profileToko , index in profileTokos" >
                   <td class="col-md 2">LOGO TOKO</td>
                   <td class="col-md-8">: 
-                    <img v-if="profileToko.profileToko.foto == null" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
-                    <img v-else class=" img-responsive thumbnail shadow" :src="url_img + profileToko.profileToko.foto">
+                    <img v-if="profileToko.profileToko.foto == null" class="img-responsive thumbnail shadow logo-toko" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
+                    <img v-else class="logo-toko img-responsive thumbnail shadow" :src="url_img + profileToko.profileToko.foto">
                   </td>
                 </tr>
                 <tr v-for="profileToko , index in profileTokos" >

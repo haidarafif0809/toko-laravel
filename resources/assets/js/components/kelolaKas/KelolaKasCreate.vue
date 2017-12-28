@@ -80,13 +80,13 @@ export default {
 			setting: {
 				placeholder: 'Kategori'
 			},
-			price: 123.45,
+			price: 1,
 	        money: {
 	          decimal: ',',
 	          thousands: '.',
-	          prefix: 'Rp',
+	          //prefix: 'Rp',
 	          //suffix: ' #',
-	          precision: 2,
+	          precision: 0,
 	          masked: false
 	        }
 

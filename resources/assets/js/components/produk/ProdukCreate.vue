@@ -37,9 +37,22 @@
 					<div class="form-group">
 						<label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
 						<div class="col-md-4">
-							<selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
-								<option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
-							</selectize-component>
+							<table width="100%">
+								<tbody>
+									<tr>
+										<td width="80%" style="vertical-align: middle;">
+											<selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
+												<option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
+											</selectize-component> 
+										</td>
+										<td width="20%" style="vertical-align: top; text-align: center;">
+											<span @click="tambahKategori()" class="glyphicon glyphicon-plus btn btn-sm btn-default">Tambah</span>	
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+
 							<span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
 
 						</div>
@@ -110,6 +123,7 @@ export default {
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 			url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
 			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
+			url_newKategoriProduk : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
 			produk: {
 				kode_produk: '',		
 				nama_produk: '',
@@ -120,18 +134,20 @@ export default {
 				status_jual: '',
 				foto: ''
 			},
+			newKategoriProduk: {
+				nama_kategori_produk: ''
+			},
 			message : '',
 			setting_satuan: {
 				placeholder: 'Pilih Satuan'
 			},
 			setting_kategori_produk: {
-				placeholder: 'Pilih Kategori Produk'
+				placeholder: 'Pilih Kategori Produk',
 			},
 		}
 	},
 	mounted() {
 		var app = this;
-		app.selectedSatuan();
 		app.selectedKategoriProduksId();
 
 	},
@@ -147,7 +163,7 @@ export default {
 			let foto = this;
 			let ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
 			console.log(file);
-			
+
 			if(!file.name.match(ekstensiOk)) {
 				foto.produk.foto = null;
 				this.$swal({
@@ -168,7 +184,6 @@ export default {
 			var app = this;
 			var newProduk = app.produk;
 			console.log(newProduk);
-			// axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
 			axios.post(app.url, newProduk)
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
@@ -197,6 +212,49 @@ export default {
 			})
 			.catch(function (resp) {
 				alert("Could not load kategori produk");
+			});
+		},
+		tambahKategori() {
+			var app = this;
+			swal({
+				text: 'Masukkan nama kategori baru',
+				content: "input",
+				button: {
+					text: "Buat",
+					closeModal: false,
+				},
+			})
+			.then(name => {
+				if (!name) throw null;
+				app.newKategoriProduk.nama_kategori_produk = name;
+				var newNamaKategori = app.newKategoriProduk;
+
+				axios.post(app.url_newKategoriProduk, newNamaKategori)
+				.then(function (resp) {
+					app.selectedKategoriProduksId();	
+					swal({
+						title: "Berhasil!",
+						text: 'Berhasil menambahkan "'+ name +'" ke kategori produk.',
+						icon: 'success',
+					});
+				})
+				.catch(function (resp) {
+					console.log()
+					swal({
+						title: "Berhasil!",
+						text: 'Berhasil menambahkan "'+ name +'" ke kategori produk.',
+						icon: 'warning',
+					});
+				});
+
+			})
+			.catch(err => {
+				if (err) {
+					swal("Oh noes!", "The AJAX request failed!", "error");
+				} else {
+					swal.stopLoading();
+					swal.close();
+				}
 			});
 		},
 		alert(pesan) {
