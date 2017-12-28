@@ -33,7 +33,7 @@
                 <span v-if="kelolaKasData.type == 1">Kas Masuk</span>
                 <span v-else> Kas Keluar</span>
               </td>
-              <td>{{kelolaKasData.jumlah}}</td>
+              <td>{{ "Rp" }}{{ new Intl.NumberFormat().format(kelolaKasData.jumlah) }}</td>
               <td>{{kelolaKasData.keterangan}}</td>
               <td>{{kelolaKasData.created_at}}</td>
               <td>
@@ -63,10 +63,8 @@
         </table>
       </div>
         <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-        <div align="right">
-        <pagination :data="kelolaKasDatas" v-on:pagination-change-page="getKelolaKas"></pagination>
-        </div>
+        <div align="right"><pagination :data="kelolaKasDatas" v-on:pagination-change-page="getKelolaKas" v-if="pencarian == '' "></pagination></div>
+                <div align="right"><pagination :data="kelolaKasDatas" v-on:pagination-change-page="searchData" v-if="pencarian != '' "></pagination></div>
       </div>
     </div>
   </div>

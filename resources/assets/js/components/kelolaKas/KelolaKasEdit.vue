@@ -84,9 +84,9 @@ export default {
 	        money: {
 	          decimal: ',',
 	          thousands: '.',
-	          prefix: 'Rp',
+	          //prefix: 'Rp',
 	          //suffix: ' #',
-	          precision: 2,
+	          precision: 0,
 	          masked: false
 	        }
 		}
