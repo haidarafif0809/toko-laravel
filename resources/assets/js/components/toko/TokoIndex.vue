@@ -74,12 +74,11 @@
 
       </div>
       <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-      <div align="right">
-        <pagination :data="tokosData" v-on:pagination-change-page="getTokos"></pagination>
-      </div>
+      <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="getTokos" v-if="pencarian == '' "></pagination></div>
+      <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="searchData" v-if="pencarian != '' "></pagination></div>
     </div>
   </div>
+</div>
 </div>
 </template>
 

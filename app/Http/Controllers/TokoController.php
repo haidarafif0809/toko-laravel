@@ -106,4 +106,9 @@ class TokoController extends Controller
         $delete = Toko::destroy($id);
         return $delete;
     }
+    public function search(Request $request)
+    {
+        $pencarian_toko = Toko::select('tokos.nama_toko AS nama_tokos', 'tokos.nama_pemilik AS nama_pemilik', 'tokos.email AS email', 'tokos.no_telp AS no_telp', 'tokos.created_at AS created_at')->leftJoin('users', 'tokos.id', '=', 'users.toko_id')->where('tokos.nama_pemilik', 'LIKE', "%$request->pencarian%")->orWhere('tokos.email', 'LIKE', "%$request->pencarian%")->orWhere('tokos.nama_toko', 'LIKE', "%$request->pencarian%")->paginate(10);
+        return response()->json($pencarian_toko);
+    }
 }
