@@ -37,22 +37,21 @@
                 <td>{{toko.nama_pemilik}}</td>
                 <td>{{toko.email}}</td>
                 <td>{{toko.no_telp}}</td>
-                <td>{{toko.statusToko}}</td>
-                <td>{{toko.created_at}}|{{toko.id_user}}</td>
+                <td>{{toko.created_at}}</td>
                 <td v-if="toko.statusToko == 1">
-                  <button type="button" size="xs" v-on:click="statusTokoNonaktif(toko.id_user, index,toko.nama_tokos)" class="btn btn-xs btn-danger">
+                  <button type="button" size="xs" v-on:click="statusTokoNonaktif(toko.id_user, index,toko.nama_tokos)" class="btn btn-xs btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>
                     Nonaktifkan Toko 
                   </button>
                 </td>
                 <td v-else>
-                  <button type="button" size="xs" v-on:click="statusTokoAktif(toko.id_user, index,toko.nama_tokos)" class="btn btn-xs btn-danger">
+                  <button type="button" size="xs" v-on:click="statusTokoAktif(toko.id_user, index,toko.nama_tokos)" class="btn btn-xs btn-danger"><i class="fa fa-check-circle" aria-hidden="true"></i>
                     Aktifkan Toko 
                   </button>
                 </td>
-                <router-link :to="{name:'editToko', params: {id: toko.id_toko}}" class="btn btn-xs btn-success" v-bind:id="'edit' +toko.id">Edit</router-link>
+                <router-link :to="{name:'editToko', params: {id: toko.id_toko}}" class="btn btn-xs btn-success" v-bind:id="'edit' +toko.id"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</router-link> |
                 <a href="#"
                 class="btn btn-xs btn-danger" 
-                v-on:click="deleteToko(toko.id, index,toko.nama_tokos)">Delete</a>
+                v-on:click="deleteToko(toko.id_toko, index,toko.nama_tokos)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
               </td>
             </tr>
           </tbody>

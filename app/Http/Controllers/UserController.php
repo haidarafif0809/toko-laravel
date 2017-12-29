@@ -65,4 +65,18 @@ class UserController extends Controller
         $cari_user = User::where('name', 'LIKE', "%$request->search%")->orWhere('email', 'LIKE', "%$request->search%")->paginate(10);
         return $cari_user;
     }
+
+    public function status($id)
+    {
+        $user = User::find($id);
+
+        if ($user->status == 1) {
+            $user->update(['status' => 0]);
+            return 0;
+
+        } else {
+            $user->update(['status' => 1]);
+            return 1;
+        }
+    }
 }
