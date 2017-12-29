@@ -7,14 +7,14 @@ use App\User;
 
 class TokoObserver
 {
-    public function updating(Toko $Toko)
+    public function updating(Toko $toko)
     {
-        User::where('toko_id', $Toko->id)->update(['nama_pemilik' => $Toko->nama_pemilik, 'email' => $Toko->email, 'no_telp' => $Toko->no_telp]);
+        User::where('toko_id', $toko->id)->update(['nama_pemilik' => $toko->nama_pemilik, 'email' => $toko->email, 'no_telp' => $toko->no_telp]);
     }
 
-    public function deleting(Toko $Toko)
+    public function deleting(Toko $toko)
     {
-        User::where('toko_id', $Toko->id)->delete();
+        User::where('toko_id', $toko->id)->delete();
         return true;
     }
 }
