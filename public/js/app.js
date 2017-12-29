@@ -82943,7 +82943,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
       axios.get(app.url + '/view?page=' + page).then(function (resp) {
         app.kelolaKas = resp.data.data_kas.data;
-        app.kelolaKasDatas = resp.data;
+        app.kelolaKasDatas = resp.data.data_kas;
         app.kelolaKasJumlah = resp.data.jumlah;
         app.loading = false;
         // buat cek ddi console
