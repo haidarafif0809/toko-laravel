@@ -111,3 +111,10 @@ Route::get('staf-toko/search', 'StafTokoController@search');
 Route::resource('gerai', 'GeraiController', ['except' => 'show']);
 Route::get('gerai/view', 'GeraiController@view');
 Route::get('gerai/pencarian', 'GeraiController@search');
+
+// status toko(aktif/nonaktof)
+Route::get('/user/status/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'user.status',
+    'uses'       => 'UserController@status',
+]);

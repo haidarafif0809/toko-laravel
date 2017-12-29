@@ -29,11 +29,13 @@ class UserSeeder extends Seeder
 
         // Membuat sample admin
         $type1               = 0;
+        $status1             = 1;
         $admin               = new User();
         $admin->type         = $type1;
         $admin->nama_pemilik = "admin";
         $admin->email        = "admin@gmail.com";
         $admin->no_telp      = "085764688661";
+        $admin->status       = $status1;
         $admin->password     = $password;
         $admin->save();
         $admin->attachRole($adminRole);
@@ -46,12 +48,14 @@ class UserSeeder extends Seeder
         $toko1->save();
         // Membuat sample member
         $type                 = 1;
+        $status               = 1;
         $member               = new User();
         $member->type         = $type;
         $member->toko_id      = $toko1->id;
         $member->nama_pemilik = $toko1->nama_pemilik;
         $member->email        = $toko1->email;
         $member->no_telp      = $toko1->no_telp;
+        $member->status       = $status;
         $member->password     = $password;
         $member->save();
         $member->attachRole($memberRole);
