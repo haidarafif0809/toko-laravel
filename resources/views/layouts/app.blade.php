@@ -44,6 +44,10 @@
                     <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                         Staf Toko
                     </router-link></li>
+
+                    <li class='w-lnk'><router-link :to="{name: 'indexGerai'}">
+                        Gerai
+                    </router-link></li>
                     @endif
                     @role('admin')
                     {{-- dropdown MASTER DATA --}}
@@ -117,6 +121,11 @@
                         <i class="fa fa-user-circle-o fa-2x"></i>
                     </router-link></li>
                     <span class='nav_txt'>Staf Toko</span>
+
+                    <li><router-link :to="{name: 'indexGerai'}">
+                        <i class="fa fa-map-marker fa-2x"></i>
+                    </router-link></li>
+                    <span class='nav_txt'>Gerai</span>
                     @endif
                     @role('admin')
                     <a href="">
