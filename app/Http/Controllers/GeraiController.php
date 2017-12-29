@@ -57,8 +57,9 @@ class GeraiController extends Controller
     {
         //Validasi
         $this->validate($request, [
-            'nama_gerai' => 'required',
-
+            'nama_gerai'   => 'required',
+            'no_telepon_a' => 'max:13|unique:gerais,no_telepon_a',
+            'no_telepon_b' => 'max:13|unique:gerais,no_telepon_b',
         ]);
         $Gerai = Gerai::create([
             'nama_gerai'   => $request->nama_gerai,
@@ -109,7 +110,8 @@ class GeraiController extends Controller
     {
         $this->validate($request, [
             'nama_gerai'   => 'required',
-            'alamat_gerai' => 'max:225',
+            'no_telepon_a' => 'max:13',
+            'no_telepon_b' => 'max:13',
         ]);
 
         $gerai = Gerai::find($id)->update([
