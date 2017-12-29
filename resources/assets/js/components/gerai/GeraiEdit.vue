@@ -86,6 +86,7 @@
 								<div class="col-md-7">
 									<label for="notes">
 										Notes
+										(Akan muncul di bagian bawah struk)
 									</label>
 									<input class="form-control" autocomplete="off" placeholder="Notes" type="text" v-model="gerai.notes" name="notes"  autofocus="">
 									<span v-if="errors.notes" id="notes_error" class="label label-danger">
@@ -98,6 +99,7 @@
 								<div class="col-md-7">
 									<label for="nama_pajak">
 										Nama Pajak
+										(Misal: Pajak, Service Charge)
 									</label>
 									<input class="form-control" autocomplete="off" placeholder="Nama Pajak" type="text" v-model="gerai.nama_pajak" name="nama_pajak"  autofocus="">
 									<span v-if="errors.nama_pajak" id="nama_pajak_error" class="label label-danger">
@@ -111,7 +113,12 @@
 									<label for="rasio">
 										Rasio
 									</label>
-									<input class="form-control" autocomplete="off" placeholder="%" type="text" v-model="gerai.rasio" name="rasio"  autofocus="" maxlength="2">
+									<div class="input-group">
+										<input class="form-control" autocomplete="off" placeholder="Rasio" type="text" v-model="gerai.rasio" name="rasio"  autofocus="" maxlength="2">
+										<div class="input-group-addon">
+											%
+										</div>
+									</div>
 									<span v-if="errors.rasio" id="rasio_error" class="label label-danger">
 										{{ errors.rasio[0] }}
 									</span>
@@ -123,6 +130,7 @@
 									<label for="meja">
 										Meja
 									</label>
+									Modul Yang Diaktifkan di Lokasi ini : <br>
 									<input class="form-check" autocomplete="off" placeholder="Meja" type="checkbox" v-model="gerai.meja" name="meja"  autofocus="">
 									<span v-if="errors.meja" id="meja_error" class="label label-danger">
 										{{ errors.meja[0] }}
