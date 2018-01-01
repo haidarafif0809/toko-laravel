@@ -103,6 +103,7 @@
 }
 #icons i {
     color: #F5B83A;
+    font-size: 18px;
 }
 .nav_txt {
     font-family: raleway;
@@ -112,7 +113,7 @@
     position: relative;
     right: 100%;
     margin: 10px auto 0 auto;
-    font-size: .8em;
+    font-size: .6em;
     color: white;
 }
 /*section{
