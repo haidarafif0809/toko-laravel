@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Gerai;
 use Illuminate\Http\Request;
-
+use App\User;
+use Auth;
 class GeraiController extends Controller
 {
     /**
@@ -12,6 +13,11 @@ class GeraiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -24,22 +30,26 @@ class GeraiController extends Controller
      */
     public function view()
     {
-        return Gerai::orderBy('id', 'desc')->paginate(10);
+
+        return Gerai::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(10);
+
     }
 
     public function search(Request $request)
     {
-        $cari_gerai = Gerai::where('nama_gerai', 'LIKE', "%$request->search%")
-            ->orWhere('alamat_gerai', 'LIKE', "%$request->search%")
-            ->orWhere('kota', 'LIKE', "%$request->search%")
-            ->orWhere('no_telepon_a', 'LIKE', "%$request->search%")
-            ->orWhere('no_telepon_b', 'LIKE', "%$request->search%")
-            ->orWhere('notes', 'LIKE', "%$request->search%")
-            ->orWhere('nama_pajak', 'LIKE', "%$request->search%")
-            ->orWhere('rasio', 'LIKE', "%$request->search%")
-            ->orWhere('meja', 'LIKE', "%$request->search%")
-            ->paginate(10);
-        return $cari_gerai;
+        $search_gerai = Gerai::where('toko_id', Auth::user()->toko_id)
+        ->where(function ($query) use ($request) {
+            $query->orwhere('nama_gerai', 'LIKE', "%$request->pencarian%")
+            ->orwhere('alamat_gerai', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('no_telepon_a', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('no_telepon_b', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('notes', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('nama_pajak', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('rasio', 'LIKE', "%$Request->pencarian%")
+            ->orwhere('meja', 'LIKE', "%$Request->pencarian%");
+        })->orderBy('gerai_id', 'desc')->paginate(10);
+
+        return response()->json($search_gerai);
     }
     public function create()
     {
@@ -58,22 +68,21 @@ class GeraiController extends Controller
         //Validasi
         $this->validate($request, [
             'nama_gerai'   => 'required',
-            'no_telepon_a' => 'max:13|unique:gerais,no_telepon_a',
-            'no_telepon_b' => 'max:13|unique:gerais,no_telepon_b',
         ]);
         $Gerai = Gerai::create([
-            'nama_gerai'   => $request->nama_gerai,
-            'alamat_gerai' => $request->alamat_gerai,
-            'kota'         => $request->kota,
-            'no_telepon_a' => $request->no_telepon_a,
-            'no_telepon_b' => $request->no_telepon_b,
-            'notes'        => $request->notes,
-            'nama_pajak'   => $request->nama_pajak,
-            'rasio'        => $request->rasio,
-            'meja'         => $request->meja,
-        ]);
+         'toko_id'    => Auth::user()->toko_id,
+         'nama_gerai'   => $request->nama_gerai,
+         'alamat_gerai' => $request->alamat_gerai,
+         'kota'         => $request->kota,
+         'no_telepon_a' => $request->no_telepon_a,
+         'no_telepon_b' => $request->no_telepon_b,
+         'notes'        => $request->notes,
+         'nama_pajak'   => $request->nama_pajak,
+         'rasio'        => $request->rasio,
+         'meja'         => $request->meja,
+     ]);
 
-        return $Gerai;
+        return response()->json($Gerai);
     }
 
     /**

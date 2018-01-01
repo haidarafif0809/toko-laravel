@@ -14,6 +14,7 @@ class GeraiSeeder extends Seeder
     {
         //
         $tambah_gerai1 = Gerai::create([
+            'toko_id'      => '1',
             'nama_gerai'   => 'Athacom 1',
             'alamat_gerai' => 'jepara',
             'kota'         => 'Lampung',
