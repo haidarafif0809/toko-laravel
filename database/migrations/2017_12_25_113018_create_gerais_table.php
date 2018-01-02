@@ -15,6 +15,7 @@ class CreateGeraisTable extends Migration
     {
         Schema::create('gerais', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('toko_id');
             $table->string('nama_gerai');
             $table->string('alamat_gerai')->nullable();
             $table->string('kota')->nullable();

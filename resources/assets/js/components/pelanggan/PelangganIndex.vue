@@ -48,7 +48,7 @@
 						<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 						unduh
 					</button>
-					<button class="btn btn-primary">
+					<button class="btn btn-primary" v-on:click="offDisable">
 						<i class="fa fa-plus" aria-hidden="true"></i>
 						Tambah
 					</button>
@@ -68,8 +68,8 @@
 						<ul class="list-group cart-item">
 							<div v-for="pelanggan ,index in pelanggans">
 								<div class="row">
-									<div class="col-md-11 list-pelanggan">
-										<div class="thumbnail">
+									<div class="col-md-11 list-pelanggan" >
+										<div class="thumbnail" v-on:click="detailPelanggan(pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
 											<font><b>{{pelanggan.nama_pelanggan}}</b></font>
 											<p>{{pelanggan.kode_pelanggan}}</p>
 											<p>
@@ -122,7 +122,7 @@
 								<div class="form-group">
 									<label for="kode_pelanggan" class="col-md-3 control-label">Kode<font size="5px" color="red">*</font></label>
 									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Kode Pelanggan" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="">
+										<input class="form-control" required autocomplete="off" placeholder="Kode Pelanggan" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" :disabled="disable == 1">
 										<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
 									</div>
 								</div>
@@ -132,7 +132,7 @@
 								<div class="form-group">
 									<label for="nama_pelanggan" class="col-md-3 control-label">Nama<font size="5px" color="red">*</font></label>
 									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="">
+										<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
 										<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
 									</div>
 								</div>
@@ -142,7 +142,7 @@
 								<div class="form-group">
 									<label for="jenis_kelamin'" class="col-md-3 control-label">Jenis Kelamin <font size="5px" color="red">*</font></label>
 									<div class="col-md-8">
-										<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings"> 
+										<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings" :disabled="disable == 1"> 
 											<option value="1"  >laki-laki</option>
 											<option value="2"  >perempuan</option>
 										</selectize-component>
@@ -155,7 +155,7 @@
 								<div class="form-group">
 									<label for="tanggal_lahir" class="col-md-3 control-label">Tanggal Lahir</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="">
+										<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
 										<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
 									</div>
 								</div>
@@ -165,7 +165,7 @@
 								<div class="form-group">
 									<label for="nomor_telepon" class="col-md-3 control-label">Nomor Telepon <font size="5px" color="red">*</font></label>
 									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="">
+										<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="" :disabled="disable == 1">
 										<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
 									</div>
 								</div>
@@ -175,7 +175,7 @@
 								<div class="form-group">
 									<label for="email" class="col-md-3 control-label">Email</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="">
+										<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="" :disabled="disable == 1">
 										<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
 									</div>
 								</div>
@@ -185,7 +185,7 @@
 								<div class="form-group">
 									<label for="kota" class="col-md-3 control-label">Kota</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="">
+										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
 										<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
 									</div>
 								</div>
@@ -195,7 +195,7 @@
 								<div class="form-group">
 									<label for="alamat" class="col-md-3 control-label">Alamat</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="">
+										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
 										<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
 									</div>
 								</div>
@@ -205,7 +205,7 @@
 								<div class="form-group">
 									<label for="kode_pos" class="col-md-3 control-label">Kode Pos</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="" >
+										<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="" :disabled="disable == 1">
 										<span v-if="errors.kode_pos" id="email_error" class="label label-danger">{{ errors.kode_pos[0] }}</span>
 									</div>
 								</div>
@@ -215,7 +215,7 @@
 								<div class="form-group">
 									<label for="catatan" class="col-md-3 control-label">Catatan</label>
 									<div class="col-md-8">
-										<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus=""></textarea>
+										<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus="" :disabled="disable == 1"></textarea>
 										<span v-if="errors.catatan" id="email_error" class="label label-danger">{{ errors.catatan[0] }}</span>
 									</div>
 								</div>
@@ -225,64 +225,96 @@
 								<div class="form-group">
 									<div class="col-md-12 col-md-offset-8">
 
-										<button class="btn btn-warning" id="btnSimpanPelanggan" type="submit">
+										<button class="btn btn-warning" id="btnSimpanPelanggan" type="submit" :disabled="disable == 1">
 											<i class="fa fa-floppy-o" aria-hidden="true"></i>
 											Simpan 
 										</button>
-										<button class="btn btn-default" id="btnSimpanPelanggan" type="submit">
+										<button class="btn btn-default" @click="onDisable" :disabled="disable == 1">
 											<i class="fa fa-times" aria-hidden="true"></i>
 											Batal
 										</button>
-									</div>
+										<button class="btn btn-xs btn-danger"
+										:disabled="disable == 1"
+										v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)"> Hapus</button>
+										<!-- <a href="#"
+										class="btn btn-xs btn-danger"
+										:disabled="disable == 1"
+										v-on:click="deleteEntry(pelanggan.id, index,pelanggan.nama_pelanggan)">
+										Delete
+									</a> -->
 								</div>
 							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</template>
+	</div>
+</div>
+</template>
 
-	<script>
-	export default {
-		data: function () {
-			return {
-				pelanggans: [],
-				pelanggansData: {},
-				url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
-				search : '',
-				loading : true,
-				errors: [],
-				pelanggan: {
-					kode_pelanggan: '',
-					nama_pelanggan: '',
-					jenis_kelamin: '',
-					tanggal_lahir: '',
-					nomor_telepon: '',
-					email: '',
-					alamat: '',
-					kota: '',
-					kode_pos: '',
-					catatan: '',
-				},
-				settings: {
-					placeholder: 'Pilih Jenis Kelamin'
-				} 
-			}
-		},
-		mounted() {
-			var app = this;
-			app.loading = true
-			app.getPelanggans();	
-
-		},
-		watch: {
+<script>
+export default {
+	data: function () {
+		return {
+			pelanggans: [],
+			pelanggansData: {},
+			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
+			search : '',
+			loading : true,
+			errors: [],
+			pelanggan: {
+				kode_pelanggan: '',
+				nama_pelanggan: '',
+				jenis_kelamin: '',
+				tanggal_lahir: '',
+				nomor_telepon: '',
+				email: '',
+				kota: '',
+				alamat: '',
+				kode_pos: '',
+				catatan: '',
+			},
+			pelangganId: null,
+			message: '',
+			disable: 1,
+			settings: {
+				placeholder: 'Pilih Jenis Kelamin'
+			} 
+		}
+	},
+	mounted() {
+		var app = this;
+		app.loading = true
+		app.getPelanggans();	
+		app.getPelanggan();
+	},
+	watch: {
         // whenever question changes, this function will run
         search: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
     methods: {
+    	offDisable(){
+    		this.disable = 0
+    	},
+    	onDisable(){
+    		this.disable = 1
+    	},
+
+    	detailPelanggan(kode_pelanggan, nama_pelanggan, jenis_kelamin, tanggal_lahir, nomor_telepon, email, kota, alamat, kode_pos, catatan){
+    		this.pelanggan.kode_pelanggan = kode_pelanggan
+    		this.pelanggan.nama_pelanggan = nama_pelanggan
+    		this.pelanggan.jenis_kelamin = jenis_kelamin
+    		this.pelanggan.tanggal_lahir = tanggal_lahir
+    		this.pelanggan.nomor_telepon = nomor_telepon
+    		this.pelanggan.email = email
+    		this.pelanggan.kota = kota
+    		this.pelanggan.alamat = alamat
+    		this.pelanggan.kode_pos = kode_pos
+    		this.pelanggan.catatan = catatan
+    	},
     	getPelanggans(page) {
     		var app = this;
     		if (typeof page === 'undefined') {
@@ -381,7 +413,44 @@
     		});
     	}
 
-    }
+  //   	saveForm() {
+		// 	var app = this;
+		// 	var newPelanggan = app.pelanggan;
+		// 	axios.patch(app.url+'/' + app.pelangganId, newPelanggan)
+		// 	.then(function (resp) {
+		// 		app.message = 'Berhasil Merubah Pelanggan "'+app.pelanggan.nama_pelanggan+'"'
+		// 		app.alert(app.message);
+		// 		app.$router.replace('/pelanggan');
+
+		// 	})
+		// 	.catch(function (resp) {
+		// 		app.errors = resp.response.data.errors;
+		// 	});
+		// },
+		// alert(pesan) {
+		// 	this.$swal({
+		// 		title: "Berhasil!",
+		// 		text: pesan,
+		// 		icon: "success",
+		// 	});
+		// },
+		// getPelanggan(){
+
+		// 	let app = this;
+		// 	let id = app.$route.params.id;
+		// 	app.pelangganId = id;
+
+		// 	axios.get(app.url+'/' + id + '/edit')
+		// 	.then(function (resp) {
+		// 		app.pelanggan = resp.data;
+		// 	})
+		// 	.catch(function () {
+		// 		alert("Could not load your pelanggan")
+		// 	});
+		// }
+
+
+	}
 }
 </script>
 
