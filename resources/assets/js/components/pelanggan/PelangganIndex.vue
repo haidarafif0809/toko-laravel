@@ -238,12 +238,12 @@
 											Batal
 										</button>
 
-										<button v-if="edit == 1" to="{params: {id:pelanggan.id}}" class="btn btn-primary" v-on:click="editPelanggan">
-											<i class="fa fa-times" aria-hidden="true"></i>
+										<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
+											<i class="fa fa-pencil" aria-hidden="true"></i>
 											Edit
 										</button>
 
-										<button v-if="disable == 2" class="btn btn-warning" v-on:click="saveFormEdit">
+										<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
 											<i class="fa fa-floppy-o" aria-hidden="true"></i>
 											Simpan
 										</button>
@@ -253,7 +253,7 @@
 											Batal
 										</button>
 
-										<button v-if="disable == 2" class="btn btn-danger">
+										<button v-if="disable == 2" class="btn btn-danger" type="button" v-on:click="deleteEntry">
 											<i class="fa fa-trash-o" aria-hidden="true"></i>
 											Hapus
 										</button>
@@ -295,7 +295,7 @@ export default {
 			message: '',
 			disable: 1,
 			edit: 0,
-			formPelanggan: 0,
+			formPelanggan: 1,
 			settings: {
 				placeholder: 'Pilih Jenis Kelamin'
 			} 
@@ -305,7 +305,7 @@ export default {
 		var app = this;
 		app.loading = true
 		app.getPelanggans();	
-		app.getPelanggan();
+		// app.getPelanggan();
 	},
 	watch: {
         // whenever question changes, this function will run
@@ -370,7 +370,7 @@ export default {
     	editPelanggan(){
     		this.disable = 2
     		this.edit = 0
-    		this.pelanggan.id = id
+    		// this.pelanggan.id = id
     	},
 
     	getPelanggans(page) {
@@ -408,40 +408,10 @@ export default {
     		});
     	},
 
-
-    	deleteEntry(id, index,nama_pelanggan) {
-    		swal({
-    			title: "Konfirmasi Hapus",
-    			text : "Anda Yakin Ingin Menghapus "+nama_pelanggan+" ?",
-    			icon : "warning",
-    			buttons: true,
-    			dangerMode: true,
-    		})
-    		.then((willDelete) => {
-    			if (willDelete) {
-    				var app = this;
-    				axios.delete(app.url+'/' + id)
-    				.then(function (resp) {
-    					app.getPelanggans();
-    					swal("Pelanggan Berhasil Dihapus!  ", {
-    						icon: "success",
-    					});
-    				})
-    				.catch(function (resp) {
-    					app.$router.replace('/pelanggan/');
-    					swal("Gagal Menghapus Pelanggan!", {
-    						icon: "warning",
-    					});
-    				});
-    			}
-    			this.$router.replace('/pelanggan/');
-    		});
-    	},
-
     	saveForm() {
     		var app = this;
-    		var newPelanggan = app.pelanggan;
-    		axios.post(app.url, newPelanggan)
+    		var Pelanggan = app.pelanggan;
+    		axios.post(app.url, Pelanggan)
     		.then(function (resp) {
     			app.alert();
 
@@ -474,10 +444,21 @@ export default {
     	saveFormEdit() {
     		var app = this;
     		var newPelanggan = app.pelanggan;
-    		axios.patch(app.url+'/' + app.pelangganId, newPelanggan)
+    		axios.patch(app.url+'/' + app.pelanggan.id, newPelanggan)
     		.then(function (resp) {
     			app.message = 'Berhasil Merubah Pelanggan "'+app.pelanggan.nama_pelanggan+'"'
     			app.alertt(app.message);
+    			app.getPelanggans();
+    			app.pelanggan.kode_pelanggan = ''
+    			app.pelanggan.nama_pelanggan = ''
+    			app.pelanggan.jenis_kelamin = ''
+    			app.pelanggan.tanggal_lahir = ''
+    			app.pelanggan.nomor_telepon = ''
+    			app.pelanggan.email = ''
+    			app.pelanggan.kota = ''
+    			app.pelanggan.alamat = ''
+    			app.pelanggan.kode_pos = ''
+    			app.pelanggan.catatan = ''
     			app.$router.replace('/pelanggan');
 
     		})
@@ -492,23 +473,36 @@ export default {
     			icon: "success",
     		});
     	},
-		// getPelanggan(){
 
-		// 	let app = this;
-		// 	let id = app.$route.params.id;
-		// 	app.pelangganId = id;
-
-		// 	axios.get(app.url+'/' + id + '/edit')
-		// 	.then(function (resp) {
-		// 		app.pelanggan = resp.data;
-		// 	})
-		// 	.catch(function () {
-		// 		alert("Could not load your pelanggan")
-		// 	});
-		// }
-
-
-	}
+    	deleteEntry() {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus ?",
+    			icon : "warning",
+    			buttons: true,
+    			dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    			if (willDelete) {
+    				var app = this;
+    				axios.delete(app.url+'/' + app.pelanggan.id)
+    				.then(function (resp) {
+    					app.getPelanggans();
+    					swal("Pelanggan Berhasil Dihapus!  ", {
+    						icon: "success",
+    					});
+    				})
+    				.catch(function (resp) {
+    					app.$router.replace('/pelanggan/');
+    					swal("Gagal Menghapus Pelanggan!", {
+    						icon: "warning",
+    					});
+    				});
+    			}
+    			this.$router.replace('/pelanggan/');
+    		});
+    	},
+    }
 }
 </script>
 
