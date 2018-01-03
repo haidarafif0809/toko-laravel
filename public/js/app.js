@@ -77574,7 +77574,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             message: '',
             disable: 1,
             edit: 0,
-            formPelanggan: 0,
+            formPelanggan: 1,
             settings: {
                 placeholder: 'Pilih Jenis Kelamin'
             }
@@ -77584,7 +77584,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var app = this;
         app.loading = true;
         app.getPelanggans();
-        app.getPelanggan();
+        // app.getPelanggan();
     },
 
     watch: {
@@ -77644,7 +77644,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         editPelanggan: function editPelanggan() {
             this.disable = 2;
             this.edit = 0;
-            this.pelanggan.id = id;
+            // this.pelanggan.id = id
         },
         getPelanggans: function getPelanggans(page) {
             var app = this;
@@ -77675,37 +77675,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert("Could not load pelanggans");
             });
         },
-        deleteEntry: function deleteEntry(id, index, nama_pelanggan) {
-            var _this = this;
-
-            swal({
-                title: "Konfirmasi Hapus",
-                text: "Anda Yakin Ingin Menghapus " + nama_pelanggan + " ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    var app = _this;
-                    axios.delete(app.url + '/' + id).then(function (resp) {
-                        app.getPelanggans();
-                        swal("Pelanggan Berhasil Dihapus!  ", {
-                            icon: "success"
-                        });
-                    }).catch(function (resp) {
-                        app.$router.replace('/pelanggan/');
-                        swal("Gagal Menghapus Pelanggan!", {
-                            icon: "warning"
-                        });
-                    });
-                }
-                _this.$router.replace('/pelanggan/');
-            });
-        },
         saveForm: function saveForm() {
             var app = this;
-            var newPelanggan = app.pelanggan;
-            axios.post(app.url, newPelanggan).then(function (resp) {
+            var Pelanggan = app.pelanggan;
+            axios.post(app.url, Pelanggan).then(function (resp) {
                 app.alert();
 
                 app.getPelanggans();
@@ -77734,9 +77707,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         saveFormEdit: function saveFormEdit() {
             var app = this;
             var newPelanggan = app.pelanggan;
-            axios.patch(app.url + '/' + app.pelangganId, newPelanggan).then(function (resp) {
+            axios.patch(app.url + '/' + app.pelanggan.id, newPelanggan).then(function (resp) {
                 app.message = 'Berhasil Merubah Pelanggan "' + app.pelanggan.nama_pelanggan + '"';
                 app.alertt(app.message);
+                app.getPelanggans();
+                app.pelanggan.kode_pelanggan = '';
+                app.pelanggan.nama_pelanggan = '';
+                app.pelanggan.jenis_kelamin = '';
+                app.pelanggan.tanggal_lahir = '';
+                app.pelanggan.nomor_telepon = '';
+                app.pelanggan.email = '';
+                app.pelanggan.kota = '';
+                app.pelanggan.alamat = '';
+                app.pelanggan.kode_pos = '';
+                app.pelanggan.catatan = '';
                 app.$router.replace('/pelanggan');
             }).catch(function (resp) {
                 app.errors = resp.response.data.errors;
@@ -77747,6 +77731,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: "Berhasil!",
                 text: pesanEdit,
                 icon: "success"
+            });
+        },
+        deleteEntry: function deleteEntry() {
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + app.pelanggan.id).then(function (resp) {
+                        app.getPelanggans();
+                        swal("Pelanggan Berhasil Dihapus!  ", {
+                            icon: "success"
+                        });
+                    }).catch(function (resp) {
+                        app.$router.replace('/pelanggan/');
+                        swal("Gagal Menghapus Pelanggan!", {
+                            icon: "warning"
+                        });
+                    });
+                }
+                _this.$router.replace('/pelanggan/');
             });
         }
     }
@@ -78606,12 +78617,12 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-primary",
-                                attrs: { to: "{params: {id:pelanggan.id}}" },
+                                attrs: { type: "button" },
                                 on: { click: _vm.editPelanggan }
                               },
                               [
                                 _c("i", {
-                                  staticClass: "fa fa-times",
+                                  staticClass: "fa fa-pencil",
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
@@ -78626,6 +78637,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-warning",
+                                attrs: { type: "button" },
                                 on: { click: _vm.saveFormEdit }
                               },
                               [
@@ -78660,15 +78672,23 @@ var render = function() {
                           : _vm._e(),
                         _vm._v(" "),
                         _vm.disable == 2
-                          ? _c("button", { staticClass: "btn btn-danger" }, [
-                              _c("i", {
-                                staticClass: "fa fa-trash-o",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
-                              )
-                            ])
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" },
+                                on: { click: _vm.deleteEntry }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            )
                           : _vm._e()
                       ])
                     ])
