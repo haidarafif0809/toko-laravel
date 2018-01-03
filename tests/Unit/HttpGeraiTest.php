@@ -37,7 +37,7 @@ class HttpGeraiTest extends TestCase
     	]);
 
     	$response->assertStatus(302)
-    	->assertRedirect(route('gerai.index'));
+    	->assertRedirect(route('gerai.create'));
 
 
     	$response2 = $this->get($response->headers->get('location'))->assertSee('Sukses :Berhasil Menambah Gerai "GeraiTest"');

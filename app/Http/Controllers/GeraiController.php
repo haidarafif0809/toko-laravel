@@ -68,6 +68,8 @@ class GeraiController extends Controller
         //Validasi
         $this->validate($request, [
             'nama_gerai'   => 'required',
+            'no_telepon_a' => 'max:13|unique:gerais,no_telepon_a',
+            'no_telepon_b' => 'max:13|unique:gerais,no_telepon_b',
         ]);
         $Gerai = Gerai::create([
          'toko_id'    => Auth::user()->toko_id,
