@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('nama_pemilik');
             $table->string('email')->unique();
             $table->string('no_telp');
-            $table->integer('status')->default(1)->comment = "(0= tdk aktif)(1= aktif)";
+            $table->boolean('status')->default(0)->comment = "(0= tdk aktif)(1= aktif)";
+            $table->string('verification_token')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->unsignedInteger('created_by')->nullable()->index();
