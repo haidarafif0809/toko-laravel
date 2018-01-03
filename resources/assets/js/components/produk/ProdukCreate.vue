@@ -241,8 +241,8 @@ export default {
 				.catch(function (resp) {
 					console.log()
 					swal({
-						title: "Berhasil!",
-						text: 'Berhasil menambahkan "'+ name +'" ke kategori produk.',
+						title: "Gagal!",
+						text: 'Ada sesuatu yang salah terjadi.',
 						icon: 'warning',
 					});
 				});
@@ -250,7 +250,7 @@ export default {
 			})
 			.catch(err => {
 				if (err) {
-					swal("Oh noes!", "The AJAX request failed!", "error");
+					swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
 				} else {
 					swal.stopLoading();
 					swal.close();
