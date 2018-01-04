@@ -6,6 +6,21 @@
 #icon:hover{
 	background-color: #00BCD4;
 }
+.box{
+	width: 200px;
+	height:40px;
+	background-color: #FCF8E3;
+	text-align: center;
+	border:1px solid #ffafaf;
+}
+#border{
+	border:1px solid #D3E0E9;
+	
+
+}
+#btnSimpanGerai{
+	background-color: #FFE24F;
+}
 
 </style>
 <template>
@@ -20,18 +35,24 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-7">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						<p class="panel-title">Tambah Gerai</p>
-					</div>
 
-					<div class="panel-body">
-						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
-
-							<div class="form-group">
-								<div class="col-md-7">
-									<label>Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+					<div class="panel-heading"></div>
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="area-top clearfix">
+								<div class="pull-left header">
+									<h4 class="uppercase"><i class="fa fa-map-marker fa-1x"></i>
+									Tambah Gerai</h4>
 								</div>
 							</div>
+						</div>
+					</div>
+
+					<div class="panel-body" id="border">
+						<div class="box">
+							<label>Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+						</div>
+						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 
 
 							<div class="form-group">
@@ -74,7 +95,7 @@
 							<div class="form-group">
 								<div class="col-md-7">
 									<label for="no_telepon_a">
-										No Telepon Gerai 1
+										Nomor Telepon Gerai 1
 									</label>
 									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 1" type="number" v-model="gerai.no_telepon_a" name="no_telepon_a"  autofocus="">
 									<span v-if="errors.no_telepon_a" id="no_telepon_a_error" class="label label-danger">
@@ -86,7 +107,7 @@
 							<div class="form-group">
 								<div class="col-md-7">
 									<label for="no_telepon_b">
-										No Telepon Gerai 2
+										Nomor Telepon Gerai 2
 									</label>
 									<input class="form-control" autocomplete="off" placeholder="Nomor Telepon 2" type="number" v-model="gerai.no_telepon_b" name="no_telepon_b"  autofocus="">
 									<span v-if="errors.no_telepon_b" id="no_telepon_b_error" class="label label-danger">
@@ -153,9 +174,10 @@
 
 							<div class="form-group">
 								<div class="col-md-5">
-									<button class="btn btn-primary" id="btnSimpanGerai" type="submit"> 
-										Tambah
+									<button class="btn btn-default" id="btnSimpanGerai" type="submit"> 
+										Buat
 									</button>
+									<router-link :to="{name: 'indexGerai'}" class="btn btn-default">Batal</router-link>
 								</div>
 							</div>
 
