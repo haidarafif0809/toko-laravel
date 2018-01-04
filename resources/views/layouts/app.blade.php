@@ -36,7 +36,7 @@
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
-                        @if (Auth::check())
+                        @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                             Dashboard
                         </router-link></li>
@@ -48,7 +48,7 @@
                         <li class='w-lnk'><router-link :to="{name: 'indexGerai'}">
                             Gerai
                         </router-link></li>
-                        @endif
+                        @endrole
                         @role('admin')
                         {{-- dropdown MASTER DATA --}}
                         <a href="">
@@ -69,7 +69,7 @@
                         </div>
                         {{-- dropdown --}}
                         @endrole
-                        @if (auth()->check())
+                        @role('member')
 
                         {{-- dropdown PRODUK--}}
                         <a href="">
@@ -106,12 +106,12 @@
                             Laporan
                         </router-link></li>
 
-                        @endif
+                        @endrole
 
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
-                        @if (Auth::check())
+                        @role('member')
                         <li><router-link :to="{name: 'indexDashboard'}">
                             <i class="fa fa-home  fa-2x"></i>
                         </router-link></li>
@@ -126,7 +126,7 @@
                             <i class="fa fa-map-marker fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Gerai</span>
-                        @endif
+                        @endrole
                         @role('admin')
                         <a href="">
                             <li data-toggle="collapse" href="#logo-masterdata-collapse">
@@ -147,7 +147,7 @@
                         </ul>
 
                         @endrole
-                        @if (auth()->check())
+                        @role('member')
                         <a href="">
                             <li data-toggle="collapse" href="#logo-produk-collapse">
                                 <i class="fa fa-briefcase fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
@@ -185,7 +185,7 @@
                             <i class="fa fa-file-archive-o fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Laporan</span>
-                        @endif
+                        @endrole
 
                     </ul>
                 </div>
