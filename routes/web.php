@@ -15,7 +15,7 @@
 
 Auth::routes();
 Route::get('/', function () {
-    return redirect('/home');
+	return redirect('/home');
 });
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -41,6 +41,8 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
 Route::get('/produk/edit/{id}', 'ProdukController@edit');
+Route::get('/produk/template_import', 'ProdukController@generateExcelTemplate');
+Route::post('/produk/import_produk', 'ProdukController@importExcel');
 
 // kategori barang
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);
@@ -90,8 +92,8 @@ Route::get('/toko/view', 'TokoController@view');
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
 Route::get('/profile-toko/view', 'ProfileTokoController@view');
 Route::get('/profile-toko/edit', [
-    'as'   => 'profile_toko.proses_ubah_profil_toko',
-    'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
+	'as'   => 'profile_toko.proses_ubah_profil_toko',
+	'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
 ]);
 Route::get('/profile-toko/provinsi', 'ProfileTokoController@provinsi');
 Route::get('/profile-toko/kabupaten/{id}/{type}', 'ProfileTokoController@kabupaten');
@@ -114,7 +116,9 @@ Route::get('gerai/pencarian', 'GeraiController@search');
 
 // status toko(aktif/nonaktof)
 Route::get('/user/status/{id}', [
-    'middleware' => ['auth'],
-    'as'         => 'user.status',
-    'uses'       => 'UserController@status',
+	'middleware' => ['auth'],
+	'as'         => 'user.status',
+	'uses'       => 'UserController@status',
 ]);
+
+Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');

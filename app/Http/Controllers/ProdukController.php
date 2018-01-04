@@ -6,9 +6,11 @@ use App\KategoriProduk;
 use App\Produk;
 use Auth;
 use Carbon\Carbon;
+use Excel;
 use File;
 use Illuminate\Http\Request;
 use Image;
+use Validator;
 
 class ProdukController extends Controller
 {
@@ -222,5 +224,77 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         return Produk::destroy($id);
+    }
+
+    public function generateExcelTemplate()
+    {
+        Excel::create('Template Import Produk', function ($excel) {
+            // Set the properties
+            $excel->setTitle('Template Import Produk')
+                ->setCreator('Toko Dasar')
+                ->setCompany('Toko Dasar')
+                ->setDescription('Template Import Produk di Aplikasi Toko Dasar');
+            $excel->sheet('Data Produk', function ($sheet) {
+                $row = 1;
+                $sheet->row($row, [
+                    'Kode Produk',
+                    'Nama Produk',
+                    'Kategori Produk',
+                    'Harga Beli',
+                    'Harga Jual',
+                    'Bisa Dijual',
+                ]);
+            });
+        })->export('xlsx');
+    }
+
+    public function importExcel(Request $request)
+    {
+        // validasi untuk memastikan file yang diupload adalah excel
+        $this->validate($request, ['excel' => 'required|mimes:xls,xlsx']);
+        // ambil file yang baru diupload
+        $excel = $request->file('excel');
+        // baca sheet pertama
+        $excels = Excel::selectSheetsByIndex(0)->load($excel, function ($reader) {
+            // options, jika ada
+        })->get();
+        // rule untuk validasi setiap row pada file excel
+
+        $rowRules = [
+            'Kode Produk'     => 'required',
+            'Nama Produk'     => 'required',
+            'Kategori Produk' => 'required',
+            'Harga Beli'      => 'required',
+            'Harga Jual'      => 'required',
+            'Bisa Dijual'     => 'required',
+        ];
+        // Catat semua id buku baru
+        // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
+        $produk_id = [];
+        // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
+        foreach ($excels as $row) {
+            // Membuat validasi untuk row di excel
+            // Disini kita ubah baris yang sedang di proses menjadi array
+            $validator = Validator::make($row->toArray(), $rowRules);
+
+            // buat buku baru
+            $produk = Produk::create([
+                'kode_produk'     => $row['kode_produk'],
+                'nama_produk'     => $row['nama_produk'],
+                'kategori_produk' => $row['kategori_produk'],
+                'kategori_produk' => $row['kategori_produk'],
+                'harga_beli'      => $row['harga_beli'],
+                'harga_beli'      => $row['harga_beli'],
+                'harga_jual'      => $row['harga_jual'],
+                'harga_jual'      => $row['harga_jual'],
+                'bisa_dijual'     => $row['bisa_dijual'],
+            ]);
+            // catat id dari buku yang baru dibuat
+            array_push($produk_id, $produk->produk_id);
+        }
+        // Ambil semua buku yang baru dibuat
+        $produks = Produk::whereIn('produk_id', $produk_id)->get();
+
+        return redirect()->back();
     }
 }

@@ -22,7 +22,7 @@ class UserShouldAktif
             Auth::logout();
             Session::flash("flash_notification", [
                 "level"   => "warning",
-                "message" => "Akun Anda tidak aktif. Menunggu Aktifasi dari Admin Toko Dasar.",
+                "message" => "Kami mengirimkan kode aktivasi. Periksa email Anda.",
             ]);
             return redirect('/login');
         }
