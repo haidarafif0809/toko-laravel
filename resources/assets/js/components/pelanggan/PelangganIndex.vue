@@ -296,8 +296,8 @@
 								<option value="2018"  >2018</option>
 							</select>
 							<button class="btn btn-success">
-								<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
-								import
+								<i class="fa fa-download" aria-hidden="true"></i>
+								Excel
 							</button>
 						</div>
 						<table border="2">

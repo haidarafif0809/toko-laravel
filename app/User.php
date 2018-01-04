@@ -46,6 +46,16 @@ class User extends Authenticatable
             $message->to($user->email, $user->name)->subject('Verifikasi Akun Toko Dasar');
         });
     }
+    public function sendVerificationStaff()
+    {
+        $user = $this;
+        $token = str_random(40);
+        $user->verification_token = $token;
+        $user->save();
+        Mail::send('auth.emails.verificationStaff', compact('user', 'token'), function ($message) use ($user) {
+            $message->to($user->email, $user->nama_pemilik)->subject('Verifikasi Akun Toko Dasar');
+        });
+    }
 
     public function verify()
     {

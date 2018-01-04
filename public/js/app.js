@@ -73997,10 +73997,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("button", { staticClass: "btn btn-success" }, [
         _c("i", {
-          staticClass: "fa fa-arrow-circle-o-up",
+          staticClass: "fa fa-download",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\n\t\t\t\t\t\t\timport\n\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\tExcel\n\t\t\t\t\t\t")
       ])
     ])
   },
@@ -77124,6 +77124,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -77339,122 +77340,124 @@ var render = function() {
                     "tbody",
                     { staticClass: "data-ada" },
                     _vm._l(_vm.tokos, function(toko, index) {
-                      return _c(
-                        "tr",
-                        [
-                          _c("td", [_vm._v(_vm._s(toko.nama_tokos))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.nama_pemilik))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.email))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.no_telp))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.created_at))]),
-                          _vm._v(" "),
-                          toko.statusToko == 1
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { type: "button", size: "xs" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.statusTokoNonaktif(
-                                          toko.id_user,
-                                          index,
-                                          toko.nama_tokos
-                                        )
-                                      }
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(toko.nama_tokos))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.nama_pemilik))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.no_telp))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.created_at))]),
+                        _vm._v(" "),
+                        toko.statusToko == 1
+                          ? _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { type: "button", size: "xs" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.statusTokoNonaktif(
+                                        toko.id_user,
+                                        index,
+                                        toko.nama_tokos
+                                      )
                                     }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-ban",
-                                      attrs: { "aria-hidden": "true" }
-                                    }),
-                                    _vm._v(
-                                      "\n                    Nonaktifkan Toko \n                  "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { type: "button", size: "xs" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.statusTokoAktif(
-                                          toko.id_user,
-                                          index,
-                                          toko.nama_tokos
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-check-circle",
-                                      attrs: { "aria-hidden": "true" }
-                                    }),
-                                    _vm._v(
-                                      "\n                    Aktifkan Toko \n                  "
-                                    )
-                                  ]
-                                )
-                              ]),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-xs btn-success",
-                              attrs: {
-                                to: {
-                                  name: "editToko",
-                                  params: { id: toko.id_toko }
+                                  }
                                 },
-                                id: "edit" + toko.id
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-pencil",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v("Edit")
-                            ]
-                          ),
-                          _vm._v(" |\n                "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteToko(
-                                    toko.id_toko,
-                                    index,
-                                    toko.nama_tokos
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-ban",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
+                                  _vm._v(
+                                    "\n                    Nonaktifkan Toko \n                  "
                                   )
+                                ]
+                              )
+                            ])
+                          : _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { type: "button", size: "xs" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.statusTokoAktif(
+                                        toko.id_user,
+                                        index,
+                                        toko.nama_tokos
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-check-circle",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
+                                  _vm._v(
+                                    "\n                    Aktifkan Toko \n                  "
+                                  )
+                                ]
+                              )
+                            ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-success",
+                                attrs: {
+                                  to: {
+                                    name: "editToko",
+                                    params: { id: toko.id_toko }
+                                  },
+                                  id: "edit" + toko.id
                                 }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-trash-o",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v("Delete")
-                            ]
-                          )
-                        ],
-                        1
-                      )
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-pencil",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("Edit")
+                              ]
+                            ),
+                            _vm._v(" |\n                  "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-xs btn-danger",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteToko(
+                                      toko.id_toko,
+                                      index,
+                                      toko.nama_tokos
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("Delete")
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
                     })
                   )
                 : _vm.loading == true
@@ -77529,7 +77532,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n                Sedang Memuat Data\n              ")
+        _vm._v("\n                  Sedang Memuat Data\n                ")
       ])
     ])
   },
@@ -77539,7 +77542,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n                Tidak Ada Data\n              ")
+        _vm._v("\n                  Tidak Ada Data\n                ")
       ])
     ])
   }
@@ -81654,7 +81657,7 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\n.label[data-v-4163792d] {\r\n    display: inline-block;\r\n    padding: 2px 10px;\r\n    font-size: 11.844px;\r\n    font-weight: 1000;\r\n    line-height: 20px;\r\n    color: white;\r\n    vertical-align: baseline;\r\n    white-space: nowrap;\r\n    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);\r\n    background-color: #999999;\n}\r\n", ""]);
 
 // exports
 
@@ -81665,6 +81668,27 @@ exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81847,11 +81871,27 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Staf Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Staff Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Staf Toko")]),
+      _c(
+        "h4",
+        { staticClass: "panel-heading" },
+        [
+          _c("i", {
+            staticClass: "fa fa-cog",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("B", [_vm._v("PENGATURAN STAFF")])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _vm._m(0, false, false),
       _vm._v(" "),
       _c(
         "div",
@@ -81868,7 +81908,13 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { name: "createStafToko" } }
                     },
-                    [_vm._v("Tambah Staf Toko")]
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-user-plus",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" Tambah Staff Toko")
+                    ]
                   )
                 ],
                 1
@@ -81912,7 +81958,7 @@ var render = function() {
                 attrs: { cellspacing: "0", width: "100%" }
               },
               [
-                _vm._m(0, false, false),
+                _vm._m(1, false, false),
                 _vm._v(" "),
                 _vm.users.length > 0 && _vm.loading == false
                   ? _c(
@@ -81952,8 +81998,12 @@ var render = function() {
                                   }
                                 },
                                 [
+                                  _c("i", {
+                                    staticClass: "fa fa-pencil",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
                                   _vm._v(
-                                    "Edit\n                                "
+                                    " Edit\n                                "
                                   )
                                 ]
                               ),
@@ -81974,8 +82024,12 @@ var render = function() {
                                   }
                                 },
                                 [
+                                  _c("i", {
+                                    staticClass: "fa fa-trash-o",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
                                   _vm._v(
-                                    "Hapus\n                                "
+                                    " Hapus\n                                "
                                   )
                                 ]
                               )
@@ -81987,10 +82041,10 @@ var render = function() {
                     )
                   : _vm.loading == true
                     ? _c("tbody", { staticClass: "data-ada" }, [
-                        _vm._m(1, false, false)
+                        _vm._m(2, false, false)
                       ])
                     : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                        _vm._m(2, false, false)
+                        _vm._m(3, false, false)
                       ])
               ]
             )
@@ -82028,10 +82082,24 @@ var render = function() {
         ],
         1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4, false, false)
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("i", {
+        staticClass: "fa fa-user-circle",
+        attrs: { "aria-hidden": "true" }
+      }),
+      _vm._v(" Staff Toko")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -82067,6 +82135,30 @@ var staticRenderFns = [
         _vm._v(
           "\n                                Tidak Ada Data\n                            "
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading " }, [
+        _c("h4", { staticClass: "label" }, [
+          _c("i", {
+            staticClass: "fa fa-info-circle ",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" INFO")
+        ]),
+        _vm._v(" "),
+        _c("b", [
+          _c("i", [
+            _vm._v(
+              " Undangan kepada staff baru akan diberikan melalui Email konfirmasi."
+            )
+          ])
+        ])
       ])
     ])
   }
@@ -82215,7 +82307,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -82238,7 +82329,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Staf ' + app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
 				app.alert(app.message);
 				app.user.nama_pemilik = '';
 				app.user.email = '';
@@ -82285,13 +82376,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexStafToko" } } }, [
-            _vm._v("Staf Toko")
+            _vm._v("Staff Toko")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staf Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staff Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -82321,7 +82412,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pemilik" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staff\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -82338,7 +82429,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Isi Nama Staf",
+                        placeholder: "Isi Nama Staff",
                         type: "text",
                         name: "nama_pemilik",
                         autofocus: ""
@@ -82643,7 +82734,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staf Toko")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staff Toko")])
     ])
   },
   function() {
@@ -82658,7 +82749,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary",
             attrs: { id: "btnSimpanUser", type: "submit" }
           },
-          [_vm._v(" \n\t\t\t\t\t\t\t\t\tTambah\n\t\t\t\t\t\t\t\t")]
+          [_vm._v(" \n\t\t\t\t\t\t\t\t\tUndang\n\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -82817,7 +82908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newUser = app.user;
 			axios.patch(app.url + '/' + app.userId, newUser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit Staf ' + app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil Mengedit Staff ' + app.user.nama_pemilik;
 				app.alert(app.message);
 				app.user.nama_pemilik = '';
 				app.user.email = '';
@@ -82873,14 +82964,14 @@ var render = function() {
       _c(
         "li",
         [
-          _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("Staf")
+          _c("router-link", { attrs: { to: { name: "indexStafToko" } } }, [
+            _vm._v("Staff Toko")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit Staf")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Staff")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -82910,7 +83001,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pemilik" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staff\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -82927,7 +83018,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Isi Nama Staf",
+                        placeholder: "Isi Nama Staff",
                         type: "text",
                         name: "nama_pemilik",
                         autofocus: ""
@@ -83098,7 +83189,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staf")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staff")])
     ])
   },
   function() {
@@ -83133,17 +83224,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(378)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(360)
 /* template */
-var __vue_template__ = __webpack_require__(361)
+var __vue_template__ = __webpack_require__(380)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-541c458d"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -83182,6 +83277,24 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -83325,230 +83438,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 361 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("ul", { staticClass: "breadcrumb" }, [
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
-            _vm._v("Home")
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        [
-          _c("router-link", { attrs: { to: { name: "indexGerai" } } }, [
-            _vm._v("Gerai")
-          ])
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "panel panel-default" },
-      [
-        _c("div", { staticClass: "panel-heading" }, [_vm._v("Gerai")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel-body" }, [
-          _c("div", { staticClass: "tambah" }, [
-            _c(
-              "p",
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { to: { name: "createGerai" } }
-                  },
-                  [_vm._v("Tambah Gerai")]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "pencarian" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.search,
-                  expression: "search"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Cari gerai.." },
-              domProps: { value: _vm.search },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.search = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(0, false, false),
-            _vm._v(" "),
-            _vm.gerais.length > 0 && _vm.loading == false
-              ? _c(
-                  "tbody",
-                  { staticClass: "data-ada" },
-                  _vm._l(_vm.gerais, function(gerai, index) {
-                    return _c("tr", [
-                      _c("td", [_vm._v(_vm._s(gerai.nama_gerai))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(gerai.kota))]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-xs btn-default",
-                              attrs: {
-                                to: {
-                                  name: "editGerai",
-                                  params: { id: gerai.id }
-                                },
-                                id: "edit-" + gerai.id
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\tEdit \n\t\t\t\t\t\t\t\t"
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteEntry(
-                                    gerai.id,
-                                    index,
-                                    gerai.nama_gerai
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("\n\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t")]
-                          )
-                        ],
-                        1
-                      )
-                    ])
-                  })
-                )
-              : _vm.loading == true
-                ? _c("tbody", { staticClass: "data-ada" }, [
-                    _vm._m(1, false, false)
-                  ])
-                : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                    _vm._m(2, false, false)
-                  ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { attrs: { align: "right" } },
-          [
-            _vm.search == ""
-              ? _c("pagination", {
-                  attrs: { data: _vm.geraisData, limit: 1 },
-                  on: { "pagination-change-page": _vm.getGerai }
-                })
-              : _vm._e()
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { attrs: { align: "right" } },
-          [
-            _vm.search != ""
-              ? _c("pagination", {
-                  attrs: { data: _vm.geraisData, limit: 1 },
-                  on: { "pagination-change-page": _vm.getGerai }
-                })
-              : _vm._e()
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Nama")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Kota")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Aksi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-541c458d", module.exports)
-  }
-}
-
-/***/ }),
+/* 361 */,
 /* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -83635,7 +83525,7 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\n#icon[data-v-5720b6d1]:hover{\r\n\tbackground-color: #00BCD4;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\n#icon[data-v-5720b6d1]:hover{\r\n\tbackground-color: #00BCD4;\n}\n.box[data-v-5720b6d1]{\r\n\twidth: 200px;\r\n\theight:40px;\r\n\tbackground-color: #FCF8E3;\r\n\ttext-align: center;\r\n\tborder:1px solid #ffafaf;\n}\n#border[data-v-5720b6d1]{\r\n\tborder:1px solid #D3E0E9;\n}\n#btnSimpanGerai[data-v-5720b6d1]{\r\n\tbackground-color: #FFE24F;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -83646,6 +83536,28 @@ exports.push([module.i, "\n.row[data-v-5720b6d1]{\r\n\tborder-color:#FDA698;\n}\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -83921,9 +83833,25 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-7" }, [
         _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }),
+          _vm._v(" "),
           _vm._m(0, false, false),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "panel-body", attrs: { id: "border" } }, [
+            _c("div", { staticClass: "box" }, [
+              _c(
+                "label",
+                [
+                  _vm._v("Kolom bertanda "),
+                  _c("font", { attrs: { size: "5px", color: "red" } }, [
+                    _vm._v("*")
+                  ]),
+                  _vm._v(" wajib diisi.")
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "form",
               {
@@ -83936,22 +83864,6 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "col-md-7" }, [
-                    _c(
-                      "label",
-                      [
-                        _vm._v("Kolom bertanda "),
-                        _c("font", { attrs: { size: "5px", color: "red" } }, [
-                          _vm._v("*")
-                        ]),
-                        _vm._v(" wajib diisi.")
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "col-md-7" }, [
                     _c(
@@ -84130,7 +84042,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-7" }, [
                     _c("label", { attrs: { for: "no_telepon_a" } }, [
                       _vm._v(
-                        "\n\t\t\t\t\t\t\t\t\tNo Telepon Gerai 1\n\t\t\t\t\t\t\t\t"
+                        "\n\t\t\t\t\t\t\t\t\tNomor Telepon Gerai 1\n\t\t\t\t\t\t\t\t"
                       )
                     ]),
                     _vm._v(" "),
@@ -84189,7 +84101,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-7" }, [
                     _c("label", { attrs: { for: "no_telepon_b" } }, [
                       _vm._v(
-                        "\n\t\t\t\t\t\t\t\t\tNo Telepon Gerai 2\n\t\t\t\t\t\t\t\t"
+                        "\n\t\t\t\t\t\t\t\t\tNomor Telepon Gerai 2\n\t\t\t\t\t\t\t\t"
                       )
                     ]),
                     _vm._v(" "),
@@ -84490,7 +84402,32 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, false, false)
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-5" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { id: "btnSimpanGerai", type: "submit" }
+                        },
+                        [_vm._v(" \n\t\t\t\t\t\t\t\t\tBuat\n\t\t\t\t\t\t\t\t")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { to: { name: "indexGerai" } }
+                        },
+                        [_vm._v("Batal")]
+                      )
+                    ],
+                    1
+                  )
+                ])
               ]
             )
           ])
@@ -84506,24 +84443,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Gerai")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-5" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "btnSimpanGerai", type: "submit" }
-          },
-          [_vm._v(" \n\t\t\t\t\t\t\t\t\tTambah\n\t\t\t\t\t\t\t\t")]
-        )
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row-fluid" }, [
+        _c("div", { staticClass: "area-top clearfix" }, [
+          _c("div", { staticClass: "pull-left header" }, [
+            _c("h4", { staticClass: "uppercase" }, [
+              _c("i", { staticClass: "fa fa-map-marker fa-1x" }),
+              _vm._v("\n\t\t\t\t\t\t\t\tTambah Gerai")
+            ])
+          ])
+        ])
       ])
     ])
   }
@@ -84542,17 +84471,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(381)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(368)
 /* template */
-var __vue_template__ = __webpack_require__(369)
+var __vue_template__ = __webpack_require__(383)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-4aea781f"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -84591,6 +84524,28 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -84816,7 +84771,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 369 */
+/* 369 */,
+/* 370 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(379);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("2b8407fa", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-541c458d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GeraiIndex.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-541c458d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GeraiIndex.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 379 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n#border[data-v-541c458d]{\r\n\tborder:1px solid #D3E0E9;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -84824,6 +84833,302 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("ul", { staticClass: "breadcrumb" }, [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexDashboard" } } }, [
+            _vm._v("Home")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: { name: "indexGerai" } } }, [
+            _vm._v("Gerai")
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "panel panel-default" },
+      [
+        _c("div", { staticClass: "panel-heading" }),
+        _vm._v(" "),
+        _vm._m(0, false, false),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body", attrs: { id: "border" } }, [
+          _c("div", { staticClass: "tambah" }, [
+            _c(
+              "p",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { to: { name: "createGerai" } }
+                  },
+                  [
+                    _c("span", { staticClass: "fa fa-plus fa-1x" }),
+                    _vm._v(" Tambah Gerai")
+                  ]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pencarian" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Cari gerai.." },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(1, false, false),
+            _vm._v(" "),
+            _vm.gerais.length > 0 && _vm.loading == false
+              ? _c(
+                  "tbody",
+                  { staticClass: "data-ada" },
+                  _vm._l(_vm.gerais, function(gerai, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(gerai.nama_gerai))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(gerai.kota))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-xs btn-default",
+                              attrs: {
+                                to: {
+                                  name: "editGerai",
+                                  params: { id: gerai.id }
+                                },
+                                id: "edit-" + gerai.id
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-pencil",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" Edit \n\t\t\t\t\t\t\t\t")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-xs btn-danger",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteEntry(
+                                    gerai.id,
+                                    index,
+                                    gerai.nama_gerai
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-trash",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(
+                                " \n\t\t\t\t\t\t\t\tDelete\n\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  })
+                )
+              : _vm.loading == true
+                ? _c("tbody", { staticClass: "data-ada" }, [
+                    _vm._m(2, false, false)
+                  ])
+                : _c("tbody", { staticClass: "tidak-ada-data" }, [
+                    _vm._m(3, false, false)
+                  ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _vm.search == ""
+              ? _c("pagination", {
+                  attrs: { data: _vm.geraisData, limit: 1 },
+                  on: { "pagination-change-page": _vm.getGerai }
+                })
+              : _vm._e()
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { attrs: { align: "right" } },
+          [
+            _vm.search != ""
+              ? _c("pagination", {
+                  attrs: { data: _vm.geraisData, limit: 1 },
+                  on: { "pagination-change-page": _vm.getGerai }
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row-fluid" }, [
+        _c("div", { staticClass: "area-top clearfix" }, [
+          _c("div", { staticClass: "pull-left header" }, [
+            _c("h4", { staticClass: "uppercase" }, [
+              _c("i", { staticClass: "fa fa-map-marker fa-1x" }),
+              _vm._v("Pengaturan Gerai")
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Nama")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Kota")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Aksi")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\tSedang Memuat Data\n\t\t\t\t\t\t")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
+        _vm._v("\n\t\t\t\t\t\t\tTidak Ada Data\n\t\t\t\t\t\t")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-541c458d", module.exports)
+  }
+}
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(382);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("9baa58c2", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4aea781f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GeraiEdit.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4aea781f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GeraiEdit.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 382 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n#btnSimpangerai[data-v-4aea781f]{\r\n\tbackground-color:#FFE24F;\n}\n.box[data-v-4aea781f]{\r\n\twidth:200px;\r\n\theight:40px;\r\n\tbackground-color:#FCF8E3;\r\n\ttext-align:center;\r\n\tborder:1px solid #ffafaf;\n}\n#border[data-v-4aea781f]{\r\n\tborder:1px solid #D3E0E9;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 383 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("ul", { staticClass: "breadcrumb" }, [
       _c(
         "li",
@@ -84853,9 +85158,25 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-7" }, [
         _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }),
+          _vm._v(" "),
           _vm._m(0, false, false),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "panel-body", attrs: { id: "border" } }, [
+            _c("div", { staticClass: "box" }, [
+              _c(
+                "label",
+                [
+                  _vm._v("Kolom bertanda "),
+                  _c("font", { attrs: { size: "5px", color: "red" } }, [
+                    _vm._v("*")
+                  ]),
+                  _vm._v(" wajib diisi.")
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "form",
               {
@@ -84868,22 +85189,6 @@ var render = function() {
                 }
               },
               [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "col-md-7" }, [
-                    _c(
-                      "label",
-                      [
-                        _vm._v("Kolom bertanda "),
-                        _c("font", { attrs: { size: "5px", color: "red" } }, [
-                          _vm._v("*")
-                        ]),
-                        _vm._v(" wajib diisi.")
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "col-md-7" }, [
                     _c(
@@ -85062,7 +85367,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-7" }, [
                     _c("label", { attrs: { for: "no_telepon_a" } }, [
                       _vm._v(
-                        "\n\t\t\t\t\t\t\t\t\tNo Telepon Gerai 1\n\t\t\t\t\t\t\t\t"
+                        "\n\t\t\t\t\t\t\t\t\tNomor Telepon Gerai 1\n\t\t\t\t\t\t\t\t"
                       )
                     ]),
                     _vm._v(" "),
@@ -85121,7 +85426,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-7" }, [
                     _c("label", { attrs: { for: "no_telepon_b" } }, [
                       _vm._v(
-                        "\n\t\t\t\t\t\t\t\t\tNo Telepon Gerai 2\n\t\t\t\t\t\t\t\t"
+                        "\n\t\t\t\t\t\t\t\t\tNomor Telepon Gerai 2\n\t\t\t\t\t\t\t\t"
                       )
                     ]),
                     _vm._v(" "),
@@ -85420,7 +85725,32 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, false, false)
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-7" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { id: "btnSimpangerai", type: "submit" }
+                        },
+                        [_vm._v("\n\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-default",
+                          attrs: { to: { name: "indexGerai" } }
+                        },
+                        [_vm._v("Batal")]
+                      )
+                    ],
+                    1
+                  )
+                ])
               ]
             )
           ])
@@ -85436,24 +85766,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Gerai")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-7" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { id: "btnSimpangerai", type: "submit" }
-          },
-          [_vm._v("\n\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t")]
-        )
+    return _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row-fluid" }, [
+        _c("div", { staticClass: "area-top clearfix" }, [
+          _c("div", { staticClass: "pull-left header" }, [
+            _c("h4", { staticClass: "uppercase" }, [
+              _c("i", { staticClass: "fa fa-map-marker fa-1x" }),
+              _vm._v("\n\t\t\t\t\t\t\t\tEdit Gerai")
+            ])
+          ])
+        ])
       ])
     ])
   }
@@ -85466,12 +85788,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-4aea781f", module.exports)
   }
 }
-
-/***/ }),
-/* 370 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

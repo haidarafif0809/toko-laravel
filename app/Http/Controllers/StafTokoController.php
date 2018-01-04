@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
 use Auth;
@@ -61,6 +61,7 @@ class StafTokoController extends Controller
         ]);
         $memberRole = Role::where('name', 'member')->first();
         $tambah_user->attachRole($memberRole);
+        $tambah_user->sendVerificationStaff();
         return $tambah_user;
     }
 
@@ -116,12 +117,13 @@ class StafTokoController extends Controller
      */
     public function destroy($id)
     {
+
         return User::destroy($id);
     }
 
     public function view()
     {
-        return User::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(10);
+        return User::where('toko_id', Auth::user()->toko_id)->where('type', 2)->orderBy('id', 'desc')->paginate(10);
     }
 
     public function search(Request $request)
