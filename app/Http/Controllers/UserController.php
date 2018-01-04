@@ -57,7 +57,7 @@ class UserController extends Controller
     }
     public function view()
     {
-        $user_view = User::orderBy('id', 'desc')->paginate(10);
+        $user_view = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
         return response()->json($user_view);
     }
     public function pencarian(Request $request)

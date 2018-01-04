@@ -7,11 +7,13 @@
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.4",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravolt/indonesia": "^0.7.0",
+        "maatwebsite/excel": "^2.1",
         "nesbot/carbon": "^1.22",
         "santigarcor/laratrust": "4.0.*",
         "yajra/laravel-auditable": "^1.1"

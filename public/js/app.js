@@ -69872,95 +69872,156 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      produks: [],
-      produksData: {},
-      pencarian: "",
-      url: window.location.origin + window.location.pathname.replace("home", "produk"),
-      loading: true
-    };
-  },
-  watch: {
-    // whenever question changes, this function will run
-    pencarian: function pencarian(newQuestion) {
-      this.searchData();
-    }
-  },
-  mounted: function mounted() {
-    var app = this;
-    app.getProduks();
-  },
-
-  methods: {
-    getProduks: function getProduks(page) {
-      var app = this;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      axios.get(app.url + '/view?page=' + page).then(function (resp) {
-        app.produks = resp.data.data;
-        app.produksData = resp.data;
-        app.loading = false;
-      }).catch(function (resp) {
-        alert("Could not load produks");
-        app.loading = false;
-      });
+    data: function data() {
+        return {
+            produks: [],
+            produksData: {},
+            import_produk: {
+                excel: ''
+            },
+            pencarian: "",
+            url: window.location.origin + window.location.pathname.replace("home", "produk"),
+            url_template_import_produk: window.location.origin + window.location.pathname.replace("home", "produk/template_import"),
+            url_import_produk: window.location.origin + window.location.pathname.replace("home", "produk/import_produk"),
+            loading: true
+        };
     },
-    searchData: function searchData(page) {
-      var app = this;
-      app.loading = true;
-      if (typeof page === 'undefined') {
-        page = 1;
-      }
-
-      axios.get(app.url + '/cari?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
-        app.produks = resp.data.data;
-        app.produksData = resp.data;
-        app.loading = false;
-      }).catch(function (resp) {
-        alert("Tidak dapat memuat produk..");
-        app.loading = false;
-      });
-    },
-    deleteEntry: function deleteEntry(id, index, nama_produk) {
-      var _this = this;
-
-      // if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
-
-      this.$swal({
-        title: "Hapus?",
-        text: "Yakin Ingin Menghapus produk " + nama_produk + " ?",
-        icon: "warning",
-        buttons: ['Batal', 'Hapus'],
-        dangerMode: true
-      }).then(function (willDelete) {
-        if (willDelete) {
-          var app = _this;
-          axios.delete(app.url + '/' + id).then(function (resp) {
-            app.getProduks();
-            app.alert("Berhasil Menghapus produk " + nama_produk);
-          }).catch(function (resp) {
-            app.alert("Tidak dapat menghapus produk!");
-          });
-        } else {
-          return;
+    watch: {
+        // whenever question changes, this function will run
+        pencarian: function pencarian(newQuestion) {
+            this.searchData();
         }
-      });
-      // if (hapus) {
-      // }
     },
-    alert: function alert(pesan) {
-      this.$swal({
-        title: "Berhasil!",
-        text: pesan,
-        icon: "success"
-      });
+    mounted: function mounted() {
+        var app = this;
+        app.getProduks();
+    },
+
+    methods: {
+        getProduks: function getProduks(page) {
+            var app = this;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+
+            axios.get(app.url + '/view?page=' + page).then(function (resp) {
+                app.produks = resp.data.data;
+                app.produksData = resp.data;
+                app.loading = false;
+            }).catch(function (resp) {
+                alert("Could not load produks");
+                app.loading = false;
+            });
+        },
+        searchData: function searchData(page) {
+            var app = this;
+            app.loading = true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+
+            axios.get(app.url + '/cari?pencarian=' + app.pencarian + '&page=' + page).then(function (resp) {
+                app.produks = resp.data.data;
+                app.produksData = resp.data;
+                app.loading = false;
+            }).catch(function (resp) {
+                alert("Tidak dapat memuat produk..");
+                app.loading = false;
+            });
+        },
+        deleteEntry: function deleteEntry(id, index, nama_produk) {
+            var _this = this;
+
+            this.$swal({
+                title: "Hapus?",
+                text: "Yakin Ingin Menghapus produk " + nama_produk + " ?",
+                icon: "warning",
+                buttons: ['Batal', 'Hapus'],
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + id).then(function (resp) {
+                        app.getProduks();
+                        app.alert('Berhasil!', 'Berhasil Menghapus produk ' + nama_produk, 'success');
+                    }).catch(function (resp) {
+                        app.alert('Gagal!', 'Tidak dapat menghapus produk!', 'warning');
+                    });
+                } else {
+                    return;
+                }
+            });
+        },
+        importProduk: function importProduk() {
+            var app = this;
+            var newProduk = new FormData();
+            var file = document.getElementById('excel').files[0];
+            if (file != undefined) {
+                newProduk.append('excel', file);
+            } else {
+                app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+                return;
+            }
+
+            axios.post(app.url_import_produk, newProduk).then(function (resp) {
+                app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+            }).catch(function (resp) {
+                console.log(resp);
+                app.alert('Gagal!', 'ada yang salah dengan proses uploadnya', 'warning');
+            });
+        },
+        alert: function alert(title, pesan, icon) {
+            this.$swal({
+                title: title,
+                text: pesan,
+                icon: icon
+            });
+        }
     }
-  }
 });
 
 /***/ }),
@@ -69986,6 +70047,68 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Produk")])
     ]),
     _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal fade", attrs: { id: "myModal", role: "dialog" } },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "form-horizontal",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.importProduk()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-2 control-label",
+                        attrs: { for: "template" }
+                      },
+                      [_vm._v("Template")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _vm._v("\n                                Gunakan "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            name: "template",
+                            href: _vm.url_template_import_produk
+                          }
+                        },
+                        [_vm._v("Template")]
+                      ),
+                      _vm._v(
+                        " untuk Import Produk\n                            "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1, false, false),
+                  _vm._v(" "),
+                  _vm._m(2, false, false)
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(3, false, false)
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
       _c("div", { staticClass: "panel-heading" }, [_vm._v("Produk")]),
       _vm._v(" "),
@@ -69994,22 +70117,29 @@ var render = function() {
         { staticClass: "panel-body" },
         [
           _c("div", { staticClass: "table-responsive" }, [
-            _c("div", { staticClass: "tambah" }, [
-              _c(
-                "p",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { to: { name: "createProduk" } }
-                    },
-                    [_vm._v("Tambah Produk")]
-                  )
-                ],
-                1
-              )
-            ]),
+            _c(
+              "p",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { to: { name: "createProduk" } }
+                  },
+                  [_vm._v("Tambah Produk")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { "data-toggle": "modal", "data-target": "#myModal" }
+                  },
+                  [_vm._v("Import Produk")]
+                )
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "pencarian" }, [
               _c("input", {
@@ -70040,7 +70170,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("table", { staticClass: "table table-striped table-hover" }, [
-              _vm._m(0, false, false),
+              _vm._m(4, false, false),
               _vm._v(" "),
               _vm.produks.length > 0 && _vm.loading == false
                 ? _c(
@@ -70063,9 +70193,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                    " +
+                                  "\n                                    " +
                                     _vm._s(produk.nama_produk) +
-                                    "\n                  "
+                                    "\n                                "
                                 )
                               ]
                             )
@@ -70090,7 +70220,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                  Edit \n                "
+                                  "\n                                    Edit \n                                "
                                 )
                               ]
                             ),
@@ -70115,7 +70245,7 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n                  Hapus\n                "
+                                  "\n                                    Hapus\n                                "
                                 )
                               ]
                             )
@@ -70126,7 +70256,7 @@ var render = function() {
                     })
                   )
                 : _c("tbody", { staticClass: "data-tidak-ada" }, [
-                    _vm._m(1, false, false)
+                    _vm._m(5, false, false)
                   ])
             ])
           ]),
@@ -70151,6 +70281,67 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Import Produk")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "col-md-2 control-label", attrs: { for: "excel" } },
+        [_vm._v("Pilih file")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("input", { attrs: { name: "excel", type: "file", id: "excel" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Simpan" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -77101,6 +77292,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -77128,7 +77403,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             message: '',
             disable: 1,
             edit: 0,
-            formPelanggan: 0,
+            formPelanggan: 1,
+            riwayatBelanja: 0,
+            perilakuPelanggan: 0,
             settings: {
                 placeholder: 'Pilih Jenis Kelamin'
             }
@@ -77138,7 +77415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var app = this;
         app.loading = true;
         app.getPelanggans();
-        app.getPelanggan();
+        // app.getPelanggan();
     },
 
     watch: {
@@ -77150,12 +77427,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         tentangPelanggan: function tentangPelanggan() {
             this.formPelanggan = 1;
+            this.riwayatBelanja = 0;
+            this.perilakuPelanggan = 0;
         },
         riwayatTransaksi: function riwayatTransaksi() {
             this.formPelanggan = 0;
+            this.riwayatBelanja = 1;
+            this.perilakuPelanggan = 0;
         },
         perilaku: function perilaku() {
             this.formPelanggan = 0;
+            this.riwayatBelanja = 0;
+            this.perilakuPelanggan = 1;
         },
         tambahPelanggan: function tambahPelanggan() {
             this.pelanggan.kode_pelanggan = '';
@@ -77198,7 +77481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         editPelanggan: function editPelanggan() {
             this.disable = 2;
             this.edit = 0;
-            this.pelanggan.id = id;
+            // this.pelanggan.id = id
         },
         getPelanggans: function getPelanggans(page) {
             var app = this;
@@ -77229,37 +77512,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 alert("Could not load pelanggans");
             });
         },
-        deleteEntry: function deleteEntry(id, index, nama_pelanggan) {
-            var _this = this;
-
-            swal({
-                title: "Konfirmasi Hapus",
-                text: "Anda Yakin Ingin Menghapus " + nama_pelanggan + " ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
-                    var app = _this;
-                    axios.delete(app.url + '/' + id).then(function (resp) {
-                        app.getPelanggans();
-                        swal("Pelanggan Berhasil Dihapus!  ", {
-                            icon: "success"
-                        });
-                    }).catch(function (resp) {
-                        app.$router.replace('/pelanggan/');
-                        swal("Gagal Menghapus Pelanggan!", {
-                            icon: "warning"
-                        });
-                    });
-                }
-                _this.$router.replace('/pelanggan/');
-            });
-        },
         saveForm: function saveForm() {
             var app = this;
-            var newPelanggan = app.pelanggan;
-            axios.post(app.url, newPelanggan).then(function (resp) {
+            var Pelanggan = app.pelanggan;
+            axios.post(app.url, Pelanggan).then(function (resp) {
                 app.alert();
 
                 app.getPelanggans();
@@ -77273,6 +77529,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.pelanggan.alamat = '';
                 app.pelanggan.kode_pos = '';
                 app.pelanggan.catatan = '';
+                app.disable = 1;
+                app.edit = 0;
                 app.$router.replace('/pelanggan');
             }).catch(function (resp) {
                 app.errors = resp.response.data.errors;
@@ -77288,10 +77546,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         saveFormEdit: function saveFormEdit() {
             var app = this;
             var newPelanggan = app.pelanggan;
-            axios.patch(app.url + '/' + app.pelangganId, newPelanggan).then(function (resp) {
+            axios.patch(app.url + '/' + app.pelanggan.id, newPelanggan).then(function (resp) {
                 app.message = 'Berhasil Merubah Pelanggan "' + app.pelanggan.nama_pelanggan + '"';
                 app.alertt(app.message);
+                app.getPelanggans();
+                app.pelanggan.kode_pelanggan = '';
+                app.pelanggan.nama_pelanggan = '';
+                app.pelanggan.jenis_kelamin = '';
+                app.pelanggan.tanggal_lahir = '';
+                app.pelanggan.nomor_telepon = '';
+                app.pelanggan.email = '';
+                app.pelanggan.kota = '';
+                app.pelanggan.alamat = '';
+                app.pelanggan.kode_pos = '';
+                app.pelanggan.catatan = '';
                 app.$router.replace('/pelanggan');
+                app.disable = 1;
             }).catch(function (resp) {
                 app.errors = resp.response.data.errors;
             });
@@ -77301,6 +77571,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: "Berhasil!",
                 text: pesanEdit,
                 icon: "success"
+            });
+        },
+        deleteEntry: function deleteEntry() {
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + this.pelanggan.nama_pelanggan + " ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(function (willDelete) {
+                if (willDelete) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + app.pelanggan.id).then(function (resp) {
+                        app.getPelanggans();
+                        swal("Pelanggan Berhasil Dihapus!  ", {
+                            icon: "success"
+                        });
+                    }).catch(function (resp) {
+                        app.$router.replace('/pelanggan/');
+                        swal("Gagal Menghapus Pelanggan!", {
+                            icon: "warning"
+                        });
+                    });
+                }
+                _this.pelanggan.kode_pelanggan = '';
+                _this.pelanggan.nama_pelanggan = '';
+                _this.pelanggan.jenis_kelamin = '';
+                _this.pelanggan.tanggal_lahir = '';
+                _this.pelanggan.nomor_telepon = '';
+                _this.pelanggan.email = '';
+                _this.pelanggan.kota = '';
+                _this.pelanggan.alamat = '';
+                _this.pelanggan.kode_pos = '';
+                _this.pelanggan.catatan = '';
+                _this.disable = 1;
+                _this.$router.replace('/pelanggan/');
             });
         }
     }
@@ -77458,7 +77766,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel panel-default" }, [
           _c("ul", { staticClass: "nav nav-tabs" }, [
-            _c("li", { staticClass: "col-sm-4" }, [
+            _c("li", { staticClass: "col-sm-4  active" }, [
               _c(
                 "a",
                 {
@@ -77887,6 +78195,60 @@ var render = function() {
                         "label",
                         {
                           staticClass: "col-md-3 control-label",
+                          attrs: { for: "alamat" }
+                        },
+                        [_vm._v("Alamat")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-8" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.pelanggan.alamat,
+                              expression: "pelanggan.alamat"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            autocomplete: "off",
+                            placeholder: "Alamat",
+                            type: "text",
+                            name: "alamat",
+                            autofocus: "",
+                            disabled: _vm.disable == 1
+                          },
+                          domProps: { value: _vm.pelanggan.alamat },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.pelanggan,
+                                "alamat",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.alamat
+                          ? _c("span", { staticClass: "label label-danger" }, [
+                              _vm._v(_vm._s(_vm.errors.alamat[0]))
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 control-label",
                           attrs: { for: "kota" }
                         },
                         [_vm._v("Kota")]
@@ -77935,60 +78297,6 @@ var render = function() {
                               },
                               [_vm._v(_vm._s(_vm.errors.kota[0]))]
                             )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "alamat" }
-                        },
-                        [_vm._v("Alamat")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.alamat,
-                              expression: "pelanggan.alamat"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Alamat",
-                            type: "text",
-                            name: "alamat",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.alamat },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "alamat",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.alamat
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.alamat[0]))
-                            ])
                           : _vm._e()
                       ])
                     ])
@@ -78160,12 +78468,12 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-primary",
-                                attrs: { to: "{params: {id:pelanggan.id}}" },
+                                attrs: { type: "button" },
                                 on: { click: _vm.editPelanggan }
                               },
                               [
                                 _c("i", {
-                                  staticClass: "fa fa-times",
+                                  staticClass: "fa fa-pencil",
                                   attrs: { "aria-hidden": "true" }
                                 }),
                                 _vm._v(
@@ -78180,6 +78488,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-warning",
+                                attrs: { type: "button" },
                                 on: { click: _vm.saveFormEdit }
                               },
                               [
@@ -78199,6 +78508,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-default",
+                                attrs: { type: "button" },
                                 on: { click: _vm.batalEdit }
                               },
                               [
@@ -78213,16 +78523,24 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
-                        _vm.disable == 2
-                          ? _c("button", { staticClass: "btn btn-danger" }, [
-                              _c("i", {
-                                staticClass: "fa fa-trash-o",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v(
-                                "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
-                              )
-                            ])
+                        _vm.edit == 1
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" },
+                                on: { click: _vm.deleteEntry }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
+                                )
+                              ]
+                            )
                           : _vm._e()
                       ])
                     ])
@@ -78230,6 +78548,20 @@ var render = function() {
                 ]
               )
             ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.riwayatBelanja == 1
+          ? _c("div", { staticClass: "row-fluid" }, [
+              _vm._m(4, false, false),
+              _vm._v(" "),
+              _vm._m(5, false, false),
+              _vm._v(" "),
+              _vm._m(6, false, false)
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.perilakuPelanggan == 1
+          ? _c("div", { staticClass: "row-fluid" }, [_vm._m(7, false, false)])
           : _vm._e()
       ])
     ])
@@ -78332,6 +78664,148 @@ var staticRenderFns = [
         attrs: { "aria-hidden": "true" }
       }),
       _vm._v("\n\t\t\t\t\tunduh\n\t\t\t\t")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("div", { staticClass: "btn-group" }, [
+        _c("button", { staticClass: "btn btn-xs btn-default active" }, [
+          _vm._v("Mingguan")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-xs btn-default" }, [
+          _vm._v("Bulanan")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-xs btn-default" }, [
+          _vm._v("Tahunan")
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-xs btn-default" }, [
+          _vm._v("Rentang Waktu")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel panel-body" }, [
+      _c("input", { attrs: { type: "text" } }),
+      _vm._v(" "),
+      _c("select", [
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Jan")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Feb")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Mar")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "4" } }, [_vm._v("Apr")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "5" } }, [_vm._v("Mei")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "6" } }, [_vm._v("Jun")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "7" } }, [_vm._v("Jul")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "8" } }, [_vm._v("Agt")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "9" } }, [_vm._v("Sep")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "10" } }, [_vm._v("Okt")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "11" } }, [_vm._v("Nov")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "12" } }, [_vm._v("Des")])
+      ]),
+      _vm._v(" "),
+      _c("select", [
+        _c("option", { attrs: { value: "2016" } }, [_vm._v("2016")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2017" } }, [_vm._v("2017")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2018" } }, [_vm._v("2018")])
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-success" }, [
+        _c("i", {
+          staticClass: "fa fa-download",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("\n\t\t\t\t\t\t\tExcel\n\t\t\t\t\t\t")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { attrs: { border: "2" } }, [
+      _c("thead", [
+        _c("th", { staticClass: "col-md-2" }, [_vm._v("Tanggal")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-4" }, [_vm._v("Produk")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-3" }, [_vm._v("Jumlah Produk")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-md-3" }, [_vm._v("Total Transaksi")])
+      ]),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("td", [_vm._v("05 Dec 2017 / 11:49")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("kentang goreng x1.000")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("10")]),
+        _vm._v(" "),
+        _c("td", [_vm._v("126,000")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", { staticClass: "table table-striped table-hover" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("Jumlah Order")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("9")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Total Belanja")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Rp 617.800,00")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Rata-rata Belanja")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Rp 68.644,44")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Terakhir Datang")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("1 minggu yang lalu")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("Rata-rata Kedatangan")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("setiap 3 hari")])
+            ])
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -81513,6 +81987,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -81728,122 +82203,124 @@ var render = function() {
                     "tbody",
                     { staticClass: "data-ada" },
                     _vm._l(_vm.tokos, function(toko, index) {
-                      return _c(
-                        "tr",
-                        [
-                          _c("td", [_vm._v(_vm._s(toko.nama_tokos))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.nama_pemilik))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.email))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.no_telp))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(toko.created_at))]),
-                          _vm._v(" "),
-                          toko.statusToko == 1
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { type: "button", size: "xs" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.statusTokoNonaktif(
-                                          toko.id_user,
-                                          index,
-                                          toko.nama_tokos
-                                        )
-                                      }
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(toko.nama_tokos))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.nama_pemilik))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.no_telp))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(toko.created_at))]),
+                        _vm._v(" "),
+                        toko.statusToko == 1
+                          ? _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { type: "button", size: "xs" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.statusTokoNonaktif(
+                                        toko.id_user,
+                                        index,
+                                        toko.nama_tokos
+                                      )
                                     }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-ban",
-                                      attrs: { "aria-hidden": "true" }
-                                    }),
-                                    _vm._v(
-                                      "\n                    Nonaktifkan Toko \n                  "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-xs btn-danger",
-                                    attrs: { type: "button", size: "xs" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.statusTokoAktif(
-                                          toko.id_user,
-                                          index,
-                                          toko.nama_tokos
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fa fa-check-circle",
-                                      attrs: { "aria-hidden": "true" }
-                                    }),
-                                    _vm._v(
-                                      "\n                    Aktifkan Toko \n                  "
-                                    )
-                                  ]
-                                )
-                              ]),
-                          _vm._v(" "),
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "btn btn-xs btn-success",
-                              attrs: {
-                                to: {
-                                  name: "editToko",
-                                  params: { id: toko.id_toko }
+                                  }
                                 },
-                                id: "edit" + toko.id
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-pencil",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v("Edit")
-                            ]
-                          ),
-                          _vm._v(" |\n                "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-xs btn-danger",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  _vm.deleteToko(
-                                    toko.id_toko,
-                                    index,
-                                    toko.nama_tokos
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-ban",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
+                                  _vm._v(
+                                    "\n                    Nonaktifkan Toko \n                  "
                                   )
+                                ]
+                              )
+                            ])
+                          : _c("td", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-xs btn-danger",
+                                  attrs: { type: "button", size: "xs" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.statusTokoAktif(
+                                        toko.id_user,
+                                        index,
+                                        toko.nama_tokos
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-check-circle",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
+                                  _vm._v(
+                                    "\n                    Aktifkan Toko \n                  "
+                                  )
+                                ]
+                              )
+                            ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-xs btn-success",
+                                attrs: {
+                                  to: {
+                                    name: "editToko",
+                                    params: { id: toko.id_toko }
+                                  },
+                                  id: "edit" + toko.id
                                 }
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-trash-o",
-                                attrs: { "aria-hidden": "true" }
-                              }),
-                              _vm._v("Delete")
-                            ]
-                          )
-                        ],
-                        1
-                      )
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-pencil",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("Edit")
+                              ]
+                            ),
+                            _vm._v(" |\n                  "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-xs btn-danger",
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteToko(
+                                      toko.id_toko,
+                                      index,
+                                      toko.nama_tokos
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-trash-o",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("Delete")
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
                     })
                   )
                 : _vm.loading == true
@@ -81918,7 +82395,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n                Sedang Memuat Data\n              ")
+        _vm._v("\n                  Sedang Memuat Data\n                ")
       ])
     ])
   },
@@ -81928,7 +82405,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "4" } }, [
-        _vm._v("\n                Tidak Ada Data\n              ")
+        _vm._v("\n                  Tidak Ada Data\n                ")
       ])
     ])
   }
@@ -85388,7 +85865,7 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, "\n.box[data-v-62f6c0ef]{\r\n        padding: 30px 5px 30px 5px;\r\n        background: #ffff;\r\n        border: 1px solid #ddd;\r\n        border-radius: 5px;\r\n        margin-bottom: 25px;\n}\n.judul[data-v-62f6c0ef]{\r\n    \tfont-size: 18px;\r\n        font-weight: 400;\r\n        text-align: center;\r\n        color:#707070;\n}\n.box[data-v-62f6c0ef]:hover, .box:hover p[data-v-62f6c0ef]{\r\n\tbackground-color: #00BCD4;\r\n\tcolor:#fff;\n}\na[data-v-62f6c0ef]:-webkit-any-link {\r\n\ttext-decoration: none;\n}\n.keterangan[data-v-62f6c0ef]{\r\n\tcolor:#707070;\r\n\tfont-size: 14px;\r\n\tfont-weight: 100;\n}\np[data-v-62f6c0ef]{margin:0px;\n}\ni[data-v-62f6c0ef]{margin-bottom: 20px\n}\r\n", ""]);
+exports.push([module.i, "\n.box[data-v-62f6c0ef]{\r\n        padding: 30px 5px 30px 5px;\r\n        background: #ffff;\r\n        border: 1px solid #ddd;\r\n        border-radius: 5px;\r\n        margin-bottom: 25px;\r\n        max-height: 173px;\n}\n.judul[data-v-62f6c0ef]{\r\n    \tfont-size: 18px;\r\n        font-weight: 400;\r\n        text-align: center;\r\n        color:#707070;\n}\n.box[data-v-62f6c0ef]:hover, .box:hover p[data-v-62f6c0ef]{\r\n\tbackground-color: #00BCD4;\r\n\tcolor:#fff;\n}\na[data-v-62f6c0ef]:-webkit-any-link {\r\n\ttext-decoration: none;\n}\n.keterangan[data-v-62f6c0ef]{\r\n\tcolor:#707070;\r\n\tfont-size: 14px;\r\n\tfont-weight: 100;\n}\np[data-v-62f6c0ef]{margin:0px;\n}\ni[data-v-62f6c0ef]{margin-bottom: 20px\n}\r\n", ""]);
 
 // exports
 
@@ -86040,7 +86517,7 @@ exports = module.exports = __webpack_require__(5)(undefined);
 
 
 // module
-exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\n\tfloat: right;\r\n\tpadding-bottom: 10px;\n}\n.label[data-v-4163792d] {\r\n    display: inline-block;\r\n    padding: 2px 10px;\r\n    font-size: 11.844px;\r\n    font-weight: 1000;\r\n    line-height: 20px;\r\n    color: white;\r\n    vertical-align: baseline;\r\n    white-space: nowrap;\r\n    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);\r\n    background-color: #999999;\n}\r\n", ""]);
 
 // exports
 
@@ -86051,6 +86528,27 @@ exports.push([module.i, "\n.pencarian[data-v-4163792d] {\r\n\tcolor: red;\r\n\r\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -86233,11 +86731,27 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Staf Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Staff Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Staf Toko")]),
+      _c(
+        "h4",
+        { staticClass: "panel-heading" },
+        [
+          _c("i", {
+            staticClass: "fa fa-cog",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("B", [_vm._v("PENGATURAN STAFF")])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _vm._m(0, false, false),
       _vm._v(" "),
       _c(
         "div",
@@ -86254,7 +86768,13 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { name: "createStafToko" } }
                     },
-                    [_vm._v("Tambah Staf Toko")]
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-user-plus",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" Tambah Staff Toko")
+                    ]
                   )
                 ],
                 1
@@ -86298,7 +86818,7 @@ var render = function() {
                 attrs: { cellspacing: "0", width: "100%" }
               },
               [
-                _vm._m(0, false, false),
+                _vm._m(1, false, false),
                 _vm._v(" "),
                 _vm.users.length > 0 && _vm.loading == false
                   ? _c(
@@ -86338,8 +86858,12 @@ var render = function() {
                                   }
                                 },
                                 [
+                                  _c("i", {
+                                    staticClass: "fa fa-pencil",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
                                   _vm._v(
-                                    "Edit\n                                "
+                                    " Edit\n                                "
                                   )
                                 ]
                               ),
@@ -86360,8 +86884,12 @@ var render = function() {
                                   }
                                 },
                                 [
+                                  _c("i", {
+                                    staticClass: "fa fa-trash-o",
+                                    attrs: { "aria-hidden": "true" }
+                                  }),
                                   _vm._v(
-                                    "Hapus\n                                "
+                                    " Hapus\n                                "
                                   )
                                 ]
                               )
@@ -86373,10 +86901,10 @@ var render = function() {
                     )
                   : _vm.loading == true
                     ? _c("tbody", { staticClass: "data-ada" }, [
-                        _vm._m(1, false, false)
+                        _vm._m(2, false, false)
                       ])
                     : _c("tbody", { staticClass: "tidak-ada-data" }, [
-                        _vm._m(2, false, false)
+                        _vm._m(3, false, false)
                       ])
               ]
             )
@@ -86414,10 +86942,24 @@ var render = function() {
         ],
         1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4, false, false)
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("i", {
+        staticClass: "fa fa-user-circle",
+        attrs: { "aria-hidden": "true" }
+      }),
+      _vm._v(" Staff Toko")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -86453,6 +86995,30 @@ var staticRenderFns = [
         _vm._v(
           "\n                                Tidak Ada Data\n                            "
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading " }, [
+        _c("h4", { staticClass: "label" }, [
+          _c("i", {
+            staticClass: "fa fa-info-circle ",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" INFO")
+        ]),
+        _vm._v(" "),
+        _c("b", [
+          _c("i", [
+            _vm._v(
+              " Undangan kepada staff baru akan diberikan melalui Email konfirmasi."
+            )
+          ])
+        ])
       ])
     ])
   }
@@ -86601,7 +87167,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -86624,7 +87189,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Staf ' + app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
 				app.alert(app.message);
 				app.user.nama_pemilik = '';
 				app.user.email = '';
@@ -86671,13 +87236,13 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "indexStafToko" } } }, [
-            _vm._v("Staf Toko")
+            _vm._v("Staff Toko")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staf Toko")])
+      _c("li", { staticClass: "active" }, [_vm._v("Tambah Staff Toko")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -86707,7 +87272,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pemilik" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staff\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -86724,7 +87289,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Isi Nama Staf",
+                        placeholder: "Isi Nama Staff",
                         type: "text",
                         name: "nama_pemilik",
                         autofocus: ""
@@ -87029,7 +87594,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staf Toko")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Tambah Staff Toko")])
     ])
   },
   function() {
@@ -87044,7 +87609,7 @@ var staticRenderFns = [
             staticClass: "btn btn-primary",
             attrs: { id: "btnSimpanUser", type: "submit" }
           },
-          [_vm._v(" \n\t\t\t\t\t\t\t\t\tTambah\n\t\t\t\t\t\t\t\t")]
+          [_vm._v(" \n\t\t\t\t\t\t\t\t\tUndang\n\t\t\t\t\t\t\t\t")]
         )
       ])
     ])
@@ -87203,7 +87768,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var app = this;
 			var newUser = app.user;
 			axios.patch(app.url + '/' + app.userId, newUser).then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit Staf ' + app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil Mengedit Staff ' + app.user.nama_pemilik;
 				app.alert(app.message);
 				app.user.nama_pemilik = '';
 				app.user.email = '';
@@ -87259,14 +87824,14 @@ var render = function() {
       _c(
         "li",
         [
-          _c("router-link", { attrs: { to: { name: "indexUser" } } }, [
-            _vm._v("Staf")
+          _c("router-link", { attrs: { to: { name: "indexStafToko" } } }, [
+            _vm._v("Staff Toko")
           ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [_vm._v("Edit Staf")])
+      _c("li", { staticClass: "active" }, [_vm._v("Edit Staff")])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -87296,7 +87861,7 @@ var render = function() {
                       staticClass: "col-md-2 control-label",
                       attrs: { for: "nama_pemilik" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staf\n\t\t\t\t\t\t\t")]
+                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Staff\n\t\t\t\t\t\t\t")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-4" }, [
@@ -87313,7 +87878,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Isi Nama Staf",
+                        placeholder: "Isi Nama Staff",
                         type: "text",
                         name: "nama_pemilik",
                         autofocus: ""
@@ -87484,7 +88049,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
-      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staf")])
+      _c("p", { staticClass: "panel-title" }, [_vm._v("Edit Staff")])
     ])
   },
   function() {

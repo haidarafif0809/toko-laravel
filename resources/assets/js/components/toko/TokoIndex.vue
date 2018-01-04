@@ -48,37 +48,38 @@
                     Aktifkan Toko 
                   </button>
                 </td>
-                <router-link :to="{name:'editToko', params: {id: toko.id_toko}}" class="btn btn-xs btn-success" v-bind:id="'edit' +toko.id"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</router-link> |
-                <a href="#"
-                class="btn btn-xs btn-danger" 
-                v-on:click="deleteToko(toko.id_toko, index,toko.nama_tokos)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
-              </td>
-            </tr>
-          </tbody>
+                <td>
+                  <router-link :to="{name:'editToko', params: {id: toko.id_toko}}" class="btn btn-xs btn-success" v-bind:id="'edit' +toko.id"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</router-link> |
+                  <a href="#"
+                  class="btn btn-xs btn-danger" 
+                  v-on:click="deleteToko(toko.id_toko, index,toko.nama_tokos)"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                </td>
+              </tr>
+            </tbody>
 
-          <tbody v-else-if="loading == true" class="data-ada" >
-            <tr >
-              <td colspan="4"  class="text-center">
-                Sedang Memuat Data
-              </td>
-            </tr>
-          </tbody>
-          <tbody v-else class="tidak-ada-data">
-            <tr>
-              <td colspan="4"  class="text-center">
-                Tidak Ada Data
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody v-else-if="loading == true" class="data-ada" >
+              <tr >
+                <td colspan="4"  class="text-center">
+                  Sedang Memuat Data
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else class="tidak-ada-data">
+              <tr>
+                <td colspan="4"  class="text-center">
+                  Tidak Ada Data
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
+        </div>
+        <vue-simple-spinner v-if="loading"></vue-simple-spinner>
+        <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="getTokos" v-if="pencarian == '' "></pagination></div>
+        <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="searchData" v-if="pencarian != '' "></pagination></div>
       </div>
-      <vue-simple-spinner v-if="loading"></vue-simple-spinner>
-      <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="getTokos" v-if="pencarian == '' "></pagination></div>
-      <div align="right"><pagination :data="tokosData" v-on:pagination-change-page="searchData" v-if="pencarian != '' "></pagination></div>
     </div>
   </div>
-</div>
 </div>
 </template>
 

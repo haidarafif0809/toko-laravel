@@ -98,7 +98,7 @@
 
 					<div class="panel panel-default">
 						<ul class="nav nav-tabs">
-							<li class="col-sm-4">
+							<li class="col-sm-4  active">
 								<a data-toggle="tab" v-on:click="tentangPelanggan">TENTANG PELANGGAN</a>
 							</li>
 
@@ -186,20 +186,20 @@
 
 							<div class="row">
 								<div class="form-group">
-									<label for="kota" class="col-md-3 control-label">Kota</label>
+									<label for="alamat" class="col-md-3 control-label">Alamat</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
+										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
+										<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="form-group">
-									<label for="alamat" class="col-md-3 control-label">Alamat</label>
+									<label for="kota" class="col-md-3 control-label">Kota</label>
 									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
+										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
+										<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
 									</div>
 								</div>
 							</div>
@@ -238,22 +238,22 @@
 											Batal
 										</button>
 
-										<button v-if="edit == 1" to="{params: {id:pelanggan.id}}" class="btn btn-primary" v-on:click="editPelanggan">
-											<i class="fa fa-times" aria-hidden="true"></i>
+										<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
+											<i class="fa fa-pencil" aria-hidden="true"></i>
 											Edit
 										</button>
 
-										<button v-if="disable == 2" class="btn btn-warning" v-on:click="saveFormEdit">
+										<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
 											<i class="fa fa-floppy-o" aria-hidden="true"></i>
 											Simpan
 										</button>
 
-										<button v-if="disable == 2" class="btn btn-default" @click="batalEdit">
+										<button v-if="disable == 2" class="btn btn-default" type="button" @click="batalEdit">
 											<i class="fa fa-times" aria-hidden="true"></i>
 											Batal
 										</button>
 
-										<button v-if="disable == 2" class="btn btn-danger">
+										<button v-if="edit == 1" class="btn btn-danger" type="button" v-on:click="deleteEntry">
 											<i class="fa fa-trash-o" aria-hidden="true"></i>
 											Hapus
 										</button>
@@ -261,6 +261,90 @@
 								</div>
 							</div>
 						</form>
+					</div>
+
+					<div class="row-fluid" v-if="riwayatBelanja == 1">
+						<div class="panel-heading">
+							<div class="btn-group">
+								<button class="btn btn-xs btn-default active">Mingguan</button>	
+								<button class="btn btn-xs btn-default">Bulanan</button>
+								<button class="btn btn-xs btn-default">Tahunan</button>
+								<button class="btn btn-xs btn-default">Rentang Waktu</button>
+							</div>
+						</div>
+						<div class="panel panel-body">
+							<input type="text">
+
+							<select > 
+								<option value="1"  >Jan</option>
+								<option value="2"  >Feb</option>
+								<option value="3"  >Mar</option>
+								<option value="4"  >Apr</option>
+								<option value="5"  >Mei</option>
+								<option value="6"  >Jun</option>
+								<option value="7"  >Jul</option>
+								<option value="8"  >Agt</option>
+								<option value="9"  >Sep</option>
+								<option value="10" >Okt</option>
+								<option value="11" >Nov</option>
+								<option value="12" >Des</option>
+							</select>
+
+							<select > 
+								<option value="2016"  >2016</option>
+								<option value="2017"  >2017</option>
+								<option value="2018"  >2018</option>
+							</select>
+							<button class="btn btn-success">
+								<i class="fa fa-download" aria-hidden="true"></i>
+								Excel
+							</button>
+						</div>
+						<table border="2">
+							<thead>
+								<th class="col-md-2">Tanggal</th>
+								<th class="col-md-4">Produk</th>
+								<th class="col-md-3">Jumlah Produk</th>
+								<th class="col-md-3">Total Transaksi</th>
+							</thead>
+							<tbody>
+								<td>05 Dec 2017 / 11:49</td>
+								<td>kentang goreng x1.000</td>
+								<td>10</td>
+								<td>126,000</td>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="row-fluid" v-if="perilakuPelanggan == 1">
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+									<tbody>	
+										<tr>
+											<td>Jumlah Order</td>
+											<td>9</td>
+										</tr>
+										<tr>
+											<td>Total Belanja</td>
+											<td>Rp 617.800,00</td>
+										</tr>
+										<tr>
+											<td>Rata-rata Belanja</td>
+											<td>Rp 68.644,44</td>
+										</tr>
+										<tr>
+											<td>Terakhir Datang</td>
+											<td>1 minggu yang lalu</td>						
+										</tr>
+										<tr>
+											<td>Rata-rata Kedatangan</td>
+											<td>setiap 3 hari</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -295,7 +379,9 @@ export default {
 			message: '',
 			disable: 1,
 			edit: 0,
-			formPelanggan: 0,
+			formPelanggan: 1,
+			riwayatBelanja: 0,
+			perilakuPelanggan:0,
 			settings: {
 				placeholder: 'Pilih Jenis Kelamin'
 			} 
@@ -305,7 +391,7 @@ export default {
 		var app = this;
 		app.loading = true
 		app.getPelanggans();	
-		app.getPelanggan();
+		// app.getPelanggan();
 	},
 	watch: {
         // whenever question changes, this function will run
@@ -316,14 +402,20 @@ export default {
     methods: {
     	tentangPelanggan(){
     		this.formPelanggan = 1
+    		this.riwayatBelanja = 0
+    		this.perilakuPelanggan = 0
     	},
 
     	riwayatTransaksi(){
     		this.formPelanggan = 0
+    		this.riwayatBelanja = 1
+    		this.perilakuPelanggan = 0
     	},
 
     	perilaku(){
     		this.formPelanggan = 0
+    		this.riwayatBelanja = 0
+    		this.perilakuPelanggan = 1
     	},
 
     	tambahPelanggan(){
@@ -370,7 +462,7 @@ export default {
     	editPelanggan(){
     		this.disable = 2
     		this.edit = 0
-    		this.pelanggan.id = id
+    		// this.pelanggan.id = id
     	},
 
     	getPelanggans(page) {
@@ -408,40 +500,10 @@ export default {
     		});
     	},
 
-
-    	deleteEntry(id, index,nama_pelanggan) {
-    		swal({
-    			title: "Konfirmasi Hapus",
-    			text : "Anda Yakin Ingin Menghapus "+nama_pelanggan+" ?",
-    			icon : "warning",
-    			buttons: true,
-    			dangerMode: true,
-    		})
-    		.then((willDelete) => {
-    			if (willDelete) {
-    				var app = this;
-    				axios.delete(app.url+'/' + id)
-    				.then(function (resp) {
-    					app.getPelanggans();
-    					swal("Pelanggan Berhasil Dihapus!  ", {
-    						icon: "success",
-    					});
-    				})
-    				.catch(function (resp) {
-    					app.$router.replace('/pelanggan/');
-    					swal("Gagal Menghapus Pelanggan!", {
-    						icon: "warning",
-    					});
-    				});
-    			}
-    			this.$router.replace('/pelanggan/');
-    		});
-    	},
-
     	saveForm() {
     		var app = this;
-    		var newPelanggan = app.pelanggan;
-    		axios.post(app.url, newPelanggan)
+    		var Pelanggan = app.pelanggan;
+    		axios.post(app.url, Pelanggan)
     		.then(function (resp) {
     			app.alert();
 
@@ -456,6 +518,8 @@ export default {
     			app.pelanggan.alamat = ''
     			app.pelanggan.kode_pos = ''
     			app.pelanggan.catatan = ''
+    			app.disable = 1
+    			app.edit = 0
     			app.$router.replace('/pelanggan');
 
     		})
@@ -474,11 +538,23 @@ export default {
     	saveFormEdit() {
     		var app = this;
     		var newPelanggan = app.pelanggan;
-    		axios.patch(app.url+'/' + app.pelangganId, newPelanggan)
+    		axios.patch(app.url+'/' + app.pelanggan.id, newPelanggan)
     		.then(function (resp) {
     			app.message = 'Berhasil Merubah Pelanggan "'+app.pelanggan.nama_pelanggan+'"'
     			app.alertt(app.message);
+    			app.getPelanggans();
+    			app.pelanggan.kode_pelanggan = ''
+    			app.pelanggan.nama_pelanggan = ''
+    			app.pelanggan.jenis_kelamin = ''
+    			app.pelanggan.tanggal_lahir = ''
+    			app.pelanggan.nomor_telepon = ''
+    			app.pelanggan.email = ''
+    			app.pelanggan.kota = ''
+    			app.pelanggan.alamat = ''
+    			app.pelanggan.kode_pos = ''
+    			app.pelanggan.catatan = ''
     			app.$router.replace('/pelanggan');
+    			app.disable = 1
 
     		})
     		.catch(function (resp) {
@@ -492,23 +568,47 @@ export default {
     			icon: "success",
     		});
     	},
-		// getPelanggan(){
 
-		// 	let app = this;
-		// 	let id = app.$route.params.id;
-		// 	app.pelangganId = id;
-
-		// 	axios.get(app.url+'/' + id + '/edit')
-		// 	.then(function (resp) {
-		// 		app.pelanggan = resp.data;
-		// 	})
-		// 	.catch(function () {
-		// 		alert("Could not load your pelanggan")
-		// 	});
-		// }
-
-
-	}
+    	deleteEntry() {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus " + this.pelanggan.nama_pelanggan +" ?",
+    			icon : "warning",
+    			buttons: true,
+    			dangerMode: true,
+    		})
+    		.then((willDelete) => {
+    			if (willDelete) {
+    				var app = this;
+    				axios.delete(app.url+'/' + app.pelanggan.id)
+    				.then(function (resp) {
+    					app.getPelanggans();
+    					swal("Pelanggan Berhasil Dihapus!  ", {
+    						icon: "success",
+    					});
+    				})
+    				.catch(function (resp) {
+    					app.$router.replace('/pelanggan/');
+    					swal("Gagal Menghapus Pelanggan!", {
+    						icon: "warning",
+    					});
+    				});
+    			}
+    			this.pelanggan.kode_pelanggan = ''
+    			this.pelanggan.nama_pelanggan = ''
+    			this.pelanggan.jenis_kelamin = ''
+    			this.pelanggan.tanggal_lahir = ''
+    			this.pelanggan.nomor_telepon = ''
+    			this.pelanggan.email = ''
+    			this.pelanggan.kota = ''
+    			this.pelanggan.alamat = ''
+    			this.pelanggan.kode_pos = ''
+    			this.pelanggan.catatan = ''
+    			this.disable = 1
+    			this.$router.replace('/pelanggan/');
+    		});
+    	},
+    }
 }
 </script>
 
