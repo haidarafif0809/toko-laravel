@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class UserShouldAktif
+class UserShouldVerified
 {
     /**
      * Handle an incoming request.
@@ -18,11 +18,11 @@ class UserShouldAktif
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        if (Auth::check() && !Auth::user()->status) {
+        if (Auth::check() && !Auth::user()->is_verified) {
             Auth::logout();
             Session::flash("flash_notification", [
                 "level"   => "warning",
-                "message" => "Toko anda secara otomatis di Nonaktifkan oleh pihak Toko Dasar. Untuk Informasi lebih lanjut hubungi pihak terkait.",
+                "message" => "Kami mengirimkan kode aktivasi. Periksa email Anda.",
             ]);
             return redirect('/login');
         }

@@ -36,6 +36,8 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('user-should-aktif');
+        $this->middleware('user-should-verified');
+
 
     }
 }

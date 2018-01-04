@@ -31,38 +31,24 @@ import DashboardIndex from './components/dashboard/Dashboard.vue'
 import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
-//KAS
-import KasIndex from './components/kas/KasIndex.vue'
-import KasCreate from './components/kas/KasCreate.vue'
-import KasEdit from './components/kas/KasEdit.vue'
+
 // Master Data Produk
 import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
 import ProdukEdit from './components/produk/ProdukEdit.vue'
 import ProdukDetail from './components/produk/ProdukDetail.vue'
-// master data satuan
-import SatuanIndex from './components/satuan/SatuanIndex.vue'
-import SatuanCreate from './components/satuan/SatuanCreate.vue'
-import SatuanEdit from './components/satuan/SatuanEdit.vue'
+
 // kategori produk
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
-// Kategori Transaksi
-import KategoriTransaksiIndex from './components/kategoriTransaksi/KategoriTransaksiIndex.vue'
-import KategoriTransaksiCreate from './components/kategoriTransaksi/KategoriTransaksiCreate.vue'
-import KategoriTransaksiEdit from './components/kategoriTransaksi/KategoriTransaksiEdit.vue'
-// Suplier 
-import SuplierIndex from './components/suplier/SuplierIndex.vue'
-import SuplierCreate from './components/suplier/SuplierCreate.vue'
-import SuplierEdit from './components/suplier/SuplierEdit.vue'
+
 // master data pelanggan
 import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
 import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
 import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
 import PelangganDetail from './components/pelanggan/PelangganDetail.vue'
-//Kas Mutasi
-import KasMutasiIndex from './components/kasMutasi/KasMutasiIndex.vue'
+
 //Penjualan
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 // toko
@@ -112,20 +98,6 @@ const routes = [{
         component: ProdukDetail,
         name: 'detailProduk'
     },
-    // Master data satuan
-    {
-        path: '/satuan',
-        component: SatuanIndex,
-        name: 'indexSatuan'
-    }, {
-        path: '/satuan-create',
-        component: SatuanCreate,
-        name: 'createSatuan'
-    }, {
-        path: '/satuan-edit',
-        component: SatuanEdit,
-        name: 'editSatuan'
-    },
     //USER
     {
         path: '/user',
@@ -140,20 +112,6 @@ const routes = [{
         component: UserEdit,
         name: 'editUser'
     },
-    //KAS
-    {
-        path: '/kas',
-        component: KasIndex,
-        name: 'indexKas'
-    }, {
-        path: '/kas/create',
-        component: KasCreate,
-        name: 'createKas'
-    }, {
-        path: '/kas/edit/:id',
-        component: KasEdit,
-        name: 'editKas'
-    },
     // kategori produk
     {
         path: '/kategoriProduk',
@@ -167,34 +125,6 @@ const routes = [{
         path: '/kategoriProduk/edit/:id',
         component: KategoriProdukEdit,
         name: 'editKategoriProduk'
-    },
-    // master data kategori transaksi
-    {
-        path: '/kategoriTransaksi',
-        component: KategoriTransaksiIndex,
-        name: 'indexKategoriTransaksi'
-    }, {
-        path: '/kategoriTransaksi-create',
-        component: KategoriTransaksiCreate,
-        name: 'createKategoriTransaksi'
-    }, {
-        path: '/kategoriTransaksi-edit',
-        component: KategoriTransaksiEdit,
-        name: 'editKategoriTransaksi'
-    },
-    // Suplier
-    {
-        path: '/suplier',
-        component: SuplierIndex,
-        name: 'indexSuplier'
-    }, {
-        path: '/suplier/create',
-        component: SuplierCreate,
-        name: 'createSuplier'
-    }, {
-        path: '/suplier/edit/:id',
-        component: SuplierEdit,
-        name: 'editSuplier'
     },
     // Master data pelanggan
     {
@@ -213,12 +143,6 @@ const routes = [{
         path: '/pelanggan/detail/:id',
         component: PelangganDetail,
         name: 'detailPelanggan'
-    },
-    // Kas Mutasi
-    {
-        path: '/kas-mutasi',
-        component: KasMutasiIndex,
-        name: 'indexKasMutasi'
     },
     //Penjualan
     {

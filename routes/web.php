@@ -24,10 +24,6 @@ Route::resource('user', 'UserController', ['except' => 'show']);
 Route::get('/user/view', 'UserController@view');
 Route::get('/user/pencarian', 'UserController@pencarian');
 
-//KAS
-Route::resource('kas', 'KasController', ['except' => 'show']);
-Route::get('/kas/view', 'KasController@view');
-Route::get('/kas/pencarian', 'KasController@pencarian');
 
 // Master Data Produk
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
@@ -48,31 +44,6 @@ Route::post('/produk/import_produk', 'ProdukController@importExcel');
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);
 Route::get('/kategoriProduk/view', 'KategoriProdukController@view');
 Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
-
-// Satuan
-Route::resource('satuan', 'SatuanController', ['except' => 'show']);
-Route::get('/satuan/view', 'SatuanController@view');
-Route::get('/satuan/pencarian', 'SatuanController@search');
-
-// Kategori Transaksi
-Route::resource('kategoriTransaksi', 'KategoriTransaksiController', ['except' => 'show']);
-Route::get('/kategoriTransaksi/view', 'KategoriTransaksiController@view');
-Route::get('/kategoriTransaksi/pencarian', 'KategoriTransaksiController@search');
-
-// Suplier
-Route::resource('suplier', 'SuplierController', ['except' => 'show']);
-Route::get('/suplier/view', 'SuplierController@view');
-Route::get('/suplier/search', 'SuplierController@search');
-
-// Satuan
-Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
-Route::get('/pelanggan/view', 'PelangganController@view');
-Route::get('/pelanggan/pencarian', 'PelangganController@search');
-Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
-
-// Kas Mutasi
-Route::resource('kas-mutasi', 'KasMutasiController', ['except' => 'show']);
-Route::get('/kas-mutasi/view', 'KasMutasiController@view');
 
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);

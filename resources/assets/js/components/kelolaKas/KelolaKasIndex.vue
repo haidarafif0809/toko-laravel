@@ -11,7 +11,7 @@
         <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah }}</div>
         <div class="tambah">
         <p>
-          <router-link :to="{name:'createKelolaKas'}" class="btn btn-primary btn-md">Tambah Kas Masuk/Keluar</router-link>
+          <router-link :to="{name:'createKelolaKas'}" class="btn btn-primary btn-md" id="tambah-kas">Tambah Kas Masuk/Keluar</router-link>
         </p>
         </div>
         <div class="pencarian">
