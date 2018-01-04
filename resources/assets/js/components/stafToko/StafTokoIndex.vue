@@ -5,26 +5,42 @@
 	float: right;
 	padding-bottom: 10px;
 }
+.label {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 11.844px;
+    font-weight: 1000;
+    line-height: 20px;
+    color: white;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #999999;
+}
 </style>
 
 <template>  
     <div class="container">
         <ul class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-            <li class="active">Staf Toko</li>
+            <li class="active">Staff Toko</li>
         </ul>
         <div class="panel panel-default">
-            <div class="panel-heading">Staf Toko</div>
+            <h4 class="panel-heading"> <i class="fa fa-cog" aria-hidden="true"></i> <B>PENGATURAN STAFF</B></h4>
+        </div> 
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-user-circle" aria-hidden="true"></i> Staff Toko</div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <div class="tambah">
-                        <p> <router-link :to="{name: 'createStafToko'}" class="btn btn-primary">Tambah Staf Toko</router-link></p>        
+                        <p> <router-link :to="{name: 'createStafToko'}" class="btn btn-primary"><i class="fa fa-user-plus" aria-hidden="true"></i> Tambah Staff Toko</router-link></p>        
                     </div>
                     <div class="pencarian">
                         <input type="text" class="form-control" name="search"placeholder="Pencarian"  v-model="search" >
                     </div>
                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                     <thead>
+                       <thead>
                         <th>Nama Pemilik</th>
                         <th>Email</th>
                         <th>No. Tlp</th>
@@ -37,9 +53,9 @@
                             <td>{{ user.no_telp }}</td>
                             <td>{{ user.last_login }}</td>
                             <td>
-                                <router-link :to="{ name:'editStafToko', params: {id: user.id}}" class="btn btn-xs btn-success" v-bin:id="'edit-' + user.id">Edit
+                                <router-link :to="{ name:'editStafToko', params: {id: user.id}}" class="btn btn-xs btn-success" v-bin:id="'edit-' + user.id"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                                 </router-link>
-                                <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + user.id" v-on:click="deleteEntry(user.id, index,user.nama_pemilik)">Hapus
+                                <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + user.id" v-on:click="deleteEntry(user.id, index,user.nama_pemilik)"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus
                                 </a>
                             </td>
                         </tr>
@@ -65,6 +81,11 @@
             <div align="right"><pagination :data="usersData" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading ">
+            <h4 class="label"> <i class="fa fa-info-circle " aria-hidden="true"> </i> INFO</h4> <b><i> Undangan kepada staff baru akan diberikan melalui Email konfirmasi.</i></b> 
+        </div>
+    </div>
 </div>
 </div>
 </div>
@@ -73,17 +94,17 @@
 
 <script>
 export default {
- data: function () {
-  return {
-   users: [],
-   usersData: {},
-   url : window.location.origin+(window.location.pathname).replace("home","staf-toko"),
-   search : '',
-   loading : true
+   data: function () {
+      return {
+         users: [],
+         usersData: {},
+         url : window.location.origin+(window.location.pathname).replace("home","staf-toko"),
+         search : '',
+         loading : true
 
-}
-},
-mounted() {
+     }
+ },
+ mounted() {
   var app = this;
   app.loading = true
   app.getUsers();   
@@ -114,14 +135,14 @@ watch: {
             });
         },
         deleteEntry(id, index,nama_pemilik) {
-         this.$swal({
+           this.$swal({
             title: "Hapus?", 
             text: "Yakin Ingin Menghapus user "+ nama_pemilik +" ?", 
             icon: "warning",
             buttons: ['Batal', 'Hapus'],
             dangerMode: true,
         })
-         .then((willDelete) => {
+           .then((willDelete) => {
             if (willDelete) {
               var app = this;
               axios.delete(app.url+'/' + id)
@@ -137,33 +158,33 @@ watch: {
               return;
           }
       });
-     },
-     alert(pesan) {
-      this.$swal({
-        title: "Berhasil!",
-        text: pesan,
-        icon: "success",
-    });
-  },
-  getHasilPencarian(page){
-    var app = this;
-    app.loading = true;
-    if (typeof page === 'undefined') {
-        page = 1;
-    }
-    axios.get(app.url+'/search?search='+app.search+'&page='+page)
-    .then(function (resp) {
-        app.loading = false
-        app.users = resp.data.data;
-        app.usersData = resp.data;
-    })
-    .catch(function (resp) {
-        console.log(resp);
-        app.loading = false
-        alert("Could not load users");
-    });
+       },
+       alert(pesan) {
+          this.$swal({
+            title: "Berhasil!",
+            text: pesan,
+            icon: "success",
+        });
+      },
+      getHasilPencarian(page){
+        var app = this;
+        app.loading = true;
+        if (typeof page === 'undefined') {
+            page = 1;
+        }
+        axios.get(app.url+'/search?search='+app.search+'&page='+page)
+        .then(function (resp) {
+            app.loading = false
+            app.users = resp.data.data;
+            app.usersData = resp.data;
+        })
+        .catch(function (resp) {
+            console.log(resp);
+            app.loading = false
+            alert("Could not load users");
+        });
 
-}
+    }
 }
 
 }

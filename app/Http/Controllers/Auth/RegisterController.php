@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Role;
 use App\Toko;
 use App\User;
+use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -107,7 +108,7 @@ class RegisterController extends Controller
             ]);
             Auth::login($user);
         }
-        return redirect('/');
+        return redirect('/home');
 
     }
 }
