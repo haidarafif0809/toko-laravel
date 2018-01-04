@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "_readme": [
         "This file locks the dependencies of your project to a known state",
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
@@ -5042,7 +5041,7 @@
         "php": ">=7.0.0"
     },
     "platform-dev": []
-=======
+
 "_readme": [
 "This file locks the dependencies of your project to a known state",
 "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
@@ -10086,5 +10085,5 @@
 "php": ">=7.0.0"
 },
 "platform-dev": []
->>>>>>> master
+
 }
