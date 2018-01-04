@@ -43,7 +43,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('user-should-aktif');
+        $this->middleware('user-should-verified');
 
     }
 
