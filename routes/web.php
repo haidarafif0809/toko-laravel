@@ -41,6 +41,8 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
 Route::get('/produk/edit/{id}', 'ProdukController@edit');
+Route::get('/produk/template_import', 'ProdukController@generateExcelTemplate');
+Route::post('/produk/import_produk', 'ProdukController@importExcel');
 
 // kategori barang
 Route::resource('kategoriProduk', 'KategoriProdukController', ['except' => 'show']);
