@@ -3,6 +3,14 @@
 	max-height: 160px;
 	overflow-y: scroll;
 }
+
+.box{
+	width: 200px;
+	height:40px;
+	background-color: #FCF8E3;
+	text-align: center;
+	border:1px solid #ffafaf;
+}
 </style>
 
 <template>
@@ -116,8 +124,8 @@
 					<div class="row-fluid" v-if="formPelanggan == 1">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 							<div class="col-md-12 form-info">
-								<div class="form-group">
-									<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+								<div class="box form-group">
+									<label>Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
 								</div>
 							</div>
 
