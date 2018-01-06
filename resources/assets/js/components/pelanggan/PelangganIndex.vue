@@ -157,7 +157,7 @@
 							</div>
 
 							<form v-on:submit.prevent="saveForm()" class="form-horizontal" >
-								<div class="row">
+								<div class="row" v-if="memberPelanggan == 1">
 									<div class="form-group">
 										<label for="kode_pelanggan" class="col-md-3 control-label rata top">Member Id<font size="5px" color="red">*</font></i></label>
 										<div class="col-md-8">
@@ -415,8 +415,8 @@ export default {
 			message: '',
 			disable: 1,
 			edit: 0,
-			memberId: 4,
 			formPelanggan: 1,
+			memberPelanggan: 0,
 			riwayatBelanja: 0,
 			perilakuPelanggan:0,
 			settings: {
@@ -456,7 +456,7 @@ export default {
     	},
 
     	tambahPelanggan(){
-    		this.pelanggan.kode_pelanggan = ''
+    		// this.pelanggan.kode_pelanggan = ''
     		this.pelanggan.nama_pelanggan = ''
     		this.pelanggan.jenis_kelamin = ''
     		this.pelanggan.tanggal_lahir = ''
@@ -469,6 +469,7 @@ export default {
     		this.$router.replace('/pelanggan');
     		this.disable = 0
     		this.formPelanggan = 1
+
     	},
 
     	onDisable(){
@@ -495,6 +496,7 @@ export default {
     		this.disable = 1
     		this.edit = 1
     		this.formPelanggan = 1
+    		this.memberPelanggan =1
     	},
     	editPelanggan(){
     		this.disable = 2
