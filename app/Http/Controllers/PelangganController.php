@@ -25,16 +25,16 @@ class PelangganController extends Controller
     public function search(Request $request)
     {
         $cari_pelanggan = Pelanggan::where('kode_pelanggan', 'LIKE', "%$request->search%")
-            ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
+        ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
         // ->orWhere('tanggal_lahir', 'LIKE', "%$request->search%")
-            ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
+        ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
         // ->orWhere('alamat', 'LIKE', "%$request->search%")
         // ->orWhere('jenis_kelamin', 'LIKE', "%$request->search%")
         // ->orWhere('email', 'LIKE', "%$request->search%")
         // ->orWhere('kota', 'LIKE', "%$request->search%")
         // ->orWhere('kode_pos', 'LIKE', "%$request->search%")
         // ->orWhere('catatan', 'LIKE', "%$request->search%")
-            ->paginate(10);
+        ->paginate(10);
         return $cari_pelanggan;
     }
 
@@ -48,7 +48,7 @@ class PelangganController extends Controller
     {
         //VALIDASI
         $this->validate($request, [
-            'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
+            // 'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
@@ -82,7 +82,7 @@ class PelangganController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan,' . $id,
+            // 'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan,' . $id,
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             // 'tanggal_lahir'  => '',
