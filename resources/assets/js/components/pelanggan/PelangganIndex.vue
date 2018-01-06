@@ -161,7 +161,7 @@
 									<div class="form-group">
 										<label for="kode_pelanggan" class="col-md-3 control-label rata top">Member Id<font size="5px" color="red">*</font></i></label>
 										<div class="col-md-8">
-											<input class="form-control" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" :disabled="disable == 1">
+											<input class="form-control" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" readonly>
 											<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
 										</div>
 									</div>
@@ -483,7 +483,7 @@ export default {
 
     	detailPelanggan(id, kode_pelanggan, nama_pelanggan, jenis_kelamin, tanggal_lahir, nomor_telepon, email, kota, alamat, kode_pos, catatan){
     		this.pelanggan.id = id
-    		this.pelanggan.kode_pelanggan = kode_pelanggan
+    		this.pelanggan.kode_pelanggan = id
     		this.pelanggan.nama_pelanggan = nama_pelanggan
     		this.pelanggan.jenis_kelamin = jenis_kelamin
     		this.pelanggan.tanggal_lahir = tanggal_lahir
@@ -559,6 +559,7 @@ export default {
     			app.pelanggan.catatan = ''
     			app.disable = 1
     			app.edit = 0
+    			memberPelanggan: 0,
     			app.$router.replace('/pelanggan');
 
     		})
@@ -594,6 +595,7 @@ export default {
     			app.pelanggan.catatan = ''
     			app.$router.replace('/pelanggan');
     			app.disable = 1
+    			app.memberPelanggan = 0
 
     		})
     		.catch(function (resp) {
@@ -644,6 +646,9 @@ export default {
     			this.pelanggan.kode_pos = ''
     			this.pelanggan.catatan = ''
     			this.disable = 1
+    			this.edit = 0
+
+    			this.memberPelanggan = 0
     			this.$router.replace('/pelanggan/');
     		});
     	},
