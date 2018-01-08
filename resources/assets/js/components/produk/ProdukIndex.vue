@@ -1,17 +1,63 @@
+<style scoped>
+.animated {
+    -webkit-animation-duration: 0.35s; /* Safari 4.0 - 8.0 */
+    animation-duration: 0.35s;
+    -webkit-animation-fill-mode: both; /* Safari 4.0 - 8.0 */
+    animation-fill-mode: both;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.tablePenjelasan, .tableContoh {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin-bottom: 30px;
+}
+
+.tablePenjelasan td {
+    padding-right: 5.5px;
+    padding-bottom: 10px;
+}
+
+.tableContoh {
+    width: 95%;
+}
+
+.tableContoh th, .tableContoh td {
+    padding: 2.5px 6px 2.5px 6px;
+    border: 1px groove #eee;
+}
+
+</style>
 <template>
     <div class="container">
         <ol class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}" >Dashboard</router-link></li>
             <li class="active">Produk</li>
         </ol>
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
 
-                <!-- Modal content-->
+        <!-- Modal untuk import produk -->
+        <div id="modalImportProduk" class="modal fade" role="dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Import Produk</h4>
                     </div>
                     <div class="modal-body">
@@ -19,8 +65,8 @@
 
                             <div class="form-group">
                                 <label for="template" class="col-md-2 control-label">Template</label>
-                                <div class="col-md-4">
-                                    Gunakan <a name="template" :href="url_template_import_produk">Template</a> untuk Import Produk
+                                <div class="col-md-6">
+                                    Gunakan <a name="template" :href="url_template_import_produk">Template</a> untuk Import Produk. Lihat <a style="color: blue;" data-toggle="modal" data-target="#modalCaraPengisianExcel" href="#">contoh</a> pengisian untuk lebih detail.
                                 </div>
                             </div>
 
@@ -39,12 +85,109 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
 
             </div>
         </div>
+
+        <!-- Modal Cara Pengisian Excel -->
+        <div id="modalCaraPengisianExcel" class="modal animated fadeIn" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Cara Pengisian</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <table class="tablePenjelasan">
+                                <tbody>
+                                    <tr>
+                                        <td class="bold">Kode Produk</td>
+                                        <td>:</td>
+                                        <td>Kode Poduk Anda.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Nama Produk</td>
+                                        <td>:</td>
+                                        <td>Nama Produk Anda.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Kategori Produk</td>
+                                        <td>:</td>
+                                        <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Harga Beli</td>
+                                        <td>:</td>
+                                        <td>Harga Beli Produk Anda.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Harga Jual</td>
+                                        <td>:</td>
+                                        <td>Harga Jual Produk Anda.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bold">Bisa Dijual</td>
+                                        <td>:</td>
+                                        <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-12">Contoh seperti tabel di bawah:</div>
+                            </div>
+                            <br>
+                            <div align="center">
+                                <table class="tableContoh">
+                                    <thead>
+                                        <th>Kode Produk</th>
+                                        <th>Nama Produk</th>
+                                        <th>Kategori Produk</th>
+                                        <th>Harga Beli</th>
+                                        <th>Harga Jual</th>
+                                        <th>Bisa Dijual</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>84399</td>
+                                            <td>Mainan</td>
+                                            <td>Unit</td>
+                                            <td align="right">180000</td>
+                                            <td align="right">200000</td>
+                                            <td>ya</td>
+                                        </tr>
+                                        <tr>
+                                            <td>88748</td>
+                                            <td>Gula</td>
+                                            <td>Sembako</td>
+                                            <td align="right">6500</td>
+                                            <td align="right">7500</td>
+                                            <td>ya</td>
+                                        </tr>
+                                        <tr>
+                                            <td>49938</td>
+                                            <td>Beras</td>
+                                            <td>Sembako</td>
+                                            <td align="right">8000</td>
+                                            <td align="right">8500</td>
+                                            <td>ya</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <div class="panel panel-default">
             <div class="panel-heading">Produk</div>
 
@@ -52,7 +195,7 @@
                 <div class="table-responsive">
                     <p>
                         <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link>
-                        <span class="btn btn-primary" data-toggle="modal" data-target="#myModal">Import Produk</span>
+                        <span class="btn btn-primary" data-toggle="modal" data-target="#modalImportProduk">Import Produk</span>
                     </p>
                     <!-- <button type="button" class="btn btn-info btn-lg">Open Modal</button> -->
 
@@ -102,6 +245,7 @@
 export default {
     data: function () {
         return {
+            errors: [],
             produks: [],
             produksData: {},
             import_produk: {
@@ -199,11 +343,23 @@ export default {
 
             axios.post(app.url_import_produk, newProduk)
             .then(function (resp) {
+                console.log(resp);
+                // return;
+                // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
+                // bukan bernilai ya atau tidak
+                if (resp.data.pesan != undefined) {
+                    return app.alert('Gagal!', resp.data.pesan, 'warning');
+                }
+
                 app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+                app.getProduks();
             })
             .catch(function (resp) {
-                console.log(resp)
-                app.alert('Gagal!', 'ada yang salah dengan proses uploadnya', 'warning');
+                // console.log(resp.response)
+                if (resp.response.data.errors.excel != undefined) {
+                    app.errors = resp.response.data.errors.excel[0];
+                }
+                app.alert('Gagal!', app.errors, 'warning');
             });
         },
         alert(title, pesan, icon) {
