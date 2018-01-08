@@ -203,7 +203,7 @@
 									<div class="form-group">
 										<label for="nama_pelanggan" class="col-md-3 control-label rata top">Nama<font size="5px" color="red">*</font></label>
 										<div class="col-md-8">
-											<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="range" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
+											<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
 											<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
 										</div>
 									</div>
