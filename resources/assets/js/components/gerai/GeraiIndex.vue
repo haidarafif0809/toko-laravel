@@ -1,3 +1,8 @@
+<style scoped>
+#border{
+	border:1px solid #D3E0E9;
+}
+</style>
 <template>
 	<div class="container">
 		<ul class="breadcrumb">
@@ -5,12 +10,24 @@
 			<li><router-link :to="{name: 'indexGerai'}">Gerai</router-link></li>
 		</ul>
 
+
 		<div class="panel panel-default">
-			<div class="panel-heading">Gerai</div>
-			<div class="panel-body">
+
+			<div class="panel-heading"></div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="area-top clearfix">
+						<div class="pull-left header">
+							<h4 class="uppercase"><i class="fa fa-map-marker fa-1x"></i>Pengaturan Gerai</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body" id="border">
 				<div class="tambah">
 					<p>
-						<router-link :to="{name: 'createGerai'}" class="btn btn-primary">Tambah Gerai</router-link>
+						<router-link :to="{name: 'createGerai'}" class="btn btn-primary"><span class="fa fa-plus fa-1x"></span> Tambah Gerai</router-link>
 					</p>
 				</div>
 
@@ -31,11 +48,12 @@
 							<td>{{gerai.kota}}</td>
 							<td>
 								<router-link :to="{name: 'editGerai', params: {id: gerai.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + gerai.id" >
-									Edit 
+									<i class="fa fa-pencil" aria-hidden="true"></i> Edit 
 								</router-link> 
 								<a href="#"
 								class="btn btn-xs btn-danger" 
 								v-on:click="deleteEntry(gerai.id, index,gerai.nama_gerai)">
+								<i class="fa fa-trash" aria-hidden="true"></i> 
 								Delete
 							</a>
 						</td>

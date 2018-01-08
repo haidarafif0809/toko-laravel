@@ -2,24 +2,24 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexStafToko'}">Staf Toko</router-link></li>
-			<li class="active">Tambah Staf Toko</li>
+			<li><router-link :to="{name: 'indexStafToko'}">Staff Toko</router-link></li>
+			<li class="active">Tambah Staff Toko</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Tambah Staf Toko</p>
+						<p class="panel-title">Tambah Staff Toko</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 							<div class="form-group">
 								<label for="nama_pemilik" class="col-md-2 control-label">
-									Nama Staf
+									Nama Staff
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Isi Nama Staf" type="text" v-model="user.nama_pemilik" name="nama_pemilik"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Isi Nama Staff" type="text" v-model="user.nama_pemilik" name="nama_pemilik"  autofocus="">
 									<span v-if="errors.nama_pemilik" id="nama_pemilik_error" class="label label-danger">
 										{{ errors.nama_pemilik[0] }}
 									</span>
@@ -62,11 +62,10 @@
 								</div>
 							</div>
 
-
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
 									<button class="btn btn-primary" id="btnSimpanUser" type="submit"> 
-										Tambah
+										Undang
 									</button>
 								</div>
 							</div>
@@ -104,7 +103,7 @@ export default {
 			var newuser = app.user;
 			axios.post(app.url, newuser)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah Staf '+ app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
 				app.alert(app.message);
 				app.user.nama_pemilik = ''
 				app.user.email = ''

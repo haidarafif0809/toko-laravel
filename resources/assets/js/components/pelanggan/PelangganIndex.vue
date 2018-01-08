@@ -3,6 +3,67 @@
 	max-height: 160px;
 	overflow-y: scroll;
 }
+
+.row .control-label {
+	text-align: left;
+}
+
+.form-info {
+	padding: 15px;
+}
+
+.tabInformasi{
+	width: 33%;
+	/*margin-bottom: 20px;*/
+}
+
+.tabKecil{
+	width: 33%;
+}
+
+.top{
+	margin-top: -15px;
+}
+
+.rata{
+	margin-left: 15px;
+}
+
+.star{
+	color: #ff0000;
+}
+
+.box{
+	/*width: 300px;*/
+	/*height:60px;*/
+	background-color: #FCF8E3;
+	text-align: center;
+	padding: 8px;
+	border:1px solid #ffafaf;
+}
+
+.nav.nav-tabs li {
+	border-right: 1px solid #eee;
+}
+.pawoon-result .nav-tabs {
+	margin-bottom: 20px;
+}
+
+.nav-tabs {
+	margin-bottom: 0px;
+	border-bottom: none;
+	background: #fff;
+	box-shadow: 0 0 1px #eee;
+}
+
+.nav li {
+	font-size: 14px;
+}
+
+.nav-tabs > li {
+	margin-bottom: -1px;
+}
+
 </style>
 
 <template>
@@ -40,13 +101,13 @@
 		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<button class="btn btn-success">
+					<button class="btn btn-success" type="button" v-on:click="upload">
 						<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
-						import
+						Import
 					</button>
-					<button class="btn btn-primary">
+					<button class="btn btn-primary" type="button" v-on:click="download">
 						<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-						unduh
+						Unduh
 					</button>
 					<button class="btn btn-primary" v-on:click="tambahPelanggan">
 						<i class="fa fa-plus" aria-hidden="true"></i>
@@ -70,11 +131,23 @@
 								<div class="row">
 									<div class="col-md-11 list-pelanggan" >
 										<div class="thumbnail" v-on:click="detailPelanggan(pelanggan.id, pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
+
+											<!-- <img src="{{ asset('images/profile.jpg') }}" class="img-circle" width="30px" height="30px">
+											{{ Auth::user()->nama_pemilik }}
+											<span class="caret"></span> -->
+
 											<p>
-												<i class="fa fa-user-circle-o" aria-hidden="true"></i>	
-												<span><b>{{pelanggan.nama_pelanggan}}</b></span>
+												<!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i>	 -->
+												<div class="col-sm-3">
+													<img :src="url_img" width="40px" height="50px">
+												</div>
+												<span><b>{{pelanggan.nama_pelanggan}}</b></span><br>
+												<span>{{pelanggan.id}}</span>
 											</p>
-											<p>{{pelanggan.kode_pelanggan}}</p>
+											<!-- <p>
+												<i class="fa fa-users" aria-hidden="true"></i>
+												<span>{{pelanggan.id}}</span>
+											</p> -->
 											<p>
 												<i class="fa fa-mobile" aria-hidden="true"></i>
 												<span>{{pelanggan.nomor_telepon}}</span>
@@ -98,174 +171,263 @@
 
 					<div class="panel panel-default">
 						<ul class="nav nav-tabs">
-							<li class="col-sm-4">
-								<a data-toggle="tab" v-on:click="tentangPelanggan">TENTANG PELANGGAN</a>
+							<li class="tabInformasi active">
+								<a data-toggle="tab" v-on:click="tentangPelanggan"><font color="#000000">TENTANG PELANGGAN</font></a>
 							</li>
 
-							<li class="col-sm-4">
-								<a data-toggle="tab"  v-on:click="riwayatTransaksi">RIWAYAT TRANSAKSI</a>
+							<li class="tabInformasi">
+								<a data-toggle="tab"  v-on:click="riwayatTransaksi"><font color="#000000">RIWAYAT TRANSAKSI</font></a>
 							</li>
 
-							<li class="col-sm-4">
-								<a data-toggle="tab"  v-on:click="perilaku">PERILAKU</a>
+							<li class="tabInformasi ">
+								<a data-toggle="tab"  v-on:click="perilaku"><font color="#000000">PERILAKU</font></a>
 							</li>
 						</ul>
 					</div>
 
-
-					<div class="row-fluid" v-if="formPelanggan == 1">
-						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
-							<div class="col-md-12 form-info">
-								<div class="form-group">
-									<label class="col-md-4">Kolom bertanda <font size="5px" color="red">*</font> wajib diisi.</label>
+					<div class="panel-body">
+						<div class="row-fluid" v-if="formPelanggan == 1">
+							<div class="col-md-12 form-info form-group">
+								<div class="row">
+									<span class="label box" >
+										<font color="#000000">Kolom bertanda</font>
+										<font size="5px" color="red">*</font>
+										<font color="#000000">wajib diisi.</font>
+									</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="kode_pelanggan" class="col-md-3 control-label">Kode<font size="5px" color="red">*</font></label>
-									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Kode Pelanggan" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
+							<form v-on:submit.prevent="saveForm()" class="form-horizontal" >
+								<div class="row" v-if="memberPelanggan == 1">
+									<div class="form-group">
+										<label for="kode_pelanggan" class="col-md-3 control-label rata top">Member Id<font size="5px" color="red">*</font></i></label>
+										<div class="col-md-8">
+											<input class="form-control" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" readonly>
+											<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row"> 
-								<div class="form-group">
-									<label for="nama_pelanggan" class="col-md-3 control-label">Nama<font size="5px" color="red">*</font></label>
-									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
+								<div class="row"> 
+									<div class="form-group">
+										<label for="nama_pelanggan" class="col-md-3 control-label rata top">Nama<font size="5px" color="red">*</font></label>
+										<div class="col-md-8">
+											<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
+											<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="jenis_kelamin'" class="col-md-3 control-label">Jenis Kelamin <font size="5px" color="red">*</font></label>
-									<div class="col-md-8">
-										<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings" :disabled="disable == 1"> 
-											<option value="1"  >laki-laki</option>
-											<option value="2"  >perempuan</option>
-										</selectize-component>
-										<span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="jenis_kelamin'" class="col-md-3 control-label rata top">Jenis Kelamin <font size="5px" color="red">*</font></label>
+										<div class="col-md-8">
+											<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings" :disabled="disable == 1"> 
+												<option value="1"  >laki-laki</option>
+												<option value="2"  >perempuan</option>
+											</selectize-component>
+											<span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="tanggal_lahir" class="col-md-3 control-label">Tanggal Lahir</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="tanggal_lahir" class="col-md-3 control-label rata">Tanggal Lahir</label>
+										<div class="col-md-8">
+											<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
+											<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="nomor_telepon" class="col-md-3 control-label">Nomor Telepon <font size="5px" color="red">*</font></label>
-									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="nomor_telepon" class="col-md-3 control-label rata top">Nomor Telepon <font size="5px" color="red">*</font></label>
+										<div class="col-md-8">
+											<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="" :disabled="disable == 1">
+											<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="email" class="col-md-3 control-label">Email</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="" :disabled="disable == 1 ">
-										<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="email" class="col-md-3 control-label rata">Email</label>
+										<div class="col-md-8">
+											<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="" :disabled="disable == 1 ">
+											<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="kota" class="col-md-3 control-label">Kota</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="alamat" class="col-md-3 control-label rata">Alamat</label>
+										<div class="col-md-8">
+											<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
+											<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="alamat" class="col-md-3 control-label">Alamat</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
+								<div class="row">
+									<div class="form-group">
+										<label for="kota" class="col-md-3 control-label rata">Kota</label>
+										<div class="col-md-8">
+											<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
+											<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="kode_pos" class="col-md-3 control-label">Kode Pos</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.kode_pos" id="email_error" class="label label-danger">{{ errors.kode_pos[0] }}</span>
-									</div>
+						<!-- <div class="row">
+							<div class="form-group">
+								<label for="kode_pos" class="col-md-3 control-label rata">Kode Pos</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Kode Pos" type="number" v-model="pelanggan.kode_pos" name="kode_pos" autofocus="" :disabled="disable == 1">
+									<span v-if="errors.kode_pos" id="email_error" class="label label-danger">{{ errors.kode_pos[0] }}</span>
 								</div>
 							</div>
+						</div> -->
 
-							<div class="row">
-								<div class="form-group">
-									<label for="catatan" class="col-md-3 control-label">Catatan</label>
-									<div class="col-md-8">
-										<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus="" :disabled="disable == 1"></textarea>
-										<span v-if="errors.catatan" id="email_error" class="label label-danger">{{ errors.catatan[0] }}</span>
-									</div>
+						<div class="row">
+							<div class="form-group">
+								<label for="catatan" class="col-md-3 control-label rata">Catatan</label>
+								<div class="col-md-8">
+									<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus="" :disabled="disable == 1"></textarea>
+									<span v-if="errors.catatan" id="email_error" class="label label-danger">{{ errors.catatan[0] }}</span>
 								</div>
 							</div>
+						</div>
 
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-12 col-md-offset-8">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-md-12 col-md-offset-8">
 
-										<button v-if="disable == 0" class="btn btn-warning" id="btnSimpanPelanggan" type="submit">
-											<i class="fa fa-floppy-o" aria-hidden="true"></i>
-											Simpan 
-										</button>
+									<button v-if="disable == 0" class="btn btn-warning" id="btnSimpanPelanggan" type="submit">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i>
+										Simpan 
+									</button>
 
-										<button v-if="disable == 0" class="btn btn-default" @click="onDisable">
-											<i class="fa fa-times" aria-hidden="true"></i>
-											Batal
-										</button>
+									<button v-if="disable == 0" class="btn btn-default" @click="onDisable">
+										<i class="fa fa-times" aria-hidden="true"></i>
+										Batal
+									</button>
 
-										<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
-											Edit
-										</button>
+									<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
+										<i class="fa fa-pencil" aria-hidden="true"></i>
+										Edit
+									</button>
 
-										<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
-											<i class="fa fa-floppy-o" aria-hidden="true"></i>
-											Simpan
-										</button>
+									<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i>
+										Simpan
+									</button>
 
-										<button v-if="disable == 2" class="btn btn-default" @click="batalEdit">
-											<i class="fa fa-times" aria-hidden="true"></i>
-											Batal
-										</button>
+									<button v-if="disable == 2" class="btn btn-default" type="button" @click="batalEdit">
+										<i class="fa fa-times" aria-hidden="true"></i>
+										Batal
+									</button>
 
-										<button v-if="disable == 2" class="btn btn-danger" type="button" v-on:click="deleteEntry">
-											<i class="fa fa-trash-o" aria-hidden="true"></i>
-											Hapus
-										</button>
-									</div>
+									<button v-if="edit == 1" class="btn btn-danger" type="button" v-on:click="deleteEntry">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+										Hapus
+									</button>
 								</div>
 							</div>
-						</form>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row-fluid" v-if="riwayatBelanja == 1">
+				<div class="panel-heading">
+					<div class="btn-group">
+						<button class="btn btn-xs btn-default">Mingguan</button>	
+						<button class="btn btn-xs btn-default">Bulanan</button>
+						<button class="btn btn-xs btn-default">Tahunan</button>
+						<button class="btn btn-xs btn-default">Rentang Waktu</button>
+					</div>
+				</div>
+				<div class="panel panel-body">
+					<input type="text">
+
+					<select > 
+						<option value="1"  >Jan</option>
+						<option value="2"  >Feb</option>
+						<option value="3"  >Mar</option>
+						<option value="4"  >Apr</option>
+						<option value="5"  >Mei</option>
+						<option value="6"  >Jun</option>
+						<option value="7"  >Jul</option>
+						<option value="8"  >Agt</option>
+						<option value="9"  >Sep</option>
+						<option value="10" >Okt</option>
+						<option value="11" >Nov</option>
+						<option value="12" >Des</option>
+					</select>
+
+					<select > 
+						<option value="2016"  >2016</option>
+						<option value="2017"  >2017</option>
+						<option value="2018"  >2018</option>
+					</select>
+					<button class="btn btn-success">
+						<i class="fa fa-download" aria-hidden="true"></i>
+						Excel
+					</button>
+				</div>
+				<table border="2">
+					<thead>
+						<th class="col-md-2">Tanggal</th>
+						<th class="col-md-4">Produk</th>
+						<th class="col-md-3">Jumlah Produk</th>
+						<th class="col-md-3">Total Transaksi</th>
+					</thead>
+					<tbody>
+						<td>05 Dec 2017 / 11:49</td>
+						<td>kentang goreng x1.000</td>
+						<td>10</td>
+						<td>126,000</td>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="row-fluid" v-if="perilakuPelanggan == 1">
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover">
+							<tbody>	
+								<tr>
+									<td>Jumlah Order</td>
+									<td>9</td>
+								</tr>
+								<tr>
+									<td>Total Belanja</td>
+									<td>Rp 617.800,00</td>
+								</tr>
+								<tr>
+									<td>Rata-rata Belanja</td>
+									<td>Rp 68.644,44</td>
+								</tr>
+								<tr>
+									<td>Terakhir Datang</td>
+									<td>1 minggu yang lalu</td>						
+								</tr>
+								<tr>
+									<td>Rata-rata Kedatangan</td>
+									<td>setiap 3 hari</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 </template>
 
 <script>
@@ -275,12 +437,12 @@ export default {
 			pelanggans: [],
 			pelanggansData: {},
 			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
+			url_img : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
 			search : '',
 			loading : true,
 			errors: [],
 			pelanggan: {
 				id: '',
-				kode_pelanggan: '',
 				nama_pelanggan: '',
 				jenis_kelamin: '',
 				tanggal_lahir: '',
@@ -296,6 +458,9 @@ export default {
 			disable: 1,
 			edit: 0,
 			formPelanggan: 1,
+			memberPelanggan: 0,
+			riwayatBelanja: 0,
+			perilakuPelanggan:0,
 			settings: {
 				placeholder: 'Pilih Jenis Kelamin'
 			} 
@@ -316,18 +481,24 @@ export default {
     methods: {
     	tentangPelanggan(){
     		this.formPelanggan = 1
+    		this.riwayatBelanja = 0
+    		this.perilakuPelanggan = 0
     	},
 
     	riwayatTransaksi(){
     		this.formPelanggan = 0
+    		this.riwayatBelanja = 1
+    		this.perilakuPelanggan = 0
     	},
 
     	perilaku(){
     		this.formPelanggan = 0
+    		this.riwayatBelanja = 0
+    		this.perilakuPelanggan = 1
     	},
 
     	tambahPelanggan(){
-    		this.pelanggan.kode_pelanggan = ''
+    		// this.pelanggan.kode_pelanggan = ''
     		this.pelanggan.nama_pelanggan = ''
     		this.pelanggan.jenis_kelamin = ''
     		this.pelanggan.tanggal_lahir = ''
@@ -340,6 +511,7 @@ export default {
     		this.$router.replace('/pelanggan');
     		this.disable = 0
     		this.formPelanggan = 1
+
     	},
 
     	onDisable(){
@@ -353,7 +525,7 @@ export default {
 
     	detailPelanggan(id, kode_pelanggan, nama_pelanggan, jenis_kelamin, tanggal_lahir, nomor_telepon, email, kota, alamat, kode_pos, catatan){
     		this.pelanggan.id = id
-    		this.pelanggan.kode_pelanggan = kode_pelanggan
+    		this.pelanggan.kode_pelanggan = id
     		this.pelanggan.nama_pelanggan = nama_pelanggan
     		this.pelanggan.jenis_kelamin = jenis_kelamin
     		this.pelanggan.tanggal_lahir = tanggal_lahir
@@ -366,6 +538,7 @@ export default {
     		this.disable = 1
     		this.edit = 1
     		this.formPelanggan = 1
+    		this.memberPelanggan =1
     	},
     	editPelanggan(){
     		this.disable = 2
@@ -408,6 +581,23 @@ export default {
     		});
     	},
 
+    	upload(){
+    		this.disable = 1
+    		this.$swal({
+    			title: "GAGAL!",
+    			text: "Fitur ini sedang dalam pengembangan",
+    			icon: "warning",
+    		});
+    	},
+    	download(){
+    		this.disable = 1
+    		this.$swal({
+    			title: "GAGAL!",
+    			text: "Fitur ini sedang dalam pengembangan",
+    			icon: "warning",
+    		});
+    	},
+
     	saveForm() {
     		var app = this;
     		var Pelanggan = app.pelanggan;
@@ -426,6 +616,9 @@ export default {
     			app.pelanggan.alamat = ''
     			app.pelanggan.kode_pos = ''
     			app.pelanggan.catatan = ''
+    			app.disable = 1
+    			app.edit = 0
+    			memberPelanggan: 0,
     			app.$router.replace('/pelanggan');
 
     		})
@@ -460,6 +653,8 @@ export default {
     			app.pelanggan.kode_pos = ''
     			app.pelanggan.catatan = ''
     			app.$router.replace('/pelanggan');
+    			app.disable = 1
+    			app.memberPelanggan = 0
 
     		})
     		.catch(function (resp) {
@@ -477,7 +672,7 @@ export default {
     	deleteEntry() {
     		swal({
     			title: "Konfirmasi Hapus",
-    			text : "Anda Yakin Ingin Menghapus ?",
+    			text : "Anda Yakin Ingin Menghapus " + this.pelanggan.nama_pelanggan +" ?",
     			icon : "warning",
     			buttons: true,
     			dangerMode: true,
@@ -499,6 +694,20 @@ export default {
     					});
     				});
     			}
+    			this.pelanggan.kode_pelanggan = ''
+    			this.pelanggan.nama_pelanggan = ''
+    			this.pelanggan.jenis_kelamin = ''
+    			this.pelanggan.tanggal_lahir = ''
+    			this.pelanggan.nomor_telepon = ''
+    			this.pelanggan.email = ''
+    			this.pelanggan.kota = ''
+    			this.pelanggan.alamat = ''
+    			this.pelanggan.kode_pos = ''
+    			this.pelanggan.catatan = ''
+    			this.disable = 1
+    			this.edit = 0
+
+    			this.memberPelanggan = 0
     			this.$router.replace('/pelanggan/');
     		});
     	},

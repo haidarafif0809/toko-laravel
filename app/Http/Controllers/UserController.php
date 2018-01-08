@@ -57,7 +57,7 @@ class UserController extends Controller
     }
     public function view()
     {
-        $user_view = User::orderBy('id', 'desc')->paginate(10);
+        $user_view = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
         return response()->json($user_view);
     }
     public function pencarian(Request $request)
@@ -78,5 +78,17 @@ class UserController extends Controller
             $user->update(['status' => 1]);
             return 1;
         }
+    }
+
+    public function viewStaff()
+    {
+        $array      = [];
+        $user_staff = User::select('toko_id', 'nama_pemilik', 'email', 'no_telp', 'last_login')->where('type', 2)->orderBy('id', 'desc')->get();
+        foreach ($user_staff as $key) {
+            $array[$key->toko_id][] = $key;
+        }
+        // array_push($array, ['nama' => $key->nama_pemilik]);
+        return response()->json($array);
+        // return var_export($array);
     }
 }

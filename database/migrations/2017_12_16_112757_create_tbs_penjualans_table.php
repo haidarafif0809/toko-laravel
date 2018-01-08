@@ -16,7 +16,7 @@ class CreateTbsPenjualansTable extends Migration
         Schema::create('tbs_penjualans', function (Blueprint $table) {
             $table->increments('id_tbs_penjualan');
             $table->string('session_id')->nullable();
-            $table->string('satuan_id');
+            $table->string('satuan_id')->nullable();
             $table->integer('produk_id');
             $table->string('jumlah_produk');
             $table->string('harga_produk');

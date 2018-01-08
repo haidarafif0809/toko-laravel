@@ -5,6 +5,7 @@
         border: 1px solid #ddd;
         border-radius: 5px;
         margin-bottom: 25px;
+        max-height: 173px;
     }
 .judul{
     	font-size: 18px;

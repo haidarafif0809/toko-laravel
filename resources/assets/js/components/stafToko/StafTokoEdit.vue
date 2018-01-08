@@ -2,24 +2,24 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li><router-link :to="{name: 'indexUser'}">Staf</router-link></li>
-			<li class="active">Edit Staf</li>
+			<li><router-link :to="{name: 'indexStafToko'}">Staff Toko</router-link></li>
+			<li class="active">Edit Staff</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Edit Staf</p>
+						<p class="panel-title">Edit Staff</p>
 					</div>
 					<div class="panel-body">
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
 							<div class="form-group">
 								<label for="nama_pemilik" class="col-md-2 control-label">
-									Nama Staf
+									Nama Staff
 								</label>
 								<div class="col-md-4">
-									<input class="form-control" required autocomplete="off" placeholder="Isi Nama Staf" type="text" v-model="user.nama_pemilik" name="nama_pemilik"  autofocus="">
+									<input class="form-control" required autocomplete="off" placeholder="Isi Nama Staff" type="text" v-model="user.nama_pemilik" name="nama_pemilik"  autofocus="">
 									<span v-if="errors.nama_pemilik" id="nama_pemilik_error" class="label label-danger">
 										{{ errors.nama_pemilik[0] }}
 									</span>
@@ -88,7 +88,7 @@ export default {
 			var newUser = app.user;
 			axios.patch(app.url+'/' + app.userId, newUser)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Mengedit Staf '+ app.user.nama_pemilik;
+				app.message = 'Sukses : Berhasil Mengedit Staff '+ app.user.nama_pemilik;
 				app.alert(app.message);
 				app.user.nama_pemilik = ''
 				app.user.email = ''

@@ -260,73 +260,76 @@
             												<table border="0" cellpadding="0" cellspacing="0">
             													<tr>
             														<td>
-            															<h3><p>Hi Sobat</p></h3>
-            															<p>Kami telah mendaftarakan alamat email Anda di KuwaliPos </p>
 
-            															<table border="0" cellpadding="0" cellspacing="0">
-            																<tbody>
-            																	<tr>
-            																		<td align="left">
-            																			<table border="0" cellpadding="0" cellspacing="0">
-            																				<tbody>
-            																					<tr>
-            																						<td> <div class="container">
+                                                                        <h1 style="color:#737373;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:600;letter-spacing:normal;margin:0;padding:0;text-align:center">Undangan Bergabung di KuwaliPos</h1><br><br>
+                                                                        <h3><p>Hi Sobat</p></h3>
 
-            																							<center><p>Klik tombol di bawah ini untuk aktivasi akun anda :</p></center>
-            																							<hr>
-            																							<center>
-            																								<p>
-            																									<div style="height:25px;width:150px;background:#ff5722;font-size:14px;font-weight:bold;border-radius:4px;text-align:center;line-height:25px;margin:0 auto">
-            																										<a href="{{ $link = url('auth/verify', $token).'?email='.urlencode($user->email) }}" type="button" style="color: white">  Konfirmasi
-            																										</a>
-            																									</div>
-            																								</p>
-            																							</center>
-            																							<hr>
-            																							<center><p>Terimakasih telah menghubungi kami!</p></center>
-            																						</div>
-            																					</td>
-            																				</tr>
-            																			</tbody>
-            																		</table>
-            																	</td>
-            																</tr>
-            															</tbody>
-            														</table>
-            														{{--<p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>--}}
-            														{{--<p>Good luck! Hope it works.</p>--}}
-            													</td>
-            												</tr>
-            											</table>
-            										</td>
-            									</tr>
+                                                                        <p>Anda Diundang untuk bergabung di toko dasar.</p>
 
-            									<!-- END MAIN CONTENT AREA -->
-            								</table>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tbody>
+                                                                               <tr>
+                                                                                  <td align="left">
+                                                                                     <table border="0" cellpadding="0" cellspacing="0">
+                                                                                        <tbody>
+                                                                                           <tr>
+                                                                                              <td> <div class="container">
 
-            								<!-- START FOOTER -->
-            								<div class="footer">
-            									<table border="0" cellpadding="0" cellspacing="0">
-            										<tr>
-            											<td class="content-block">
-            												<span class="apple-link">Anak IT Andaglos</span>
-            												{{--<br> Don't like these emails? <a href="http://andaglos.id">Unsubscribe</a>.--}}
-            											</td>
-            										</tr>
-            										<tr>
-            											<td class="content-block powered-by">
-            												Powered by <a href="http://andaglos.id" font-color="blue">Anak IT Andaglos</a>.
-            											</td>
-            										</tr>
-            									</table>
-            								</div>
-            								<!-- END FOOTER -->
+                                                                                                 <center><p>Klik tombol di bawah ini untuk aktivasi akun anda :</p></center>
+                                                                                                 <hr>
+                                                                                                 <center>
+                                                                                                    <p>
+                                                                                                       <div style="height:25px;width:150px;background:#ff5722;font-size:14px;font-weight:bold;border-radius:4px;text-align:center;line-height:25px;margin:0 auto">
+                                                                                                          <a href="{{ $link = url('auth/verify', $token).'?email='.urlencode($user->email) }}" type="button" style="color: white">  Konfirmasi
+                                                                                                          </a>
+                                                                                                      </div>
+                                                                                                  </p>
+                                                                                              </center>
+                                                                                              <hr>
+                                                                                              <center><p>Terimakasih !</p></center>
+                                                                                          </div>
+                                                                                      </td>
+                                                                                  </tr>
+                                                                              </tbody>
+                                                                          </table>
+                                                                      </td>
+                                                                  </tr>
+                                                              </tbody>
+                                                          </table>
+                                                          {{--<p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>--}}
+                                                          {{--<p>Good luck! Hope it works.</p>--}}
+                                                      </td>
+                                                  </tr>
+                                              </table>
+                                          </td>
+                                      </tr>
 
-            								<!-- END CENTERED WHITE CONTAINER -->
-            							</div>
-            						</td>
-            						<td>&nbsp;</td>
-            					</tr>
-            				</table>
-            			</body>
-            			</html>
+                                      <!-- END MAIN CONTENT AREA -->
+                                  </table>
+
+                                  <!-- START FOOTER -->
+                                  <div class="footer">
+                                     <table border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                           <td class="content-block">
+                                              <span class="apple-link">Anak IT Andaglos</span>
+                                              {{--<br> Don't like these emails? <a href="http://andaglos.id">Unsubscribe</a>.--}}
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                         <td class="content-block powered-by">
+                                            Powered by <a href="http://andaglos.id" font-color="blue">Anak IT Andaglos</a>.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- END FOOTER -->
+
+                            <!-- END CENTERED WHITE CONTAINER -->
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </body>
+        </html>

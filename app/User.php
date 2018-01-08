@@ -21,10 +21,10 @@ class User extends Authenticatable
      */
 
     protected $casts = [
-        'status' => 'boolean',
+        'is_verified' => 'boolean',
     ];
     protected $fillable = [
-        'type', 'toko_id', 'nama_pemilik', 'email', 'no_telp', 'password', 'status',
+        'type', 'toko_id', 'nama_pemilik', 'email', 'no_telp', 'password', 'status', 'is_verified',
     ];
 
     /**
@@ -43,13 +43,23 @@ class User extends Authenticatable
         $user->verification_token = $token;
         $user->save();
         Mail::send('auth.emails.verification', compact('user', 'token'), function ($message) use ($user) {
-            $message->to($user->email, $user->name)->subject('Verifikasi Akun Toko Dasar');
+            $message->to($user->email, $user->nama_pemilik)->subject('Verifikasi Akun Toko Dasar');
+        });
+    }
+    public function sendVerificationStaff()
+    {
+        $user = $this;
+        $token = str_random(40);
+        $user->verification_token = $token;
+        $user->save();
+        Mail::send('auth.emails.verificationStaff', compact('user', 'token'), function ($message) use ($user) {
+            $message->to($user->email, $user->nama_pemilik)->subject('Verifikasi Akun Toko Dasar');
         });
     }
 
     public function verify()
     {
-        $this->status = 1;
+        $this->is_verified = 1;
         $this->verification_token = null;
         $this->save();
     }
