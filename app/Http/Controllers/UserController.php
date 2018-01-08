@@ -79,4 +79,16 @@ class UserController extends Controller
             return 1;
         }
     }
+
+    public function viewStaff()
+    {
+        $array      = [];
+        $user_staff = User::select('toko_id', 'nama_pemilik', 'email', 'no_telp', 'last_login')->where('type', 2)->orderBy('id', 'desc')->get();
+        foreach ($user_staff as $key) {
+            $array[$key->toko_id][] = $key;
+        }
+        // array_push($array, ['nama' => $key->nama_pemilik]);
+        return response()->json($array);
+        // return var_export($array);
+    }
 }

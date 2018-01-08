@@ -261,7 +261,7 @@
             													<tr>
             														<td>
 
-                                                                        <h1 style="color:#737373;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:600;letter-spacing:normal;margin:0;padding:0;text-align:center">Undangan Bergabung di Toko Dasar</h1><br><br>
+                                                                        <h1 style="color:#737373;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:600;letter-spacing:normal;margin:0;padding:0;text-align:center">Undangan Bergabung di KuwaliPos</h1><br><br>
                                                                         <h3><p>Hi Sobat</p></h3>
 
                                                                         <p>Anda Diundang untuk bergabung di toko dasar.</p>
