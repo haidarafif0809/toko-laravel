@@ -131,14 +131,23 @@
 								<div class="row">
 									<div class="col-md-11 list-pelanggan" >
 										<div class="thumbnail" v-on:click="detailPelanggan(pelanggan.id, pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
+
+											<!-- <img src="{{ asset('images/profile.jpg') }}" class="img-circle" width="30px" height="30px">
+											{{ Auth::user()->nama_pemilik }}
+											<span class="caret"></span> -->
+
 											<p>
-												<i class="fa fa-user-circle-o" aria-hidden="true"></i>	
-												<span><b>{{pelanggan.nama_pelanggan}}</b></span>
-											</p>
-											<p>
-												<i class="fa fa-users" aria-hidden="true"></i>
+												<!-- <i class="fa fa-user-circle-o" aria-hidden="true"></i>	 -->
+												<div class="col-sm-3">
+													<img :src="url_img" width="40px" height="50px">
+												</div>
+												<span><b>{{pelanggan.nama_pelanggan}}</b></span><br>
 												<span>{{pelanggan.id}}</span>
 											</p>
+											<!-- <p>
+												<i class="fa fa-users" aria-hidden="true"></i>
+												<span>{{pelanggan.id}}</span>
+											</p> -->
 											<p>
 												<i class="fa fa-mobile" aria-hidden="true"></i>
 												<span>{{pelanggan.nomor_telepon}}</span>
@@ -428,6 +437,7 @@ export default {
 			pelanggans: [],
 			pelanggansData: {},
 			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
+			url_img : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
 			search : '',
 			loading : true,
 			errors: [],

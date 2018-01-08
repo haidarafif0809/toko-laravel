@@ -12,6 +12,7 @@ img {
 			<ul class="breadcrumb">
 				<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 				<li><router-link :to="{name: 'profileTokoIndex'}">Profile Toko</router-link></li>
+				
 				<li class="active">Edit Profile Toko</li>
 			</ul>
 			<div class="col-md-8 col-md-offset-2">
