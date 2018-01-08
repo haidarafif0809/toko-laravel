@@ -19,7 +19,8 @@
     <div id="app">
         <nav>
             <div class='link-wrapper'>
-                <div class='link-container' style="background-image: url('images/gambar.png');">
+                <div class='link-container' style="background-color:#101920;">
+                    <!--<div class='link-container' style="background-image: url('images/gambar.png');">-->
                     <div class='hum-container'>
                         <div class='bar2'></div>
                         <div class='bar-mid'></div>
@@ -136,7 +137,7 @@
                         <span class="nav_txt">Master Data</span>
                         <ul id="logo-masterdata-collapse" class="collapse">
                             <li><router-link :to="{name: 'indexToko'}">
-                                <i class="fa fa-windows fa-2x"></i>
+                                <i class="fa fa-th-large fa-2x"></i>
                             </router-link></li>
                             <span class='nav_txt'>Toko</span>
 
