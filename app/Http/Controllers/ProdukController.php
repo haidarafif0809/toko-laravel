@@ -32,18 +32,18 @@ class ProdukController extends Controller
 
     public function view()
     {
-        return Produk::with('satuan')->orderBy('produk_id', 'desc')->paginate(10);
+        return Produk::orderBy('produk_id', 'desc')->paginate(10);
     }
 
     public function cari(Request $request)
     {
-        $produk = Produk::with('satuan')->where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $produk = Produk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
         return response()->json($produk);
     }
 
     public function detail($id)
     {
-        $produk = Produk::with('satuan')->where('produk_id', $id)->first();
+        $produk = Produk::where('produk_id', $id)->first();
         return response()->json($produk);
     }
 
@@ -148,8 +148,7 @@ class ProdukController extends Controller
  */
     public function edit($id)
     {
-        $produk = Produk::with('satuan')->where('produk_id', $id)->first();
-        // return response()->json($produk);
+        $produk = Produk::where('produk_id', $id)->first();
         return $produk;
     }
 
