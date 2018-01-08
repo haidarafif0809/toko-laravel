@@ -12,6 +12,15 @@
 	padding: 15px;
 }
 
+.tabInformasi{
+	width: 33%;
+	/*margin-bottom: 20px;*/
+}
+
+.tabKecil{
+	width: 33%;
+}
+
 .top{
 	margin-top: -15px;
 }
@@ -32,6 +41,29 @@
 	padding: 8px;
 	border:1px solid #ffafaf;
 }
+
+.nav.nav-tabs li {
+	border-right: 1px solid #eee;
+}
+.pawoon-result .nav-tabs {
+	margin-bottom: 20px;
+}
+
+.nav-tabs {
+	margin-bottom: 0px;
+	border-bottom: none;
+	background: #fff;
+	box-shadow: 0 0 1px #eee;
+}
+
+.nav li {
+	font-size: 14px;
+}
+
+.nav-tabs > li {
+	margin-bottom: -1px;
+}
+
 </style>
 
 <template>
@@ -130,15 +162,15 @@
 
 					<div class="panel panel-default">
 						<ul class="nav nav-tabs">
-							<li class="col-sm-4  active">
+							<li class="tabInformasi active">
 								<a data-toggle="tab" v-on:click="tentangPelanggan"><font color="#000000">TENTANG PELANGGAN</font></a>
 							</li>
 
-							<li class="col-sm-4">
+							<li class="tabInformasi">
 								<a data-toggle="tab"  v-on:click="riwayatTransaksi"><font color="#000000">RIWAYAT TRANSAKSI</font></a>
 							</li>
 
-							<li class="col-sm-4">
+							<li class="tabInformasi ">
 								<a data-toggle="tab"  v-on:click="perilaku"><font color="#000000">PERILAKU</font></a>
 							</li>
 						</ul>
@@ -171,7 +203,7 @@
 									<div class="form-group">
 										<label for="nama_pelanggan" class="col-md-3 control-label rata top">Nama<font size="5px" color="red">*</font></label>
 										<div class="col-md-8">
-											<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
+											<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="range" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
 											<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
 										</div>
 									</div>
