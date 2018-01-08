@@ -72775,7 +72775,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.cart-item[data-v-c948883a] {\r\n\tmax-height: 160px;\r\n\toverflow-y: scroll;\n}\n.box[data-v-c948883a]{\r\n\twidth: 200px;\r\n\theight:40px;\r\n\tbackground-color: #FCF8E3;\r\n\ttext-align: center;\r\n\tborder:1px solid #ffafaf;\n}\r\n", ""]);
+exports.push([module.i, "\n.cart-item[data-v-c948883a] {\r\n\tmax-height: 160px;\r\n\toverflow-y: scroll;\n}\n.row .control-label[data-v-c948883a] {\r\n\ttext-align: left;\n}\n.form-info[data-v-c948883a] {\r\n\tpadding: 15px;\n}\n.tabInformasi[data-v-c948883a]{\r\n\twidth: 33%;\r\n\t/*margin-bottom: 20px;*/\n}\n.tabKecil[data-v-c948883a]{\r\n\twidth: 33%;\n}\n.top[data-v-c948883a]{\r\n\tmargin-top: -15px;\n}\n.rata[data-v-c948883a]{\r\n\tmargin-left: 15px;\n}\n.star[data-v-c948883a]{\r\n\tcolor: #ff0000;\n}\n.box[data-v-c948883a]{\r\n\t/*width: 300px;*/\r\n\t/*height:60px;*/\r\n\tbackground-color: #FCF8E3;\r\n\ttext-align: center;\r\n\tpadding: 8px;\r\n\tborder:1px solid #ffafaf;\n}\n.nav.nav-tabs li[data-v-c948883a] {\r\n\tborder-right: 1px solid #eee;\n}\n.pawoon-result .nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 20px;\n}\n.nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 0px;\r\n\tborder-bottom: none;\r\n\tbackground: #fff;\r\n\t-webkit-box-shadow: 0 0 1px #eee;\r\n\t        box-shadow: 0 0 1px #eee;\n}\n.nav li[data-v-c948883a] {\r\n\tfont-size: 14px;\n}\n.nav-tabs > li[data-v-c948883a] {\r\n\tmargin-bottom: -1px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -72786,6 +72786,67 @@ exports.push([module.i, "\n.cart-item[data-v-c948883a] {\r\n\tmax-height: 160px;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -73160,7 +73221,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errors: [],
             pelanggan: {
                 id: '',
-                kode_pelanggan: '',
                 nama_pelanggan: '',
                 jenis_kelamin: '',
                 tanggal_lahir: '',
@@ -73176,6 +73236,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             disable: 1,
             edit: 0,
             formPelanggan: 1,
+            memberPelanggan: 0,
             riwayatBelanja: 0,
             perilakuPelanggan: 0,
             settings: {
@@ -73213,7 +73274,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.perilakuPelanggan = 1;
         },
         tambahPelanggan: function tambahPelanggan() {
-            this.pelanggan.kode_pelanggan = '';
+            // this.pelanggan.kode_pelanggan = ''
             this.pelanggan.nama_pelanggan = '';
             this.pelanggan.jenis_kelamin = '';
             this.pelanggan.tanggal_lahir = '';
@@ -73236,7 +73297,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         detailPelanggan: function detailPelanggan(id, kode_pelanggan, nama_pelanggan, jenis_kelamin, tanggal_lahir, nomor_telepon, email, kota, alamat, kode_pos, catatan) {
             this.pelanggan.id = id;
-            this.pelanggan.kode_pelanggan = kode_pelanggan;
+            this.pelanggan.kode_pelanggan = id;
             this.pelanggan.nama_pelanggan = nama_pelanggan;
             this.pelanggan.jenis_kelamin = jenis_kelamin;
             this.pelanggan.tanggal_lahir = tanggal_lahir;
@@ -73249,6 +73310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.disable = 1;
             this.edit = 1;
             this.formPelanggan = 1;
+            this.memberPelanggan = 1;
         },
         editPelanggan: function editPelanggan() {
             this.disable = 2;
@@ -73303,7 +73365,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.pelanggan.catatan = '';
                 app.disable = 1;
                 app.edit = 0;
-                app.$router.replace('/pelanggan');
+                memberPelanggan: 0, app.$router.replace('/pelanggan');
             }).catch(function (resp) {
                 app.errors = resp.response.data.errors;
             });
@@ -73334,6 +73396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.pelanggan.catatan = '';
                 app.$router.replace('/pelanggan');
                 app.disable = 1;
+                app.memberPelanggan = 0;
             }).catch(function (resp) {
                 app.errors = resp.response.data.errors;
             });
@@ -73380,6 +73443,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.pelanggan.kode_pos = '';
                 _this.pelanggan.catatan = '';
                 _this.disable = 1;
+                _this.edit = 0;
+
+                _this.memberPelanggan = 0;
                 _this.$router.replace('/pelanggan/');
             });
         }
@@ -73417,7 +73483,7 @@ var render = function() {
                 staticClass: "fa fa-plus",
                 attrs: { "aria-hidden": "true" }
               }),
-              _vm._v("\n\t\t\t\t\tTambah\n\t\t\t\t")
+              _vm._v("\n\t\t\t\t\t\tTambah\n\t\t\t\t\t")
             ]
           )
         ]),
@@ -73500,7 +73566,14 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(pelanggan.kode_pelanggan))]),
+                        _c("p", [
+                          _c("i", {
+                            staticClass: "fa fa-users",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(pelanggan.id))])
+                        ]),
                         _vm._v(" "),
                         _c("p", [
                           _c("i", {
@@ -73538,788 +73611,787 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel panel-default" }, [
           _c("ul", { staticClass: "nav nav-tabs" }, [
-            _c("li", { staticClass: "col-sm-4  active" }, [
+            _c("li", { staticClass: "tabInformasi active" }, [
               _c(
                 "a",
                 {
                   attrs: { "data-toggle": "tab" },
                   on: { click: _vm.tentangPelanggan }
                 },
-                [_vm._v("TENTANG PELANGGAN")]
+                [
+                  _c("font", { attrs: { color: "#000000" } }, [
+                    _vm._v("TENTANG PELANGGAN")
+                  ])
+                ],
+                1
               )
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "col-sm-4" }, [
+            _c("li", { staticClass: "tabInformasi" }, [
               _c(
                 "a",
                 {
                   attrs: { "data-toggle": "tab" },
                   on: { click: _vm.riwayatTransaksi }
                 },
-                [_vm._v("RIWAYAT TRANSAKSI")]
+                [
+                  _c("font", { attrs: { color: "#000000" } }, [
+                    _vm._v("RIWAYAT TRANSAKSI")
+                  ])
+                ],
+                1
               )
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "col-sm-4" }, [
+            _c("li", { staticClass: "tabInformasi " }, [
               _c(
                 "a",
                 {
                   attrs: { "data-toggle": "tab" },
                   on: { click: _vm.perilaku }
                 },
-                [_vm._v("PERILAKU")]
+                [
+                  _c("font", { attrs: { color: "#000000" } }, [
+                    _vm._v("PERILAKU")
+                  ])
+                ],
+                1
               )
             ])
           ])
         ]),
         _vm._v(" "),
-        _vm.formPelanggan == 1
-          ? _c("div", { staticClass: "row-fluid" }, [
-              _c(
-                "form",
-                {
-                  staticClass: "form-horizontal",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      _vm.saveForm()
+        _c("div", { staticClass: "panel-body" }, [
+          _vm.formPelanggan == 1
+            ? _c("div", { staticClass: "row-fluid" }, [
+                _c("div", { staticClass: "col-md-12 form-info form-group" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "span",
+                      { staticClass: "label box" },
+                      [
+                        _c("font", { attrs: { color: "#000000" } }, [
+                          _vm._v("Kolom bertanda")
+                        ]),
+                        _vm._v(" "),
+                        _c("font", { attrs: { size: "5px", color: "red" } }, [
+                          _vm._v("*")
+                        ]),
+                        _vm._v(" "),
+                        _c("font", { attrs: { color: "#000000" } }, [
+                          _vm._v("wajib diisi.")
+                        ])
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-horizontal",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.saveForm()
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "col-md-12 form-info" }, [
-                    _c("div", { staticClass: "box form-group" }, [
-                      _c(
-                        "label",
-                        [
-                          _vm._v("Kolom bertanda "),
-                          _c("font", { attrs: { size: "5px", color: "red" } }, [
-                            _vm._v("*")
-                          ]),
-                          _vm._v(" wajib diisi.")
-                        ],
-                        1
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "kode_pelanggan" }
-                        },
-                        [
-                          _vm._v("Kode"),
-                          _c("font", { attrs: { size: "5px", color: "red" } }, [
-                            _vm._v("*")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.kode_pelanggan,
-                              expression: "pelanggan.kode_pelanggan"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            required: "",
-                            autocomplete: "off",
-                            placeholder: "Kode Pelanggan",
-                            type: "text",
-                            name: "kode_pelanggan",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.kode_pelanggan },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "kode_pelanggan",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.kode_pelanggan
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.kode_pelanggan[0]))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "nama_pelanggan" }
-                        },
-                        [
-                          _vm._v("Nama"),
-                          _c("font", { attrs: { size: "5px", color: "red" } }, [
-                            _vm._v("*")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.nama_pelanggan,
-                              expression: "pelanggan.nama_pelanggan"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            required: "",
-                            autocomplete: "off",
-                            placeholder: "Nama Pelanggan",
-                            type: "text",
-                            name: "nama_pelanggan",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.nama_pelanggan },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "nama_pelanggan",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.nama_pelanggan
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.nama_pelanggan[0]))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "jenis_kelamin'" }
-                        },
-                        [
-                          _vm._v("Jenis Kelamin "),
-                          _c("font", { attrs: { size: "5px", color: "red" } }, [
-                            _vm._v("*")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-md-8" },
-                        [
-                          _c(
-                            "selectize-component",
-                            {
-                              attrs: {
-                                settings: _vm.settings,
-                                disabled: _vm.disable == 1
+                  },
+                  [
+                    _vm.memberPelanggan == 1
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-md-3 control-label rata top",
+                                attrs: { for: "kode_pelanggan" }
                               },
-                              model: {
-                                value: _vm.pelanggan.jenis_kelamin,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.pelanggan, "jenis_kelamin", $$v)
+                              [
+                                _vm._v("Member Id"),
+                                _c(
+                                  "font",
+                                  { attrs: { size: "5px", color: "red" } },
+                                  [_vm._v("*")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-8" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pelanggan.kode_pelanggan,
+                                    expression: "pelanggan.kode_pelanggan"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  required: "",
+                                  autocomplete: "off",
+                                  placeholder: "Member Id",
+                                  type: "text",
+                                  name: "kode_pelanggan",
+                                  autofocus: "",
+                                  readonly: ""
                                 },
-                                expression: "pelanggan.jenis_kelamin"
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "1" } }, [
-                                _vm._v("laki-laki")
-                              ]),
+                                domProps: {
+                                  value: _vm.pelanggan.kode_pelanggan
+                                },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.pelanggan,
+                                      "kode_pelanggan",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
                               _vm._v(" "),
-                              _c("option", { attrs: { value: "2" } }, [
-                                _vm._v("perempuan")
-                              ])
-                            ]
-                          ),
+                              _vm.errors.kode_pelanggan
+                                ? _c(
+                                    "span",
+                                    { staticClass: "label label-danger" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.errors.kode_pelanggan[0])
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata top",
+                            attrs: { for: "nama_pelanggan" }
+                          },
+                          [
+                            _vm._v("Nama"),
+                            _c(
+                              "font",
+                              { attrs: { size: "5px", color: "red" } },
+                              [_vm._v("*")]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.nama_pelanggan,
+                                expression: "pelanggan.nama_pelanggan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              required: "",
+                              autocomplete: "off",
+                              placeholder: "Nama Pelanggan",
+                              type: "text",
+                              name: "nama_pelanggan",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.nama_pelanggan },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "nama_pelanggan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
                           _vm._v(" "),
-                          _vm.errors.jenis_kelamin
+                          _vm.errors.nama_pelanggan
                             ? _c(
                                 "span",
                                 { staticClass: "label label-danger" },
-                                [_vm._v(_vm._s(_vm.errors.jenis_kelamin[0]))]
+                                [_vm._v(_vm._s(_vm.errors.nama_pelanggan[0]))]
                               )
                             : _vm._e()
-                        ],
-                        1
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "tanggal_lahir" }
-                        },
-                        [_vm._v("Tanggal Lahir")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.tanggal_lahir,
-                              expression: "pelanggan.tanggal_lahir"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "YYYY-MM-DD",
-                            type: "date",
-                            name: "tanggal_lahir",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.tanggal_lahir },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "tanggal_lahir",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.tanggal_lahir
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.tanggal_lahir[0]))
-                            ])
-                          : _vm._e()
+                        ])
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "nomor_telepon" }
-                        },
-                        [
-                          _vm._v("Nomor Telepon "),
-                          _c("font", { attrs: { size: "5px", color: "red" } }, [
-                            _vm._v("*")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model.phone",
-                              value: _vm.pelanggan.nomor_telepon,
-                              expression: "pelanggan.nomor_telepon",
-                              modifiers: { phone: true }
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            required: "",
-                            autocomplete: "off",
-                            placeholder: "Nomor Telepon",
-                            type: "number",
-                            name: "nomor_telepon",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata top",
+                            attrs: { for: "jenis_kelamin'" }
                           },
-                          domProps: { value: _vm.pelanggan.nomor_telepon },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "nomor_telepon",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.nomor_telepon
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.nomor_telepon[0]))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "email" }
-                        },
-                        [_vm._v("Email")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.email,
-                              expression: "pelanggan.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Email",
-                            type: "email",
-                            name: "email",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "email",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.email
-                          ? _c(
-                              "span",
-                              {
-                                staticClass: "label label-danger",
-                                attrs: { id: "email_error" }
-                              },
-                              [_vm._v(_vm._s(_vm.errors.email[0]))]
+                          [
+                            _vm._v("Jenis Kelamin "),
+                            _c(
+                              "font",
+                              { attrs: { size: "5px", color: "red" } },
+                              [_vm._v("*")]
                             )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "alamat" }
-                        },
-                        [_vm._v("Alamat")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.alamat,
-                              expression: "pelanggan.alamat"
-                            }
                           ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Alamat",
-                            type: "text",
-                            name: "alamat",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.alamat },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "alamat",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
+                          1
+                        ),
                         _vm._v(" "),
-                        _vm.errors.alamat
-                          ? _c("span", { staticClass: "label label-danger" }, [
-                              _vm._v(_vm._s(_vm.errors.alamat[0]))
-                            ])
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "kota" }
-                        },
-                        [_vm._v("Kota")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.kota,
-                              expression: "pelanggan.kota"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Kota",
-                            type: "text",
-                            name: "kota",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.kota },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "kota",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.kota
-                          ? _c(
-                              "span",
+                        _c(
+                          "div",
+                          { staticClass: "col-md-8" },
+                          [
+                            _c(
+                              "selectize-component",
                               {
-                                staticClass: "label label-danger",
-                                attrs: { id: "email_error" }
-                              },
-                              [_vm._v(_vm._s(_vm.errors.kota[0]))]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "kode_pos" }
-                        },
-                        [_vm._v("Kode Pos")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.kode_pos,
-                              expression: "pelanggan.kode_pos"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Kode Pos",
-                            type: "number",
-                            name: "kode_pos",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.kode_pos },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "kode_pos",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.kode_pos
-                          ? _c(
-                              "span",
-                              {
-                                staticClass: "label label-danger",
-                                attrs: { id: "email_error" }
-                              },
-                              [_vm._v(_vm._s(_vm.errors.kode_pos[0]))]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 control-label",
-                          attrs: { for: "catatan" }
-                        },
-                        [_vm._v("Catatan")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-8" }, [
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pelanggan.catatan,
-                              expression: "pelanggan.catatan"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            autocomplete: "off",
-                            placeholder: "Catatan",
-                            name: "catatan",
-                            autofocus: "",
-                            disabled: _vm.disable == 1
-                          },
-                          domProps: { value: _vm.pelanggan.catatan },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.pelanggan,
-                                "catatan",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.catatan
-                          ? _c(
-                              "span",
-                              {
-                                staticClass: "label label-danger",
-                                attrs: { id: "email_error" }
-                              },
-                              [_vm._v(_vm._s(_vm.errors.catatan[0]))]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("div", { staticClass: "col-md-12 col-md-offset-8" }, [
-                        _vm.disable == 0
-                          ? _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-warning",
                                 attrs: {
-                                  id: "btnSimpanPelanggan",
-                                  type: "submit"
+                                  settings: _vm.settings,
+                                  disabled: _vm.disable == 1
+                                },
+                                model: {
+                                  value: _vm.pelanggan.jenis_kelamin,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.pelanggan,
+                                      "jenis_kelamin",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "pelanggan.jenis_kelamin"
                                 }
                               },
                               [
-                                _c("i", {
-                                  staticClass: "fa fa-floppy-o",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tSimpan \n\t\t\t\t\t\t\t\t\t"
-                                )
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("laki-laki")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "2" } }, [
+                                  _vm._v("perempuan")
+                                ])
                               ]
-                            )
-                          : _vm._e(),
+                            ),
+                            _vm._v(" "),
+                            _vm.errors.jenis_kelamin
+                              ? _c(
+                                  "span",
+                                  { staticClass: "label label-danger" },
+                                  [_vm._v(_vm._s(_vm.errors.jenis_kelamin[0]))]
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata",
+                            attrs: { for: "tanggal_lahir" }
+                          },
+                          [_vm._v("Tanggal Lahir")]
+                        ),
                         _vm._v(" "),
-                        _vm.disable == 0
-                          ? _c(
-                              "button",
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass: "btn btn-default",
-                                on: { click: _vm.onDisable }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-times",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.tanggal_lahir,
+                                expression: "pelanggan.tanggal_lahir"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              autocomplete: "off",
+                              placeholder: "YYYY-MM-DD",
+                              type: "date",
+                              name: "tanggal_lahir",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.tanggal_lahir },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "tanggal_lahir",
+                                  $event.target.value
                                 )
-                              ]
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.tanggal_lahir
+                            ? _c(
+                                "span",
+                                { staticClass: "label label-danger" },
+                                [_vm._v(_vm._s(_vm.errors.tanggal_lahir[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata top",
+                            attrs: { for: "nomor_telepon" }
+                          },
+                          [
+                            _vm._v("Nomor Telepon "),
+                            _c(
+                              "font",
+                              { attrs: { size: "5px", color: "red" } },
+                              [_vm._v("*")]
                             )
-                          : _vm._e(),
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
-                        _vm.edit == 1
-                          ? _c(
-                              "button",
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass: "btn btn-primary",
-                                attrs: { type: "button" },
-                                on: { click: _vm.editPelanggan }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-pencil",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t"
+                                name: "model",
+                                rawName: "v-model.phone",
+                                value: _vm.pelanggan.nomor_telepon,
+                                expression: "pelanggan.nomor_telepon",
+                                modifiers: { phone: true }
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              required: "",
+                              autocomplete: "off",
+                              placeholder: "Nomor Telepon",
+                              type: "number",
+                              name: "nomor_telepon",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.nomor_telepon },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "nomor_telepon",
+                                  $event.target.value
                                 )
-                              ]
-                            )
-                          : _vm._e(),
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.nomor_telepon
+                            ? _c(
+                                "span",
+                                { staticClass: "label label-danger" },
+                                [_vm._v(_vm._s(_vm.errors.nomor_telepon[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata",
+                            attrs: { for: "email" }
+                          },
+                          [_vm._v("Email")]
+                        ),
                         _vm._v(" "),
-                        _vm.disable == 2
-                          ? _c(
-                              "button",
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass: "btn btn-warning",
-                                attrs: { type: "button" },
-                                on: { click: _vm.saveFormEdit }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-floppy-o",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t\t"
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.email,
+                                expression: "pelanggan.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              autocomplete: "off",
+                              placeholder: "Email",
+                              type: "email",
+                              name: "email",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "email",
+                                  $event.target.value
                                 )
-                              ]
-                            )
-                          : _vm._e(),
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.email
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "label label-danger",
+                                  attrs: { id: "email_error" }
+                                },
+                                [_vm._v(_vm._s(_vm.errors.email[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata",
+                            attrs: { for: "alamat" }
+                          },
+                          [_vm._v("Alamat")]
+                        ),
                         _vm._v(" "),
-                        _vm.disable == 2
-                          ? _c(
-                              "button",
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass: "btn btn-default",
-                                attrs: { type: "button" },
-                                on: { click: _vm.batalEdit }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-times",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.alamat,
+                                expression: "pelanggan.alamat"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              autocomplete: "off",
+                              placeholder: "Alamat",
+                              type: "text",
+                              name: "alamat",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.alamat },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "alamat",
+                                  $event.target.value
                                 )
-                              ]
-                            )
-                          : _vm._e(),
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.alamat
+                            ? _c(
+                                "span",
+                                { staticClass: "label label-danger" },
+                                [_vm._v(_vm._s(_vm.errors.alamat[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata",
+                            attrs: { for: "kota" }
+                          },
+                          [_vm._v("Kota")]
+                        ),
                         _vm._v(" "),
-                        _vm.edit == 1
-                          ? _c(
-                              "button",
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("input", {
+                            directives: [
                               {
-                                staticClass: "btn btn-danger",
-                                attrs: { type: "button" },
-                                on: { click: _vm.deleteEntry }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fa fa-trash-o",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.kota,
+                                expression: "pelanggan.kota"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              autocomplete: "off",
+                              placeholder: "Kota",
+                              type: "text",
+                              name: "kota",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.kota },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "kota",
+                                  $event.target.value
                                 )
-                              ]
-                            )
-                          : _vm._e()
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.kota
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "label label-danger",
+                                  attrs: { id: "email_error" }
+                                },
+                                [_vm._v(_vm._s(_vm.errors.kota[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-md-3 control-label rata",
+                            attrs: { for: "catatan" }
+                          },
+                          [_vm._v("Catatan")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8" }, [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.pelanggan.catatan,
+                                expression: "pelanggan.catatan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              autocomplete: "off",
+                              placeholder: "Catatan",
+                              name: "catatan",
+                              autofocus: "",
+                              disabled: _vm.disable == 1
+                            },
+                            domProps: { value: _vm.pelanggan.catatan },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.pelanggan,
+                                  "catatan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors.catatan
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "label label-danger",
+                                  attrs: { id: "email_error" }
+                                },
+                                [_vm._v(_vm._s(_vm.errors.catatan[0]))]
+                              )
+                            : _vm._e()
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-md-12 col-md-offset-8" },
+                          [
+                            _vm.disable == 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: {
+                                      id: "btnSimpanPelanggan",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-floppy-o",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tSimpan \n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.disable == 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-default",
+                                    on: { click: _vm.onDisable }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-times",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.edit == 1
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.editPelanggan }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-pencil",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.disable == 2
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.saveFormEdit }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-floppy-o",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.disable == 2
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-default",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.batalEdit }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-times",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.edit == 1
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.deleteEntry }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash-o",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(
+                                      "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       ])
                     ])
-                  ])
-                ]
-              )
-            ])
-          : _vm._e(),
+                  ]
+                )
+              ])
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _vm.riwayatBelanja == 1
           ? _c("div", { staticClass: "row-fluid" }, [
@@ -74422,7 +74494,7 @@ var staticRenderFns = [
         staticClass: "fa fa-arrow-circle-o-up",
         attrs: { "aria-hidden": "true" }
       }),
-      _vm._v("\n\t\t\t\t\timport\n\t\t\t\t")
+      _vm._v("\n\t\t\t\t\t\tImport\n\t\t\t\t\t")
     ])
   },
   function() {
@@ -74434,7 +74506,7 @@ var staticRenderFns = [
         staticClass: "fa fa-arrow-circle-o-down",
         attrs: { "aria-hidden": "true" }
       }),
-      _vm._v("\n\t\t\t\t\tunduh\n\t\t\t\t")
+      _vm._v("\n\t\t\t\t\t\tUnduh\n\t\t\t\t\t")
     ])
   },
   function() {
@@ -74443,7 +74515,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "panel-heading" }, [
       _c("div", { staticClass: "btn-group" }, [
-        _c("button", { staticClass: "btn btn-xs btn-default active" }, [
+        _c("button", { staticClass: "btn btn-xs btn-default" }, [
           _vm._v("Mingguan")
         ]),
         _vm._v(" "),
@@ -74507,7 +74579,7 @@ var staticRenderFns = [
           staticClass: "fa fa-download",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\n\t\t\t\t\t\t\tExcel\n\t\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\tExcel\n\t\t\t\t\t")
       ])
     ])
   },
@@ -80520,7 +80592,7 @@ var render = function() {
                   _c(
                     "router-link",
                     {
-                      staticClass: "btn btn-primary btn-md",
+                      staticClass: "btn btn-primary btn-md tambah-kas",
                       attrs: {
                         to: { name: "createKelolaKas" },
                         id: "tambah-kas"
