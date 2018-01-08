@@ -130,13 +130,13 @@
                 alert("Could not load users");
             });
         },
-        deleteEntry(id, index,name) {
-            if (confirm("Yakin Ingin Menghapus Staf "+name+" ?")) {
+        deleteEntry(id, index,nama_pemilik) {
+            if (confirm("Yakin Ingin Menghapus Staf "+nama_pemilik+" ?")) {
                 var app = this;
                 axios.delete(app.url+'/' + id)
                 .then(function (resp) {
                     app.getUsers();
-                    app.alert(name)
+                    app.alert(nama_pemilik)
                     app.$router.replace('/user');
                 })
                 .catch(function (resp) {
@@ -144,10 +144,10 @@
                 });
             }
         },
-        alert(name) {
+        alert(nama_pemilik) {
             this.$swal({
                 title: "Berhasil!",
-                text: "Berhasil Menghapus "+ name,
+                text: "Berhasil Menghapus "+ nama_pemilik,
                 icon: "success",
             });
         }
