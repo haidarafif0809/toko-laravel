@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController', ['except' => 'show']);
 Route::get('/user/view', 'UserController@view');
 Route::get('/user/pencarian', 'UserController@pencarian');
+Route::get('/user/viewStaff', 'UserController@viewStaff');
 
 
 // Master Data Produk

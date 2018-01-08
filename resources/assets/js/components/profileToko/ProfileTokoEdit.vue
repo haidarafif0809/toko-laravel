@@ -3,7 +3,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 img {
-	width: 100%;
+	width: 70%;
 }
 </style>
 <template>
@@ -92,7 +92,7 @@ img {
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Foto</label>
 							<div class="col-md-4">
-								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" required>
+								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" >
 							</div>
 						</div>
 
