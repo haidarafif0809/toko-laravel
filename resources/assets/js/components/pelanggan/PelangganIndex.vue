@@ -101,11 +101,11 @@
 		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<button class="btn btn-success">
+					<button class="btn btn-success" type="button" v-on:click="upload">
 						<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
 						Import
 					</button>
-					<button class="btn btn-primary">
+					<button class="btn btn-primary" type="button" v-on:click="download">
 						<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 						Unduh
 					</button>
@@ -568,6 +568,23 @@ export default {
     			console.log(resp);
     			app.loading = false
     			alert("Could not load pelanggans");
+    		});
+    	},
+
+    	upload(){
+    		this.disable = 1
+    		this.$swal({
+    			title: "GAGAL!",
+    			text: "Fitur ini sedang dalam pengembangan",
+    			icon: "warning",
+    		});
+    	},
+    	download(){
+    		this.disable = 1
+    		this.$swal({
+    			title: "GAGAL!",
+    			text: "Fitur ini sedang dalam pengembangan",
+    			icon: "warning",
     		});
     	},
 
