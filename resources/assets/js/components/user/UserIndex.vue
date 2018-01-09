@@ -18,7 +18,7 @@
                             <b-table class="table table-striped table-hover data-ada" v-if="users.length > 0 && loading == false" :items="users" :fields="field_users">
                                 <!-- <b-tr v-for="user , index in users" :key="user.id"> -->
                                     <template slot="lihat_detail" slot-scope="row">
-                                        <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
+                                        <b-button size="sm" v-on:click.stop="row.toggleDetails" class="mr-2">
                                             {{ row.detailsShowing ? 'Tutup' : 'Lihat'}} Staf
                                         </b-button>
                                     </template>

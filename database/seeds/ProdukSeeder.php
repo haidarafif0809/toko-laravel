@@ -25,7 +25,7 @@ class ProdukSeeder extends Seeder
         // sample produk 2
         $produk                      = new Produk();
         $produk->kode_produk         = "TBG";
-        $produk->nama_produk         = "TABUNG GAS";
+        $produk->nama_produk         = "Tabung Gas";
         $produk->harga_beli          = "11200";
         $produk->harga_jual          = "115000";
         $produk->kategori_produks_id = "1";
@@ -35,7 +35,7 @@ class ProdukSeeder extends Seeder
         // sample produk 3
         $produk                      = new Produk();
         $produk->kode_produk         = "020";
-        $produk->nama_produk         = "DETERGEN BOOM 450 G";
+        $produk->nama_produk         = "Detergen Boom 450 G";
         $produk->harga_beli          = "4167";
         $produk->harga_jual          = "417700";
         $produk->kategori_produks_id = "1";
