@@ -73,6 +73,7 @@ import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 import GeraiIndex from './components/gerai/GeraiIndex.vue'
 import GeraiCreate from './components/gerai/GeraiCreate.vue'
 import GeraiEdit from './components/gerai/GeraiEdit.vue'
+ 
 const routes = [{
         path: '/',
         components: {
@@ -225,7 +226,7 @@ const routes = [{
         path: '/gerai/edit',
         component: GeraiEdit,
         name: 'editGerai'
-    },
+    } 
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
