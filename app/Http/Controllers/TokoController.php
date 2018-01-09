@@ -24,7 +24,7 @@ class TokoController extends Controller
     }
     public function view()
     {
-        $toko = Toko::select('tokos.id AS id_toko', 'tokos.nama_toko AS nama_tokos', 'tokos.nama_pemilik AS nama_pemilik', 'tokos.email AS email', 'tokos.no_telp AS no_telp', 'tokos.created_at AS created_at', 'users.id AS id_user', 'users.status AS statusToko')->leftJoin('users', 'tokos.id', '=', 'users.toko_id')->orderBy('tokos.id', 'desc')->paginate(10);
+        $toko = Toko::select('tokos.id AS id_toko', 'tokos.nama_toko AS nama_tokos', 'tokos.nama_pemilik AS nama_pemilik', 'tokos.email AS email', 'tokos.no_telp AS no_telp', 'tokos.created_at AS created_at', 'users.id AS id_user', 'users.status AS statusToko')->leftJoin('users', 'tokos.id', '=', 'users.toko_id')->where('type', 1)->orderBy('tokos.id', 'desc')->paginate(10);
         return response()->json($toko);
     }
     /**
