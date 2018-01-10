@@ -101,15 +101,15 @@ const routes = [{
     },
     //USER
     {
-        path: '/user',
+        path: '/admin/user',
         component: UserIndex,
         name: 'indexUser'
     }, {
-        path: '/user/create',
+        path: '/admin/user/create',
         component: UserCreate,
         name: 'createUser'
     }, {
-        path: '/user/edit/:id',
+        path: '/admin/user/edit/:id',
         component: UserEdit,
         name: 'editUser'
     },
@@ -153,11 +153,11 @@ const routes = [{
     },
     // toko
     {
-        path: '/toko',
+        path: '/admin/toko',
         component: TokoIndex,
         name: 'indexToko'
     }, {
-        path: '/toko/edit/:id',
+        path: '/admin/toko/edit/:id',
         component: TokoEdit,
         name: 'editToko'
     },

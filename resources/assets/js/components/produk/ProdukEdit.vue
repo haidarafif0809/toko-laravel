@@ -5,11 +5,12 @@
 </style>
 <template>
     <div class="container" >
-        <ol class="breadcrumb">
+        <ul class="breadcrumb">
             <li><router-link :to="{name: 'indexDashboard'}" >Dashboard</router-link></li>
             <li><router-link :to="{name: 'indexProduk'}" >Produk</router-link></li>
             <li class="active" >Edit Produk</li>
-        </ol>
+        </ul>
+        <div class="col-md-9 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">Edit Produk {{ produk.nama_produk }}</div>
             <div class="panel-body">
@@ -118,6 +119,7 @@
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     </div>
 </template>

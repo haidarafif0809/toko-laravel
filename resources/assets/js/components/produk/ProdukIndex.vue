@@ -343,29 +343,53 @@ export default {
 
             axios.post(app.url_import_produk, newProduk)
             .then(function (resp) {
-                console.log(resp);
+                console.log(resp.data);
                 // return;
+
+                swal({
+                  title: 'my title',
+                  html: 'A custom <span style="color:#F8BB86">html<span> message.',
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'เล่น Lotto'
+              }).then(function () {
+          // angular service
+          GamePlayerService.create(params, function(){
+            setTimeout(function () {
+              window.location.reload();
+          }, 1000);
+        });
+      });
+              return;
+
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
-                // bukan bernilai ya atau tidak
-                if (resp.data.pesan != undefined) {
-                    return app.alert('Gagal!', resp.data.pesan, 'warning');
+                // bukan bernilai ya atau tidak atau bahkan kosong
+                if (resp.data.errorMsg != undefined) {
+
+                    // return app.alert('Gagal!', resp.data.errorMsg, 'warning');
                 }
 
                 app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
                 app.getProduks();
             })
             .catch(function (resp) {
-                // console.log(resp.response)
-                if (resp.response.data.errors.excel != undefined) {
+                console.log(resp.response)
+                if (resp.response.data.errors != undefined) {
                     app.errors = resp.response.data.errors.excel[0];
                 }
-                app.alert('Gagal!', app.errors, 'warning');
+                else {
+                    app.errors = "Ukuran file terlalu besar!";
+                }
+                // app.alert('Gagal!', app.errors, 'warning');
+                app.alert('Gagal!', "<b>" + app.errors + "</b>", 'warning');
             });
         },
         alert(title, pesan, icon) {
             this.$swal({
                 title: title,
-                text: pesan,
+                html: 'dsdsdsd<br>' + 'hjhh',
                 icon: icon,
             });
         }

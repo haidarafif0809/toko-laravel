@@ -20,6 +20,7 @@ class ProdukSeeder extends Seeder
         $produk->harga_jual          = "90000";
         $produk->kategori_produks_id = "1";
         $produk->status_jual         = 1;
+        $produk->produk_modifier_id     = "1";
         $produk->save();
 
         // sample produk 2
