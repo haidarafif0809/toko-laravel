@@ -20,7 +20,7 @@
         <nav>
             <div class='link-wrapper'>
                 <div class='link-container' style="background-color:#101920;">
-                    
+
                     <div class='hum-container'>
                         <div class='bar2'></div>
                         <div class='bar-mid'></div>
@@ -221,13 +221,18 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link :to="{name: 'profileTokoIndex'}">
-                                            Profile Toko
+                                            <i class="fa fa-user" aria-hidden="true"></i> Profile Toko
                                         </router-link>
                                     </li>
                                     <li>
+                                        <a href="{{ url('/ubah-password/password') }}"><i class="fa fa-btn fa-lock"></i> Ubah Password</a>
+                                    </li>
+
+                                    <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                        Logout
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                        Keluar
                                     </a>
                                     <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
                                         {{ csrf_field() }}
