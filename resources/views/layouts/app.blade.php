@@ -20,7 +20,7 @@
         <nav>
             <div class='link-wrapper'>
                 <div class='link-container' style="background-color:#101920;">
-                    <!--<div class='link-container' style="background-image: url('images/gambar.png');">-->
+                    
                     <div class='hum-container'>
                         <div class='bar2'></div>
                         <div class='bar-mid'></div>
@@ -250,6 +250,5 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
-
 </body>
 </html>

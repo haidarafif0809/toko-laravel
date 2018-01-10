@@ -18,7 +18,7 @@
                             <b-table class="table table-striped table-hover data-ada" v-if="users.length > 0 && loading == false" :items="users" :fields="field_users">
                                 <!-- <b-tr v-for="user , index in users" :key="user.id"> -->
                                     <template slot="lihat_detail" slot-scope="row">
-                                        <b-button size="sm" @click.stop="row.toggleDetails" class="mr-2">
+                                        <b-button size="sm" v-on:click.stop="row.toggleDetails" class="mr-2">
                                             {{ row.detailsShowing ? 'Tutup' : 'Lihat'}} Staf
                                         </b-button>
                                     </template>
@@ -27,21 +27,21 @@
                                         <b-table class="table table-striped table-hover data-ada" :items="staffs[row.item.toko_id]" :fields="field_staffs">
                                         </b-table>
                                     </template>
+                                    <tbody v-if="users.length > 0 && loading == true" class="data-ada" >
+                                        <tr >
+                                            <td colspan="5"  class="text-center">
+                                                Sedang Memuat Data
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-if="users.length == 0 && loading == false" class="tidak-ada-data">
+                                        <tr>
+                                            <td colspan="5"  class="text-center">
+                                                Tidak Ada Data
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </b-table>
-                                <tbody v-if="users.length > 0 && loading == true" class="data-ada" >
-                                    <tr >
-                                        <td colspan="4"  class="text-center">
-                                            Sedang Memuat Data
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tbody v-if="users.length == 0 && loading == false" class="tidak-ada-data">
-                                    <tr>
-                                        <td colspan="4"  class="text-center">
-                                            Tidak Ada Data
-                                        </td>
-                                    </tr>
-                                </tbody>
                             </div>
                         </div>
                         <vue-simple-spinner v-if="loading"></vue-simple-spinner>
@@ -62,7 +62,7 @@
                 field_staffs: ['nama_pemilik', 'email', 'no_telp', 'last_login'],
                 users: [],
                 usersData: {},
-                url : window.location.origin+(window.location.pathname).replace("home","user"),
+                url : window.location.origin+(window.location.pathname).replace("home","admin/user"),
                 search : '',
                 loading : true
 

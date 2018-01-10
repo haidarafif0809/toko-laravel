@@ -62,7 +62,14 @@ class UserController extends Controller
     }
     public function pencarian(Request $request)
     {
-        $cari_user = User::where('name', 'LIKE', "%$request->search%")->orWhere('email', 'LIKE', "%$request->search%")->paginate(10);
+        $search    = $request->search;
+        $cari_user = User::where('type', 1)
+            ->where(function ($query) use ($search) {
+                $query->orwhere('nama_pemilik', 'LIKE', '%' . $search . '%')
+                    ->orwhere('email', 'LIKE', '%' . $search . '%')
+                    ->orwhere('no_telp', 'LIKE', '%' . $search . '%');
+            })->paginate(10);
+
         return $cari_user;
     }
 

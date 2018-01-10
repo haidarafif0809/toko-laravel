@@ -8,11 +8,12 @@
 </style>
 <template>
 	<div class="container">
-		<ol class="breadcrumb">
+		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}" >Dashboard</router-link></li>
 			<li><router-link :to="{name: 'indexProduk'}" >Produk</router-link></li>
 			<li class="active" >Tambah Produk</li>    
-		</ol>
+		</ul>
+		<div class="col-md-9 col-md-offset-1">
 		<div class="panel panel-default">
 			<div class="panel-heading">Tambah Produk</div>
 			<div class="panel-body">
@@ -78,7 +79,7 @@
 						<div class="col-md-4 margin-atas">
 							<div class="col-md-6">
 								<label>
-									<input type="radio" name="status_jual" v-model="produk.status_jual" value="1"> Ya
+									<input type="radio" name="status_jual" v-model="produk.status_jual" value="1"  checked="checked"> Ya
 								</label>
 							</div>
 							<div class="col-md-6">
@@ -104,6 +105,24 @@
 							<input class="form-control" type="file" name="foto" v-on:change="onFileChange">
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="modifier" class="col-md-2 control-label"></label>
+						<div class="col-md-4">
+							<div>
+							    <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
+							      Tambahan & Pilhan Produk
+							    </b-form-checkbox>
+							    <div v-if="status_modifier == 'accepted'">
+							    	<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
+										<option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }}</option>
+									</selectize-component>
+							    </div>
+							</div>
+						</div>
+					</div>
+
+
 					<div class="form-group">
 						<div class="col-md-4 col-md-offset-2">
 							<button class="btn btn-primary" id="btnSimpanproduk" type="submit">Submit</button>
@@ -112,14 +131,18 @@
 				</form>
 			</div>
 		</div>
+		</div>
 	</div>
 </template>
+
 <script>
 export default {
 	data: function () {
 		return {
+			status_modifier: 'not_accepted',
 			errors: [],
 			kategori_produks_id: [],
+			produk_modifier_id: [],
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 			url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
 			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
@@ -129,26 +152,27 @@ export default {
 				nama_produk: '',
 				harga_jual: '',
 				harga_beli: '',
-				satuans_id: '',
 				kategori_produks_id: '',
-				status_jual: '',
-				foto: ''
+				status_jual: '1',
+				foto: '',
+				produk_modifier_id: ''
 			},
 			newKategoriProduk: {
 				nama_kategori_produk: ''
 			},
 			message : '',
-			setting_satuan: {
-				placeholder: 'Pilih Satuan'
-			},
 			setting_kategori_produk: {
 				placeholder: 'Pilih Kategori Produk',
+			},
+			setting_produk_modifier:{
+				placeholder: 'Pilih Tambahan',
 			},
 		}
 	},
 	mounted() {
 		var app = this;
 		app.selectedKategoriProduksId();
+		app.selectedProdukModifierId();
 
 	},
 	methods: {
@@ -195,6 +219,7 @@ export default {
 				app.produk.kategori_produks_id = '';
 				app.produk.status_jual = '';
 				app.produk.foto = '';
+				app.produk.produk_modifier_id = '';
 				app.errors = '';
 				app.$router.replace('/produk');
 
@@ -255,6 +280,16 @@ export default {
 					swal.stopLoading();
 					swal.close();
 				}
+			});
+		},
+		selectedProdukModifierId() {
+			var app = this;
+			axios.get(app.url+'/produk-modifier-id')
+			.then(function (resp) {
+				app.produk_modifier_id = resp.data;
+			})
+			.catch(function (resp) {
+				alert("Could not load produk modifier");
 			});
 		},
 		alert(pesan) {

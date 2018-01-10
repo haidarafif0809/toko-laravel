@@ -95,8 +95,8 @@ export default {
       tokosData: {},
       pencarian: '',
       message : '',
-      url : window.location.origin+(window.location.pathname).replace("home", "toko"),
-      url_user : window.location.origin+(window.location.pathname).replace("home", "user"),
+      url : window.location.origin+(window.location.pathname).replace("home", "admin/toko"),
+      url_user : window.location.origin+(window.location.pathname).replace("home", "admin/user"),
       loading : true
     }
   },
@@ -131,13 +131,13 @@ export default {
                 app.getTokos();
               })
               .catch(function (resp) {
-                app.$router.replace('/toko/');
+                app.$router.replace('/admin/toko/');
                 swal("Gagal Mengaktifkan!", {
                   icon: "warning",
                 });
               });
             }
-            this.$router.replace('/toko/');
+            this.$router.replace('/admin/toko/');
           });
         },
         statusTokoNonaktif(id_user, index,nama_tokos) {         
@@ -161,13 +161,13 @@ export default {
                 app.getTokos();
               })
               .catch(function (resp) {
-                app.$router.replace('/toko/');
+                app.$router.replace('/admin/toko/');
                 swal("Gagal Menonaktifkan!", {
                   icon: "warning",
                 });
               });
             }
-            this.$router.replace('/toko/');
+            this.$router.replace('/admin/toko/');
           });
         },
         // method getTokos

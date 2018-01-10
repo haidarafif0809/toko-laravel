@@ -166,7 +166,7 @@ class ProfileTokoController extends Controller
         $profile_toko_array = array();
 
         foreach ($profile_toko as $profile_tokos) {
-            $user = User::select('last_login')->where('Toko_id', $profile_tokos->id)->first();
+            $user = User::select('last_login')->where('toko_id', $profile_tokos->id)->first();
 
             if ($profile_tokos->provinsi == null) {
                 $provinsi  = '';
