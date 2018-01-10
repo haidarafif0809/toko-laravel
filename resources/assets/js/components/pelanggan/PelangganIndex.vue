@@ -21,12 +21,24 @@
 	width: 33%;
 }
 
+.scroll-panel-list-result {
+	position: relative;
+	height: 400px;
+	overflow: auto;
+	left: 5px;
+}
+
 .top{
 	margin-top: -15px;
 }
 
 .rata{
 	margin-left: 15px;
+}
+
+{
+	width: 33%;
+	height:60px;
 }
 
 .star{
@@ -79,6 +91,169 @@
 			</div>
 		</div>
 
+
+		<!-- Modal untuk import produk -->
+		<div id="modalImportPelanggan" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Import Pelanggan</h4>
+					</div>
+					<div class="modal-body">
+						<form v-on:submit.prevent="importPelanggan()" class="form-horizontal">
+
+							<div class="form-group">
+								<label for="template" class="col-md-2 control-label">Template</label>
+								<div class="col-md-6">
+									Gunakan <a name="template" :href="url_template_import_pelanggan">Template</a> untuk Import Pelanggan. Lihat <a style="color: blue;" data-toggle="modal" data-target="#modalCaraPengisianExcel" href="#">contoh</a> pengisian untuk lebih detail.
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="excel" class="col-md-2 control-label">Pilih file</label>
+								<div class="col-md-4">
+									<input name="excel" type="file" id="excel">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-4 col-md-offset-2">
+									<input class="btn btn-primary" type="submit" value="Simpan">
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Modal Cara Pengisian Excel -->
+		<div id="modalCaraPengisianExcel" class="modal animated fadeIn" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>Cara Pengisian</h4>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<table class="tablePenjelasan">
+								<tbody>
+									<tr>
+										<td class="bold">Nama Pelanggan</td>
+										<td>:</td>
+										<td>Nama Pelanggan Anda.</td>
+									</tr>
+									<tr>
+										<td class="bold">Jenis Kelamin</td>
+										<td>:</td>
+										<td>Jenis kelamin diisi jika laki-laki = 1, perempuan = 2</td>
+									</tr>
+									<tr>
+										<td class="bold">Tanggal Lahir</td>
+										<td>:</td>
+										<td>Tanggal Lahir diisi dengan format Tahun-Bulan-Tangal (yyyy-mm-dd)</td>
+									</tr>
+									<tr>
+										<td class="bold">Nomor Telepon</td>
+										<td>:</td>
+										<td>Nomor telepon diisi dengan maksimal 13 karakter</td>
+									</tr>
+									<tr>
+										<td class="bold">email</td>
+										<td>:</td>
+										<td>email diisi menggunakan format email(example@example.example)</td>
+									</tr>
+									<tr>
+										<td class="bold">Alamat</td>
+										<td>:</td>
+										<td>Alamat diisi sesuai dengan alamat pelanggan</td>
+									</tr>
+									<tr>
+										<td class="bold">Kota</td>
+										<td>:</td>
+										<td>Kota diisi sesuai dengan alamat pelanggan</td>
+									</tr>
+									<tr>
+										<td class="bold">Kode Pos</td>
+										<td>:</td>
+										<td>Kode Pos diisi dengan maksimal 5 karakter</td>
+									</tr>
+									<tr>
+										<td class="bold">Catatan</td>
+										<td>:</td>
+										<td>Catatan diisi apabila pelanggan ada catatan khusus</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="row">
+								<div class="col-md-12">Contoh seperti tabel di bawah:</div>
+							</div>
+							<br>
+							<div align="center">
+								<table class="tableContoh">
+									<thead>
+										<th>Nama Pelanggan</th>
+										<th>Jenis Kelamin</th>
+										<th>Tanggal Lahir</th>
+										<th>Nomor Telepon</th>
+										<th>Email</th>
+										<th>Alamat</th>
+										<th>Kota</th>
+										<th>Kode Pos</th>
+										<th>Catatan</th>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Adi</td>
+											<td align="right">1</td>
+											<td align="right">1997-12-17</td>
+											<td align="right">08764537255</td>
+											<td>adi@gmail.com</td>
+											<td>Kedaton</td>
+											<td>Bandar Lampung</td>
+											<td>12345</td>
+											<td>test pelanggan</td>
+										</tr>
+										<tr>
+											<td>Galang</td>
+											<td align="right">1</td>
+											<td align="right">2000-12-17</td>
+											<td align="right">08776537255</td>
+											<td>galang@gmail.com</td>
+											<td>Kemiling</td>
+											<td>Bandar Lampung</td>
+											<td>12345</td>
+											<td>Coba Pelanggan</td>
+										</tr>
+										<tr>
+											<td>Khofifah</td>
+											<td align="right">2</td>
+											<td align="right">2001-11-20</td>
+											<td align="right">0876453755</td>
+											<td>khofifah@gmail.com</td>
+											<td>Labuhan Ratu</td>
+											<td>Bandar Lampung</td>
+											<td>12645</td>
+											<td>Mencoba Pelanggan</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Filter Pelanggan</div>
@@ -101,10 +276,14 @@
 		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<button class="btn btn-success" type="button" v-on:click="upload">
+					<!-- <button class="btn btn-success" type="button" v-on:click="upload">
 						<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
 						Import
-					</button>
+					</button> -->
+					<span class="btn btn-success" data-toggle="modal" data-target="#modalImportPelanggan">
+						<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+						Import
+					</span>
 					<button class="btn btn-primary" type="button" v-on:click="download">
 						<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 						Unduh
@@ -126,10 +305,10 @@
 							</div>
 						</div>	
 
-						<ul class="list-group cart-item">
+						<ul class="scroll-panel-list-result">
 							<div v-for="pelanggan ,index in pelanggans">
 								<div class="row">
-									<div class="col-md-11 list-pelanggan" >
+									<div class="col-md-11" >
 										<div class="thumbnail" v-on:click="detailPelanggan(pelanggan.id, pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
 											<p>
 												<div class="col-sm-3" v-if="pelanggan.jenis_kelamin == 1">
@@ -432,6 +611,8 @@ export default {
 			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
 			url_img_man : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
 			url_img_women : window.location.origin+(window.location.pathname).replace("home","/images/women.png"),
+			url_template_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/template_import"),
+			url_import_produk : window.location.origin + (window.location.pathname).replace("home", "produk/import_produk"),
 			search : '',
 			loading : true,
 			errors: [],
@@ -705,6 +886,47 @@ export default {
     			this.$router.replace('/pelanggan/');
     		});
     	},
+
+    	importPelanggan() {
+    		var app = this;
+    		let newPelanggan = new FormData();
+    		let file = document.getElementById('excel').files[0];
+    		if (file != undefined) {
+    			newPelanggan.append('excel', file);
+    		}
+    		else {
+    			app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+    			return;
+    		}
+
+    		axios.post(app.url_import_produk, newPelanggan)
+    		.then(function (resp) {
+    			console.log(resp);
+                // return;
+                // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
+                // bukan bernilai ya atau tidak
+                if (resp.data.pesan != undefined) {
+                	return app.alert('Gagal!', resp.data.pesan, 'warning');
+                }
+
+                app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+                app.getProduks();
+            })
+    		.catch(function (resp) {
+                // console.log(resp.response)
+                if (resp.response.data.errors.excel != undefined) {
+                	app.errors = resp.response.data.errors.excel[0];
+                }
+                app.alert('Gagal!', app.errors, 'warning');
+            });
+    	},
+    	alert(title, pesan, icon) {
+    		this.$swal({
+    			title: title,
+    			text: pesan,
+    			icon: icon,
+    		});
+    	}
     }
 }
 </script>
