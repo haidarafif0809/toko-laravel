@@ -59,7 +59,7 @@ class PenjualanController extends Controller
             $num++;
 
         }
-
+        
         //DATA PAGINATION
         $respons['current_page']   = $produks->currentPage();
         $respons['data']           = $array;
@@ -98,9 +98,9 @@ class PenjualanController extends Controller
     public function tbsPenjualan()
     {
         $tbsPenjualan = DB::table('tbs_penjualans')
-            ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal')
-            ->get();
+        ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
+        ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal')
+        ->get();
         if (count($tbsPenjualan) > 0) {
 
             $json_tbs = json_decode($tbsPenjualan, true);
@@ -180,8 +180,8 @@ class PenjualanController extends Controller
 
     public function hapusTbsPenjualan($id)
     {
-        $tbs = TbsPenjualan::where('produk_id', $id);
-        $tbs->delete();
+        $tbs = TbsPenjualan::where('id_tbs_penjualan', $id);
+        $tbs->delete(produk_id);
     }
 
 /**
@@ -190,10 +190,10 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function edit($id)
-    {
+public function edit($id)
+{
         //
-    }
+}
 
 /**
  * Update the specified resource in storage.
@@ -202,10 +202,10 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function update(Request $request, $id)
-    {
+public function update(Request $request, $id)
+{
         //
-    }
+}
 
 /**
  * Remove the specified resource from storage.
@@ -213,8 +213,8 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function destroy($id)
-    {
+public function destroy($id)
+{
         //
-    }
+}
 }
