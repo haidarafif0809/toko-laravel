@@ -101,6 +101,10 @@ Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
 Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
+Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate'); 
+Route::post('/pelanggan/import_produk', 'PelangganController@importExcel'); 
+
+
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 // ubah password
