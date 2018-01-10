@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\KategoriProduk;
-use App\Produk;
-use Auth;
-use Carbon\Carbon;
 use DB;
-use Excel;
+use Auth;
 use File;
-use Illuminate\Http\Request;
+use Excel;
 use Image;
 use Validator;
+use App\Produk;
+use App\Modifier;
+use Carbon\Carbon;
+use App\KategoriProduk;
+use Illuminate\Http\Request;
+
+
 
 class ProdukController extends Controller
 {
-/**
- * Display a listing of the resource.
- *
- * @return \Illuminate\Http\Response
- */
+
     public function index()
     {
 
@@ -47,12 +46,11 @@ class ProdukController extends Controller
         return response()->json($produk);
     }
 
-    public function detailSatuanDariProduk($id)
-    {
-        $produk = Produk::where('produk_id', $id)->first();
-        $satuan = Satuan::where('id', $produk->satuans_id)->first();
 
-        return response()->json($satuan);
+    public function produkModifiersId()
+    {
+        $produk_modifier = Modifier::all();
+        return response()->json($produk_modifier);
     }
 
     public function kategoriProduksId()
@@ -75,22 +73,13 @@ class ProdukController extends Controller
         return response()->json($kategoriProduk);
     }
 
-/**
- * Show the form for creating a new resource.
- *
- * @return \Illuminate\Http\Response
- */
+
     public function create()
     {
 //
     }
 
-/**
- * Store a newly created resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\Response
- */
+
     public function store(Request $request)
     {
         //validate
@@ -112,6 +101,7 @@ class ProdukController extends Controller
                 'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'required|numeric',
                 'status_jual'         => 'required',
+                'produk_modifier_id'  => 'nullable|exists:modifiers,id',
             ]);
 
         }
@@ -123,42 +113,26 @@ class ProdukController extends Controller
             'kategori_produks_id' => $request->kategori_produks_id,
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
-            'satuans_id'          => $request->satuans_id,
             'status_jual'         => $request->status_jual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
+            'produk_modifier_id'       => $request->produk_modifier_id,
         ]);
     }
 
-/**
- * Display the specified resource.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+
     public function show($id)
     {
 //
     }
 
-/**
- * Show the form for editing the specified resource.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+
     public function edit($id)
     {
         $produk = Produk::where('produk_id', $id)->first();
         return $produk;
     }
 
-/**
- * Update the specified resource in storage.
- *
- * @param  \Illuminate\Http\Request  $request
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+
     public function update(Request $request, $id)
     {
         $produk = Produk::find($id);
@@ -170,6 +144,7 @@ class ProdukController extends Controller
             'harga_beli'          => 'required|numeric',
             'harga_jual'          => 'required|numeric',
             'status_jual'         => 'required',
+            'harga_modifier'      => 'nullable|numeric',
         ]);
 
         $arrUpdateProduk = [
@@ -179,6 +154,9 @@ class ProdukController extends Controller
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
             'status_jual'         => $request->status_jual,
+            'nama_modifier'       => $request->nama_modifier,
+            'nama_tampilan'       => $request->nama_tampilan,
+            'harga_modifier'      => $request->harga_modifier,
         ];
 
         if ($request->foto !== null) {
@@ -215,12 +193,7 @@ class ProdukController extends Controller
         }
     }
 
-/**
- * Remove the specified resource from storage.
- *
- * @param  int  $id
- * @return \Illuminate\Http\Response
- */
+
     public function destroy($id)
     {
         return Produk::destroy($id);
@@ -271,9 +244,61 @@ class ProdukController extends Controller
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
         $produk_id = [];
+        $errors    = [];
+        $no        = 1;
 
-        // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
+        // Perulangan pertama untuk memvalidasi inputan dari user pada
+        // file excel yang di upload dan memasukkannya kedalama variable
+        // array yang nantinya akan ditampilkan pada perulangan kedua
+        // jika ada isinya
         foreach ($excels as $row) {
+            // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
+            $bisaDijual = trim(strtolower($row['bisa_dijual']));
+            if (!empty($row['bisa_dijual'])) {
+                if ($bisaDijual !== 'ya' && $bisaDijual !== 'tidak') {
+                    $errors['bisaDijual'][] = [
+                        'line'    => $no,
+                        'message' => 'Nilai dari kolom Bisa Dijual hanya boleh berisi ya atau tidak.',
+                    ];
+                }
+            } else {
+                $errors['bisaDijual'][] = [
+                    'line'    => $no,
+                    'message' => 'Nilai dari kolom Bisa Dijual tidak boleh kosong.',
+                ];
+            }
+            $no++;
+        }
+        // return response()->json($errors);
+
+        // Perulangan kedua untuk penambahan data jika tidak ada error.
+        foreach ($excels as $row) {
+
+            // Untuk menampilkan error dan menghentikan jalannya script
+            // sehingga jika ada error tidak ada data yang akan dimasukkan
+            // kedalam database
+            if (count($errors) > 0) {
+
+                // Membuat variable array dengan index errorMsg.
+                // Tujuan membuat index ini adalah agar memperjelas struktur kode
+                // saat kita akan mengambilnya dari kode vue
+                $pesan = ['errorMsg' => ''];
+
+                // Jumlah data produk pada file excel
+                $jumlah_produk_yg_error = count($errors['bisaDijual']);
+
+                // Menyusun dan memasukkan pesan error (baris dan pesannya) kedalam variable
+                // array yang telah kita buat diatas pada index errorMsg
+                foreach ($errors['bisaDijual'] as $key => $val) {
+                    if ($val['line'] != $jumlah_produk_yg_error) {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
+                    } else {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'];
+                    }
+                }
+                return response()->json($pesan);
+            }
+
             // Membuat validasi untuk row di excel
             // Disini kita ubah baris yang sedang di proses menjadi array
             $validator = Validator::make($row->toArray(), $rowRules);
@@ -298,7 +323,7 @@ class ProdukController extends Controller
             | sesuai dengan yang diinputkan pada Excel
              */
 
-            /* Begin Cek Kategori Produk */
+            /* Begin Cek Nama Kategori Produk */
 
             // Membuat variable array kosong
             $dataKategoriProduk = [];
@@ -340,7 +365,7 @@ class ProdukController extends Controller
             // Membuat value dari $arrayNamaKategoriProduk menjadi huruf kecil semua
             $arrayNamaKategoriProduk = array_map('strtolower', $arrayNamaKategoriProduk);
 
-            /* End Cek Kategori Produk*/
+            /* End Cek Nama Kategori Produk*/
 
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
@@ -372,13 +397,13 @@ class ProdukController extends Controller
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $row['bisa_dijual'],
-                ]);}
+                ]);
+            }
 
             // catat id dari buku yang baru dibuat
             // array_push($produk_id, $produk->produk_id);
 
         }
-
         // Ambil semua produk yang baru dibuat
         $produks = Produk::whereIn('produk_id', $produk_id)->get();
     }

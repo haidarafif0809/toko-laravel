@@ -23,6 +23,7 @@ class CreateProduksTable extends Migration
             $table->string('toko_id')->nullable();
             $table->integer('status_jual')->nullable()->comment = "1 = Ya, 0 = Tidak";
             $table->string('foto')->nullable();
+            $table->string('produk_modifier_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
