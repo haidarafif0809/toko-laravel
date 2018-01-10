@@ -15,16 +15,27 @@
 
 Auth::routes();
 Route::get('/', function () {
-	return redirect('/home');
+    return redirect('/home');
+});
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
+//USER
+    Route::resource('user', 'UserController', ['except' => 'show']);
+    Route::get('/user/view', 'UserController@view');
+    Route::get('/user/pencarian', 'UserController@pencarian');
+    Route::get('/user/viewStaff', 'UserController@viewStaff');
+// status toko(aktif/nonaktof)
+    Route::get('/user/status/{id}', [
+        'middleware' => ['auth'],
+        'as'         => 'user.status',
+        'uses'       => 'UserController@status',
+    ]);
+
+// Toko
+    Route::resource('toko', 'TokoController', ['except' => 'show']);
+    Route::get('/toko/search', 'TokoController@search');
+    Route::get('/toko/view', 'TokoController@view');
 });
 Route::get('/home', 'HomeController@index')->name('home');
-
-//USER
-Route::resource('user', 'UserController', ['except' => 'show']);
-Route::get('/user/view', 'UserController@view');
-Route::get('/user/pencarian', 'UserController@pencarian');
-Route::get('/user/viewStaff', 'UserController@viewStaff');
-
 
 // Master Data Produk
 Route::resource('produk', 'ProdukController', ['except' => 'show']);
@@ -59,17 +70,12 @@ Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 Route::get('/penjualan/hapus-tbs-penjualan/{id}', 'PenjualanController@hapusTbsPenjualan');
 Route::get('/penjualan/tbs-penjualan', 'PenjualanController@tbsPenjualan');
 
-// Toko
-Route::resource('toko', 'TokoController', ['except' => 'show']);
-Route::get('/toko/search', 'TokoController@search');
-Route::get('/toko/view', 'TokoController@view');
-
 // Profile Toko
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
 Route::get('/profile-toko/view', 'ProfileTokoController@view');
 Route::get('/profile-toko/edit', [
-	'as'   => 'profile_toko.proses_ubah_profil_toko',
-	'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
+    'as'   => 'profile_toko.proses_ubah_profil_toko',
+    'uses' => 'ProfileTokoController@proses_ubah_profil_toko',
 ]);
 Route::get('/profile-toko/provinsi', 'ProfileTokoController@provinsi');
 Route::get('/profile-toko/kabupaten/{id}/{type}', 'ProfileTokoController@kabupaten');
@@ -96,11 +102,7 @@ Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
 Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
 
-// status toko(aktif/nonaktof)
-Route::get('/user/status/{id}', [
-	'middleware' => ['auth'],
-	'as'         => 'user.status',
-	'uses'       => 'UserController@status',
-]);
-
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
+// ubah password
+Route::get('ubah-password/password', 'UbahPasswordController@editPassword');
+Route::post('ubah-password/password', 'UbahPasswordController@updatePassword');
