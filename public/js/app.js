@@ -73625,13 +73625,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -73639,7 +73632,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             pelanggans: [],
             pelanggansData: {},
             url: window.location.origin + window.location.pathname.replace("home", "pelanggan"),
-            url_img: window.location.origin + window.location.pathname.replace("home", "/images/man.png"),
+            url_img_man: window.location.origin + window.location.pathname.replace("home", "/images/man.png"),
+            url_img_women: window.location.origin + window.location.pathname.replace("home", "/images/women.png"),
             search: '',
             loading: true,
             errors: [],
@@ -74024,15 +74018,27 @@ var render = function() {
                       },
                       [
                         _c("p"),
-                        _c("div", { staticClass: "col-sm-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: _vm.url_img,
-                              width: "40px",
-                              height: "50px"
-                            }
-                          })
-                        ]),
+                        pelanggan.jenis_kelamin == 1
+                          ? _c("div", { staticClass: "col-sm-3" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm.url_img_man,
+                                  width: "40px",
+                                  height: "50px"
+                                }
+                              })
+                            ])
+                          : _c("div", { staticClass: "col-sm-3" }, [
+                              (_vm.jenis_kelamin = 2)
+                                ? _c("img", {
+                                    attrs: {
+                                      src: _vm.url_img_women,
+                                      width: "40px",
+                                      height: "50px"
+                                    }
+                                  })
+                                : _vm._e()
+                            ]),
                         _vm._v(" "),
                         _c("span", [
                           _c("b", [_vm._v(_vm._s(pelanggan.nama_pelanggan))])
