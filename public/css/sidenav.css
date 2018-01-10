@@ -52,7 +52,6 @@
     position: fixed;
     top: 0;
     width: 200px;
-    background-image: url("gambar.png");
     height: 100%;
     overflow-y: auto;
 }
@@ -102,7 +101,7 @@
     text-align: center;
 }
 #icons i {
-    color: #F5B83A;
+    color: #FFDC04;
     font-size: 18px;
 }
 .nav_txt {

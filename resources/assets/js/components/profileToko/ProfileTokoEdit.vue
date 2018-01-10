@@ -3,7 +3,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 img {
-	width: 100%;
+	width: 70%;
 }
 </style>
 <template>
@@ -12,6 +12,7 @@ img {
 			<ul class="breadcrumb">
 				<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 				<li><router-link :to="{name: 'profileTokoIndex'}">Profile Toko</router-link></li>
+				
 				<li class="active">Edit Profile Toko</li>
 			</ul>
 			<div class="col-md-8 col-md-offset-2">
@@ -92,7 +93,7 @@ img {
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Foto</label>
 							<div class="col-md-4">
-								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" required>
+								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" >
 							</div>
 						</div>
 

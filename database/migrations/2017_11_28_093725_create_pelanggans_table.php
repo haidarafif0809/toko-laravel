@@ -15,7 +15,8 @@ class CreatePelanggansTable extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode_pelanggan');
+            $table->integer('toko_id');
+            $table->string('kode_pelanggan')->nullable();
             $table->string('nama_pelanggan');
             $table->date('tanggal_lahir')->nullable();
             $table->string('nomor_telepon');
@@ -25,7 +26,6 @@ class CreatePelanggansTable extends Migration
             $table->string('kota')->nullable();
             $table->string('kode_pos')->nullable();
             $table->string('catatan')->nullable();
-            $table->string('toko_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();

@@ -19,7 +19,8 @@
     <div id="app">
         <nav>
             <div class='link-wrapper'>
-                <div class='link-container' style="background-image: url('images/gambar.png');">
+                <div class='link-container' style="background-color:#101920;">
+
                     <div class='hum-container'>
                         <div class='bar2'></div>
                         <div class='bar-mid'></div>
@@ -136,7 +137,7 @@
                         <span class="nav_txt">Master Data</span>
                         <ul id="logo-masterdata-collapse" class="collapse">
                             <li><router-link :to="{name: 'indexToko'}">
-                                <i class="fa fa-windows fa-2x"></i>
+                                <i class="fa fa-th-large fa-2x"></i>
                             </router-link></li>
                             <span class='nav_txt'>Toko</span>
 
@@ -220,13 +221,18 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <router-link :to="{name: 'profileTokoIndex'}">
-                                            Profile Toko
+                                            <i class="fa fa-user" aria-hidden="true"></i> Profile Toko
                                         </router-link>
                                     </li>
                                     <li>
+                                        <a href="{{ url('/ubah-password/password') }}"><i class="fa fa-btn fa-lock"></i> Ubah Password</a>
+                                    </li>
+
+                                    <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                        Logout
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                        Keluar
                                     </a>
                                     <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
                                         {{ csrf_field() }}
@@ -249,6 +255,5 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
-
 </body>
 </html>

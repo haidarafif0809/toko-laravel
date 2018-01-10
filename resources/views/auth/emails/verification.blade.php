@@ -261,7 +261,7 @@
             													<tr>
             														<td>
             															<h3><p>Hi Sobat</p></h3>
-            															<p>Kami telah mendaftarakan alamat email Anda di Toko Dasar </p>
+            															<p>Kami telah mendaftarakan alamat email Anda di KuwaliPos </p>
 
             															<table border="0" cellpadding="0" cellspacing="0">
             																<tbody>
