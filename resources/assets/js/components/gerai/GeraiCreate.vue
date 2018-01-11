@@ -22,6 +22,7 @@
 	background-color: #FFE24F;
 }
 
+
 </style>
 <template>
 	<div class="container-fluid">
@@ -173,7 +174,7 @@
 							</div>
 
 							<div class="form-group">
-								<div class="col-md-5">
+								<div class="col-md-5" id="default">
 									<button class="btn btn-default" id="btnSimpanGerai" type="submit"> 
 										Buat
 									</button>
