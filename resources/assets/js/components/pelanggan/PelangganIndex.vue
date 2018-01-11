@@ -612,7 +612,7 @@ export default {
 			url_img_man : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
 			url_img_women : window.location.origin+(window.location.pathname).replace("home","/images/women.png"),
 			url_template_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/template_import"),
-			url_import_produk : window.location.origin + (window.location.pathname).replace("home", "produk/import_produk"),
+			url_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/import_pelanggan"),
 			search : '',
 			loading : true,
 			errors: [],
@@ -899,7 +899,7 @@ export default {
     			return;
     		}
 
-    		axios.post(app.url_import_produk, newPelanggan)
+    		axios.post(app.url_import_pelanggan, newPelanggan)
     		.then(function (resp) {
     			console.log(resp);
                 // return;
@@ -910,7 +910,7 @@ export default {
                 }
 
                 app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
-                app.getProduks();
+                app.getPelanggans();
             })
     		.catch(function (resp) {
                 // console.log(resp.response)

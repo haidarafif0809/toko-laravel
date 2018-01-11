@@ -31,24 +31,6 @@ class PelangganController extends Controller
     }
     public function search(Request $request)
     {
-        // $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)
-        // ->where(function ($query) use ($request){
-        //     $query->orwhere('kode_pelanggan', 'LIKE', "%$request->search%")
-        //     ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-        //     ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-        //     ->orWhere('email', 'LIKE', "%$request->search%");
-        // })->orderBy('gerai_id', 'desc');
-        // return response()->json($cari_pelanggan);
-        // return $cari_pelanggan;
-
-        // $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('created_at', 'desc')
-        // ->where('kode_pelanggan', 'LIKE', "%$request->search%")
-        // ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-        // ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-        // ->orWhere('email', 'LIKE', "%$request->search%")
-        // ->paginate(10);
-        // return response()->json($cari_pelanggan);
-
         $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)
         ->where(function ($query) use ($request) {
             $query->orwhere('kode_pelanggan', 'LIKE', "%$request->search%")
@@ -70,7 +52,6 @@ class PelangganController extends Controller
     {
         //VALIDASI
         $this->validate($request, [
-            // 'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
@@ -185,7 +166,7 @@ class PelangganController extends Controller
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
-        $id = [];
+        $pelanggan_id = [];
 
         // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
         foreach ($excels as $row) {
@@ -259,8 +240,10 @@ class PelangganController extends Controller
 
             // if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
+            //Skip baris ini jadi tidak valid , langsung ke baris selajutnya
+            if ($validator->fails()) continue;
                 // buat produk baru
-            $produk = Produk::create([
+            $pelanggan = Pelanggan::create([
                 'nama_pelanggan'         => $row['nama_pelanggan'],
                 'jenis_kelamin'         => $row['jenis_kelamin'],
                 'tanggal_lahir'         => $row['tanggal_lahir'],
@@ -272,14 +255,12 @@ class PelangganController extends Controller
                 'catatan'         => $row['catatan'],
             ]);
 
-
-
             // catat id dari buku yang baru dibuat
-            // array_push($produk_id, $produk->produk_id);
+            array_push($pelanggan_id, $pelanggan->id);
 
         }
 
         // Ambil semua produk yang baru dibuat
-        $produks = Pelanggan::whereIn('id', $id)->get();
+        $pelanggans = Pelanggan::whereIn('id', $pelanggan_id)->get();
     }
 }

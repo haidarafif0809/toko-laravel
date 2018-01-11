@@ -102,7 +102,7 @@ Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
 Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
 Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate'); 
-Route::post('/pelanggan/import_produk', 'PelangganController@importExcel'); 
+Route::post('/pelanggan/import_pelanggan', 'PelangganController@importExcel'); 
 
 
 // verifikasi user baru
