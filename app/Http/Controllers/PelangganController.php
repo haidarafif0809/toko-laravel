@@ -11,6 +11,7 @@ use Auth;
 use Excel;
 use File;
 use Validator;
+use Session;
 
 class PelangganController extends Controller
 {
@@ -262,5 +263,23 @@ class PelangganController extends Controller
 
         // Ambil semua produk yang baru dibuat
         $pelanggans = Pelanggan::whereIn('id', $pelanggan_id)->get();
+
+
+       //redirect ke form jika tidak ada team yang berhasil di import
+        if($pelanggans->count() == 0){
+            Session::flash('flash_notification',[
+              'level' =>'danger',
+              'message'=>'Tidak ada Pelanggan yang diimport'
+
+          ]);
+            return redirect()->back();
+        }
+
+       //set feedback
+        Session::flash('flash_notification',[
+            'level' =>'success',
+            'message'=>"Berhasil mengimport ".$pelanggans->count()." Pelanggan"
+
+        ]);
     }
 }
