@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\KategoriProduk;
 use App\Pelanggan;
 use App\Produk;
 use App\TbsPenjualan;
@@ -59,7 +60,7 @@ class PenjualanController extends Controller
             $num++;
 
         }
-        
+
         //DATA PAGINATION
         $respons['current_page']   = $produks->currentPage();
         $respons['data']           = $array;
@@ -68,7 +69,7 @@ class PenjualanController extends Controller
         $respons['last_page']      = $produks->lastPage();
         $respons['last_page_url']  = url('/penjualan/view?page=' . $produks->lastPage());
         $respons['next_page_url']  = $produks->nextPageUrl();
-        $respons['path']           = url('/penjualan/');
+        $respons['path']           = url('/penjualan/view');
         $respons['per_page']       = $produks->perPage();
         $respons['prev_page_url']  = $produks->previousPageUrl();
         $respons['to']             = $produks->perPage();
@@ -98,9 +99,9 @@ class PenjualanController extends Controller
     public function tbsPenjualan()
     {
         $tbsPenjualan = DB::table('tbs_penjualans')
-        ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-        ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal')
-        ->get();
+            ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
+            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal', 'id_tbs_penjualan', 'tbs_Penjualans.produk_id AS id_produk')
+            ->get();
         if (count($tbsPenjualan) > 0) {
 
             $json_tbs = json_decode($tbsPenjualan, true);
@@ -180,8 +181,12 @@ class PenjualanController extends Controller
 
     public function hapusTbsPenjualan($id)
     {
-        $tbs = TbsPenjualan::where('id_tbs_penjualan', $id);
-        $tbs->delete(produk_id);
+        if (TbsPenjualan::destroy($id)) {
+            return response('200');
+        } else {
+            return;
+        }
+
     }
 
 /**
@@ -190,10 +195,10 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function edit($id)
-{
+    public function edit($id)
+    {
         //
-}
+    }
 
 /**
  * Update the specified resource in storage.
@@ -202,10 +207,10 @@ public function edit($id)
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function update(Request $request, $id)
-{
+    public function update(Request $request, $id)
+    {
         //
-}
+    }
 
 /**
  * Remove the specified resource from storage.
@@ -213,8 +218,14 @@ public function update(Request $request, $id)
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-public function destroy($id)
-{
+    public function destroy($id)
+    {
         //
-}
+    }
+
+    public function kategoriProduk()
+    {
+        $kategoriProduk = KategoriProduk::select('nama_kategori_produk')->get();
+        return response($kategoriProduk);
+    }
 }

@@ -11,7 +11,7 @@ class TbsPenjualan extends Model
     protected $fillable = [
         'session_id', 'satuan_id', 'produk_id', 'jumlah_produk', 'harga_produk', 'subtotal', 'toko_id',
     ];
-    protected $primaryKey = 'id_tbs_pembelian';
+    protected $primaryKey = 'id_tbs_penjualan';
 
     public function produk()
     {

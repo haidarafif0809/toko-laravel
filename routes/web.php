@@ -67,8 +67,16 @@ Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
-Route::get('/penjualan/hapus-tbs-penjualan/{id}', 'PenjualanController@hapusTbsPenjualan');
+// hapus item penjualan
+Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'penjualan.hapus_tbs_penjualan',
+    'uses'       => 'PenjualanController@hapusTbsPenjualan',
+]);
+// ketegori produk pada penjualan
+Route::get('/penjualan/kategori-produk', 'PenjualanController@kategoriProduk');
 Route::get('/penjualan/tbs-penjualan', 'PenjualanController@tbsPenjualan');
+Route::get('/penjualan/datail-produk', 'PenjualanController@detailProduk');
 
 // Profile Toko
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);
@@ -101,9 +109,8 @@ Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
 Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
-Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate'); 
-Route::post('/pelanggan/import_produk', 'PelangganController@importExcel'); 
-
+Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate');
+Route::post('/pelanggan/import_produk', 'PelangganController@importExcel');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
