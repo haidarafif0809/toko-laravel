@@ -107,6 +107,23 @@
                             <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="modifier" class="col-md-2 control-label"></label>
+                        <div class="col-md-4">
+                            <div>
+                                <b-form-checkbox v-if="" id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer" checked="true">
+                                  Tambahan & Pilhan Produk
+                                </b-form-checkbox>
+                                <div v-if="status_modifier == 'accepted'">
+                                    <selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
+                                        <option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }}</option>
+                                    </selectize-component>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-2">
                             <div v-if="produk.foto != null">
@@ -128,8 +145,10 @@
 export default {
     data: function () {
         return {
+            status_modifier: '',
             errors: [],
             kategori_produks_id: [],
+            produk_modifier_id: [],
             produkId: null,
             url : window.location.origin + (window.location.pathname).replace("home", "produk"),
             url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
@@ -142,7 +161,8 @@ export default {
                 harga_beli: '',
                 kategori_produks_id: '',
                 status_jual: '',
-                foto: ''
+                foto: '',
+                produk_modifier_id: ''
             },
             newKategoriProduk: {
                 nama_kategori_produk: ''
@@ -153,6 +173,9 @@ export default {
             },
             setting_kategori_produk: {
                 placeholder: 'Pilih Kategori Produk'
+            },
+            setting_produk_modifier:{
+                placeholder: 'Pilih Tambahan',
             }
         }
     },
@@ -160,6 +183,7 @@ export default {
         var app = this;
         app.getData();
         app.selectedKategoriProduksId();
+        app.selectedProdukModifierId();
     },
     methods: {
         onFileChange(e) {
@@ -245,8 +269,14 @@ export default {
                 app.produk = resp.data;
                 if (app.produk.foto == null) {
                     app.produk.foto = '';
+                };
+
+                if (resp.data.produk_modifier_id > 0) {
+                    app.status_modifier = 'accepted';
                 }
-                // console.log(app.produk);
+                else{
+                    app.status_modifier = 'not_accepted';
+                }
             })
             .catch(function () {
                 alert("Could not load your produk");
@@ -294,6 +324,16 @@ export default {
                     swal.stopLoading();
                     swal.close();
                 }
+            });
+        },
+        selectedProdukModifierId() {
+            var app = this;
+            axios.get(app.url+'/produk-modifier-id')
+            .then(function (resp) {
+                app.produk_modifier_id = resp.data;
+            })
+            .catch(function (resp) {
+                alert("Could not load produk modifier");
             });
         }
 

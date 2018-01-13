@@ -67,8 +67,16 @@ Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
-Route::get('/penjualan/hapus-tbs-penjualan/{id}', 'PenjualanController@hapusTbsPenjualan');
+// hapus item penjualan
+Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'penjualan.hapus_tbs_penjualan',
+    'uses'       => 'PenjualanController@hapusTbsPenjualan',
+]);
+// ketegori produk pada penjualan
+Route::get('/penjualan/kategori-produk', 'PenjualanController@kategoriProduk');
 Route::get('/penjualan/tbs-penjualan', 'PenjualanController@tbsPenjualan');
+Route::get('/penjualan/datail-produk', 'PenjualanController@detailProduk');
 
 // Profile Toko
 Route::resource('profile-toko', 'ProfileTokoController', ['except' => 'show']);

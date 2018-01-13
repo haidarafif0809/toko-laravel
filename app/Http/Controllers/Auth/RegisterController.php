@@ -8,10 +8,9 @@ use App\Toko;
 use App\User;
 use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -83,6 +82,7 @@ class RegisterController extends Controller
         $user = User::create([
             'type'         => $type,
             'toko_id'      => $toko->id,
+            'nama_toko'    => $toko->nama_toko,
             'nama_pemilik' => $toko->nama_pemilik,
             'email'        => $toko->email,
             'no_telp'      => $toko->no_telp,
@@ -95,16 +95,16 @@ class RegisterController extends Controller
 
     }
 
-    public function verify(Request $request, $token) 
+    public function verify(Request $request, $token)
     {
 
         $email = $request->get('email');
-        $user = User::where('verification_token', $token)->where('email', $email)->first();
+        $user  = User::where('verification_token', $token)->where('email', $email)->first();
         if ($user) {
             $user->verify();
             Session::flash("flash_notification", [
-                "level" => "success",
-                "message" => "Berhasil melakukan verifikasi."
+                "level"   => "success",
+                "message" => "Berhasil melakukan verifikasi.",
             ]);
             Auth::login($user);
         }

@@ -15,7 +15,11 @@
     </ul>
 
     <div class="panel panel-default">
-      <div class="panel-heading">Toko</div>
+      <h4 class="panel-heading"> <i class="fa fa-list-alt" aria-hidden="true"></i></i> <B>DATA SEMUA TOKO</B></h4>
+    </div> 
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><i class="fa fa-university" aria-hidden="true"></i> TOKO</div>
       <div class="panel-body">
         <div class="table-responsive">
           <div class="pencarian">
