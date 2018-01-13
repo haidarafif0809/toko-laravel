@@ -275,10 +275,10 @@
 						<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
 						Import
 					</span>
-					<button class="btn btn-primary" type="button" v-on:click="download">
+					<a :href="url_export_pelanggan" class="btn btn-primary">
 						<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
 						Unduh
-					</button>
+					</a>
 					<button class="btn btn-primary" v-on:click="tambahPelanggan">
 						<i class="fa fa-plus" aria-hidden="true"></i>
 						Tambah
@@ -588,12 +588,16 @@ export default {
 			import_pelanggan: {
 				excel: '',
 			},
+			export_pelanggan: {
+				excel: '',
+			},
 			pelanggansData: {},
 			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
 			url_img_man : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
 			url_img_women : window.location.origin+(window.location.pathname).replace("home","/images/women.png"),
 			url_template_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/template_import"),
 			url_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/import_pelanggan"),
+			url_export_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/export_pelanggan"),
 			search : '',
 			loading : true,
 			errors: [],
@@ -744,23 +748,6 @@ export default {
     			console.log(resp);
     			app.loading = false
     			alert("Could not load pelanggans");
-    		});
-    	},
-
-    	upload(){
-    		this.disable = 1
-    		this.$swal({
-    			title: "GAGAL!",
-    			text: "Fitur ini sedang dalam pengembangan",
-    			icon: "warning",
-    		});
-    	},
-    	download(){
-    		this.disable = 1
-    		this.$swal({
-    			title: "GAGAL!",
-    			text: "Fitur ini sedang dalam pengembangan",
-    			icon: "warning",
     		});
     	},
 

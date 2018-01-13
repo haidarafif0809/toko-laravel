@@ -25,7 +25,7 @@ class PelangganController extends Controller
 
     public function view()
     {
-        return Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('created_at', 'desc')->paginate(10);
+        return Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate();
     }
     public function search(Request $request)
     {
@@ -35,7 +35,7 @@ class PelangganController extends Controller
                     ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
                     ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->orderBy('created_at', 'desc')->paginate(10);
+            })->orderBy('id', 'desc')->paginate();
 
         return response()->json($cari_pelanggan);
     }
@@ -289,5 +289,43 @@ class PelangganController extends Controller
         //     return redirect()->back();
         // }
 
+    }
+
+    public function exportExcel()
+    {
+        $data = Pelanggan::select('kode_pelanggan', 'nama_pelanggan', 'tanggal_lahir', 'nomor_telepon', 'alamat', 'jenis_kelamin', 'email', 'kota', 'kode_pos', 'catatan')->get();
+        Excel::create('Semua Data Pelanggan', function ($excel) use ($data) {
+            $excel->sheet('Data Pelanggan', function ($sheet) use ($data) {
+                // $sheet->fromArray($data);
+                $row = 1;
+                $sheet->row($row, [
+                    'Member Id',
+                    'Nama Pelanggan',
+                    'Jenis Kelamin',
+                    'Tanggal Lahir',
+                    'Nomor Telepon',
+                    'Email',
+                    'Alamat',
+                    'Kota',
+                    'Kode Pos',
+                    'Catatan',
+                ]);
+                foreach ($data as $app) {
+                    $sheet->row(++$row, [
+                        $app->kode_pelanggan,
+                        $app->nama_pelanggan,
+                        $app->jenis_kelamin,
+                        $app->tanggal_lahir,
+                        $app->nomor_telepon,
+                        $app->email,
+                        $app->alamat,
+                        $app->kota,
+                        $app->kode_pos,
+                        $app->catatan,
+                    ]);
+                }
+            });
+
+        })->download('xlsx');
     }
 }
