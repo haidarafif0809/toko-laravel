@@ -58,7 +58,7 @@
         data: function () {
             return {
                 staffs: [],
-                field_users: ['nama_pemilik', 'email', 'no_telp', 'last_login', 'lihat_detail'],
+                field_users: ['nama_toko','nama_pemilik', 'email', 'no_telp', 'last_login', 'lihat_detail'],
                 field_staffs: ['nama_pemilik', 'email', 'no_telp', 'last_login'],
                 users: [],
                 usersData: {},

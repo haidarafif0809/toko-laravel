@@ -67952,7 +67952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             staffs: [],
-            field_users: ['nama_pemilik', 'email', 'no_telp', 'last_login', 'lihat_detail'],
+            field_users: ['nama_toko', 'nama_pemilik', 'email', 'no_telp', 'last_login', 'lihat_detail'],
             field_staffs: ['nama_pemilik', 'email', 'no_telp', 'last_login'],
             users: [],
             usersData: {},
@@ -77986,7 +77986,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.cart-item[data-v-96dfc7e6] {\r\n\tmax-height: 160px;\r\n\toverflow-y: scroll;\n}\n#pull-right[data-v-96dfc7e6]{\r\n\tfloat:right;\n}\n#pull-left[data-v-96dfc7e6]{\r\n\tfloat:left;\n}\n#box[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\r\n\tbackground-color:#F5F8FA;\r\n\tborder-radius: 3px;\n}\n#box2[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.kategori[data-v-96dfc7e6] {\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\n.cart-item[data-v-96dfc7e6] {\r\n\tmax-height: 100px;\r\n\toverflow-y: scroll;\n}\n#pull-right[data-v-96dfc7e6]{\r\n\tfloat:right;\n}\n#pull-left[data-v-96dfc7e6]{\r\n\tfloat:left;\n}\n#box[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\r\n\tbackground-color:#F5F8FA;\r\n\tborder-radius: 3px;\n}\n#box2[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\n}\n.total-bayar[data-v-96dfc7e6]{\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -78190,10 +78190,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			kategori_produks: [],
 			penjualan: [],
 			pelanggans: [],
 			produksPenjualan: [],
@@ -78225,6 +78257,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		var app = this;
 		app.loading = true;
 		app.loadingTbs = true;
+		app.getKategoriProduk();
 		app.getProduksPenjualan();
 		app.getTbsPenjualan();
 		app.selectPelanggans();
@@ -78238,6 +78271,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
+		getKategoriProduk: function getKategoriProduk(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+			axios.get(app.url + '/kategori-produk').then(function (resp) {
+				app.loading = false;
+				app.kategori_produks = resp.data;
+			}).catch(function (resp) {
+				alert("Could not load produksPenjualan");
+				app.loading = false;
+			});
+		},
 		getProduksPenjualan: function getProduksPenjualan(page) {
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -78248,7 +78294,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.loading = false;
 				app.produksPenjualan = resp.data.data;
 				app.dataProduksPenjualan = resp.data;
-				console.log(resp.data.data);
 			}).catch(function (resp) {
 				alert("Could not load produksPenjualan");
 				app.loading = false;
@@ -78257,6 +78302,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		getTbsPenjualan: function getTbsPenjualan() {
 			var app = this;
 			axios.get(app.url + '/tbs-penjualan').then(function (resp) {
+				console.log(resp.data);
 				if (resp.data.length == 2) {
 
 					app.tbs_penjualans = resp.data[0];
@@ -78267,7 +78313,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					app.tbs_penjualans = resp.data;
 					app.loadingTbs = false;
 				}
-				// console.log(resp.data.length);
 				// app.tbs_penjualans.total_item = 
 			}).catch(function () {
 				alert("Could not load tbs penjualan");
@@ -78307,11 +78352,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var newTbs = app.inputTbsPenjualan;
 
 			axios.post(app.urlTambahTbs, newTbs).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah "' + produk.data_produk.nama_produk + '" ke Pemesanan';
-				app.alert(app.message);
+				// app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
+				// app.alert(app.message);
 				app.$router.replace('/penjualan');
 				app.getTbsPenjualan();
-				app.$swal.close();
+				// app.$swal.close();
 			}).catch(function (resp) {
 				console.log(resp);
 
@@ -78319,19 +78364,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.errors = resp.response.data.errors;
 			});
 		},
-		deleteTbsPenjualan: function deleteTbsPenjualan(tbs_penjualan) {
-			var app = this;
-			axios.delete(app.urlHapusTbs + '/' + tbs_penjualan)
-			// axios.delete(app.urlHapusTbs +'/'+ produk)
-			.then(function (resp) {
-				app.getTbsPenjualan();
-				app.alert("berhasil menghapus");
-			}).catch(function (resp) {
-				console.log(resp);
-				app.$swal({
-					text: "tidak dapat menghapus",
-					icon: "warning"
-				});
+		deleteTbsPenjualan: function deleteTbsPenjualan(id_tbs_penjualan) {
+			var _this = this;
+
+			swal({
+				title: "Konfirmasi Hapus",
+				text: "Anda Yakin Ingin Menghapus ?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true
+			}).then(function (willDelete) {
+				if (willDelete) {
+					var app = _this;
+					axios.delete(app.urlHapusTbs + '/' + id_tbs_penjualan).then(function (resp) {
+						app.getTbsPenjualan();
+						swal("Berhasil Dihapus!  ", {
+							icon: "success"
+						});
+					}).catch(function (resp) {
+						app.$router.replace('/penjualan');
+						swal("Gagal Menghapus!", {
+							icon: "warning"
+						});
+					});
+				}
+				_this.$router.replace('/penjualan');
 			});
 		},
 
@@ -78381,67 +78438,37 @@ var render = function() {
       _c("li", { staticClass: "active" }, [_vm._v("Penjualan")])
     ]),
     _vm._v(" "),
-    _c("div", [
-      _c("div", { staticClass: "col-md-8", attrs: { id: "pull-right" } }, [
-        _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "col-md-8", attrs: { id: "pull-right" } }, [
+      _c(
+        "div",
+        { staticClass: "panel panel-default" },
+        [
           _c("div", { staticClass: "panel-heading" }, [_vm._v("Daftar")]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "panel-body" },
-            [
+          _c("div", { staticClass: "panel-body" }, [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-heading" }, [
+                _vm._v("DAFTAR KATEGORI")
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12 pencarian" }, [
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.search,
-                          expression: "search"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        name: "search",
-                        placeholder: "Pencarian Produk"
-                      },
-                      domProps: { value: _vm.search },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.search = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(0)
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div"),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _vm.produksPenjualan.length > 0 && _vm.loading == false
-                    ? _c("div", { staticClass: "data-ada" }, [
-                        _vm.produksPenjualan.length == 1
+                _vm.kategori_produks.length > 0 && _vm.loading == false
+                  ? _c("div", { staticClass: "data-ada" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _vm.kategori_produks.length == 1
                           ? _c(
                               "div",
-                              _vm._l(_vm.produksPenjualan, function(
+                              _vm._l(_vm.kategori_produks, function(
                                 produk,
                                 index
                               ) {
                                 return _c(
                                   "div",
-                                  { staticClass: "col-md-4 list-produk" },
+                                  { staticClass: "col-md-3 list-produk " },
                                   [
-                                    _c("div", { staticClass: "thumbnail" }, [
+                                    _c("div", { staticClass: "thumbnail " }, [
                                       _c(
                                         "div",
                                         {
@@ -78453,39 +78480,37 @@ var render = function() {
                                           }
                                         },
                                         [
-                                          produk.data_produk.nama_produk
+                                          produk.data_produk.kategori_produks_id
                                             .length > 15
-                                            ? _c("h4", [
-                                                _vm._v(
-                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                    _vm._s(
-                                                      produk.data_produk.nama_produk.slice(
-                                                        0,
-                                                        15
+                                            ? _c(
+                                                "h4",
+                                                [
+                                                  _c("center", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        produk.nama_kategori_produk.slice(
+                                                          0,
+                                                          15
+                                                        )
+                                                      ) + "..."
+                                                    )
+                                                  ])
+                                                ],
+                                                1
+                                              )
+                                            : _c(
+                                                "h4",
+                                                [
+                                                  _c("center", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        produk.nama_kategori_produk
                                                       )
-                                                    ) +
-                                                    "...\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                )
-                                              ])
-                                            : _c("h4", [
-                                                _vm._v(
-                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                    _vm._s(
-                                                      produk.data_produk
-                                                        .nama_produk
-                                                    ) +
-                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                )
-                                              ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "Harga: " +
-                                                _vm._s(
-                                                  produk.data_produk.harga_jual
-                                                )
-                                            )
-                                          ])
+                                                    )
+                                                  ])
+                                                ],
+                                                1
+                                              )
                                         ]
                                       )
                                     ])
@@ -78495,15 +78520,18 @@ var render = function() {
                             )
                           : _c(
                               "div",
-                              _vm._l(_vm.produksPenjualan, function(
+                              _vm._l(_vm.kategori_produks, function(
                                 produk,
                                 index
                               ) {
-                                return _c(
-                                  "div",
-                                  { staticClass: "col-md-4 list-produk" },
-                                  [
-                                    _c("div", { staticClass: "thumbnail" }, [
+                                return _c("div", [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        " btn btn-success col-md-3 list-produk"
+                                    },
+                                    [
                                       _c(
                                         "div",
                                         {
@@ -78515,243 +78543,411 @@ var render = function() {
                                           }
                                         },
                                         [
-                                          produk.data_produk.nama_produk
-                                            .length > 15
-                                            ? _c("h4", [
-                                                _vm._v(
-                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                    _vm._s(
-                                                      produk.data_produk.nama_produk.slice(
-                                                        0,
-                                                        15
+                                          produk.nama_kategori_produk.length >
+                                          15
+                                            ? _c(
+                                                "h4",
+                                                { staticClass: "kategori" },
+                                                [
+                                                  _c("center", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        produk.nama_kategori_produk.slice(
+                                                          0,
+                                                          15
+                                                        )
+                                                      ) + "..."
+                                                    )
+                                                  ])
+                                                ],
+                                                1
+                                              )
+                                            : _c(
+                                                "h4",
+                                                [
+                                                  _c("center", [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        produk.nama_kategori_produk
                                                       )
-                                                    ) +
-                                                    "...\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                )
-                                              ])
-                                            : _c("h4", [
-                                                _vm._v(
-                                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\t" +
-                                                    _vm._s(
-                                                      produk.data_produk
-                                                        .nama_produk
-                                                    ) +
-                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                                                )
-                                              ]),
-                                          _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "Harga: " +
-                                                _vm._s(
-                                                  produk.data_produk.harga_jual
-                                                )
-                                            )
-                                          ])
+                                                    )
+                                                  ])
+                                                ],
+                                                1
+                                              )
                                         ]
                                       )
-                                    ])
-                                  ]
-                                )
+                                    ]
+                                  )
+                                ])
                               })
                             )
                       ])
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { align: "right" } },
-                [
-                  _c("pagination", {
-                    attrs: { data: _vm.dataProduksPenjualan, limit: 3 },
-                    on: { "pagination-change-page": _vm.getProduksPenjualan }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { attrs: { align: "right" } })
-            ],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4", attrs: { id: "pull-left" } }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [_vm._v("Pesanan")]),
+                    ])
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _vm.kategori_produks.length > 0 && _vm.loading == false
+                ? _c("div", { staticClass: "data-ada" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm.kategori_produks.length == 1
+                        ? _c(
+                            "div",
+                            _vm._l(_vm.kategori_produks, function(
+                              produk,
+                              index
+                            ) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-4 list-produk" },
+                                [
+                                  _c("div", { staticClass: "thumbnail" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(produk)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        produk.data_produk.nama_produk.length >
+                                        15
+                                          ? _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk.nama_produk.slice(
+                                                      0,
+                                                      15
+                                                    )
+                                                  ) +
+                                                  "...\n\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ])
+                                          : _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk
+                                                      .nama_produk
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Harga: " +
+                                              _vm._s(
+                                                produk.data_produk.harga_jual
+                                              )
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          )
+                        : _c(
+                            "div",
+                            _vm._l(_vm.produksPenjualan, function(
+                              produk,
+                              index
+                            ) {
+                              return _c(
+                                "div",
+                                { staticClass: "col-md-4 list-produk" },
+                                [
+                                  _c("div", { staticClass: "thumbnail" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(produk)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        produk.data_produk.nama_produk.length >
+                                        15
+                                          ? _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk.nama_produk.slice(
+                                                      0,
+                                                      15
+                                                    )
+                                                  ) +
+                                                  "...\n\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ])
+                                          : _c("h4", [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(
+                                                    produk.data_produk
+                                                      .nama_produk
+                                                  ) +
+                                                  "\n\t\t\t\t\t\t\t\t\t\t\t"
+                                              )
+                                            ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Harga: " +
+                                              _vm._s(
+                                                produk.data_produk.harga_jual
+                                              )
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.loading ? _c("vue-simple-spinner") : _vm._e(),
           _vm._v(" "),
           _c(
-            "ul",
-            { staticClass: "list-group cart-item" },
+            "div",
+            { attrs: { align: "right" } },
             [
-              _vm.tbs_penjualans.length > 0 && _vm.loadingTbs == false
-                ? _c(
-                    "div",
-                    { staticClass: "data-ada" },
-                    _vm._l(_vm.tbs_penjualans, function(tbsPenjualan, index) {
-                      return _c(
-                        "li",
-                        {
-                          staticClass: "list-group-item",
-                          attrs: { "track-by": "id" }
-                        },
-                        [
-                          _c("div", [
-                            _c("small", [
+              _c("pagination", {
+                attrs: { data: _vm.dataProduksPenjualan, limit: 3 },
+                on: { "pagination-change-page": _vm.getProduksPenjualan }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { attrs: { align: "right" } })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-4", attrs: { id: "pull-left" } }, [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12 pencarian" }, [
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "search",
+                  placeholder: "Pencarian Produk"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Pesanan")]),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "list-group cart-item" },
+          [
+            _vm.tbs_penjualans.length > 0 && _vm.loadingTbs == false
+              ? _c(
+                  "div",
+                  { staticClass: "data-ada" },
+                  _vm._l(_vm.tbs_penjualans, function(tbsPenjualan, index) {
+                    return _c(
+                      "li",
+                      {
+                        staticClass: "list-group-item",
+                        attrs: { "track-by": "id" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          [
+                            _c("large", [
                               tbsPenjualan.nama_produk.length > 15
-                                ? _c("span", { staticClass: "small" }, [
+                                ? _c("span", { staticClass: "large" }, [
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t" +
+                                      "\n\t\t\t\t\t\t\t\t\t" +
                                         _vm._s(
                                           tbsPenjualan.nama_produk.slice(0, 15)
                                         ) +
-                                        "...\n\t\t\t\t\t\t\t\t\t"
+                                        "...\n\t\t\t\t\t\t\t\t"
                                     )
                                   ])
-                                : _c("span", { staticClass: "small" }, [
+                                : _c("span", { staticClass: "large" }, [
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\t" +
+                                      "\n\t\t\t\t\t\t\t\t\t" +
                                         _vm._s(tbsPenjualan.nama_produk) +
-                                        "\n\t\t\t\t\t\t\t\t\t"
+                                        "\n\t\t\t\t\t\t\t\t"
                                     )
                                   ]),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 {
-                                  staticClass: "small",
+                                  staticClass: "large",
                                   staticStyle: { float: "right" }
                                 },
                                 [
                                   _vm._v(
-                                    "\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t(" +
+                                    "\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t( " +
                                       _vm._s(tbsPenjualan.harga_produk) +
                                       " x " +
                                       _vm._s(tbsPenjualan.jumlah_produk) +
-                                      ") : " +
-                                      _vm._s(tbsPenjualan.subtotal) +
-                                      " \n\t\t\t\t\t\t\t\t\t\t"
+                                      " ) : "
                                   ),
+                                  _c("b", [
+                                    _vm._v(_vm._s(tbsPenjualan.subtotal))
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
                                     "button",
                                     {
-                                      staticClass: "btn btn-xs btn-danger",
+                                      staticClass:
+                                        "btn btn-xs btn-danger btn-floating",
                                       attrs: { type: "button" },
                                       on: {
                                         click: function($event) {
                                           _vm.deleteTbsPenjualan(
-                                            _vm.deleteProdukTbsPenjualan
-                                              .produk_id
+                                            tbsPenjualan.id_tbs_penjualan
                                           )
                                         }
                                       }
                                     },
                                     [
-                                      _c(
-                                        "i",
-                                        {
-                                          staticClass: "fa fa-trash-o",
-                                          attrs: { "aria-hidden": "true" }
-                                        },
-                                        [_vm._v(" HAPUS")]
-                                      )
+                                      _c("i", {
+                                        staticClass: "fa fa-trash-o",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
                                     ]
                                   )
                                 ]
                               )
                             ])
-                          ])
-                        ]
-                      )
-                    })
-                  )
-                : _vm.loadingTbs == true
-                  ? _c("div", { staticClass: "text-center" }, [
-                      _c("li", [_vm._v("Sedang Memuat Produk")])
-                    ])
-                  : _c(
-                      "div",
-                      {
-                        staticClass: "list-group-item list-group-item-warning"
-                      },
-                      [_vm._v("\n\t\t\t\t\t\tTidak Ada Produk\n\t\t\t\t\t")]
-                    ),
-              _vm._v(" "),
-              _vm.loadingTbs ? _c("vue-simple-spinner") : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-footer" }, [
-            _vm._v(
-              "\n\t\t\t\t\tTotal Item: " +
-                _vm._s(_vm.tbs_penjualans.length) +
-                "\n\t\t\t\t\t"
-            ),
-            _c("span", { staticClass: "pull-right" })
-          ])
-        ]),
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  })
+                )
+              : _vm.loadingTbs == true
+                ? _c("div", { staticClass: "text-center" }, [
+                    _c("li", [_vm._v("Sedang Memuat Produk")])
+                  ])
+                : _c(
+                    "div",
+                    { staticClass: "list-group-item list-group-item-warning" },
+                    [_vm._v("\n\t\t\t\t\tTidak Ada Produk\n\t\t\t\t")]
+                  ),
+            _vm._v(" "),
+            _vm.loadingTbs ? _c("vue-simple-spinner") : _vm._e()
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-body" }, [
-            _c("form", [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Total Bayar")
-                ]),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("h1", { attrs: { align: "center" } }, [
-                  _c("b", [_vm._v(_vm._s(_vm.tbs_penjualans.total_bayar))])
-                ]),
-                _vm._v(" "),
-                _c("h2", { staticClass: "form-control-static text-warning" })
+        _c("div", { staticClass: "panel-footer" }, [
+          _vm._v(
+            "\n\t\t\t\tTotal Item: " +
+              _vm._s(_vm.tbs_penjualans.length) +
+              "\n\t\t\t\t"
+          ),
+          _c("span", { staticClass: "pull-right" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-body" }, [
+          _c("form", [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "control-label" }, [
+                _vm._v("Total Bayar")
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", { staticClass: "control-label" }, [
-                    _vm._v(" Nama Pelanggan:")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "selectize-component",
-                    {
-                      attrs: { settings: _vm.setting_pelanggan },
-                      model: {
-                        value: _vm.penjualan.nama_pelanggan,
-                        callback: function($$v) {
-                          _vm.$set(_vm.penjualan, "nama_pelanggan", $$v)
-                        },
-                        expression: "penjualan.nama_pelanggan"
-                      }
-                    },
-                    _vm._l(_vm.pelanggans, function(pelanggan) {
-                      return _c(
-                        "option",
-                        { domProps: { value: pelanggan.id } },
-                        [_vm._v(_vm._s(pelanggan.nama_pelanggan))]
-                      )
-                    })
-                  )
-                ],
-                1
-              ),
+              _c("br"),
               _vm._v(" "),
-              _vm._m(1),
+              _c("br"),
               _vm._v(" "),
-              _vm._m(2)
-            ])
+              _c("h1", { staticClass: "total-bayar" }, [
+                _vm._v("Rp. " + _vm._s(_vm.tbs_penjualans.total_bayar)),
+                _c("hr")
+              ]),
+              _vm._v(" "),
+              _c("h2", { staticClass: "form-control-static text-warning" })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { staticClass: "control-label" }, [
+                  _vm._v(" Nama Pelanggan:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "selectize-component",
+                  {
+                    attrs: { settings: _vm.setting_pelanggan },
+                    model: {
+                      value: _vm.penjualan.nama_pelanggan,
+                      callback: function($$v) {
+                        _vm.$set(_vm.penjualan, "nama_pelanggan", $$v)
+                      },
+                      expression: "penjualan.nama_pelanggan"
+                    }
+                  },
+                  _vm._l(_vm.pelanggans, function(pelanggan) {
+                    return _c("option", { domProps: { value: pelanggan.id } }, [
+                      _vm._v(_vm._s(pelanggan.nama_pelanggan))
+                    ])
+                  })
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
           ])
         ])
       ])
@@ -78901,6 +79097,10 @@ exports.push([module.i, "\n.pencarian[data-v-56a4ec6d] {\r\n\tcolor: red;\r\n\r\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -79159,7 +79359,23 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("Toko")]),
+      _c(
+        "h4",
+        { staticClass: "panel-heading" },
+        [
+          _c("i", {
+            staticClass: "fa fa-list-alt",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("B", [_vm._v("DATA SEMUA TOKO")])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel panel-default" }, [
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
@@ -79195,7 +79411,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("table", { staticClass: "table table-striped table-hover" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _vm.tokos.length > 0 && _vm.loading == false
                 ? _c(
@@ -79323,8 +79539,8 @@ var render = function() {
                     })
                   )
                 : _vm.loading == true
-                  ? _c("tbody", { staticClass: "data-ada" }, [_vm._m(1)])
-                  : _c("tbody", { staticClass: "tidak-ada-data" }, [_vm._m(2)])
+                  ? _c("tbody", { staticClass: "data-ada" }, [_vm._m(2)])
+                  : _c("tbody", { staticClass: "tidak-ada-data" }, [_vm._m(3)])
             ])
           ]),
           _vm._v(" "),
@@ -79364,6 +79580,18 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("i", {
+        staticClass: "fa fa-university",
+        attrs: { "aria-hidden": "true" }
+      }),
+      _vm._v(" TOKO")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
