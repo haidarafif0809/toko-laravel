@@ -88,22 +88,24 @@ class ProfileTokoController extends Controller
             return response()->view('error.403');
         } else {
             $this->validate($request, [
-                'nama_toko'    => 'required',
-                'nama_pemilik' => 'required',
-                'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
-                'no_telp'      => 'required',
-                'provinsi'     => 'required',
-                'kabupaten'    => 'required',
-                'alamat'       => 'required',
+                'nama_toko'        => 'required',
+                'nama_pemilik'     => 'required',
+                'email'            => 'required|string|email|max:255|unique:tokos,email,' . $id,
+                'no_telp'          => 'required',
+                'provinsi'         => 'required',
+                'kabupaten'        => 'required',
+                'alamat'           => 'required',
+                'prefix_member_id' => 'required',
             ]);
             $user_login->update([
-                'nama_toko'    => $request->nama_toko,
-                'nama_pemilik' => $request->nama_pemilik,
-                'email'        => $request->email,
-                'no_telp'      => $request->no_telp,
-                'provinsi'     => $request->provinsi,
-                'kabupaten'    => $request->kabupaten,
-                'alamat'       => $request->alamat,
+                'nama_toko'        => $request->nama_toko,
+                'nama_pemilik'     => $request->nama_pemilik,
+                'email'            => $request->email,
+                'no_telp'          => $request->no_telp,
+                'provinsi'         => $request->provinsi,
+                'kabupaten'        => $request->kabupaten,
+                'alamat'           => $request->alamat,
+                'prefix_member_id' => $request->prefix_member_id,
             ]);
         }if ($request->foto === null) {
 

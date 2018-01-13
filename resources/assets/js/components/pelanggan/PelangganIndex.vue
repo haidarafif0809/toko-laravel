@@ -306,7 +306,7 @@
 												<img :src="url_img_women" v-if="jenis_kelamin = 2" width="40px" height="50px">
 											</div>												
 											<span><b>{{pelanggan.nama_pelanggan}}</b></span><br>
-											<span>{{pelanggan.id}}</span>
+											<span>{{pelanggan.kode_pelanggan}}</span>
 										</p>
 										<p>
 											<i class="fa fa-mobile" aria-hidden="true"></i>
@@ -360,7 +360,7 @@
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal" >
 							<div class="row" v-if="memberPelanggan == 1">
 								<div class="form-group">
-									<label for="kode_pelanggan" class="col-md-3 control-label rata top">Member Id<font size="5px" color="red">*</font></i></label>
+									<label for="kode_pelanggan" class="col-md-3 control-label rata">Member Id</label>
 									<div class="col-md-8">
 										<input class="form-control" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" readonly>
 										<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
@@ -693,7 +693,7 @@ export default {
 
     	detailPelanggan(id, kode_pelanggan, nama_pelanggan, jenis_kelamin, tanggal_lahir, nomor_telepon, email, kota, alamat, kode_pos, catatan){
     		this.pelanggan.id = id
-    		this.pelanggan.kode_pelanggan = id
+    		this.pelanggan.kode_pelanggan = kode_pelanggan
     		this.pelanggan.nama_pelanggan = nama_pelanggan
     		this.pelanggan.jenis_kelamin = jenis_kelamin
     		this.pelanggan.tanggal_lahir = tanggal_lahir

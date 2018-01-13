@@ -41,11 +41,12 @@ class UserSeeder extends Seeder
         $admin->save();
         $admin->attachRole($adminRole);
 
-        $toko1               = new Toko();
-        $toko1->nama_toko    = 'Toko Sample';
-        $toko1->nama_pemilik = 'member';
-        $toko1->email        = 'member@gmail.com';
-        $toko1->no_telp      = '1134567';
+        $toko1                   = new Toko();
+        $toko1->nama_toko        = 'Toko Sample';
+        $toko1->nama_pemilik     = 'member';
+        $toko1->email            = 'member@gmail.com';
+        $toko1->no_telp          = '1134567';
+        $toko1->prefix_member_id = 'mm';
         $toko1->save();
         // Membuat sample member
         $type                 = 1;

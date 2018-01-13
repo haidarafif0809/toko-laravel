@@ -14,7 +14,7 @@ class Toko extends Model
     use AuditableTrait;
     use Notifiable;
     protected $fillable = [
-        'nama_toko', 'nama_pemilik', 'email', 'no_telp', 'provinsi', 'kabupaten', 'alamat', 'foto',
+        'nama_toko', 'nama_pemilik', 'email', 'no_telp', 'provinsi', 'kabupaten', 'alamat', 'prefix_member_id', 'foto',
     ];
 
     public function getCreatedAtAttribute()

@@ -20,7 +20,7 @@
   </style>
   <template>  
     <div class="container">
-      
+
       <div class="row">
         <div class="col-md-12">
           <ul class="breadcrumb">
@@ -126,6 +126,10 @@
                 <td class="col-md-8">: {{profileToko.profileToko.alamat}}</td>
               </tr>
               <tr v-for="profileToko , index in profileTokos" >
+                <td class="col-md 2">PREFIX MEMBER ID</td>
+                <td class="col-md-8">: {{profileToko.profileToko.prefix_member_id}}</td>
+              </tr>
+              <tr v-for="profileToko , index in profileTokos" >
                 <td class="col-md 2">TANGGAL REGISTRASI</td>
                 <td class="col-md-8">: {{profileToko.profileToko.created_at}}</td>
               </tr>
@@ -170,7 +174,7 @@
      </div>
    </div>
  </div>
-</div>
+</div>  
 </div>
 </template>
 
