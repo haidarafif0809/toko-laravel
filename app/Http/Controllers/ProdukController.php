@@ -242,9 +242,61 @@ class ProdukController extends Controller
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
         $produk_id = [];
+        $errors    = [];
+        $no        = 1;
 
-        // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
+        // Perulangan pertama untuk memvalidasi inputan dari user pada
+        // file excel yang di upload dan memasukkannya kedalama variable
+        // array yang nantinya akan ditampilkan pada perulangan kedua
+        // jika ada isinya
         foreach ($excels as $row) {
+            // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
+            $bisaDijual = trim(strtolower($row['bisa_dijual']));
+            if (!empty($row['bisa_dijual'])) {
+                if ($bisaDijual !== 'ya' && $bisaDijual !== 'tidak') {
+                    $errors['bisaDijual'][] = [
+                        'line'    => $no,
+                        'message' => 'Nilai dari kolom Bisa Dijual hanya boleh berisi ya atau tidak.',
+                    ];
+                }
+            } else {
+                $errors['bisaDijual'][] = [
+                    'line'    => $no,
+                    'message' => 'Nilai dari kolom Bisa Dijual tidak boleh kosong.',
+                ];
+            }
+            $no++;
+        }
+        // return response()->json($errors);
+
+        // Perulangan kedua untuk penambahan data jika tidak ada error.
+        foreach ($excels as $row) {
+
+            // Untuk menampilkan error dan menghentikan jalannya script
+            // sehingga jika ada error tidak ada data yang akan dimasukkan
+            // kedalam database
+            if (count($errors) > 0) {
+
+                // Membuat variable array dengan index errorMsg.
+                // Tujuan membuat index ini adalah agar memperjelas struktur kode
+                // saat kita akan mengambilnya dari kode vue
+                $pesan = ['errorMsg' => ''];
+
+                // Jumlah data produk pada file excel
+                $jumlah_produk_yg_error = count($errors['bisaDijual']);
+
+                // Menyusun dan memasukkan pesan error (baris dan pesannya) kedalam variable
+                // array yang telah kita buat diatas pada index errorMsg
+                foreach ($errors['bisaDijual'] as $key => $val) {
+                    if ($val['line'] != $jumlah_produk_yg_error) {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
+                    } else {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'];
+                    }
+                }
+                return response()->json($pesan);
+            }
+
             // Membuat validasi untuk row di excel
             // Disini kita ubah baris yang sedang di proses menjadi array
             $validator = Validator::make($row->toArray(), $rowRules);
@@ -269,7 +321,7 @@ class ProdukController extends Controller
             | sesuai dengan yang diinputkan pada Excel
              */
 
-            /* Begin Cek Kategori Produk */
+            /* Begin Cek Nama Kategori Produk */
 
             // Membuat variable array kosong
             $dataKategoriProduk = [];
@@ -311,7 +363,7 @@ class ProdukController extends Controller
             // Membuat value dari $arrayNamaKategoriProduk menjadi huruf kecil semua
             $arrayNamaKategoriProduk = array_map('strtolower', $arrayNamaKategoriProduk);
 
-            /* End Cek Kategori Produk*/
+            /* End Cek Nama Kategori Produk*/
 
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
@@ -343,13 +395,13 @@ class ProdukController extends Controller
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $row['bisa_dijual'],
-                ]);}
+                ]);
+            }
 
             // catat id dari buku yang baru dibuat
             // array_push($produk_id, $produk->produk_id);
 
         }
-
         // Ambil semua produk yang baru dibuat
         $produks = Produk::whereIn('produk_id', $produk_id)->get();
     }
