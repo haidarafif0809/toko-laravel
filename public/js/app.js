@@ -70261,6 +70261,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -70885,7 +70888,7 @@ var render = function() {
                   attrs: { for: "modifier" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-8" }, [
                   _c(
                     "div",
                     [
@@ -70914,44 +70917,49 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _vm.status_modifier == "accepted"
-                        ? _c(
-                            "div",
-                            [
-                              _c(
-                                "selectize-component",
-                                {
-                                  attrs: {
-                                    settings: _vm.setting_produk_modifier
-                                  },
-                                  model: {
-                                    value: _vm.produk.produk_modifier_id,
-                                    callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.produk,
-                                        "produk_modifier_id",
-                                        $$v
-                                      )
+                        ? _c("div", [
+                            _c(
+                              "div",
+                              { staticClass: "col-md-4" },
+                              [
+                                _c(
+                                  "selectize-component",
+                                  {
+                                    attrs: {
+                                      settings: _vm.setting_produk_modifier
                                     },
-                                    expression: "produk.produk_modifier_id"
-                                  }
-                                },
-                                _vm._l(_vm.produk_modifier_id, function(
-                                  produk_modifier
-                                ) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: produk_modifier.id } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(produk_modifier.nama_modifier)
-                                      )
-                                    ]
-                                  )
-                                })
-                              )
-                            ],
-                            1
-                          )
+                                    model: {
+                                      value: _vm.produk.produk_modifier_id,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.produk,
+                                          "produk_modifier_id",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "produk.produk_modifier_id"
+                                    }
+                                  },
+                                  _vm._l(_vm.produk_modifier_id, function(
+                                    produk_modifier
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        domProps: { value: produk_modifier.id }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(produk_modifier.nama_modifier)
+                                        )
+                                      ]
+                                    )
+                                  })
+                                )
+                              ],
+                              1
+                            )
+                          ])
                         : _vm._e()
                     ],
                     1
@@ -71218,12 +71226,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            status_modifier: '',
             errors: [],
             kategori_produks_id: [],
+            produk_modifier_id: [],
             produkId: null,
             url: window.location.origin + window.location.pathname.replace("home", "produk"),
             url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk"),
@@ -71236,7 +71263,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 harga_beli: '',
                 kategori_produks_id: '',
                 status_jual: '',
-                foto: ''
+                foto: '',
+                produk_modifier_id: ''
             },
             newKategoriProduk: {
                 nama_kategori_produk: ''
@@ -71247,6 +71275,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             setting_kategori_produk: {
                 placeholder: 'Pilih Kategori Produk'
+            },
+            setting_produk_modifier: {
+                placeholder: 'Pilih Tambahan'
             }
         };
     },
@@ -71254,6 +71285,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var app = this;
         app.getData();
         app.selectedKategoriProduksId();
+        app.selectedProdukModifierId();
     },
 
     methods: {
@@ -71332,8 +71364,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 app.produk = resp.data;
                 if (app.produk.foto == null) {
                     app.produk.foto = '';
+                };
+
+                if (resp.data.produk_modifier_id > 0) {
+                    app.status_modifier = 'accepted';
+                } else {
+                    app.status_modifier = 'not_accepted';
                 }
-                // console.log(app.produk);
             }).catch(function () {
                 alert("Could not load your produk");
             });
@@ -71375,6 +71412,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     swal.stopLoading();
                     swal.close();
                 }
+            });
+        },
+        selectedProdukModifierId: function selectedProdukModifierId() {
+            var app = this;
+            axios.get(app.url + '/produk-modifier-id').then(function (resp) {
+                app.produk_modifier_id = resp.data;
+            }).catch(function (resp) {
+                alert("Could not load produk modifier");
             });
         }
     }
@@ -71856,6 +71901,87 @@ var render = function() {
                     attrs: { type: "file", name: "foto", id: "image" },
                     on: { change: _vm.onFileChange }
                   })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", {
+                  staticClass: "col-md-2 control-label",
+                  attrs: { for: "modifier" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "div",
+                    [
+                      _c(
+                        "b-form-checkbox",
+                        {
+                          staticStyle: { cursor: "pointer" },
+                          attrs: {
+                            id: "checkbox1",
+                            value: "accepted",
+                            "unchecked-value": "not_accepted",
+                            checked: "true"
+                          },
+                          model: {
+                            value: _vm.status_modifier,
+                            callback: function($$v) {
+                              _vm.status_modifier = $$v
+                            },
+                            expression: "status_modifier"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                              Tambahan & Pilhan Produk\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.status_modifier == "accepted"
+                        ? _c(
+                            "div",
+                            [
+                              _c(
+                                "selectize-component",
+                                {
+                                  attrs: {
+                                    settings: _vm.setting_produk_modifier
+                                  },
+                                  model: {
+                                    value: _vm.produk.produk_modifier_id,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.produk,
+                                        "produk_modifier_id",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "produk.produk_modifier_id"
+                                  }
+                                },
+                                _vm._l(_vm.produk_modifier_id, function(
+                                  produk_modifier
+                                ) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: produk_modifier.id } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(produk_modifier.nama_modifier)
+                                      )
+                                    ]
+                                  )
+                                })
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -73356,7 +73482,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.cart-item[data-v-c948883a] {\r\n\tmax-height: 160px;\r\n\toverflow-y: scroll;\n}\n.row .control-label[data-v-c948883a] {\r\n\ttext-align: left;\n}\n.form-info[data-v-c948883a] {\r\n\tpadding: 15px;\n}\n.tabInformasi[data-v-c948883a]{\r\n\twidth: 33%;\r\n\t/*margin-bottom: 20px;*/\n}\n.tabKecil[data-v-c948883a]{\r\n\twidth: 33%;\n}\n.scroll-panel-list-result[data-v-c948883a] {\r\n\tposition: relative;\r\n\theight: 400px;\r\n\toverflow: auto;\r\n\tleft: 5px;\n}\n.top[data-v-c948883a]{\r\n\tmargin-top: -15px;\n}\n.rata[data-v-c948883a]{\r\n\tmargin-left: 15px;\n}\n{\r\n\twidth: 33%;\r\n\theight:60px;\n}\n.star[data-v-c948883a]{\r\n\tcolor: #ff0000;\n}\n.box[data-v-c948883a]{\r\n\t/*width: 300px;*/\r\n\t/*height:60px;*/\r\n\tbackground-color: #FCF8E3;\r\n\ttext-align: center;\r\n\tpadding: 8px;\r\n\tborder:1px solid #ffafaf;\n}\n.nav.nav-tabs li[data-v-c948883a] {\r\n\tborder-right: 1px solid #eee;\n}\n.pawoon-result .nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 20px;\n}\n.nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 0px;\r\n\tborder-bottom: none;\r\n\tbackground: #fff;\r\n\t-webkit-box-shadow: 0 0 1px #eee;\r\n\t        box-shadow: 0 0 1px #eee;\n}\n.nav li[data-v-c948883a] {\r\n\tfont-size: 14px;\n}\n.nav-tabs > li[data-v-c948883a] {\r\n\tmargin-bottom: -1px;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.row .control-label[data-v-c948883a] {\r\n\ttext-align: left;\n}\n.form-info[data-v-c948883a] {\r\n\tpadding: 15px;\n}\n.tabInformasi[data-v-c948883a]{\r\n\twidth: 33%;\r\n\t/*margin-bottom: 20px;*/\n}\n.tabKecil[data-v-c948883a]{\r\n\twidth: 33%;\n}\n.scroll-panel-list-result[data-v-c948883a] {\r\n\tposition: relative;\r\n\theight: 400px;\r\n\toverflow: auto;\r\n\tleft: 5px;\n}\n.top[data-v-c948883a]{\r\n\tmargin-top: -15px;\n}\n.rata[data-v-c948883a]{\r\n\tmargin-left: 15px;\n}\n{\r\n\twidth: 33%;\r\n\theight:60px;\n}\n.star[data-v-c948883a]{\r\n\tcolor: #ff0000;\n}\n.box[data-v-c948883a]{\r\n\t/*width: 300px;*/\r\n\t/*height:60px;*/\r\n\tbackground-color: #FCF8E3;\r\n\ttext-align: center;\r\n\tpadding: 8px;\r\n\tborder:1px solid #ffafaf;\n}\n.nav.nav-tabs li[data-v-c948883a] {\r\n\tborder-right: 1px solid #eee;\n}\n.pawoon-result .nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 20px;\n}\n.nav-tabs[data-v-c948883a] {\r\n\tmargin-bottom: 0px;\r\n\tborder-bottom: none;\r\n\tbackground: #fff;\r\n\t-webkit-box-shadow: 0 0 1px #eee;\r\n\t        box-shadow: 0 0 1px #eee;\n}\n.nav li[data-v-c948883a] {\r\n\tfont-size: 14px;\n}\n.nav-tabs > li[data-v-c948883a] {\r\n\tmargin-bottom: -1px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -73367,30 +73493,6 @@ exports.push([module.i, "\n.cart-item[data-v-c948883a] {\r\n\tmax-height: 160px;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -73978,12 +74080,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     data: function data() {
         return {
             pelanggans: [],
+            import_pelanggan: {
+                excel: ''
+            },
             pelanggansData: {},
             url: window.location.origin + window.location.pathname.replace("home", "pelanggan"),
             url_img_man: window.location.origin + window.location.pathname.replace("home", "/images/man.png"),
             url_img_women: window.location.origin + window.location.pathname.replace("home", "/images/women.png"),
             url_template_import_pelanggan: window.location.origin + window.location.pathname.replace("home", "pelanggan/template_import"),
-            url_import_produk: window.location.origin + window.location.pathname.replace("home", "produk/import_produk"),
+            url_import_pelanggan: window.location.origin + window.location.pathname.replace("home", "pelanggan/import_pelanggan"),
             search: '',
             loading: true,
             errors: [],
@@ -74003,6 +74108,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             message: '',
             disable: 1,
             edit: 0,
+            tambah: 1,
             formPelanggan: 1,
             memberPelanggan: 0,
             riwayatBelanja: 0,
@@ -74025,7 +74131,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.getHasilPencarian();
         }
     },
-    methods: _defineProperty({
+    methods: {
         tentangPelanggan: function tentangPelanggan() {
             this.formPelanggan = 1;
             this.riwayatBelanja = 0;
@@ -74054,7 +74160,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.pelanggan.catatan = '';
             this.$router.replace('/pelanggan');
             this.disable = 0;
+            this.tambah = 0;
+            this.edit = 0;
             this.formPelanggan = 1;
+            this.memberPelanggan = 0;
+            this.perilakuPelanggan = 0;
+            this.tentangPelanggan();
         },
         onDisable: function onDisable() {
             this.disable = 1;
@@ -74076,6 +74187,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.pelanggan.kode_pos = kode_pos;
             this.pelanggan.catatan = catatan;
             this.disable = 1;
+            this.tambah = 1;
             this.edit = 1;
             this.formPelanggan = 1;
             this.memberPelanggan = 1;
@@ -74083,6 +74195,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         editPelanggan: function editPelanggan() {
             this.disable = 2;
             this.edit = 0;
+            this.tambah = 1;
             // this.pelanggan.id = id
         },
         getPelanggans: function getPelanggans(page) {
@@ -74134,7 +74247,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var app = this;
             var Pelanggan = app.pelanggan;
             axios.post(app.url, Pelanggan).then(function (resp) {
-                app.alert();
+                app.alerttt();
 
                 app.getPelanggans();
                 app.pelanggan.kode_pelanggan = '';
@@ -74154,7 +74267,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 app.errors = resp.response.data.errors;
             });
         },
-        alert: function alert() {
+        alerttt: function alerttt() {
             this.$swal({
                 title: "Berhasil!",
                 text: "Berhasil Menambahkan Pelanggan",
@@ -74244,8 +74357,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return;
             }
 
-            axios.post(app.url_import_produk, newPelanggan).then(function (resp) {
-                console.log(resp);
+            axios.post(app.url_import_pelanggan, newPelanggan).then(function (resp) {
+                console.log(resp.data);
                 // return;
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
                 // bukan bernilai ya atau tidak
@@ -74254,22 +74367,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }
 
                 app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
-                app.getProduks();
+                app.getPelanggans();
+                app.$router.replace('/pelanggan/');
             }).catch(function (resp) {
-                // console.log(resp.response)
-                if (resp.response.data.errors.excel != undefined) {
+                console.log(resp.response);
+                if (resp.response.data.errors != undefined) {
                     app.errors = resp.response.data.errors.excel[0];
                 }
                 app.alert('Gagal!', app.errors, 'warning');
+                app.$router.replace('/pelanggan/');
             });
+        },
+        alert: function alert(title, pesan, icon) {
+            this.$swal({
+                title: title,
+                text: pesan,
+                icon: icon
+            });
+            this.pelanggan.kode_pelanggan = '';
+            this.pelanggan.nama_pelanggan = '';
+            this.pelanggan.jenis_kelamin = '';
+            this.pelanggan.tanggal_lahir = '';
+            this.pelanggan.nomor_telepon = '';
+            this.pelanggan.email = '';
+            this.pelanggan.kota = '';
+            this.pelanggan.alamat = '';
+            this.pelanggan.kode_pos = '';
+            this.pelanggan.catatan = '';
+            this.disable = 1;
+            this.edit = 0;
+
+            this.memberPelanggan = 0;
+            app.$router.replace('/pelanggan/');
         }
-    }, "alert", function alert(title, pesan, icon) {
-        this.$swal({
-            title: title,
-            text: pesan,
-            icon: icon
-        });
-    })
+    }
 });
 
 /***/ }),
@@ -74340,9 +74471,9 @@ var render = function() {
                             href: "#"
                           }
                         },
-                        [_vm._v("contoh")]
+                        [_vm._v("cara pengisian")]
                       ),
-                      _vm._v(" pengisian untuk lebih detail.\n\t\t\t\t\t\t\t\t")
+                      _vm._v(" untuk lebih detail.\n\t\t\t\t\t\t\t\t")
                     ])
                   ]),
                   _vm._v(" "),
@@ -75187,7 +75318,7 @@ var render = function() {
                           "div",
                           { staticClass: "col-md-12 col-md-offset-8" },
                           [
-                            _vm.disable == 0
+                            _vm.tambah == 0
                               ? _c(
                                   "button",
                                   {
@@ -75203,13 +75334,13 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tSimpan \n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tSimpan \n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.disable == 0
+                            _vm.tambah == 0
                               ? _c(
                                   "button",
                                   {
@@ -75222,7 +75353,7 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
@@ -75242,7 +75373,7 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tEdit\n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
@@ -75262,7 +75393,7 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tSimpan\n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
@@ -75282,7 +75413,7 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tBatal\n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
@@ -75302,7 +75433,7 @@ var render = function() {
                                       attrs: { "aria-hidden": "true" }
                                     }),
                                     _vm._v(
-                                      "\n\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t"
+                                      "\n\t\t\t\t\t\t\t\t\t\t\tHapus\n\t\t\t\t\t\t\t\t\t\t"
                                     )
                                   ]
                                 )
@@ -75438,9 +75569,7 @@ var staticRenderFns = [
                       _c("td", [_vm._v(":")]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._v(
-                          "Jenis kelamin diisi jika laki-laki = 1, perempuan = 2"
-                        )
+                        _vm._v("Jenis kelamin diisi laki-laki atau perempuan")
                       ])
                     ]),
                     _vm._v(" "),
@@ -75453,7 +75582,7 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
-                          "Tanggal Lahir diisi dengan format Tahun-Bulan-Tangal (yyyy-mm-dd)"
+                          "Tanggal Lahir diisi dengan format Tahun/Bulan/Tanggal (yyyy/mm/dd)"
                         )
                       ])
                     ]),
@@ -75467,7 +75596,7 @@ var staticRenderFns = [
                       _vm._v(" "),
                       _c("td", [
                         _vm._v(
-                          "Nomor telepon diisi dengan maksimal 13 karakter"
+                          "Nomor telepon diisi dengan maksimal 13 karakter, dan setiap pelanggan nomor teleponnya berbeda"
                         )
                       ])
                     ]),
@@ -75805,7 +75934,7 @@ var staticRenderFns = [
           staticClass: "fa fa-download",
           attrs: { "aria-hidden": "true" }
         }),
-        _vm._v("\n\t\t\t\t\t\tExcel\n\t\t\t\t\t")
+        _vm._v("\n\t\t\t\t\t\t\tExcel\n\t\t\t\t\t\t")
       ])
     ])
   },

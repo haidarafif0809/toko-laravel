@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Pelanggan;
 use App\User;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use DB;
 use Auth;
 use Excel;
 use File;
+use Illuminate\Http\Request;
 use Validator;
 
 class PelangganController extends Controller
@@ -31,31 +29,13 @@ class PelangganController extends Controller
     }
     public function search(Request $request)
     {
-        // $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)
-        // ->where(function ($query) use ($request){
-        //     $query->orwhere('kode_pelanggan', 'LIKE', "%$request->search%")
-        //     ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-        //     ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-        //     ->orWhere('email', 'LIKE', "%$request->search%");
-        // })->orderBy('gerai_id', 'desc');
-        // return response()->json($cari_pelanggan);
-        // return $cari_pelanggan;
-
-        // $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('created_at', 'desc')
-        // ->where('kode_pelanggan', 'LIKE', "%$request->search%")
-        // ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-        // ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-        // ->orWhere('email', 'LIKE', "%$request->search%")
-        // ->paginate(10);
-        // return response()->json($cari_pelanggan);
-
         $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)
-        ->where(function ($query) use ($request) {
-            $query->orwhere('kode_pelanggan', 'LIKE', "%$request->search%")
-            ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
-            ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
-            ->orWhere('email', 'LIKE', "%$request->search%");
-        })->orderBy('created_at', 'desc')->paginate(10);
+            ->where(function ($query) use ($request) {
+                $query->orwhere('kode_pelanggan', 'LIKE', "%$request->search%")
+                    ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
+                    ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
+                    ->orWhere('email', 'LIKE', "%$request->search%");
+            })->orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json($cari_pelanggan);
     }
@@ -70,15 +50,15 @@ class PelangganController extends Controller
     {
         //VALIDASI
         $this->validate($request, [
-            // 'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan',
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
             'kode_pos'       => 'max:5',
+            'email'          => 'unique:pelanggans,email',
 
         ]);
         $pelanggan = Pelanggan::create([
-            'toko_id'    => Auth::User()->toko_id,
+            'toko_id'        => Auth::User()->toko_id,
             'kode_pelanggan' => $request->kode_pelanggan,
             'nama_pelanggan' => $request->nama_pelanggan,
             'jenis_kelamin'  => $request->jenis_kelamin,
@@ -110,7 +90,7 @@ class PelangganController extends Controller
             'jenis_kelamin'  => 'required',
             // 'tanggal_lahir'  => '',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon,' . $id,
-            // 'email'          => '',
+            'email'          => 'unique:pelanggans,email' . $id,
             // 'alamat'         => '',
             // 'kota'           => '',
             'kode_pos'       => 'max:5',
@@ -140,9 +120,9 @@ class PelangganController extends Controller
         Excel::create('Template Import Pelanggan', function ($excel) {
             // Set the properties
             $excel->setTitle('Template Import Pelanggan')
-            ->setCreator('Toko Dasar')
-            ->setCompany('Toko Dasar')
-            ->setDescription('Template Import Pelanggan di Aplikasi Toko Dasar');
+                ->setCreator('Toko Dasar')
+                ->setCompany('Toko Dasar')
+                ->setDescription('Template Import Pelanggan di Aplikasi Toko Dasar');
             $excel->sheet('Data Pelanggan', function ($sheet) {
                 $row = 1;
                 $sheet->row($row, [
@@ -154,7 +134,7 @@ class PelangganController extends Controller
                     'Alamat',
                     'Kota',
                     'Kode Pos',
-                    'Catatan'
+                    'Catatan',
                 ]);
             });
         })->export('xlsx');
@@ -173,19 +153,19 @@ class PelangganController extends Controller
         // rule untuk validasi setiap row pada file excel
 
         $rowRules = [
-            'Nama Pelanggan'  => 'required',
-            'Jenis Kelamin'   => 'required',
-            'Tanggal Lahir'   => '',
-            'Nomor Telepon'   =>'required|max:13|unique:pelanggans,nomor_telepon' ,
-            'Email'           => '',
-            'Alamat'          => '',
-            'Kota'            => '',
-            'Kode Pos'        => 'max:5',
-            'Catatan'         => '',
+            'Nama Pelanggan' => 'required',
+            'Jenis Kelamin'  => 'required',
+            'Tanggal Lahir'  => '',
+            'Nomor Telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
+            'Email'          => 'unique:pelanggans,email',
+            'Alamat'         => '',
+            'Kota'           => '',
+            'Kode Pos'       => 'max:5',
+            'Catatan'        => '',
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
-        $id = [];
+        $pelanggan_id = [];
 
         // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
         foreach ($excels as $row) {
@@ -193,18 +173,36 @@ class PelangganController extends Controller
             // Disini kita ubah baris yang sedang di proses menjadi array
             $validator = Validator::make($row->toArray(), $rowRules);
 
+            $a = [
+                $row['nama_pelanggan'],
+                $row['jenis_kelamin'],
+                $row['tanggal_lahir'],
+                $row['nomor_telepon'],
+                $row['email'],
+                $row['alamat'],
+                $row['kota'],
+                $row['kode_pos'],
+                $row['catatan'],
+            ];
+            // return response()->json($a);
+
             // Variable array kosong untuk menampung pesan error
-            // $errorMsg = [];
+            $errorMsg = [];
             // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
-            // $bisaDijual = trim(strtolower($row['bisa_dijual']));
-            // if ($bisaDijual !== 'ya' && $bisaDijual !== 'tidak') {
-            //     $errorMsg['pesan'] = 'Nilai dari kolom Bisa Dijual hanya boleh berisi ya atau tidak';
-            //     return response()->json($errorMsg);
-            // }
+            $jenisKelamin = trim(strtolower($row['jenis_kelamin']));
+            if ($jenisKelamin !== 'laki-laki' && $jenisKelamin !== 'perempuan') {
+                $errorMsg['pesan'] = 'kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan';
+                return response()->json($errorMsg);
+            }
+            if ($jenisKelamin == 'laki-laki') {
+                $gender = 1;
+            } elseif ($jenisKelamin == 'perempuan') {
+                $gender = 2;
+            }
 
             /*
             |---------------------------------------------------------------------------
-            | Mengecek nama kategori produk
+            | Mengecek nama kategori pelanggan
             |---------------------------------------------------------------------------
             |
             | Disini kita cek apakah kategori produk yang user inputkan didalam
@@ -240,7 +238,7 @@ class PelangganController extends Controller
             // Mengisi variable array $arrNamaIdKategoriProduk dengan nama KategoriProduk sebagai index
             // dan id KategoriProduk sebagai value
             // for ($i = 0; $i < count($dataKategoriProduk[1]); $i++) {
-                // $arrNamaIdKategoriProduk[$dataKategoriProduk[0][$i]['nama_kategori_produk']] = $dataKategoriProduk[1][$i]['id'];
+            // $arrNamaIdKategoriProduk[$dataKategoriProduk[0][$i]['nama_kategori_produk']] = $dataKategoriProduk[1][$i]['id'];
             // }
 
             // Mengubah semua key (nama KategoriProduk) menjadi huruf kecil
@@ -250,7 +248,7 @@ class PelangganController extends Controller
             // $arrayNamaKategoriProduk = [];
             // Memasukkan data nama KategoriProduk ke variable $arrayNamaKategoriProduk
             // foreach ($namaKategoriProduk as $namaKP) {
-                // array_push($arrayNamaKategoriProduk, $namaKP['nama_kategori_produk']);
+            // array_push($arrayNamaKategoriProduk, $namaKP['nama_kategori_produk']);
             // }
             // Membuat value dari $arrayNamaKategoriProduk menjadi huruf kecil semua
             // $arrayNamaKategoriProduk = array_map('strtolower', $arrayNamaKategoriProduk);
@@ -259,27 +257,37 @@ class PelangganController extends Controller
 
             // if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
-                // buat produk baru
-            $produk = Produk::create([
-                'nama_pelanggan'         => $row['nama_pelanggan'],
-                'jenis_kelamin'         => $row['jenis_kelamin'],
-                'tanggal_lahir'         => $row['tanggal_lahir'],
-                'nomor_telepon'         => $row['nomor_telepon'],
-                'email'         => $row['email'],
+            // buat produk baru
+            $pelanggan = Pelanggan::create([
+                'toko_id'        => Auth::User()->toko_id,
+                'nama_pelanggan' => $row['nama_pelanggan'],
+                'jenis_kelamin'  => $gender,
+                'tanggal_lahir'  => $row['tanggal_lahir'],
+                'nomor_telepon'  => $row['nomor_telepon'],
+                'email'          => $row['email'],
                 'alamat'         => $row['alamat'],
-                'kota'         => $row['kota'],
-                'kode_pos'         => $row['kode_pos'],
-                'catatan'         => $row['catatan'],
+                'kota'           => $row['kota'],
+                'kode_pos'       => $row['kode_pos'],
+                'catatan'        => $row['catatan'],
             ]);
 
-
-
             // catat id dari buku yang baru dibuat
-            // array_push($produk_id, $produk->produk_id);
+            array_push($pelanggan_id, $pelanggan->id);
 
         }
 
         // Ambil semua produk yang baru dibuat
-        $produks = Pelanggan::whereIn('id', $id)->get();
+        $pelanggans = Pelanggan::whereIn('id', $pelanggan_id)->get();
+
+        //redirect ke form jika tidak ada team yang berhasil di import
+        // if($pelanggans->count() == 0){
+        //     Session::flash('flash_notification',[
+        //       'level' =>'danger',
+        //       'message'=>'Tidak ada Pelanggan yang diimport'
+
+        //   ]);
+        //     return redirect()->back();
+        // }
+
     }
 }

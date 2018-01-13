@@ -108,15 +108,18 @@
 
 					<div class="form-group">
 						<label for="modifier" class="col-md-2 control-label"></label>
-						<div class="col-md-4">
+						<div class="col-md-8">
 							<div>
 							    <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
 							      Tambahan & Pilhan Produk
 							    </b-form-checkbox>
 							    <div v-if="status_modifier == 'accepted'">
-							    	<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
+							    	<div class="col-md-4">
+							    				<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
 										<option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }}</option>
 									</selectize-component>
+								</div>
+							    	
 							    </div>
 							</div>
 						</div>
@@ -166,7 +169,7 @@ export default {
 			},
 			setting_produk_modifier:{
 				placeholder: 'Pilih Tambahan',
-			},
+			}
 		}
 	},
 	mounted() {
