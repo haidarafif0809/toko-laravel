@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use App\KategoriProduk;
+use App\Modifier;
+use App\Produk;
 use Auth;
-use File;
+use Carbon\Carbon;
+use DB;
 use Excel;
+use File;
+use Illuminate\Http\Request;
 use Image;
 use Validator;
-use App\Produk;
-use App\Modifier;
-use Carbon\Carbon;
-use App\KategoriProduk;
-use Illuminate\Http\Request;
-
-
 
 class ProdukController extends Controller
 {
@@ -46,7 +44,6 @@ class ProdukController extends Controller
         return response()->json($produk);
     }
 
-
     public function produkModifiersId()
     {
         $produk_modifier = Modifier::all();
@@ -73,12 +70,10 @@ class ProdukController extends Controller
         return response()->json($kategoriProduk);
     }
 
-
     public function create()
     {
 //
     }
-
 
     public function store(Request $request)
     {
@@ -119,19 +114,16 @@ class ProdukController extends Controller
         ]);
     }
 
-
     public function show($id)
     {
 //
     }
-
 
     public function edit($id)
     {
         $produk = Produk::where('produk_id', $id)->first();
         return $produk;
     }
-
 
     public function update(Request $request, $id)
     {
@@ -191,7 +183,6 @@ class ProdukController extends Controller
         }
     }
 
-
     public function destroy($id)
     {
         return Produk::destroy($id);
@@ -241,9 +232,10 @@ class ProdukController extends Controller
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
-        $produk_id = [];
-        $errors    = [];
-        $no        = 1;
+        $produk_id  = [];
+        $errors     = [];
+        $lineErrors = [];
+        $no         = 1;
 
         // Perulangan pertama untuk memvalidasi inputan dari user pada
         // file excel yang di upload dan memasukkannya kedalama variable
@@ -258,16 +250,21 @@ class ProdukController extends Controller
                         'line'    => $no,
                         'message' => 'Nilai dari kolom Bisa Dijual hanya boleh berisi ya atau tidak.',
                     ];
+                    $lineErrors[] = $no;
                 }
             } else {
                 $errors['bisaDijual'][] = [
                     'line'    => $no,
                     'message' => 'Nilai dari kolom Bisa Dijual tidak boleh kosong.',
                 ];
+                $lineErrors[] = $no;
             }
             $no++;
         }
         // return response()->json($errors);
+
+        $jumlahProduk                 = ['jumlahProduk' => ''];
+        $jumlahProduk['jumlahProduk'] = ($no - 1);
 
         // Perulangan kedua untuk penambahan data jika tidak ada error.
         foreach ($excels as $row) {
@@ -282,16 +279,13 @@ class ProdukController extends Controller
                 // saat kita akan mengambilnya dari kode vue
                 $pesan = ['errorMsg' => ''];
 
-                // Jumlah data produk pada file excel
-                $jumlah_produk_yg_error = count($errors['bisaDijual']);
-
                 // Menyusun dan memasukkan pesan error (baris dan pesannya) kedalam variable
                 // array yang telah kita buat diatas pada index errorMsg
                 foreach ($errors['bisaDijual'] as $key => $val) {
-                    if ($val['line'] != $jumlah_produk_yg_error) {
-                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
-                    } else {
+                    if ($val['line'] == end($lineErrors)) {
                         $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'];
+                    } else {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
                     }
                 }
                 return response()->json($pesan);
@@ -402,6 +396,7 @@ class ProdukController extends Controller
             // array_push($produk_id, $produk->produk_id);
 
         }
+        return response()->json($jumlahProduk);
         // Ambil semua produk yang baru dibuat
         $produks = Produk::whereIn('produk_id', $produk_id)->get();
     }
