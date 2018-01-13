@@ -66,6 +66,7 @@ class UserController extends Controller
         $cari_user = User::where('type', 1)
             ->where(function ($query) use ($search) {
                 $query->orwhere('nama_pemilik', 'LIKE', '%' . $search . '%')
+                    ->orwhere('nama_toko', 'LIKE', '%' . $search . '%')
                     ->orwhere('email', 'LIKE', '%' . $search . '%')
                     ->orwhere('no_telp', 'LIKE', '%' . $search . '%');
             })->paginate(10);

@@ -17,10 +17,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->integer('type')->default('2')->nullable()->comment = "(1=user toko), (2=staf toko)";
             $table->integer('toko_id')->nullable();
+            $table->string('nama_toko')->nullable();
             $table->string('nama_pemilik');
             $table->string('email')->unique();
             $table->string('no_telp');
-            $table->boolean('status')->default(1)->comment = "(0= tdk aktif)(1= aktif)";
+            $table->boolean('status')->default(1)->comment      = "(0= tdk aktif)(1= aktif)";
             $table->boolean('is_verified')->default(0)->comment = "(0= nonverifikasi)(1= terverifikasi)";
             $table->string('verification_token')->nullable();
             $table->string('password');

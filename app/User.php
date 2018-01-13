@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Laratrust\Traits\LaratrustUserTrait;
 use Yajra\Auditable\AuditableTrait;
-use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -24,7 +24,7 @@ class User extends Authenticatable
         'is_verified' => 'boolean',
     ];
     protected $fillable = [
-        'type', 'toko_id', 'nama_pemilik', 'email', 'no_telp', 'password', 'status', 'is_verified',
+        'type', 'toko_id', 'nama_toko', 'nama_pemilik', 'email', 'no_telp', 'password', 'status', 'is_verified',
     ];
 
     /**
@@ -38,8 +38,8 @@ class User extends Authenticatable
 
     public function sendVerification()
     {
-        $user = $this;
-        $token = str_random(40);
+        $user                     = $this;
+        $token                    = str_random(40);
         $user->verification_token = $token;
         $user->save();
         Mail::send('auth.emails.verification', compact('user', 'token'), function ($message) use ($user) {
@@ -48,8 +48,8 @@ class User extends Authenticatable
     }
     public function sendVerificationStaff()
     {
-        $user = $this;
-        $token = str_random(40);
+        $user                     = $this;
+        $token                    = str_random(40);
         $user->verification_token = $token;
         $user->save();
         Mail::send('auth.emails.verificationStaff', compact('user', 'token'), function ($message) use ($user) {
@@ -59,12 +59,10 @@ class User extends Authenticatable
 
     public function verify()
     {
-        $this->is_verified = 1;
+        $this->is_verified        = 1;
         $this->verification_token = null;
         $this->save();
     }
-
-
 
     public function setPasswordAttribute($password)
     {
@@ -74,18 +72,18 @@ class User extends Authenticatable
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
-        ->format(' d F Y H:i:s');
+            ->format(' d F Y H:i:s');
     }
     public function getCreatedAtAttributes()
     {
         return \Carbon\Carbon::parse($this->attributes['last_login'])
-        ->format(' d F Y H:i:s');
+            ->format(' d F Y H:i:s');
     }
 
     public function getUpdatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
-        ->diffForHumans();
+            ->diffForHumans();
     }
 
     public function toko()
@@ -101,6 +99,5 @@ class User extends Authenticatable
     {
         return \Carbon\Carbon::createFromFormat('Y-m-d', $date)->format('d/m/Y');
     }
-
 
 }
