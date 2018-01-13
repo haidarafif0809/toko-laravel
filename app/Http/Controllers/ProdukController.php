@@ -115,7 +115,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'status_jual'         => $request->status_jual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
-            'produk_modifier_id'       => $request->produk_modifier_id,
+            'produk_modifier_id'  => $request->produk_modifier_id,
         ]);
     }
 
@@ -144,7 +144,7 @@ class ProdukController extends Controller
             'harga_beli'          => 'required|numeric',
             'harga_jual'          => 'required|numeric',
             'status_jual'         => 'required',
-            'harga_modifier'      => 'nullable|numeric',
+            'produk_modifier_id'  => 'nullable|exists:modifiers,id',
         ]);
 
         $arrUpdateProduk = [
@@ -154,9 +154,7 @@ class ProdukController extends Controller
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
             'status_jual'         => $request->status_jual,
-            'nama_modifier'       => $request->nama_modifier,
-            'nama_tampilan'       => $request->nama_tampilan,
-            'harga_modifier'      => $request->harga_modifier,
+            'produk_modifier_id'  => $request->produk_modifier_id,
         ];
 
         if ($request->foto !== null) {

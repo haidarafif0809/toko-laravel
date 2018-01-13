@@ -199,7 +199,7 @@
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <p class="navbar-brand">
-                                <i class="fa fa-info-circle"></i> Disini Buat Pengumuman Atau Sejenisnya.
+                                <i class="fa fa-info-circle"></i> VERSI GRATIS | Upgrade Sekarang!.
                             </p>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
