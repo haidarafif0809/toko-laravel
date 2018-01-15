@@ -25,7 +25,32 @@ class PelangganController extends Controller
 
     public function view()
     {
-        return Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate();
+
+        $pelanggan     = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate();
+        $pelangganData = [];
+
+        foreach ($pelanggan as $key => $val) {
+            $kode_pelanggan                        = explode('/', $val->kode_pelanggan);
+            $kode_pelanggan                        = $kode_pelanggan[1] . '/' . $kode_pelanggan[2];
+            $pelangganData[]                       = $val;
+            $pelangganData[$key]['kode_pelanggan'] = $kode_pelanggan;
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/profile-toko/view?page=' . $pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $pelanggan->lastPage();
+        $respons['last_page_url']  = url('/profile-toko/view?page=' . $pelanggan->lastPage());
+        $respons['next_page_url']  = $pelanggan->nextPageUrl();
+        $respons['path']           = url('/profile-toko/view');
+        $respons['per_page']       = $pelanggan->perPage();
+        $respons['prev_page_url']  = $pelanggan->previousPageUrl();
+        $respons['to']             = $pelanggan->perPage();
+        $respons['total']          = $pelanggan->total();
+
+        return response()->json($respons);
     }
     public function search(Request $request)
     {
@@ -37,7 +62,30 @@ class PelangganController extends Controller
                     ->orWhere('email', 'LIKE', "%$request->search%");
             })->orderBy('id', 'desc')->paginate();
 
-        return response()->json($cari_pelanggan);
+        $pelangganData = [];
+
+        foreach ($cari_pelanggan as $key => $val) {
+            $kode_pelanggan                        = explode('/', $val->kode_pelanggan);
+            $kode_pelanggan                        = $kode_pelanggan[1] . '/' . $kode_pelanggan[2];
+            $pelangganData[]                       = $val;
+            $pelangganData[$key]['kode_pelanggan'] = $kode_pelanggan;
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $cari_pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/profile-toko/view?page=' . $cari_pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $cari_pelanggan->lastPage();
+        $respons['last_page_url']  = url('/profile-toko/view?page=' . $cari_pelanggan->lastPage());
+        $respons['next_page_url']  = $cari_pelanggan->nextPageUrl();
+        $respons['path']           = url('/profile-toko/view');
+        $respons['per_page']       = $cari_pelanggan->perPage();
+        $respons['prev_page_url']  = $cari_pelanggan->previousPageUrl();
+        $respons['to']             = $cari_pelanggan->perPage();
+        $respons['total']          = $cari_pelanggan->total();
+
+        return response()->json($respons);
     }
 
     public function detail($id)

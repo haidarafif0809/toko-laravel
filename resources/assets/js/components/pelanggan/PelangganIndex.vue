@@ -723,6 +723,7 @@ export default {
     		}
     		axios.get(app.url+'/view?page='+page)
     		.then(function (resp) {
+    			console.log(resp);
     			app.loading = false
     			app.pelanggans = resp.data.data;
     			app.pelanggansData = resp.data
