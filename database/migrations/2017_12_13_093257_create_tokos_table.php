@@ -23,6 +23,7 @@ class CreateTokosTable extends Migration
             $table->string('kabupaten')->nullable();
             $table->string('alamat')->nullable();
             $table->string('foto')->nullable();
+            $table->string('prefix_member_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();

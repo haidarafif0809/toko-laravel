@@ -54,12 +54,14 @@ class PelangganController extends Controller
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
             'kode_pos'       => 'max:5',
-            'email'          => 'unique:pelanggans,email',
+            'email'          => '',
 
         ]);
-        $pelanggan = Pelanggan::create([
+        $id_toko        = Auth::User()->toko_id;
+        $kode_pelanggan = Pelanggan::kode_pelanggan($id_toko);
+        $pelanggan      = Pelanggan::create([
             'toko_id'        => Auth::User()->toko_id,
-            'kode_pelanggan' => $request->kode_pelanggan,
+            'kode_pelanggan' => $kode_pelanggan,
             'nama_pelanggan' => $request->nama_pelanggan,
             'jenis_kelamin'  => $request->jenis_kelamin,
             'tanggal_lahir'  => $request->tanggal_lahir,
@@ -90,7 +92,7 @@ class PelangganController extends Controller
             'jenis_kelamin'  => 'required',
             // 'tanggal_lahir'  => '',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon,' . $id,
-            'email'          => 'unique:pelanggans,email' . $id,
+            'email'          => '',
             // 'alamat'         => '',
             // 'kota'           => '',
             'kode_pos'       => 'max:5',
@@ -157,7 +159,7 @@ class PelangganController extends Controller
             'Jenis Kelamin'  => 'required',
             'Tanggal Lahir'  => '',
             'Nomor Telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
-            'Email'          => 'unique:pelanggans,email',
+            'Email'          => '',
             'Alamat'         => '',
             'Kota'           => '',
             'Kode Pos'       => 'max:5',
@@ -258,8 +260,12 @@ class PelangganController extends Controller
             // if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
             // buat produk baru
-            $pelanggan = Pelanggan::create([
+
+            $id_toko        = Auth::User()->toko_id;
+            $kode_pelanggan = Pelanggan::kode_pelanggan($id_toko);
+            $pelanggan      = Pelanggan::create([
                 'toko_id'        => Auth::User()->toko_id,
+                'kode_pelanggan' => $kode_pelanggan,
                 'nama_pelanggan' => $row['nama_pelanggan'],
                 'jenis_kelamin'  => $gender,
                 'tanggal_lahir'  => $row['tanggal_lahir'],
