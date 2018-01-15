@@ -359,6 +359,7 @@ class ProdukController extends Controller
 
             /* End Cek Nama Kategori Produk*/
 
+            $bisa_dijual = ($row['bisa_dijual'] == 'ya' ? 1 : 0);
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
                 // buat produk baru
@@ -368,9 +369,8 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $row['bisa_dijual'],
+                    'bisa_dijual'         => $bisa_dijual,
                 ]);
-
             } else {
                 // Membuat kategori produk baru
                 $kategori_produk = KategoriProduk::create([
@@ -388,7 +388,7 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $row['bisa_dijual'],
+                    'bisa_dijual'         => $bisa_dijual,
                 ]);
             }
 
