@@ -330,7 +330,7 @@ export default {
                         swal({
                             title: 'Berhasil!',
                             type: 'success',
-                            text: 'Berhasil menghapus produk '+ nama_produk
+                            text: 'Berhasil menghapus '+ nama_produk
                         })
                     })
                     .catch(function (resp) {
@@ -364,7 +364,7 @@ export default {
 
             axios.post(app.url_import_produk, newProduk)
             .then(function (resp) {
-                console.log(resp.data);
+                console.log(resp);
                 // return;
 
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
@@ -381,7 +381,7 @@ export default {
                 swal({
                     title: 'Berhasil!',
                     type: 'success',
-                    text: resp.data.jumlahProduk + ' Excel berhasil diupload.'
+                    text: resp.data.jumlahProduk + ' Produk berhasil diupload.'
                 })
                 app.getProduks();
             })
