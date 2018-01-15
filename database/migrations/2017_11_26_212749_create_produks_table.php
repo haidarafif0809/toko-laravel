@@ -19,11 +19,11 @@ class CreateProduksTable extends Migration
             $table->string('nama_produk');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
-            $table->string('kategori_produks_id')->nullable();
-            $table->string('toko_id')->nullable();
+            $table->integer('kategori_produks_id')->nullable();
+            $table->integer('toko_id')->nullable();
             $table->integer('status_jual')->nullable()->comment = "1 = Ya, 0 = Tidak";
             $table->string('foto')->nullable();
-            $table->string('produk_modifier_id')->nullable();
+            $table->integer('produk_modifier_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
