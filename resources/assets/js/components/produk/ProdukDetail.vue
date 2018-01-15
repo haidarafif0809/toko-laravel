@@ -14,44 +14,56 @@
 			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
 
 			<div class="panel-body">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>
-								Foto Produk:
-							</td>
-							<td width="40%">
-								<img v-if="produk.foto == null || produk.foto == ''" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
-								<img v-else class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								Kode Produk:
-							</td>
-							<td>{{ produk.kode_produk }}</td>
-						</tr>
-						<tr>
-							<td>Harga Jual:</td>
-							<td>{{ produk.harga_jual }}</td>
-						</tr>
-						<tr>
-							<td>Harga Beli:</td>
-							<td>{{ produk.harga_beli }}</td>
-						</tr>
-						<tr>
-							<td>Kategori Produk:</td>
-							<td>{{ kategori_produk.nama_kategori_produk }}</td>
-						</tr>
-						<tr>
-							<td>Status Jual:</td>
-							<td>
-								<span v-if="produk.status_jual == 1">Aktif</span>
-								<span v-if="produk.status_jual == 0">Tidak Aktif</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="col-md-5">
+					<div class="row">
+						<label for="produk_foto">Foto Produk :</label>
+						<img name="produk_foto" v-if="produk.foto == null || produk.foto == ''" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
+						<img name="produk_foto" v-else class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
+
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="row">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>
+										<label>Kode Produk:</label>
+									</td>
+									<td>{{ produk.kode_produk }}</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Harga Jual:</label>
+									</td>
+									<td>{{ produk.harga_jual }}</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Harga Beli:</label>
+									</td>
+									<td>{{ produk.harga_beli }}</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Kategori Produk:</label>
+									</td>
+									<td>{{ kategori_produk.nama_kategori_produk }}</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Status Jual:</label>
+									</td>
+									<td>
+										<span v-if="produk.status_jual == 1">Aktif</span>
+										<span v-if="produk.status_jual == 0">Tidak Aktif</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-6"></div>
 			</div>
 		</div>
 	</div>
