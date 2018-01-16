@@ -70995,7 +70995,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.animated[data-v-7fb34826] {\r\n    -webkit-animation-duration: 0.35s; /* Safari 4.0 - 8.0 */\r\n    animation-duration: 0.35s;\r\n    -webkit-animation-fill-mode: both; /* Safari 4.0 - 8.0 */\r\n    animation-fill-mode: both;\n}\r\n\r\n/* Safari 4.0 - 8.0 */\n@-webkit-keyframes fadeIn-data-v-7fb34826 {\n0% {opacity: 0;\n}\n100% {opacity: 1;\n}\n}\n@keyframes fadeIn-data-v-7fb34826 {\n0% {opacity: 0;\n}\n100% {opacity: 1;\n}\n}\n.fadeIn[data-v-7fb34826] {\r\n    -webkit-animation-name: fadeIn-data-v-7fb34826;\r\n    animation-name: fadeIn-data-v-7fb34826;\n}\n.bold[data-v-7fb34826] {\r\n    font-weight: bold;\n}\n.tablePenjelasan[data-v-7fb34826], .tableContoh[data-v-7fb34826] {\r\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\r\n    margin-bottom: 30px;\n}\n.tablePenjelasan td[data-v-7fb34826] {\r\n    padding-right: 5.5px;\r\n    padding-bottom: 10px;\n}\n.tableContoh[data-v-7fb34826] {\r\n    width: 95%;\n}\n.tableContoh th[data-v-7fb34826], .tableContoh td[data-v-7fb34826] {\r\n    padding: 2.5px 6px 2.5px 6px;\r\n    border: 1px groove #eee;\n}\n.leftSmall[data-v-7fb34826] {\r\n    background: #000;\r\n    text-align: left;\r\n    font-size: 4px;\n}\r\n", ""]);
+exports.push([module.i, "\n.animated[data-v-7fb34826] {\r\n    -webkit-animation-duration: 0.35s; /* Safari 4.0 - 8.0 */\r\n    animation-duration: 0.35s;\r\n    -webkit-animation-fill-mode: both; /* Safari 4.0 - 8.0 */\r\n    animation-fill-mode: both;\n}\r\n\r\n/* Safari 4.0 - 8.0 */\n@-webkit-keyframes fadeIn-data-v-7fb34826 {\n0% {opacity: 0;\n}\n100% {opacity: 1;\n}\n}\n@keyframes fadeIn-data-v-7fb34826 {\n0% {opacity: 0;\n}\n100% {opacity: 1;\n}\n}\n.fadeIn[data-v-7fb34826] {\r\n    -webkit-animation-name: fadeIn-data-v-7fb34826;\r\n    animation-name: fadeIn-data-v-7fb34826;\n}\n.bold[data-v-7fb34826] {\r\n    font-weight: bold;\n}\n.tablePenjelasan[data-v-7fb34826], .tableContoh[data-v-7fb34826] {\r\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\r\n    margin-bottom: 30px;\n}\n.tablePenjelasan td[data-v-7fb34826] {\r\n    padding-right: 5.5px;\r\n    padding-bottom: 10px;\n}\n.tableContoh[data-v-7fb34826] {\r\n    width: 95%;\n}\n.tableContoh th[data-v-7fb34826], .tableContoh td[data-v-7fb34826] {\r\n    padding: 2.5px 6px 2.5px 6px;\r\n    border: 1px groove #eee;\n}\n.leftSmall[data-v-7fb34826] {\r\n    background: #000;\r\n    text-align: left;\r\n    font-size: 4px;\n}\n.table-responsive[data-v-7fb34826] {\r\n    border: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -71006,6 +71006,11 @@ exports.push([module.i, "\n.animated[data-v-7fb34826] {\r\n    -webkit-animation
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -71749,155 +71754,161 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("div", { staticClass: "container" }, [
-                _c("table", { staticClass: "tablePenjelasan" }, [
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [
-                        _vm._v("Kode Produk")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Kode Poduk Anda.")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [
-                        _vm._v("Nama Produk")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Nama Produk Anda.")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [
-                        _vm._v("Kategori Produk")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [_vm._v("Harga Beli")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Harga Beli Produk Anda.")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [_vm._v("Harga Jual")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Harga Jual Produk Anda.")])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("td", { staticClass: "bold" }, [
-                        _vm._v("Bisa Dijual")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(":")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "Menentukan apakah Produk Anda dapat dijual atau tidak ( "
-                        ),
-                        _c("b", [_vm._v("ya")]),
-                        _vm._v(" / "),
-                        _c("b", [_vm._v("tidak")]),
-                        _vm._v(" ).")
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _vm._v("Contoh seperti tabel di bawah:")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
-                _c("div", { attrs: { align: "center" } }, [
-                  _c("table", { staticClass: "tableContoh" }, [
-                    _c("thead", [
-                      _c("th", [_vm._v("Kode Produk")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Nama Produk")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Kategori Produk")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Harga Beli")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Harga Jual")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("Bisa Dijual")])
-                    ]),
-                    _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c("table", { staticClass: "tablePenjelasan" }, [
                     _c("tbody", [
                       _c("tr", [
-                        _c("td", [_vm._v("84399")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Mainan")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Unit")]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("180000")
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Kode Produk")
                         ]),
                         _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("200000")
-                        ]),
+                        _c("td", [_vm._v(":")]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("ya")])
+                        _c("td", [_vm._v("Kode Poduk Anda.")])
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("88748")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Gula")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Sembako")]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("6500")
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Nama Produk")
                         ]),
                         _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("7500")
-                        ]),
+                        _c("td", [_vm._v(":")]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("ya")])
+                        _c("td", [_vm._v("Nama Produk Anda.")])
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("49938")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Beras")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Sembako")]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("8000")
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Kategori Produk")
                         ]),
                         _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("8500")
+                        _c("td", [_vm._v(":")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Harga Beli")
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v("ya")])
+                        _c("td", [_vm._v(":")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Harga Beli Produk Anda.")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Harga Jual")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(":")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Harga Jual Produk Anda.")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", { staticClass: "bold" }, [
+                          _vm._v("Bisa Dijual")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(":")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Menentukan apakah Produk Anda dapat dijual atau tidak ( "
+                          ),
+                          _c("b", [_vm._v("ya")]),
+                          _vm._v(" / "),
+                          _c("b", [_vm._v("tidak")]),
+                          _vm._v(" ).")
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm._v("Contoh seperti tabel di bawah:")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { attrs: { align: "center" } }, [
+                    _c("table", { staticClass: "tableContoh" }, [
+                      _c("thead", [
+                        _c("th", [_vm._v("Kode Produk")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Nama Produk")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Kategori Produk")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Harga Beli")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Harga Jual")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Bisa Dijual")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tbody", [
+                        _c("tr", [
+                          _c("td", [_vm._v("84399")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Mainan")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Unit")]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("180000")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("200000")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("ya")])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [_vm._v("88748")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Gula")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Sembako")]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("6500")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("7500")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("ya")])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("td", [_vm._v("49938")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Beras")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Sembako")]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("8000")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("8500")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("ya")])
+                        ])
                       ])
                     ])
                   ])
@@ -74411,7 +74422,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -74502,74 +74512,70 @@ var render = function() {
       _c("div", { staticClass: "panel-body" }, [
         _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "row" }, [
-            _c("label", { attrs: { for: "produk_foto" } }, [
-              _vm._v("Foto Produk :")
-            ]),
-            _vm._v(" "),
             _vm.produk.foto == null || _vm.produk.foto == ""
               ? _c("img", {
                   staticClass: "img-responsive thumbnail shadow",
                   attrs: {
-                    name: "produk_foto",
                     src:
                       "https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif"
                   }
                 })
               : _c("img", {
                   staticClass: "img-responsive thumbnail shadow",
-                  attrs: {
-                    name: "produk_foto",
-                    src: _vm.url_foto_produk + "/" + _vm.produk.foto
-                  }
+                  attrs: { src: _vm.url_foto_produk + "/" + _vm.produk.foto }
                 })
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-7" }, [
           _c("div", { staticClass: "row" }, [
-            _c("table", { staticClass: "table" }, [
-              _c("tbody", [
-                _c("tr", [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(_vm._s(_vm.kategori_produk.nama_kategori_produk))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm.produk.status_jual == 1
-                      ? _c("span", [_vm._v("Aktif")])
-                      : _vm._e(),
+            _c(
+              "table",
+              { staticClass: "table", staticStyle: { "margin-top": "5px" } },
+              [
+                _c("tbody", [
+                  _c("tr", [
+                    _vm._m(0),
                     _vm._v(" "),
-                    _vm.produk.status_jual == 0
-                      ? _c("span", [_vm._v("Tidak Aktif")])
-                      : _vm._e()
+                    _c("td", [_vm._v(_vm._s(_vm.produk.kode_produk))])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.produk.harga_jual))])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(_vm.produk.harga_beli))])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(_vm.kategori_produk.nama_kategori_produk))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm.produk.bisa_dijual == 1
+                        ? _c("span", [_vm._v("Aktif")])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.produk.bisa_dijual == 0
+                        ? _c("span", [_vm._v("Tidak Aktif")])
+                        : _vm._e()
+                    ])
                   ])
                 ])
-              ])
-            ])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),

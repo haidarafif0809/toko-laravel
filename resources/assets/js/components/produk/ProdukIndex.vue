@@ -50,6 +50,9 @@
     text-align: left;
     font-size: 4px;
 }
+.table-responsive {
+    border: 0;
+}
 </style>
 <template>
     <div class="container">
@@ -106,81 +109,83 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <table class="tablePenjelasan">
-                                <tbody>
-                                    <tr>
-                                        <td class="bold">Kode Produk</td>
-                                        <td>:</td>
-                                        <td>Kode Poduk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Nama Produk</td>
-                                        <td>:</td>
-                                        <td>Nama Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Kategori Produk</td>
-                                        <td>:</td>
-                                        <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Harga Beli</td>
-                                        <td>:</td>
-                                        <td>Harga Beli Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Harga Jual</td>
-                                        <td>:</td>
-                                        <td>Harga Jual Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Bisa Dijual</td>
-                                        <td>:</td>
-                                        <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-md-12">Contoh seperti tabel di bawah:</div>
-                            </div>
-                            <br>
-                            <div align="center">
-                                <table class="tableContoh">
-                                    <thead>
-                                        <th>Kode Produk</th>
-                                        <th>Nama Produk</th>
-                                        <th>Kategori Produk</th>
-                                        <th>Harga Beli</th>
-                                        <th>Harga Jual</th>
-                                        <th>Bisa Dijual</th>
-                                    </thead>
+                            <div class="table-responsive">
+                                <table class="tablePenjelasan">
                                     <tbody>
                                         <tr>
-                                            <td>84399</td>
-                                            <td>Mainan</td>
-                                            <td>Unit</td>
-                                            <td align="right">180000</td>
-                                            <td align="right">200000</td>
-                                            <td>ya</td>
+                                            <td class="bold">Kode Produk</td>
+                                            <td>:</td>
+                                            <td>Kode Poduk Anda.</td>
                                         </tr>
                                         <tr>
-                                            <td>88748</td>
-                                            <td>Gula</td>
-                                            <td>Sembako</td>
-                                            <td align="right">6500</td>
-                                            <td align="right">7500</td>
-                                            <td>ya</td>
+                                            <td class="bold">Nama Produk</td>
+                                            <td>:</td>
+                                            <td>Nama Produk Anda.</td>
                                         </tr>
                                         <tr>
-                                            <td>49938</td>
-                                            <td>Beras</td>
-                                            <td>Sembako</td>
-                                            <td align="right">8000</td>
-                                            <td align="right">8500</td>
-                                            <td>ya</td>
+                                            <td class="bold">Kategori Produk</td>
+                                            <td>:</td>
+                                            <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Harga Beli</td>
+                                            <td>:</td>
+                                            <td>Harga Beli Produk Anda.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Harga Jual</td>
+                                            <td>:</td>
+                                            <td>Harga Jual Produk Anda.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Bisa Dijual</td>
+                                            <td>:</td>
+                                            <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div class="row">
+                                    <div class="col-md-12">Contoh seperti tabel di bawah:</div>
+                                </div>
+                                <br>
+                                <div align="center">
+                                    <table class="tableContoh">
+                                        <thead>
+                                            <th>Kode Produk</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kategori Produk</th>
+                                            <th>Harga Beli</th>
+                                            <th>Harga Jual</th>
+                                            <th>Bisa Dijual</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>84399</td>
+                                                <td>Mainan</td>
+                                                <td>Unit</td>
+                                                <td align="right">180000</td>
+                                                <td align="right">200000</td>
+                                                <td>ya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>88748</td>
+                                                <td>Gula</td>
+                                                <td>Sembako</td>
+                                                <td align="right">6500</td>
+                                                <td align="right">7500</td>
+                                                <td>ya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>49938</td>
+                                                <td>Beras</td>
+                                                <td>Sembako</td>
+                                                <td align="right">8000</td>
+                                                <td align="right">8500</td>
+                                                <td>ya</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
