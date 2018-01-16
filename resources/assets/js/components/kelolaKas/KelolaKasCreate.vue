@@ -66,7 +66,6 @@ export default {
 		return {
 			errors: [],
 			kas: [],
-			// kategoriTransaksis: [],
 			url : window.location.origin+(window.location.pathname).replace("home", "kelola-kas"),
 			kelolaKas: {
 				type: '',
@@ -84,8 +83,6 @@ export default {
 	        money: {
 	          decimal: ',',
 	          thousands: '.',
-	          //prefix: 'Rp',
-	          //suffix: ' #',
 	          precision: 0,
 	          masked: false
 	        }
@@ -95,8 +92,6 @@ export default {
 	},
 	mounted() {
 		var app = this;
-		// app.selected();
-		// app.selected2();
 	},
 	methods: {
 		saveForm() {
@@ -123,27 +118,6 @@ export default {
 				app.errors = resp.response.data.errors;
 			});
 		},
-		// selected() {
-		// 	var app = this;
-		// 	axios.get(app.url+'/kas')
-		// 	.then(function (resp) {
-		// 		app.kas = resp.data;
-		// 	})
-		// 	.catch(function (resp) {
-		// 		alert("Could not load kas ");
-		// 	});
-		// },
-		// selected2() {
-		// 	var app = this;
-		// 	axios.get(app.url+'/kategoriTransaksi')
-		// 	.then(function (resp) {
-		// 		app.kategoriTransaksis = resp.data;
-		// 	})
-		// 	.catch(function (resp) {
-		// 		alert("Could not load kategori transaksi");
-		// 	});
-		// },
-
 		alert(pesan) {
 			this.$swal({
 				title: "Berhasil!",

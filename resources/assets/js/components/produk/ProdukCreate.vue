@@ -214,18 +214,16 @@ export default {
 			},
 			setting_produk_modifier:{
 				placeholder: 'Pilih Tambahan',
-				  sortField: 'text',
-				  delimiter: ',',
-				  maxItems: null
+				sortField: 'text',
+				delimiter: ',',
+				maxItems: null
 			},
 			price: 1,
 	        money: {
-	          decimal: ',',
-	          thousands: '.',
-	          //prefix: 'Rp',
-	          //suffix: ' #',
-	          precision: 0,
-	          masked: false
+	            decimal: ',',
+	            thousands: '.',
+	            precision: 0,
+	            masked: false
 	        }
 		}
 	},
@@ -235,21 +233,8 @@ export default {
 		app.selectedProdukModifierId();
 
 	},
-	// watch:{
-	// 	'produk.produk_modifier_id' : function(){
-	// 		this.produkModifier()
-	// 	}
-	// },
-	methods: {
-		// produkModifier(){
-		// 	var app = this;
-		// 	var modifier = app.produk.produk_modifier_id.split("|");
-		// 	var nama_tampilan = modifier[1];
-		// 	var harga_modifier = modifier[2];
-		// 	app.produk.nama_tampilan = nama_tampilan
-		// 	app.produk.harga_modifier = harga_modifier
 
-		// },
+	methods: {
 		bukaTambahModifier(){
 			$('#inputan').show();
 		},
