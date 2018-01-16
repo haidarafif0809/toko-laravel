@@ -51,7 +51,7 @@
 											</selectize-component> 
 										</td>
 										<td width="20%" style="vertical-align: top; text-align: center;">
-											<span @click="tambahKategori()" class="glyphicon glyphicon-plus btn btn-sm btn-default btn-success">Tambah</span>	
+											<span @click="tambahKategori()" class="btn btn-sm btn-success">+Tambah</span>	
 										</td>
 									</tr>
 								</tbody>
@@ -64,16 +64,18 @@
 					</div>
 					<div class="form-group">
 						<label for="harga" class="col-md-2 control-label">Harga Beli</label>
-						<div class="col-md-2">
-							<input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
+						<div class="col-md-4">
+							<money class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" v-bind="money" name="harga_beli"  autofocus="">
+							</money>
 							<span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
 
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="harga" class="col-md-2 control-label">Harga Jual</label>
-						<div class="col-md-2">
-							<input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
+						<div class="col-md-4">
+							<money class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" v-bind="money" name="harga_jual"  autofocus="">
+							</money>
 							<span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
 						</div>
@@ -126,7 +128,7 @@
 												</selectize-component>
 											</div>
 											<div class="input-group">
-												<button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Tambah</button>
+												<button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Buat baru</button>
 											</div>
 										
 											<table id="inputan" style="display:none">
@@ -143,11 +145,15 @@
 															<span v-if="errors.nama_modifier" class="label label-danger">{{ errors.nama_modifier[0] }}</span>
 														</td>
 														<td>
-															<input class="form-control" autocomplete="off" placeholder="Harga Modifier" type="text" v-model="modifier.harga_modifier" name="harga_modifier"  autofocus="">
+															<money class="form-control" autocomplete="off" placeholder="Harga Modifier" v-model="modifier.harga_modifier" v-bind="money" name="harga_modifier"  autofocus="">
+															</money>
 															<span v-if="errors.harga_modifier" class="label label-danger">{{ errors.harga_modifier[0] }}</span>
 														</td>
 														<td>
-															<button type="submit" class="btn btn-success">Oke</button>
+															<button type="submit" class="btn btn-sm btn-success">Tambah</button>
+														</td>
+														<td>
+															<button type="button" class="btn btn-sm btn-danger" v-on:click="tutupTambahModifier">Batal</button>
 														</td>
 													</tr>
 												</tbody>
@@ -211,7 +217,16 @@ export default {
 				  sortField: 'text',
 				  delimiter: ',',
 				  maxItems: null
-			}
+			},
+			price: 1,
+	        money: {
+	          decimal: ',',
+	          thousands: '.',
+	          //prefix: 'Rp',
+	          //suffix: ' #',
+	          precision: 0,
+	          masked: false
+	        }
 		}
 	},
 	mounted() {
@@ -237,6 +252,9 @@ export default {
 		// },
 		bukaTambahModifier(){
 			$('#inputan').show();
+		},
+		tutupTambahModifier(){
+			$('#inputan').hide();
 		},
 		onFileChange(e) {
 			let files = e.target.files || e.dataTransfer.files;
@@ -355,24 +373,24 @@ export default {
 			});
 		},
 		tambahModifier(){
-			// var app = this;
-			// var newModifier = app.modifier;
-			// console.log(newModifier);
-			// axios.post(app.url_newModifier, newModifier)
-			// .then(function (resp) {
-			// 	app.message = 'Sukses : Berhasil Menambah modifier '+ app.modifier.nama_modifier;
-			// 	app.alert(app.message);
-			// 	app.modifier.nama_modifier = '';
-			// 	app.modifier.harga_modifier = '';
-			// 	app.errors = '';
-			// 	app.$router.replace('/modifier');
-
-			// })
-			// .catch(function (resp) {
-			// 	app.success = false;
-			// 	app.errors = resp.response.data.errors;
-			// });
-			console.log(1)
+			var app = this;
+			var newModifier = app.modifier;
+			console.log(newModifier);
+			axios.post(app.url_newModifier, newModifier)
+			.then(function (resp) {
+				console.log(1)
+				app.message = 'Sukses : Berhasil Menambah modifier "'+ app.modifier.nama_modifier +'"';
+				swal({
+					title: 'Berhasil!',
+					type: 'success',
+					text: app.message
+				})
+				app.selectedProdukModifierId()
+			})
+			.catch(function (resp) {
+				app.success = false;
+				app.errors = resp.response.data.errors;
+			});
 		},
 		alert(pesan) {
 			this.$swal({

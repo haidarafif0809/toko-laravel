@@ -8,7 +8,9 @@
       <div class="panel-heading">Kelola Kas</div>
       <div class="panel-body">
         <div class="table-responsive">
-        <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah }}</div>
+          <div class="well">
+            <div class="text-center" style="font-size:25px;">TOTAL KAS =  {{ kelolaKasJumlah }}</div>
+        </div>
         <div class="tambah">
         <p>
           <router-link :to="{name:'createKelolaKas'}" class="btn btn-primary btn-md tambah-kas" id="tambah-kas">Tambah Kas Masuk/Keluar</router-link>

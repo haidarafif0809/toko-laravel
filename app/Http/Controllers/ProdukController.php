@@ -103,13 +103,16 @@ class ProdukController extends Controller
 
         $modifier = '';
         $noUrut = 1;
-        foreach ($request->produk_modifier_id as $id_modifier) {
-            if ($noUrut != count($request->produk_modifier_id)) {
-                $modifier .= $id_modifier .'|';
-            } else {
-                $modifier .= $id_modifier;
+        $produk_modifier = $request->produk_modifier_id;
+        if (is_array($produk_modifier) || is_object($produk_modifier)) {
+            foreach ($produk_modifier as $id_modifier) {
+                if ($noUrut != count($request->produk_modifier_id)) {
+                    $modifier .= $id_modifier .'|';
+                } else {
+                    $modifier .= $id_modifier;
+                }
+                $noUrut++;
             }
-            $noUrut++;
         }
 
         // insert

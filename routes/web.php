@@ -50,6 +50,10 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 //modifier produk
 Route::get('/produk/produk-modifier-id', 'ProdukController@produkModifiersId');
 Route::get('/produk/modifier', 'ProdukController@modifier');
+// kategori barang
+Route::resource('modifier', 'ModifierController', ['except' => 'show']);
+// Route::get('/modifier/view', 'ModifierController@view');
+// Route::get('/modifier/search', 'ModifierController@search');
 
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
