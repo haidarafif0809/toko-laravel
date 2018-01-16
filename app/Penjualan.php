@@ -24,7 +24,7 @@ class Penjualan extends Model
 
     public function tbsPenjualan()
     {
-        return $this->hasOne('App\TbsPenjualan', 'id_tbs_pembelian', 'produk_id');
+        return $this->hasOne('App\TbsPenjualan', 'id_tbs_penjualan', 'produk_id');
     }
 
     // public function produk()

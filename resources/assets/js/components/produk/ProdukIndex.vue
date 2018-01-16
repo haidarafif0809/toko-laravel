@@ -45,6 +45,11 @@
     border: 1px groove #eee;
 }
 
+.leftSmall {
+    background: #000;
+    text-align: left;
+    font-size: 4px;
+}
 </style>
 <template>
     <div class="container">
@@ -305,23 +310,35 @@ export default {
             })
         },
         deleteEntry(id, index,nama_produk) {
-            this.$swal({
+            swal({
                 title: "Hapus?", 
                 text: "Yakin Ingin Menghapus produk "+ nama_produk +" ?", 
-                icon: "warning",
-                buttons: ['Batal', 'Hapus'],
-                dangerMode: true,
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
             })
-            .then((willDelete) => {
-                if (willDelete) {
+            .then((result) => {
+                if (result.value) {
                     var app = this;
                     axios.delete(app.url+'/' + id)
                     .then(function (resp) {
                         app.getProduks();
-                        app.alert('Berhasil!', 'Berhasil Menghapus produk '+nama_produk, 'success')
+                        swal({
+                            title: 'Berhasil!',
+                            type: 'success',
+                            text: 'Berhasil menghapus '+ nama_produk
+                        })
                     })
                     .catch(function (resp) {
-                        app.alert('Gagal!', 'Tidak dapat menghapus produk!', 'warning');
+                        swal({
+                            title: 'Gagal!',
+                            type: 'warning',
+                            text: 'Tidak dapat menghapus produk!'
+                        })
                     });
                 } 
                 else {
@@ -337,41 +354,35 @@ export default {
                 newProduk.append('excel', file);
             }
             else {
-                app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+                swal({
+                    title: 'Kosong!',
+                    type: 'warning',
+                    text: 'Tolong masukkan file.'
+                })
                 return;
             }
 
             axios.post(app.url_import_produk, newProduk)
             .then(function (resp) {
-                console.log(resp.data);
+                console.log(resp);
                 // return;
-
-                swal({
-                  title: 'my title',
-                  html: 'A custom <span style="color:#F8BB86">html<span> message.',
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'เล่น Lotto'
-              }).then(function () {
-          // angular service
-          GamePlayerService.create(params, function(){
-            setTimeout(function () {
-              window.location.reload();
-          }, 1000);
-        });
-      });
-              return;
 
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
                 // bukan bernilai ya atau tidak atau bahkan kosong
                 if (resp.data.errorMsg != undefined) {
 
-                    // return app.alert('Gagal!', resp.data.errorMsg, 'warning');
+                    return swal({
+                        title: 'Gagal!',
+                        type: 'warning',
+                        html: '<div style="text-align: left; font-size: 14px;">'+ resp.data.errorMsg +'</div>',
+                    });
                 }
 
-                app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+                swal({
+                    title: 'Berhasil!',
+                    type: 'success',
+                    text: resp.data.jumlahProduk + ' Produk berhasil diupload.'
+                })
                 app.getProduks();
             })
             .catch(function (resp) {
@@ -382,15 +393,11 @@ export default {
                 else {
                     app.errors = "Ukuran file terlalu besar!";
                 }
-                // app.alert('Gagal!', app.errors, 'warning');
-                app.alert('Gagal!', "<b>" + app.errors + "</b>", 'warning');
-            });
-        },
-        alert(title, pesan, icon) {
-            this.$swal({
-                title: title,
-                html: 'dsdsdsd<br>' + 'hjhh',
-                icon: icon,
+                return swal({
+                    title: 'Gagal!',
+                    type: 'warning',
+                    text: app.errors,
+                })
             });
         }
     }

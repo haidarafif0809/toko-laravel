@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use App\KategoriProduk;
+use App\Modifier;
+use App\Produk;
 use Auth;
-use File;
+use Carbon\Carbon;
+use DB;
 use Excel;
+use File;
+use Illuminate\Http\Request;
 use Image;
 use Validator;
-use App\Produk;
-use App\Modifier;
-use Carbon\Carbon;
-use App\KategoriProduk;
-use Illuminate\Http\Request;
-
-
 
 class ProdukController extends Controller
 {
@@ -46,7 +44,6 @@ class ProdukController extends Controller
         return response()->json($produk);
     }
 
-
     public function produkModifiersId()
     {
         $produk_modifier = Modifier::all();
@@ -73,12 +70,10 @@ class ProdukController extends Controller
         return response()->json($kategoriProduk);
     }
 
-
     public function create()
     {
 //
     }
-
 
     public function store(Request $request)
     {
@@ -130,19 +125,16 @@ class ProdukController extends Controller
         ]);
     }
 
-
     public function show($id)
     {
 //
     }
-
 
     public function edit($id)
     {
         $produk = Produk::where('produk_id', $id)->first();
         return $produk;
     }
-
 
     public function update(Request $request, $id)
     {
@@ -202,7 +194,6 @@ class ProdukController extends Controller
         }
     }
 
-
     public function destroy($id)
     {
         return Produk::destroy($id);
@@ -252,10 +243,62 @@ class ProdukController extends Controller
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
-        $produk_id = [];
+        $produk_id  = [];
+        $errors     = [];
+        $lineErrors = [];
+        $no         = 1;
 
         // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
         foreach ($excels as $row) {
+            // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
+            $bisaDijual = trim(strtolower($row['bisa_dijual']));
+            if (!empty($row['bisa_dijual'])) {
+                if ($bisaDijual !== 'ya' && $bisaDijual !== 'tidak') {
+                    $errors['bisaDijual'][] = [
+                        'line'    => $no,
+                        'message' => 'Nilai dari kolom Bisa Dijual hanya boleh berisi ya atau tidak.',
+                    ];
+                    $lineErrors[] = $no;
+                }
+            } else {
+                $errors['bisaDijual'][] = [
+                    'line'    => $no,
+                    'message' => 'Nilai dari kolom Bisa Dijual tidak boleh kosong.',
+                ];
+                $lineErrors[] = $no;
+            }
+            $no++;
+        }
+        // return response()->json($errors);
+
+        $jumlahProduk                 = ['jumlahProduk' => ''];
+        $jumlahProduk['jumlahProduk'] = ($no - 1);
+
+        // Perulangan kedua untuk penambahan data jika tidak ada error.
+        foreach ($excels as $row) {
+
+            // Untuk menampilkan error dan menghentikan jalannya script
+            // sehingga jika ada error tidak ada data yang akan dimasukkan
+            // kedalam database
+            if (count($errors) > 0) {
+
+                // Membuat variable array dengan index errorMsg.
+                // Tujuan membuat index ini adalah agar memperjelas struktur kode
+                // saat kita akan mengambilnya dari kode vue
+                $pesan = ['errorMsg' => ''];
+
+                // Menyusun dan memasukkan pesan error (baris dan pesannya) kedalam variable
+                // array yang telah kita buat diatas pada index errorMsg
+                foreach ($errors['bisaDijual'] as $key => $val) {
+                    if ($val['line'] == end($lineErrors)) {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'];
+                    } else {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
+                    }
+                }
+                return response()->json($pesan);
+            }
+
             // Membuat validasi untuk row di excel
             // Disini kita ubah baris yang sedang di proses menjadi array
             $validator = Validator::make($row->toArray(), $rowRules);
@@ -324,6 +367,7 @@ class ProdukController extends Controller
 
             /* End Cek Kategori Produk*/
 
+            $bisa_dijual = ($row['bisa_dijual'] == 'ya' ? 1 : 0);
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
                 // buat produk baru
@@ -333,9 +377,8 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $row['bisa_dijual'],
+                    'bisa_dijual'         => $bisa_dijual,
                 ]);
-
             } else {
                 // Membuat kategori produk baru
                 $kategori_produk = KategoriProduk::create([
@@ -353,14 +396,15 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
                     'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $row['bisa_dijual'],
-                ]);}
+                    'bisa_dijual'         => $bisa_dijual,
+                ]);
+            }
 
             // catat id dari buku yang baru dibuat
             // array_push($produk_id, $produk->produk_id);
 
         }
-
+        return response()->json($jumlahProduk);
         // Ambil semua produk yang baru dibuat
         $produks = Produk::whereIn('produk_id', $produk_id)->get();
     }

@@ -25,7 +25,32 @@ class PelangganController extends Controller
 
     public function view()
     {
-        return Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('created_at', 'desc')->paginate(10);
+
+        $pelanggan     = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate();
+        $pelangganData = [];
+
+        foreach ($pelanggan as $key => $val) {
+            $kode_pelanggan                        = explode('/', $val->kode_pelanggan);
+            $kode_pelanggan                        = $kode_pelanggan[1] . '/' . $kode_pelanggan[2];
+            $pelangganData[]                       = $val;
+            $pelangganData[$key]['kode_pelanggan'] = $kode_pelanggan;
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/profile-toko/view?page=' . $pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $pelanggan->lastPage();
+        $respons['last_page_url']  = url('/profile-toko/view?page=' . $pelanggan->lastPage());
+        $respons['next_page_url']  = $pelanggan->nextPageUrl();
+        $respons['path']           = url('/profile-toko/view');
+        $respons['per_page']       = $pelanggan->perPage();
+        $respons['prev_page_url']  = $pelanggan->previousPageUrl();
+        $respons['to']             = $pelanggan->perPage();
+        $respons['total']          = $pelanggan->total();
+
+        return response()->json($respons);
     }
     public function search(Request $request)
     {
@@ -35,9 +60,32 @@ class PelangganController extends Controller
                     ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
                     ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->orderBy('created_at', 'desc')->paginate(10);
+            })->orderBy('id', 'desc')->paginate();
 
-        return response()->json($cari_pelanggan);
+        $pelangganData = [];
+
+        foreach ($cari_pelanggan as $key => $val) {
+            $kode_pelanggan                        = explode('/', $val->kode_pelanggan);
+            $kode_pelanggan                        = $kode_pelanggan[1] . '/' . $kode_pelanggan[2];
+            $pelangganData[]                       = $val;
+            $pelangganData[$key]['kode_pelanggan'] = $kode_pelanggan;
+        }
+
+        //DATA PAGINATION
+        $respons['current_page']   = $cari_pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/profile-toko/view?page=' . $cari_pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $cari_pelanggan->lastPage();
+        $respons['last_page_url']  = url('/profile-toko/view?page=' . $cari_pelanggan->lastPage());
+        $respons['next_page_url']  = $cari_pelanggan->nextPageUrl();
+        $respons['path']           = url('/profile-toko/view');
+        $respons['per_page']       = $cari_pelanggan->perPage();
+        $respons['prev_page_url']  = $cari_pelanggan->previousPageUrl();
+        $respons['to']             = $cari_pelanggan->perPage();
+        $respons['total']          = $cari_pelanggan->total();
+
+        return response()->json($respons);
     }
 
     public function detail($id)
@@ -54,12 +102,14 @@ class PelangganController extends Controller
             'jenis_kelamin'  => 'required',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
             'kode_pos'       => 'max:5',
-            'email'          => 'unique:pelanggans,email',
+            'email'          => '',
 
         ]);
-        $pelanggan = Pelanggan::create([
+        $id_toko        = Auth::User()->toko_id;
+        $kode_pelanggan = Pelanggan::kode_pelanggan($id_toko);
+        $pelanggan      = Pelanggan::create([
             'toko_id'        => Auth::User()->toko_id,
-            'kode_pelanggan' => $request->kode_pelanggan,
+            'kode_pelanggan' => $kode_pelanggan,
             'nama_pelanggan' => $request->nama_pelanggan,
             'jenis_kelamin'  => $request->jenis_kelamin,
             'tanggal_lahir'  => $request->tanggal_lahir,
@@ -90,7 +140,7 @@ class PelangganController extends Controller
             'jenis_kelamin'  => 'required',
             // 'tanggal_lahir'  => '',
             'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon,' . $id,
-            'email'          => 'unique:pelanggans,email' . $id,
+            'email'          => '',
             // 'alamat'         => '',
             // 'kota'           => '',
             'kode_pos'       => 'max:5',
@@ -157,7 +207,7 @@ class PelangganController extends Controller
             'Jenis Kelamin'  => 'required',
             'Tanggal Lahir'  => '',
             'Nomor Telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
-            'Email'          => 'unique:pelanggans,email',
+            'Email'          => '',
             'Alamat'         => '',
             'Kota'           => '',
             'Kode Pos'       => 'max:5',
@@ -258,8 +308,12 @@ class PelangganController extends Controller
             // if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
             // buat produk baru
-            $pelanggan = Pelanggan::create([
+
+            $id_toko        = Auth::User()->toko_id;
+            $kode_pelanggan = Pelanggan::kode_pelanggan($id_toko);
+            $pelanggan      = Pelanggan::create([
                 'toko_id'        => Auth::User()->toko_id,
+                'kode_pelanggan' => $kode_pelanggan,
                 'nama_pelanggan' => $row['nama_pelanggan'],
                 'jenis_kelamin'  => $gender,
                 'tanggal_lahir'  => $row['tanggal_lahir'],
@@ -289,5 +343,43 @@ class PelangganController extends Controller
         //     return redirect()->back();
         // }
 
+    }
+
+    public function exportExcel()
+    {
+        $data = Pelanggan::select('kode_pelanggan', 'nama_pelanggan', 'tanggal_lahir', 'nomor_telepon', 'alamat', 'jenis_kelamin', 'email', 'kota', 'kode_pos', 'catatan')->get();
+        Excel::create('Semua Data Pelanggan', function ($excel) use ($data) {
+            $excel->sheet('Data Pelanggan', function ($sheet) use ($data) {
+                // $sheet->fromArray($data);
+                $row = 1;
+                $sheet->row($row, [
+                    'Member Id',
+                    'Nama Pelanggan',
+                    'Jenis Kelamin',
+                    'Tanggal Lahir',
+                    'Nomor Telepon',
+                    'Email',
+                    'Alamat',
+                    'Kota',
+                    'Kode Pos',
+                    'Catatan',
+                ]);
+                foreach ($data as $app) {
+                    $sheet->row(++$row, [
+                        $app->kode_pelanggan,
+                        $app->nama_pelanggan,
+                        $app->jenis_kelamin,
+                        $app->tanggal_lahir,
+                        $app->nomor_telepon,
+                        $app->email,
+                        $app->alamat,
+                        $app->kota,
+                        $app->kode_pos,
+                        $app->catatan,
+                    ]);
+                }
+            });
+
+        })->download('xlsx');
     }
 }

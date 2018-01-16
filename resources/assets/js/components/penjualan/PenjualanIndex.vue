@@ -1,6 +1,11 @@
 <style scoped>
+.kategori {
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
 .cart-item {
-	max-height: 160px;
+	max-height: 100px;
 	overflow-y: scroll;
 }
 #pull-right{
@@ -17,6 +22,11 @@
 #box2{
 	border:1px solid #F0F0F0;
 }
+.total-bayar{
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
 
 </style>
 
@@ -27,164 +37,185 @@
 			<li class="active">Penjualan</li>
 		</ul>
 
-		<div>
-			<div class="col-md-8" id="pull-right">
-				<div class="panel panel-default">
-					<div class="panel-heading">Daftar</div>
+		
+		<div class="col-md-8" id="pull-right">
+			<div class="panel panel-default">
+				<div class="panel-heading">Daftar</div>
 
-					<div class="panel-body">
+				<div class="panel-body">
+					<div class="panel panel-default">
+						<div class="panel-heading">DAFTAR KATEGORI</div>
+						<br>
 						<div class="row">
-							<div class="col-md-12 pencarian">
-								<div class="input-group">
-									<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
-									<div class="input-group-addon">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
-							<div>
-
-								<!-- div class="col-md-12">
-									<label >KATEGORI</label>
-
-								</div> -->
-								
-							</div>
-
-							<br>
-							<div class="row">
-								<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
-									<div v-if="produksPenjualan.length == 1">
-										<div v-for="produk , index in produksPenjualan" class="col-md-4 list-produk">
-											<div class="thumbnail">
+							<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
+								<div class="col-md-12">
+									<div v-if="kategori_produks.length == 1">
+										<div v-for="produk , index in kategori_produks" class="col-md-3 list-produk ">
+											<div class="thumbnail ">
 												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 v-if="produk.data_produk.nama_produk.length > 15">
-														{{produk.data_produk.nama_produk.slice(0, 15)}}...
+													<h4 v-if="produk.data_produk.kategori_produks_id.length > 15">
+														<center>{{produk.nama_kategori_produk.slice(0, 15)}}...</center>
 													</h4>
 													<h4 v-else>
-														{{produk.data_produk.nama_produk}}
+														<center>{{produk.nama_kategori_produk}}</center>
 													</h4>
-													<p>Harga: {{produk.data_produk.harga_jual}}</p>
 												</div>
 											</div>
 										</div>
-
 									</div>
 									<div v-else>
-										<div v-for="produk , index in produksPenjualan" class="col-md-4 list-produk">
-											<div class="thumbnail">
+										<div v-for="produk , index in kategori_produks" >
+											<div class=" btn btn-success col-md-3 list-produk">
 												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 v-if="produk.data_produk.nama_produk.length > 15">
-														{{produk.data_produk.nama_produk.slice(0, 15)}}...
+													<h4 class="kategori" v-if="produk.nama_kategori_produk.length > 15">
+														<center>{{produk.nama_kategori_produk.slice(0, 15)}}...</center>
 													</h4>
 													<h4 v-else>
-														{{produk.data_produk.nama_produk}}
+														<center>{{produk.nama_kategori_produk}}</center>
 													</h4>
-													<p>Harga: {{produk.data_produk.harga_jual}}</p>
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-						<div align="right">
-							<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
-						</div>
-						<div align="right">
+					</div> 
+					<br>
+					<div class="row">
+						<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
+							<div class="col-md-12">
+								<div v-if="kategori_produks.length == 1">
+									<div v-for="produk , index in kategori_produks" class="col-md-4 list-produk">
+										<div class="thumbnail">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 v-if="produk.data_produk.nama_produk.length > 15">
+													{{produk.data_produk.nama_produk.slice(0, 15)}}...
+												</h4>
+												<h4 v-else>
+													{{produk.data_produk.nama_produk}}
+												</h4>
+												<p>Harga: {{produk.data_produk.harga_jual}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div v-else>
+									<div v-for="produk , index in produksPenjualan" class="col-md-4 list-produk">
+										<div class="thumbnail">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 v-if="produk.data_produk.nama_produk.length > 15">
+													{{produk.data_produk.nama_produk.slice(0, 15)}}...
+												</h4>
+												<h4 v-else>
+													{{produk.data_produk.nama_produk}}
+												</h4>
+												<p>Harga: {{produk.data_produk.harga_jual}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div>
+
+				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+
+				<div align="right">
+					<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
+				</div>
+				<div align="right">
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="col-md-4" id="pull-left">
+			<div class="panel panel-default">
+				<div class="row">
+					<div class="col-md-12 pencarian">
+						<div class="input-group">
+							<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
+							<div class="input-group-addon">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-heading">Pesanan</div>
+				<ul class="list-group cart-item">
+					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
+					<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
+						<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
+							<div>
+								<large>
+									<span class="large" v-if="tbsPenjualan.nama_produk.length > 15">
+										{{ tbsPenjualan.nama_produk.slice(0, 15) }}...
+									</span>
+									<span class="large" v-else>
+										{{ tbsPenjualan.nama_produk}}
+									</span>
+
+									<span class="large" style="float: right;">					
+										( {{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }} ) : <b>{{ tbsPenjualan.subtotal }}</b> 
+										<button v-on:click="deleteTbsPenjualan(tbsPenjualan.id_tbs_penjualan)" type="button" class="btn btn-xs btn-danger btn-floating">
+											<i class="fa fa-trash-o" aria-hidden="true"></i>
+										</button>
+									</span>
+								</large>
+							</div>
+						</li>
+					</div>
+					<div v-else-if="loadingTbs == true" class="text-center">
+						<li>Sedang Memuat Produk</li>
+					</div>
+					<div v-else class="list-group-item list-group-item-warning">
+						Tidak Ada Produk
+					</div>
+					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
+				</ul>
+
+				<div class="panel-footer">
+					Total Item: {{ tbs_penjualans.length }}
+					<span class="pull-right">
+						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
+					</span>
 				</div>
 			</div>
 
-			<div class="col-md-4" id="pull-left">
-				<div class="panel panel-default">
-					<div class="panel-heading">Pesanan</div>
-					<ul class="list-group cart-item">
-
-
-
-
-						<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
-						<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
-							<li class="list-group-item" track-by="id" v-for="tbsPenjualan, index in tbs_penjualans">
-								<div>
-									<small>
-										<span class="small" v-if="tbsPenjualan.nama_produk.length > 15">
-											{{ tbsPenjualan.nama_produk.slice(0, 15) }}...
-										</span>
-										<span class="small" v-else>
-											{{ tbsPenjualan.nama_produk}}
-										</span>
-
-										<span class="small" style="float: right;">					
-											({{ tbsPenjualan.harga_produk }} x {{ tbsPenjualan.jumlah_produk }}) : {{ tbsPenjualan.subtotal }} 
-											<button v-on:click="deleteTbsPenjualan(deleteProdukTbsPenjualan.produk_id)" type="button" class="btn btn-xs btn-danger">
-												<i class="fa fa-trash-o" aria-hidden="true"> HAPUS</i>
-											</button>
-										</span>
-									</small>
-								</div>
-							</li>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<label class="control-label">Total Bayar</label>
+							<br>
+							<br>
+							<h1 class="total-bayar">Rp. {{ tbs_penjualans.total_bayar }}<hr></h1>
+							<h2 class="form-control-static text-warning"></h2>
 						</div>
 
-
-
-
-						<div v-else-if="loadingTbs == true" class="text-center">
-							<li>Sedang Memuat Produk</li>
+						<div  class="form-group">
+							<label class="control-label"> Nama Pelanggan:</label>
+							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+							</selectize-component>
 						</div>
-						<div v-else class="list-group-item list-group-item-warning">
-							Tidak Ada Produk
+
+						<div class="form-group">
+							<div class="input-group">
+								<input type="number" class="form-control" placeholder="Pembayaran">
+								<span class="input-group-btn">
+									<button class="btn btn-success">Bayar</button>
+								</span>
+							</div>
 						</div>
-						<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
-					</ul>
 
-					<div class="panel-footer">
-						Total Item: {{ tbs_penjualans.length }}
-						<span class="pull-right">
-							<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-						</span>
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<form>
-							<div class="form-group">
-								<label class="control-label">Total Bayar</label>
-								<br>
-								<br>
-								<h1 align="center"><b>{{ tbs_penjualans.total_bayar }}</b><!-- <span class="glyphicon glyphicon-remove"></span> --></h1>
-								<h2 class="form-control-static text-warning"></h2>
-							</div>
-
-							<div  class="form-group">
-								<label class="control-label"> Nama Pelanggan:</label>
-								<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-									<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-								</selectize-component>
-							</div>
-
-							<div class="form-group">
-								<div class="input-group">
-									<input type="number" class="form-control" placeholder="Pembayaran">
-									<span class="input-group-btn">
-										<button class="btn btn-success">Bayar</button>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="control-label">Keterangan</label>
-								<textarea class="form-control"></textarea>
-							</div> 
-						</form>
-					</div>
+						<div class="form-group">
+							<label class="control-label">Keterangan</label>
+							<textarea class="form-control"></textarea>
+						</div> 
+					</form>
 				</div>
 			</div>
 		</div>
@@ -195,6 +226,7 @@
 export default {
 	data: function () {
 		return {
+			kategori_produks: [],
 			penjualan:[],
 			pelanggans:[],
 			produksPenjualan: [],
@@ -226,6 +258,7 @@ export default {
 		var app = this;
 		app.loading = true
 		app.loadingTbs = true
+		app.getKategoriProduk();
 		app.getProduksPenjualan();
 		app.getTbsPenjualan();
 		app.selectPelanggans();
@@ -238,6 +271,21 @@ export default {
 	    }
 	},
 	methods: {
+		getKategoriProduk(page){
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+			axios.get(app.url+'/kategori-produk')
+			.then(function (resp) {
+				app.loading = false;
+				app.kategori_produks = resp.data;
+			})
+			.catch(function(resp) {
+				alert("Could not load produksPenjualan");
+				app.loading = false;
+			});
+		},
 		getProduksPenjualan(page) {
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -249,7 +297,6 @@ export default {
 				app.loading = false;
 				app.produksPenjualan = resp.data.data;
 				app.dataProduksPenjualan = resp.data;
-				console.log(resp.data.data);
 
 			})
 			.catch(function (resp) {
@@ -261,6 +308,7 @@ export default {
 			var app = this;
 			axios.get(app.url +'/tbs-penjualan')
 			.then(function (resp) {
+				console.log(resp.data);
 				if (resp.data.length == 2) {
 
 					app.tbs_penjualans = resp.data[0];
@@ -272,7 +320,6 @@ export default {
 					app.tbs_penjualans = resp.data;
 					app.loadingTbs = false;
 				}
-				// console.log(resp.data.length);
 				// app.tbs_penjualans.total_item = 
 				
 			})	
@@ -322,11 +369,11 @@ export default {
 
 			axios.post(app.urlTambahTbs, newTbs)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
-				app.alert(app.message);
+				// app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
+				// app.alert(app.message);
 				app.$router.replace('/penjualan');
 				app.getTbsPenjualan();
-				app.$swal.close();
+				// app.$swal.close();
 			})
 			.catch(function (resp) {
 				console.log(resp)
@@ -335,20 +382,32 @@ export default {
 				app.errors = resp.response.data.errors;
 			});
 		},
-		deleteTbsPenjualan(tbs_penjualan) {
-			var app = this;
-			axios.delete(app.urlHapusTbs+'/'+ tbs_penjualan)
-			// axios.delete(app.urlHapusTbs +'/'+ produk)
-			.then(function (resp) {
-				app.getTbsPenjualan();
-				app.alert("berhasil menghapus");
+		deleteTbsPenjualan(id_tbs_penjualan) {
+			swal({
+				title: "Konfirmasi Hapus",
+				text : "Anda Yakin Ingin Menghapus ?",
+				icon : "warning",
+				buttons: true,
+				dangerMode: true,
 			})
-			.catch(function (resp) {
-				console.log(resp);
-				app.$swal({
-					text: "tidak dapat menghapus", 
-					icon: "warning",
-				});
+			.then((willDelete) => {
+				if (willDelete) {
+					var app = this;
+					axios.delete(app.urlHapusTbs+ '/'+id_tbs_penjualan)
+					.then(function (resp) {
+						app.getTbsPenjualan();
+						swal("Berhasil Dihapus!  ", {
+							icon: "success",
+						});
+					})
+					.catch(function (resp) {
+						app.$router.replace('/penjualan');
+						swal("Gagal Menghapus!", {
+							icon: "warning",
+						});
+					});
+				}
+				this.$router.replace('/penjualan');
 			});
 		},
 	// deleteEntry(id, index,nama_produk) {

@@ -36,16 +36,17 @@ class UserSeeder extends Seeder
         $admin->email        = "admin@gmail.com";
         $admin->no_telp      = "085764688661";
         $admin->status       = $status1;
-        $admin->is_verified       = $status1;
+        $admin->is_verified  = $status1;
         $admin->password     = $password;
         $admin->save();
         $admin->attachRole($adminRole);
 
-        $toko1               = new Toko();
-        $toko1->nama_toko    = 'Toko Sample';
-        $toko1->nama_pemilik = 'member';
-        $toko1->email        = 'member@gmail.com';
-        $toko1->no_telp      = '1134567';
+        $toko1                   = new Toko();
+        $toko1->nama_toko        = 'Toko Sample';
+        $toko1->nama_pemilik     = 'member';
+        $toko1->email            = 'member@gmail.com';
+        $toko1->no_telp          = '1134567';
+        $toko1->prefix_member_id = 'mm';
         $toko1->save();
         // Membuat sample member
         $type                 = 1;
@@ -53,11 +54,12 @@ class UserSeeder extends Seeder
         $member               = new User();
         $member->type         = $type;
         $member->toko_id      = $toko1->id;
+        $member->nama_toko    = $toko1->nama_toko;
         $member->nama_pemilik = $toko1->nama_pemilik;
         $member->email        = $toko1->email;
         $member->no_telp      = $toko1->no_telp;
         $member->status       = $status;
-        $member->is_verified       = $status;
+        $member->is_verified  = $status;
         $member->password     = $password;
         $member->save();
         $member->attachRole($memberRole);
