@@ -49,6 +49,7 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 
 //modifier produk
 Route::get('/produk/produk-modifier-id', 'ProdukController@produkModifiersId');
+Route::get('/produk/modifier', 'ProdukController@modifier');
 
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');

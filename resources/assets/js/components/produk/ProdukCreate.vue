@@ -5,6 +5,11 @@
 .shadow {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#inputan thead tr th, #inputan tbody tr td{
+	margin: 10px; padding: 5px;
+}
+
 </style>
 <template>
 	<div class="container">
@@ -32,7 +37,6 @@
 						<div class="col-md-4">
 							<input class="form-control" required autocomplete="off" placeholder="Nama produk" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
 							<span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
-
 						</div>
 					</div> 
 					<div class="form-group">
@@ -42,12 +46,12 @@
 								<tbody>
 									<tr>
 										<td width="80%" style="vertical-align: middle;">
-											<selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
+											<selectize-component id="id_selected" v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
 												<option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
 											</selectize-component> 
 										</td>
 										<td width="20%" style="vertical-align: top; text-align: center;">
-											<span @click="tambahKategori()" class="glyphicon glyphicon-plus btn btn-sm btn-default">Tambah</span>	
+											<span @click="tambahKategori()" class="glyphicon glyphicon-plus btn btn-sm btn-default btn-success">Tambah</span>	
 										</td>
 									</tr>
 								</tbody>
@@ -108,18 +112,48 @@
 
 					<div class="form-group">
 						<label for="modifier" class="col-md-2 control-label"></label>
-						<div class="col-md-8">
+						<div class="col-md-9">
 							<div>
 							    <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
 							      Tambahan & Pilhan Produk
 							    </b-form-checkbox>
 							    <div v-if="status_modifier == 'accepted'">
-							    	<div class="col-md-4">
-							    				<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
-										<option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }}</option>
-									</selectize-component>
-								</div>
-							    	
+									<div class="col-md-8">
+							    		<form v-on:submit.prevent="tambahModifier()" class="form-inline">
+							    			<div class="input-group">
+										    	<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
+													<option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }} Rp{{ produk_modifier.harga_modifier }}</option>
+												</selectize-component>
+											</div>
+											<div class="input-group">
+												<button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Tambah</button>
+											</div>
+										
+											<table id="inputan" style="display:none">
+												<thead>
+													<tr>
+														<th>Nama modifier</th>
+														<th>Harga modifier</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<input class="form-control" autocomplete="off" placeholder="Nama modifier" type="text" v-model="modifier.nama_modifier" name="nama_modifier"  autofocus="">
+															<span v-if="errors.nama_modifier" class="label label-danger">{{ errors.nama_modifier[0] }}</span>
+														</td>
+														<td>
+															<input class="form-control" autocomplete="off" placeholder="Harga Modifier" type="text" v-model="modifier.harga_modifier" name="harga_modifier"  autofocus="">
+															<span v-if="errors.harga_modifier" class="label label-danger">{{ errors.harga_modifier[0] }}</span>
+														</td>
+														<td>
+															<button type="submit" class="btn btn-success">Oke</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</form>
+									</div>
 							    </div>
 							</div>
 						</div>
@@ -150,6 +184,7 @@ export default {
 			url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
 			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
 			url_newKategoriProduk : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
+			url_newModifier : window.location.origin+(window.location.pathname).replace("home", "modifier"),
 			produk: {
 				kode_produk: '',		
 				nama_produk: '',
@@ -163,12 +198,19 @@ export default {
 			newKategoriProduk: {
 				nama_kategori_produk: ''
 			},
+			modifier:{
+				nama_modifier:'',
+				harga_modifier:''
+			},
 			message : '',
 			setting_kategori_produk: {
 				placeholder: 'Pilih Kategori Produk',
 			},
 			setting_produk_modifier:{
 				placeholder: 'Pilih Tambahan',
+				  sortField: 'text',
+				  delimiter: ',',
+				  maxItems: null
 			}
 		}
 	},
@@ -178,7 +220,24 @@ export default {
 		app.selectedProdukModifierId();
 
 	},
+	// watch:{
+	// 	'produk.produk_modifier_id' : function(){
+	// 		this.produkModifier()
+	// 	}
+	// },
 	methods: {
+		// produkModifier(){
+		// 	var app = this;
+		// 	var modifier = app.produk.produk_modifier_id.split("|");
+		// 	var nama_tampilan = modifier[1];
+		// 	var harga_modifier = modifier[2];
+		// 	app.produk.nama_tampilan = nama_tampilan
+		// 	app.produk.harga_modifier = harga_modifier
+
+		// },
+		bukaTambahModifier(){
+			$('#inputan').show();
+		},
 		onFileChange(e) {
 			let files = e.target.files || e.dataTransfer.files;
 			if (!files.length)
@@ -294,6 +353,26 @@ export default {
 			.catch(function (resp) {
 				alert("Could not load produk modifier");
 			});
+		},
+		tambahModifier(){
+			// var app = this;
+			// var newModifier = app.modifier;
+			// console.log(newModifier);
+			// axios.post(app.url_newModifier, newModifier)
+			// .then(function (resp) {
+			// 	app.message = 'Sukses : Berhasil Menambah modifier '+ app.modifier.nama_modifier;
+			// 	app.alert(app.message);
+			// 	app.modifier.nama_modifier = '';
+			// 	app.modifier.harga_modifier = '';
+			// 	app.errors = '';
+			// 	app.$router.replace('/modifier');
+
+			// })
+			// .catch(function (resp) {
+			// 	app.success = false;
+			// 	app.errors = resp.response.data.errors;
+			// });
+			console.log(1)
 		},
 		alert(pesan) {
 			this.$swal({

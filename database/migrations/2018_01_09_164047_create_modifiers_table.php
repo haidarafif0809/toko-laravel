@@ -16,7 +16,6 @@ class CreateModifiersTable extends Migration
         Schema::create('modifiers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_modifier');
-            $table->string('nama_tampilan');
             $table->integer('harga_modifier');
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();

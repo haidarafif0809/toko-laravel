@@ -69635,7 +69635,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "\n.margin-atas[data-v-6c596c71] {\r\n\tmargin-top: 5px;\n}\n.shadow[data-v-6c596c71] {\r\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\r\n", ""]);
+exports.push([module.i, "\n.margin-atas[data-v-6c596c71] {\r\n\tmargin-top: 5px;\n}\n.shadow[data-v-6c596c71] {\r\n\t-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\r\n\t        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n}\n#inputan thead tr th[data-v-6c596c71], #inputan tbody tr td[data-v-6c596c71]{\r\n\tmargin: 10px; padding: 5px;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -69646,6 +69646,40 @@ exports.push([module.i, "\n.margin-atas[data-v-6c596c71] {\r\n\tmargin-top: 5px;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -69798,6 +69832,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk"),
 			broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
 			url_newKategoriProduk: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
+			url_newModifier: window.location.origin + window.location.pathname.replace("home", "modifier"),
 			produk: {
 				kode_produk: '',
 				nama_produk: '',
@@ -69811,12 +69846,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			newKategoriProduk: {
 				nama_kategori_produk: ''
 			},
+			modifier: {
+				nama_modifier: '',
+				harga_modifier: ''
+			},
 			message: '',
 			setting_kategori_produk: {
 				placeholder: 'Pilih Kategori Produk'
 			},
 			setting_produk_modifier: {
-				placeholder: 'Pilih Tambahan'
+				placeholder: 'Pilih Tambahan',
+				sortField: 'text',
+				delimiter: ',',
+				maxItems: null
 			}
 		};
 	},
@@ -69826,7 +69868,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		app.selectedProdukModifierId();
 	},
 
+	// watch:{
+	// 	'produk.produk_modifier_id' : function(){
+	// 		this.produkModifier()
+	// 	}
+	// },
 	methods: {
+		// produkModifier(){
+		// 	var app = this;
+		// 	var modifier = app.produk.produk_modifier_id.split("|");
+		// 	var nama_tampilan = modifier[1];
+		// 	var harga_modifier = modifier[2];
+		// 	app.produk.nama_tampilan = nama_tampilan
+		// 	app.produk.harga_modifier = harga_modifier
+
+		// },
+		bukaTambahModifier: function bukaTambahModifier() {
+			$('#inputan').show();
+		},
 		onFileChange: function onFileChange(e) {
 			var files = e.target.files || e.dataTransfer.files;
 			if (!files.length) return null;
@@ -69928,6 +69987,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).catch(function (resp) {
 				alert("Could not load produk modifier");
 			});
+		},
+		tambahModifier: function tambahModifier() {
+			// var app = this;
+			// var newModifier = app.modifier;
+			// console.log(newModifier);
+			// axios.post(app.url_newModifier, newModifier)
+			// .then(function (resp) {
+			// 	app.message = 'Sukses : Berhasil Menambah modifier '+ app.modifier.nama_modifier;
+			// 	app.alert(app.message);
+			// 	app.modifier.nama_modifier = '';
+			// 	app.modifier.harga_modifier = '';
+			// 	app.errors = '';
+			// 	app.$router.replace('/modifier');
+
+			// })
+			// .catch(function (resp) {
+			// 	app.success = false;
+			// 	app.errors = resp.response.data.errors;
+			// });
+			console.log(1);
 		},
 		alert: function alert(pesan) {
 			this.$swal({
@@ -70110,6 +70189,7 @@ var render = function() {
                               "selectize-component",
                               {
                                 attrs: {
+                                  id: "id_selected",
                                   settings: _vm.setting_kategori_produk
                                 },
                                 model: {
@@ -70158,7 +70238,7 @@ var render = function() {
                               "span",
                               {
                                 staticClass:
-                                  "glyphicon glyphicon-plus btn btn-sm btn-default",
+                                  "glyphicon glyphicon-plus btn btn-sm btn-default btn-success",
                                 on: {
                                   click: function($event) {
                                     _vm.tambahKategori()
@@ -70410,7 +70490,7 @@ var render = function() {
                   attrs: { for: "modifier" }
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-8" }, [
+                _c("div", { staticClass: "col-md-9" }, [
                   _c(
                     "div",
                     [
@@ -70440,47 +70520,217 @@ var render = function() {
                       _vm._v(" "),
                       _vm.status_modifier == "accepted"
                         ? _c("div", [
-                            _c(
-                              "div",
-                              { staticClass: "col-md-4" },
-                              [
-                                _c(
-                                  "selectize-component",
-                                  {
-                                    attrs: {
-                                      settings: _vm.setting_produk_modifier
-                                    },
-                                    model: {
-                                      value: _vm.produk.produk_modifier_id,
-                                      callback: function($$v) {
-                                        _vm.$set(
-                                          _vm.produk,
-                                          "produk_modifier_id",
-                                          $$v
-                                        )
-                                      },
-                                      expression: "produk.produk_modifier_id"
+                            _c("div", { staticClass: "col-md-8" }, [
+                              _c(
+                                "form",
+                                {
+                                  staticClass: "form-inline",
+                                  on: {
+                                    submit: function($event) {
+                                      $event.preventDefault()
+                                      _vm.tambahModifier()
                                     }
-                                  },
-                                  _vm._l(_vm.produk_modifier_id, function(
-                                    produk_modifier
-                                  ) {
-                                    return _c(
-                                      "option",
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group" },
+                                    [
+                                      _c(
+                                        "selectize-component",
+                                        {
+                                          attrs: {
+                                            settings:
+                                              _vm.setting_produk_modifier
+                                          },
+                                          model: {
+                                            value:
+                                              _vm.produk.produk_modifier_id,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.produk,
+                                                "produk_modifier_id",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "produk.produk_modifier_id"
+                                          }
+                                        },
+                                        _vm._l(_vm.produk_modifier_id, function(
+                                          produk_modifier
+                                        ) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              domProps: {
+                                                value: produk_modifier.id
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  produk_modifier.nama_modifier
+                                                ) +
+                                                  " Rp" +
+                                                  _vm._s(
+                                                    produk_modifier.harga_modifier
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c(
+                                      "button",
                                       {
-                                        domProps: { value: produk_modifier.id }
+                                        staticClass: "btn btn-success btn-sm",
+                                        attrs: { type: "button" },
+                                        on: { click: _vm.bukaTambahModifier }
                                       },
-                                      [
-                                        _vm._v(
-                                          _vm._s(produk_modifier.nama_modifier)
-                                        )
-                                      ]
+                                      [_vm._v("+Tambah")]
                                     )
-                                  })
-                                )
-                              ],
-                              1
-                            )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "table",
+                                    {
+                                      staticStyle: { display: "none" },
+                                      attrs: { id: "inputan" }
+                                    },
+                                    [
+                                      _vm._m(0, false, false),
+                                      _vm._v(" "),
+                                      _c("tbody", [
+                                        _c("tr", [
+                                          _c("td", [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.modifier.nama_modifier,
+                                                  expression:
+                                                    "modifier.nama_modifier"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              attrs: {
+                                                autocomplete: "off",
+                                                placeholder: "Nama modifier",
+                                                type: "text",
+                                                name: "nama_modifier",
+                                                autofocus: ""
+                                              },
+                                              domProps: {
+                                                value:
+                                                  _vm.modifier.nama_modifier
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.modifier,
+                                                    "nama_modifier",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.errors.nama_modifier
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "label label-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.errors
+                                                          .nama_modifier[0]
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("td", [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.modifier.harga_modifier,
+                                                  expression:
+                                                    "modifier.harga_modifier"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              attrs: {
+                                                autocomplete: "off",
+                                                placeholder: "Harga Modifier",
+                                                type: "text",
+                                                name: "harga_modifier",
+                                                autofocus: ""
+                                              },
+                                              domProps: {
+                                                value:
+                                                  _vm.modifier.harga_modifier
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.modifier,
+                                                    "harga_modifier",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _vm.errors.harga_modifier
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "label label-danger"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.errors
+                                                          .harga_modifier[0]
+                                                      )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm._m(1, false, false)
+                                        ])
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
                           ])
                         : _vm._e()
                     ],
@@ -70489,7 +70739,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(0, false, false)
+              _vm._m(2, false, false)
             ]
           )
         ])
@@ -70498,6 +70748,30 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Nama modifier")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Harga modifier")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Oke")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -81925,8 +82199,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		saveForm: function saveForm() {
 			var app = this;
-			var newKategoriProduk = app.kelolaKas;
-			axios.post(app.url, newKategoriProduk).then(function (resp) {
+			var tambahKelolaKas = app.kelolaKas;
+			axios.post(app.url, tambahKelolaKas).then(function (resp) {
 				if (app.kelolaKas.type == 1) {
 					var typeKas = "Kas Masuk";
 				} else {

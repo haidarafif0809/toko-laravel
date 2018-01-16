@@ -254,6 +254,7 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
 </body>
 </html>

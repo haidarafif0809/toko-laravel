@@ -101,8 +101,8 @@ export default {
 	methods: {
 		saveForm() {
 			var app = this;
-			var newKategoriProduk = app.kelolaKas;
-			axios.post(app.url, newKategoriProduk)
+			var tambahKelolaKas = app.kelolaKas;
+			axios.post(app.url, tambahKelolaKas)
 			.then(function (resp) {
 				if (app.kelolaKas.type == 1){
 		            var typeKas = "Kas Masuk";
