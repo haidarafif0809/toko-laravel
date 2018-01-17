@@ -149,9 +149,7 @@ export default {
          swal({
           title: "Konfirmasi Hapus",
           text : "Anda Yakin Ingin Menghapus "+typeKas+" ini ?",
-          icon : "warning",
-          buttons: true,
-          dangerMode: true,
+          type : "warning",
         })
          .then((willDelete) => {
           if (willDelete) {
@@ -159,14 +157,16 @@ export default {
             axios.delete(app.url+'/' + id)
             .then(function (resp) {
               app.getKelolaKas();
-              swal("Berhasil Dihapus!  ", {
-                icon: "success",
+              swal({
+                title:"Berhasil Dihapus!",
+                type: "success"
               });
             })
             .catch(function (resp) {
-              app.$router.replace('/kategori-transaksi/');
-              swal("Gagal Menghapus!", {
-                icon: "warning",
+              swal({
+                title:"Gagal Menghapus!",
+                type: "warning",
+                text: 'Tidak dapat menghapus kas!'
               });
             });
           }
@@ -177,7 +177,7 @@ export default {
          this.$swal({
           title: "Berhasil!",
           text: 'Sukses : Berhasil menghapus Kas Masuk '+ type,
-          icon: "success",
+          type: "success",
         });
        }
      }
