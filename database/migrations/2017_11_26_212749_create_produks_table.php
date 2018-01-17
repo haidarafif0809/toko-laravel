@@ -24,7 +24,7 @@ class CreateProduksTable extends Migration
             $table->integer('bisa_dijual')->nullable()->comment = "1 = Ya, 0 = Tidak";
             $table->string('foto')->nullable();
             $table->string('satuan')->nullable()
-                ->comment = "1 = Pcs, 2 = Porsi, 3 = Pack, Lainnya = Lainnya";
+                  ->comment = "1 = Pcs, 2 = Porsi, 3 = Pack";
             $table->string('produk_modifier_id')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
