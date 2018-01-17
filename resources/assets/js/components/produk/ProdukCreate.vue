@@ -113,6 +113,31 @@
 					</div>
 
 					<div class="form-group">
+						<label for="foto" class="col-md-2 control-label">Satuan</label>
+						<div class="col-md-5">
+							<form>
+							<label class="radio-inline">
+								<input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan">Pcs
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="lainnya" v-model="produk.satuan" v-on:click="bukaFormSatuan">Lainnya
+							</label>
+							</form>
+							<br>
+							<div id="form-satuan" style="display:none">
+								<input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
+								<span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
 						<label for="modifier" class="col-md-2 control-label"></label>
 						<div class="col-md-9">
 							<div>
@@ -199,6 +224,7 @@ export default {
 				kategori_produks_id: '',
 				status_jual: '1',
 				foto: '',
+				satuan:'',
 				produk_modifier_id: ''
 			},
 			newKategoriProduk: {
@@ -235,6 +261,12 @@ export default {
 	},
 
 	methods: {
+		bukaFormSatuan(){
+			$('#form-satuan').show();
+		},
+		tutupFormSatuan(){
+			$('#form-satuan').hide();
+		},
 		bukaTambahModifier(){
 			$('#inputan').show();
 		},
@@ -284,6 +316,7 @@ export default {
 				app.produk.kategori_produks_id = '';
 				app.produk.status_jual = '';
 				app.produk.foto = '';
+				app.produk.satuan = '';
 				app.produk.produk_modifier_id = '';
 				app.errors = '';
 				app.$router.replace('/produk');

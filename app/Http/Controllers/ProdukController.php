@@ -58,7 +58,7 @@ class ProdukController extends Controller
 
     public function statusJual()
     {
-        $status_jual = Produk::select('status_jual')->first();
+        $status_jual = Produk::select('bisa_dijual')->first();
         return response()->json($status_jual);
     }
 
@@ -96,6 +96,7 @@ class ProdukController extends Controller
                 'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'required|numeric',
                 'status_jual'         => 'required',
+                'satuan'         => 'nullable',
                 'produk_modifier_id'  => 'nullable|exists:modifiers,id',
             ]);
 
@@ -124,6 +125,7 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'status_jual'         => $request->status_jual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
+            'satuan'              => $request->satuan,
             'produk_modifier_id'  => $modifier,
         ]);
     }
