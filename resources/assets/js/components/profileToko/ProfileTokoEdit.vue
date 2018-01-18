@@ -78,7 +78,7 @@ img {
 						<div class="form-group">
 							<label for="prefix_member_id" class="col-md-2 control-label">Prefix Member Id</label>
 							<div class="col-md-4">
-								<input class="form-control" autocomplete="on" placeholder="Prefix Member Id" type="text" v-model="profileToko.prefix_member_id" name="prefix_member_id"  autofocus="">
+								<input class="form-control" autocomplete="on" placeholder="Prefix Member Id" type="text" v-model="profileToko.prefix_member_id" required name="prefix_member_id"  autofocus="">
 								<span v-if="errors.prefix_member_id" class="label label-danger">{{ errors.prefix_member_id[0] }}</span>
 							</div>
 						</div>

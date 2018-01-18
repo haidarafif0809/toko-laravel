@@ -248,8 +248,7 @@
 		</div>
 
 
-
-		<div class="col-md-12">
+		<!-- <div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">Filter Pelanggan</div>
 				<div class="panel-body">
@@ -267,7 +266,9 @@
 					</div> 
 				</div>
 			</div>
-		</div>
+		</div> -->
+
+
 		<div class="col-md-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -332,14 +333,14 @@
 				<div class="panel panel-default">
 					<ul class="nav nav-tabs">
 						<li class="tabInformasi active">
-							<a data-toggle="tab"  v-on:click="tentangPelanggan"><font color="#000000">TENTANG PELANGGAN</font></a>
+							<a data-toggle="tab" v-on:click="tentangPelanggan"><font color="#000000">TENTANG PELANGGAN</font></a>
 						</li>
 
 						<li class="tabInformasi">
-							<a data-toggle="tab"  v-on:click="riwayatTransaksi"><font color="#000000">RIWAYAT TRANSAKSI</font></a>
+							<a data-toggle="tab" v-on:click="riwayatTransaksi"><font color="#000000">RIWAYAT TRANSAKSI</font></a>
 						</li>
 
-						<li class="tabInformasi ">
+						<li class="tabInformasi">
 							<a data-toggle="tab"  v-on:click="perilaku"><font color="#000000">PERILAKU</font></a>
 						</li>
 					</ul>
@@ -594,7 +595,7 @@ export default {
 			pelanggansData: {},
 			url : window.location.origin+(window.location.pathname).replace("home","pelanggan"),
 			url_img_man : window.location.origin+(window.location.pathname).replace("home","/images/man.png"),
-			url_img_women : window.location.origin+(window.location.pathname).replace("home","/images/women.png"),
+			url_img_women : window.location.origin+(window.location.pathname).replace("home","/images/woman.png"),
 			url_template_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/template_import"),
 			url_import_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/import_pelanggan"),
 			url_export_pelanggan : window.location.origin + (window.location.pathname).replace("home", "pelanggan/export_pelanggan"),
@@ -674,9 +675,10 @@ export default {
     		this.tambah = 0
     		this.edit = 0
     		this.formPelanggan = 1
-    		this.memberPelanggan = 0
+    		this.riwayatBelanja = 0
     		this.perilakuPelanggan = 0
-    		this.tentangPelanggan();
+    		this.memberPelanggan = 0
+    		this.tentangPelanggan(active);
 
 
 
@@ -684,6 +686,7 @@ export default {
 
     	onDisable(){
     		this.disable = 1
+    		this.tambah = 1
     	},
 
     	batalEdit(){
@@ -707,6 +710,8 @@ export default {
     		this.tambah = 1
     		this.edit = 1
     		this.formPelanggan = 1
+    		this.riwayatBelanja = 0
+    		this.perilakuPelanggan = 0
     		this.memberPelanggan =1
     	},
     	editPelanggan(){
@@ -772,6 +777,7 @@ export default {
     			app.pelanggan.catatan = ''
     			app.disable = 1
     			app.edit = 0
+    			app.tambah = 1
     			memberPelanggan: 0,
     			app.$router.replace('/pelanggan');
 
@@ -827,24 +833,32 @@ export default {
     		swal({
     			title: "Konfirmasi Hapus",
     			text : "Anda Yakin Ingin Menghapus " + this.pelanggan.nama_pelanggan +" ?",
-    			icon : "warning",
-    			buttons: true,
-    			dangerMode: true,
+    			type : "warning",
+    			showCancelButton: true,
+    			cancelButtonColor: '#3085d6',
+    			confirmButtonColor: '#d33',
+    			confirmButtonText: 'Hapus',
+    			cancelButtonText: 'Batal',
+    			reverseButtons: true
     		})
-    		.then((willDelete) => {
-    			if (willDelete) {
+    		.then((result) => {
+    			if (result.value) {
     				var app = this;
     				axios.delete(app.url+'/' + app.pelanggan.id)
     				.then(function (resp) {
     					app.getPelanggans();
-    					swal("Pelanggan Berhasil Dihapus!  ", {
-    						icon: "success",
-    					});
+    					swal({
+    						title: 'Berhasil!',
+    						type: 'success',
+    						text: 'Berhasil menghapus '+ app.pelanggan.nama_pelanggan
+    					})
     				})
     				.catch(function (resp) {
     					app.$router.replace('/pelanggan/');
-    					swal("Gagal Menghapus Pelanggan!", {
-    						icon: "warning",
+    					swal({
+    						title: 'Gagal!',
+    						type: 'warning',
+    						text: 'Tidak dapat menghapus pelanggan!'
     					});
     				});
     			}
