@@ -26,7 +26,7 @@ class PelangganController extends Controller
     public function view()
     {
 
-        $pelanggan     = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate();
+        $pelanggan     = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(1000000);
         $pelangganData = [];
 
         foreach ($pelanggan as $key => $val) {
@@ -60,7 +60,7 @@ class PelangganController extends Controller
                     ->orWhere('nama_pelanggan', 'LIKE', "%$request->search%")
                     ->orWhere('nomor_telepon', 'LIKE', "%$request->search%")
                     ->orWhere('email', 'LIKE', "%$request->search%");
-            })->orderBy('id', 'desc')->paginate();
+            })->orderBy('id', 'desc')->paginate(1000000);
 
         $pelangganData = [];
 
@@ -98,9 +98,9 @@ class PelangganController extends Controller
     {
         //VALIDASI
         $this->validate($request, [
-            'nama_pelanggan' => 'required',
+            'nama_pelanggan' => '',
             'jenis_kelamin'  => 'required',
-            'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon',
+            'nomor_telepon'  => 'max:13|unique:pelanggans,nomor_telepon,NULL,id,toko_id,' . Auth::user()->toko_id,
             'kode_pos'       => 'max:5',
             'email'          => '',
 
@@ -135,19 +135,13 @@ class PelangganController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            // 'kode_pelanggan' => 'required|unique:pelanggans,kode_pelanggan,' . $id,
             'nama_pelanggan' => 'required',
             'jenis_kelamin'  => 'required',
-            // 'tanggal_lahir'  => '',
-            'nomor_telepon'  => 'required|max:13|unique:pelanggans,nomor_telepon,' . $id,
+            'nomor_telepon'  => 'max:13|unique:pelanggans,nomor_telepon,' . $request->id . ',id,toko_id,' . Auth::user()->toko_id,
             'email'          => '',
-            // 'alamat'         => '',
-            // 'kota'           => '',
             'kode_pos'       => 'max:5',
-            // 'catatan'        => '',
         ]);
         $pelanggan = Pelanggan::find($id)->update([
-            'kode_pelanggan' => $request->kode_pelanggan,
             'nama_pelanggan' => $request->nama_pelanggan,
             'jenis_kelamin'  => $request->jenis_kelamin,
             'tanggal_lahir'  => $request->tanggal_lahir,
