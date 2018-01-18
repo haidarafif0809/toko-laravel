@@ -75,6 +75,14 @@ img {
 							</div>
 						</div>
 
+						<div class="form-group">
+							<label for="prefix_member_id" class="col-md-2 control-label">Prefix Member Id</label>
+							<div class="col-md-4">
+								<input class="form-control" autocomplete="on" placeholder="Prefix Member Id" type="text" v-model="profileToko.prefix_member_id" required name="prefix_member_id"  autofocus="">
+								<span v-if="errors.prefix_member_id" class="label label-danger">{{ errors.prefix_member_id[0] }}</span>
+							</div>
+						</div>
+
 						<div v-if="profileToko.foto != ''" class="form-group">
 							<label for="foto" class="col-md-2 control-label">Logo</label>
 							<div v-if="profileToko.foto != null" class="col-md-4">		
@@ -136,6 +144,7 @@ export default {
 				provinsi: '',
 				kabupaten: '',
 				alamat: '',
+				prefix_member_id:'',
 				foto: '',
 			},
 			setting_provinsi: {
@@ -194,6 +203,7 @@ export default {
 				app.profileToko.email=''
 				app.profileToko.no_telp=''
 				app.profileToko.alamat=''
+				app.profileToko.prefix_member_id=''
 				app.profileToko.foto=''
 				app.errors = '';
 				app.$router.replace('/profile-toko');

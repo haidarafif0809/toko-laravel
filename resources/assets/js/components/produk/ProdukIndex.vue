@@ -45,6 +45,14 @@
     border: 1px groove #eee;
 }
 
+.leftSmall {
+    background: #000;
+    text-align: left;
+    font-size: 4px;
+}
+.table-responsive {
+    border: 0;
+}
 </style>
 <template>
     <div class="container">
@@ -101,81 +109,83 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <table class="tablePenjelasan">
-                                <tbody>
-                                    <tr>
-                                        <td class="bold">Kode Produk</td>
-                                        <td>:</td>
-                                        <td>Kode Poduk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Nama Produk</td>
-                                        <td>:</td>
-                                        <td>Nama Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Kategori Produk</td>
-                                        <td>:</td>
-                                        <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Harga Beli</td>
-                                        <td>:</td>
-                                        <td>Harga Beli Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Harga Jual</td>
-                                        <td>:</td>
-                                        <td>Harga Jual Produk Anda.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bold">Bisa Dijual</td>
-                                        <td>:</td>
-                                        <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-md-12">Contoh seperti tabel di bawah:</div>
-                            </div>
-                            <br>
-                            <div align="center">
-                                <table class="tableContoh">
-                                    <thead>
-                                        <th>Kode Produk</th>
-                                        <th>Nama Produk</th>
-                                        <th>Kategori Produk</th>
-                                        <th>Harga Beli</th>
-                                        <th>Harga Jual</th>
-                                        <th>Bisa Dijual</th>
-                                    </thead>
+                            <div class="table-responsive">
+                                <table class="tablePenjelasan">
                                     <tbody>
                                         <tr>
-                                            <td>84399</td>
-                                            <td>Mainan</td>
-                                            <td>Unit</td>
-                                            <td align="right">180000</td>
-                                            <td align="right">200000</td>
-                                            <td>ya</td>
+                                            <td class="bold">Kode Produk</td>
+                                            <td>:</td>
+                                            <td>Kode Poduk Anda.</td>
                                         </tr>
                                         <tr>
-                                            <td>88748</td>
-                                            <td>Gula</td>
-                                            <td>Sembako</td>
-                                            <td align="right">6500</td>
-                                            <td align="right">7500</td>
-                                            <td>ya</td>
+                                            <td class="bold">Nama Produk</td>
+                                            <td>:</td>
+                                            <td>Nama Produk Anda.</td>
                                         </tr>
                                         <tr>
-                                            <td>49938</td>
-                                            <td>Beras</td>
-                                            <td>Sembako</td>
-                                            <td align="right">8000</td>
-                                            <td align="right">8500</td>
-                                            <td>ya</td>
+                                            <td class="bold">Kategori Produk</td>
+                                            <td>:</td>
+                                            <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Harga Beli</td>
+                                            <td>:</td>
+                                            <td>Harga Beli Produk Anda.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Harga Jual</td>
+                                            <td>:</td>
+                                            <td>Harga Jual Produk Anda.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Bisa Dijual</td>
+                                            <td>:</td>
+                                            <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div class="row">
+                                    <div class="col-md-12">Contoh seperti tabel di bawah:</div>
+                                </div>
+                                <br>
+                                <div align="center">
+                                    <table class="tableContoh">
+                                        <thead>
+                                            <th>Kode Produk</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kategori Produk</th>
+                                            <th>Harga Beli</th>
+                                            <th>Harga Jual</th>
+                                            <th>Bisa Dijual</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>84399</td>
+                                                <td>Mainan</td>
+                                                <td>Unit</td>
+                                                <td align="right">180000</td>
+                                                <td align="right">200000</td>
+                                                <td>ya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>88748</td>
+                                                <td>Gula</td>
+                                                <td>Sembako</td>
+                                                <td align="right">6500</td>
+                                                <td align="right">7500</td>
+                                                <td>ya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>49938</td>
+                                                <td>Beras</td>
+                                                <td>Sembako</td>
+                                                <td align="right">8000</td>
+                                                <td align="right">8500</td>
+                                                <td>ya</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -305,23 +315,35 @@ export default {
             })
         },
         deleteEntry(id, index,nama_produk) {
-            this.$swal({
+            swal({
                 title: "Hapus?", 
                 text: "Yakin Ingin Menghapus produk "+ nama_produk +" ?", 
-                icon: "warning",
-                buttons: ['Batal', 'Hapus'],
-                dangerMode: true,
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
             })
-            .then((willDelete) => {
-                if (willDelete) {
+            .then((result) => {
+                if (result.value) {
                     var app = this;
                     axios.delete(app.url+'/' + id)
                     .then(function (resp) {
                         app.getProduks();
-                        app.alert('Berhasil!', 'Berhasil Menghapus produk '+nama_produk, 'success')
+                        swal({
+                            title: 'Berhasil!',
+                            type: 'success',
+                            text: 'Berhasil menghapus '+ nama_produk
+                        })
                     })
                     .catch(function (resp) {
-                        app.alert('Gagal!', 'Tidak dapat menghapus produk!', 'warning');
+                        swal({
+                            title: 'Gagal!',
+                            type: 'warning',
+                            text: 'Tidak dapat menghapus produk!'
+                        })
                     });
                 } 
                 else {
@@ -337,41 +359,35 @@ export default {
                 newProduk.append('excel', file);
             }
             else {
-                app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+                swal({
+                    title: 'Kosong!',
+                    type: 'warning',
+                    text: 'Tolong masukkan file.'
+                })
                 return;
             }
 
             axios.post(app.url_import_produk, newProduk)
             .then(function (resp) {
-                console.log(resp.data);
+                console.log(resp);
                 // return;
-
-                swal({
-                  title: 'my title',
-                  html: 'A custom <span style="color:#F8BB86">html<span> message.',
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'เล่น Lotto'
-              }).then(function () {
-          // angular service
-          GamePlayerService.create(params, function(){
-            setTimeout(function () {
-              window.location.reload();
-          }, 1000);
-        });
-      });
-              return;
 
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
                 // bukan bernilai ya atau tidak atau bahkan kosong
                 if (resp.data.errorMsg != undefined) {
 
-                    // return app.alert('Gagal!', resp.data.errorMsg, 'warning');
+                    return swal({
+                        title: 'Gagal!',
+                        type: 'warning',
+                        html: '<div style="text-align: left; font-size: 14px;">'+ resp.data.errorMsg +'</div>',
+                    });
                 }
 
-                app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+                swal({
+                    title: 'Berhasil!',
+                    type: 'success',
+                    text: resp.data.jumlahProduk + ' Produk berhasil diupload.'
+                })
                 app.getProduks();
             })
             .catch(function (resp) {
@@ -382,15 +398,11 @@ export default {
                 else {
                     app.errors = "Ukuran file terlalu besar!";
                 }
-                // app.alert('Gagal!', app.errors, 'warning');
-                app.alert('Gagal!', "<b>" + app.errors + "</b>", 'warning');
-            });
-        },
-        alert(title, pesan, icon) {
-            this.$swal({
-                title: title,
-                html: 'dsdsdsd<br>' + 'hjhh',
-                icon: icon,
+                return swal({
+                    title: 'Gagal!',
+                    type: 'warning',
+                    text: app.errors,
+                })
             });
         }
     }
