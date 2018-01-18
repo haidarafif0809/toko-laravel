@@ -14,22 +14,26 @@ class KategoriProdukSeeder extends Seeder
     {
         // Membuat sample kategori produk
         $kategori_produk                       = new KategoriProduk();
-        $kategori_produk->nama_kategori_produk = "Sembako";
+        $kategori_produk->nama_kategori_produk = "Makanan";
+        $kategori_produk->toko_id              = "1";
         $kategori_produk->save();
 
         // Membuat sample kategori produk
         $kategori_produk                       = new KategoriProduk();
-        $kategori_produk->nama_kategori_produk = "Fitting";
+        $kategori_produk->nama_kategori_produk = "Minuman";
+        $kategori_produk->toko_id              = "1";
         $kategori_produk->save();
 
         // Membuat sample kategori produk
         $kategori_produk                       = new KategoriProduk();
-        $kategori_produk->nama_kategori_produk = "Pipa";
+        $kategori_produk->nama_kategori_produk = "Dissert";
+        $kategori_produk->toko_id              = "1";
         $kategori_produk->save();
 
         // Membuat sample kategori produk
         $kategori_produk                       = new KategoriProduk();
-        $kategori_produk->nama_kategori_produk = "Gutter";
+        $kategori_produk->nama_kategori_produk = "Cemilan";
+        $kategori_produk->toko_id              = "1";
         $kategori_produk->save();
     }
 }
