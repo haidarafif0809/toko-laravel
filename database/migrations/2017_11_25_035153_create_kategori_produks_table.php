@@ -15,6 +15,7 @@ class CreateKategoriProduksTable extends Migration
     {
         Schema::create('kategori_produks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('toko_id');
             $table->string('nama_kategori_produk');
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
