@@ -15,13 +15,14 @@ class CreateTbsPenjualansTable extends Migration
     {
         Schema::create('tbs_penjualans', function (Blueprint $table) {
             $table->increments('id_tbs_penjualan');
+            $table->integer('toko_id');
             $table->string('session_id')->nullable();
             $table->string('satuan_id')->nullable();
             $table->integer('produk_id');
             $table->string('jumlah_produk');
             $table->string('harga_produk');
             $table->string('subtotal');
-            $table->integer('toko_id');
+            $table->string('keterangan')->nullable();
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();

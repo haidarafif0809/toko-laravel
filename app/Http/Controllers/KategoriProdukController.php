@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\KategoriProduk;
+use Auth;
 use Illuminate\Http\Request;
 
 class KategoriProdukController extends Controller
@@ -37,10 +38,11 @@ class KategoriProdukController extends Controller
     {
         //
         $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk',
+            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,NULL,id,toko_id,' . Auth::user()->toko_id,
         ]);
         KategoriProduk::create([
             'nama_kategori_produk' => $request->nama_kategori_produk,
+            'toko_id'              => Auth::user()->toko_id,
         ]);
     }
 
@@ -76,7 +78,7 @@ class KategoriProdukController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,' . $id,
+            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,' . $id . ',id,toko_id,' . Auth::user()->toko_id,
         ]);
         KategoriProduk::find($id)->update([
             'nama_kategori_produk' => $request->nama_kategori_produk,
@@ -96,7 +98,7 @@ class KategoriProdukController extends Controller
     }
     public function view()
     {
-        return KategoriProduk::paginate(10);
+        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->paginate(10);
     }
 
     public function search(Request $request)

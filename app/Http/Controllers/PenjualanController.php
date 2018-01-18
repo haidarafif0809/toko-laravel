@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\KategoriProduk;
 use App\Pelanggan;
+use App\Penjualan;
 use App\Produk;
 use App\TbsPenjualan;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 use Session;
@@ -49,7 +51,7 @@ class PenjualanController extends Controller
         // return Penjualan::with('Produk')->paginate(10);
         // return Produk::paginate(5);
         // return KategoriProduk::paginate(2);
-        $produks = Produk::paginate(9);
+        $produks = Produk::where('toko_id', Auth::user()->toko_id)->paginate(10);
         $array   = [];
         $num     = 0;
         foreach ($produks as $produk) {
@@ -100,8 +102,9 @@ class PenjualanController extends Controller
     {
         $tbsPenjualan = DB::table('tbs_penjualans')
             ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal', 'id_tbs_penjualan', 'tbs_Penjualans.produk_id AS id_produk')
+            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal', 'id_tbs_penjualan', 'tbs_Penjualans.produk_id AS id_produk')->where('tbs_penjualans.toko_id', Auth::user()->toko_id)
             ->get();
+
         if (count($tbsPenjualan) > 0) {
 
             $json_tbs = json_decode($tbsPenjualan, true);
@@ -114,9 +117,11 @@ class PenjualanController extends Controller
             }
 
             $dataArray = [
-                $tbsPenjualan,
-                array_sum($subtotalData),
+                'data'        => $tbsPenjualan,
+                'total_bayar' => array_sum($subtotalData),
             ];
+            // $dataArray['data']['total_bayar'] = array_sum($subtotalData);
+
             return response()->json($dataArray);
         } else {
 
@@ -127,7 +132,15 @@ class PenjualanController extends Controller
 
     public function store(Request $request)
     {
-        //
+        Penjualan::create([
+            'toko_id'      => Auth::user()->toko_id,
+            'total_bayar'  => $request->total_bayar,
+            'cara_bayar'   => $request->cara_bayar,
+            'diskon'       => $request->diskon,
+            'keterangan'   => $request->keterangan,
+            'pelanggan_id' => $request->pelanggan_id,
+            'subtotal'     => $request->subtotal,
+        ]);
     }
 
     /**
@@ -172,7 +185,7 @@ class PenjualanController extends Controller
                 'harga_produk'  => $request->harga,
                 'satuan_id'     => $request->satuan,
                 'subtotal'      => $request->harga,
-                'toko_id'       => 1,
+                'toko_id'       => Auth::user()->toko_id,
             ]);
         }
 
@@ -225,7 +238,6 @@ class PenjualanController extends Controller
 
     public function kategoriProduk()
     {
-        $kategoriProduk = KategoriProduk::select('nama_kategori_produk')->get();
-        return response($kategoriProduk);
+        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
     }
 }

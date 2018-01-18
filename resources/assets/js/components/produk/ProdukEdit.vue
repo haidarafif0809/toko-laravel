@@ -11,25 +11,26 @@
             <li class="active" >Edit Produk</li>
         </ul>
         <div class="col-md-9 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">Edit Produk {{ produk.nama_produk }}</div>
-            <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">Edit Produk {{ produk.nama_produk }}</div>
+                <div class="panel-body">
 
-                <form v-on:submit.prevent="saveForm()" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
-                        <div class="col-md-4">
-                            <input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
-                            <span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
+                    <form v-on:submit.prevent="saveForm()" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
+                            <div class="col-md-4">
+                                <input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
+                                <span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_produk" class="col-md-2 control-label">Nama Produk</label>
-                        <div class="col-md-4">
-                            <input class="form-control" required autocomplete="off" placeholder="Name" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
-                            <span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
+                        <div class="form-group">
+                            <label for="nama_produk" class="col-md-2 control-label">Nama Produk</label>
+                            <div class="col-md-4">
+                                <input class="form-control" required autocomplete="off" placeholder="Name" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
+                                <span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
 
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -51,24 +52,25 @@
                             </table>
 
 
-                            <span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
+                                <span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga" class="col-md-2 control-label">Harga Beli</label>
-                        <div class="col-md-2">
-                            <input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
-                            <span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
+                        <div class="form-group">
+                            <label for="harga" class="col-md-2 control-label">Harga Beli</label>
+                            <div class="col-md-2">
+                                <input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
+                                <span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga" class="col-md-2 control-label">Harga Jual</label>
-                        <div class="col-md-2">
-                            <input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
-                            <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
+                        <div class="form-group">
+                            <label for="harga" class="col-md-2 control-label">Harga Jual</label>
+                            <div class="col-md-2">
+                                <input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
+                                <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -86,27 +88,26 @@
                                 <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
                             </div>
                         </div>
-                    </div>
-                    <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
-                        <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-                        <div class="col-md-4">
-                            <div v-if="produk.foto.length > 100">
-                                <img :src="produk.foto" class="img-responsive thumbnail shadow">
+                        <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
+                            <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
+                            <div class="col-md-4">
+                                <div v-if="produk.foto.length > 100">
+                                    <img :src="produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
+                                <div v-else>
+                                    <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
                             </div>
-                            <div v-else>
-                                <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
+                            <div v-if="produk.foto == ''" class="col-md-4">
+                                <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
                             </div>
                         </div>
-                        <div v-if="produk.foto == ''" class="col-md-4">
-                            <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+                        <div class="form-group">
+                            <label for="foto" class="col-md-2 control-label">Foto</label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="foto" class="col-md-2 control-label">Foto</label>
-                        <div class="col-md-4">
-                            <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="foto" class="col-md-2 control-label">Satuan</label>
@@ -200,8 +201,8 @@
                 </form>
             </div>
         </div>
-        </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -320,14 +321,6 @@ export default {
             .then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk '+ app.produk.nama_produk;
                 app.alert(app.message);
-                // app.produk.kode_produk = ''
-                // app.produk.nama_produk = ''
-                // app.produk.harga_jual = ''
-                // app.produk.harga_beli = ''
-                // app.produk.kategori_produks_id = ''
-                // app.produk.bisa_dijual = ''
-                // app.produk.foto = ''
-                app.errors = '';
                 app.$router.replace('/produk');
 
             })
@@ -382,45 +375,49 @@ export default {
         tambahKategori() {
             var app = this;
             swal({
-                text: 'Masukkan nama kategori baru',
-                content: "input",
-                button: {
-                    text: "Buat",
-                    closeModal: false,
-                },
-            })
-            .then(name => {
-                if (!name) throw null;
-                app.newKategoriProduk.nama_kategori_produk = name;
-                var newNamaKategori = app.newKategoriProduk;
-
-                axios.post(app.url_newKategoriProduk, newNamaKategori)
-                .then(function (resp) {
-                    console.log(0);
-                    app.selectedKategoriProduksId();    
-                    swal({
-                        title: "Berhasil!",
-                        text: 'Berhasil menambahkan "'+ name +'" ke kategori produk.',
-                        icon: 'success',
-                    });
-                })
-                .catch(function (resp) {
-                    console.log()
-                    swal({
-                        title: "Gagal!",
-                        text: 'Ada sesuatu yang salah terjadi.',
-                        icon: 'warning',
-                    });
-                });
-
-            })
-            .catch(err => {
-                if (err) {
-                    swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
-                } else {
-                    swal.stopLoading();
-                    swal.close();
+                title: 'Tambah Kategori Produk',
+                input: 'text',
+                inputPlaceholder: 'Masukkan nama kategori produk yang baru',
+                showCancelButton: true,
+                allowOutsideClick: false,
+                reverseButtons: true,
+                inputValidator: (nama_kategori_produk) => {
+                    return new Promise((resolve) => {
+                        if (!nama_kategori_produk) {
+                            return resolve('Nama kategori produk tidak boleh kosong!');     
+                        }
+                        return resolve();
+                    })
                 }
+            })
+            .then(nama_kategori_produk => {
+                if (nama_kategori_produk.value) {
+                    console.log(app.newKategoriProduk)
+                    app.newKategoriProduk.nama_kategori_produk = nama_kategori_produk.value;
+                    var newNamaKategori = app.newKategoriProduk;
+
+                    axios.post(app.url_newKategoriProduk, newNamaKategori)
+                    .then(function (resp) {
+                        app.selectedKategoriProduksId();    
+                        swal({
+                            title: "Berhasil!",
+                            type: 'success',
+                            text: 'Berhasil menambahkan "'+ nama_kategori_produk.value +'" ke kategori produk.',
+                        });
+                    })
+                    .catch(function (resp) {
+                        console.log(resp)
+                        swal({
+                            title: "Gagal!",
+                            type: 'warning',
+                            text: 'Ada sesuatu yang salah terjadi.',
+                        });
+                    });
+                }
+            })
+            .catch(function (resp) {
+                console.log(resp)
+                swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
             });
         },
         selectedProdukModifierId() {

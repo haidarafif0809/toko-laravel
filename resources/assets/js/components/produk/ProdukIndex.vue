@@ -314,7 +314,7 @@ export default {
                 app.loading = false;
             })
         },
-        deleteEntry(id, index,nama_produk) {
+        deleteEntry(id, index, nama_produk) {
             swal({
                 title: "Hapus?", 
                 text: "Yakin Ingin Menghapus produk "+ nama_produk +" ?", 
