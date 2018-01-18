@@ -72054,403 +72054,9 @@ exports.push([module.i, "\n.margin-atas[data-v-6c596c71] {\r\n\tmargin-top: 5px;
 
 /***/ }),
 /* 264 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			status_modifier: 'not_accepted',
-			errors: [],
-			kategori_produks_id: [],
-			produk_modifier_id: [],
-			url: window.location.origin + window.location.pathname.replace("home", "produk"),
-			url_foto_produk: window.location.origin + window.location.pathname.replace("home", "foto_produk"),
-			broken_file: window.location.origin + window.location.pathname.replace("home", "broken-image.png"),
-			url_newKategoriProduk: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
-			url_newModifier: window.location.origin + window.location.pathname.replace("home", "modifier"),
-			produk: {
-				kode_produk: '',
-				nama_produk: '',
-				harga_jual: '',
-				harga_beli: '',
-				kategori_produks_id: '',
-				bisa_dijual: '1',
-				foto: '',
-				produk_modifier_id: ''
-			},
-			newKategoriProduk: {
-				nama_kategori_produk: ''
-			},
-			modifier: {
-				nama_modifier: '',
-				harga_modifier: ''
-			},
-			message: '',
-			setting_kategori_produk: {
-				placeholder: 'Pilih Kategori Produk'
-			},
-			setting_produk_modifier: {
-				placeholder: 'Pilih Tambahan',
-				sortField: 'text',
-				delimiter: ',',
-				maxItems: null
-			},
-			price: 1,
-			money: {
-				decimal: ',',
-				thousands: '.',
-				//prefix: 'Rp',
-				//suffix: ' #',
-				precision: 0,
-				masked: false
-			}
-		};
-	},
-	mounted: function mounted() {
-		var app = this;
-		app.selectedKategoriProduksId();
-		app.selectedProdukModifierId();
-	},
-
-	// watch:{
-	// 	'produk.produk_modifier_id' : function(){
-	// 		this.produkModifier()
-	// 	}
-	// },
-	methods: {
-		// produkModifier(){
-		// 	var app = this;
-		// 	var modifier = app.produk.produk_modifier_id.split("|");
-		// 	var nama_tampilan = modifier[1];
-		// 	var harga_modifier = modifier[2];
-		// 	app.produk.nama_tampilan = nama_tampilan
-		// 	app.produk.harga_modifier = harga_modifier
-
-		// },
-		bukaTambahModifier: function bukaTambahModifier() {
-			$('#inputan').show();
-		},
-		tutupTambahModifier: function tutupTambahModifier() {
-			$('#inputan').hide();
-		},
-		onFileChange: function onFileChange(e) {
-			var files = e.target.files || e.dataTransfer.files;
-			if (!files.length) return null;
-			this.createImage(files[0]);
-		},
-		createImage: function createImage(file) {
-			var reader = new FileReader();
-			var foto = this;
-			var ekstensiOk = /(\.jpg|\.jpeg|\.png)/i;
-			console.log(file);
-
-			if (!file.name.match(ekstensiOk)) {
-				foto.produk.foto = null;
-				this.$swal({
-					title: "File tidak didukung!",
-					text: "Tolong pilih file gambar dengan format .jpg, .jpeg, atau .png.",
-					icon: "warning",
-					buttons: "Saya mengerti"
-				});
-			} else {
-				reader.onload = function (e) {
-					foto.produk.foto = e.target.result;
-				};
-			}
-			reader.readAsDataURL(file);
-		},
-		saveForm: function saveForm() {
-			var app = this;
-			var newProduk = app.produk;
-			console.log(newProduk);
-			axios.post(app.url, newProduk).then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah produk ' + app.produk.nama_produk;
-				app.alert(app.message);
-				// app.produk.kode_produk = '';
-				// app.produk.nama_produk = '';
-				// app.produk.harga_jual = '';
-				// app.produk.harga_beli = '';
-				// app.produk.kategori_produks_id = '';
-				// app.produk.bisa_dijual = '';
-				// app.produk.foto = '';
-				// app.produk.satuan = '';
-				// app.produk.produk_modifier_id = '';
-				// app.errors = '';
-				app.$router.replace('/produk');
-			}).catch(function (resp) {
-				app.success = false;
-				app.errors = resp.response.data.errors;
-			});
-		},
-		selectedKategoriProduksId: function selectedKategoriProduksId() {
-			var app = this;
-			axios.get(app.url + '/kategori_produks_id').then(function (resp) {
-				app.kategori_produks_id = resp.data;
-			}).catch(function (resp) {
-				alert("Could not load kategori produk");
-			});
-		},
-		tambahKategori: function tambahKategori() {
-			var app = this;
-			swal({
-				title: 'Tambah Kategori Produk',
-				input: 'text',
-				inputPlaceholder: 'Masukkan nama kategori produk yang baru',
-				showCancelButton: true,
-				allowOutsideClick: false,
-				reverseButtons: true,
-				inputValidator: function inputValidator(nama_kategori_produk) {
-					return new Promise(function (resolve) {
-						if (!nama_kategori_produk) {
-							return resolve('Nama kategori produk tidak boleh kosong!');
-						}
-						return resolve();
-					});
-				}
-			}).then(function (nama_kategori_produk) {
-				if (nama_kategori_produk.value) {
-					console.log(app.newKategoriProduk);
-					app.newKategoriProduk.nama_kategori_produk = nama_kategori_produk.value;
-					var newNamaKategori = app.newKategoriProduk;
-
-					axios.post(app.url_newKategoriProduk, newNamaKategori).then(function (resp) {
-						app.selectedKategoriProduksId();
-						swal({
-							title: "Berhasil!",
-							type: 'success',
-							text: 'Berhasil menambahkan "' + nama_kategori_produk.value + '" ke kategori produk.'
-						});
-					}).catch(function (resp) {
-						console.log(resp);
-						swal({
-							title: "Gagal!",
-							type: 'warning',
-							text: 'Ada sesuatu yang salah terjadi.'
-						});
-					});
-				}
-			}).catch(function (resp) {
-				console.log(resp);
-				swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
-			});
-		},
-		selectedProdukModifierId: function selectedProdukModifierId() {
-			var app = this;
-			axios.get(app.url + '/produk-modifier-id').then(function (resp) {
-				app.produk_modifier_id = resp.data;
-			}).catch(function (resp) {
-				alert("Could not load produk modifier");
-			});
-		},
-		tambahModifier: function tambahModifier() {
-			var app = this;
-			var newModifier = app.modifier;
-			console.log(newModifier);
-			axios.post(app.url_newModifier, newModifier).then(function (resp) {
-				console.log(1);
-				app.message = 'Sukses : Berhasil Menambah modifier "' + app.modifier.nama_modifier + '"';
-				swal({
-					title: 'Berhasil!',
-					type: 'success',
-					text: app.message
-				});
-				app.selectedProdukModifierId();
-			}).catch(function (resp) {
-				app.success = false;
-				app.errors = resp.response.data.errors;
-			});
-		},
-		alert: function alert(pesan) {
-			this.$swal({
-				title: "Berhasil!",
-				text: pesan,
-				icon: "success"
-			});
-		}
-	}
-});
+throw new Error("Module build failed: SyntaxError: D:/xampp/htdocs/toko_dasar/resources/assets/js/components/produk/ProdukCreate.vue: Unexpected token (335:0)\n\n  333 | \t\t\t\tapp.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;\n  334 | \t\t\t\tapp.alert(app.message);\n> 335 | <<<<<<< HEAD\n      | ^\n  336 | \t\t\t\t// app.produk.kode_produk = '';\n  337 | \t\t\t\t// app.produk.nama_produk = '';\n  338 | \t\t\t\t// app.produk.harga_jual = '';\n");
 
 /***/ }),
 /* 265 */
@@ -72561,6 +72167,36 @@ exports.push([module.i, "\n.shadow[data-v-041415bf] {\r\n    -webkit-box-shadow:
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -72882,6 +72518,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.patch(app.url + '/' + app.produkId, app.produk).then(function (resp) {
                 app.message = 'Sukses : Berhasil Mengedit produk ' + app.produk.nama_produk;
                 app.alert(app.message);
+                // app.produk.kode_produk = ''
+                // app.produk.nama_produk = ''
+                // app.produk.harga_jual = ''
+                // app.produk.harga_beli = ''
+                // app.produk.kategori_produks_id = ''
+                // app.produk.status_jual = ''
+                // app.produk.foto = ''
+                app.errors = '';
                 app.$router.replace('/produk');
             }).catch(function (resp) {
                 app.success = false;
@@ -72928,45 +72572,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         tambahKategori: function tambahKategori() {
             var app = this;
             swal({
-                title: 'Tambah Kategori Produk',
-                input: 'text',
-                inputPlaceholder: 'Masukkan nama kategori produk yang baru',
-                showCancelButton: true,
-                allowOutsideClick: false,
-                reverseButtons: true,
-                inputValidator: function inputValidator(nama_kategori_produk) {
-                    return new Promise(function (resolve) {
-                        if (!nama_kategori_produk) {
-                            return resolve('Nama kategori produk tidak boleh kosong!');
-                        }
-                        return resolve();
-                    });
+                text: 'Masukkan nama kategori baru',
+                content: "input",
+                button: {
+                    text: "Buat",
+                    closeModal: false
                 }
-            }).then(function (nama_kategori_produk) {
-                if (nama_kategori_produk.value) {
-                    console.log(app.newKategoriProduk);
-                    app.newKategoriProduk.nama_kategori_produk = nama_kategori_produk.value;
-                    var newNamaKategori = app.newKategoriProduk;
+            }).then(function (name) {
+                if (!name) throw null;
+                app.newKategoriProduk.nama_kategori_produk = name;
+                var newNamaKategori = app.newKategoriProduk;
 
-                    axios.post(app.url_newKategoriProduk, newNamaKategori).then(function (resp) {
-                        app.selectedKategoriProduksId();
-                        swal({
-                            title: "Berhasil!",
-                            type: 'success',
-                            text: 'Berhasil menambahkan "' + nama_kategori_produk.value + '" ke kategori produk.'
-                        });
-                    }).catch(function (resp) {
-                        console.log(resp);
-                        swal({
-                            title: "Gagal!",
-                            type: 'warning',
-                            text: 'Ada sesuatu yang salah terjadi.'
-                        });
+                axios.post(app.url_newKategoriProduk, newNamaKategori).then(function (resp) {
+                    console.log(0);
+                    app.selectedKategoriProduksId();
+                    swal({
+                        title: "Berhasil!",
+                        text: 'Berhasil menambahkan "' + name + '" ke kategori produk.',
+                        icon: 'success'
                     });
+                }).catch(function (resp) {
+                    console.log();
+                    swal({
+                        title: "Gagal!",
+                        text: 'Ada sesuatu yang salah terjadi.',
+                        icon: 'warning'
+                    });
+                });
+            }).catch(function (err) {
+                if (err) {
+                    swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
+                } else {
+                    swal.stopLoading();
+                    swal.close();
                 }
-            }).catch(function (resp) {
-                console.log(resp);
-                swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
             });
         },
         selectedProdukModifierId: function selectedProdukModifierId() {
