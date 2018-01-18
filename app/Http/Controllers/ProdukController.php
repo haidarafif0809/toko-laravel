@@ -50,6 +50,12 @@ class ProdukController extends Controller
         return response()->json($produk_modifier);
     }
 
+    public function produkModifiersIdEdit($id_produk) {
+        $produk_modifier = Produk::select('produk_modifier_id')->where('produk_id', $id_produk)->first();
+        $produk_modifier = explode(',', $produk_modifier->produk_modifier_id);
+        return response()->json($produk_modifier);
+    }
+
     public function kategoriProduksId()
     {
         $kategoriProduk = KategoriProduk::all();
@@ -95,8 +101,8 @@ class ProdukController extends Controller
                 'kategori_produks_id' => 'required|exists:kategori_produks,id',
                 'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'required|numeric',
-                'status_jual'         => 'required',
-                'satuan'         => 'nullable',
+                'bisa_dijual'         => 'required',
+                'satuan'              => 'nullable',
                 'produk_modifier_id'  => 'nullable|exists:modifiers,id',
             ]);
 
@@ -108,7 +114,7 @@ class ProdukController extends Controller
         if (is_array($produk_modifier) || is_object($produk_modifier)) {
             foreach ($produk_modifier as $id_modifier) {
                 if ($noUrut != count($request->produk_modifier_id)) {
-                    $modifier .= $id_modifier .'|';
+                    $modifier .= $id_modifier .',';
                 } else {
                     $modifier .= $id_modifier;
                 }
@@ -123,7 +129,7 @@ class ProdukController extends Controller
             'kategori_produks_id' => $request->kategori_produks_id,
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
-            'status_jual'         => $request->status_jual,
+            'bisa_dijual'         => $request->bisa_dijual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
             'satuan'              => $request->satuan,
             'produk_modifier_id'  => $modifier,
@@ -151,9 +157,24 @@ class ProdukController extends Controller
             'kategori_produks_id' => 'required|exists:kategori_produks,id',
             'harga_beli'          => 'required|numeric',
             'harga_jual'          => 'required|numeric',
-            'status_jual'         => 'required',
+            'bisa_dijual'         => 'required',
+            'satuan'              => 'nullable',
             'produk_modifier_id'  => 'nullable|exists:modifiers,id',
         ]);
+
+        $modifier = '';
+        $noUrut = 1;
+        $produk_modifier = $request->produk_modifier_id;
+        if (is_array($produk_modifier) || is_object($produk_modifier)) {
+            foreach ($produk_modifier as $id_modifier) {
+                if ($noUrut != count($request->produk_modifier_id)) {
+                    $modifier .= $id_modifier .',';
+                } else {
+                    $modifier .= $id_modifier;
+                }
+                $noUrut++;
+            }
+        }
 
         $arrUpdateProduk = [
             'kode_produk'         => $request->kode_produk,
@@ -161,8 +182,9 @@ class ProdukController extends Controller
             'kategori_produks_id' => $request->kategori_produks_id,
             'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
-            'status_jual'         => $request->status_jual,
-            'produk_modifier_id'  => $request->produk_modifier_id,
+            'bisa_dijual'         => $request->bisa_dijual,
+            'satuan'              => $request->satuan,
+            'produk_modifier_id'  => $modifier,
         ];
 
         if ($request->foto !== null) {

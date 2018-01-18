@@ -309,16 +309,16 @@ export default {
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
 				app.alert(app.message);
-				app.produk.kode_produk = '';
-				app.produk.nama_produk = '';
-				app.produk.harga_jual = '';
-				app.produk.harga_beli = '';
-				app.produk.kategori_produks_id = '';
-				app.produk.status_jual = '';
-				app.produk.foto = '';
-				app.produk.satuan = '';
-				app.produk.produk_modifier_id = '';
-				app.errors = '';
+				// app.produk.kode_produk = '';
+				// app.produk.nama_produk = '';
+				// app.produk.harga_jual = '';
+				// app.produk.harga_beli = '';
+				// app.produk.kategori_produks_id = '';
+				// app.produk.status_jual = '';
+				// app.produk.foto = '';
+				// app.produk.satuan = '';
+				// app.produk.produk_modifier_id = '';
+				// app.errors = '';
 				app.$router.replace('/produk');
 
 			})
