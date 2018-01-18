@@ -49,9 +49,9 @@ class KelolaKasController extends Controller
             'jumlah'     => 'required',
             'keterangan' => 'required',
         ]);
-
+        $toko_id    = Auth::user()->toko_id;
         $kelola_kas = KelolaKas::create([
-            'toko_id'    => Auth::user()->toko_id,
+            'toko_id'    => $toko_id,
             'type'       => $request->type,
             'jumlah'     => $request->jumlah,
             'keterangan' => $request->keterangan,

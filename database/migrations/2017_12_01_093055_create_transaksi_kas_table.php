@@ -15,7 +15,9 @@ class CreateTransaksiKasTable extends Migration
     {
         Schema::create('transaksi_kas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('jenis_transaksi')->comment = "(1 = kas masuk), (2 = kas keluar)";
+            $table->integer('toko_id');
+            $table->integer('id_transaksi')->nullable();
+            $table->integer('jenis_transaksi')->comment = "(1 = kas masuk), (2 = kas keluar), (3 = kas penjualan)";
             $table->integer('jumlah_masuk')->default(0);
             $table->integer('jumlah_keluar')->default(0);
             $table->timestamps();

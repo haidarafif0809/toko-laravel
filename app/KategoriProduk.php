@@ -9,7 +9,7 @@ class KategoriProduk extends Model
 {
     use AuditableTrait;
     protected $fillable = [
-        'nama_kategori_produk',
+        'toko_id', 'nama_kategori_produk',
     ];
 
 }
