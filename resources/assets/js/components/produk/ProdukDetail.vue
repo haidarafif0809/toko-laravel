@@ -16,15 +16,14 @@
 			<div class="panel-body">
 				<div class="col-md-5">
 					<div class="row">
-						<label for="produk_foto">Foto Produk :</label>
-						<img name="produk_foto" v-if="produk.foto == null || produk.foto == ''" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
-						<img name="produk_foto" v-else class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
+						<img v-if="produk.foto == null || produk.foto == ''" class="img-responsive thumbnail shadow" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
+						<img v-else class="img-responsive thumbnail shadow" :src="url_foto_produk +'/' + produk.foto">
 
 					</div>
 				</div>
 				<div class="col-md-7">
 					<div class="row">
-						<table class="table">
+						<table class="table" style="margin-top: 5px;">
 							<tbody>
 								<tr>
 									<td>
@@ -55,8 +54,8 @@
 										<label>Status Jual:</label>
 									</td>
 									<td>
-										<span v-if="produk.status_jual == 1">Aktif</span>
-										<span v-if="produk.status_jual == 0">Tidak Aktif</span>
+										<span v-if="produk.bisa_dijual == 1">Aktif</span>
+										<span v-if="produk.bisa_dijual == 0">Tidak Aktif</span>
 									</td>
 								</tr>
 							</tbody>

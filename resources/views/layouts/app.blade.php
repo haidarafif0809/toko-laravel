@@ -15,6 +15,15 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
+    <style type="text/css">
+        @font-face {
+            font-family: Ubuntu Medium;
+            src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
+        }
+        body {
+            font-family: Ubuntu Medium;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -255,6 +264,7 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
 </body>
 </html>

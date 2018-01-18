@@ -58,7 +58,7 @@ class ProdukController extends Controller
 
     public function statusJual()
     {
-        $status_jual = Produk::select('status_jual')->first();
+        $status_jual = Produk::select('bisa_dijual')->first();
         return response()->json($status_jual);
     }
 
@@ -96,9 +96,24 @@ class ProdukController extends Controller
                 'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'required|numeric',
                 'status_jual'         => 'required',
+                'satuan'         => 'nullable',
                 'produk_modifier_id'  => 'nullable|exists:modifiers,id',
             ]);
 
+        }
+
+        $modifier = '';
+        $noUrut = 1;
+        $produk_modifier = $request->produk_modifier_id;
+        if (is_array($produk_modifier) || is_object($produk_modifier)) {
+            foreach ($produk_modifier as $id_modifier) {
+                if ($noUrut != count($request->produk_modifier_id)) {
+                    $modifier .= $id_modifier .'|';
+                } else {
+                    $modifier .= $id_modifier;
+                }
+                $noUrut++;
+            }
         }
 
         // insert
@@ -110,7 +125,8 @@ class ProdukController extends Controller
             'harga_jual'          => $request->harga_jual,
             'status_jual'         => $request->status_jual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
-            'produk_modifier_id'  => $request->produk_modifier_id,
+            'satuan'              => $request->satuan,
+            'produk_modifier_id'  => $modifier,
         ]);
     }
 
@@ -237,10 +253,7 @@ class ProdukController extends Controller
         $lineErrors = [];
         $no         = 1;
 
-        // Perulangan pertama untuk memvalidasi inputan dari user pada
-        // file excel yang di upload dan memasukkannya kedalama variable
-        // array yang nantinya akan ditampilkan pada perulangan kedua
-        // jika ada isinya
+        // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
         foreach ($excels as $row) {
             // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
             $bisaDijual = trim(strtolower($row['bisa_dijual']));
@@ -315,7 +328,7 @@ class ProdukController extends Controller
             | sesuai dengan yang diinputkan pada Excel
              */
 
-            /* Begin Cek Nama Kategori Produk */
+            /* Begin Cek Kategori Produk */
 
             // Membuat variable array kosong
             $dataKategoriProduk = [];
@@ -357,7 +370,7 @@ class ProdukController extends Controller
             // Membuat value dari $arrayNamaKategoriProduk menjadi huruf kecil semua
             $arrayNamaKategoriProduk = array_map('strtolower', $arrayNamaKategoriProduk);
 
-            /* End Cek Nama Kategori Produk*/
+            /* End Cek Kategori Produk*/
 
             $bisa_dijual = ($row['bisa_dijual'] == 'ya' ? 1 : 0);
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
