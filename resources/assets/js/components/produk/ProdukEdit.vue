@@ -32,23 +32,24 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
-                            <div class="col-md-4">
-                                <table width="100%">
-                                    <tbody>
-                                        <tr>
-                                            <td width="80%" style="vertical-align: middle;">
-                                                <selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
-                                                    <option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
-                                                </selectize-component> 
-                                            </td>
-                                            <td width="20%" style="vertical-align: top; text-align: center;">
-                                                <span @click="tambahKategori()" class="glyphicon glyphicon-plus btn btn-sm btn-default">Tambah</span>   
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
+                        <div class="col-md-4">
+                            <table width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="80%" style="vertical-align: middle;">
+                                            <selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
+                                                <option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
+                                            </selectize-component> 
+                                        </td>
+                                        <td width="20%" style="vertical-align: top; text-align: center;">
+                                            <span @click="tambahKategori()" class="btn btn-sm btn-success">+Tambah</span>   
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
 
                                 <span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
@@ -71,20 +72,20 @@
 
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="status_jual" class="col-md-2 control-label">Bisa Dijual</label>
-                            <div class="col-md-4 margin-atas">
-                                <div class="col-md-6">
-                                    <label>
-                                        <input type="radio" name="status_jual" v-model="produk.status_jual" value="1"> Ya
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>
-                                        <input type="radio" name="status_jual" v-model="produk.status_jual" value="0"> Tidak
-                                    </label>
-                                    <span v-if="errors.status_jual" class="label label-danger">{{ errors.status_jual[0] }}</span>
-                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
+                        <div class="col-md-4 margin-atas">
+                            <div class="col-md-6">
+                                <label>
+                                    <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"> Ya
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
+                                </label>
+                                <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
                             </div>
                         </div>
                         <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
@@ -108,21 +109,84 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="modifier" class="col-md-2 control-label"></label>
-                            <div class="col-md-4">
-                                <div>
-                                    <b-form-checkbox v-if="" id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer" checked="true">
-                                      Tambahan & Pilhan Produk
-                                  </b-form-checkbox>
-                                  <div v-if="status_modifier == 'accepted'">
-                                    <selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
-                                        <option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }}</option>
-                                    </selectize-component>
+                    <div class="form-group">
+                        <label for="foto" class="col-md-2 control-label">Satuan</label>
+                        <div class="col-md-5">
+                            <form>
+                            <label class="radio-inline">
+                                <input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan">Pcs
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="lainnya" v-model="produk.satuan" v-on:click="bukaFormSatuan">Lainnya
+                            </label>
+                            </form>
+                            <br>
+                            <div id="form-satuan" style="display:none">
+                                <input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
+                                <span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modifier" class="col-md-2 control-label"></label>
+                        <div class="col-md-9"> 
+                            <div>
+                                <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
+                                  Tambahan & Pilhan Produk
+                                </b-form-checkbox>
+                                <div v-if="status_modifier == 'accepted'">
+                                    <div class="col-md-8">
+                                        <form v-on:submit.prevent="tambahModifier()" class="form-inline">
+                                            <div class="input-group">
+                                                <selectize-component v-model="produk_modifier" :settings="setting_produk_modifier"> 
+                                                    <option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }} Rp{{ produk_modifier.harga_modifier }}</option>
+                                                </selectize-component>
+                                            </div>
+                                            <div class="input-group">
+                                                <button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Buat baru</button>
+                                            </div>
+                                        
+                                            <table id="inputan" style="display:none">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nama modifier</th>
+                                                        <th>Harga modifier</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <input class="form-control" autocomplete="off" placeholder="Nama modifier" type="text" v-model="modifier.nama_modifier" name="nama_modifier"  autofocus="">
+                                                            <span v-if="errors.nama_modifier" class="label label-danger">{{ errors.nama_modifier[0] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <money class="form-control" autocomplete="off" placeholder="Harga Modifier" v-model="modifier.harga_modifier" v-bind="money" name="harga_modifier"  autofocus="">
+                                                            </money>
+                                                            <span v-if="errors.harga_modifier" class="label label-danger">{{ errors.harga_modifier[0] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" class="btn btn-sm btn-success">Tambah</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-sm btn-danger" v-on:click="tutupTambahModifier">Batal</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <div class="col-md-4 col-md-offset-2">
@@ -154,18 +218,25 @@ export default {
             url_foto_produk: window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
             broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
             url_newKategoriProduk : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
+            url_newModifier : window.location.origin+(window.location.pathname).replace("home", "modifier"),
+            produk_modifier: [],
             produk: {
                 kode_produk: '',
                 nama_produk: '',
                 harga_jual: '',
                 harga_beli: '',
                 kategori_produks_id: '',
-                status_jual: '',
+                bisa_dijual: '',
                 foto: '',
-                produk_modifier_id: ''
+                satuan:'',
             },
+
             newKategoriProduk: {
                 nama_kategori_produk: ''
+            },
+            modifier:{
+                nama_modifier:'',
+                harga_modifier:''
             },
             message : '',
             setting_satuan: {
@@ -176,6 +247,16 @@ export default {
             },
             setting_produk_modifier:{
                 placeholder: 'Pilih Tambahan',
+                sortField: 'text',
+                delimiter: ',',
+                maxItems: null
+            },
+            price: 1,
+            money: {
+                decimal: ',',
+                thousands: '.',
+                precision: 0,
+                masked: false
             }
         }
     },
@@ -184,8 +265,21 @@ export default {
         app.getData();
         app.selectedKategoriProduksId();
         app.selectedProdukModifierId();
+        app.selectedProdukModifierIdEdit();
     },
     methods: {
+        bukaFormSatuan(){
+            $('#form-satuan').show();
+        },
+        tutupFormSatuan(){
+            $('#form-satuan').hide();
+        },
+        bukaTambahModifier(){
+            $('#inputan').show();
+        },
+        tutupTambahModifier(){
+            $('#inputan').hide();
+        },
         onFileChange(e) {
             let files = e.target.files || e.dataTransfer.files;
             if (!files.length)
@@ -216,6 +310,7 @@ export default {
         saveForm() {
             var app = this;
             console.log(app.produk);
+            app.produk.produk_modifier_id = app.produk_modifier;
             // var newProduk = app.produk;
             var image = document.getElementById('image');
 
@@ -263,7 +358,10 @@ export default {
                     app.produk.foto = '';
                 };
 
-                if (resp.data.produk_modifier_id > 0) {
+                if (resp.data.produk_modifier_id.length > 0) {
+                    app.status_modifier = 'accepted';
+                }
+                else if(app.produk_modifier.length > 0){
                     app.status_modifier = 'accepted';
                 }
                 else{
@@ -327,9 +425,42 @@ export default {
             axios.get(app.url+'/produk-modifier-id')
             .then(function (resp) {
                 app.produk_modifier_id = resp.data;
+                console.log(resp.data)
             })
             .catch(function (resp) {
                 alert("Could not load produk modifier");
+            });
+        },
+        selectedProdukModifierIdEdit() {
+            var app = this;
+            let id = app.$route.params.id;
+            axios.get(app.url+'/produk-modifier-id/' + id)
+            .then(function (resp) {
+                app.produk_modifier = resp.data;
+                console.log(resp.data)
+            })
+            .catch(function (resp) {
+                alert("Could not load produk modifier");
+            });
+        },
+        tambahModifier(){
+            var app = this;
+            var newModifier = app.modifier;
+            console.log(newModifier);
+            axios.post(app.url_newModifier, newModifier)
+            .then(function (resp) {
+                console.log(1)
+                app.message = 'Sukses : Berhasil Menambah modifier "'+ app.modifier.nama_modifier +'"';
+                swal({
+                    title: 'Berhasil!',
+                    type: 'success',
+                    text: app.message
+                })
+                app.selectedProdukModifierId()
+            })
+            .catch(function (resp) {
+                app.success = false;
+                app.errors = resp.response.data.errors;
             });
         }
 

@@ -150,6 +150,12 @@ export default {
           title: "Konfirmasi Hapus",
           text : "Anda Yakin Ingin Menghapus "+typeKas+" ini ?",
           type : "warning",
+          showCancelButton: true,
+          cancelButtonColor: '#3085d6',
+          confirmButtonColor: '#d33',
+          confirmButtonText: 'Hapus',
+          cancelButtonText: 'Batal',
+          reverseButtons: true
         })
          .then((willDelete) => {
           if (willDelete) {

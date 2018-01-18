@@ -78,22 +78,21 @@
 								</money>
 								<span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
+						</div>
+					</div> 
+					<div class="form-group">
+						<label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
+						<div class="col-md-4 margin-atas">
+							<div class="col-md-6">
+								<label>
+									<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"  checked="checked"> Ya
+								</label>
 							</div>
-						</div> 
-						<div class="form-group">
-							<label for="status_jual" class="col-md-2 control-label">Bisa Dijual</label>
-							<div class="col-md-4 margin-atas">
-								<div class="col-md-6">
-									<label>
-										<input type="radio" name="status_jual" v-model="produk.status_jual" value="1"  checked="checked"> Ya
-									</label>
-								</div>
-								<div class="col-md-6">
-									<label>
-										<input type="radio" name="status_jual" v-model="produk.status_jual" value="0"> Tidak
-									</label>
-									<span v-if="errors.status_jual" class="label label-danger">{{ errors.status_jual[0] }}</span>
-								</div>
+							<div class="col-md-6">
+								<label>
+									<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
+								</label>
+								<span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
 							</div>
 						</div> 
 						<div v-if="produk.foto != ''" class="form-group">
@@ -197,7 +196,7 @@ export default {
 				harga_jual: '',
 				harga_beli: '',
 				kategori_produks_id: '',
-				status_jual: '1',
+				bisa_dijual: '1',
 				foto: '',
 				produk_modifier_id: ''
 			},
@@ -292,15 +291,16 @@ export default {
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
 				app.alert(app.message);
-				app.produk.kode_produk = '';
-				app.produk.nama_produk = '';
-				app.produk.harga_jual = '';
-				app.produk.harga_beli = '';
-				app.produk.kategori_produks_id = '';
-				app.produk.status_jual = '';
-				app.produk.foto = '';
-				app.produk.produk_modifier_id = '';
-				app.errors = '';
+				// app.produk.kode_produk = '';
+				// app.produk.nama_produk = '';
+				// app.produk.harga_jual = '';
+				// app.produk.harga_beli = '';
+				// app.produk.kategori_produks_id = '';
+				// app.produk.bisa_dijual = '';
+				// app.produk.foto = '';
+				// app.produk.satuan = '';
+				// app.produk.produk_modifier_id = '';
+				// app.errors = '';
 				app.$router.replace('/produk');
 
 			})
