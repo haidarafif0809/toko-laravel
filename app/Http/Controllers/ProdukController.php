@@ -50,7 +50,8 @@ class ProdukController extends Controller
         return response()->json($produk_modifier);
     }
 
-    public function produkModifiersIdEdit($id_produk) {
+    public function produkModifiersIdEdit($id_produk)
+    {
         $produk_modifier = Produk::select('produk_modifier_id')->where('produk_id', $id_produk)->first();
         $produk_modifier = explode(',', $produk_modifier->produk_modifier_id);
         return response()->json($produk_modifier);
@@ -108,13 +109,13 @@ class ProdukController extends Controller
 
         }
 
-        $modifier = '';
-        $noUrut = 1;
+        $modifier        = '';
+        $noUrut          = 1;
         $produk_modifier = $request->produk_modifier_id;
         if (is_array($produk_modifier) || is_object($produk_modifier)) {
             foreach ($produk_modifier as $id_modifier) {
                 if ($noUrut != count($request->produk_modifier_id)) {
-                    $modifier .= $id_modifier .',';
+                    $modifier .= $id_modifier . ',';
                 } else {
                     $modifier .= $id_modifier;
                 }
@@ -123,7 +124,9 @@ class ProdukController extends Controller
         }
 
         // insert
-        $produk = Produk::create([
+        $toko_id = Auth::user()->toko_id;
+        $produk  = Produk::create([
+            'toko_id'             => $toko_id,
             'kode_produk'         => $request->kode_produk,
             'nama_produk'         => $request->nama_produk,
             'kategori_produks_id' => $request->kategori_produks_id,
@@ -162,13 +165,13 @@ class ProdukController extends Controller
             'produk_modifier_id'  => 'nullable|exists:modifiers,id',
         ]);
 
-        $modifier = '';
-        $noUrut = 1;
+        $modifier        = '';
+        $noUrut          = 1;
         $produk_modifier = $request->produk_modifier_id;
         if (is_array($produk_modifier) || is_object($produk_modifier)) {
             foreach ($produk_modifier as $id_modifier) {
                 if ($noUrut != count($request->produk_modifier_id)) {
-                    $modifier .= $id_modifier .',';
+                    $modifier .= $id_modifier . ',';
                 } else {
                     $modifier .= $id_modifier;
                 }
