@@ -325,7 +325,7 @@ export default {
                 // app.produk.harga_jual = ''
                 // app.produk.harga_beli = ''
                 // app.produk.kategori_produks_id = ''
-                // app.produk.bisa_dijual = ''
+                // app.produk.status_jual = ''
                 // app.produk.foto = ''
                 app.errors = '';
                 app.$router.replace('/produk');

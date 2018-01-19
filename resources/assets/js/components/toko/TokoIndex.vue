@@ -120,24 +120,34 @@ export default {
           swal({
             title: "Konfirmasi Status Toko",
             text : "Anda Yakin Ingin Mengaktifkan "+nama_tokos+" ?",
-            icon : "warning",
-            buttons: true,
-            dangerMode: true,
+            type : "warning",
+            // buttons: true,
+            // dangerMode: true,
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ok',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
           })
-          .then((willConfirm) => {
-            if (willConfirm) {
+          .then((result) => {
+            if (result.value) {
               var app = this;
               axios.get(app.url_user+'/status/' + id_user)
               .then(function (resp) {
-                swal("Berhasil Diaktifkan!  ", {
-                  icon: "success",
-                });
+                swal({
+                 title: 'Berhasil!',
+                 type: 'success',
+                 text: 'Berhasil Diaktifkan!'
+               });
                 app.getTokos();
               })
               .catch(function (resp) {
                 app.$router.replace('/admin/toko/');
-                swal("Gagal Mengaktifkan!", {
-                  icon: "warning",
+                swal( {
+                  title: 'Gagal!',
+                  type: 'warning',
+                  text: 'Gagal Mengaktifkan!'
                 });
               });
             }
@@ -148,26 +158,32 @@ export default {
           swal({
             title: "Konfirmasi Status Toko",
             text : "Anda Yakin Ingin Menonaktifkan "+nama_tokos+" ?",
-            icon : "warning",
-            buttons: true,
-            dangerMode: true,
+            type : "warning",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ok',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
           })
-          .then((willConfirm) => {
-            if (willConfirm) {
+          .then((result) => {
+            if (result.value) {
               var app = this;
               axios.get(app.url_user+'/status/' + id_user)
               .then(function (resp) {
 
                 // app.tokos.status = resp.data.data;
-                swal("Berhasil Dinonaktifkan!  ", {
-                  icon: "success",
+                swal({
+                  title: 'Gagal!',
+                  type: 'warning',
+                  text: 'Berhasil Dinonaktifkan'
                 });
                 app.getTokos();
               })
               .catch(function (resp) {
                 app.$router.replace('/admin/toko/');
                 swal("Gagal Menonaktifkan!", {
-                  icon: "warning",
+                  type: "warning",
                 });
               });
             }
@@ -214,29 +230,37 @@ export default {
       deleteToko(id, index,nama_tokos) {
        swal({
         title: "Konfirmasi Hapus",
-        text : "Anda Yakin Ingin Menghapus "+nama_tokos+" ?",
-        icon : "warning",
-        buttons: true,
-        dangerMode: true,
+        text : "Anda Yakin Ingin Menghapus " + nama_tokos +" ?",
+        type : "warning",
+        showCancelButton: true,
+        cancelButtonColor: '#3085d6',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Batal',
+        reverseButtons: true
       })
-       .then((willDelete) => {
-        if (willDelete) {
+       .then((result) => {
+        if (result.value) {
           var app = this;
           axios.delete(app.url+'/' + id)
           .then(function (resp) {
             app.getTokos();
-            swal("Berhasil Dihapus!  ", {
-              icon: "success",
+            swal({
+              title: 'Berhasil!',
+              type: 'success',
+              text: 'Berhasil menghapus '+ nama_tokos
             });
           })
           .catch(function (resp) {
-            app.$router.replace('/toko/');
-            swal("Gagal Menghapus!", {
-              icon: "warning",
+            app.$router.replace('/admin/toko/');
+            swal({
+              title: 'Gagal!',
+              type: 'warning',
+              text: 'Tidak dapat menghapus pelanggan!'
             });
           });
         }
-        this.$router.replace('/toko/');
+        this.$router.replace('/admin/toko/');
       });
      }
    }
