@@ -17,7 +17,7 @@
 
 .bayar{
 	padding: 30px 20px;
-	font-size: 30px;
+	font-size: 35px;
 }
 
 .tombol{
@@ -63,13 +63,12 @@
 						Jumlah Produk
 					</div>
 					<div class="modal-body">
-						<form v-on:submit.prevent="" class="form-horizontal">
-							<input class="form-control" required autocomplete="off"  type="number" name="diskon_per_Faktur"  autofocus="" v-model="formJumlahProduk">
-							<br>
+						<form class="form-horizontal">
+							<input class="form-control" required autocomplete="off"  type="number" name="jumlahProduk"  autofocus="" v-model="dataTbs.jumlah">
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk()" >Simpan</button>
+						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
 					</div>
 				</div>
@@ -128,48 +127,43 @@
 
 		<div class="col-md-8" id="pull-right">
 			<div class="panel panel-default">
-				<div class="panel-heading">DAFTAR PRODUK</div>
 				<!-- KATEGORI PRODUK -->
+				<div class="panel-heading">KATEGORI PRODUK</div>
 				<div class="panel-body">
-					<div class="panel panel-default">
-						<div class="panel-heading">KATEGORI PRODUK</div>
-						<br>
-						<div class="row">
-							<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
-								<div class="col-md-12">
-									<div v-if="kategori_produks.length == 1">
-										<div v-for="kategori_produk , index in kategori_produks">
-											<div class=" btn btn-success col-md-3 list-produk">
-												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 v-if="kategori_produk.id.length > 15">
-														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-													</h4>
-													<h4 v-else>
-														<center>{{kategori_produk.nama_kategori_produk}}</center>
-													</h4>
-												</div>
+					<div class="row">
+						<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
+							<div class="col-md-12">
+								<div v-if="kategori_produks.length == 1">
+									<div v-for="kategori_produk , index in kategori_produks">
+										<div class=" btn btn-success col-md-3 list-produk">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 v-if="kategori_produk.id.length > 15">
+													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
+												</h4>
+												<h4 v-else>
+													<center>{{kategori_produk.nama_kategori_produk}}</center>
+												</h4>
 											</div>
 										</div>
 									</div>
-									<div v-else>
-										<div v-for="kategori_produk , index in kategori_produks" >
-											<div class=" btn btn-success col-md-3 list-produk">
-												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
-														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-													</h4>
-													<h4 v-else>
-														<center>{{kategori_produk.nama_kategori_produk}}</center>
-													</h4>
-												</div>
+								</div>
+								<div v-else>
+									<div v-for="kategori_produk , index in kategori_produks" >
+										<div class=" btn btn-success col-md-3 list-produk">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
+													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
+												</h4>
+												<h4 v-else>
+													<center>{{kategori_produk.nama_kategori_produk}}</center>
+												</h4>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						<br>
-					</div> 
+					</div>
 					<br>
 
 					<!-- PRODUK PENJUALAN -->
@@ -259,8 +253,8 @@
 									test
 								</span>
 								<span class="large" style="float: right;">					
-									( {{ tbs_penjualan.harga_produk }} - 
-									<span class="btn btn-default button" data-toggle="modal" data-target="#modalJumlahProduk">
+									( {{ tbs_penjualan.harga_produk }} X 
+									<span @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)" class="btn btn-default button" data-toggle="modal" data-target="#modalJumlahProduk">
 										{{ tbs_penjualan.jumlah_produk }} 
 									</span> )
 									: <b>{{ tbs_penjualan.subtotal }}</b> 
@@ -345,10 +339,10 @@
 							<div v-if="formTunai == 1" v-model="penjualan.cara_bayar">
 								<br>
 								<div>
-									<input type="number" class="form-control bayar" placeholder="Pembayaran" v-model="pembayaran.bayar"> 
+									<input type="number" class="form-control bayar" placeholder="PEMBAYARAN" v-model="pembayaran.bayar"> 
 								</div>
 								<div>
-									<label class="control-label" font-size="100px"><h2><b>Kembalian :</b></h2></label>
+									<label class="control-label" font-size="50px"><h6><b>KEMBALIAN :</b></h6></label>
 									<hr><h3><span>{{pembayaran.kembalian}}</span></h3><hr>
 								</div>
 
@@ -435,6 +429,12 @@ export default {
 			deleteProdukTbsPenjualan: {
 				produk_id: ''
 			},
+			dataTbs: {
+				id: '',
+				jumlah: '',
+				subtotal: '',
+				harga: ''
+			},
 			search: '',
 			formTunai: 1,
 			diskonProduk: 1,
@@ -444,6 +444,7 @@ export default {
 			formKartu: 0,
 			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
 			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+			urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
 			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
 			loading : true,
 			loadingTbs : true,
@@ -476,7 +477,12 @@ export default {
 	    }
 	},
 	methods: {
-
+		getDataTbs(id, subtotal, harga, jumlah) {
+			this.dataTbs.id = id;
+			this.dataTbs.subtotal = subtotal;
+			this.dataTbs.harga = harga;
+			this.dataTbs.jumlah = jumlah;
+		},
 		getHasilKembalian(){
 			var app = this;
 			var kembalian = app.pembayaran.bayar - app.jumlahBayar
@@ -509,11 +515,7 @@ export default {
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
 		},
-		simpanJumlahProduk(){
-			var app = this;
-			app.formJumlahProduk = app.tbs_penjualans.jumlah_produk;
-		},
-
+		
 		getKategoriProduk(page){
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -691,6 +693,21 @@ export default {
 				app.errors = resp.response.data.errors;
 			});
 		},
+
+		simpanJumlahProduk(jumlah){
+			var app = this;
+			var newJumlah = app.dataTbs;
+			axios.post(app.urlUpdateTbs, newJumlah)
+			.then(function (resp) {
+				app.inputTbsPenjualan.jumlah = ''	
+				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+			})
+			.catch(function (resp) {
+				app.errors = resp.response.data.errors;
+			});		
+		},
+
 		deleteTbsPenjualan(id_tbs_penjualan) {
 			swal({
 				title: "Hapus?", 

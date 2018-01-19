@@ -223,6 +223,15 @@ class PenjualanController extends Controller
         return response(200);
     }
 
+    public function ubahTbsPenjualan(Request $request)
+    {
+        $subtotal = ($request->harga * $request->jumlah);
+        TbsPenjualan::where('id_tbs_penjualan', $request->id)->update([
+            'jumlah_produk' => $request->jumlah,
+            'subtotal'      => $subtotal,
+        ]);
+    }
+
     public function hapusTbsPenjualan($id)
     {
         if (TbsPenjualan::destroy($id)) {
