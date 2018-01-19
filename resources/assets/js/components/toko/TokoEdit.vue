@@ -11,6 +11,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">Edit Toko </h4>
           </div>
+          <br>
           <form v-on:submit.prevent="saveForm()" class="form-horizontal">
             <div class="form-group">
               <label for="nama_toko" class="col-md-2 control-label">Nama Toko</label>
@@ -62,7 +63,7 @@ export default {
   data: function () {
     return {
       errors: [],
-      url : window.location.origin+(window.location.pathname).replace("home", "toko"),
+      url : window.location.origin+(window.location.pathname).replace("home", "admin/toko"),
       toko: {
         nama_toko: '',
         nama_pemilik: '',
@@ -81,7 +82,7 @@ export default {
       .then(function (resp) {
         app.message = 'Berhasil Merubah kategori Produk "'+app.toko.nama_toko+'"'
         app.alert(app.message);
-        app.$router.replace('/toko');
+        app.$router.replace('/admin/toko');
 
       })
       .catch(function (resp) {

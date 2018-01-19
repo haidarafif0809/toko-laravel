@@ -83241,8 +83241,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // app.tokos.status = resp.data.data;
             swal({
-              title: 'Gagal!',
-              type: 'warning',
+              title: 'Berhasil!',
+              type: 'success',
               text: 'Berhasil Dinonaktifkan'
             });
             app.getTokos();
@@ -83742,6 +83742,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -83752,7 +83753,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       errors: [],
-      url: window.location.origin + window.location.pathname.replace("home", "toko"),
+      url: window.location.origin + window.location.pathname.replace("home", "admin/toko"),
       toko: {
         nama_toko: '',
         nama_pemilik: '',
@@ -83770,7 +83771,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.patch(app.url + '/' + app.tokoId, newtoko).then(function (resp) {
         app.message = 'Berhasil Merubah kategori Produk "' + app.toko.nama_toko + '"';
         app.alert(app.message);
-        app.$router.replace('/toko');
+        app.$router.replace('/admin/toko');
       }).catch(function (resp) {
         app.errors = resp.response.data.errors;
       });
@@ -83840,6 +83841,8 @@ var render = function() {
       _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
         _c("div", { staticClass: "panel panel-default" }, [
           _vm._m(0),
+          _vm._v(" "),
+          _c("br"),
           _vm._v(" "),
           _c(
             "form",
