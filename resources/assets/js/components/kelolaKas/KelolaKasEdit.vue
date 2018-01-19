@@ -36,7 +36,7 @@
 							<div class="form-group">
 								<label for="keterangan" class="col-md-2 control-label">Keterangan</label>
 								<div class="col-md-4">
-									<textarea class="form-control" required autocomplete="off" placeholder="Keterangan" v-model="kelolaKas.keterangan" name="keterangan"  autofocus=""></textarea>
+									<textarea style="overflow:hidden" class="form-control" required autocomplete="off" placeholder="Keterangan" v-model="kelolaKas.keterangan" name="keterangan"  autofocus=""></textarea>
 									<span v-if="errors.keterangan" class="label label-danger">{{ errors.keterangan[0] }}</span>
 								</div>
 							</div>
