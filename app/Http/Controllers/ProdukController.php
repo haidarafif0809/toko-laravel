@@ -162,7 +162,7 @@ class ProdukController extends Controller
             'harga_jual'          => 'required|numeric',
             'bisa_dijual'         => 'required',
             'satuan'              => 'nullable',
-            'produk_modifier_id'  => 'nullable|exists:modifiers,id',
+            'produk_modifier_id'  => 'nullable',
         ]);
 
         $modifier        = '';

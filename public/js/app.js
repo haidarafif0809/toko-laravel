@@ -73721,6 +73721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            status_satuan: '',
             status_modifier: '',
             errors: [],
             kategori_produks_id: [],
@@ -73877,6 +73878,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     app.status_modifier = 'accepted';
                 } else {
                     app.status_modifier = 'not_accepted';
+                }
+                if (resp.data.satuan == 1 || resp.data.satuan == 2 || resp.data.satuan == 3) {
+                    app.status_satuan = 'not_ceklis';
+                } else {
+                    app.status_satuan = 'ceklis';
                 }
             }).catch(function () {
                 alert("Could not load your produk");
@@ -74523,16 +74529,23 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.produk.satuan,
-                            expression: "produk.satuan"
+                            value: _vm.status_satuan,
+                            expression: "status_satuan"
                           }
                         ],
-                        attrs: { type: "radio", name: "lainnya" },
-                        domProps: { checked: _vm._q(_vm.produk.satuan, null) },
+                        attrs: {
+                          type: "radio",
+                          name: "lainnya",
+                          value: "ceklis",
+                          "unchecked-value": "not_ceklis"
+                        },
+                        domProps: {
+                          checked: _vm._q(_vm.status_satuan, "ceklis")
+                        },
                         on: {
                           click: _vm.bukaFormSatuan,
                           change: function($event) {
-                            _vm.$set(_vm.produk, "satuan", null)
+                            _vm.status_satuan = "ceklis"
                           }
                         }
                       }),
@@ -74542,49 +74555,48 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticStyle: { display: "none" },
-                      attrs: { id: "form-satuan" }
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.produk.satuan,
-                            expression: "produk.satuan"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          required: "",
-                          autocomplete: "off",
-                          placeholder: "Nama satuan",
-                          type: "text",
-                          name: "satuan",
-                          autofocus: ""
-                        },
-                        domProps: { value: _vm.produk.satuan },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                  _vm.status_satuan == "ceklis"
+                    ? _c("div", { attrs: { id: "form-satuan" } }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.produk.satuan,
+                              expression: "produk.satuan"
                             }
-                            _vm.$set(_vm.produk, "satuan", $event.target.value)
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            required: "",
+                            autocomplete: "off",
+                            placeholder: "Nama satuan",
+                            type: "text",
+                            name: "satuan",
+                            autofocus: ""
+                          },
+                          domProps: { value: _vm.produk.satuan },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.produk,
+                                "satuan",
+                                $event.target.value
+                              )
+                            }
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.errors.satuan
-                        ? _c("span", { staticClass: "label label-danger" }, [
-                            _vm._v(_vm._s(_vm.errors.satuan[0]))
-                          ])
-                        : _vm._e()
-                    ]
-                  )
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.satuan
+                          ? _c("span", { staticClass: "label label-danger" }, [
+                              _vm._v(_vm._s(_vm.errors.satuan[0]))
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
                 ])
               ]),
               _vm._v(" "),
@@ -80982,7 +80994,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.kategori[data-v-96dfc7e6] {\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\n.cart-item[data-v-96dfc7e6] {\r\n\tmax-height: 170px;\r\n\toverflow-y: scroll;\n}\n#pull-right[data-v-96dfc7e6]{\r\n\tfloat:right;\n}\n#pull-left[data-v-96dfc7e6]{\r\n\tfloat:left;\n}\n.bayar[data-v-96dfc7e6]{\r\n\tpadding: 30px 20px;\r\n\tfont-size: 30px;\n}\n.tombol[data-v-96dfc7e6]{\r\n\tpadding: 10px 20px;\r\n\tfont-size: 15px;\n}\n.button[data-v-96dfc7e6]{\r\n\tpadding: 5px 15px;\r\n\tfont-size: 10px;\n}\n.tombolBayar[data-v-96dfc7e6]{\r\n\tpadding: 10px 20px;\r\n\tfont-size: 15px;\r\n\twidth: 40%;\n}\n.tabInformasi[data-v-96dfc7e6]{\r\n\twidth: 50%;\n}\n#box[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\r\n\tbackground-color:#F5F8FA;\r\n\tborder-radius: 3px;\n}\n#box2[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\n}\n.total-bayar[data-v-96dfc7e6]{\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.kategori[data-v-96dfc7e6] {\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\n.cart-item[data-v-96dfc7e6] {\r\n\tmax-height: 170px;\r\n\toverflow-y: scroll;\n}\n#pull-right[data-v-96dfc7e6]{\r\n\tfloat:right;\n}\n#pull-left[data-v-96dfc7e6]{\r\n\tfloat:left;\n}\n.bayar[data-v-96dfc7e6]{\r\n\tpadding: 30px 20px;\r\n\tfont-size: 35px;\n}\n.tombol[data-v-96dfc7e6]{\r\n\tpadding: 10px 20px;\r\n\tfont-size: 15px;\n}\n.button[data-v-96dfc7e6]{\r\n\tpadding: 5px 15px;\r\n\tfont-size: 10px;\n}\n.tombolBayar[data-v-96dfc7e6]{\r\n\tpadding: 10px 20px;\r\n\tfont-size: 15px;\r\n\twidth: 40%;\n}\n.tabInformasi[data-v-96dfc7e6]{\r\n\twidth: 50%;\n}\n#box[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\r\n\tbackground-color:#F5F8FA;\r\n\tborder-radius: 3px;\n}\n#box2[data-v-96dfc7e6]{\r\n\tborder:1px solid #F0F0F0;\n}\n.total-bayar[data-v-96dfc7e6]{\r\n\tcolor: red;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -80993,12 +81005,6 @@ exports.push([module.i, "\n.kategori[data-v-96dfc7e6] {\r\n\tcolor: red;\r\n\tfo
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -81430,6 +81436,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			deleteProdukTbsPenjualan: {
 				produk_id: ''
 			},
+			dataTbs: {
+				id: '',
+				jumlah: '',
+				subtotal: '',
+				harga: ''
+			},
 			search: '',
 			formTunai: 1,
 			diskonProduk: 1,
@@ -81439,6 +81451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			formKartu: 0,
 			url: window.location.origin + window.location.pathname.replace("home", "penjualan"),
 			urlTambahTbs: window.location.origin + window.location.pathname.replace("home", "proses-tbs-penjualan"),
+			urlUpdateTbs: window.location.origin + window.location.pathname.replace("home", "update-tbs-penjualan"),
 			urlHapusTbs: window.location.origin + window.location.pathname.replace("home", "penjualan/hapus-tbs-penjualan"),
 			loading: true,
 			loadingTbs: true,
@@ -81472,6 +81485,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	},
 	methods: {
+		getDataTbs: function getDataTbs(id, subtotal, harga, jumlah) {
+			this.dataTbs.id = id;
+			this.dataTbs.subtotal = subtotal;
+			this.dataTbs.harga = harga;
+			this.dataTbs.jumlah = jumlah;
+		},
 		getHasilKembalian: function getHasilKembalian() {
 			var app = this;
 			var kembalian = app.pembayaran.bayar - app.jumlahBayar;
@@ -81499,10 +81518,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
-		},
-		simpanJumlahProduk: function simpanJumlahProduk() {
-			var app = this;
-			app.formJumlahProduk = app.tbs_penjualans.jumlah_produk;
 		},
 		getKategoriProduk: function getKategoriProduk(page) {
 			var app = this;
@@ -81657,6 +81672,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.errors = resp.response.data.errors;
 			});
 		},
+		simpanJumlahProduk: function simpanJumlahProduk(jumlah) {
+			var app = this;
+			var newJumlah = app.dataTbs;
+			axios.post(app.urlUpdateTbs, newJumlah).then(function (resp) {
+				app.inputTbsPenjualan.jumlah = '';
+				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+			}).catch(function (resp) {
+				app.errors = resp.response.data.errors;
+			});
+		},
 		deleteTbsPenjualan: function deleteTbsPenjualan(id_tbs_penjualan) {
 			var _this = this;
 
@@ -81742,48 +81768,35 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
-              _c(
-                "form",
-                {
-                  staticClass: "form-horizontal",
+              _c("form", { staticClass: "form-horizontal" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.dataTbs.jumlah,
+                      expression: "dataTbs.jumlah"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    autocomplete: "off",
+                    type: "number",
+                    name: "jumlahProduk",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.dataTbs.jumlah },
                   on: {
-                    submit: function($event) {
-                      $event.preventDefault()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.dataTbs, "jumlah", $event.target.value)
                     }
                   }
-                },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formJumlahProduk,
-                        expression: "formJumlahProduk"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      required: "",
-                      autocomplete: "off",
-                      type: "number",
-                      name: "diskon_per_Faktur",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.formJumlahProduk },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.formJumlahProduk = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("br")
-                ]
-              )
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
@@ -81794,7 +81807,7 @@ var render = function() {
                   attrs: { type: "button", "data-dismiss": "modal" },
                   on: {
                     click: function($event) {
-                      _vm.simpanJumlahProduk()
+                      _vm.simpanJumlahProduk(_vm.dataTbs.jumlah)
                     }
                   }
                 },
@@ -82047,154 +82060,144 @@ var render = function() {
         { staticClass: "panel panel-default" },
         [
           _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("DAFTAR PRODUK")
+            _vm._v("KATEGORI PRODUK")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "panel panel-default" }, [
-              _c("div", { staticClass: "panel-heading" }, [
-                _vm._v("KATEGORI PRODUK")
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _vm.kategori_produks.length > 0 && _vm.loading == false
-                  ? _c("div", { staticClass: "data-ada" }, [
-                      _c("div", { staticClass: "col-md-12" }, [
-                        _vm.kategori_produks.length == 1
-                          ? _c(
-                              "div",
-                              _vm._l(_vm.kategori_produks, function(
-                                kategori_produk,
-                                index
-                              ) {
-                                return _c("div", [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        " btn btn-success col-md-3 list-produk"
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "caption",
-                                          on: {
-                                            click: function($event) {
-                                              _vm.submitTbsPenjualan(_vm.produk)
-                                            }
+            _c("div", { staticClass: "row" }, [
+              _vm.kategori_produks.length > 0 && _vm.loading == false
+                ? _c("div", { staticClass: "data-ada" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _vm.kategori_produks.length == 1
+                        ? _c(
+                            "div",
+                            _vm._l(_vm.kategori_produks, function(
+                              kategori_produk,
+                              index
+                            ) {
+                              return _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      " btn btn-success col-md-3 list-produk"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(_vm.produk)
                                           }
-                                        },
-                                        [
-                                          kategori_produk.id.length > 15
-                                            ? _c(
-                                                "h4",
-                                                [
-                                                  _c("center", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        kategori_produk.nama_kategori_produk.slice(
-                                                          0,
-                                                          15
-                                                        )
-                                                      ) + "..."
-                                                    )
-                                                  ])
-                                                ],
-                                                1
-                                              )
-                                            : _c(
-                                                "h4",
-                                                [
-                                                  _c("center", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        kategori_produk.nama_kategori_produk
+                                        }
+                                      },
+                                      [
+                                        kategori_produk.id.length > 15
+                                          ? _c(
+                                              "h4",
+                                              [
+                                                _c("center", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      kategori_produk.nama_kategori_produk.slice(
+                                                        0,
+                                                        15
                                                       )
+                                                    ) + "..."
+                                                  )
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                          : _c(
+                                              "h4",
+                                              [
+                                                _c("center", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      kategori_produk.nama_kategori_produk
                                                     )
-                                                  ])
-                                                ],
-                                                1
-                                              )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              })
-                            )
-                          : _c(
-                              "div",
-                              _vm._l(_vm.kategori_produks, function(
-                                kategori_produk,
-                                index
-                              ) {
-                                return _c("div", [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        " btn btn-success col-md-3 list-produk"
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        {
-                                          staticClass: "caption",
-                                          on: {
-                                            click: function($event) {
-                                              _vm.submitTbsPenjualan(_vm.produk)
-                                            }
+                                                  )
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            })
+                          )
+                        : _c(
+                            "div",
+                            _vm._l(_vm.kategori_produks, function(
+                              kategori_produk,
+                              index
+                            ) {
+                              return _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      " btn btn-success col-md-3 list-produk"
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "caption",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.submitTbsPenjualan(_vm.produk)
                                           }
-                                        },
-                                        [
-                                          kategori_produk.nama_kategori_produk
-                                            .length > 15
-                                            ? _c(
-                                                "h4",
-                                                { staticClass: "kategori" },
-                                                [
-                                                  _c("center", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        kategori_produk.nama_kategori_produk.slice(
-                                                          0,
-                                                          15
-                                                        )
-                                                      ) + "..."
-                                                    )
-                                                  ])
-                                                ],
-                                                1
-                                              )
-                                            : _c(
-                                                "h4",
-                                                [
-                                                  _c("center", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        kategori_produk.nama_kategori_produk
+                                        }
+                                      },
+                                      [
+                                        kategori_produk.nama_kategori_produk
+                                          .length > 15
+                                          ? _c(
+                                              "h4",
+                                              { staticClass: "kategori" },
+                                              [
+                                                _c("center", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      kategori_produk.nama_kategori_produk.slice(
+                                                        0,
+                                                        15
                                                       )
+                                                    ) + "..."
+                                                  )
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                          : _c(
+                                              "h4",
+                                              [
+                                                _c("center", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      kategori_produk.nama_kategori_produk
                                                     )
-                                                  ])
-                                                ],
-                                                1
-                                              )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              })
-                            )
-                      ])
+                                                  )
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            })
+                          )
                     ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("br")
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("br"),
@@ -82449,7 +82452,7 @@ var render = function() {
                               _vm._v(
                                 "\t\t\t\t\t\n\t\t\t\t\t\t\t\t( " +
                                   _vm._s(tbs_penjualan.harga_produk) +
-                                  " - \n\t\t\t\t\t\t\t\t"
+                                  " X \n\t\t\t\t\t\t\t\t"
                               ),
                               _c(
                                 "span",
@@ -82458,6 +82461,16 @@ var render = function() {
                                   attrs: {
                                     "data-toggle": "modal",
                                     "data-target": "#modalJumlahProduk"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.getDataTbs(
+                                        tbs_penjualan.id_tbs_penjualan,
+                                        tbs_penjualan.subtotal,
+                                        tbs_penjualan.harga_produk,
+                                        tbs_penjualan.jumlah_produk
+                                      )
+                                    }
                                   }
                                 },
                                 [
@@ -82700,7 +82713,7 @@ var render = function() {
                               staticClass: "form-control bayar",
                               attrs: {
                                 type: "number",
-                                placeholder: "Pembayaran"
+                                placeholder: "PEMBAYARAN"
                               },
                               domProps: { value: _vm.pembayaran.bayar },
                               on: {
@@ -82925,8 +82938,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "label",
-      { staticClass: "control-label", attrs: { "font-size": "100px" } },
-      [_c("h2", [_c("b", [_vm._v("Kembalian :")])])]
+      { staticClass: "control-label", attrs: { "font-size": "50px" } },
+      [_c("h6", [_c("b", [_vm._v("KEMBALIAN :")])])]
     )
   },
   function() {
@@ -86806,6 +86819,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      staticStyle: { overflow: "hidden" },
                       attrs: {
                         required: "",
                         autocomplete: "off",
@@ -87267,6 +87281,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
+                      staticStyle: { overflow: "hidden" },
                       attrs: {
                         required: "",
                         autocomplete: "off",
