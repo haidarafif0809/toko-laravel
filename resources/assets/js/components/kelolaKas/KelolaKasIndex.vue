@@ -158,7 +158,7 @@ export default {
           reverseButtons: true
         })
          .then((willDelete) => {
-          if (willDelete) {
+          if (willDelete.value) {
             var app = this;
             axios.delete(app.url+'/' + id)
             .then(function (resp) {

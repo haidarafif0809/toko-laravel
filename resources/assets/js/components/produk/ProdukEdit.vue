@@ -122,11 +122,11 @@
                                 <input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="lainnya" v-model="status_satuan" value="ceklis" unchecked-value="not_ceklis" v-on:click="bukaFormSatuan">Lainnya
+                                <input type="radio" name="lainnya" v-model="status_satuan" value="checklist" unchecked-value="not_checklist" v-on:click="bukaFormSatuan">Lainnya
                             </label>
                             </form>
                             <br>
-                            <div id="form-satuan" v-if="status_satuan == 'ceklis'">
+                            <div id="form-satuan" v-if="status_satuan == 'checklist'">
                                 <input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
                                 <span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
                             </div>
@@ -376,10 +376,10 @@ export default {
                     app.status_modifier = 'not_accepted';
                 }
                 if (resp.data.satuan == 1 || resp.data.satuan == 2 || resp.data.satuan == 3) {
-                    app.status_satuan = 'not_ceklis';
+                    app.status_satuan = 'not_checklist';
                 }
                 else{
-                    app.status_satuan = 'ceklis';
+                    app.status_satuan = 'checklist';
                 }
             })
             .catch(function () {

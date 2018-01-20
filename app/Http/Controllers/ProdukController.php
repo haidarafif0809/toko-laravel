@@ -63,6 +63,16 @@ class ProdukController extends Controller
         return response()->json($kategoriProduk);
     }
 
+    public function detailModifier(){
+        $modifier = Modifier::select(['id','nama_modifier'])->get();
+        $array_modifier = [];
+        foreach ($modifier as $key => $val) {
+            $array_modifier[$val['id']] = $val['nama_modifier'];
+            
+        }
+        return $array_modifier;
+    }
+
     public function statusJual()
     {
         $status_jual = Produk::select('bisa_dijual')->first();

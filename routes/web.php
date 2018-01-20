@@ -51,6 +51,7 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 Route::get('/produk/produk-modifier-id', 'ProdukController@produkModifiersId');
 Route::get('/produk/produk-modifier-id/{id_produk}', 'ProdukController@produkModifiersIdEdit');
 Route::get('/produk/modifier', 'ProdukController@modifier');
+Route::get('/produk/produk-modifier', 'ProdukController@detailModifier');
 Route::resource('modifier', 'ModifierController', ['except' => 'show']);
 
 

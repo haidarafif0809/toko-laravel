@@ -12,8 +12,29 @@ class KelolaKasSeeder extends Seeder
      */
     public function run()
     {
-        KelolaKas::create([
-            'toko_id' => 1, 'type' => 1, 'jumlah' => 1000, 'keterangan' => 'lunas',
-        ]);
+        // Membuat sample kelola Kas
+        $kelola_kas             = new KelolaKas();
+        $kelola_kas->toko_id    = 1;
+        $kelola_kas->type       = 1;
+        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->keterangan = 'Lunas';
+        $kelola_kas->save();
+
+        // Membuat sample kelola Kas
+        $kelola_kas             = new KelolaKas();
+        $kelola_kas->toko_id    = 1;
+        $kelola_kas->type       = 2;
+        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->keterangan = 'Ngutang';
+        $kelola_kas->save();
+
+        // Membuat sample kelola Kas
+        $kelola_kas             = new KelolaKas();
+        $kelola_kas->toko_id    = 1;
+        $kelola_kas->type       = 1;
+        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->keterangan = 'Nyicil';
+        $kelola_kas->save();
+
     }
 }
