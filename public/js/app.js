@@ -81394,6 +81394,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -81516,6 +81517,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				app.diskonPerfaktur.rupiah = 0;
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
+
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
 		},
@@ -82732,15 +82734,28 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", [
-                            _vm._m(5),
-                            _vm._v(" "),
-                            _c("hr"),
-                            _c("h3", [
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.pembayaran.kembalian))
-                              ])
-                            ]),
-                            _c("hr")
+                            _c(
+                              "label",
+                              {
+                                staticClass: "control-label",
+                                attrs: { "font-size": "200px" }
+                              },
+                              [
+                                _c(
+                                  "h3",
+                                  [
+                                    _vm._v(" KEMBALIAN :\n\t\t\t\t\t\t\t\t\t"),
+                                    _c("font", { attrs: { color: "red" } }, [
+                                      _vm._v(
+                                        " Rp." +
+                                          _vm._s(_vm.pembayaran.kembalian)
+                                      )
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
                           ])
                         ]
                       )
@@ -82814,7 +82829,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
@@ -82931,16 +82946,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("td", { attrs: { align: "right" } }, [_vm._v("2,2%")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "control-label", attrs: { "font-size": "50px" } },
-      [_c("h6", [_c("b", [_vm._v("KEMBALIAN :")])])]
-    )
   },
   function() {
     var _vm = this
