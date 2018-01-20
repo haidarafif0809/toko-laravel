@@ -17,6 +17,7 @@ class CreateKategoriProduksTable extends Migration
             $table->increments('id');
             $table->integer('toko_id');
             $table->string('nama_kategori_produk');
+            $table->string('urutan_kategori_produk');
             $table->unsignedInteger('created_by')->nullable()->index();
             $table->unsignedInteger('updated_by')->nullable()->index();
             $table->timestamps();
