@@ -225,6 +225,9 @@ class PenjualanController extends Controller
 
     public function ubahTbsPenjualan(Request $request)
     {
+        // $this->validate($request, [
+        // 'jumlah' => 'not_in:0',
+        // ]);
         $subtotal = ($request->harga * $request->jumlah);
         TbsPenjualan::where('id_tbs_penjualan', $request->id)->update([
             'jumlah_produk' => $request->jumlah,

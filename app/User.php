@@ -43,7 +43,7 @@ class User extends Authenticatable
         $user->verification_token = $token;
         $user->save();
         Mail::send('auth.emails.verification', compact('user', 'token'), function ($message) use ($user) {
-            $message->to($user->email, $user->nama_pemilik)->subject('Verifikasi Akun Toko Dasar');
+            $message->to($user->email, $user->nama_pemilik)->subject('Konfirmasi Registrasi Akun KavePos Anda');
         });
     }
     public function sendVerificationStaff()
@@ -53,7 +53,7 @@ class User extends Authenticatable
         $user->verification_token = $token;
         $user->save();
         Mail::send('auth.emails.verificationStaff', compact('user', 'token'), function ($message) use ($user) {
-            $message->to($user->email, $user->nama_pemilik)->subject('Verifikasi Akun Toko Dasar');
+            $message->to($user->email, $user->nama_pemilik)->subject('Konfirmasi Undangan Akun KavePos');
         });
     }
 

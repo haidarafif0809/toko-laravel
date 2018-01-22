@@ -38,11 +38,13 @@ class KategoriProdukController extends Controller
     {
         //
         $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,NULL,id,toko_id,' . Auth::user()->toko_id,
+            'nama_kategori_produk'   => 'required|unique:kategori_produks,nama_kategori_produk,NULL,id,toko_id,' . Auth::user()->toko_id,
+            'urutan_kategori_produk' => 'required|unique:kategori_produks,urutan_kategori_produk,NULL,id,toko_id,' . Auth::user()->toko_id,
         ]);
         KategoriProduk::create([
-            'nama_kategori_produk' => $request->nama_kategori_produk,
-            'toko_id'              => Auth::user()->toko_id,
+            'nama_kategori_produk'   => $request->nama_kategori_produk,
+            'urutan_kategori_produk' => $request->urutan_kategori_produk,
+            'toko_id'                => Auth::user()->toko_id,
         ]);
     }
 
@@ -78,10 +80,12 @@ class KategoriProdukController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_kategori_produk' => 'required|unique:kategori_produks,nama_kategori_produk,' . $id . ',id,toko_id,' . Auth::user()->toko_id,
+            'nama_kategori_produk'   => 'required|unique:kategori_produks,nama_kategori_produk,' . $id . ',id,toko_id,' . Auth::user()->toko_id,
+            'urutan_kategori_produk' => 'required|unique:kategori_produks,urutan_kategori_produk,' . $id . ',id,toko_id,' . Auth::user()->toko_id,
         ]);
         KategoriProduk::find($id)->update([
-            'nama_kategori_produk' => $request->nama_kategori_produk,
+            'nama_kategori_produk'   => $request->nama_kategori_produk,
+            'urutan_kategori_produk' => $request->urutan_kategori_produk,
         ]);
     }
 
@@ -98,12 +102,14 @@ class KategoriProdukController extends Controller
     }
     public function view()
     {
-        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->paginate(10);
+        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->orderBy('urutan_kategori_produk', 'asc')->paginate(10);
     }
 
     public function search(Request $request)
     {
-        $nama_kategori_produk = KategoriProduk::where('nama_kategori_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
+        $nama_kategori_produk = KategoriProduk::where('nama_kategori_produk', 'LIKE', "%$request->pencarian%")
+            ->orWhere('urutan_kategori_produk', 'LIKE', "%$request->pencarian%")
+            ->paginate(10);
         return response()->json($nama_kategori_produk);
     }
 }

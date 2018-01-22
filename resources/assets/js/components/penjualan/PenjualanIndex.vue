@@ -342,8 +342,9 @@
 									<input type="number" class="form-control bayar" placeholder="PEMBAYARAN" v-model="pembayaran.bayar"> 
 								</div>
 								<div>
-									<label class="control-label" font-size="50px"><h6><b>KEMBALIAN :</b></h6></label>
-									<hr><h3><span>{{pembayaran.kembalian}}</span></h3><hr>
+									<label class="control-label" font-size="200px" > <h3> KEMBALIAN :
+										<font color="red"> Rp.{{pembayaran.kembalian}}</font></h3>
+									</label>
 								</div>
 
 							</div>
@@ -512,6 +513,7 @@ export default {
 				app.diskonPerfaktur.rupiah = 0;
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
+			
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
 		},
