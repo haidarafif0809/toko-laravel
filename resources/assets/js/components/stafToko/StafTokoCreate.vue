@@ -133,7 +133,7 @@ export default {
 			var newuser = app.user;
 			axios.post(app.url, newuser)
 			.then(function (resp) {
-				app.message = 'Sukses : Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
+				app.message = 'Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
 				app.alert(app.message);
 				app.user.nama_pemilik = ''
 				app.user.email = ''

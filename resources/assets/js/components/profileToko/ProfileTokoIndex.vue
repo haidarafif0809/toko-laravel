@@ -114,15 +114,15 @@
                                             <td class="col-md-8">: {{profileToko.profileToko.no_telp}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">Provinsi </td>
+                                            <td class="col-md 2">PROVINSI </td>
                                             <td class="col-md-8">: {{profileToko.provinsi.name}}</td>
                                         </tr>                
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">Kabupaten </td>
+                                            <td class="col-md 2">KABUPATEN </td>
                                             <td class="col-md-8">: {{profileToko.kabupaten.name}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">ALAMAT/TEMPAT</td>
+                                            <td class="col-md 2">ALAMAT</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.alamat}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >

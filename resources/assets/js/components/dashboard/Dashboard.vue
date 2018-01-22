@@ -6,7 +6,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    Selamat Datang di Dashboard Toko Laravel
+                    Selamat Datang di Dashboard KavePos
                 </div>
             </div>
         </div>

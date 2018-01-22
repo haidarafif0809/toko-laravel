@@ -67,8 +67,9 @@
 									</td>
 									<td>
 										<span v-if="produk.satuan == 1">Pcs</span>
-										<span v-if="produk.satuan == 2">Porsi</span>
-										<span v-if="produk.satuan == 3">Pack</span>
+										<span v-else-if="produk.satuan == 2">Porsi</span>
+										<span v-else-if="produk.satuan == 3">Pack</span>
+										<span v-else>{{ produk.satuan }}</span>
 									</td>
 								</tr>
 								<tr>
@@ -78,6 +79,7 @@
 									<td>
 										<span v-for="id,index in produk.produk_modifier_id" class="detail_nama_modifier">
 											<span>{{ produk_modifier[id] }}</span>
+											<span v-if="produk_modifier[id] == null">Tidak ada tambahan</span>
 										</span>
 									</td>
 								</tr>
