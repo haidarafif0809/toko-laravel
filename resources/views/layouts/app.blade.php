@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta content="{{ csrf_token() }}" name="csrf-token">
     <title>
-        Toko Dasar
+        KavePos
     </title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
                             <img src="{{ asset('images/logo.png') }}" class="img-circle" width="100" height="100" />
                         </div>
                         <div class='title-holder'>
-                            {{-- <span>Toko Dasar</span> --}}
+                            {{-- <span>KavePos</span> --}}
                         </div>
                     </div>
                     <!-- word navigations -->

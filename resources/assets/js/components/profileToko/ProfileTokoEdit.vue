@@ -20,6 +20,7 @@ img {
 					<div class="panel-heading">
 						<h4 class="panel-title"> Profile Toko </h4>
 					</div>
+					<br> 
 					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 						<div class="form-group">
 							<label for="nama_toko" class="col-md-2 control-label">Nama Toko</label>
@@ -99,7 +100,7 @@ img {
 						</div>
 
 						<div class="form-group">
-							<label for="foto" class="col-md-2 control-label">Foto</label>
+							<label for="foto" class="col-md-2 control-label"></label>
 							<div class="col-md-4">
 								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" >
 							</div>
