@@ -30,21 +30,9 @@
 							<tbody>
 								<tr>
 									<td>
-										<label>Kode Produk:</label>
-									</td>
-									<td>{{ produk.kode_produk }}</td>
-								</tr>
-								<tr>
-									<td>
 										<label>Harga Jual:</label>
 									</td>
-									<td>{{ produk.harga_jual }}</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Harga Beli:</label>
-									</td>
-									<td>{{ produk.harga_beli }}</td>
+									<td>{{  "Rp" }}{{ new Intl.NumberFormat().format(produk.harga_jual) }}</td>
 								</tr>
 								<tr>
 									<td>
