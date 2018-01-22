@@ -88,14 +88,13 @@ class ProfileTokoController extends Controller
             return response()->view('error.403');
         } else {
             $this->validate($request, [
-                'nama_toko'        => 'required',
-                'nama_pemilik'     => 'required',
-                'email'            => 'required|string|email|max:255|unique:tokos,email,' . $id,
-                'no_telp'          => 'required',
-                'provinsi'         => 'required',
-                'kabupaten'        => 'required',
-                'alamat'           => 'required',
-                'prefix_member_id' => 'required',
+                'nama_toko'    => 'required',
+                'nama_pemilik' => 'required',
+                'email'        => 'required|string|email|max:255|unique:tokos,email,' . $id,
+                'no_telp'      => 'required',
+                'provinsi'     => 'required',
+                'kabupaten'    => 'required',
+                'alamat'       => 'required',
             ]);
             $user_login->update([
                 'nama_toko'        => $request->nama_toko,

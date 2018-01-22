@@ -135,57 +135,64 @@ watch: {
             });
         },
         deleteEntry(id, index,nama_pemilik) {
-           this.$swal({
-            title: "Hapus?", 
-            text: "Yakin Ingin Menghapus user "+ nama_pemilik +" ?", 
-            icon: "warning",
-            buttons: ['Batal', 'Hapus'],
-            dangerMode: true,
-        })
-           .then((willDelete) => {
-            if (willDelete) {
-              var app = this;
-              axios.delete(app.url+'/' + id)
-              .then(function (resp) {
-                app.getUsers();
-                app.alert("Berhasil Menghapus Staf "+nama_pemilik)
+            swal({
+                title: "Konfirmasi Hapus",
+                text : "Anda Yakin Ingin Menghapus " + nama_pemilik +" ?",
+                type : "warning",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true,
             })
-              .catch(function (resp) {
-                app.alert("Tidak dapat menghapus Staf!");
+            .then((result) => {
+                if (result.value) {
+                  var app = this;
+                  axios.delete(app.url+'/' + id)
+                  .then(function (resp) {
+                    app.getUsers();
+                    swal({
+                      title: 'Berhasil!',
+                      type: 'success',
+                      text: 'Berhasil menghapus '+ nama_pemilik,
+                      showConfirmButton: false,
+                      timer: 2300,
+                  });
+                })
+                  .catch(function (resp) {
+                    app.$router.replace('/staf-toko');
+                    swal({
+                      title: 'Gagal!',
+                      type: 'warning',
+                      text: 'Tidak dapat menghapus Staf Toko!'
+                  });
+                });
+              }
+              this.$router.replace('/staf-toko');
+          });
+        },
+        getHasilPencarian(page){
+            var app = this;
+            app.loading = true;
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+            axios.get(app.url+'/search?search='+app.search+'&page='+page)
+            .then(function (resp) {
+                app.loading = false
+                app.users = resp.data.data;
+                app.usersData = resp.data;
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                app.loading = false
+                alert("Could not load users");
             });
-          } 
-          else {
-              return;
-          }
-      });
-       },
-       alert(pesan) {
-          this.$swal({
-            title: "Berhasil!",
-            text: pesan,
-            icon: "success",
-        });
-      },
-      getHasilPencarian(page){
-        var app = this;
-        app.loading = true;
-        if (typeof page === 'undefined') {
-            page = 1;
-        }
-        axios.get(app.url+'/search?search='+app.search+'&page='+page)
-        .then(function (resp) {
-            app.loading = false
-            app.users = resp.data.data;
-            app.usersData = resp.data;
-        })
-        .catch(function (resp) {
-            console.log(resp);
-            app.loading = false
-            alert("Could not load users");
-        });
 
+        }
     }
-}
 
 }
 </script>
