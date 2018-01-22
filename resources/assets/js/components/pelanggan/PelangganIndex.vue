@@ -688,7 +688,6 @@ export default {
     		this.riwayatBelanja = 0
     		this.perilakuPelanggan = 0
     		this.memberPelanggan = 0
-    		this.tentangPelanggan(active);
 
 
 
