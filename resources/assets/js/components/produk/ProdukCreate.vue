@@ -112,29 +112,6 @@
 							</div>
 						</div>
 
-<<<<<<< HEAD
-					<div class="form-group">
-						<label for="foto" class="col-md-2 control-label">Satuan</label>
-						<div class="col-md-5">
-							<form>
-							<label class="radio-inline">
-								<input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan" checked="checked">Pcs
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="lainnya" v-model="produk.satuan" v-on:click="bukaFormSatuan">Lainnya
-							</label>
-							</form>
-							<br>
-							<div id="form-satuan" style="display:none">
-								<input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
-								<span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
-=======
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Satuan</label>
 							<div class="col-md-5">
@@ -157,7 +134,6 @@
 									<input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
 									<span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
 								</div>
->>>>>>> master
 							</div>
 						</div>
 
