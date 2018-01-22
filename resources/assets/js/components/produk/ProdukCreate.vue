@@ -117,7 +117,7 @@
 						<div class="col-md-5">
 							<form>
 							<label class="radio-inline">
-								<input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan">Pcs
+								<input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan" checked="checked">Pcs
 							</label>
 							<label class="radio-inline">
 								<input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi

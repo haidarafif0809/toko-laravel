@@ -39,7 +39,7 @@
                     <!-- ////logo and title -->
                     <div class='lgo'>
                         <div class='img-holder'>
-                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="100" height="100" />
+                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="194" height="100" />
                         </div>
                         <div class='title-holder'>
                             {{-- <span>Toko Dasar</span> --}}
@@ -161,7 +161,7 @@
                         @role('member')
                         <a href="">
                             <li data-toggle="collapse" href="#logo-produk-collapse">
-                                <i class="fa fa-briefcase fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
+                                <i class="fa fa-cubes fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
                             </li>
                         </a>
                         <span class="nav_txt">Produk</span>
