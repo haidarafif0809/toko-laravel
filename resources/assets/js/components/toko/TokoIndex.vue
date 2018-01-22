@@ -256,7 +256,7 @@ export default {
             swal({
               title: 'Gagal!',
               type: 'warning',
-              text: 'Tidak dapat menghapus pelanggan!'
+              text: 'Tidak dapat menghapus Toko!'
             });
           });
         }

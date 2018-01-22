@@ -263,8 +263,43 @@
 
 </div>
 <!-- Scripts -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
+<script type="text/javascript">
+    function sweetAlert(){
+        var namaToko = document.getElementById('nama_toko').value;
+        var userName = document.getElementById('nama_pemilik').value;
+        var email = document.getElementById('email').value;
+        var no_telp = document.getElementById('no_telp').value;
+        var password = document.getElementById('password').value;
+        if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
+             swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+        }
+    } function sweetAlerts(){
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if ((!email == '') && (!password == '')) {
+             swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+        }
+    }
+</script>
 </body>
 </html>

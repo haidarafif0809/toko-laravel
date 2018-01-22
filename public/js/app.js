@@ -83637,7 +83637,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             swal({
               title: 'Gagal!',
               type: 'warning',
-              text: 'Tidak dapat menghapus pelanggan!'
+              text: 'Tidak dapat menghapus Toko!'
             });
           });
         }
@@ -86083,7 +86083,6 @@ var render = function() {
                       autocomplete: "on",
                       placeholder: "Prefix Member Id",
                       type: "text",
-                      required: "",
                       name: "prefix_member_id",
                       autofocus: ""
                     },
@@ -88548,31 +88547,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteEntry: function deleteEntry(id, index, nama_pemilik) {
             var _this = this;
 
-            this.$swal({
-                title: "Hapus?",
-                text: "Yakin Ingin Menghapus user " + nama_pemilik + " ?",
-                icon: "warning",
-                buttons: ['Batal', 'Hapus'],
-                dangerMode: true
-            }).then(function (willDelete) {
-                if (willDelete) {
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + nama_pemilik + " ?",
+                type: "warning",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
                     var app = _this;
                     axios.delete(app.url + '/' + id).then(function (resp) {
                         app.getUsers();
-                        app.alert("Berhasil Menghapus Staf " + nama_pemilik);
+                        swal({
+                            title: 'Berhasil!',
+                            type: 'success',
+                            text: 'Berhasil menghapus ' + nama_pemilik,
+                            showConfirmButton: false,
+                            timer: 2300
+                        });
                     }).catch(function (resp) {
-                        app.alert("Tidak dapat menghapus Staf!");
+                        app.$router.replace('/staf-toko');
+                        swal({
+                            title: 'Gagal!',
+                            type: 'warning',
+                            text: 'Tidak dapat menghapus Staf Toko!'
+                        });
                     });
-                } else {
-                    return;
                 }
-            });
-        },
-        alert: function alert(pesan) {
-            this.$swal({
-                title: "Berhasil!",
-                text: pesan,
-                icon: "success"
+                _this.$router.replace('/staf-toko');
             });
         },
         getHasilPencarian: function getHasilPencarian(page) {
@@ -89083,38 +89090,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	methods: {
-		klikUndang: function klikUndang(nama_pemilik, email, no_telp, password) {
-			var emails = document.forms['emailku']['emailUser'].value;
-			var atpos = emails.indexOf("@");
-			var dotpos = emails.lastIndexOf(".");
-			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
-				return;
-			} else {
-				this.undang = false;
-			}
-		},
+		// klikUndang(nama_pemilik, email, no_telp, password) {
+		// 	var emails = document.forms['emailku']['emailUser'].value;
+		// 	var atpos = emails.indexOf("@");
+		// 	var dotpos = emails.lastIndexOf(".");
+		// 	if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
+		// 		return;
+		// 	}
+		// 	else {
+		// 		this.undang = false;
+
+		// // using setTimeout to simulate ajax request
+		// setTimeout(() => {
+		// 	window.swal({
+		// 		title: "Finished!",
+		// 		showConfirmButton: false,
+		// 		timer: 1000
+		// 	});
+		// }, 2000);
+
+		// }
+		// },
 		saveForm: function saveForm() {
+			swal({
+				title: "Memproses...",
+				text: "Mohon tunggu",
+				imageUrl: "images/ajaxloader.gif",
+				showConfirmButton: false,
+				allowOutsideClick: false,
+				allowEscapeKey: false
+			});
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
-				app.message = 'Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
-				app.alert(app.message);
+				swal({
+					title: 'Berhasil!',
+					type: 'success',
+					text: 'Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.',
+					showConfirmButton: false,
+					timer: 2300
+				});
 				app.user.nama_pemilik = '';
 				app.user.email = '';
 				app.user.no_telp = '';
-				// app.user.password = ''
+				app.user.password = '';
 				app.errors = '';
 				app.$router.replace('/staf-toko');
 			}).catch(function (resp) {
 				app.success = false;
 				app.errors = resp.response.data.errors;
-			});
-		},
-		alert: function alert(pesan) {
-			this.$swal({
-				title: "Berhasil!",
-				text: pesan,
-				icon: "success"
 			});
 		}
 	}
@@ -89515,17 +89539,7 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-primary",
-                        attrs: { value: "simpan", type: "submit" },
-                        on: {
-                          click: function($event) {
-                            _vm.klikUndang(
-                              _vm.user.nama_pemilik,
-                              _vm.user.email,
-                              _vm.user.no_telp,
-                              _vm.user.password
-                            )
-                          }
-                        }
+                        attrs: { value: "simpan", type: "submit" }
                       },
                       [
                         _c(
