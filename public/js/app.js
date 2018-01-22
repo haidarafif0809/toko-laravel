@@ -72449,6 +72449,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					text: app.message
 				});
 				app.selectedProdukModifierId();
+				app.modifier.nama_modifier = '';
+				app.modifier.harga_modifier = '';
 			}).catch(function (resp) {
 				app.success = false;
 				app.errors = resp.response.data.errors;
@@ -72845,7 +72847,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v(" Ya\n\t\t\t\t\t\t\t")
+                      _vm._v(" Ya\n\t\t\t\t\t\t\t\t")
                     ])
                   ]),
                   _vm._v(" "),
@@ -72874,7 +72876,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v(" Tidak\n\t\t\t\t\t\t\t")
+                      _vm._v(" Tidak\n\t\t\t\t\t\t\t\t")
                     ]),
                     _vm._v(" "),
                     _vm.errors.bisa_dijual
@@ -72966,7 +72968,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Pcs\n\t\t\t\t\t\t")
+                      _vm._v("Pcs\n\t\t\t\t\t\t\t\t")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -72988,7 +72990,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Porsi\n\t\t\t\t\t\t")
+                      _vm._v("Porsi\n\t\t\t\t\t\t\t\t")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -73010,7 +73012,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Pack\n\t\t\t\t\t\t")
+                      _vm._v("Pack\n\t\t\t\t\t\t\t\t")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -73032,7 +73034,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Lainnya\n\t\t\t\t\t\t")
+                      _vm._v("Lainnya\n\t\t\t\t\t\t\t\t")
                     ])
                   ]),
                   _vm._v(" "),
@@ -73113,7 +73115,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n\t\t\t\t\t\t      Tambahan & Pilhan Produk\n\t\t\t\t\t\t    "
+                            "\n\t\t\t\t\t\t\t\t\tTambahan & Pilhan Produk\n\t\t\t\t\t\t\t\t"
                           )
                         ]
                       ),
@@ -73959,6 +73961,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     text: app.message
                 });
                 app.selectedProdukModifierId();
+                app.modifier.nama_modifier = '';
+                app.modifier.harga_modifier = '';
             }).catch(function (resp) {
                 app.success = false;
                 app.errors = resp.response.data.errors;
@@ -74342,7 +74346,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v(" Ya\n                            ")
+                      _vm._v(" Ya\n                                    ")
                     ])
                   ]),
                   _vm._v(" "),
@@ -74371,7 +74375,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v(" Tidak\n                            ")
+                      _vm._v(" Tidak\n                                    ")
                     ]),
                     _vm._v(" "),
                     _vm.errors.bisa_dijual
@@ -74476,7 +74480,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Pcs\n                        ")
+                      _vm._v("Pcs\n                                    ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -74498,7 +74502,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Porsi\n                        ")
+                      _vm._v("Porsi\n                                    ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -74520,7 +74524,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Pack\n                        ")
+                      _vm._v("Pack\n                                    ")
                     ]),
                     _vm._v(" "),
                     _c("label", { staticClass: "radio-inline" }, [
@@ -74549,7 +74553,7 @@ var render = function() {
                           }
                         }
                       }),
-                      _vm._v("Lainnya\n                        ")
+                      _vm._v("Lainnya\n                                    ")
                     ])
                   ]),
                   _vm._v(" "),
@@ -74629,7 +74633,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                              Tambahan & Pilhan Produk\n                            "
+                            "\n                                      Tambahan & Pilhan Produk\n                                  "
                           )
                         ]
                       ),
@@ -75558,6 +75562,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -75618,21 +75624,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         deleteKategoriProduk: function deleteKategoriProduk(id, index, nama_kategori_produk) {
-            if (confirm("Yakin Ingin Menghapus Satuan " + nama_kategori_produk + " ?")) {
-                var app = this;
-                axios.delete(app.url + '/' + id).then(function (resp) {
-                    app.getKategoriProduks();
-                    app.alert(nama_kategori_produk);
-                }).catch(function (resp) {
-                    alert("Could not delete Satuan");
-                });
-            }
-        },
-        alert: function alert(nama_kategori_produk) {
-            this.$swal({
-                title: "Berhasil!",
-                text: 'Sukses : Berhasil menghapus kategori Produk ' + nama_kategori_produk,
-                icon: "success"
+            var _this = this;
+
+            swal({
+                title: "Konfirmasi Hapus",
+                text: "Anda Yakin Ingin Menghapus " + nama_kategori_produk + " ?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    var app = _this;
+                    axios.delete(app.url + '/' + id).then(function (resp) {
+                        app.getKategoriProduks();
+                        swal({
+                            title: 'Berhasil!',
+                            type: 'success',
+                            text: 'Berhasil menghapus ' + nama_kategori_produk
+                        });
+                        app.$router.replace('/kategoriProduk/');
+                    }).catch(function (resp) {
+                        app.$router.replace('/kategoriProduk/');
+                        swal({
+                            title: 'Gagal!',
+                            type: 'warning',
+                            text: 'Tidak dapat menghapus kategori produk!'
+                        });
+                    });
+                }
+                _this.$router.replace('/kategoriProduk/');
             });
         }
     }
@@ -75679,7 +75703,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { name: "createKategoriProduk" } }
                     },
-                    [_vm._v("Create Kategori Produk")]
+                    [_vm._v("Tambah Kategori Produk")]
                   )
                 ],
                 1
@@ -75728,6 +75752,10 @@ var render = function() {
                       return _c("tr", [
                         _c("td", [
                           _vm._v(_vm._s(kategoriProduk.nama_kategori_produk))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(_vm._s(kategoriProduk.urutan_kategori_produk))
                         ]),
                         _vm._v(" "),
                         _c(
@@ -75807,6 +75835,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("th", [_vm._v("Nama Kategori Produk")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Urutan Kategori Produk")]),
       _vm._v(" "),
       _c("th", [_vm._v("Aksi")])
     ])
@@ -75942,6 +75972,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -75949,7 +75990,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_kategori_produk: ''
+				nama_kategori_produk: '',
+				urutan_kategori_produk: ''
 			},
 			message: ''
 		};
@@ -76038,13 +76080,17 @@ var render = function() {
                   _c(
                     "label",
                     {
-                      staticClass: "col-md-2 control-label",
+                      staticClass: "col-md-3 control-label",
                       attrs: { for: "nama_kategori_produk" }
                     },
-                    [_vm._v("\n\t\t\t\t\t\t\t\tNama Produk\n\t\t\t\t\t\t\t")]
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t\t\tNama Kategori Produk\n\t\t\t\t\t\t\t"
+                      )
+                    ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "col-md-5" }, [
                     _c("input", {
                       directives: [
                         {
@@ -76058,7 +76104,7 @@ var render = function() {
                       attrs: {
                         required: "",
                         autocomplete: "off",
-                        placeholder: "Nama Produk",
+                        placeholder: "Nama Kategori Produk",
                         type: "text",
                         name: "nama_kategori_produk",
                         autofocus: ""
@@ -76099,6 +76145,75 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-md-3 control-label",
+                      attrs: { for: "urutan_kategori_produk" }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t\t\tUrutan Tampil Kategori Produk\n\t\t\t\t\t\t\t"
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kategoriProduk.urutan_kategori_produk,
+                          expression: "kategoriProduk.urutan_kategori_produk"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        required: "",
+                        autocomplete: "off",
+                        placeholder: "Urutan Tampil Kategori Produk  Produk",
+                        type: "number",
+                        name: "urutan_kategori_produk",
+                        autofocus: ""
+                      },
+                      domProps: {
+                        value: _vm.kategoriProduk.urutan_kategori_produk
+                      },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.kategoriProduk,
+                            "urutan_kategori_produk",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.urutan_kategori_produk
+                      ? _c(
+                          "span",
+                          {
+                            staticClass: "label label-danger",
+                            attrs: { id: "name_error" }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t\t" +
+                                _vm._s(_vm.errors.urutan_kategori_produk[0]) +
+                                "\n\t\t\t\t\t\t\t\t"
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
                 _vm._m(1)
               ]
             )
@@ -76126,7 +76241,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4 col-md-offset-2" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-3" }, [
         _c(
           "button",
           {
@@ -76235,6 +76350,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	mounted: function mounted() {
@@ -76247,7 +76377,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			errors: [],
 			url: window.location.origin + window.location.pathname.replace("home", "kategoriProduk"),
 			kategoriProduk: {
-				nama_kategori_produk: ''
+				nama_kategori_produk: '',
+				urutan_kategori_produk: ''
 			},
 			kategoriProdukId: null,
 			message: ''
@@ -76344,13 +76475,17 @@ var render = function() {
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-2 control-label",
+                    staticClass: "col-md-3 control-label",
                     attrs: { for: "nama_kategori_produk" }
                   },
-                  [_vm._v("Nama Kategori Produk")]
+                  [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\tNama Kategori Produk\n\t\t\t\t\t\t\t"
+                    )
+                  ]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-5" }, [
                   _c("input", {
                     directives: [
                       {
@@ -76387,9 +76522,89 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _vm.errors.nama_kategori_produk
-                    ? _c("span", { staticClass: "label label-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.nama_kategori_produk[0]))
-                      ])
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "label label-danger",
+                          attrs: { id: "name_error" }
+                        },
+                        [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t" +
+                              _vm._s(_vm.errors.nama_kategori_produk[0]) +
+                              "\n\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  {
+                    staticClass: "col-md-3 control-label",
+                    attrs: { for: "urutan_kategori_produk" }
+                  },
+                  [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t\tUrutan Tampil Kategori Produk\n\t\t\t\t\t\t\t"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-5" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.kategoriProduk.urutan_kategori_produk,
+                        expression: "kategoriProduk.urutan_kategori_produk"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      required: "",
+                      autocomplete: "off",
+                      placeholder: "Urutan Tampil Kategori Produk  Produk",
+                      type: "number",
+                      name: "urutan_kategori_produk",
+                      autofocus: ""
+                    },
+                    domProps: {
+                      value: _vm.kategoriProduk.urutan_kategori_produk
+                    },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.kategoriProduk,
+                          "urutan_kategori_produk",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.urutan_kategori_produk
+                    ? _c(
+                        "span",
+                        {
+                          staticClass: "label label-danger",
+                          attrs: { id: "name_error" }
+                        },
+                        [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t" +
+                              _vm._s(_vm.errors.urutan_kategori_produk[0]) +
+                              "\n\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
                     : _vm._e()
                 ])
               ]),

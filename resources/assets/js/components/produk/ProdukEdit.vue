@@ -11,136 +11,136 @@
             <li class="active" >Edit Produk</li>
         </ul>
         <div class="col-md-9 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">Edit Produk {{ produk.nama_produk }}</div>
-            <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">Edit Produk {{ produk.nama_produk }}</div>
+                <div class="panel-body">
 
-                <form v-on:submit.prevent="saveForm()" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
-                        <div class="col-md-4">
-                            <input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
-                            <span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
+                    <form v-on:submit.prevent="saveForm()" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
+                            <div class="col-md-4">
+                                <input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
+                                <span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_produk" class="col-md-2 control-label">Nama Produk</label>
-                        <div class="col-md-4">
-                            <input class="form-control" required autocomplete="off" placeholder="Name" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
-                            <span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
-                        <div class="col-md-4">
-                            <table width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td width="80%" style="vertical-align: middle;">
-                                            <selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
-                                                <option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
-                                            </selectize-component> 
-                                        </td>
-                                        <td width="20%" style="vertical-align: top; text-align: center;">
-                                            <span @click="tambahKategori()" class="btn btn-sm btn-success">+Tambah</span>   
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
-                            <span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga" class="col-md-2 control-label">Harga Beli</label>
-                        <div class="col-md-2">
-                            <input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
-                            <span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="harga" class="col-md-2 control-label">Harga Jual</label>
-                        <div class="col-md-2">
-                            <input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
-                            <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
-                        <div class="col-md-4 margin-atas">
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"> Ya
-                                </label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
-                                </label>
-                                <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
                             </div>
                         </div>
-                    </div>
-                    <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
-                        <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-                        <div class="col-md-4">
-                            <div v-if="produk.foto.length > 100">
-                                <img :src="produk.foto" class="img-responsive thumbnail shadow">
-                            </div>
-                            <div v-else>
-                                <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
-                            </div>
-                        </div>
-                        <div v-if="produk.foto == ''" class="col-md-4">
-                            <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="foto" class="col-md-2 control-label">Foto</label>
-                        <div class="col-md-4">
-                            <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
-                        </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="nama_produk" class="col-md-2 control-label">Nama Produk</label>
+                            <div class="col-md-4">
+                                <input class="form-control" required autocomplete="off" placeholder="Name" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
+                                <span v-if="errors.nama_produk" class="label label-danger">{{ errors.nama_produk[0] }}</span>
 
-                    <div class="form-group">
-                        <label for="foto" class="col-md-2 control-label">Satuan</label>
-                        <div class="col-md-5">
-                            <form>
-                            <label class="radio-inline">
-                                <input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan">Pcs
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="lainnya" v-model="status_satuan" value="checklist" unchecked-value="not_checklist" v-on:click="bukaFormSatuan">Lainnya
-                            </label>
-                            </form>
-                            <br>
-                            <div id="form-satuan" v-if="status_satuan == 'checklist'">
-                                <input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
-                                <span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
+                            <div class="col-md-4">
+                                <table width="100%">
+                                    <tbody>
+                                        <tr>
+                                            <td width="80%" style="vertical-align: middle;">
+                                                <selectize-component v-model="produk.kategori_produks_id" :settings="setting_kategori_produk"> 
+                                                    <option v-for="kategori_produk in kategori_produks_id" v-bind:value="kategori_produk.id" >{{ kategori_produk.nama_kategori_produk }}</option>
+                                                </selectize-component> 
+                                            </td>
+                                            <td width="20%" style="vertical-align: top; text-align: center;">
+                                                <span @click="tambahKategori()" class="btn btn-sm btn-success">+Tambah</span>   
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                    <div class="form-group">
-                        <label for="modifier" class="col-md-2 control-label"></label>
-                        <div class="col-md-9"> 
-                            <div>
-                                <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
-                                  Tambahan & Pilhan Produk
-                                </b-form-checkbox>
-                                <div v-if="status_modifier == 'accepted'">
+
+                                <span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="harga" class="col-md-2 control-label">Harga Beli</label>
+                            <div class="col-md-2">
+                                <input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
+                                <span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="harga" class="col-md-2 control-label">Harga Jual</label>
+                            <div class="col-md-2">
+                                <input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
+                                <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
+                            <div class="col-md-4 margin-atas">
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"> Ya
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
+                                    </label>
+                                    <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
+                            <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
+                            <div class="col-md-4">
+                                <div v-if="produk.foto.length > 100">
+                                    <img :src="produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
+                                <div v-else>
+                                    <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
+                            </div>
+                            <div v-if="produk.foto == ''" class="col-md-4">
+                                <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="foto" class="col-md-2 control-label">Foto</label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto" class="col-md-2 control-label">Satuan</label>
+                            <div class="col-md-5">
+                                <form>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="pcs" v-model="produk.satuan" value="1" v-on:click="tutupFormSatuan">Pcs
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="porsi" v-model="produk.satuan" value="2" v-on:click="tutupFormSatuan">Porsi
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="pack" v-model="produk.satuan" value="3" v-on:click="tutupFormSatuan">Pack
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="lainnya" v-model="status_satuan" value="checklist" unchecked-value="not_checklist" v-on:click="bukaFormSatuan">Lainnya
+                                    </label>
+                                </form>
+                                <br>
+                                <div id="form-satuan" v-if="status_satuan == 'checklist'">
+                                    <input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
+                                    <span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modifier" class="col-md-2 control-label"></label>
+                            <div class="col-md-9"> 
+                                <div>
+                                    <b-form-checkbox id="checkbox1" v-model="status_modifier" value="accepted" unchecked-value="not_accepted" style="cursor:pointer">
+                                      Tambahan & Pilhan Produk
+                                  </b-form-checkbox>
+                                  <div v-if="status_modifier == 'accepted'">
                                     <div class="col-md-8">
                                         <form v-on:submit.prevent="tambahModifier()" class="form-inline">
                                             <div class="input-group">
@@ -151,7 +151,7 @@
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Buat baru</button>
                                             </div>
-                                        
+                                            
                                             <table id="inputan" style="display:none">
                                                 <thead>
                                                     <tr>
@@ -200,8 +200,8 @@
                 </form>
             </div>
         </div>
-        </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -467,6 +467,8 @@ export default {
                     text: app.message
                 })
                 app.selectedProdukModifierId()
+                app.modifier.nama_modifier = ''
+                app.modifier.harga_modifier = ''
             })
             .catch(function (resp) {
                 app.success = false;
