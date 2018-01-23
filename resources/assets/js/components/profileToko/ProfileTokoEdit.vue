@@ -208,6 +208,7 @@ export default {
 				app.profileToko.foto=''
 				app.errors = '';
 				app.$router.replace('/profile-toko');
+				location.reload()
 				console.log(resp)
 			})
 			.catch(function (resp) {

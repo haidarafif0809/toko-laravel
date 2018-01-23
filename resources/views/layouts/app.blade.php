@@ -224,7 +224,11 @@
                             @else
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                    <img src="{{ asset('images/profil.jpg') }}" class="img-circle" width="30px" height="30px">
+                                    @if(App\Toko::logoNavbar() == null)
+                                    <img src="{{ asset('images/user-no-image.png') }}" width="30px" height="30px">
+                                    @else
+                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle" width="30px" height="30px">
+                                    @endif
                                     {{ Auth::user()->nama_pemilik }}
                                     <span class="caret"></span>
                                 </a>
