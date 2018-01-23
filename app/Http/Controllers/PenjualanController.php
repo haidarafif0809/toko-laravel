@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailPenjualan;
 use App\KategoriProduk;
 use App\Pelanggan;
 use App\Penjualan;
 use App\Produk;
 use App\TbsPenjualan;
+use App\TransaksiKas;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -132,15 +134,44 @@ class PenjualanController extends Controller
 
     public function store(Request $request)
     {
-        Penjualan::create([
-            'toko_id'      => Auth::user()->toko_id,
-            'total_bayar'  => $request->total_bayar,
-            'cara_bayar'   => $request->cara_bayar,
-            'diskon'       => $request->diskon,
-            'keterangan'   => $request->keterangan,
-            'pelanggan_id' => $request->pelanggan_id,
-            'subtotal'     => $request->subtotal,
-        ]);
+        $session_id   = session()->getId();
+        $tbsPenjualan = TbsPenjualan::where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->select('produk_id', 'harga_produk', 'jumlah_produk');
+        if ($tbsPenjualan->count() > 0) {
+            $penjualan = Penjualan::create([
+                'toko_id'      => Auth::user()->toko_id,
+                'total_bayar'  => $request->total_bayar,
+                'cara_bayar'   => $request->cara_bayar,
+                'diskon'       => $request->diskon,
+                'keterangan'   => $request->keterangan,
+                'pelanggan_id' => $request->pelanggan_id,
+                'subtotal'     => $request->subtotal,
+            ]);
+
+            $jumlah_keluar   = 0;
+            $jenis_transaksi = 3;
+            $toko_id         = Auth::user()->toko_id;
+            TransaksiKas::create([
+                'toko_id'         => $toko_id,
+                'id_transaksi'    => $penjualan->id,
+                'jenis_transaksi' => $jenis_transaksi,
+                'jumlah_masuk'    => $penjualan->total_bayar,
+                'jumlah_keluar'   => $jumlah_keluar,
+            ]);
+
+            foreach ($tbsPenjualan->get() as $tbs_penjualans) {
+                DetailPenjualan::create([
+                    'id_produk'     => $tbs_penjualans->produk_id,
+                    'id_penjualan'  => $penjualan->id,
+                    'harga_produk'  => $tbs_penjualans->harga_produk,
+                    'subtotal'      => $penjualan->subtotal,
+                    'diskon'        => $penjualan->diskon,
+                    'jumlah_produk' => $tbs_penjualans->jumlah_produk,
+
+                ]);
+            }
+
+            $tbsPenjualan->delete();
+        }
     }
 
     /**
@@ -190,6 +221,18 @@ class PenjualanController extends Controller
         }
 
         return response(200);
+    }
+
+    public function ubahTbsPenjualan(Request $request)
+    {
+        // $this->validate($request, [
+        // 'jumlah' => 'not_in:0',
+        // ]);
+        $subtotal = ($request->harga * $request->jumlah);
+        TbsPenjualan::where('id_tbs_penjualan', $request->id)->update([
+            'jumlah_produk' => $request->jumlah,
+            'subtotal'      => $subtotal,
+        ]);
     }
 
     public function hapusTbsPenjualan($id)

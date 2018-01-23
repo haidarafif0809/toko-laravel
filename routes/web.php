@@ -51,8 +51,8 @@ Route::get('/produk/status_jual', 'ProdukController@statusJual');
 Route::get('/produk/produk-modifier-id', 'ProdukController@produkModifiersId');
 Route::get('/produk/produk-modifier-id/{id_produk}', 'ProdukController@produkModifiersIdEdit');
 Route::get('/produk/modifier', 'ProdukController@modifier');
+Route::get('/produk/produk-modifier', 'ProdukController@detailModifier');
 Route::resource('modifier', 'ModifierController', ['except' => 'show']);
-
 
 Route::get('/produk/detail/{id}', 'ProdukController@detail');
 Route::get('/produk/detailSatuanDariProduk/{id}', 'ProdukController@detailSatuanDariProduk');
@@ -71,6 +71,7 @@ Route::get('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
+Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
 // hapus item penjualan
 Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
     'middleware' => ['auth'],

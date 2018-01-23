@@ -15,12 +15,11 @@ class ProdukSeeder extends Seeder
         // sample produk 1
         $produk                      = new Produk();
         $produk->toko_id             = 1;
-        $produk->kode_produk         = "0018";
-        $produk->nama_produk         = "Beras 10kg";
-        $produk->harga_beli          = "85000";
-        $produk->harga_jual          = "90000";
+        $produk->nama_produk         = "Fettuccine Carbonara";
+        $produk->harga_jual          = "3336250";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
+        $produk->foto                = '1516674546.jpeg';
         $produk->satuan              = 1;
         $produk->produk_modifier_id  = 1;
         $produk->save();
@@ -28,12 +27,11 @@ class ProdukSeeder extends Seeder
         // sample produk 2
         $produk                      = new Produk();
         $produk->toko_id             = 1;
-        $produk->kode_produk         = "TBG";
-        $produk->nama_produk         = "Tabung Gas";
-        $produk->harga_beli          = "11200";
-        $produk->harga_jual          = "115000";
+        $produk->nama_produk         = "Steak and Cheese with French Onion Dip";
+        $produk->harga_jual          = "3603150";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
+        $produk->foto                = '1516674506.jpeg';
         $produk->satuan              = 2;
         $produk->produk_modifier_id  = 2;
         $produk->save();
@@ -41,12 +39,11 @@ class ProdukSeeder extends Seeder
         // sample produk 3
         $produk                      = new Produk();
         $produk->toko_id             = 1;
-        $produk->kode_produk         = "020";
-        $produk->nama_produk         = "Detergen Boom 450 G";
-        $produk->harga_beli          = "4167";
-        $produk->harga_jual          = "417700";
+        $produk->nama_produk         = "French Onion Soup";
+        $produk->harga_jual          = "2669000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
+        $produk->foto                = '1516674386.jpeg';
         $produk->satuan              = 3;
         $produk->produk_modifier_id  = 3;
         $produk->save();

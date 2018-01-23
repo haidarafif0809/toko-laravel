@@ -2,6 +2,9 @@
 .shadow {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.detail_nama_modifier + .detail_nama_modifier:before {
+  content: ", ";
+}
 </style>
 <template>  
 	<div class="container">
@@ -27,21 +30,9 @@
 							<tbody>
 								<tr>
 									<td>
-										<label>Kode Produk:</label>
-									</td>
-									<td>{{ produk.kode_produk }}</td>
-								</tr>
-								<tr>
-									<td>
 										<label>Harga Jual:</label>
 									</td>
-									<td>{{ produk.harga_jual }}</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Harga Beli:</label>
-									</td>
-									<td>{{ produk.harga_beli }}</td>
+									<td>{{  "Rp" }}{{ new Intl.NumberFormat().format(produk.harga_jual) }}</td>
 								</tr>
 								<tr>
 									<td>
@@ -56,6 +47,28 @@
 									<td>
 										<span v-if="produk.bisa_dijual == 1">Aktif</span>
 										<span v-if="produk.bisa_dijual == 0">Tidak Aktif</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Satuan:</label>
+									</td>
+									<td>
+										<span v-if="produk.satuan == 1">Pcs</span>
+										<span v-else-if="produk.satuan == 2">Porsi</span>
+										<span v-else-if="produk.satuan == 3">Pack</span>
+										<span v-else>{{ produk.satuan }}</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label>Tambahan:</label>
+									</td>
+									<td>
+										<span v-for="id,index in produk.produk_modifier_id" class="detail_nama_modifier">
+											<span>{{ produk_modifier[id] }}</span>
+											<span v-if="produk_modifier[id] == null">Tidak ada tambahan</span>
+										</span>
 									</td>
 								</tr>
 							</tbody>
@@ -73,6 +86,7 @@ export default {
 		return {
 			produk: [],
 			kategori_produk: [],
+			produk_modifier: [],
 			produkId: null,
 			url : window.location.origin + (window.location.pathname).replace("home", "produk"),
 			url_foto_produk : window.location.origin+(window.location.pathname).replace("home", "foto_produk"),
@@ -82,6 +96,7 @@ export default {
 		var app = this;
 		app.getDataProduk();
 		app.getDataKategoriProdukDariProduk();
+		app.getProdukModifier();
 	},
 	methods: {
 		alert(pesan) {
@@ -99,6 +114,8 @@ export default {
 			axios.get(app.url+'/detail/' + id)
 			.then(function (resp) {
 				app.produk = resp.data;
+				app.produk.produk_modifier_id = resp.data.produk_modifier_id.split(',');
+				console.log(app.produk.produk_modifier_id)
 			})
 			.catch(function () {
 				alert("Could not load your produk");
@@ -111,6 +128,19 @@ export default {
 			axios.get(app.url+'/kategori_produks_id/' + id)
 			.then(function (resp) {
 				app.kategori_produk = resp.data;
+			})
+			.catch(function () {
+				alert("Could not load your kategori produk");
+			});			
+		},
+		getProdukModifier() {
+			let app = this;
+			let id = app.$route.params.id;
+
+			axios.get(app.url+'/produk-modifier/')
+			.then(function (resp) {
+				app.produk_modifier = resp.data;
+				console.log(resp.data)
 			})
 			.catch(function () {
 				alert("Could not load your kategori produk");

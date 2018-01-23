@@ -71,6 +71,16 @@
 	margin-bottom: -1px;
 }
 
+div > ul > li[class=tabInformasi] a {
+	color: #000000;
+}
+div > ul > li[class="tabInformasi active"] a {
+	color: #F7AD36;
+}
+div > ul > li[class="tabInformasi active"] {
+	border-bottom: 3px solid #F7AD36;
+}
+
 </style>
 
 <template>
@@ -333,15 +343,15 @@
 				<div class="panel panel-default">
 					<ul class="nav nav-tabs">
 						<li class="tabInformasi active">
-							<a data-toggle="tab" v-on:click="tentangPelanggan"><font color="#000000">TENTANG PELANGGAN</font></a>
+							<a data-toggle="tab" v-on:click="tentangPelanggan">TENTANG PELANGGAN</a>
 						</li>
 
 						<li class="tabInformasi">
-							<a data-toggle="tab" v-on:click="riwayatTransaksi"><font color="#000000">RIWAYAT TRANSAKSI</font></a>
+							<a data-toggle="tab" v-on:click="riwayatTransaksi">RIWAYAT TRANSAKSI</a>
 						</li>
 
 						<li class="tabInformasi">
-							<a data-toggle="tab"  v-on:click="perilaku"><font color="#000000">PERILAKU</font></a>
+							<a data-toggle="tab"  v-on:click="perilaku">PERILAKU</a>
 						</li>
 					</ul>
 				</div>
@@ -533,7 +543,7 @@
 						<thead>
 							<th class="col-md-2">Tanggal</th>
 							<th class="col-md-4">Produk</th>
-							<th class="col-md-3">Jumlah Produk</th>
+							<th class="col-md-3 text-right">Jumlah Produk</th>
 							<th class="col-md-3">Total Transaksi</th>
 						</thead>
 						<tbody>
@@ -678,7 +688,6 @@ export default {
     		this.riwayatBelanja = 0
     		this.perilakuPelanggan = 0
     		this.memberPelanggan = 0
-    		this.tentangPelanggan(active);
 
 
 

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta content="{{ csrf_token() }}" name="csrf-token">
     <title>
-        Toko Dasar
+        KavePos
     </title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -39,10 +39,10 @@
                     <!-- ////logo and title -->
                     <div class='lgo'>
                         <div class='img-holder'>
-                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="100" height="100" />
+                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="194" height="100" />
                         </div>
                         <div class='title-holder'>
-                            {{-- <span>Toko Dasar</span> --}}
+                            {{-- <span>KavePos</span> --}}
                         </div>
                     </div>
                     <!-- word navigations -->
@@ -161,7 +161,7 @@
                         @role('member')
                         <a href="">
                             <li data-toggle="collapse" href="#logo-produk-collapse">
-                                <i class="fa fa-briefcase fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
+                                <i class="fa fa-cubes fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
                             </li>
                         </a>
                         <span class="nav_txt">Produk</span>
@@ -224,7 +224,7 @@
                             @else
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                    <img src="{{ asset('images/profile.jpg') }}" class="img-circle" width="30px" height="30px">
+                                    <img src="{{ asset('images/profil.jpg') }}" class="img-circle" width="30px" height="30px">
                                     {{ Auth::user()->nama_pemilik }}
                                     <span class="caret"></span>
                                 </a>
@@ -263,8 +263,43 @@
 
 </div>
 <!-- Scripts -->
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('js/app.js?v=1.26') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
+<script type="text/javascript">
+    function sweetAlert(){
+        var namaToko = document.getElementById('nama_toko').value;
+        var userName = document.getElementById('nama_pemilik').value;
+        var email = document.getElementById('email').value;
+        var no_telp = document.getElementById('no_telp').value;
+        var password = document.getElementById('password').value;
+        if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
+             swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+        }
+    } function sweetAlerts(){
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if ((!email == '') && (!password == '')) {
+             swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+        }
+    }
+</script>
 </body>
 </html>

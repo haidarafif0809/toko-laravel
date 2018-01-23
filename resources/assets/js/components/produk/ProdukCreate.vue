@@ -23,15 +23,7 @@
 				<div class="panel-heading">Tambah Produk</div>
 				<div class="panel-body">
 
-					<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
-						<div class="form-group">
-							<label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
-							<div class="col-md-4">
-								<input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
-								<span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
-
-							</div>
-						</div> 
+					<form v-on:submit.prevent="saveForm()" class="form-horizontal">  
 						<div class="form-group">
 							<label for="nama_produk" class="col-md-2 control-label">Nama</label>
 							<div class="col-md-4">
@@ -59,15 +51,6 @@
 
 
 								<span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
-
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="harga" class="col-md-2 control-label">Harga Beli</label>
-							<div class="col-md-4">
-								<money class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" v-bind="money" name="harga_beli"  autofocus="">
-								</money>
-								<span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
 
 							</div>
 						</div>
@@ -155,7 +138,7 @@
 												<div class="input-group">
 													<button type="button" class="btn btn-success btn-sm" v-on:click="bukaTambahModifier">+Buat baru</button>
 												</div>
-
+												
 												<table id="inputan" style="display:none">
 													<thead>
 														<tr>
@@ -216,11 +199,9 @@ export default {
 			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
 			url_newKategoriProduk : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
 			url_newModifier : window.location.origin+(window.location.pathname).replace("home", "modifier"),
-			produk: {
-				kode_produk: '',		
+			produk: {		
 				nama_produk: '',
 				harga_jual: '',
-				harga_beli: '',
 				kategori_produks_id: '',
 				bisa_dijual: '1',
 				foto: '',
@@ -455,6 +436,8 @@ export default {
 					text: app.message
 				})
 				app.selectedProdukModifierId()
+				app.modifier.nama_modifier = ''
+				app.modifier.harga_modifier = ''
 			})
 			.catch(function (resp) {
 				app.success = false;

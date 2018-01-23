@@ -16,9 +16,7 @@ class CreateProduksTable extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->increments('produk_id');
             $table->integer('toko_id');
-            $table->string('kode_produk');
             $table->string('nama_produk');
-            $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->integer('kategori_produks_id')->nullable();
             $table->integer('bisa_dijual')->nullable()->comment = "1 = Ya, 0 = Tidak";

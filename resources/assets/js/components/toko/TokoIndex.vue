@@ -174,8 +174,8 @@ export default {
 
                 // app.tokos.status = resp.data.data;
                 swal({
-                  title: 'Gagal!',
-                  type: 'warning',
+                  title: 'Berhasil!',
+                  type: 'success',
                   text: 'Berhasil Dinonaktifkan'
                 });
                 app.getTokos();
@@ -256,7 +256,7 @@ export default {
             swal({
               title: 'Gagal!',
               type: 'warning',
-              text: 'Tidak dapat menghapus pelanggan!'
+              text: 'Tidak dapat menghapus Toko!'
             });
           });
         }
