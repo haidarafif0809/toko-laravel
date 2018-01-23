@@ -290,16 +290,16 @@ export default {
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
 				app.alert(app.message);
-				// app.produk.kode_produk = '';
-				// app.produk.nama_produk = '';
-				// app.produk.harga_jual = '';
-				// app.produk.harga_beli = '';
-				// app.produk.kategori_produks_id = '';
-				// app.produk.bisa_dijual = '';
-				// app.produk.foto = '';
-				// app.produk.satuan = '';
-				// app.produk.produk_modifier_id = '';
-				// app.errors = '';
+				app.produk.kode_produk = '';
+				app.produk.nama_produk = '';
+				app.produk.harga_jual = '';
+				app.produk.harga_beli = '';
+				app.produk.kategori_produks_id = '';
+				app.produk.bisa_dijual = '';
+				app.produk.foto = '';
+				app.produk.satuan = '';
+				app.produk.produk_modifier_id = '';
+				app.errors = '';
 				app.$router.replace('/produk');
 
 			})
@@ -319,6 +319,57 @@ export default {
 			});
 		},
 		tambahKategori() {
+			var app = this;
+			swal({
+				title: 'Masukkan nama kategori',
+				input: 'text',
+				inputPlaceholder: 'Nama kategori baru',
+				showCloseButton: true,
+				confirmButtonText: 'Buat',
+				showLoaderOnConfirm: true,
+				preConfirm: (nama_kategori_produk) => {
+					return new Promise((resolve) => {
+						setTimeout(() => {
+							if (!nama_kategori_produk) {
+								swal.showValidationError('Nama kategori tidak boleh kosong.');
+							}
+							else if (!nama_kategori_produk.match(/^[a-zA-Z0-9_-]*$/)) {
+								swal.showValidationError('Nama kategori tidak boleh berisi simbol khusus <br> kecuali strip "-" dan underscore "_"');
+							}
+							else if (nama_kategori_produk.length < 4) {
+								swal.showValidationError('Nama kategori minimal harus berisi 4 karakter.')
+							}
+							resolve();
+						}, 250)
+					});
+				}
+			})
+			.then(nama_kategori_produk => {
+				if (!nama_kategori_produk.value) {
+					return;
+				}
+				app.newKategoriProduk.nama_kategori_produk = nama_kategori_produk.value;
+				var newNamaKategori = app.newKategoriProduk;
+				axios.post(app.url_newKategoriProduk, newNamaKategori)
+				.then(function () {
+					app.selectedKategoriProduksId();
+					swal({
+						title: "Berhasil!",
+						type: 'success',
+						timer: 1800,
+						showConfirmButton: false,
+						text: 'Berhasil menambahkan "'+ nama_kategori_produk.value +'" ke kategori produk.',
+					});
+				})
+				.catch(function () {
+					swal("Gagal!", "Ada sesuatu yang salah terjadi.", "warning");
+				})
+			})
+			.catch(function () {
+				swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
+			});
+		},
+		tambahKategori_old() {
 			var app = this;
 			swal({
 				text: 'Masukkan nama kategori baru',
