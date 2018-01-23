@@ -224,7 +224,7 @@
                             @else
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                    <img src="{{ asset('images/profile.jpg') }}" class="img-circle" width="30px" height="30px">
+                                    <img src="{{ asset('images/profil.jpg') }}" class="img-circle" width="30px" height="30px">
                                     {{ Auth::user()->nama_pemilik }}
                                     <span class="caret"></span>
                                 </a>
