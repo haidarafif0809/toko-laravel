@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KategoriProdukSeeder::class);
         $this->call(PelangganSeeder::class);
         $this->call(KelolaKasSeeder::class);
-        $this->call(GeraiSeeder::class);
         $this->call(ModifierSeeder::class);
     }
 }
