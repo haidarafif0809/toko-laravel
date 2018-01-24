@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Yajra\Auditable\AuditableTrait;
+use Auth;
 
 class Toko extends Model
 {
@@ -36,5 +37,15 @@ class Toko extends Model
     public function stafToko()
     {
         return $this->hasMany('App\StafToko');
+    }
+
+    public static function logoNavbar(){
+	    $logoNavbar = Toko::select('foto')->where('id',Auth::User()->toko_id)->first();	
+		$logoNavbar = $logoNavbar->foto;
+	    if (is_null($logoNavbar)) {
+	    	return null;
+	    }
+	    $logoNavbar = asset('logo').'/'.$logoNavbar;
+	    return $logoNavbar;
     }
 }

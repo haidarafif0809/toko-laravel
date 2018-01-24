@@ -23,15 +23,7 @@
 				<div class="panel-heading">Tambah Produk</div>
 				<div class="panel-body">
 
-					<form v-on:submit.prevent="saveForm()" class="form-horizontal"> 
-						<div class="form-group">
-							<label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
-							<div class="col-md-4">
-								<input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
-								<span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
-
-							</div>
-						</div> 
+					<form v-on:submit.prevent="saveForm()" class="form-horizontal">  
 						<div class="form-group">
 							<label for="nama_produk" class="col-md-2 control-label">Nama</label>
 							<div class="col-md-4">
@@ -59,15 +51,6 @@
 
 
 								<span v-if="errors.kategori_produks_id" class="label label-danger">{{ errors.kategori_produks_id[0] }}</span>
-
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="harga" class="col-md-2 control-label">Harga Beli</label>
-							<div class="col-md-4">
-								<money class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" v-bind="money" name="harga_beli"  autofocus="">
-								</money>
-								<span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
 
 							</div>
 						</div>
@@ -216,11 +199,9 @@ export default {
 			broken_file : window.location.origin + (window.location.pathname).replace("home", "broken-image.png"),
 			url_newKategoriProduk : window.location.origin+(window.location.pathname).replace("home", "kategoriProduk"),
 			url_newModifier : window.location.origin+(window.location.pathname).replace("home", "modifier"),
-			produk: {
-				kode_produk: '',		
+			produk: {		
 				nama_produk: '',
 				harga_jual: '',
-				harga_beli: '',
 				kategori_produks_id: '',
 				bisa_dijual: '1',
 				foto: '',
@@ -309,16 +290,16 @@ export default {
 			.then(function (resp) {
 				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
 				app.alert(app.message);
-				// app.produk.kode_produk = '';
-				// app.produk.nama_produk = '';
-				// app.produk.harga_jual = '';
-				// app.produk.harga_beli = '';
-				// app.produk.kategori_produks_id = '';
-				// app.produk.bisa_dijual = '';
-				// app.produk.foto = '';
-				// app.produk.satuan = '';
-				// app.produk.produk_modifier_id = '';
-				// app.errors = '';
+				app.produk.kode_produk = '';
+				app.produk.nama_produk = '';
+				app.produk.harga_jual = '';
+				app.produk.harga_beli = '';
+				app.produk.kategori_produks_id = '';
+				app.produk.bisa_dijual = '';
+				app.produk.foto = '';
+				app.produk.satuan = '';
+				app.produk.produk_modifier_id = '';
+				app.errors = '';
 				app.$router.replace('/produk');
 
 			})
@@ -338,6 +319,57 @@ export default {
 			});
 		},
 		tambahKategori() {
+			var app = this;
+			swal({
+				title: 'Masukkan nama kategori',
+				input: 'text',
+				inputPlaceholder: 'Nama kategori baru',
+				showCloseButton: true,
+				confirmButtonText: 'Buat',
+				showLoaderOnConfirm: true,
+				preConfirm: (nama_kategori_produk) => {
+					return new Promise((resolve) => {
+						setTimeout(() => {
+							if (!nama_kategori_produk) {
+								swal.showValidationError('Nama kategori tidak boleh kosong.');
+							}
+							else if (!nama_kategori_produk.match(/^[a-zA-Z0-9_-]*$/)) {
+								swal.showValidationError('Nama kategori tidak boleh berisi simbol khusus <br> kecuali strip "-" dan underscore "_"');
+							}
+							else if (nama_kategori_produk.length < 4) {
+								swal.showValidationError('Nama kategori minimal harus berisi 4 karakter.')
+							}
+							resolve();
+						}, 250)
+					});
+				}
+			})
+			.then(nama_kategori_produk => {
+				if (!nama_kategori_produk.value) {
+					return;
+				}
+				app.newKategoriProduk.nama_kategori_produk = nama_kategori_produk.value;
+				var newNamaKategori = app.newKategoriProduk;
+				axios.post(app.url_newKategoriProduk, newNamaKategori)
+				.then(function () {
+					app.selectedKategoriProduksId();
+					swal({
+						title: "Berhasil!",
+						type: 'success',
+						timer: 1800,
+						showConfirmButton: false,
+						text: 'Berhasil menambahkan "'+ nama_kategori_produk.value +'" ke kategori produk.',
+					});
+				})
+				.catch(function () {
+					swal("Gagal!", "Ada sesuatu yang salah terjadi.", "warning");
+				})
+			})
+			.catch(function () {
+				swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
+			});
+		},
+		tambahKategori_old() {
 			var app = this;
 			swal({
 				text: 'Masukkan nama kategori baru',

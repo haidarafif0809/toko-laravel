@@ -21,7 +21,7 @@
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
-                        <th>No TRQ</th>
+                        <th>No TRX</th>
                         <th>type</th>
                         <th>Jumlah</th>
                         <th>Keterangan</th>

@@ -215,6 +215,8 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <th>Nama Produk</th>
+                            <th>Harga Jual</th>
+                            <th>Kategori</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="produks.length > 0 && loading == false" class="data-ada">
@@ -223,6 +225,12 @@
                                     <router-link :to="{name: 'detailProduk', params: {id: produk.produk_id}}">
                                         {{produk.nama_produk}}
                                     </router-link>
+                                </td>
+                                <td>
+                                    {{ "Rp" }}{{ new Intl.NumberFormat().format(produk.harga_jual) }}
+                                </td>
+                                <td>
+                                    {{ produk.kategori_produk }}
                                 </td>
                                 <td>
                                     <router-link :to="{name: 'editProduk', params: {id: produk.produk_id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + produk.produk_id" >

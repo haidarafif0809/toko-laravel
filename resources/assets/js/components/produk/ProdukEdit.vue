@@ -17,14 +17,6 @@
 
                     <form v-on:submit.prevent="saveForm()" class="form-horizontal">
                         <div class="form-group">
-                            <label for="kode_produk" class="col-md-2 control-label">Kode Produk</label>
-                            <div class="col-md-4">
-                                <input class="form-control" required autocomplete="off" placeholder="Kode Produk" type="text" v-model="produk.kode_produk" name="kode_produk"  autofocus="">
-                                <span v-if="errors.kode_produk" class="label label-danger">{{ errors.kode_produk[0] }}</span>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="nama_produk" class="col-md-2 control-label">Nama Produk</label>
                             <div class="col-md-4">
                                 <input class="form-control" required autocomplete="off" placeholder="Name" type="text" v-model="produk.nama_produk" name="nama_produk"  autofocus="">
@@ -56,17 +48,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="harga" class="col-md-2 control-label">Harga Beli</label>
-                            <div class="col-md-2">
-                                <input class="form-control" required autocomplete="off" placeholder="Harga Beli" type="text" v-model="produk.harga_beli" name="harga_beli"  autofocus="">
-                                <span v-if="errors.harga_beli" class="label label-danger">{{ errors.harga_beli[0] }}</span>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="harga" class="col-md-2 control-label">Harga Jual</label>
                             <div class="col-md-2">
-                                <input class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" name="harga_jual"  autofocus="">
+                                <money class="form-control" required autocomplete="off" placeholder="Harga Jual" type="text" v-model="produk.harga_jual" v-bind="money" name="harga_jual"  autofocus="">
+                                </money>
                                 <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
                             </div>
@@ -221,10 +206,8 @@ export default {
             url_newModifier : window.location.origin+(window.location.pathname).replace("home", "modifier"),
             produk_modifier: [],
             produk: {
-                kode_produk: '',
                 nama_produk: '',
                 harga_jual: '',
-                harga_beli: '',
                 kategori_produks_id: '',
                 bisa_dijual: '',
                 foto: '',
