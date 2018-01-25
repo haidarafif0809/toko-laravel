@@ -4,6 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 require('./bootstrap');
+// chartjs package
+require('chart.js');
+// vue-charts package
+require('hchs-vue-charts');
+Vue.use(VueCharts);
 window.Vue = require('vue');
 var VueResource = require('vue-resource');
 Vue.use(VueResource);
@@ -18,11 +23,20 @@ Vue.use(money, {
     precision: 4
 })
 Vue.use(BootstrapVue);
+if (typeof Chart === "undefined") throw "ChartJS is undefined";
+// 4 kb here
+window.VueCharts = {};
+VueCharts.core = require('./vue-chartjs-lib.js');
+VueCharts.install = function(Vue) {
+    Vue.component('chartjs-line', require('./components/chartjs-line.vue'));
+}
 window.Vue.use(VueSwal)
 window.Vue.use(Spinner)
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('vue-simple-spinner', require('vue-simple-spinner'));
 Vue.component('selectize-component', require('vue2-selectize'));
+// Vue.component('chartjs-line', require('./components/chartjs-line.vue'));
+Vue.component('example', require('./components/Example.vue'));
 window.Vue.use(VueRouter);
 window.Vue = require('vue');
 //DASHBOARD
@@ -31,24 +45,20 @@ import DashboardIndex from './components/dashboard/Dashboard.vue'
 import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
-
 // Master Data Produk
 import ProdukIndex from './components/produk/ProdukIndex.vue'
 import ProdukCreate from './components/produk/ProdukCreate.vue'
 import ProdukEdit from './components/produk/ProdukEdit.vue'
 import ProdukDetail from './components/produk/ProdukDetail.vue'
-
 // kategori produk
 import KategoriProdukIndex from './components/kategoriProduk/KategoriProdukIndex.vue'
 import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCreate.vue'
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
-
 // master data pelanggan
 import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
 import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
 import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
 import PelangganDetail from './components/pelanggan/PelangganDetail.vue'
-
 //Penjualan
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 // toko
@@ -57,6 +67,7 @@ import TokoEdit from './components/toko/TokoEdit.vue'
 // profile toko
 import ProfileTokoIndex from './components/profileToko/ProfileTokoIndex.vue'
 import ProfileTokoEdit from './components/profileToko/ProfileTokoEdit.vue'
+import LengkapiProfile from './components/profileToko/LengkapiProfile.vue'
 // Kelola Kas
 import KelolaKasIndex from './components/kelolaKas/KelolaKasIndex.vue'
 import KelolaKasCreate from './components/kelolaKas/KelolaKasCreate.vue'
@@ -69,11 +80,7 @@ import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
 import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
-//gerai
-import GeraiIndex from './components/gerai/GeraiIndex.vue'
-import GeraiCreate from './components/gerai/GeraiCreate.vue'
-import GeraiEdit from './components/gerai/GeraiEdit.vue'
- 
+
 const routes = [{
         path: '/',
         components: {
@@ -170,6 +177,10 @@ const routes = [{
         path: '/profile-toko/edit/:id',
         component: ProfileTokoEdit,
         name: 'editProfileToko'
+    }, {
+        path: '/profile-toko/lengkapi-profile/:id',
+        component: LengkapiProfile,
+        name: 'lengkapiProfile'
     },
     // Kelola Kas
     {
@@ -212,21 +223,8 @@ const routes = [{
         path: '/staf-toko/edit/:id',
         component: StafTokoEdit,
         name: 'editStafToko',
-    },
-    // Gerai
-    {
-        path: '/gerai',
-        component: GeraiIndex,
-        name: 'indexGerai'
-    }, {
-        path: '/gerai/create',
-        component: GeraiCreate,
-        name: 'createGerai'
-    }, {
-        path: '/gerai/edit',
-        component: GeraiEdit,
-        name: 'editGerai'
-    } 
+    }
+    
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to

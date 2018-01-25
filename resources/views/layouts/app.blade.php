@@ -15,6 +15,8 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/timer.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/wizard.css') }}" rel="stylesheet">
     <style type="text/css">
         @font-face {
             font-family: Ubuntu Medium;
@@ -66,9 +68,6 @@
                             Staf Toko
                         </router-link></li>
 
-                        <li class='w-lnk'><router-link :to="{name: 'indexGerai'}">
-                            Gerai
-                        </router-link></li>
                         @endrole
                         @role('admin')
                         {{-- dropdown MASTER DATA --}}
@@ -143,10 +142,6 @@
                         </router-link></li>
                         <span class='nav_txt'>Staf Toko</span>
 
-                        <li><router-link :to="{name: 'indexGerai'}">
-                            <i class="fa fa-map-marker fa-2x"></i>
-                        </router-link></li>
-                        <span class='nav_txt'>Gerai</span>
                         @endrole
                         @role('admin')
                         <a href="">
@@ -234,7 +229,11 @@
                             @else
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                                    <img src="{{ asset('images/profil.jpg') }}" class="img-circle" width="30px" height="30px">
+                                    @if(App\Toko::logoNavbar() === null)
+                                    <img src="{{ asset('images/user-no-image.png') }}" width="30px" height="30px">
+                                    @else
+                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle" width="30px" height="30px">
+                                    @endif
                                     {{ Auth::user()->nama_pemilik }}
                                     <span class="caret"></span>
                                 </a>
@@ -274,11 +273,17 @@
 </div>
 <!-- Scripts -->
   <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="{{ asset('js/app.js?v=1.26') }}"></script>
+<script src="{{ asset('js/app.js?v=1.27') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
+<script src="{{ asset('js/timer.js') }}"></script>
+<!-- charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script src="{{ asset('js/vue-charts.js') }}"></script>
+<script src="js/Chart.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script>
 <script type="text/javascript">
     function sweetAlert(){
         var namaToko = document.getElementById('nama_toko').value;

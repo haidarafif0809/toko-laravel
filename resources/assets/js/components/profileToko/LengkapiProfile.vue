@@ -9,16 +9,13 @@ img {
 <template>
 	<div class="container">
 		<div class="row">
-			<ul class="breadcrumb">
-				<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-				<li><router-link :to="{name: 'profileTokoIndex'}">Profile Toko</router-link></li>
-				
-				<li class="active">Edit Profile Toko</li>
-			</ul>
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
+					<h4 class="panel-heading" style="color: red;"> <i class="fa fa-info-circle" aria-hidden="true"></i> <i>Lengkapilah Profile Toko Anda dengan benar !</i></h4>
+				</div>
+				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title"> Profile Toko </h4>
+						<h4 class="panel-title">Lengkapi Profile Toko </h4>
 					</div>
 					<br> 
 					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
@@ -208,7 +205,6 @@ export default {
 				app.profileToko.foto=''
 				app.errors = '';
 				app.$router.replace('/profile-toko');
-				location.reload()
 				console.log(resp)
 			})
 			.catch(function (resp) {
