@@ -16,7 +16,6 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/timer.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/wizard.css') }}" rel="stylesheet">
     <style type="text/css">
         @font-face {
             font-family: Ubuntu Medium;
@@ -34,6 +33,10 @@
         }
         .swal2-content {
             font-family: Museo Sans;
+        }
+        .logo-navbar{
+            width:30px;
+            height:30px;
         }
     </style>
 </head>
@@ -59,11 +62,10 @@
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
-                        @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                             Dashboard
                         </router-link></li>
-
+                        @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                             Staf Toko
                         </router-link></li>
@@ -131,17 +133,15 @@
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
-                        @role('member')
                         <li><router-link :to="{name: 'indexDashboard'}">
                             <i class="fa fa-home  fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Home</span>
-
+                        @role('member')
                         <li><router-link :to="{name: 'indexStafToko'}">
                             <i class="fa fa-user-circle-o fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Staf Toko</span>
-
                         @endrole
                         @role('admin')
                         <a href="">
@@ -229,11 +229,16 @@
                             @else
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                    @role('admin')
+                                    <img src="{{ asset('images/user-no-image.png') }}" class="img-circle logo-navbar">
+                                    @endrole
+                                    @role('member')
                                     @if(App\Toko::logoNavbar() === null)
-                                    <img src="{{ asset('images/user-no-image.png') }}" width="30px" height="30px">
+                                    <img src="{{ asset('images/user-no-image.png') }}" class="img-circle logo-navbar">
                                     @else
-                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle" width="30px" height="30px">
+                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle logo-navbar">
                                     @endif
+                                    @endrole
                                     {{ Auth::user()->nama_pemilik }}
                                     <span class="caret"></span>
                                 </a>
@@ -275,7 +280,7 @@
   <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="{{ asset('js/app.js?v=1.27') }}"></script>
+<script src="{{ asset('js/app.js?v=1.28') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
 <script src="{{ asset('js/timer.js') }}"></script>
