@@ -19,6 +19,7 @@
         "vue": "^2.5.13"
     },
     "dependencies": {
+        "amcharts3": "github:amcharts/amcharts3",
         "bootstrap-vue": "^1.4.0",
         "chart.js": "^2.7.1",
         "hchs-vue-charts": "^1.2.8",
