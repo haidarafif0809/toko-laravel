@@ -20,8 +20,18 @@
             font-family: Ubuntu Medium;
             src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
         }
+        @font-face {
+            font-family: Museo Sans;
+            src: url({{ asset('fonts/MuseoSans_500.otf') }});
+        }
         body {
+            font-family: Museo Sans;
+        }
+        input {
             font-family: Ubuntu Medium;
+        }
+        .swal2-content {
+            font-family: Museo Sans;
         }
     </style>
 </head>
