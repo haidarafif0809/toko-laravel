@@ -24,6 +24,10 @@
         body {
             font-family: Ubuntu Medium;
         }
+        .logo-navbar{
+            width:30px;
+            height:30px;
+        }
     </style>
 </head>
 <body>
@@ -48,16 +52,15 @@
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
+                        <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
+                            Dashboard
+                        </router-link></li>
                         @role('member')
-
                         <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                             Staf Toko
                         </router-link></li>
 
                         @endrole
-                        <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
-                            Dashboard
-                        </router-link></li>
                         @role('admin')
                         {{-- dropdown MASTER DATA --}}
                         <a href="">
@@ -218,13 +221,13 @@
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                                     @role('admin')
-                                    <img src="{{ asset('images/user-no-image.png') }}" width="30px" height="30px">
+                                    <img src="{{ asset('images/user-no-image.png') }}" class="img-circle logo-navbar">
                                     @endrole
                                     @role('member')
                                     @if(App\Toko::logoNavbar() === null)
-                                    <img src="{{ asset('images/user-no-image.png') }}" width="30px" height="30px">
+                                    <img src="{{ asset('images/user-no-image.png') }}" class="img-circle logo-navbar">
                                     @else
-                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle" width="30px" height="30px">
+                                    <img src="{{ App\Toko::logoNavbar() }}" class="img-circle logo-navbar">
                                     @endif
                                     @endrole
                                     {{ Auth::user()->nama_pemilik }}
