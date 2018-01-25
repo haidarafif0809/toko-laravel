@@ -123,17 +123,16 @@
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
+                        <li><router-link :to="{name: 'indexDashboard'}">
+                            <i class="fa fa-home  fa-2x"></i>
+                        </router-link></li>
+                        <span class='nav_txt'>Home</span>
                         @role('member')
                         <li><router-link :to="{name: 'indexStafToko'}">
                             <i class="fa fa-user-circle-o fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Staf Toko</span>
-
                         @endrole
-                        <li><router-link :to="{name: 'indexDashboard'}">
-                            <i class="fa fa-home  fa-2x"></i>
-                        </router-link></li>
-                        <span class='nav_txt'>Home</span>
                         @role('admin')
                         <a href="">
                             <li data-toggle="collapse" href="#logo-masterdata-collapse">
