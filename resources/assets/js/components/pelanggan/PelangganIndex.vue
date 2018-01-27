@@ -106,7 +106,26 @@ div > ul > li[class="tabInformasi active"] {
 ul :hover {background: #ffd11a;}
 .pointer {cursor: pointer;}
 .not-allowed {cursor: not-allowed;}
+.tablePenjelasan, .tableContoh {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	margin-bottom: 30px;
+}
 
+.tablePenjelasan td {
+	padding-right: 5.5px;
+	padding-bottom: 10px;
+}
+.bold {
+	font-weight: bold;
+}
+.tableContoh {
+	width: 95%;
+}
+
+.tableContoh th, .tableCdontoh td {
+	padding: 2.5px 6px 2.5px 6px;
+	border: 1px groove #eee;
+}
 </style>
 
 <template>
@@ -225,22 +244,22 @@ ul :hover {background: #ffd11a;}
 							</div>
 							<br>
 							<div align="center">
-								<table class="tableContoh">
+								<table class="tableContoh" border="1px">
 									<thead>
-										<th>Nama Pelanggan</th>
-										<th>Jenis Kelamin</th>
-										<th>Tanggal Lahir</th>
-										<th>Nomor Telepon</th>
-										<th>Email</th>
-										<th>Alamat</th>
-										<th>Kota</th>
-										<th>Kode Pos</th>
-										<th>Catatan</th>
+										<th><b>Nama Pelanggan</b></th>
+										<th><b>Jenis Kelamin</b></th>
+										<th><b>Tanggal Lahir</b></th>
+										<th><b>Nomor Telepon</b></th>
+										<th><b>Email</b></th>
+										<th><b>Alamat</b></th>
+										<th><b>Kota</b></th>
+										<th><b>Kode Pos</b></th>
+										<th><b>Catatan</b></th>
 									</thead>
 									<tbody>
 										<tr>
 											<td>Adi</td>
-											<td align="right">1</td>
+											<td align="right">laki-laki	</td>
 											<td align="right">1997-12-17</td>
 											<td align="right">08764537255</td>
 											<td>adi@gmail.com</td>
@@ -251,7 +270,7 @@ ul :hover {background: #ffd11a;}
 										</tr>
 										<tr>
 											<td>Galang</td>
-											<td align="right">1</td>
+											<td align="right">laki-laki	</td>
 											<td align="right">2000-12-17</td>
 											<td align="right">08776537255</td>
 											<td>galang@gmail.com</td>
@@ -259,17 +278,6 @@ ul :hover {background: #ffd11a;}
 											<td>Bandar Lampung</td>
 											<td>12345</td>
 											<td>Coba Pelanggan</td>
-										</tr>
-										<tr>
-											<td>Khofifah</td>
-											<td align="right">2</td>
-											<td align="right">2001-11-20</td>
-											<td align="right">0876453755</td>
-											<td>khofifah@gmail.com</td>
-											<td>Labuhan Ratu</td>
-											<td>Bandar Lampung</td>
-											<td>12645</td>
-											<td>Mencoba Pelanggan</td>
 										</tr>
 									</tbody>
 								</table>
