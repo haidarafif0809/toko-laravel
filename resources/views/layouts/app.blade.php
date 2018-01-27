@@ -10,35 +10,38 @@
         KavePos
     </title>
     <!-- Styles -->
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/timer.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
     <style type="text/css">
-        @font-face {
-            font-family: Ubuntu Medium;
-            src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
-        }
-        @font-face {
-            font-family: Museo Sans;
-            src: url({{ asset('fonts/MuseoSans_500.otf') }});
-        }
-        body {
-            font-family: Museo Sans;
-        }
-        input {
-            font-family: Ubuntu Medium;
-        }
-        .swal2-content {
-            font-family: Museo Sans;
-        }
-        .logo-navbar{
-            width:30px;
-            height:30px;
-        }
-    </style>
+    @font-face {
+        font-family: Ubuntu Medium;
+        src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
+}
+@font-face {
+    font-family: Museo Sans;
+    src: url({{ asset('fonts/MuseoSans_500.otf') }});
+}
+body {
+    font-family: Museo Sans;
+}
+input {
+    font-family: Ubuntu Medium;
+}
+.swal2-content {
+    font-family: Museo Sans;
+}
+.logo-navbar{
+    width:30px;
+    height:30px;
+}
+</style>
 </head>
 <body>
     <div id="app">
@@ -277,7 +280,7 @@
 
 </div>
 <!-- Scripts -->
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('js/app.js?v=1.28') }}"></script>
@@ -285,10 +288,17 @@
 <script src="{{ asset('js/sidenav.js') }}"></script>
 <script src="{{ asset('js/timer.js') }}"></script>
 <!-- charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
 <script src="{{ asset('js/vue-charts.js') }}"></script>
 <script src="js/Chart.min.js "></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script> -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <script type="text/javascript">
     function sweetAlert(){
         var namaToko = document.getElementById('nama_toko').value;
@@ -297,7 +307,7 @@
         var no_telp = document.getElementById('no_telp').value;
         var password = document.getElementById('password').value;
         if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
-             swal({
+         swal({
             title: "Memproses...",
             text: "Mohon tunggu",
             imageUrl: "images/ajaxloader.gif",
@@ -305,21 +315,21 @@
             allowOutsideClick: false,
             allowEscapeKey: false
         });
-        }
-    } function sweetAlerts(){
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        if ((!email == '') && (!password == '')) {
-             swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
-        }
-    }
+     }
+ } function sweetAlerts(){
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if ((!email == '') && (!password == '')) {
+     swal({
+        title: "Memproses...",
+        text: "Mohon tunggu",
+        imageUrl: "images/ajaxloader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+ }
+}
 </script>
 </body>
 </html>

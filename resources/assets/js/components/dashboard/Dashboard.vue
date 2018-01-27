@@ -1,4 +1,8 @@
 <style type="text/css">
+#chartdiv {
+  width : 100%;
+  height  : 5000px;
+}
 .card {
   display: inline-block;
   position: relative;
@@ -60,103 +64,106 @@
   padding: 10px 0;
   background-color: #FFFFFF;
 }
-h3 {
+h4 {
   padding-left: 20px;
 }
 </style>
 <template>
-    <body>
-        <div class="container">
-            <div class="panel panel-default">
-                <h4 class="panel-heading"><B>DASHBOARD</B></h4>
-            </div> 
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <chartjs-line></chartjs-line>
-                </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <h4 class="panel-heading"><B>DASHBOARD</B></h4>
+    </div>
+    <div class="row">
+      <div class="">
+        <p>{{ msg }}</p>
+        <line-chart></line-chart>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-nav-tabs">
+          <div class="header header-info">
+            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Produk Teratas</h4>
+              </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card card-nav-tabs">
-                  <div class="header header-info">
-                    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-                    <div class="nav-tabs-navigation">
-                      <div class="nav-tabs-wrapper">
-                        <h3><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Produk Teratas</h3>
-                    </div>
-                </div>
+          </div>
+          <div class="content">
+            <div class="tab-content text-center">
+              <div class="tab-pane active" id="profile">
+                <h1><chartjs-horizontal-bar></chartjs-horizontal-bar></h1>
+              </div>
+              <div class="tab-pane" id="messages">
+                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
+              </div>
+              <div class="tab-pane" id="settings">
+                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
+              </div>
             </div>
-            <div class="content">
-                <div class="tab-content text-center">
-                  <div class="tab-pane active" id="profile">
-                    <h1>0 %</h1>
-                </div>
-                <div class="tab-pane" id="messages">
-                    <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-                </div>
-                <div class="tab-pane" id="settings">
-                    <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-                </div>
+          </div>
+        </div>
+      </div>      
+      <div class="col-md-4">
+        <div class="card card-nav-tabs">
+          <div class="header header-info">
+            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Per Kategori</h4>
+              </div>
             </div>
+          </div>
+          <div class="content">
+            <div class="tab-content text-center">
+              <div class="tab-pane active" id="profile">
+                <h1><chartjs-polar-area></chartjs-polar-area></h1>
+              </div>
+              <div class="tab-pane" id="messages">
+                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
+              </div>
+              <div class="tab-pane" id="settings">
+                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>      
-<div class="col-md-4">
-    <div class="card card-nav-tabs">
-      <div class="header header-info">
-        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-        <div class="nav-tabs-navigation">
-          <div class="nav-tabs-wrapper">
-            <h3><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Per Kategori</h3>
+      </div>      
+      <div class="col-md-4">
+        <div class="card card-nav-tabs">
+          <div class="header header-info">
+            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Nominal Penjualan Tertinggi</h4>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <div class="tab-content text-center">
+              <div class="tab-pane active" id="profile">
+                <h1><chartjs-horizontal-bar></chartjs-horizontal-bar></h1>
+              </div>
+              <div class="tab-pane" id="messages">
+                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
+              </div>
+              <div class="tab-pane" id="settings">
+                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="content">
-    <div class="tab-content text-center">
-      <div class="tab-pane active" id="profile">
-        <h1>0 %</h1>
-    </div>
-    <div class="tab-pane" id="messages">
-        <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-    </div>
-    <div class="tab-pane" id="settings">
-        <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-    </div>
-</div>
-</div>
-</div>
-</div>      
-<div class="col-md-4">
-    <div class="card card-nav-tabs">
-      <div class="header header-info">
-        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-        <div class="nav-tabs-navigation">
-          <div class="nav-tabs-wrapper">
-            <h3><i class="fa fa-area-chart" aria-hidden="true"></i> Nominal Penjualan Tertinggi</h3>
-        </div>
-    </div>
-</div>
-<div class="content">
-    <div class="tab-content text-center">
-      <div class="tab-pane active" id="profile">
-        <h1>0 %</h1>
-    </div>
-    <div class="tab-pane" id="messages">
-        <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-    </div>
-    <div class="tab-pane" id="settings">
-        <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</body>
+  </div>
 </template>
-
-<script type="text/javascript">
-
+<script>
+export default {
+  data() {
+    return {
+      msg: 'Laporan Penjualan per hari'
+    }
+  },
+}
 </script>

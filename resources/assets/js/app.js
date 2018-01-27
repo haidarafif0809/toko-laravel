@@ -19,23 +19,37 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from 'vue'
 import money from 'v-money'
+import AmCharts from 'amcharts3'
+import AmSerial from 'amcharts3/amcharts/serial'
+// chart.js
+import VueChartJs from 'vue-chartjs'
 Vue.use(money, {
     precision: 4
 })
 Vue.use(BootstrapVue);
-if (typeof Chart === "undefined") throw "ChartJS is undefined";
-// 4 kb here
-window.VueCharts = {};
-VueCharts.core = require('./vue-chartjs-lib.js');
-VueCharts.install = function(Vue) {
-    Vue.component('chartjs-line', require('./components/chartjs-line.vue'));
-}
 window.Vue.use(VueSwal)
 window.Vue.use(Spinner)
+window.Vue.use(VueChartJs)
+Vue.component('line-chart', {
+    extends: VueChartJs.Line,
+    mounted() {
+        this.renderChart({
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Data One',
+                backgroundColor: '#f87979',
+                data: [40, 39, 10, 40, 39, 80, 40]
+            }]
+        }, {
+            responsive: true,
+            maintainAspectRatio: false
+        })
+    }
+});
+Vue.component('vue-chart', require('vue-chartjs'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('vue-simple-spinner', require('vue-simple-spinner'));
 Vue.component('selectize-component', require('vue2-selectize'));
-// Vue.component('chartjs-line', require('./components/chartjs-line.vue'));
 Vue.component('example', require('./components/Example.vue'));
 window.Vue.use(VueRouter);
 window.Vue = require('vue');
@@ -80,7 +94,16 @@ import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
 import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
-
+// if (typeof Chart === "undefined") throw "ChartJS is undefined";
+// // 4 kb here
+// window.VueCharts = {};
+// VueCharts.core = require('./vue-chartjs-lib.js');
+// VueCharts.install = function(Vue) {
+//     // Vue.component('chartjs-line', require('./components/chartjs-line.vue'));
+//     // Vue.component('chartjs-bar', require('./components/chartjs-bar.vue'));
+//     Vue.component('chartjs-horizontal-ber', require('./components/chartjs-horizontal-bar.vue'));
+//     Vue.component('chartjs-doughnut', require('./components/chartjs-doughnut.vue'));
+// }
 const routes = [{
         path: '/',
         components: {
@@ -224,7 +247,6 @@ const routes = [{
         component: StafTokoEdit,
         name: 'editStafToko',
     }
-    
 ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
