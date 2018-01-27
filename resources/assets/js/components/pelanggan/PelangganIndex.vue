@@ -205,7 +205,7 @@ ul :hover {background: #ffd11a;}
 									<tr>
 										<td class="bold">Tanggal Lahir</td>
 										<td>:</td>
-										<td>Tanggal Lahir diisi dengan format Tahun/Bulan/Tanggal (yyyy/mm/dd)</td>
+										<td>Tanggal Lahir diisi dengan format Tanggal/Bulan/Tahun/ (dd/mm/yyyy)</td>
 									</tr>
 									<tr>
 										<td class="bold">Nomor Telepon</td>
@@ -260,7 +260,7 @@ ul :hover {background: #ffd11a;}
 										<tr>
 											<td>Adi</td>
 											<td align="right">laki-laki	</td>
-											<td align="right">1997-12-17</td>
+											<td align="right">17/12/1997</td>
 											<td align="right">08764537255</td>
 											<td>adi@gmail.com</td>
 											<td>Kedaton</td>
@@ -271,7 +271,7 @@ ul :hover {background: #ffd11a;}
 										<tr>
 											<td>Galang</td>
 											<td align="right">laki-laki	</td>
-											<td align="right">2000-12-17</td>
+											<td align="right">14/10/1998</td>
 											<td align="right">08776537255</td>
 											<td>galang@gmail.com</td>
 											<td>Kemiling</td>
