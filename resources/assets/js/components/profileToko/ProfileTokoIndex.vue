@@ -1,7 +1,7 @@
 <style type="text/css">
 
 .logo-toko {
-    width: 50%;
+    width: 70%;
     margin: auto;
     display: block;
     box-shadow: 10px 10px 5px 5px;
@@ -28,12 +28,12 @@
                         <li class="active">Profile Toko</li>
                     </ul>
                     <div class="panel panel-default">
-                        <h4 class="panel-heading"> <i class="fa fa-cog" aria-hidden="true"></i> <B>PROFILE ANDA</B></h4>
+                        <h4 class="panel-heading"> <i class="fa fa-cog" aria-hidden="true"></i> <B>SETTING PROFILE</B></h4>
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <ul class="breadcrumb color">
-                        <li class="active">INFORMASI USER</li>
+                        <li class="active"><h3>INFORMASI USER</h3></li>
                     </ul>
                     <div class="panel panel-default color">
                         <div class="panel-heading"><i class="fa fa-user-o" aria-hidden="true"></i> User Toko</div>
@@ -46,7 +46,7 @@
                                             <td class="col-md-8">: {{profileToko.profileToko.nama_toko}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">ALAMAT EMAIL</td>
+                                            <td class="col-md 2">EMAIL</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.email}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-md-6 ">
                     <ul class="breadcrumb color">
-                        <li class="active">INFORMASI TOKO</li>
+                        <li class="active"><h3>INFORMASI TOKO</h3></li>
                     </ul>
                     <div class="panel panel-default color">
                         <div class="panel-heading"><i class="fa fa-university" aria-hidden="true"></i> Toko</div>
@@ -101,6 +101,13 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <tbody v-if="profileTokos.length > 0 && loading == false" class="data-ada">
+                                        <tr v-for="profileToko , index in profileTokos" >
+                                            <td class="col-md-2">
+                                                <img v-if="profileToko.profileToko.foto == null" class="img-responsive thumbnail shadow logo-toko" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
+                                                <img v-else class="logo-toko img-responsive thumbnail shadow" :src="url_img + profileToko.profileToko.foto">
+                                            </td>
+                                            <td class="col-md-8">LOGO TOKO</td>
+                                        </tr>
                                         <tr v-for="profileToko , index in profileTokos">
                                             <td class="col-md 2">NAMA TOKO</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.nama_toko}}</td>
@@ -110,19 +117,19 @@
                                             <td class="col-md-8">: {{profileToko.profileToko.nama_pemilik}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">NOMOR TELP</td>
+                                            <td class="col-md 2">TELEPON</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.no_telp}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">Provinsi </td>
+                                            <td class="col-md 2">PROVINSI </td>
                                             <td class="col-md-8">: {{profileToko.provinsi.name}}</td>
                                         </tr>                
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">Kabupaten </td>
+                                            <td class="col-md 2">KABUPATEN </td>
                                             <td class="col-md-8">: {{profileToko.kabupaten.name}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">ALAMAT/TEMPAT</td>
+                                            <td class="col-md 2">ALAMAT</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.alamat}}</td>
                                         </tr>
                                         <tr v-for="profileToko , index in profileTokos" >
@@ -132,13 +139,6 @@
                                         <tr v-for="profileToko , index in profileTokos" >
                                             <td class="col-md 2">TANGGAL REGISTRASI</td>
                                             <td class="col-md-8">: {{profileToko.profileToko.created_at}}</td>
-                                        </tr>
-                                        <tr v-for="profileToko , index in profileTokos" >
-                                            <td class="col-md 2">LOGO TOKO</td>
-                                            <td class="col-md-8">: 
-                                                <img v-if="profileToko.profileToko.foto == null" class="img-responsive thumbnail shadow logo-toko" src="https://www.glasgow.gov.uk/georgesquarewebcam/camera-unavailable.gif">
-                                                <img v-else class="logo-toko img-responsive thumbnail shadow" :src="url_img + profileToko.profileToko.foto">
-                                            </td>
                                         </tr>
                                         <br>
                                         <ul>

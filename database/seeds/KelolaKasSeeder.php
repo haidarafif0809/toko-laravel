@@ -16,7 +16,7 @@ class KelolaKasSeeder extends Seeder
         $kelola_kas             = new KelolaKas();
         $kelola_kas->toko_id    = 1;
         $kelola_kas->type       = 1;
-        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->jumlah     = 5000000;
         $kelola_kas->keterangan = 'Lunas';
         $kelola_kas->save();
 
@@ -24,7 +24,7 @@ class KelolaKasSeeder extends Seeder
         $kelola_kas             = new KelolaKas();
         $kelola_kas->toko_id    = 1;
         $kelola_kas->type       = 2;
-        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->jumlah     = 11000000;
         $kelola_kas->keterangan = 'Ngutang';
         $kelola_kas->save();
 
@@ -32,7 +32,7 @@ class KelolaKasSeeder extends Seeder
         $kelola_kas             = new KelolaKas();
         $kelola_kas->toko_id    = 1;
         $kelola_kas->type       = 1;
-        $kelola_kas->jumlah     = 5000;
+        $kelola_kas->jumlah     = 10000000;
         $kelola_kas->keterangan = 'Nyicil';
         $kelola_kas->save();
 

@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('new_password_confirmation') ? ' has-error': '' }}">
-                            <label for="new_password_confirmation" class="col-md-4 control-label">Konfirmasi Password anyar</label>
+                            <label for="new_password_confirmation" class="col-md-4 control-label">Konfirmasi Password Baru</label>
                             <div class="col-md-6">
                                  <input id="new_password_confirmation" type="password" class="form-control" name="new_password_confirmation" required>
                                 @if ($errors->has('new_password_confirmation'))

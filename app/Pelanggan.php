@@ -27,7 +27,7 @@ class Pelanggan extends Model
 
     public static function kode_pelanggan($id_toko)
     {
-        $datatoko      = Toko::select('id', 'prefix_member_id')->where('id', $id_toko)->first();
+        $dataToko      = Toko::select('id', 'prefix_member_id')->where('id', $id_toko)->first();
         $dataPelanggan = Pelanggan::where('toko_id', $id_toko)->orderBy('id', 'desc');
         $pelanggan     = $dataPelanggan->first();
         if ($pelanggan != null) {
@@ -37,12 +37,27 @@ class Pelanggan extends Model
             $ambil_nomor = 1;
         }
 
-        if ($dataPelanggan->count() > 0) {
-            $nomor          = 1 + $ambil_nomor;
-            $kode_pelanggan = $datatoko->id . "/" . $datatoko->prefix_member_id . "/" . $nomor;
+        if (is_null($dataToko->prefix_member_id)) {
+            // $nomor          = 1 + $ambil_nomor;
+            // $kode_pelanggan = $dataToko->id . "/kv/" . $nomor;
+            // } else {
+
+            if ($dataPelanggan->count() > 0) {
+                $nomor          = 1 + $ambil_nomor;
+                $kode_pelanggan = $dataToko->id . "/KV/" . $nomor;
+            } else {
+                $nomor          = 1;
+                $kode_pelanggan = $dataToko->id . "/KV/" . $nomor;
+            }
         } else {
-            $nomor          = 1;
-            $kode_pelanggan = $datatoko->id . "/" . $datatoko->prefix_member_id . "/" . $nomor;
+            if ($dataPelanggan->count() > 0) {
+                $nomor          = 1 + $ambil_nomor;
+                $kode_pelanggan = $dataToko->id . "/" . $dataToko->prefix_member_id . "/" . $nomor;
+            } else {
+                $nomor          = 1;
+                $kode_pelanggan = $dataToko->id . "/" . $dataToko->prefix_member_id . "/" . $nomor;
+            }
+
         }
 
         return $kode_pelanggan;

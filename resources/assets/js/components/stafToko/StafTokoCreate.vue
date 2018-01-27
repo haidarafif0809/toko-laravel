@@ -70,7 +70,7 @@
 
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
-									<button class="btn btn-primary" value="simpan" type="submit" v-on:click="klikUndang(user.nama_pemilik, user.email, user.no_telp, user.password)">
+									<button class="btn btn-primary" value="simpan" type="submit">
 										<span v-model="undangs.true" v-show="undang">Undang</i></span>
 										<span v-model="undangs.false" v-show="!undang">Loading . . .</i></span>
 									</button>
@@ -115,47 +115,60 @@ export default {
 
 	},
 	methods: {
-		klikUndang(nama_pemilik, email, no_telp, password) {
-			var emails = document.forms['emailku']['emailUser'].value;
-			var atpos = emails.indexOf("@");
-			var dotpos = emails.lastIndexOf(".");
-			if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
-				return;
-			}
-			else {
-				this.undang = false;
-			}
+		// klikUndang(nama_pemilik, email, no_telp, password) {
+		// 	var emails = document.forms['emailku']['emailUser'].value;
+		// 	var atpos = emails.indexOf("@");
+		// 	var dotpos = emails.lastIndexOf(".");
+		// 	if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
+		// 		return;
+		// 	}
+		// 	else {
+		// 		this.undang = false;
 
+			// // using setTimeout to simulate ajax request
+			// setTimeout(() => {
+			// 	window.swal({
+			// 		title: "Finished!",
+			// 		showConfirmButton: false,
+			// 		timer: 1000
+			// 	});
+			// }, 2000);
 
-		},
-		saveForm() {
-			var app = this;
-			var newuser = app.user;
-			axios.post(app.url, newuser)
-			.then(function (resp) {
-				app.message = 'Sukses : Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.';
-				app.alert(app.message);
-				app.user.nama_pemilik = ''
-				app.user.email = ''
-				app.user.no_telp = ''
-				// app.user.password = ''
-				app.errors = '';
-				app.$router.replace('/staf-toko');
+		// }
+	// },
+	saveForm() {
+		swal({
+			title: "Memproses...",
+			text: "Mohon tunggu",
+			imageUrl: "images/ajaxloader.gif",
+			showConfirmButton: false,
+			allowOutsideClick: false,
+			allowEscapeKey: false
+		});
+		var app = this;
+		var newuser = app.user;
+		axios.post(app.url, newuser)
+		.then(function (resp) {
+			swal({
+				title: 'Berhasil!',
+				type: 'success',
+				text: 'Berhasil mengundang ' + app.user.email + ' sebagai staff baru. Email undangan telah terkirim.',
+				showConfirmButton: false,
+				timer: 2300
 			})
-			.catch(function (resp) {
-				app.success = false;
-				app.errors = resp.response.data.errors;
-			});
-		},
-		alert(pesan) {
-			this.$swal({
-				title: "Berhasil!",
-				text: pesan,
-				icon: "success",
-			});
-		}
-
-	}
+			app.user.nama_pemilik = ''
+			app.user.email = ''
+			app.user.no_telp = ''
+			app.user.password = ''
+			app.errors = '';
+			app.$router.replace('/staf-toko');
+		})
+		.catch(function (resp) {
+			app.success = false;
+			app.errors = resp.response.data.errors;
+		});
+	},
+}
 }
 </script>
 

@@ -29,13 +29,78 @@ class ProdukController extends Controller
 
     public function view()
     {
-        return Produk::orderBy('produk_id', 'desc')->paginate(10);
+        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk','produks.produk_id as produk_id','produks.nama_produk as nama_produk','produks.harga_jual'])
+            ->leftJoin('kategori_produks','produks.kategori_produks_id','=','kategori_produks.id')
+            ->orderBy('produk_id', 'desc')
+            ->paginate(10);
+
+        $array = array();
+        foreach ($produk as $produks) {
+            array_push($array, [
+                'nama_produk'      => $produks->nama_produk,
+                'harga_jual'       => $produks->harga_jual,
+                'kategori_produk'  => $produks->nama_kategori_produk,
+                'produk_id'        => $produks->produk_id,
+
+            ]);
+        }
+         //DATA PAGINATION
+        $respons['current_page']   = $produk->currentPage();
+        $respons['data']           = $array;
+        $respons['first_page_url'] = url('produk/view?page=' . $produk->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $produk->lastPage();
+        $respons['last_page_url']  = url('produk/view?page=' . $produk->lastPage());
+        $respons['next_page_url']  = $produk->nextPageUrl();
+        $respons['path']           = url('produk/view');
+        $respons['per_page']       = $produk->perPage();
+        $respons['prev_page_url']  = $produk->previousPageUrl();
+        $respons['to']             = $produk->perPage();
+        $respons['total']          = $produk->total();
+        //DATA PAGINATION
+
+         return response()->json($respons);
     }
 
     public function cari(Request $request)
     {
-        $produk = Produk::where('nama_produk', 'LIKE', "%$request->pencarian%")->paginate(10);
-        return response()->json($produk);
+
+        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk','produks.produk_id as produk_id','produks.nama_produk as nama_produk','produks.harga_jual'])
+            ->leftJoin('kategori_produks','produks.kategori_produks_id','=','kategori_produks.id')
+            ->where(function ($query) use ($request) {
+                        $query->orwhere('nama_produk', 'LIKE', "%$request->pencarian%")
+                        ->orWhere('nama_kategori_produk', 'LIKE', "%$request->pencarian%");
+                        })
+                        ->orderBy('produk_id', 'desc')
+                        ->paginate(10);
+                        
+        $array = array();
+        foreach ($produk as $produks) {
+            array_push($array, [
+                'nama_produk'      => $produks->nama_produk,
+                'harga_jual'       => $produks->harga_jual,
+                'kategori_produk'  => $produks->nama_kategori_produk,
+                'produk_id'        => $produks->produk_id,
+
+            ]);
+        }
+        //DATA PAGINATION
+        $respons['current_page']   = $produk->currentPage();
+        $respons['data']           = $array;
+        $respons['first_page_url'] = url('produk/view?page=' . $produk->firstItem() . '&pencarian=' . $request->pencarian);
+        $respons['from']           = 1;
+        $respons['last_page']      = $produk->lastPage();
+        $respons['last_page_url']  = url('produk/view?page=' . $produk->lastPage() . '&pencarian=' . $request->pencarian);
+        $respons['next_page_url']  = $produk->nextPageUrl();
+        $respons['path']           = url('produk/view');
+        $respons['per_page']       = $produk->perPage();
+        $respons['prev_page_url']  = $produk->previousPageUrl();
+        $respons['to']             = $produk->perPage();
+        $respons['total']          = $produk->total();
+        //DATA PAGINATION
+ 
+
+        return response()->json($respons);
     }
 
     public function detail($id)
@@ -107,13 +172,11 @@ class ProdukController extends Controller
             Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
         } else {
             $this->validate($request, [
-                'kode_produk'         => 'required|unique:produks,kode_produk',
                 'nama_produk'         => 'required',
                 'kategori_produks_id' => 'required|exists:kategori_produks,id',
-                'harga_beli'          => 'required|numeric',
                 'harga_jual'          => 'required|numeric',
                 'bisa_dijual'         => 'required',
-                'satuan'              => 'nullable',
+                'satuan'              => 'required',
                 'produk_modifier_id'  => 'nullable|exists:modifiers,id',
             ]);
 
@@ -137,10 +200,8 @@ class ProdukController extends Controller
         $toko_id = Auth::user()->toko_id;
         $produk  = Produk::create([
             'toko_id'             => $toko_id,
-            'kode_produk'         => $request->kode_produk,
             'nama_produk'         => $request->nama_produk,
             'kategori_produks_id' => $request->kategori_produks_id,
-            'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
             'bisa_dijual'         => $request->bisa_dijual,
             'foto'                => (!empty($fileName) ? $fileName : ''),
@@ -165,13 +226,11 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
 
         $this->validate($request, [
-            'kode_produk'         => 'required',
             'nama_produk'         => 'required',
             'kategori_produks_id' => 'required|exists:kategori_produks,id',
-            'harga_beli'          => 'required|numeric',
             'harga_jual'          => 'required|numeric',
             'bisa_dijual'         => 'required',
-            'satuan'              => 'nullable',
+            'satuan'              => 'required',
             'produk_modifier_id'  => 'nullable',
         ]);
 
@@ -190,10 +249,8 @@ class ProdukController extends Controller
         }
 
         $arrUpdateProduk = [
-            'kode_produk'         => $request->kode_produk,
             'nama_produk'         => $request->nama_produk,
             'kategori_produks_id' => $request->kategori_produks_id,
-            'harga_beli'          => $request->harga_beli,
             'harga_jual'          => $request->harga_jual,
             'bisa_dijual'         => $request->bisa_dijual,
             'satuan'              => $request->satuan,

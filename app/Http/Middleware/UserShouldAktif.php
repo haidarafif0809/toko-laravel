@@ -22,7 +22,7 @@ class UserShouldAktif
             Auth::logout();
             Session::flash("flash_notification", [
                 "level"   => "warning",
-                "message" => "Toko anda secara otomatis di Nonaktifkan oleh pihak Toko Dasar. Untuk Informasi lebih lanjut hubungi pihak terkait.",
+                "message" => "Toko anda secara otomatis Dinonaktifkan oleh pihak KavePos. Untuk Informasi lebih lanjut hubungi pihak terkait.",
             ]);
             return redirect('/login');
         }

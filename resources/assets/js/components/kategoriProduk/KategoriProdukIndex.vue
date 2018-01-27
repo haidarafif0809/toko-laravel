@@ -18,7 +18,7 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <div class="tambah">
-                        <p> <router-link :to="{name: 'createKategoriProduk'}" class="btn btn-primary">Create Kategori Produk</router-link></p>        
+                        <p> <router-link :to="{name: 'createKategoriProduk'}" class="btn btn-primary">Tambah Kategori Produk</router-link></p>        
                     </div>
                     <div class="pencarian">
                         <input type="text" class="form-control" name="pencarian"placeholder="Pencarian"  v-model="pencarian" >
@@ -26,11 +26,13 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <th>Nama Kategori Produk</th>
+                            <th>Urutan Kategori Produk</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody v-if="kategoriProduks.length > 0 && loading == false" class="data-ada">
                             <tr v-for="kategoriProduk , index in kategoriProduks" >
                                 <td>{{kategoriProduk.nama_kategori_produk}}</td>
+                                <td>{{kategoriProduk.urutan_kategori_produk}}</td>
                                 <td>
                                     <router-link :to="{name: 'editKategoriProduk', params: {id: kategoriProduk.id}}" class="btn btn-xs btn-default" v-bind:id="'edit-' + kategoriProduk.id" >
                                     Edit  </router-link> 
@@ -133,25 +135,42 @@ watch: {
         	});
         },
         deleteKategoriProduk(id, index,nama_kategori_produk) {
-            if (confirm("Yakin Ingin Menghapus Satuan "+nama_kategori_produk+" ?")) {
-                var app = this;
-                axios.delete(app.url+'/' + id)
-                .then(function (resp) {
-                    app.getKategoriProduks();
-                    app.alert(nama_kategori_produk)
-                })
-                .catch(function (resp) {
-                    alert("Could not delete Satuan");
-                });
-            }
+            swal({
+                title: "Konfirmasi Hapus",
+                text : "Anda Yakin Ingin Menghapus " + nama_kategori_produk +" ?",
+                type : "warning",
+                showCancelButton: true,
+                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            })
+            .then((result) => {
+                if (result.value) {
+                    var app = this;
+                    axios.delete(app.url+'/' + id)
+                    .then(function (resp) {
+                        app.getKategoriProduks();
+                        swal({
+                            title: 'Berhasil!',
+                            type: 'success',
+                            text: 'Berhasil menghapus '+ nama_kategori_produk
+                        })
+                        app.$router.replace('/kategoriProduk/');
+                    })
+                    .catch(function (resp) {
+                        app.$router.replace('/kategoriProduk/');
+                        swal({
+                            title: 'Gagal!',
+                            type: 'warning',
+                            text: 'Tidak dapat menghapus kategori produk!'
+                        });
+                    });
+                }
+                this.$router.replace('/kategoriProduk/');
+            });
         },
-        alert(nama_kategori_produk) {
-        	this.$swal({
-        		title: "Berhasil!",
-        		text: 'Sukses : Berhasil menghapus kategori Produk '+ nama_kategori_produk,
-        		icon: "success",
-        	});
-        }
     }
 }
 </script>

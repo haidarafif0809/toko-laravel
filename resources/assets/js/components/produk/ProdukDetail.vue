@@ -30,21 +30,9 @@
 							<tbody>
 								<tr>
 									<td>
-										<label>Kode Produk:</label>
-									</td>
-									<td>{{ produk.kode_produk }}</td>
-								</tr>
-								<tr>
-									<td>
 										<label>Harga Jual:</label>
 									</td>
-									<td>{{ produk.harga_jual }}</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Harga Beli:</label>
-									</td>
-									<td>{{ produk.harga_beli }}</td>
+									<td>{{  "Rp" }}{{ new Intl.NumberFormat().format(produk.harga_jual) }}</td>
 								</tr>
 								<tr>
 									<td>
@@ -67,8 +55,9 @@
 									</td>
 									<td>
 										<span v-if="produk.satuan == 1">Pcs</span>
-										<span v-if="produk.satuan == 2">Porsi</span>
-										<span v-if="produk.satuan == 3">Pack</span>
+										<span v-else-if="produk.satuan == 2">Porsi</span>
+										<span v-else-if="produk.satuan == 3">Pack</span>
+										<span v-else>{{ produk.satuan }}</span>
 									</td>
 								</tr>
 								<tr>
@@ -78,6 +67,7 @@
 									<td>
 										<span v-for="id,index in produk.produk_modifier_id" class="detail_nama_modifier">
 											<span>{{ produk_modifier[id] }}</span>
+											<span v-if="produk_modifier[id] == null">Tidak ada tambahan</span>
 										</span>
 									</td>
 								</tr>

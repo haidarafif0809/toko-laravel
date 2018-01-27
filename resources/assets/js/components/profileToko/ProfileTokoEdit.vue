@@ -20,6 +20,7 @@ img {
 					<div class="panel-heading">
 						<h4 class="panel-title"> Profile Toko </h4>
 					</div>
+					<br> 
 					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
 						<div class="form-group">
 							<label for="nama_toko" class="col-md-2 control-label">Nama Toko</label>
@@ -78,7 +79,7 @@ img {
 						<div class="form-group">
 							<label for="prefix_member_id" class="col-md-2 control-label">Prefix Member Id</label>
 							<div class="col-md-4">
-								<input class="form-control" autocomplete="on" placeholder="Prefix Member Id" type="text" v-model="profileToko.prefix_member_id" required name="prefix_member_id"  autofocus="">
+								<input class="form-control" autocomplete="on" placeholder="Prefix Member Id" type="text" v-model="profileToko.prefix_member_id" name="prefix_member_id"  autofocus="">
 								<span v-if="errors.prefix_member_id" class="label label-danger">{{ errors.prefix_member_id[0] }}</span>
 							</div>
 						</div>
@@ -99,7 +100,7 @@ img {
 						</div>
 
 						<div class="form-group">
-							<label for="foto" class="col-md-2 control-label">Foto</label>
+							<label for="foto" class="col-md-2 control-label"></label>
 							<div class="col-md-4">
 								<input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image" >
 							</div>
@@ -207,6 +208,7 @@ export default {
 				app.profileToko.foto=''
 				app.errors = '';
 				app.$router.replace('/profile-toko');
+				location.reload()
 				console.log(resp)
 			})
 			.catch(function (resp) {

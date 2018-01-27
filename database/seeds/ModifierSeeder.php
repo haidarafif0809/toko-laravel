@@ -14,20 +14,20 @@ class ModifierSeeder extends Seeder
     {
         // Membuat sample Modifer
         $modifier                 = new Modifier();
-        $modifier->nama_modifier  = "Topping Kacang";
-        $modifier->harga_modifier = "4000";
+        $modifier->nama_modifier  = "Gruyere cheese";
+        $modifier->harga_modifier = "400000";
         $modifier->save();
 
         // Membuat sample Modifer
         $modifier                 = new Modifier();
-        $modifier->nama_modifier  = "Karamel Afrika";
-        $modifier->harga_modifier = "5000";
+        $modifier->nama_modifier  = "Cheese recipe";
+        $modifier->harga_modifier = "500000";
         $modifier->save();
 
         // Membuat sample Modifer
         $modifier                 = new Modifier();
-        $modifier->nama_modifier  = "Keju Arab";
-        $modifier->harga_modifier = "6000";
+        $modifier->nama_modifier  = "Red wine";
+        $modifier->harga_modifier = "600000";
         $modifier->save();
     }
 }
