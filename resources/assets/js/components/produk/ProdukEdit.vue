@@ -371,45 +371,89 @@ export default {
         },
         tambahKategori() {
             var app = this;
-            swal({
-                text: 'Masukkan nama kategori baru',
-                content: "input",
-                button: {
-                    text: "Buat",
-                    closeModal: false,
-                },
-            })
-            .then(name => {
-                if (!name) throw null;
-                app.newKategoriProduk.nama_kategori_produk = name;
-                var newNamaKategori = app.newKategoriProduk;
 
+            swal({
+                title: 'Tambah Kategori Produk',
+                html:
+                '<input id="nama_kategori_produk" placeholder="Nama kategori produk" class="swal2-input">' +
+                '<input id="urutan_kategori_produk" placeholder="Urutan tampilan kategori produk" class="swal2-input">',
+                focusConfirm: false,
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        var nama_kategori_produk = $('#nama_kategori_produk');
+                        var urutan_kategori_produk = $('#urutan_kategori_produk');
+                        var data = new Array;
+                        data['nama_kategori_produk'] = nama_kategori_produk.val();
+                        data['urutan_kategori_produk'] = urutan_kategori_produk.val();
+                        setTimeout(() => {
+
+                            if (!nama_kategori_produk.val()) {
+                                swal.showValidationError('Nama kategori tidak boleh kosong.');
+                                nama_kategori_produk.focus();
+                            }
+                            else if (!nama_kategori_produk.val().match(/^[a-zA-Z0-9_-]*$/)) {
+                                swal.showValidationError('Nama kategori tidak boleh berisi simbol khusus <br> kecuali strip "-" dan underscore "_"');
+                                nama_kategori_produk.focus();
+                            }
+                            else if (nama_kategori_produk.val().length < 4) {
+                                swal.showValidationError('Nama kategori minimal harus berisi 4 karakter.');
+                                nama_kategori_produk.focus();
+                            }
+                            else {
+
+                                if (!urutan_kategori_produk.val()) {
+                                    swal.showValidationError('Urutan kategori produk tidak boleh kosong.');
+                                    urutan_kategori_produk.focus();
+                                }
+                                else if (!urutan_kategori_produk.val().match(/^[0-9]*$/)) {
+                                    swal.showValidationError('Urutan kategori produk hanya boleh berisi angka.');
+                                    urutan_kategori_produk.focus();
+                                }
+                            }
+                            console.log(data)
+                            resolve(data);
+                        }, 250);
+                    });
+                }
+            })
+            .then(data => {
+                console.log(data);
+                if (!data.value) {
+                    return;
+                }
+                app.newKategoriProduk.nama_kategori_produk = data.value['nama_kategori_produk'];
+                app.newKategoriProduk.urutan_kategori_produk = data.value['urutan_kategori_produk'];
+                var newNamaKategori = app.newKategoriProduk;
                 axios.post(app.url_newKategoriProduk, newNamaKategori)
                 .then(function (resp) {
-                    console.log(0);
-                    app.selectedKategoriProduksId();    
+                    console.log(resp)
+                    app.selectedKategoriProduksId();
                     swal({
                         title: "Berhasil!",
-                        text: 'Berhasil menambahkan "'+ name +'" ke kategori produk.',
-                        icon: 'success',
+                        type: 'success',
+                        timer: 1800,
+                        showConfirmButton: false,
+                        text: 'Berhasil menambahkan "'+ data.value['nama_kategori_produk'] +'" ke kategori produk.',
                     });
                 })
                 .catch(function (resp) {
-                    console.log()
-                    swal({
-                        title: "Gagal!",
-                        text: 'Ada sesuatu yang salah terjadi.',
-                        icon: 'warning',
-                    });
+                    console.log(resp)
+                    swal("Ada sesuatu yang salah terjadi", "Nama kategori produk atau nomor urutnya mungkin sudah digunakan sebelumnya.", "warning");
                 });
-
             })
-            .catch(err => {
-                if (err) {
-                    swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
-                } else {
-                    swal.stopLoading();
-                    swal.close();
+            .catch(function () {
+                swal("Ups.. Ada yang tidak beres.", "Pembuatan kategori produk gagal!", "error");
+            });
+            var button = $(".swal2-confirm");
+            $('.swal2-container').keydown(function (event) {
+
+                // Untuk mendeteksi apakah tombol enter ditekan atau tidak, jika ditekan
+                // maka trigger event klik untuk tombol konfirmasi pada swal yang muncul
+                // karena untuk swal tambah kategori kita tidak bisa menekan tombol enter
+                // untuk submit form secara bawaan, jadi harus dibuat manual :3
+                if (event.which == 13) {
+                    button.click();
                 }
             });
         },
