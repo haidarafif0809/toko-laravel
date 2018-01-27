@@ -1,13 +1,8 @@
 <style scoped>
-#box1{
-	background-color: black;
-	border-radius: 5px;
-	height: 90px;
+.kategori {
 	color: red;
-	padding: 15px;	
-	border:solid 5px #DDDDDD;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+	font-weight: bold;
+	text-align: center;
 }
 .cart-item {
 
@@ -21,94 +16,41 @@
 	float:left;
 
 }
-.button2:hover {background-color: #424EF7;}
 
-.button3{
-	background-color: black;
-	color: white;
-	border-radius:10px;
-	width: 130px;
-	height:60px;
-	left: 20px;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.button3:hover {background-color: #424EF7;}
-
-.button4 {
-	background-color: green;
-	color: white;
-	border-radius:10px;
-	width: 128px;
-	height:60px;
-	left:30px;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.bayar{
+	padding: 30px 20px;
+	font-size: 35px;
 }
 
-.button4:hover {background-color: #424EF7;}
-
-.button5{
-	background-color: white;
-	color: black;
-	border: 1px solid #e7e7e7;
-	border-radius: 5px;
-	width:50px;
-	height:30px;
-
+.tombol{
+	padding: 10px 20px;
+	font-size: 15px;
+}
+.button{
+	padding: 5px 15px;
+	font-size: 10px;
+}
+.tombolBayar{
+	padding: 10px 20px;
+	font-size: 15px;
+	width: 40%;
 }
 
-.button5:hover {background-color: red;}
-.buttonp{
-	background-color: #31C2E5;
-	color: black;
-	border: 1px solid #e7e7e7;
-	border-radius: 5px;
-	width:200px;
-	height:50px;
-	padding:10px;
-	margin: 10px;
-
+.tabInformasi{
+	width: 50%;
 }
-
-.buttonp:hover {background-color:#31C2E3;}
-
-/*.button6{
-	background-color: white;
-	color: black;
-	border: 1px solid #e7e7e7;
-	border-radius: 1px;
-	width:200px;
-	height:20px;
-
+#box{
+	border:1px solid #F0F0F0;
+	background-color:#F5F8FA;
+	border-radius: 3px;
 }
-
-.button6:hover {background-color: red;}*/
-#pencarian{
-	position: relative;
-	width: 360px;
-	height: 40px;
-	background-color: #F5F5F5;
-	border: solid 1px #CCCCCC;
-
+#box2{
+	border:1px solid #F0F0F0;
 }
-.table{
-	overflow: scroll;
-}
-.body{
-	float: right;
-	width: 65%;
-	height: 90px;
-	box-shadow:2px 3px black;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.produk{
-	background-color: #449D44;
-	width: 100px;
-	height: 50px;
-	border-radius: 4px;
+.total-bayar{
+	color: red;
+	font-weight: bold;
 	text-align: center;
-	float: right;
-	border:solid 1px #F7FBFF;
-	
 }
 #digital{
 	background-color: black;
@@ -305,38 +247,39 @@
 			</div>
 		</div>
 
-	</style>
-	<template>
-		<div class="container">
-			<!-- Button buka penjualan -->
-			<tr>
-				<td>Penjualan</td>|
-				<td><a style="color:red;" href="#">Buka Penjualan</a></td>
-			</tr>
-			<!-- Modal Pembayaran -->
-			<div id="modalBayar" class="modal fade" role="dialog" tabindex="-1">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3>Pembayaran</h3>
-						</div>
-						<div class="modal-body" id="modalPembayaran">
-							<form class="form-horizontal">
-								<h2>Total Transaksi</h2>
-								<tr>
-									<td><b>Total Pembelian</b></td>
-									<td align="center"> :</td>
-								</tr>
-								<div class="form-group">
-									<label class="col-md-4 control-label">Tunai</label>
-									<div class="col-md-6">
-										<input style="width:400px;height:35px;" required autocomplete="off"  type="text" name="modalBayar"  autofocus="" class="form-control">
-									</div>
-								</div>
+		<!-- Modal untuk Diskon per faktur -->
+		<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
+						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
+						<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
 
-								<label class="col-md-2 control-label"><h3>Kembalian:</h3></label>
+					</div>
+					<div class="modal-body">
+						<form v-on:submit.prevent="" class="form-horizontal">
+							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
+							<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
+							<br>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerFaktur()" >Simpan</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+					</div>
+				</div>
+			</div>
+		</div>
 
-								<hr style="width:550px;align:center;">
+		<!-- Modal untuk Diskon per Produk-->
+		<div id="modalDiskonPenjualanPerProduk" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <h4 class="modal-title">Diskon Penjualan</h4> -->
+						<button class="btn btn-default" v-on:click="diskonPenjualanProdukPersen">Diskon %</button>
+						<button class="btn btn-default" v-on:click="diskonPenjualanProdukRp">Diskon Rp</button>
 
 					</div>
 					<div class="modal-body">
@@ -376,13 +319,24 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="form-group">
-									<label class="col-md-4 control-label">Keterangan</label>
-									<div class="col-md-6 keterangan">
-										<textarea style="width:400px;"></textarea>
+								<div v-else>
+									<div v-for="kategori_produk , index in kategori_produks" >
+										<div class=" btn btn-success col-md-3 list-produk">
+											<div class="caption"  @click="submitTbsPenjualan(produk)">
+												<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
+													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
+												</h4>
+												<h4 v-else>
+													<center>{{kategori_produk.nama_kategori_produk}}</center>
+												</h4>
+											</div>
+										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+					</div>
+					<br>
 
 					
 					<!-- PRODUK PENJUALAN -->
@@ -404,26 +358,35 @@
 										</div>
 									</div>
 								</div>
-
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="button" data-dismiss="modal">Bayar</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+								<div v-else>
+									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-4 list-produk">
+										<div class="thumbnail">
+											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
+												<h4 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
+													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
+												</h4>
+												<h4 v-else>
+													{{produksPenjualans.data_produk.nama_produk}}
+												</h4>
+												<p>Harga: {{produksPenjualans.data_produk.harga_jual}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+
+				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+
+				<div align="right">
+					<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
+				</div>
+				<div align="right">
+				</div>
 			</div>
-
-			<!-- Modal Diskon Perfaktur -->
-
-			<div id="modalDiskonPerfaktur" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
-							<button class="btn btn-default" v-on:click="diskonFakturPersen">Diskon %</button>
-							<button class="btn btn-default" v-on:click="diskonFakturRp">Diskon Rp</button>
+		</div>
 
 		<div class="col-md-4" id="pull-left">
 			
@@ -511,35 +474,6 @@
 				<button class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
 				<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 			</div>
-
-			<table class="table">
-				<thead>
-					<th>Barang</th>
-					<th></th>
-					<th>Total</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Es cream cappucino
-							<br>
-							<a href="#">@.10.000</a>
-							<br>
-							Es cream cappucino
-							<br>
-							<a href="#">@.10.000</a>
-							<br>
-						</td>
-						<td>
-							<button class="button button5">10</button><br><br>
-							<button class="button button5">10</button><br><br>
-						</td>
-						<td><br>100.000.00 <br>
-							<br>100.000.00 <br>
-						</td>
-
-					</tr>
-				</tbody>
-			</table>
 		</div>
 	</template>
 
@@ -640,17 +574,47 @@
 	    	this.getHasilKembalian()
 	    }
 	},
-
 	methods: {
+		getDataTbs(id, subtotal, harga, jumlah) {
+			this.dataTbs.id = id;
+			this.dataTbs.subtotal = subtotal;
+			this.dataTbs.harga = harga;
+			this.dataTbs.jumlah = jumlah;
+		},
+		getHasilKembalian(){
+			var app = this;
+			var kembalian = app.pembayaran.bayar - app.jumlahBayar
 
-		diskonFakturRp(){
-			this.diskonPerFakturPersen = 0
-			this.diskonPerFakturRp = 1
+			if (app.pembayaran.bayar === 0 || app.pembayaran.bayar === '') {
+				return app.pembayaran.kembalian = 0;
+			}
+			else {
+
+				app.pembayaran.kembalian = kembalian;
+
+			}
 		},
-		diskonFakturPersen(){
-			this.diskonPerFakturPersen = 1
-			this.diskonPerFakturRp = 0
+		simpanDiskonPerFaktur(){
+			var app = this;
+			
+			if(app.formDiskon.persen > 0 ){
+				app.diskonPerfaktur.persen = app.formDiskon.persen;
+				app.diskonPerfaktur.rupiah = (app.tbs_penjualans.total_bayar / 100) * app.formDiskon.persen;
+			}
+			else if(app.formDiskon.rupiah > 0 ){
+				app.diskonPerfaktur.rupiah = app.formDiskon.rupiah;
+				app.diskonPerfaktur.persen = (app.formDiskon.rupiah * 100) / app.tbs_penjualans.total_bayar;
+			}
+			else {
+				app.diskonPerfaktur.persen = 0;
+				app.diskonPerfaktur.rupiah = 0;
+			}
+			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
+			
+			console.log(app.tbs_penjualans.total_bayar);
+			$('#modalDiskonPenjualan').hide();
 		},
+		
 		getKategoriProduk(page){
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -666,6 +630,245 @@
 				app.loading = false;
 			});
 		},
+		getProduksPenjualan(page) {
+			var app = this;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url+'/view?page='+page)
+			.then(function (resp) {
+				app.loading = false;
+				app.produksPenjualan = resp.data.data;
+				app.dataProduksPenjualan = resp.data;
+
+			})
+			.catch(function (resp) {
+				alert("Could not load produksPenjualan");
+				app.loading = false
+			});
+		},
+		getTbsPenjualan() {
+			var app = this;
+			axios.get(app.url +'/tbs-penjualan')
+			.then(function (resp) {
+				if (resp.data.data != undefined) {
+
+					app.tbs_penjualans = resp.data.data;
+					app.tbs_penjualans.total_bayar = resp.data.total_bayar;
+					app.jumlahBayar = resp.data.total_bayar;
+					app.loadingTbs = false;
+					console.log(resp);
+				}
+				app.loadingTbs = false;
+				// else {
+					
+				// 	app.tbs_penjualans = resp.data;
+				// 	app.loadingTbs = false;
+				// }
+				// app.tbs_penjualans.total_item = 
+				
+			})	
+			.catch(function () {
+				alert("Could not load tbs penjualan");
+			});
+
+		},
+
+		selectPelanggans() {
+			var app = this;
+			axios.get(app.url+'/pelanggan')
+			.then(function (resp) {
+				app.pelanggans = resp.data;
+			})
+			.catch(function (resp) {
+				alert("Could not load pelanggan");
+			});
+		},
+
+		tunai(){
+			this.formTunai = 1
+			this.formKartu = 0
+		},
+
+		diskonPenjualanProdukPersen(){
+			this.diskonProduk = 1
+			this.diskonProdukRp = 0
+		},
+
+		diskonPenjualanProdukRp(){
+			this.diskonProduk = 0
+			this.diskonProdukRp = 1
+		},
+
+		diskonPenjualanFakturPersen(){
+			this.diskonFaktur = 1
+			this.diskonFakturRp = 0
+		},
+
+		diskonPenjualanFakturRp(){
+			this.diskonFaktur = 0
+			this.diskonFakturRp = 1
+		},
+		kartu(){
+			this.formTunai = 0
+			// this.formKartu = 1
+			this.$swal({
+				title: "GAGAL!",
+				text: "Fitur ini sedang dalam pengembangan",
+				icon: "warning",
+			});
+		},
+		saveForm(){
+			var app = this;
+			app.penjualan.total_bayar = app.jumlahBayar;
+			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.cara_bayar = 'Tunai';
+			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
+			app.penjualan.keterangan = app.penjualan.keterangan;
+			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
+			var Penjualan = app.penjualan;
+			console.log(app.penjualan.subtotal)
+			axios.post(app.url, Penjualan)
+			.then(function(resp){
+				app.alert('berhasil');
+				app.getKategoriProduk();
+				app.getProduksPenjualan();
+				app.getTbsPenjualan();
+				app.selectPelanggans();
+				app.tbs_penjualans = '';
+				app.pelanggans = '';
+				app.diskonPerfaktur.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.pembayaran.bayar = '';
+				app.pembayaran.kembalian = 0;
+				app.penjualan.keterangan = '';
+				// app.getPenjualans();
+			})
+			.catch(function (resp) {
+				app.alert('gagal')
+			})
+
+		},
+		getHasilPencarian(page) {
+			var app = this;
+			app.loading = true;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+
+			axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
+			.then(function (resp) {
+				app.loading = false    
+				app.produksPenjualan = resp.data;
+				app.dataProduksPenjualan = resp;
+				console.log(resp.data);
+			})
+			.catch(function (resp) {
+				alert("Tidak dapat memuat produk..");
+				app.loading = false;
+			});
+		},
+		submitTbsPenjualan(produksPenjualans){
+			var app = this;
+			app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
+			app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
+			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuans_id;
+			app.inputTbsPenjualan.jumlah = 1;
+			var newTbs = app.inputTbsPenjualan;
+
+			axios.post(app.urlTambahTbs, newTbs)
+			.then(function (resp) {
+				// app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
+				// app.alert(app.message);
+				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+				// app.$swal.close();
+			})
+			.catch(function (resp) {
+				console.log(resp)
+
+				app.success = false;
+				app.errors = resp.response.data.errors;
+			});
+		},
+
+		simpanJumlahProduk(jumlah){
+			var app = this;
+			var newJumlah = app.dataTbs;
+			axios.post(app.urlUpdateTbs, newJumlah)
+			.then(function (resp) {
+				app.inputTbsPenjualan.jumlah = ''	
+				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+			})
+			.catch(function (resp) {
+				app.errors = resp.response.data.errors;
+			});		
+		},
+
+		deleteTbsPenjualan(id_tbs_penjualan) {
+			swal({
+				title: "Hapus?", 
+				text: "Yakin Ingin Menghapus ?", 
+				type: "warning",
+				showCancelButton: true,
+				cancelButtonColor: '#3085d6',
+				confirmButtonColor: '#d33',
+				confirmButtonText: 'Hapus',
+				cancelButtonText: 'Batal',
+				reverseButtons: true
+			})
+			.then((result) => {
+				if (result.value) {
+					var app = this;
+					axios.delete(app.urlHapusTbs+ '/'+id_tbs_penjualan)
+					.then(function (resp) {
+						app.getTbsPenjualan();
+						swal({
+							title: 'Berhasil!',
+							type: 'success',
+							text: 'Berhasil menghapus '
+						});
+						// app.$router.replace('/penjualan');
+					})
+					.catch(function (resp) {
+						app.$router.replace('/penjualan');
+						swal({
+							title: 'Gagal!',
+							type: 'warning',
+							text: 'Tidak dapat menghapus produk!'
+						})
+					});
+				}
+				else {
+					return;
+				}
+				this.tbs_penjualans = '',
+				this.$router.replace('/penjualan');
+			});
+		},
+	// deleteEntry(id, index,nama_produk) {
+	// 	if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
+	// 		var app = this;
+	// 		axios.delete(app.url+'/' + id)
+	// 		.then(function (resp) {
+	// 			app.getProduks();
+	// 			app.alert("Berhasil Menghapus produk "+nama_produk)
+	// 		})
+	// 		.catch(function (resp) {
+	// 			alert("Tidak dapat menghapus produk!");
+	// 		});
+	// 	}
+	// },
+	alert(pesan) {
+		this.$swal({
+			title: "Berhasil!",
+			text: pesan,
+			icon: "success",
+		});
 	}
+
+}
 }
 </script>
