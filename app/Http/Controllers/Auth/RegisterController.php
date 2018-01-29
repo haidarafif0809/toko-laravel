@@ -107,6 +107,7 @@ class RegisterController extends Controller
 
             $user = User::where('verification_token', $token)->where('email', $email)->first();
             if ($user) {
+
                 $user->verify();
                 Session::flash("flash_notification", [
                     "level"   => "success",
