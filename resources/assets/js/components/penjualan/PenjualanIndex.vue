@@ -5,14 +5,16 @@
 	text-align: center;
 }
 .cart-item {
-	max-height: 170px;
-	overflow-y: scroll;
+
+	overflow: auto;
 }
 #pull-right{
 	float:right;
+
 }
 #pull-left{
 	float:left;
+
 }
 
 .bayar{
@@ -50,11 +52,181 @@
 	font-weight: bold;
 	text-align: center;
 }
+#digital{
+	background-color: black;
+	border-radius: 3px;
+	color:red;
+	border:4px solid #F5F5F5;
+}
+.button1{
+	background-color: black;
+	color: white;
+	border-radius:10px;
+	width: 114px;
+	height:60px;
+	left: 10px;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 15px;
+}
+.button1:hover {background-color: #424EF7;}
 
+.button2{
+	background-color: black;
+	color: white;
+	border-radius:10px;
+	width: 114px;
+	height:60px;
+	left: 10px;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 15px;
+}
+.button2:hover {background-color: #424EF7;}
+
+.button3 {
+	background-color: green;
+	color: white;
+	border-radius:10px;
+	width: 114px;
+	height:60px;
+	left:30px;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 15px;
+}
+
+.button3:hover {background-color: #424EF7;}
+
+#tbs{
+	height: 250px;
+	overflow: auto;
+}
+#digital{
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#kategori_shadow{
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#modalPembayaran{
+	width: 400px;
+	height: 400px;
+	border-radius:0px;
+	color:#5E5E5E;
+	display:block;
+}
+.splice{
+	border-radius: 100%;
+	background-color: red;
+	width:25px;
+	height:25px;
+}
 </style>
 
 <template>
 	<div class="container">
+
+		<!-- Modal untuk Diskon per faktur -->
+		<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
+						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
+						<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
+
+					</div>
+					<div class="modal-body">
+						<form v-on:submit.prevent="" class="form-horizontal">
+							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
+							<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
+							<br>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerFaktur()" >Simpan</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Pembayaran -->
+		<div id="modalBayar" class="modal fade" role="dialog" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>Pembayaran</h3>
+					</div>
+					<div class="modal-body" id="modalPembayaran">
+						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
+							<table>
+								<tbody>
+									<tr>
+										<td><h2>Total</h2></td>
+										<td><h2 style="width:40px;">:</h2></td>
+										<td>
+											<h2>{{ new Intl.NumberFormat().format(jumlahBayar) }}</h2>
+										</td>
+									</tr>
+									<tr>
+										<td>Total Item</td>
+										<td style="40px;">:</td>
+										<td>{{ tbs_penjualans.length }}</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<label class="col-md-4 control-label">Tunai</label>
+								<div class="col-md-6">
+									<money class="form-control" style="width:400px;height:35px;" required autocomplete="off" placeholder="Jumlah" v-model="pembayaran.bayar" v-bind="money" name="bayar"  autofocus=""></money>
+								</div>
+							</div>
+							<!-- v-model="pembayaran.bayar" -->
+							<!-- style="width:400px;height:35px;"  -->
+							<tr>
+								<td>
+									<h3>Kembalian</h3>
+								</td>
+								<td style="width:40px;">:</td>
+								<td>{{ new Intl.NumberFormat().format(pembayaran.kembalian) }}</td>
+							</tr>
+
+							<hr style="width:550px;align:center;">
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Status Pesanan</label>
+								<div class="col-md-6">
+									<selectize-component>
+										<option>Dine In</option>
+										<option>Take Away</option>
+										<option>Delivery</option>
+									</selectize-component>	
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Keterangan</label>
+								<div class="col-md-6 keterangan">
+									<textarea style="width:400px;"  v-model="penjualan.keterangan"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label">Pelanggan</label>
+								<div class="col-md-6">
+									<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+										<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+									</selectize-component>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="button" data-dismiss="modal"v-on:click="saveForm()">Bayar</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- MODAL INPUT JUMLAH PRODUK -->
 		<div id="modalJumlahProduk" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -126,7 +298,7 @@
 		</div>
 
 		<div class="col-md-8" id="pull-right">
-			<div class="panel panel-default">
+			<div class="panel panel-default" id="kategori_shadow">
 				<!-- KATEGORI PRODUK -->
 				<div class="panel-heading">KATEGORI PRODUK</div>
 				<div class="panel-body">
@@ -166,6 +338,7 @@
 					</div>
 					<br>
 
+					
 					<!-- PRODUK PENJUALAN -->
 					<div class="row">
 						<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
@@ -216,259 +389,183 @@
 		</div>
 
 		<div class="col-md-4" id="pull-left">
-			<div class="panel panel-default">
-				<!-- PENCARIAN PRODUK PENJUALAN -->
-				<div class="row">
-					<div class="col-md-12 pencarian">
-						<div class="input-group">
-							<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
-							<div class="input-group-addon">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</div>
-						</div>
+			
+			<div class="panel panel-default" id="digital">
+				<div class="panel-body">
+					<div>
+						<h3 style="float:right;padding:10px;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ new Intl.NumberFormat().format(jumlahBayar) }}</h3>
+						<h3 style="float:right;padding:10px;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
 					</div>
-				</div>
-				<!-- PESANAN/ITEM PENJUALAN -->
-				<div class="panel-heading">Pesanan</div>
-				<ul class="list-group cart-item">
-					<!-- <li class="list-group-item list-group-item-warning">Tidak ada item</li> -->
-					<div v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">	
-						<li class="list-group-item" track-by="id" v-for="tbs_penjualan, index in tbs_penjualans">
-							<div>
-								<span class="large" v-if="tbs_penjualan.nama_produk.length > 15">
-									{{ tbs_penjualan.nama_produk.slice(0, 15) }}... <br>
-									<button class="btn btn-xs btn-danger btn-floating" type="button" data-id="id_tbs_penjualan">
-										<span data-toggle="modal" data-target="#modalDiskonPenjualanPerProduk">
-											<i class="fa fa-percent" aria-hidden="true"></i>
-										</span>
-									</button>
-								</span>
-								<span class="large" v-else>
-									{{ tbs_penjualan.nama_produk}}<br>
-									<button class="btn btn-xs btn-danger btn-floating" type="button" data-id="id_tbs_penjualan">
-										<span data-toggle="modal" data-target="#modalDiskonPenjualanPerProduk">
-											<i class="fa fa-percent" aria-hidden="true"></i>
-										</span>
-									</button>
-									test
-								</span>
-								<span class="large" style="float: right;">					
-									( {{ tbs_penjualan.harga_produk }} X 
-									<span @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)" class="btn btn-default button" data-toggle="modal" data-target="#modalJumlahProduk">
-										{{ tbs_penjualan.jumlah_produk }} 
-									</span> )
-									: <b>{{ tbs_penjualan.subtotal }}</b> 
-									<button v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button" class="btn btn-xs btn-danger btn-floating">
-										<i class="fa fa-trash-o" aria-hidden="true"></i>
-									</button>
-								</span>
-							</div>
-						</li>
+					<div id="digital2">
+						<tr>
+							<td>Sub Total </td>
+							<td>:</td>
+							<td align="right">{{ new Intl.NumberFormat().format(tbs_penjualans.total_bayar) }}</td>
+						</tr>
+						<tr>
+							<td>Diskon</td>
+							<td>:</td>
+							<td align="right" >{{diskonPerfaktur.persen}} %</td>
+						</tr>
+						<tr>
+							<td>Diskon</td>
+							<td>:</td>
+							<td align="right" >Rp. {{diskonPerfaktur.rupiah}}</td>
+						</tr>
+						<tr>
+							<td>Pajak</td>
+							<td>:</td>
+							<td align="right">2,2%</td>
+						</tr>
 					</div>
-					<div v-else-if="loadingTbs == true" class="text-center">
-						<li>Sedang Memuat Produk</li>
-					</div>
-					<div v-else class="list-group-item list-group-item-warning">
-						Tidak Ada Produk
-					</div>
-					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
-				</ul>
-				<div class="panel-footer">
-					Total Item: {{ tbs_penjualans.length }}
-					<span class="pull-right">
-						<!-- <i class="glyphicon glyphicon-refresh cart-item-action" v-on:click="clearCart()"></i> -->
-					</span>
+
 				</div>
 			</div>
 
+
+			
 			<div class="panel panel-default">
+				<div class="panel-heading"></div>
 				<div class="panel-body">
-					<form v-on:submit.prevent="saveForm()" class="form-horizontal">
-						<div class="form-group">
-							<table>
-								<tbody>
-									<tr>
-										<td>Sub Total </td>
-										<td width="25%" align="center"> :</td>
-										<td align="right">{{ tbs_penjualans.total_bayar }}</td>
-									</tr>
-									<tr>
-										<td>Diskon</td>
-										<td width="25%" align="center">:</td>
-										<td align="right" >{{diskonPerfaktur.persen}} %</td>
-									</tr>
-									<tr>
-										<td>Diskon</td>
-										<td width="25%" align="center">:</td>
-										<td align="right" >Rp. {{diskonPerfaktur.rupiah}}</td>
-									</tr>
-									<tr>
-										<td>Pajak</td>
-										<td width="25%" align="center">:</td>
-										<td align="right">2,2%</td>
+
+					<div class="row">
+						<div class="col-md-12 pencarian">
+							<div class="input-group">
+								<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
+								<div class="input-group-addon">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-responsive" id="tbs">
+						<table class="table table-striped table-hover">
+							<!-- <thead>
+								<th>Barang</th>
+								<th>Jml</th>
+								<th>Total</th>
+							</thead> -->
+							<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
+								<tr v-for="tbs_penjualan, index in tbs_penjualans">
+									<td>{{ tbs_penjualan.nama_produk}} <br>
+										<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal">@{{ new Intl.NumberFormat().format(tbs_penjualan.harga_produk) }}</a></td>
+										<td>{{ tbs_penjualan.jumlah_produk }}</td>
+										<td>{{ tbs_penjualan.subtotal }}</td>
+
+										<td>
+											<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
+											</button>
+										</td>
 									</tr>
 								</tbody>
+								<tbody v-else-if="loadingTbs == true" class="text-center">
+									<li>Sedang Memuat Produk</li>
+								</tbody>
+								<tbody v-else class="text-center">
+									Tidak Ada Produk
+								</tbody>
 							</table>
-							<!-- <h6>Sub total  : {{ tbs_penjualans.total_bayar }} </h6>
-							<h6>Diskon     : </h6>
-							<h6>Pajak      :</h6> -->
-							<div class="form-group">
-								<div class="col-md-12">
-									<label class="control-label">Total Bayar</label>
-									<h1 v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">Rp. {{ jumlahBayar }}<hr></h1>
-									<h1 v-else class="total-bayar"><hr></h1>
-								</div>
-							</div>
-							
-							<label class="control-label"> Nama Pelanggan:</label>
-							<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-								<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-							</selectize-component>
-							<label>Cara Bayar : </label>
-							<div>
-								<ul class="nav nav-tabs">
-									<li class="tabInformasi active">
-										<a data-toggle="tab"  v-on:click="tunai"><font color="#000000">Tunai</font></a>
-									</li>
-
-									<li class="tabInformasi">
-										<a data-toggle="tab"  v-on:click="kartu"><font color="#000000">Kartu</font></a>
-									</li>
-								</ul>								
-							</div>
-							<div v-if="formTunai == 1" v-model="penjualan.cara_bayar">
-								<br>
-								<div>
-									<input type="number" class="form-control bayar" placeholder="PEMBAYARAN" v-model="pembayaran.bayar"> 
-								</div>
-								<div>
-									<label class="control-label" font-size="200px" > <h3> KEMBALIAN :
-										<font color="red"> Rp.{{pembayaran.kembalian}}</font></h3>
-									</label>
-								</div>
-
-							</div>
-							<div v-if="formKartu == 1" v-model="penjualan.cara_bayar">
-								<selectize-component  :settings="settingss"> 
-									<option value="1"  >BNI</option>
-									<option value="2"  >BRI</option>
-									<option value="3"  >BCA</option>
-								</selectize-component>
-								<!-- <span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span> -->
-							</div>
-							<div>
-								<label class="control-label">Keterangan</label>
-								<textarea class="form-control" v-model="penjualan.keterangan"></textarea>
-							</div> 
-							<br>
-							<div>
-								<button class="btn btn-success tombol">Simpan</button>
-
-								<span class="btn btn-success tombol" data-toggle="modal" data-target="#modalDiskonPenjualan">
-									Diskon
-								</span>
-
-								<!-- <button class="btn btn-success tombol">Diskon</button> -->
-								<button class="btn btn-success tombolBayar">Bayar</button>
-							</div>
-							<br>
-							<h2 class="form-control-static text-warning"></h2>
 						</div>
-
-						<div  class="form-group">
-						</div>
-
-						<div class="form-group">
-						</div>
-
-					</form>
+					</div>
+					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 				</div>
+				<button class="button button2">Simpan</button>
+				<button class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+				<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 			</div>
 		</div>
-	</div>
-</template>
+	</template>
 
-<script>
-export default {
-	data: function () {
-		return {
-			formJumlahProduk: '',
-			jumlahBayar: '',
-			diskonPerfaktur: {
-				persen: '',
-				rupiah: '',
-			},
-			formDiskon: {
-				persen: '',
-				rupiah: '',
-			},
-			pembayaran:{
-				bayar: '',
-				kembalian: '',
-			},
-			kategori_produks: [],
-			penjualan: {
-				nama_pelanggan: '',
-				cara_bayar: '',
-				diskon: '',
-				subtotal: '',
-				total_bayar: '',
-				keterangan: '',
+	<script>
+	export default {
+		data: function () {
+			return {
+				formJumlahProduk: '',
+				jumlahBayar: '',
+				diskonPerfaktur: {
+					persen: '',
+					rupiah: '',
+				},
+				formDiskon: {
+					persen: '',
+					rupiah: '',
+				},
+				pembayaran:{
+					bayar: '',
+					kembalian: '',
+				},
+				kategori_produks: [],
+				penjualan: {
+					nama_pelanggan: '',
+					cara_bayar: '',
+					diskon: '',
+					subtotal: '',
+					total_bayar: '',
+					keterangan: '',
 
-			},
-			pelanggans:[],
-			produksPenjualan: [],
-			tbs_penjualans: [],
-			dataProduksPenjualan:{},
-			inputTbsPenjualan: {
-				satuan:'',
-				produk_id:'',
-				jumlah: '',
-				harga:'',
-				total_bayar: '',
-			},
-			deleteProdukTbsPenjualan: {
-				produk_id: ''
-			},
-			dataTbs: {
-				id: '',
-				jumlah: '',
-				subtotal: '',
-				harga: ''
-			},
-			search: '',
-			formTunai: 1,
-			diskonProduk: 1,
-			diskonProdukRp: 0,
-			diskonFaktur: 1,
-			diskonFakturRp: 0,
-			formKartu: 0,
-			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
-			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
-			urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
-			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
-			loading : true,
-			loadingTbs : true,
+				},
+				pelanggans:[],
+				produksPenjualan: [],
+				tbs_penjualans: [],
+				dataProduksPenjualan:{},
+				inputTbsPenjualan: {
+					satuan:'',
+					produk_id:'',
+					jumlah: '',
+					harga:'',
+					total_bayar: '',
+				},
+				deleteProdukTbsPenjualan: {
+					produk_id: ''
+				},
+				dataTbs: {
+					id: '',
+					jumlah: '',
+					subtotal: '',
+					harga: ''
+				},
+				price:1,
+				money: {
+					decimal: ',',
+					thousands: '.',
+					precision: 0,
+					masked: false
+				},
+				search: '',
+				formTunai: 1,
+				diskonProduk: 1,
+				diskonProdukRp: 0,
+				diskonFaktur: 1,
+				diskonFakturRp: 0,
+				formKartu: 0,
+				url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
+				urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+				urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
+				urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
+				loading : true,
+				loadingTbs : true,
 
-			setting_pelanggan:{
-				placeholder: 'Pilih Pelanggan'
-			},
-			settingss:{
-				placeholder: 'Pilih Bank'
-			},
-		}
-	},
-	mounted() {
-		var app = this;
-		app.loading = true
-		app.loadingTbs = true
-		app.getKategoriProduk();
-		app.getProduksPenjualan();
-		app.getTbsPenjualan();
-		app.selectPelanggans();
-	},
+				setting_pelanggan:{
+					placeholder: 'Pilih Pelanggan'
+				},
+				settingss:{
+					placeholder: 'Pilih Bank'
+				},
+			}
+		},
+		mounted() {
+			var app = this;
+			app.loading = true
+			app.loadingTbs = true
+			app.getKategoriProduk();
+			app.getProduksPenjualan();
+			app.getTbsPenjualan();
+			app.selectPelanggans();
+		},
 
-	watch: {
+
+		watch: {
 	    // whenever question changes, this function will run
 	    search: function (newQuestion) {
 	    	this.getHasilPencarian()

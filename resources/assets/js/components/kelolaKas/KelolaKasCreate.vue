@@ -80,12 +80,12 @@ export default {
 				placeholder: 'Kategori'
 			},
 			price: 1,
-	        money: {
-	          decimal: ',',
-	          thousands: '.',
-	          precision: 0,
-	          masked: false
-	        }
+			money: {
+				decimal: ',',
+				thousands: '.',
+				precision: 0,
+				masked: false
+			}
 
 		}
 
@@ -100,11 +100,11 @@ export default {
 			axios.post(app.url, tambahKelolaKas)
 			.then(function (resp) {
 				if (app.kelolaKas.type == 1){
-		            var typeKas = "Kas Masuk";
-		          }
-		          else{
-		            var typeKas = "Kas Keluar";
-		          }
+					var typeKas = "Kas Masuk";
+				}
+				else{
+					var typeKas = "Kas Keluar";
+				}
 				app.message = 'Sukses : Berhasil Menambah Kas "'+ typeKas +'"';
 				app.alert(app.message);
 				app.kelolaKas.type = ''

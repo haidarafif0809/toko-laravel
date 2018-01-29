@@ -9,7 +9,9 @@
     <title>
         KavePos
     </title>
+    <link rel="icon" type="img" href="{{ asset('favicon-kavepos.ico') }}">
     <!-- Styles -->
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -19,28 +21,28 @@
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 
     <style type="text/css">
-        @font-face {
-            font-family: Ubuntu Medium;
-            src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
-        }
-        @font-face {
-            font-family: Museo Sans;
-            src: url({{ asset('fonts/MuseoSans_500.otf') }});
-        }
-        body {
-            font-family: Museo Sans;
-        }
-        input {
-            font-family: Ubuntu Medium;
-        }
-        .swal2-content {
-            font-family: Museo Sans;
-        }
-        .logo-navbar{
-            width:30px;
-            height:30px;
-        }
-    </style>
+    @font-face {
+        font-family: Ubuntu Medium;
+        src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
+}
+@font-face {
+    font-family: Museo Sans;
+    src: url({{ asset('fonts/MuseoSans_500.otf') }});
+}
+body {
+    font-family: Museo Sans;
+}
+input {
+    font-family: Ubuntu Medium;
+}
+.swal2-content {
+    font-family: Museo Sans;
+}
+.logo-navbar{
+    width:30px;
+    height:30px;
+}
+</style>
 </head>
 <body>
     <div id="app">
@@ -56,7 +58,7 @@
                     <!-- ////logo and title -->
                     <div class='lgo'>
                         <div class='img-holder'>
-                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="194" height="100" />
+                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="150" height="80" />
                         </div>
                         <div class='title-holder'>
                             {{-- <span>KavePos</span> --}}
@@ -64,9 +66,11 @@
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
+                        @if (Auth::check())
                         <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                             Dashboard
                         </router-link></li>
+                        @endif
                         @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                             Staf Toko
@@ -135,10 +139,12 @@
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
+                        @if (Auth::check())
                         <li><router-link :to="{name: 'indexDashboard'}">
                             <i class="fa fa-home  fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Home</span>
+                        @endif
                         @role('member')
                         <li><router-link :to="{name: 'indexStafToko'}">
                             <i class="fa fa-user-circle-o fa-2x"></i>
@@ -279,7 +285,7 @@
 
 </div>
 <!-- Scripts -->
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+<!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="{{ asset('js/app.js?v=1.28') }}"></script>
@@ -306,7 +312,7 @@
         var no_telp = document.getElementById('no_telp').value;
         var password = document.getElementById('password').value;
         if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
-             swal({
+         swal({
             title: "Memproses...",
             text: "Mohon tunggu",
             imageUrl: "images/ajaxloader.gif",
@@ -314,21 +320,21 @@
             allowOutsideClick: false,
             allowEscapeKey: false
         });
-        }
-    } function sweetAlerts(){
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        if ((!email == '') && (!password == '')) {
-             swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
-        }
-    }
+     }
+ } function sweetAlerts(){
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    if ((!email == '') && (!password == '')) {
+     swal({
+        title: "Memproses...",
+        text: "Mohon tunggu",
+        imageUrl: "images/ajaxloader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+ }
+}
 </script>
 </body>
 </html>

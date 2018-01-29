@@ -80,7 +80,7 @@
     padding-left: 0;
     font-weight: 100;
     letter-spacing: 1.5px;
-    font-family: raleway;
+    /*font-family: raleway;*/
 }
 .w-lnk a, .w-lnk a:active, .w-lnk a:visited, .w-lnk a:focus {
     text-decoration: none;
@@ -105,7 +105,7 @@
     font-size: 18px;
 }
 .nav_txt {
-    font-family: raleway;
+    /*font-family: raleway;*/
     letter-spacing: 1px;
     display: block;
     text-align: center;
