@@ -9,6 +9,7 @@
     <title>
         KavePos
     </title>
+    <link rel="icon" type="img" href="{{ asset('favicon-kavepos.ico') }}">
     <!-- Styles -->
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -57,7 +58,7 @@ input {
                     <!-- ////logo and title -->
                     <div class='lgo'>
                         <div class='img-holder'>
-                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="194" height="100" />
+                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="150" height="80" />
                         </div>
                         <div class='title-holder'>
                             {{-- <span>KavePos</span> --}}
@@ -65,9 +66,11 @@ input {
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
+                        @if (Auth::check())
                         <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                             Dashboard
                         </router-link></li>
+                        @endif
                         @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                             Staf Toko
@@ -136,10 +139,12 @@ input {
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
+                        @if (Auth::check())
                         <li><router-link :to="{name: 'indexDashboard'}">
                             <i class="fa fa-home  fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Home</span>
+                        @endif
                         @role('member')
                         <li><router-link :to="{name: 'indexStafToko'}">
                             <i class="fa fa-user-circle-o fa-2x"></i>
