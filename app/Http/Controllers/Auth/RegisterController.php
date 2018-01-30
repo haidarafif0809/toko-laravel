@@ -99,16 +99,24 @@ class RegisterController extends Controller
     {
 
         $email = $request->get('email');
-        $user  = User::where('verification_token', $token)->where('email', $email)->first();
-        if ($user) {
-            $user->verify();
-            Session::flash("flash_notification", [
-                "level"   => "success",
-                "message" => "Berhasil melakukan verifikasi.",
-            ]);
+        $user  = User::where('email', $email)->first();
+        if ($user->is_verified == 1) {
             Auth::login($user);
+            return redirect('/home#');
+        } else {
+
+            $user = User::where('verification_token', $token)->where('email', $email)->first();
+            if ($user) {
+
+                $user->verify();
+                Session::flash("flash_notification", [
+                    "level"   => "success",
+                    "message" => "Berhasil melakukan verifikasi.",
+                ]);
+                Auth::login($user);
+            }
+            return redirect('/home#/profile-toko/lengkapi-profile/' . Auth::user()->toko_id);
         }
-        return redirect('/home#/profile-toko/lengkapi-profile/' . Auth::user()->toko_id);
 
     }
 }
