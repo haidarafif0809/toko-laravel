@@ -245,7 +245,7 @@
 
                         <tbody v-else class="data-tidak-ada">
                             <tr>
-                                <td colspan="2" class="text-center">Tidak Ada Data</td>
+                                <td colspan="4" class="text-center">Tidak Ada Data</td>
                             </tr>
                         </tbody>
                     </table>

@@ -31,6 +31,7 @@ class ProdukController extends Controller
     {
         $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk', 'produks.produk_id as produk_id', 'produks.nama_produk as nama_produk', 'produks.harga_jual'])
             ->leftJoin('kategori_produks', 'produks.kategori_produks_id', '=', 'kategori_produks.id')
+            ->where('produks.toko_id', Auth::user()->toko_id)
             ->orderBy('produk_id', 'desc')
             ->paginate(10);
 
@@ -71,6 +72,7 @@ class ProdukController extends Controller
                 $query->orwhere('nama_produk', 'LIKE', "%$request->pencarian%")
                     ->orWhere('nama_kategori_produk', 'LIKE', "%$request->pencarian%");
             })
+            ->where('produks.toko_id', Auth::user()->toko_id)
             ->orderBy('produk_id', 'desc')
             ->paginate(10);
 
