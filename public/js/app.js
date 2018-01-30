@@ -122297,36 +122297,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	methods: {
-		// klikUndang(nama_pemilik, email, no_telp, password) {
-		// 	var emails = document.forms['emailku']['emailUser'].value;
-		// 	var atpos = emails.indexOf("@");
-		// 	var dotpos = emails.lastIndexOf(".");
-		// 	if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
-		// 		return;
-		// 	}
-		// 	else {
-		// 		this.undang = false;
+		klikUndang: function klikUndang(nama_pemilik, email, no_telp, password) {
+			var emails = document.forms['emailku']['email'].value;
+			var atpos = emails.indexOf("@");
+			var dotpos = emails.lastIndexOf(".");
+			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
+				return;
+			} else {
+				swal({
+					title: "Memproses...",
+					text: "Mohon tunggu",
+					imageUrl: "images/ajaxloader.gif",
+					showConfirmButton: false,
+					allowOutsideClick: false,
+					allowEscapeKey: false
+				});
+				// 	this.undang = false;
 
-		// // using setTimeout to simulate ajax request
-		// setTimeout(() => {
-		// 	window.swal({
-		// 		title: "Finished!",
-		// 		showConfirmButton: false,
-		// 		timer: 1000
-		// 	});
-		// }, 2000);
-
-		// }
-		// },
+				// // using setTimeout to simulate ajax request
+				// setTimeout(() => {
+				// 	window.swal({
+				// 		title: "Finished!",
+				// 		showConfirmButton: false,
+				// 		timer: 1000
+				// 	});
+				// }, 2000);
+			}
+		},
 		saveForm: function saveForm() {
-			swal({
-				title: "Memproses...",
-				text: "Mohon tunggu",
-				imageUrl: "images/ajaxloader.gif",
-				showConfirmButton: false,
-				allowOutsideClick: false,
-				allowEscapeKey: false
-			});
+
 			var app = this;
 			var newuser = app.user;
 			axios.post(app.url, newuser).then(function (resp) {
@@ -122494,7 +122493,7 @@ var render = function() {
                         autocomplete: "off",
                         placeholder: "Isi Email",
                         type: "email",
-                        name: "emailUser",
+                        name: "email",
                         autofocus: ""
                       },
                       domProps: { value: _vm.user.email },
@@ -122746,7 +122745,17 @@ var render = function() {
                       "button",
                       {
                         staticClass: "btn btn-primary",
-                        attrs: { value: "simpan", type: "submit" }
+                        attrs: { value: "simpan", type: "submit" },
+                        on: {
+                          click: function($event) {
+                            _vm.klikUndang(
+                              _vm.user.nama_pemilik,
+                              _vm.user.email,
+                              _vm.user.no_telp,
+                              _vm.user.password
+                            )
+                          }
+                        }
                       },
                       [
                         _c(

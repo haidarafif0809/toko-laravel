@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
@@ -44,7 +45,7 @@ class StafTokoController extends Controller
     {
         $this->validate($request, [
             'nama_pemilik' => 'required',
-            'email'        => 'required|email|unique:users,email',
+            'email'        => 'required|string|email|max:255|unique:users',
             'no_telp'      => 'required',
             'password'     => 'required|string|min:6',
 

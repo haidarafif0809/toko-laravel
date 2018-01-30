@@ -31,7 +31,7 @@
 									Email
 								</label>
 								<div class="col-md-4">
-									<input id="email" class="form-control"  autocomplete="off" placeholder="Isi Email" type="email" v-model="user.email" name="emailUser" autofocus="">
+									<input id="email" class="form-control"  autocomplete="off" placeholder="Isi Email" type="email" v-model="user.email" name="email" autofocus="">
 									<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}
 									</span>
 								</div>
@@ -70,7 +70,7 @@
 
 							<div class="form-group">
 								<div class="col-md-4 col-md-offset-2">
-									<button class="btn btn-primary" value="simpan" type="submit">
+									<button class="btn btn-primary" value="simpan" type="submit" @click="klikUndang(user.nama_pemilik, user.email, user.no_telp, user.password)">
 										<span v-model="undangs.true" v-show="undang">Undang</i></span>
 										<span v-model="undangs.false" v-show="!undang">Loading . . .</i></span>
 									</button>
@@ -115,15 +115,23 @@ export default {
 
 	},
 	methods: {
-		// klikUndang(nama_pemilik, email, no_telp, password) {
-		// 	var emails = document.forms['emailku']['emailUser'].value;
-		// 	var atpos = emails.indexOf("@");
-		// 	var dotpos = emails.lastIndexOf(".");
-		// 	if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
-		// 		return;
-		// 	}
-		// 	else {
-		// 		this.undang = false;
+		klikUndang(nama_pemilik, email, no_telp, password) {
+			var emails = document.forms['emailku']['email'].value;
+			var atpos = emails.indexOf("@");
+			var dotpos = emails.lastIndexOf(".");
+			if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || !nama_pemilik || !email || !no_telp || !password) {
+				return;
+			}
+			else {
+				swal({
+					title: "Memproses...",
+					text: "Mohon tunggu",
+					imageUrl: "images/ajaxloader.gif",
+					showConfirmButton: false,
+					allowOutsideClick: false,
+					allowEscapeKey: false
+				});
+			// 	this.undang = false;
 
 			// // using setTimeout to simulate ajax request
 			// setTimeout(() => {
@@ -134,17 +142,10 @@ export default {
 			// 	});
 			// }, 2000);
 
-		// }
-	// },
+		}
+	},
 	saveForm() {
-		swal({
-			title: "Memproses...",
-			text: "Mohon tunggu",
-			imageUrl: "images/ajaxloader.gif",
-			showConfirmButton: false,
-			allowOutsideClick: false,
-			allowEscapeKey: false
-		});
+
 		var app = this;
 		var newuser = app.user;
 		axios.post(app.url, newuser)

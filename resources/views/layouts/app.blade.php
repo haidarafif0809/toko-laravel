@@ -311,20 +311,33 @@ input {
         var email = document.getElementById('email').value;
         var no_telp = document.getElementById('no_telp').value;
         var password = document.getElementById('password').value;
-        if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
-         swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
+        var emails = document.forms['emails']['email'].value;
+        var atpos = emails.indexOf("@");
+        var dotpos = emails.lastIndexOf(".");
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || namaToko == '' || userName == '' || email == '' || no_telp == '' || password == '') {
+              return;
+            }
+            else{
+             swal({
+                title: "Memproses...",
+                text: "Mohon tunggu",
+                imageUrl: "images/ajaxloader.gif",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+         }
      }
- } function sweetAlerts(){
+  function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    if ((!email == '') && (!password == '')) {
+    var emails = document.forms['emails']['email'].value;
+            var atpos = emails.indexOf("@");
+            var dotpos = emails.lastIndexOf(".");
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || email == '' || password == '') {
+        return;
+    }
+    else{
      swal({
         title: "Memproses...",
         text: "Mohon tunggu",
