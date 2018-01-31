@@ -313,6 +313,8 @@ class ProdukController extends Controller
                     'Kategori Produk',
                     'Harga Jual',
                     'Bisa Dijual',
+                    'Satuan',
+                    'Tambahan',
                 ]);
             });
         })->export('xlsx');
@@ -335,6 +337,8 @@ class ProdukController extends Controller
             'Kategori Produk' => 'required|exists:kategori_produks,id',
             'Harga Jual'      => 'required|numeric',
             'Bisa Dijual'     => 'required',
+            'Satuan'          => 'required',
+            'Tambahan'        => 'required',
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
@@ -407,6 +411,7 @@ class ProdukController extends Controller
                 return response()->json($errorMsg);
             }
 
+            // membuat satuan
             /*
             |---------------------------------------------------------------------------
             | Mengecek nama kategori produk
@@ -473,6 +478,8 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
+                    'satuan'              => $row['satuan'],
+                    'produk_modifier_id'  => $row['tambahan'],
                 ]);
             } else {
                 // Membuat kategori produk baru
@@ -492,6 +499,8 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
+                    'satuan'              => $row['satuan'],
+                    'produk_modifier_id'  => $row['tambahan'],
                 ]);
             }
 
