@@ -949,7 +949,12 @@ export default {
                 	return app.alert('Gagal!', resp.data.pesan, 'warning');
                 }
 
-                app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
+                swal({
+                	title: 'Berhasil!',
+                	type: 'success',
+                	text: resp.data.jumlahProduk + ' Produk berhasil diupload.'
+                }),
+                // app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
                 app.getPelanggans();
                 app.$router.replace('/pelanggan/');
             })

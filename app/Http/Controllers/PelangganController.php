@@ -207,11 +207,19 @@ class PelangganController extends Controller
             'Kode Pos'       => 'max:5',
             'Catatan'        => '',
         ];
-        // Catat semua id buku baru
-        // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
+        // Catat semua id pelanggan baru
+        // ID ini kita butuhkan untuk menghitung total pelanggan yang berhasil diimport
         $pelanggan_id = [];
+        $no           = 1;
 
         // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
+        foreach ($excels as $row) {
+            $no++;
+        }
+        // return response()->json($errors);
+        $jumlahPelanggan                    = ['jumlahPelanggan' => ''];
+        $jumlahPelanggan['jumlahPelanggan'] = ($no - 1);
+
         foreach ($excels as $row) {
             // Membuat validasi untuk row di excel
             // Disini kita ubah baris yang sedang di proses menjadi array
@@ -319,11 +327,11 @@ class PelangganController extends Controller
                 'catatan'        => $row['catatan'],
             ]);
 
-            // catat id dari buku yang baru dibuat
+            // catat id dari pelanggan yang baru dibuat
             array_push($pelanggan_id, $pelanggan->id);
 
         }
-
+        return response()->json($jumlahPelanggan);
         // Ambil semua produk yang baru dibuat
         $pelanggans = Pelanggan::whereIn('id', $pelanggan_id)->get();
 
