@@ -935,61 +935,58 @@ export default {
     			newPelanggan.append('excel', file);
     		}
     		else {
-    			app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+    			// app.alert('Kosong!', 'Tolong masukkan file.', 'warning');
+    			// return;
+    			swal({
+    				title: 'Kosong!',
+    				type: 'warning',
+    				text: 'Tolong masukkan file.'
+    			})
     			return;
     		}
 
     		axios.post(app.url_import_pelanggan, newPelanggan)
     		.then(function (resp) {
-    			console.log(resp.data);
+    			console.log(resp);
                 // return;
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
                 // bukan bernilai ya atau tidak
-                if (resp.data.pesan != undefined) {
-                	return app.alert('Gagal!', resp.data.pesan, 'warning');
+                if (resp.data.errorMsg != undefined) {
+                	// return app.alert('Gagal!', resp.data.pesan, 'warning');
+                	return swal({
+                		title: 'Gagal!',
+                		type: 'warning',
+                		html: '<div style="text-align: left; font-size: 14px;">'+ resp.data.errorMsg +'</div>',
+                	});
                 }
 
                 swal({
                 	title: 'Berhasil!',
                 	type: 'success',
-                	text: resp.data.jumlahProduk + ' Produk berhasil diupload.'
+                	text: resp.data.jumlahPelanggan + ' Pelanggan berhasil diupload.'
                 }),
                 // app.alert('Berhasil!', 'Excel berhasil diupload.', 'success');
                 app.getPelanggans();
-                app.$router.replace('/pelanggan/');
+                // app.$router.replace('/pelanggan/');
             })
     		.catch(function (resp) {
     			console.log(resp.response)
     			if (resp.response.data.errors != undefined) {
     				app.errors = resp.response.data.errors.excel[0];
     			}
-    			app.alert('Gagal!', app.errors, 'warning');
-    			app.$router.replace('/pelanggan/');
-    		});
-    	},
-    	alert(title, pesan, icon) {
-    		this.$swal({
-    			title: title,
-    			text: pesan,
-    			icon: icon,
-    		});
-    		this.pelanggan.kode_pelanggan = ''
-    		this.pelanggan.nama_pelanggan = ''
-    		this.pelanggan.jenis_kelamin = ''
-    		this.pelanggan.tanggal_lahir = ''
-    		this.pelanggan.nomor_telepon = ''
-    		this.pelanggan.email = ''
-    		this.pelanggan.kota = ''
-    		this.pelanggan.alamat = ''
-    		this.pelanggan.kode_pos = ''
-    		this.pelanggan.catatan = ''
-    		this.disable = 1
-    		this.edit = 0
 
-    		this.memberPelanggan = 0
-    		app.$router.replace('/pelanggan/');
+    			// app.alert('Gagal!', app.errors, 'warning');
+    			else {
+    				app.errors = "Ukuran file terlalu besar!";
+    			}
+    			return swal({
+    				title: 'Gagal!',
+    				type: 'warning',
+    				text: app.errors,
+    			})
+    			// app.$router.replace('/pelanggan/');
+    		});
     	}
-
     }
 }
 </script>
