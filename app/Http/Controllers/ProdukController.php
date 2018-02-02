@@ -314,7 +314,7 @@ class ProdukController extends Controller
                     'Harga Jual',
                     'Bisa Dijual',
                     'Satuan',
-                    'Modifier',
+
                 ]);
             });
         })->export('xlsx');
@@ -338,7 +338,7 @@ class ProdukController extends Controller
             'Harga Jual'      => 'required|numeric',
             'Bisa Dijual'     => 'required',
             'Satuan'          => 'required',
-            'Modifier'        => 'required',
+
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
@@ -411,6 +411,17 @@ class ProdukController extends Controller
                 return response()->json($errorMsg);
             }
 
+            $satuanProduk = trim(strtolower($row['satuan']));
+            if ($satuanProduk == 'pcs') {
+                $satuan = 1;
+            } elseif ($satuanProduk == 'porsi') {
+                $satuan = 2;
+            } elseif ($satuanProduk == 'pack') {
+                $satuan = 3;
+            } else {
+                $satuan = $row['satuan'];
+            }
+
             // membuat satuan
             /*
             |---------------------------------------------------------------------------
@@ -478,8 +489,9 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
-                    'satuan'              => $row['satuan'],
-                    'produk_modifier_id'  => $row['modifier'],
+                    'satuan'              => $satuan,
+                    'produk_modifier_id'  => '',
+
                 ]);
             } else {
                 // Membuat kategori produk baru
@@ -499,8 +511,9 @@ class ProdukController extends Controller
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
-                    'satuan'              => $row['satuan'],
-                    'produk_modifier_id'  => $row['modifier'],
+                    'satuan'              => $satuan,
+                    'produk_modifier_id'  => '',
+
                 ]);
             }
 
