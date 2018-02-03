@@ -207,27 +207,65 @@ class PelangganController extends Controller
             'Kode Pos'       => 'max:5',
             'Catatan'        => '',
         ];
-        // Catat semua id buku baru
-        // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
+        // Catat semua id pelanggan baru
+        // ID ini kita butuhkan untuk menghitung total pelanggan yang berhasil diimport
         $pelanggan_id = [];
+        $errors       = [];
+        $lineErrors   = [];
+        $no           = 1;
 
         // looping setiap baris, mulai dari baris ke 2 (karena baris ke 1 adalah nama kolom)
         foreach ($excels as $row) {
+            // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
+            $jenisKelamin = trim(strtolower($row['jenis_kelamin']));
+            if (!empty($row['jenis_kelamin'])) {
+                if ($jenisKelamin !== 'laki-laki' && $jenisKelamin !== 'perempuan') {
+                    $errors['jenisKelamin'][] = [
+                        'line'    => $no,
+                        'message' => 'Nilai dari kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan.',
+                    ];
+                    $lineErrors[] = $no;
+                }
+            } else {
+                $errors['jenisKelamin'][] = [
+                    'line'    => $no,
+                    'message' => 'Nilai dari kolom Jenis Kelamin tidak boleh kosong.',
+                ];
+                $lineErrors[] = $no;
+            }
+            $no++;
+        }
+        // return response()->json($errors);
+        $jumlahPelanggan                    = ['jumlahPelanggan' => ''];
+        $jumlahPelanggan['jumlahPelanggan'] = ($no - 1);
+
+        foreach ($excels as $row) {
+            // Untuk menampilkan error dan menghentikan jalannya script
+            // sehingga jika ada error tidak ada data yang akan dimasukkan
+            // kedalam database
+            if (count($errors) > 0) {
+
+                // Membuat variable array dengan index errorMsg.
+                // Tujuan membuat index ini adalah agar memperjelas struktur kode
+                // saat kita akan mengambilnya dari kode vue
+                $pesan = ['errorMsg' => ''];
+
+                // Menyusun dan memasukkan pesan error (baris dan pesannya) kedalam variable
+                // array yang telah kita buat diatas pada index errorMsg
+                foreach ($errors['jenisKelamin'] as $key => $val) {
+                    if ($val['line'] == end($lineErrors)) {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'];
+                    } else {
+                        $pesan['errorMsg'] .= 'Baris ke ' . $val['line'] . ' ' . $val['message'] . '<br>';
+                    }
+                }
+                return response()->json($pesan);
+            }
+
             // Membuat validasi untuk row di excel
             // Disini kita ubah baris yang sedang di proses menjadi array
             $validator = Validator::make($row->toArray(), $rowRules);
 
-            $a = [
-                $row['nama_pelanggan'],
-                $row['jenis_kelamin'],
-                $row['tanggal_lahir'],
-                $row['nomor_telepon'],
-                $row['email'],
-                $row['alamat'],
-                $row['kota'],
-                $row['kode_pos'],
-                $row['catatan'],
-            ];
             // return response()->json($a);
 
             // Variable array kosong untuk menampung pesan error
@@ -319,11 +357,11 @@ class PelangganController extends Controller
                 'catatan'        => $row['catatan'],
             ]);
 
-            // catat id dari buku yang baru dibuat
+            // catat id dari pelanggan yang baru dibuat
             array_push($pelanggan_id, $pelanggan->id);
 
         }
-
+        return response()->json($jumlahPelanggan);
         // Ambil semua produk yang baru dibuat
         $pelanggans = Pelanggan::whereIn('id', $pelanggan_id)->get();
 

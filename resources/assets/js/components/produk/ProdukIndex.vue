@@ -113,11 +113,6 @@
                                 <table class="tablePenjelasan">
                                     <tbody>
                                         <tr>
-                                            <td class="bold">Kode Produk</td>
-                                            <td>:</td>
-                                            <td>Kode Poduk Anda.</td>
-                                        </tr>
-                                        <tr>
                                             <td class="bold">Nama Produk</td>
                                             <td>:</td>
                                             <td>Nama Produk Anda.</td>
@@ -126,11 +121,6 @@
                                             <td class="bold">Kategori Produk</td>
                                             <td>:</td>
                                             <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="bold">Harga Beli</td>
-                                            <td>:</td>
-                                            <td>Harga Beli Produk Anda.</td>
                                         </tr>
                                         <tr>
                                             <td class="bold">Harga Jual</td>
@@ -142,6 +132,16 @@
                                             <td>:</td>
                                             <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
                                         </tr>
+                                        <tr>
+                                            <td class="bold">Satuan</td>
+                                            <td>:</td>
+                                            <td>Isi satuan produk anda, contoh Pcs, Porsi, Pack, atau yang lainnya.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bold">Tambahan</td>
+                                            <td>:</td>
+                                            <td>Isi Tambahan apabila ada tambahan bahan dalam produk anda</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
@@ -151,37 +151,37 @@
                                 <div align="center">
                                     <table class="tableContoh">
                                         <thead>
-                                            <th>Kode Produk</th>
                                             <th>Nama Produk</th>
                                             <th>Kategori Produk</th>
-                                            <th>Harga Beli</th>
                                             <th>Harga Jual</th>
                                             <th>Bisa Dijual</th>
+                                            <th>Satuan</th>
+                                            <th>Tambahan</th>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>84399</td>
-                                                <td>Mainan</td>
-                                                <td>Unit</td>
-                                                <td align="right">180000</td>
-                                                <td align="right">200000</td>
+                                                <td>Mie Goreng</td>
+                                                <td>Makanan</td>
+                                                <td align="right">25000</td>
                                                 <td>ya</td>
+                                                <td>Porsi</td>
+                                                <td>Cumi</td>
                                             </tr>
                                             <tr>
-                                                <td>88748</td>
-                                                <td>Gula</td>
-                                                <td>Sembako</td>
-                                                <td align="right">6500</td>
-                                                <td align="right">7500</td>
+                                                <td>Nasi Goreng</td>
+                                                <td>Makanan</td>
+                                                <td align="right">23000</td>
                                                 <td>ya</td>
+                                                <td>Piring</td>
+                                                <td>ayam</td>
                                             </tr>
                                             <tr>
-                                                <td>49938</td>
-                                                <td>Beras</td>
-                                                <td>Sembako</td>
-                                                <td align="right">8000</td>
-                                                <td align="right">8500</td>
+                                                <td>Jus Jeruk</td>
+                                                <td>Minuman</td>
+                                                <td align="right">12000</td>
                                                 <td>ya</td>
+                                                <td>Porsi</td>
+                                                <td>Susu Coklat</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -245,7 +245,7 @@
 
                         <tbody v-else class="data-tidak-ada">
                             <tr>
-                                <td colspan="2" class="text-center">Tidak Ada Data</td>
+                                <td colspan="4" class="text-center">Tidak Ada Data</td>
                             </tr>
                         </tbody>
                     </table>
@@ -347,6 +347,7 @@ export default {
                         })
                     })
                     .catch(function (resp) {
+                        app.$router.replace('/produk/');
                         swal({
                             title: 'Gagal!',
                             type: 'warning',
@@ -354,9 +355,10 @@ export default {
                         })
                     });
                 } 
-                else {
-                    return;
-                }
+                // else {
+                //     return;
+                // }
+                this.$router.replace('/produk/');
             });
         },
         importProduk() {

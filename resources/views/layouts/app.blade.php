@@ -9,6 +9,7 @@
     <title>
         KavePos
     </title>
+    <link rel="icon" type="img" href="{{ asset('favicon-kavepos.ico') }}">
     <!-- Styles -->
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -57,7 +58,7 @@ input {
                     <!-- ////logo and title -->
                     <div class='lgo'>
                         <div class='img-holder'>
-                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="194" height="100" />
+                            <img src="{{ asset('images/logo.png') }}" class="img-circle" width="150" height="80" />
                         </div>
                         <div class='title-holder'>
                             {{-- <span>KavePos</span> --}}
@@ -65,9 +66,11 @@ input {
                     </div>
                     <!-- word navigations -->
                     <ul id='menu_teks'>
+                        @if (Auth::check())
                         <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                             Dashboard
                         </router-link></li>
+                        @endif
                         @role('member')
                         <li class='w-lnk'><router-link :to="{name: 'indexStafToko'}">
                             Staf Toko
@@ -136,10 +139,12 @@ input {
                     </ul>
                     <!-- icon navigation -->
                     <ul id='icons'>
+                        @if (Auth::check())
                         <li><router-link :to="{name: 'indexDashboard'}">
                             <i class="fa fa-home  fa-2x"></i>
                         </router-link></li>
                         <span class='nav_txt'>Home</span>
+                        @endif
                         @role('member')
                         <li><router-link :to="{name: 'indexStafToko'}">
                             <i class="fa fa-user-circle-o fa-2x"></i>
@@ -306,20 +311,33 @@ input {
         var email = document.getElementById('email').value;
         var no_telp = document.getElementById('no_telp').value;
         var password = document.getElementById('password').value;
-        if ((!namaToko == '') && (!userName == '') && (!email == '') && (!no_telp == '') && (!password == '')) {
-         swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
+        var emails = document.forms['emails']['email'].value;
+        var atpos = emails.indexOf("@");
+        var dotpos = emails.lastIndexOf(".");
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || namaToko == '' || userName == '' || email == '' || no_telp == '' || password == '') {
+              return;
+            }
+            else{
+             swal({
+                title: "Memproses...",
+                text: "Mohon tunggu",
+                imageUrl: "images/ajaxloader.gif",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+         }
      }
- } function sweetAlerts(){
+  function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    if ((!email == '') && (!password == '')) {
+    var emails = document.forms['emails']['email'].value;
+            var atpos = emails.indexOf("@");
+            var dotpos = emails.lastIndexOf(".");
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || email == '' || password == '') {
+        return;
+    }
+    else{
      swal({
         title: "Memproses...",
         text: "Mohon tunggu",

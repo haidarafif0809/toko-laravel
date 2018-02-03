@@ -29,22 +29,23 @@ class ProdukController extends Controller
 
     public function view()
     {
-        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk','produks.produk_id as produk_id','produks.nama_produk as nama_produk','produks.harga_jual'])
-            ->leftJoin('kategori_produks','produks.kategori_produks_id','=','kategori_produks.id')
+        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk', 'produks.produk_id as produk_id', 'produks.nama_produk as nama_produk', 'produks.harga_jual'])
+            ->leftJoin('kategori_produks', 'produks.kategori_produks_id', '=', 'kategori_produks.id')
+            ->where('produks.toko_id', Auth::user()->toko_id)
             ->orderBy('produk_id', 'desc')
             ->paginate(10);
 
         $array = array();
         foreach ($produk as $produks) {
             array_push($array, [
-                'nama_produk'      => $produks->nama_produk,
-                'harga_jual'       => $produks->harga_jual,
-                'kategori_produk'  => $produks->nama_kategori_produk,
-                'produk_id'        => $produks->produk_id,
+                'nama_produk'     => $produks->nama_produk,
+                'harga_jual'      => $produks->harga_jual,
+                'kategori_produk' => $produks->nama_kategori_produk,
+                'produk_id'       => $produks->produk_id,
 
             ]);
         }
-         //DATA PAGINATION
+        //DATA PAGINATION
         $respons['current_page']   = $produk->currentPage();
         $respons['data']           = $array;
         $respons['first_page_url'] = url('produk/view?page=' . $produk->firstItem());
@@ -59,28 +60,29 @@ class ProdukController extends Controller
         $respons['total']          = $produk->total();
         //DATA PAGINATION
 
-         return response()->json($respons);
+        return response()->json($respons);
     }
 
     public function cari(Request $request)
     {
 
-        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk','produks.produk_id as produk_id','produks.nama_produk as nama_produk','produks.harga_jual'])
-            ->leftJoin('kategori_produks','produks.kategori_produks_id','=','kategori_produks.id')
+        $produk = Produk::select(['kategori_produks.nama_kategori_produk as nama_kategori_produk', 'produks.produk_id as produk_id', 'produks.nama_produk as nama_produk', 'produks.harga_jual'])
+            ->leftJoin('kategori_produks', 'produks.kategori_produks_id', '=', 'kategori_produks.id')
             ->where(function ($query) use ($request) {
-                        $query->orwhere('nama_produk', 'LIKE', "%$request->pencarian%")
-                        ->orWhere('nama_kategori_produk', 'LIKE', "%$request->pencarian%");
-                        })
-                        ->orderBy('produk_id', 'desc')
-                        ->paginate(10);
-                        
+                $query->orwhere('nama_produk', 'LIKE', "%$request->pencarian%")
+                    ->orWhere('nama_kategori_produk', 'LIKE', "%$request->pencarian%");
+            })
+            ->where('produks.toko_id', Auth::user()->toko_id)
+            ->orderBy('produk_id', 'desc')
+            ->paginate(10);
+
         $array = array();
         foreach ($produk as $produks) {
             array_push($array, [
-                'nama_produk'      => $produks->nama_produk,
-                'harga_jual'       => $produks->harga_jual,
-                'kategori_produk'  => $produks->nama_kategori_produk,
-                'produk_id'        => $produks->produk_id,
+                'nama_produk'     => $produks->nama_produk,
+                'harga_jual'      => $produks->harga_jual,
+                'kategori_produk' => $produks->nama_kategori_produk,
+                'produk_id'       => $produks->produk_id,
 
             ]);
         }
@@ -98,7 +100,6 @@ class ProdukController extends Controller
         $respons['to']             = $produk->perPage();
         $respons['total']          = $produk->total();
         //DATA PAGINATION
- 
 
         return response()->json($respons);
     }
@@ -128,12 +129,13 @@ class ProdukController extends Controller
         return response()->json($kategoriProduk);
     }
 
-    public function detailModifier(){
-        $modifier = Modifier::select(['id','nama_modifier'])->get();
+    public function detailModifier()
+    {
+        $modifier       = Modifier::select(['id', 'nama_modifier'])->get();
         $array_modifier = [];
         foreach ($modifier as $key => $val) {
             $array_modifier[$val['id']] = $val['nama_modifier'];
-            
+
         }
         return $array_modifier;
     }
@@ -307,12 +309,12 @@ class ProdukController extends Controller
             $excel->sheet('Data Produk', function ($sheet) {
                 $row = 1;
                 $sheet->row($row, [
-                    'Kode Produk',
                     'Nama Produk',
                     'Kategori Produk',
-                    'Harga Beli',
                     'Harga Jual',
                     'Bisa Dijual',
+                    'Satuan',
+
                 ]);
             });
         })->export('xlsx');
@@ -331,12 +333,12 @@ class ProdukController extends Controller
         // rule untuk validasi setiap row pada file excel
 
         $rowRules = [
-            'Kode Produk'     => 'required|unique:produks,kode_produk',
             'Nama Produk'     => 'required',
             'Kategori Produk' => 'required|exists:kategori_produks,id',
-            'Harga Beli'      => 'required|numeric',
             'Harga Jual'      => 'required|numeric',
             'Bisa Dijual'     => 'required',
+            'Satuan'          => 'required',
+
         ];
         // Catat semua id buku baru
         // ID ini kita butuhkan untuk menghitung total buku yang berhasil diimport
@@ -409,6 +411,18 @@ class ProdukController extends Controller
                 return response()->json($errorMsg);
             }
 
+            $satuanProduk = trim(strtolower($row['satuan']));
+            if ($satuanProduk == 'pcs') {
+                $satuan = 1;
+            } elseif ($satuanProduk == 'porsi') {
+                $satuan = 2;
+            } elseif ($satuanProduk == 'pack') {
+                $satuan = 3;
+            } else {
+                $satuan = $row['satuan'];
+            }
+
+            // membuat satuan
             /*
             |---------------------------------------------------------------------------
             | Mengecek nama kategori produk
@@ -468,13 +482,16 @@ class ProdukController extends Controller
             if (in_array($importNamaKategoriProduk, $arrayNamaKategoriProduk)) {
 
                 // buat produk baru
-                $produk = Produk::create([
-                    'kode_produk'         => $row['kode_produk'],
+                $toko_id = Auth::user()->toko_id;
+                $produk  = Produk::create([
+                    'toko_id'             => $toko_id,
                     'nama_produk'         => $row['nama_produk'],
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
-                    'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
+                    'satuan'              => $satuan,
+                    'produk_modifier_id'  => '',
+
                 ]);
             } else {
                 // Membuat kategori produk baru
@@ -487,13 +504,16 @@ class ProdukController extends Controller
                 $idKategoriProdukTerbaru = DB::table('kategori_produks')->orderBy('id', 'desc')->limit(1)->first();
 
                 // Membuat produk baru
-                $produk = Produk::create([
-                    'kode_produk'         => $row['kode_produk'],
+                $toko_id = Auth::user()->toko_id;
+                $produk  = Produk::create([
+                    'toko_id'             => $toko_id,
                     'nama_produk'         => $row['nama_produk'],
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
-                    'harga_beli'          => $row['harga_beli'],
                     'harga_jual'          => $row['harga_jual'],
                     'bisa_dijual'         => $bisa_dijual,
+                    'satuan'              => $satuan,
+                    'produk_modifier_id'  => '',
+
                 ]);
             }
 
