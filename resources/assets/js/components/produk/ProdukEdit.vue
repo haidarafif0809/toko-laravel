@@ -392,7 +392,7 @@ export default {
                                 swal.showValidationError('Nama kategori tidak boleh kosong.');
                                 nama_kategori_produk.focus();
                             }
-                            else if (!nama_kategori_produk.val().match(/^[a-zA-Z0-9_-]*$/)) {
+                            else if (!nama_kategori_produk.val().match(/^[a-zA-Z0-9_-\s]*$/)) {
                                 swal.showValidationError('Nama kategori tidak boleh berisi simbol khusus <br> kecuali strip "-" dan underscore "_"');
                                 nama_kategori_produk.focus();
                             }
