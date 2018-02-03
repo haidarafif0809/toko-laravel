@@ -9,8 +9,8 @@ class Penjualan extends Model
 {
     //
     use AuditableTrait;
-    protected $fillable = (['no_faktur', 'total_bayar', 'pelanggan_id', 'cara_bayar', 'keterangan', 'toko_id', 'subtotal', 'diskon', 'pajak',
-    ]);
+    protected $fillable = (['no_faktur', 'total_bayar','status_pemesanan', 'pelanggan_id', 'cara_bayar', 'keterangan', 'toko_id', 'subtotal', 'diskon', 'pajak',
+]);
 
     public function kategoriProduk()
     {

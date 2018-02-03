@@ -72,6 +72,7 @@ Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
+Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
 // hapus item penjualan
 Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
     'middleware' => ['auth'],
@@ -104,10 +105,6 @@ Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
 Route::get('staf-toko/view', 'StafTokoController@view');
 Route::get('staf-toko/search', 'StafTokoController@search');
 
-// Gerai
-Route::resource('gerai', 'GeraiController', ['except' => 'show']);
-Route::get('gerai/view', 'GeraiController@view');
-Route::get('gerai/pencarian', 'GeraiController@search');
 
 // Pelanggan
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);

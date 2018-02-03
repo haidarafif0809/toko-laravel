@@ -103,9 +103,9 @@ class PenjualanController extends Controller
     public function tbsPenjualan()
     {
         $tbsPenjualan = DB::table('tbs_penjualans')
-            ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-            ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal', 'id_tbs_penjualan', 'tbs_Penjualans.produk_id AS id_produk')->where('tbs_penjualans.toko_id', Auth::user()->toko_id)
-            ->get();
+        ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
+        ->select('nama_produk', 'harga_produk', 'jumlah_produk', 'subtotal', 'id_tbs_penjualan', 'tbs_Penjualans.produk_id AS id_produk')->where('tbs_penjualans.toko_id', Auth::user()->toko_id)
+        ->get();
 
         if (count($tbsPenjualan) > 0) {
 
@@ -145,6 +145,7 @@ class PenjualanController extends Controller
                 'keterangan'   => $request->keterangan,
                 'pelanggan_id' => $request->pelanggan_id,
                 'subtotal'     => $request->subtotal,
+                'status_pemesanan' => $request->status_pemesanan,
             ]);
 
             $jumlah_keluar   = 0;
@@ -166,6 +167,7 @@ class PenjualanController extends Controller
                     'subtotal'      => $penjualan->subtotal,
                     'diskon'        => $penjualan->diskon,
                     'jumlah_produk' => $tbs_penjualans->jumlah_produk,
+                    'status_pemesanan' => $penjualan->status_pemesanan,
 
                 ]);
             }
@@ -251,10 +253,10 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function edit($id)
-    {
+public function edit($id)
+{
         //
-    }
+}
 
 /**
  * Update the specified resource in storage.
@@ -263,10 +265,10 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function update(Request $request, $id)
-    {
+public function update(Request $request, $id)
+{
         //
-    }
+}
 
 /**
  * Remove the specified resource from storage.
@@ -274,13 +276,13 @@ class PenjualanController extends Controller
  * @param  int  $id
  * @return \Illuminate\Http\Response
  */
-    public function destroy($id)
-    {
+public function destroy($id)
+{
         //
-    }
+}
 
-    public function kategoriProduk()
-    {
-        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
-    }
+public function kategoriProduk()
+{
+    return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
+}
 }

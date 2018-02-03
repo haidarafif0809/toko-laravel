@@ -55,7 +55,7 @@
 #digital{
 	background-color: black;
 	border-radius: 3px;
-	color:red;
+	color:#FF0000;
 	border:4px solid #F5F5F5;
 }
 .button1{
@@ -106,11 +106,11 @@
 	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #modalPembayaran{
-	width: 400px;
-	height: 400px;
-	border-radius:0px;
-	color:#5E5E5E;
-	display:block;
+/*	width: 400px;
+height: 400px;*/
+border-radius:0px;
+color:#5E5E5E;
+display:block;
 }
 .splice{
 	border-radius: 100%;
@@ -118,10 +118,47 @@
 	width:25px;
 	height:25px;
 }
+.trash{
+	width: 45px;
+	height: 25px;
+	background-color: white;
+	border-radius: 4px;
+}
+.trash:hover {background-color: red;}
+
+#items{
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.focus:focus{
+	background-color: #EFF0F1;
+}
+.button5:focus{
+	color: red;
+}
+
 </style>
 
 <template>
 	<div class="container">
+		<!-- modal jumlah item -->
+		<div id="modalJumlahItem" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Jumlah Produk
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+							<input class="form-control" required autocomplete="off"  type="number" name="jumlahProduk"  autofocus="" v-model="dataTbs.jumlah">
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- Modal untuk Diskon per faktur -->
 		<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
@@ -129,14 +166,15 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
-						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
-						<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
+						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen"
+						onclick="document.getElementById('myInput').focus();return false;">Diskon %</button>
+						<button onclick="document.getElementById('myInput2').focus();return false;" class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
 
 					</div>
 					<div class="modal-body">
 						<form v-on:submit.prevent="" class="form-horizontal">
-							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
-							<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
+							<input id="myInput" class="form-control" required autocomplete="off" placeholder="%" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
+							<money id="myInput2" v-bind="money" class="form-control" required autocomplete="off" placeholder="Rp" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah"></money>
 							<br>
 						</form>
 					</div>
@@ -156,68 +194,64 @@
 						<h3>Pembayaran</h3>
 					</div>
 					<div class="modal-body" id="modalPembayaran">
-						<form v-on:submit.prevent="saveForm()" class="form-horizontal">
-							<table>
+						<form  v-on:submit.prevent="saveForm()">
+							<table width="100%">
 								<tbody>
-									<tr>
-										<td><h2>Total</h2></td>
-										<td><h2 style="width:40px;">:</h2></td>
+									<tr width="100%">
+										<td width="10%"><h2>Total</h2></td>
+										<td width="10%"><h2>:</h2></td>
+										<td width="80%"><h2 style="text-align:right;">{{jumlahBayar|pemisahTitik}}</h2></td>
+									</tr>
+									<tr width="100%">
+										<td>Total Penjualan</td>
+										<td>:</td>
+										<td>{{ tbs_penjualans.length }}</td>
+									</tr>
+									<br>
+									<tr width="100%">
+										<td width="20%">Tunai</td>
+										<td width="10%">:</td>
+										<td><money class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="pembayaran.bayar" v-bind="money" name="bayar" style="text-align:right;" ref="tunai"></money></td>
+									</tr>
+									<tr width="100%">
+										<td width="10%"></td>
+										<td width="10%"></td>
+										<td width="80%"></td>
+									</tr>
+									<tr width="100%">
+										<td width="10%">Kembalian</td>
+										<td width="10%">:</td>
+										<td width="80%"><h2 style="text-align:right;">{{pembayaran.kembalian|pemisahTitik}}</h2></td>
+									</tr>
+									<tr width="100%">
+										<td>Status Pesanan</td>
+										<td>:</td>
 										<td>
-											<h2>{{ new Intl.NumberFormat().format(jumlahBayar) }}</h2>
+											<selectize-component v-model="penjualan.status_pemesanan"  id="status_pemesanan" ref="status_pemesanan"> 
+												<option v-bind:value="0">Dine In </option>
+												<option v-bind:value="1" >Take Away </option>
+												<option v-bind:value="2" >Delivery </option>
+											</selectize-component>
 										</td>
 									</tr>
-									<tr>
-										<td>Total Item</td>
-										<td style="40px;">:</td>
-										<td>{{ tbs_penjualans.length }}</td>
+									<tr width="100%">
+										<td>Keterangan</td>
+										<td>:</td>
+										<td>
+											<textarea style="width:400px;"  v-model="penjualan.keterangan"></textarea>
+										</td>
+									</tr>
+									<tr width="100%">
+										<td>Pelanggan</td>
+										<td>:</td>
+										<td>
+											<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+												<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+											</selectize-component>
+										</td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="form-group">
-								<label class="col-md-4 control-label">Tunai</label>
-								<div class="col-md-6">
-									<money class="form-control" style="width:400px;height:35px;" required autocomplete="off" placeholder="Jumlah" v-model="pembayaran.bayar" v-bind="money" name="bayar"  autofocus=""></money>
-								</div>
-							</div>
-							<!-- v-model="pembayaran.bayar" -->
-							<!-- style="width:400px;height:35px;"  -->
-							<tr>
-								<td>
-									<h3>Kembalian</h3>
-								</td>
-								<td style="width:40px;">:</td>
-								<td>{{ new Intl.NumberFormat().format(pembayaran.kembalian) }}</td>
-							</tr>
-
-							<hr style="width:550px;align:center;">
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Status Pesanan</label>
-								<div class="col-md-6">
-									<selectize-component>
-										<option>Dine In</option>
-										<option>Take Away</option>
-										<option>Delivery</option>
-									</selectize-component>	
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Keterangan</label>
-								<div class="col-md-6 keterangan">
-									<textarea style="width:400px;"  v-model="penjualan.keterangan"></textarea>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-md-4 control-label">Pelanggan</label>
-								<div class="col-md-6">
-									<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-										<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-									</selectize-component>
-								</div>
-							</div>
-
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -283,15 +317,58 @@
 
 					</div>
 					<div class="modal-body">
-						<form v-on:submit.prevent="importPelanggan()" class="form-horizontal">
-							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_produk"  autofocus="" v-if="diskonProduk == 1">
-							<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_produk"  autofocus="" v-if="diskonProdukRp == 1">
+						<form v-on:submit.prevent="" class="form-horizontal">
+							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_produk"  autofocus="" v-if="diskonProduk == 1" v-model="formDiskonProduk.persen">
+							<money v-bind="money" class="form-control" required autocomplete="off" placeholder="Rp"  name="diskon_per_produk"  autofocus="" v-if="diskonProdukRp == 1" v-model="formDiskonProduk.rupiah"></money>
 							<br>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<input class="btn btn-primary" type="submit" value="Simpan">
+						<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk)" >Simpan</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MODAL SIMPAN PENJUALAN -->
+		<div id="modalSimpanPenjualan" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<div class="modal-body">
+
+							<form class="form-horizontal">
+
+								<!-- Form Name -->
+								<legend>Simpan</legend>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="textinput">No Meja</label>  
+									<div class="col-md-8">
+										<input v-model="bukaPenjualan.nomor_meja" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+										<span class="help-block"></span>  
+									</div>
+								</div>
+
+								<!-- Textarea -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="textarea">Catatan</label>
+									<div class="col-md-8">                     
+										<textarea v-model="bukaPenjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button v-on:click="simpanPenjualan()" class="btn btn-primary" type="button" data-dismiss="modal">Simpan</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
 					</div>
 				</div>
 			</div>
@@ -338,7 +415,7 @@
 					</div>
 					<br>
 
-					
+
 					<!-- PRODUK PENJUALAN -->
 					<div class="row">
 						<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
@@ -353,7 +430,8 @@
 												<h4 v-else>
 													{{produksPenjualans.data_produk.nama_produk}}
 												</h4>
-												<p>Harga: {{produksPenjualans.data_produk.harga_jual}}</p>
+												<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
+
 											</div>
 										</div>
 									</div>
@@ -368,7 +446,7 @@
 												<h4 v-else>
 													{{produksPenjualans.data_produk.nama_produk}}
 												</h4>
-												<p>Harga: {{produksPenjualans.data_produk.harga_jual}}</p>
+												<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
 											</div>
 										</div>
 									</div>
@@ -389,42 +467,42 @@
 		</div>
 
 		<div class="col-md-4" id="pull-left">
-			
 			<div class="panel panel-default" id="digital">
-				<div class="panel-body">
-					<div>
-						<h3 style="float:right;padding:10px;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ new Intl.NumberFormat().format(jumlahBayar) }}</h3>
-						<h3 style="float:right;padding:10px;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
+				<div class="panel-body" width="100%" style="size:100%;">
+
+					<div width="80%" style="float:right;size:95%;">
+						<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ jumlahBayar|pemisahTitik }}</h3>
+						<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
 					</div>
-					<div id="digital2">
+
+					<div width="5%" style="float:left;size:5%;">
 						<tr>
-							<td>Sub Total </td>
+							<td>Subtotal</td>
 							<td>:</td>
-							<td align="right">{{ new Intl.NumberFormat().format(tbs_penjualans.total_bayar) }}</td>
+							<td v-if="tbs_penjualans.total_bayar === undefined">{{0}}</td>
+							<td v-else>{{tbs_penjualans.total_bayar|pemisahTitik}}</td>
 						</tr>
 						<tr>
 							<td>Diskon</td>
 							<td>:</td>
-							<td align="right" >{{diskonPerfaktur.persen}} %</td>
+							<td>{{diskonPerfaktur.persen}} %</td>
 						</tr>
 						<tr>
 							<td>Diskon</td>
 							<td>:</td>
-							<td align="right" >Rp. {{diskonPerfaktur.rupiah}}</td>
+							<td>{{diskonPerfaktur.rupiah}}</td>
 						</tr>
 						<tr>
 							<td>Pajak</td>
 							<td>:</td>
-							<td align="right">2,2%</td>
+							<td>2,2%</td>
 						</tr>
 					</div>
 
 				</div>
 			</div>
 
-
-			
-			<div class="panel panel-default">
+			<div class="panel panel-default" id="items">
 				<div class="panel-heading"></div>
 				<div class="panel-body">
 
@@ -449,123 +527,143 @@
 							<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
 								<tr v-for="tbs_penjualan, index in tbs_penjualans">
 									<td>{{ tbs_penjualan.nama_produk}} <br>
-										<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal">@{{ new Intl.NumberFormat().format(tbs_penjualan.harga_produk) }}</a></td>
-										<td>{{ tbs_penjualan.jumlah_produk }}</td>
-										<td>{{ tbs_penjualan.subtotal }}</td>
-
-										<td>
-											<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
-											</button>
-										</td>
-									</tr>
-								</tbody>
-								<tbody v-else-if="loadingTbs == true" class="text-center">
-									<li>Sedang Memuat Produk</li>
-								</tbody>
-								<tbody v-else class="text-center">
-									Tidak Ada Produk
-								</tbody>
-							</table>
-						</div>
+										<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
+										
+										<p>Disc. {{diskonPerproduk.persen}}% ({{diskonPerproduk.rupiah | pemisahTitik}})</p>
+									</td>
+									<td>
+										<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)">
+											{{ tbs_penjualan.jumlah_produk }}
+										</button>
+									</td>
+									<td>
+									{{tbs_penjualan.subtotal|pemisahTitik}}</td>
+									<td>
+										<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
+										</button>
+									</td>
+								</tr>
+							</tbody>
+							<tbody v-else-if="loadingTbs == true" class="text-center">
+								<li>Sedang Memuat Item</li>
+							</tbody>
+							<tbody v-else class="text-center">
+								Tidak Ada Item
+							</tbody>
+						</table>
 					</div>
-					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 				</div>
-				<button class="button button2">Simpan</button>
-				<button class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
-				<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
+				<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 			</div>
+			<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
+			<button onclick="document.getElementById('myInput').focus();return false;" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+			
+			<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 		</div>
-	</template>
+	</div>
+</template>
 
-	<script>
-	export default {
-		data: function () {
-			return {
-				formJumlahProduk: '',
-				jumlahBayar: '',
-				diskonPerfaktur: {
-					persen: '',
-					rupiah: '',
-				},
-				formDiskon: {
-					persen: '',
-					rupiah: '',
-				},
-				pembayaran:{
-					bayar: '',
-					kembalian: '',
-				},
-				kategori_produks: [],
-				penjualan: {
-					nama_pelanggan: '',
-					cara_bayar: '',
-					diskon: '',
-					subtotal: '',
-					total_bayar: '',
-					keterangan: '',
+<script>
+export default {
+	data: function () {
+		return {
+			bukaPenjualan: {
+				nomor_meja: '',
+				catatan: '',
+			},
+			formJumlahProduk: '',
+			jumlahBayar: '',
+			diskonPerfaktur: {
+				persen: '',
+				rupiah: '',
+			},
+			formDiskon: {
+				persen: '',
+				rupiah: '',
+			},
+			diskonPerproduk:{
+				persen: '',
+				rupiah: '',
+			},
+			formDiskonProduk:{
+				persen: '',
+			},	rupiah: '',
+			pembayaran:{
+				bayar: '',
+				kembalian: '',
+			},
+			kategori_produks: [],
+			penjualan: {
+				nama_pelanggan: '',
+				cara_bayar: '',
+				diskon: '',
+				subtotal: '',
+				total_bayar: '',
+				keterangan: '',
+				status_pemesanan: 0,
+			},
+			pelanggans:[],
+			produksPenjualan: [],
+			tbs_penjualans: [],
+			dataProduksPenjualan:{},
+			inputTbsPenjualan: {
+				satuan:'',
+				produk_id:'',
+				jumlah: '',
+				harga:'',
+				total_bayar: '',
+			},
+			deleteProdukTbsPenjualan: {
+				produk_id: ''
+			},
+			dataTbs: {
+				id: '',
+				jumlah: '',
+				subtotal: '',
+				harga: ''
+			},
+			price:1,
+			money: {
+				decimal: ',',
+				thousands: '.',
+				precision: 0,
+				masked: false
+			},
+			search: '',
+			formTunai: 1,
+			diskonProduk: 1,
+			diskonProdukRp: 0,
+			diskonFaktur: 1,
+			diskonFakturRp: 0,
+			formKartu: 0,
+			urlBukaPenjualan: window.location.origin + (window.location.pathname).replace("home","buka-penjualan"),
+			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
+			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+			urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
+			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
+			loading : true,
+			loadingTbs : true,
 
-				},
-				pelanggans:[],
-				produksPenjualan: [],
-				tbs_penjualans: [],
-				dataProduksPenjualan:{},
-				inputTbsPenjualan: {
-					satuan:'',
-					produk_id:'',
-					jumlah: '',
-					harga:'',
-					total_bayar: '',
-				},
-				deleteProdukTbsPenjualan: {
-					produk_id: ''
-				},
-				dataTbs: {
-					id: '',
-					jumlah: '',
-					subtotal: '',
-					harga: ''
-				},
-				price:1,
-				money: {
-					decimal: ',',
-					thousands: '.',
-					precision: 0,
-					masked: false
-				},
-				search: '',
-				formTunai: 1,
-				diskonProduk: 1,
-				diskonProdukRp: 0,
-				diskonFaktur: 1,
-				diskonFakturRp: 0,
-				formKartu: 0,
-				url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
-				urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
-				urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
-				urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
-				loading : true,
-				loadingTbs : true,
-
-				setting_pelanggan:{
-					placeholder: 'Pilih Pelanggan'
-				},
-				settingss:{
-					placeholder: 'Pilih Bank'
-				},
-			}
-		},
-		mounted() {
-			var app = this;
-			app.loading = true
-			app.loadingTbs = true
-			app.getKategoriProduk();
-			app.getProduksPenjualan();
-			app.getTbsPenjualan();
-			app.selectPelanggans();
-		},
+			setting_pelanggan:{
+				placeholder: 'Pilih Pelanggan'
+			},
+			settingss:{
+				placeholder: 'Pilih Bank'
+			},
+		}
+	},
+	mounted() {
+		var app = this;
+		app.loading = true
+		app.loadingTbs = true
+		app.getKategoriProduk();
+		app.getProduksPenjualan();
+		app.getTbsPenjualan();
+		app.selectPelanggans();
+	},
 
 
-		watch: {
+	watch: {
 	    // whenever question changes, this function will run
 	    search: function (newQuestion) {
 	    	this.getHasilPencarian()
@@ -574,6 +672,15 @@
 	    	this.getHasilKembalian()
 	    }
 	},
+
+	filters: {
+		pemisahTitik: function (value) {
+			var angka = [value];
+			var numberFormat = new Intl.NumberFormat('es-ES');
+			var formatted = angka.map(numberFormat.format);
+			return formatted.join('; ');
+		}
+	},
 	methods: {
 		getDataTbs(id, subtotal, harga, jumlah) {
 			this.dataTbs.id = id;
@@ -581,6 +688,7 @@
 			this.dataTbs.harga = harga;
 			this.dataTbs.jumlah = jumlah;
 		},
+
 		getHasilKembalian(){
 			var app = this;
 			var kembalian = app.pembayaran.bayar - app.jumlahBayar
@@ -613,8 +721,30 @@
 			
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
+
 		},
-		
+
+		simpanDiskonPerProduk(){
+			var app = this;
+			if(app.formDiskonProduk.persen > 0){
+				app.diskonPerproduk.persen = app.formDiskonProduk.persen;
+				app.diskonPerproduk.rupiah = (app.tbs_penjualans.total_bayar * app.diskonPerproduk.persen) / 100;
+
+			}else if(app.formDiskonProduk.rupiah > 0){
+				app.diskonPerproduk.rupiah = app.formDiskonProduk.rupiah;
+				app.diskonPerproduk.persen = (app.diskonPerproduk.rupiah / app.tbs_penjualans.total_bayar) * 100;
+
+			}
+			else{
+				app.diskonPerproduk.persen = 0;
+				app.diskonPerproduk.rupiah = 0;
+			}
+			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerproduk.rupiah;
+
+			console.log(app.tbs_penjualans.total_bayar);
+			$('#modalDiskonPenjualanPerProduk').hide();
+		},
+
 		getKategoriProduk(page){
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -723,6 +853,7 @@
 			var app = this;
 			app.penjualan.total_bayar = app.jumlahBayar;
 			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.status_pemesanan = app.penjualan.status_pemesanan;
 			app.penjualan.cara_bayar = 'Tunai';
 			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
 			app.penjualan.keterangan = app.penjualan.keterangan;
@@ -743,11 +874,26 @@
 				app.pembayaran.bayar = '';
 				app.pembayaran.kembalian = 0;
 				app.penjualan.keterangan = '';
+				app.penjualan.status_pemesanan = '';
 				// app.getPenjualans();
 			})
 			.catch(function (resp) {
 				app.alert('gagal')
 			})
+
+		},
+		simpanPenjualan() {
+			var app = this;
+
+			axios.post(app.urlBukaPenjualan, app.bukaPenjualan)
+			.then(function (resp) {
+				console.log(resp);
+				app.alert('Berhasil');
+			})
+			.catch(function (resp) {
+				console.log(resp);
+				app.alert('Gagal');
+			});
 
 		},
 		getHasilPencarian(page) {
