@@ -72,7 +72,10 @@ Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
+Route::post('/proses-tambah-tbs', 'PenjualanController@prosesTambahTbs');
+
 Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
+
 // hapus item penjualan
 Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
     'middleware' => ['auth'],

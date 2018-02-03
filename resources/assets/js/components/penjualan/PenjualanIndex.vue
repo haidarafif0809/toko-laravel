@@ -556,7 +556,7 @@ display:block;
 				<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 			</div>
 			<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
-			<button onclick="document.getElementById('myInput').focus();return false;" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+			<button class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
 			
 			<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 		</div>
@@ -714,8 +714,8 @@ export default {
 				app.diskonPerfaktur.persen = (app.formDiskon.rupiah * 100) / app.tbs_penjualans.total_bayar;
 			}
 			else {
-				app.diskonPerfaktur.persen = 0;
-				app.diskonPerfaktur.rupiah = 0;
+				app.diskonPerfaktur.persen = '';
+				app.diskonPerfaktur.rupiah = '';
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
 			
@@ -736,8 +736,8 @@ export default {
 
 			}
 			else{
-				app.diskonPerproduk.persen = 0;
-				app.diskonPerproduk.rupiah = 0;
+				app.diskonPerproduk.persen = '';
+				app.diskonPerproduk.rupiah = '';
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerproduk.rupiah;
 
