@@ -423,6 +423,7 @@ display:block;
 								<div v-if="produksPenjualan.length == 1">
 									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-4 list-produk">
 										<div class="thumbnail">
+											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
 											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
 												<h4 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
@@ -439,6 +440,7 @@ display:block;
 								<div v-else>
 									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-4 list-produk">
 										<div class="thumbnail">
+											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
 											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
 												<h4 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
@@ -641,6 +643,7 @@ export default {
 			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
 			urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
 			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
+			urlFotoProduk : window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
 			loading : true,
 			loadingTbs : true,
 
@@ -771,6 +774,8 @@ export default {
 				app.loading = false;
 				app.produksPenjualan = resp.data.data;
 				app.dataProduksPenjualan = resp.data;
+				console.log(app.urlFotoProduk);
+				console.log(app.produksPenjualan)
 
 			})
 			.catch(function (resp) {
