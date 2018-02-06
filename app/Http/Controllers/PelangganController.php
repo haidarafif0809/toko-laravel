@@ -164,9 +164,9 @@ class PelangganController extends Controller
         Excel::create('Template Import Pelanggan', function ($excel) {
             // Set the properties
             $excel->setTitle('Template Import Pelanggan')
-                ->setCreator('Toko Dasar')
-                ->setCompany('Toko Dasar')
-                ->setDescription('Template Import Pelanggan di Aplikasi Toko Dasar');
+                ->setCreator('Kavepos')
+                ->setCompany('Kavepos')
+                ->setDescription('Template Import Pelanggan di Aplikasi Kavepos');
             $excel->sheet('Data Pelanggan', function ($sheet) {
                 $row = 1;
                 $sheet->row($row, [
@@ -222,14 +222,14 @@ class PelangganController extends Controller
                 if ($jenisKelamin !== 'laki-laki' && $jenisKelamin !== 'perempuan') {
                     $errors['jenisKelamin'][] = [
                         'line'    => $no,
-                        'message' => 'Nilai dari kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan.',
+                        'message' => 'Kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan.',
                     ];
                     $lineErrors[] = $no;
                 }
             } else {
                 $errors['jenisKelamin'][] = [
                     'line'    => $no,
-                    'message' => 'Nilai dari kolom Jenis Kelamin tidak boleh kosong.',
+                    'message' => 'Kolom Jenis Kelamin tidak boleh kosong.',
                 ];
                 $lineErrors[] = $no;
             }
@@ -273,7 +273,7 @@ class PelangganController extends Controller
             // Membuang spasi dan mengubah huruf menjadi lowercase (huruf kecil)
             $jenisKelamin = trim(strtolower($row['jenis_kelamin']));
             if ($jenisKelamin !== 'laki-laki' && $jenisKelamin !== 'perempuan') {
-                $errorMsg['pesan'] = 'kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan';
+                $errorMsg['pesan'] = 'Kolom Jenis Kelamin hanya boleh berisi laki-laki atau perempuan';
                 return response()->json($errorMsg);
             }
             if ($jenisKelamin == 'laki-laki') {

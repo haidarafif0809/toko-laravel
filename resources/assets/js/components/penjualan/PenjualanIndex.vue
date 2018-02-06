@@ -136,6 +136,17 @@ display:block;
 	color: red;
 }
 
+.box-produk {
+	height: 250px;
+	width: 180px;
+	/*background-color: powderblue;*/
+}
+.box-dalam-produk {
+	height: 230px;
+	width: 170px;
+	/*background-color: powderblue;*/
+}
+
 </style>
 
 <template>
@@ -384,7 +395,7 @@ display:block;
 							<div class="col-md-12">
 								<div v-if="kategori_produks.length == 1">
 									<div v-for="kategori_produk , index in kategori_produks">
-										<div class=" btn btn-success col-md-3 list-produk">
+										<div class=" btn btn-success col-md-3">
 											<div class="caption"  @click="submitTbsPenjualan(produk)">
 												<h4 v-if="kategori_produk.id.length > 15">
 													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
@@ -398,7 +409,7 @@ display:block;
 								</div>
 								<div v-else>
 									<div v-for="kategori_produk , index in kategori_produks" >
-										<div class=" btn btn-success col-md-3 list-produk">
+										<div class=" btn btn-success col-md-3">
 											<div class="caption"  @click="submitTbsPenjualan(produk)">
 												<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
 													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
@@ -421,16 +432,16 @@ display:block;
 						<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
 							<div class="col-md-12">
 								<div v-if="produksPenjualan.length == 1">
-									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-4 list-produk">
-										<div class="thumbnail">
+									<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
+										<div class="thumbnail box-dalam-produk">
 											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
 											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
-												<h4 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
+												<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
-												</h4>
-												<h4 v-else>
+												</h6>
+												<h6 v-else>
 													{{produksPenjualans.data_produk.nama_produk}}
-												</h4>
+												</h6>
 												<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
 
 											</div>
@@ -438,17 +449,17 @@ display:block;
 									</div>
 								</div>
 								<div v-else>
-									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-4 list-produk">
-										<div class="thumbnail">
-											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
+									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-3 box-produk">
+										<div class="thumbnail box-dalam-produk">
+											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" width="150px" height="80px">
 											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
-												<h4 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
+												<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
-												</h4>
-												<h4 v-else>
+												</h6>
+												<h6 v-else>
 													{{produksPenjualans.data_produk.nama_produk}}
-												</h4>
-												<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
+												</h6>
+												<p class="font-harga">Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
 											</div>
 										</div>
 									</div>

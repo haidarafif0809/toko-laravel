@@ -63,4 +63,9 @@ class Pelanggan extends Model
         return $kode_pelanggan;
     }
 
+    public function penjualan()
+    {
+        return $this->hasOne('App\Penjualan');
+    }
+
 }
