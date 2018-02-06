@@ -137,12 +137,12 @@ display:block;
 }
 
 .box-produk {
-	height: 250px;
+	height: 200px;
 	width: 180px;
 	/*background-color: powderblue;*/
 }
 .box-dalam-produk {
-	height: 230px;
+	height: 190px;
 	width: 170px;
 	/*background-color: powderblue;*/
 }
