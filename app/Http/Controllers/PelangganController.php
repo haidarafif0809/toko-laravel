@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pelanggan;
+use App\Penjualan;
 use App\User;
 use Auth;
 use Excel;
@@ -25,9 +26,16 @@ class PelangganController extends Controller
 
     public function view()
     {
-
-        $pelanggan     = Pelanggan::where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(1000000);
-        $pelangganData = [];
+        $pelanggan = Pelanggan::with('penjualan')->where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(1000000);
+        return response($pelanggan);
+        // print_r($pelanggan[1]['id']);
+        return;
+        $penjualan    = Penjualan::where('pelanggan_id', $pelanggan[1]['toko_id'])->get();
+        $jumlah_order = $penjualan->count();
+        return response($penjualan);
+        return response($pelanggan[0]['nama_pelanggan']);
+        exit;
+        // $pelangganData = [];
 
         foreach ($pelanggan as $key => $val) {
             $kode_pelanggan                        = explode('/', $val->kode_pelanggan);
@@ -39,12 +47,12 @@ class PelangganController extends Controller
         //DATA PAGINATION
         $respons['current_page']   = $pelanggan->currentPage();
         $respons['data']           = $pelangganData;
-        $respons['first_page_url'] = url('/profile-toko/view?page=' . $pelanggan->firstItem());
+        $respons['first_page_url'] = url('/pelanggan/view?page=' . $pelanggan->firstItem());
         $respons['from']           = 1;
         $respons['last_page']      = $pelanggan->lastPage();
-        $respons['last_page_url']  = url('/profile-toko/view?page=' . $pelanggan->lastPage());
+        $respons['last_page_url']  = url('/pelanggan/view?page=' . $pelanggan->lastPage());
         $respons['next_page_url']  = $pelanggan->nextPageUrl();
-        $respons['path']           = url('/profile-toko/view');
+        $respons['path']           = url('/pelanggan/view');
         $respons['per_page']       = $pelanggan->perPage();
         $respons['prev_page_url']  = $pelanggan->previousPageUrl();
         $respons['to']             = $pelanggan->perPage();
@@ -74,12 +82,12 @@ class PelangganController extends Controller
         //DATA PAGINATION
         $respons['current_page']   = $cari_pelanggan->currentPage();
         $respons['data']           = $pelangganData;
-        $respons['first_page_url'] = url('/profile-toko/view?page=' . $cari_pelanggan->firstItem());
+        $respons['first_page_url'] = url('/pelanggan/view?page=' . $cari_pelanggan->firstItem());
         $respons['from']           = 1;
         $respons['last_page']      = $cari_pelanggan->lastPage();
-        $respons['last_page_url']  = url('/profile-toko/view?page=' . $cari_pelanggan->lastPage());
+        $respons['last_page_url']  = url('/pelanggan/view?page=' . $cari_pelanggan->lastPage());
         $respons['next_page_url']  = $cari_pelanggan->nextPageUrl();
-        $respons['path']           = url('/profile-toko/view');
+        $respons['path']           = url('/pelanggan/view');
         $respons['per_page']       = $cari_pelanggan->perPage();
         $respons['prev_page_url']  = $cari_pelanggan->previousPageUrl();
         $respons['to']             = $cari_pelanggan->perPage();
