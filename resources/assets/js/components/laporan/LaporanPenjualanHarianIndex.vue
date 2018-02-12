@@ -31,7 +31,7 @@
 						<br>
 						<div class="table-responsive">
 							<table class="table table-striped table-condensed table-responsive">
-								<thead>
+								<thead bgcolor="#d6d6c2">
 									<tr>
 										<th>TANGGAL</th>
 										<th style="text-align:right">JUMLAH PENJUALAN</th>
@@ -59,12 +59,12 @@
 										<td align="right">100.000</td>
 									</tr>
 								</tbody>
-								<tfoot bgcolor="#00FF00">	
+								<tfoot bgcolor="#d6d6c2">	
 									<tr>
-										<td>Grand Total:</td>
-										<td align="right">6</td>
-										<td align="right">1.200.000</td>
-										<td align="right">200.000</td>
+										<td><b><font color="#000000">Grand Total:</font></b></td>
+										<td align="right"><b><font color="#000000">6</font></b></td>
+										<td align="right"><b><font color="#000000">1.200.000</font></b></td>
+										<td align="right"><b><font color="#000000">200.000</font></b></td>
 									</tr>
 								</tfoot>
 						<!-- <tbody v-else-if="loading == true" class="data-ada" >

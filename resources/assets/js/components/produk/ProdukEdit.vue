@@ -2,6 +2,9 @@
 .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.rata{
+    margin-left: -17px;
+}
 </style>
 <template>
     <div class="container" >
@@ -128,7 +131,7 @@
                                   <div v-if="status_modifier == 'accepted'">
                                     <div class="col-md-8">
                                         <form v-on:submit.prevent="tambahModifier()" class="form-inline">
-                                            <div class="input-group">
+                                            <div class="input-group col-md-8 rata">
                                                 <selectize-component v-model="produk_modifier" :settings="setting_produk_modifier"> 
                                                     <option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }} Rp{{ produk_modifier.harga_modifier }}</option>
                                                 </selectize-component>
