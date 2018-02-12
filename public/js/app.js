@@ -46975,7 +46975,7 @@ __WEBPACK_IMPORTED_MODULE_5_vue___default.a.component('line-chart', {
         this.renderChart({
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
-                label: 'Data One',
+                label: 'Data Satu',
                 backgroundColor: '#f87979',
                 data: [40, 39, 10, 40, 39, 80, 40]
             }]
