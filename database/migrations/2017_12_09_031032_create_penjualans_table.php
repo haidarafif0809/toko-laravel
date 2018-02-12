@@ -18,7 +18,7 @@ class CreatePenjualansTable extends Migration
             $table->string('no_faktur')->nullable();
             $table->string('toko_id')->nullable();
             $table->string('pelanggan_id')->nullable();
-            $table->string('subtotal')->nullable();
+            $table->string('subtotal')->nullable(0);
             $table->string('pajak')->nullable();
             $table->string('diskon')->nullable();
             $table->string('total_bayar')->nullable();

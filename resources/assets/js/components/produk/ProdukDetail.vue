@@ -3,7 +3,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .detail_nama_modifier + .detail_nama_modifier:before {
-  content: ", ";
+	content: ", ";
 }
 </style>
 <template>  
@@ -66,8 +66,8 @@
 									</td>
 									<td>
 										<span v-for="id,index in produk.produk_modifier_id" class="detail_nama_modifier">
-											<span>{{ produk_modifier[id] }}</span>
 											<span v-if="produk_modifier[id] == null">Tidak ada tambahan</span>
+											<span v-else>{{ produk_modifier[id] }}</span>
 										</span>
 									</td>
 								</tr>

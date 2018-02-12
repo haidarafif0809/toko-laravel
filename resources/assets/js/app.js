@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('./bootstrap');
+ require('./bootstrap');
 // chartjs package
 require('chart.js');
 // vue-charts package
@@ -105,12 +105,12 @@ import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 //     Vue.component('chartjs-doughnut', require('./components/chartjs-doughnut.vue'));
 // }
 const routes = [{
-        path: '/',
-        components: {
-            dashboardIndex: DashboardIndex
-        },
-        name: 'indexDashboard'
+    path: '/',
+    components: {
+        dashboardIndex: DashboardIndex
     },
+    name: 'indexDashboard'
+},
     // Master data Produk
     {
         path: '/produk',
@@ -247,7 +247,7 @@ const routes = [{
         component: StafTokoEdit,
         name: 'editStafToko',
     }
-]
+    ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
