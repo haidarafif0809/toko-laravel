@@ -280,7 +280,7 @@
                                                                                                  <center>
                                                                                                     <p>
                                                                                                        <div style="height:25px;width:150px;background:#ff5722;font-size:14px;font-weight:bold;border-radius:4px;text-align:center;line-height:25px;margin:0 auto">
-                                                                                                          <a href="{{ $link = url('auth/verify', $token).'?email='.urlencode($user->email) }}" type="button" style="color: white">  Konfirmasi
+                                                                                                          <a href="{{ $link = url('auth/verifyStaff', $token).'?email='.urlencode($user->email) }}" type="button" style="color: white">  Konfirmasi
                                                                                                           </a>
                                                                                                       </div>
                                                                                                   </p>

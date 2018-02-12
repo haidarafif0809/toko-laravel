@@ -108,7 +108,6 @@ Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
 Route::get('staf-toko/view', 'StafTokoController@view');
 Route::get('staf-toko/search', 'StafTokoController@search');
 
-
 // Pelanggan
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
@@ -120,6 +119,7 @@ Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('auth/verifyStaff/{token}', 'Auth\RegisterController@verifyStaff');
 // ubah password
 Route::get('ubah-password/password', 'UbahPasswordController@editPassword');
 Route::post('ubah-password/password', 'UbahPasswordController@updatePassword');
