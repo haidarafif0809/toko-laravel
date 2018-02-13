@@ -67,27 +67,13 @@
 										<td align="right"><b><font color="#000000">200.000</font></b></td>
 									</tr>
 								</tfoot>
-						<!-- <tbody v-else-if="loading == true" class="data-ada" >
-							<tr >
-								<td colspan="4"  class="text-center">
-									Sedang Memuat Data
-								</td>
-							</tr>
-						</tbody>
-						<tbody v-else class="tidak-ada-data">
-							<tr>
-								<td colspan="4"  class="text-center">
-									Tidak Ada Data
-								</td>
-							</tr>
-						</tbody> -->
-					</table>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 </template>
 <script >
 
