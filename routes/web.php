@@ -117,6 +117,10 @@ Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTempl
 Route::post('/pelanggan/import_pelanggan', 'PelangganController@importExcel');
 Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
 
+//laporan
+Route::resource('laporan', 'LaporanController', ['except' => 'show']);
+Route::get('/laporan/laporan-ringkas', 'LaporanController@laporanRingkas');
+
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 Route::get('auth/verifyStaff/{token}', 'Auth\RegisterController@verifyStaff');
