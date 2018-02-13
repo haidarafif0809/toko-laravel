@@ -38,11 +38,21 @@
 							<tbody>
 								<tr>
 									<td>Penjualan</td>
-									<td>0,00</td>
+									<td v-if="laporan_ringkas.subtotal > 0">
+										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal) }}
+									</td>
+									<td v-else>
+										0,00
+									</td>
 								</tr>
 								<tr>
 									<td>Diskon</td>
-									<td>0,00</td>
+									<td v-if="laporan_ringkas.diskon > 0">
+										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.diskon) }}
+									</td>
+									<td v-else>
+										0,00
+									</td>
 								</tr>
 								<tr>
 									<td>Pembatalan</td>
@@ -50,14 +60,15 @@
 								</tr>
 								<tr>
 									<td>Penjualan bersih</td>
-									<td>0,00</td>
+									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0">
+										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
+									</td>
+									<td v-else>
+										0,00
+									</td>
 								</tr>
 								<tr>
 									<td>Pajak</td>
-									<td>0,00</td>
-								</tr>
-								<tr>
-									<td>Pembulatan</td>
 									<td>0,00</td>
 								</tr>
 								<tr>
@@ -72,3 +83,27 @@
 		</div>
 	</div>
 </template>
+<script>
+	export default{
+		data: function(){
+			return{
+				laporan_ringkas:[],
+				url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
+			}
+		},
+		mounted(){
+			var app = this;
+			app.getDataLaporan();
+		},
+		methods: {
+			getDataLaporan(){
+				let app = this;
+				axios.get(app.url+'/laporan-ringkas/')
+				.then(function (resp){
+					app.laporan_ringkas = resp.data;
+					console.log(resp.data)
+				})
+			}
+		}
+	}
+</script>

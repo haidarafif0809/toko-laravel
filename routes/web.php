@@ -108,7 +108,6 @@ Route::resource('staf-toko', 'StafTokoController', ['except' => 'show']);
 Route::get('staf-toko/view', 'StafTokoController@view');
 Route::get('staf-toko/search', 'StafTokoController@search');
 
-
 // Pelanggan
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
@@ -117,6 +116,10 @@ Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
 Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate');
 Route::post('/pelanggan/import_pelanggan', 'PelangganController@importExcel');
 Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
+
+//laporan
+Route::resource('laporan', 'LaporanController', ['except' => 'show']);
+Route::get('/laporan/laporan-ringkas', 'LaporanController@laporanRingkas');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
