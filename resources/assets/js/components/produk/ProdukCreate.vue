@@ -9,6 +9,9 @@
 #inputan thead tr th, #inputan tbody tr td{
 	margin: 10px; padding: 5px;
 }
+.rata{
+	margin-left: -17px;
+}
 
 </style>
 <template>
@@ -130,7 +133,7 @@
 									<div v-if="status_modifier == 'accepted'">
 										<div class="col-md-8">
 											<form v-on:submit.prevent="tambahModifier()" class="form-inline">
-												<div class="input-group">
+												<div class="input-group col-md-8 rata">
 													<selectize-component v-model="produk.produk_modifier_id" :settings="setting_produk_modifier"> 
 														<option v-for="produk_modifier in produk_modifier_id" v-bind:value="produk_modifier.id" >{{ produk_modifier.nama_modifier }} Rp{{ produk_modifier.harga_modifier }}</option>
 													</selectize-component>

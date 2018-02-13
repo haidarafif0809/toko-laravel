@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Pelanggan;
+use App\Penjualan;
 use App\Toko;
 use Illuminate\Database\Eloquent\Model;
 use Yajra\Auditable\AuditableTrait;
@@ -23,6 +24,11 @@ class Pelanggan extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'toko_id', 'id');
+    }
+
+    public function penjualan()
+    {
+        return $this->hasOne('App\Penjualan');
     }
 
     public static function kode_pelanggan($id_toko)
@@ -61,11 +67,6 @@ class Pelanggan extends Model
         }
 
         return $kode_pelanggan;
-    }
-
-    public function penjualan()
-    {
-        return $this->hasOne('App\Penjualan');
     }
 
 }

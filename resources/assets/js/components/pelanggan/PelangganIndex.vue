@@ -597,7 +597,7 @@ ul :hover {background: #ffd11a;}
 								<tbody>	
 									<tr>
 										<td>Jumlah Order</td>
-										<td>9</td>
+										<!-- <td>9</td> -->
 									</tr>
 									<tr>
 										<td>Total Belanja</td>

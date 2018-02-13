@@ -123,6 +123,7 @@ Route::get('/laporan/laporan-ringkas', 'LaporanController@laporanRingkas');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('auth/verifyStaff/{token}', 'Auth\RegisterController@verifyStaff');
 // ubah password
 Route::get('ubah-password/password', 'UbahPasswordController@editPassword');
 Route::post('ubah-password/password', 'UbahPasswordController@updatePassword');

@@ -36,7 +36,7 @@ Vue.component('line-chart', {
         this.renderChart({
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [{
-                label: 'Data One',
+                label: 'Data Satu',
                 backgroundColor: '#f87979',
                 data: [40, 39, 10, 40, 39, 80, 40]
             }]
@@ -90,6 +90,7 @@ import KelolaKasEdit from './components/kelolaKas/KelolaKasEdit.vue'
 import LaporanIndex from './components/laporan/LaporanIndex.vue'
 import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'
 import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
+import LaporanPenjualanHarianIndex from './components/laporan/LaporanPenjualanHarianIndex.vue'
 // staf toko
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
@@ -232,6 +233,10 @@ const routes = [{
         path: '/laporan/rekap_kas',
         component: RekapKasIndex,
         name: 'indexRekapKas'
+    },{
+        path: '/laporan/laporan-penjualan-harian',
+        component: LaporanPenjualanHarianIndex,
+        name: 'indexLaporanPenjualanHarian'
     },
     // staf toko
     {
