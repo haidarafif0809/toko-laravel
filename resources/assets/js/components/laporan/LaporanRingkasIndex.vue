@@ -55,10 +55,6 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Pembatalan</td>
-									<td>0,00</td>
-								</tr>
-								<tr>
 									<td>Penjualan bersih</td>
 									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0">
 										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
@@ -73,7 +69,12 @@
 								</tr>
 								<tr>
 									<td>Total Penerimaan</td>
-									<td>0,00</td>
+									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0">
+										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
+									</td>
+									<td v-else>
+										0,00
+									</td>
 								</tr>
 							</tbody>
 						</table>
