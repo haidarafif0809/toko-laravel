@@ -59,7 +59,7 @@ i{margin-bottom: 20px}
 					</router-link>
 				</div>
 				<div class="col-md-4">
-					<router-link :to="{name: 'indexDashboard'}">
+					<router-link :to="{name: 'indexLaporanPenjualanPerJam'}">
 						<div class="box">
 							<i class="fa fa-clock-o fa-3x"></i>
 							<p class="judul">Analisa Penjualan Per Jam</p>

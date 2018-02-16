@@ -2,6 +2,10 @@
 .tombol-export{
 	float: right;
 }
+.btn.active
+{
+  background-color:#002a38;
+}
 </style>
 <template>
 	<div class="container">
@@ -18,10 +22,10 @@
 					</div>
 					<div class="panel-body">
 						<div class="btn-group">
-							<button class="btn btn-primary active">Harian</button>
-							<button class="btn btn-primary">Mingguan</button>	
-							<button class="btn btn-primary">Bulanan</button>
-							<button class="btn btn-primary">Tahunan</button>
+							<button class="btn btn-primary active" v-on:click="getDataLaporan(1)">Harian</button>
+							<button class="btn btn-primary" v-on:click="getDataLaporan(2)">Mingguan</button>	
+							<button class="btn btn-primary" v-on:click="getDataLaporan(3)">Bulanan</button>
+							<button class="btn btn-primary" v-on:click="getDataLaporan(4)">Tahunan</button>
 						</div>
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
@@ -32,47 +36,47 @@
 							<thead>
 								<tr>
 								<th>Jenis Laporan</th>
-								<th>Total Nominal(Rp)</th>
+								<th style="text-align:right">Total Nominal(Rp)</th>
 							    </tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>Penjualan</td>
-									<td v-if="laporan_ringkas.subtotal > 0">
-										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal) }}
+									<td v-if="laporan_ringkas.subtotal > 0" align="right">
+										{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal) }}
 									</td>
-									<td v-else>
+									<td v-else align="right">
 										0,00
 									</td>
 								</tr>
 								<tr>
 									<td>Diskon</td>
-									<td v-if="laporan_ringkas.diskon > 0">
-										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.diskon) }}
+									<td v-if="laporan_ringkas.diskon > 0" align="right">
+										{{ new Intl.NumberFormat().format(laporan_ringkas.diskon) }}
 									</td>
-									<td v-else>
+									<td v-else align="right">
 										0,00
 									</td>
 								</tr>
 								<tr>
 									<td>Penjualan bersih</td>
-									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0">
-										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
+									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0" align="right">
+										{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
 									</td>
-									<td v-else>
+									<td v-else align="right">
 										0,00
 									</td>
 								</tr>
 								<tr>
 									<td>Pajak</td>
-									<td>0,00</td>
+									<td align="right">0,00</td>
 								</tr>
 								<tr>
 									<td>Total Penerimaan</td>
-									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0">
-										{{ "Rp" }}{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
+									<td v-if="laporan_ringkas.subtotal - laporan_ringkas.diskon > 0" align="right">
+										{{ new Intl.NumberFormat().format(laporan_ringkas.subtotal - laporan_ringkas.diskon) }}
 									</td>
-									<td v-else>
+									<td v-else align="right">
 										0,00
 									</td>
 								</tr>
@@ -95,11 +99,15 @@
 		mounted(){
 			var app = this;
 			app.getDataLaporan();
+				$(".btn-group > .btn").click(function(){
+			    $(".btn-group > .btn").removeClass("active");
+			    $(this).addClass("active");
+			});
 		},
 		methods: {
-			getDataLaporan(){
+			getDataLaporan(type = 1){
 				let app = this;
-				axios.get(app.url+'/laporan-ringkas/')
+				axios.get(app.url+'/laporan-ringkas/'+type)
 				.then(function (resp){
 					app.laporan_ringkas = resp.data;
 					console.log(resp.data)
