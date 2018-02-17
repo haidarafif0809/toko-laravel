@@ -12,13 +12,13 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
-			<li class="active">Laporan Penjualan Harian</li>
+			<li class="active">Laporan Penjualan Per Jam</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Laporan Penjualan Harian</p>
+						<p class="panel-title">Laporan Penjualan Per Jam</p>
 					</div>
 					<div class="panel-body">
 						<div class="btn-group">
@@ -133,7 +133,7 @@ export default{
 			})
 
 		},
-		getDataGrandTotal(type){
+		getDataGrandTotal(type = 1){
 			let app = this;
 			axios.get(app.url+'/grand-total-penjualan/'+type)
 			.then(function (resp){

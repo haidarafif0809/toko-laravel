@@ -19,75 +19,34 @@ class LaporanController extends Controller
 
         //per hari
         if ($type == 1) {
-            $laporan       = Penjualan::select(['subtotal', 'diskon'])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $hari)->get();
-            $array_laporan = [];
-            $subtotal      = 0;
-            $diskon        = 0;
-            foreach ($laporan as $key => $val) {
-                $subtotal = $subtotal + $val['subtotal'];
-
-                $array_laporan['subtotal'] = $subtotal;
-
-                $diskon = $diskon + $val['diskon'];
-
-                $array_laporan['diskon'] = $diskon;
-            }
-            return $array_laporan;
+            $laporan = Penjualan::LaporanRingkas($hari)->get();
         }
-
         //per minggu
-        if ($type == 2) {
-            $laporan       = Penjualan::select(['subtotal', 'diskon'])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $minggu)->get();
-            $array_laporan = [];
-            $subtotal      = 0;
-            $diskon        = 0;
-            foreach ($laporan as $key => $val) {
-                $subtotal = $subtotal + $val['subtotal'];
-
-                $array_laporan['subtotal'] = $subtotal;
-
-                $diskon = $diskon + $val['diskon'];
-
-                $array_laporan['diskon'] = $diskon;
-            }
-            return $array_laporan;
+        elseif ($type == 2) {
+            $laporan = Penjualan::LaporanRingkas($minggu)->get();
         }
-
         //per bulan
-        if ($type == 3) {
-            $laporan       = Penjualan::select(['subtotal', 'diskon'])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $bulan)->get();
-            $array_laporan = [];
-            $subtotal      = 0;
-            $diskon        = 0;
-            foreach ($laporan as $key => $val) {
-                $subtotal = $subtotal + $val['subtotal'];
-
-                $array_laporan['subtotal'] = $subtotal;
-
-                $diskon = $diskon + $val['diskon'];
-
-                $array_laporan['diskon'] = $diskon;
-            }
-            return $array_laporan;
+        elseif ($type == 3) {
+            $laporan = Penjualan::LaporanRingkas($bulan)->get();
         }
-
         //per tahun
-        if ($type == 4) {
-            $laporan       = Penjualan::select(['subtotal', 'diskon'])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $tahun)->get();
-            $array_laporan = [];
-            $subtotal      = 0;
-            $diskon        = 0;
-            foreach ($laporan as $key => $val) {
-                $subtotal = $subtotal + $val['subtotal'];
-
-                $array_laporan['subtotal'] = $subtotal;
-
-                $diskon = $diskon + $val['diskon'];
-
-                $array_laporan['diskon'] = $diskon;
-            }
-            return $array_laporan;
+        elseif ($type == 4) {
+            $laporan = Penjualan::LaporanRingkas($tahun)->get();
         }
+
+        $array_laporan = [];
+        $subtotal      = 0;
+        $diskon        = 0;
+        foreach ($laporan as $key => $val) {
+            $subtotal = $subtotal + $val['subtotal'];
+
+            $array_laporan['subtotal'] = $subtotal;
+
+            $diskon = $diskon + $val['diskon'];
+
+            $array_laporan['diskon'] = $diskon;
+        }
+        return $array_laporan;
 
     }
 
@@ -110,67 +69,33 @@ class LaporanController extends Controller
 
         //per hari
         if ($type == 1) {
-            $laporan             = Penjualan::select([DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $hari)->get();
-            $array_laporan       = [];
-            $gt_total_penjualan  = 0;
-            $gt_total_pembayaran = 0;
-            foreach ($laporan as $key) {
-                $gt_total_penjualan += $key->total_penjualan;
-                $array_laporan['total_penjualan'] = $gt_total_penjualan;
-
-                $gt_total_pembayaran += $key->total_pembayaran;
-                $array_laporan['total_pembayaran'] = $gt_total_pembayaran;
-            }
-            return $array_laporan;
+            $laporan = Penjualan::TotalPenjualan($hari)->get();
         }
-
         //per minggu
-        if ($type == 2) {
-            $laporan             = Penjualan::select([DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $minggu)->get();
-            $array_laporan       = [];
-            $gt_total_penjualan  = 0;
-            $gt_total_pembayaran = 0;
-            foreach ($laporan as $key) {
-                $gt_total_penjualan += $key->total_penjualan;
-                $array_laporan['total_penjualan'] = $gt_total_penjualan;
-
-                $gt_total_pembayaran += $key->total_pembayaran;
-                $array_laporan['total_pembayaran'] = $gt_total_pembayaran;
-            }
-            return $array_laporan;
+        elseif ($type == 2) {
+            $laporan = Penjualan::TotalPenjualan($minggu)->get();
         }
-
         //per bulan
-        if ($type == 3) {
-            $laporan             = Penjualan::select([DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $bulan)->get();
-            $array_laporan       = [];
-            $gt_total_penjualan  = 0;
-            $gt_total_pembayaran = 0;
-            foreach ($laporan as $key) {
-                $gt_total_penjualan += $key->total_penjualan;
-                $array_laporan['total_penjualan'] = $gt_total_penjualan;
-
-                $gt_total_pembayaran += $key->total_pembayaran;
-                $array_laporan['total_pembayaran'] = $gt_total_pembayaran;
-            }
-            return $array_laporan;
+        elseif ($type == 3) {
+            $laporan = Penjualan::TotalPenjualan($bulan)->get();
         }
 
         //per tahun
-        if ($type == 4) {
-            $laporan             = Penjualan::select([DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $tahun)->get();
-            $array_laporan       = [];
-            $gt_total_penjualan  = 0;
-            $gt_total_pembayaran = 0;
-            foreach ($laporan as $key) {
-                $gt_total_penjualan += $key->total_penjualan;
-                $array_laporan['total_penjualan'] = $gt_total_penjualan;
-
-                $gt_total_pembayaran += $key->total_pembayaran;
-                $array_laporan['total_pembayaran'] = $gt_total_pembayaran;
-            }
-            return $array_laporan;
+        elseif ($type == 4) {
+            $laporan = Penjualan::TotalPenjualan($tahun)->get();
         }
+
+        $array_laporan       = [];
+        $gt_total_penjualan  = 0;
+        $gt_total_pembayaran = 0;
+        foreach ($laporan as $key) {
+            $gt_total_penjualan += $key->total_penjualan;
+            $array_laporan['total_penjualan'] = $gt_total_penjualan;
+
+            $gt_total_pembayaran += $key->total_pembayaran;
+            $array_laporan['total_pembayaran'] = $gt_total_pembayaran;
+        }
+        return $array_laporan;
     }
 
     public function laporanPenjualanPerJam($type)
@@ -182,40 +107,26 @@ class LaporanController extends Controller
 
         //per hari
         if ($type == 1) {
-            $laporan       = Penjualan::select([DB::raw('HOUR(created_at) as jam'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $hari)->groupBy(DB::raw('HOUR(created_at)'))->get();
-            $array_laporan = array();
-            foreach ($laporan as $key) {
-                array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-            }
-            return $array_laporan;
+            $laporan = Penjualan::LaporanPerJam($hari)->get();
         }
         //per minggu
         elseif ($type == 2) {
-            $laporan       = Penjualan::select([DB::raw('HOUR(created_at) as jam'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $minggu)->groupBy(DB::raw('HOUR(created_at)'))->get();
-            $array_laporan = array();
-            foreach ($laporan as $key) {
-                array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-            }
-            return $array_laporan;
+            $laporan = Penjualan::LaporanPerJam($minggu)->get();
         }
         //per bulan
         elseif ($type == 3) {
-            $laporan       = Penjualan::select([DB::raw('HOUR(created_at) as jam'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $bulan)->groupBy(DB::raw('HOUR(created_at)'))->get();
-            $array_laporan = array();
-            foreach ($laporan as $key) {
-                array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-            }
-            return $array_laporan;
+            $laporan = Penjualan::LaporanPerJam($bulan)->get();
         }
         //per tahun
         elseif ($type == 4) {
-            $laporan       = Penjualan::select([DB::raw('HOUR(created_at) as jam'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $tahun)->groupBy(DB::raw('HOUR(created_at)'))->get();
-            $array_laporan = array();
-            foreach ($laporan as $key) {
-                array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-            }
-            return $array_laporan;
+            $laporan = Penjualan::LaporanPerJam($tahun)->get();
         }
+
+        $array_laporan = array();
+        foreach ($laporan as $key) {
+            array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
+        }
+        return $array_laporan;
 
     }
 
