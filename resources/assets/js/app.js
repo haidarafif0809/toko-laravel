@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
- require('./bootstrap');
+require('./bootstrap');
 // chartjs package
 require('chart.js');
 // vue-charts package
@@ -70,9 +70,6 @@ import KategoriProdukCreate from './components/kategoriProduk/KategoriProdukCrea
 import KategoriProdukEdit from './components/kategoriProduk/KategoriProdukEdit.vue'
 // master data pelanggan
 import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
-import PelangganCreate from './components/pelanggan/PelangganCreate.vue'
-import PelangganEdit from './components/pelanggan/PelangganEdit.vue'
-import PelangganDetail from './components/pelanggan/PelangganDetail.vue'
 //Penjualan
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 // toko
@@ -107,12 +104,12 @@ import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 //     Vue.component('chartjs-doughnut', require('./components/chartjs-doughnut.vue'));
 // }
 const routes = [{
-    path: '/',
-    components: {
-        dashboardIndex: DashboardIndex
+        path: '/',
+        components: {
+            dashboardIndex: DashboardIndex
+        },
+        name: 'indexDashboard'
     },
-    name: 'indexDashboard'
-},
     // Master data Produk
     {
         path: '/produk',
@@ -164,18 +161,6 @@ const routes = [{
         path: '/pelanggan',
         component: PelangganIndex,
         name: 'indexPelanggan'
-    }, {
-        path: '/pelanggan-create',
-        component: PelangganCreate,
-        name: 'createPelanggan'
-    }, {
-        path: '/pelanggan-edit',
-        component: PelangganEdit,
-        name: 'editPelanggan'
-    }, {
-        path: '/pelanggan/detail/:id',
-        component: PelangganDetail,
-        name: 'detailPelanggan'
     },
     //Penjualan
     {
@@ -234,11 +219,11 @@ const routes = [{
         path: '/laporan/rekap_kas',
         component: RekapKasIndex,
         name: 'indexRekapKas'
-    },{
+    }, {
         path: '/laporan/laporan-penjualan-harian',
         component: LaporanPenjualanHarianIndex,
         name: 'indexLaporanPenjualanHarian'
-    },{
+    }, {
         path: '/laporan/laporan-penjualan-perjam',
         component: LaporanPenjualanPerJam,
         name: 'indexLaporanPenjualanPerJam'
@@ -257,7 +242,7 @@ const routes = [{
         component: StafTokoEdit,
         name: 'editStafToko',
     }
-    ]
+]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -23,19 +23,30 @@ class PelangganController extends Controller
     {
         //
     }
+    public function perilaku($id)
+    {
+        $pelanggan       = Pelanggan::select()->where('id', $id)->first();
+        $jumlah_order    = Penjualan::where('pelanggan_id', $pelanggan->id)->count();
+        $total_belanja   = Penjualan::perilakuPelanggan($id)->first();
+        $terakhir_datang = Penjualan::terakhirDatang($id)->first();
+        if ($jumlah_order > 0) {
+            $rata_rata_belanja = $total_belanja->total_bayars / $jumlah_order;
+        } else {
+            $rata_rata_belanja = 0;
+        }
 
+        $respons['jumlah_order']      = $jumlah_order;
+        $respons['total_belanja']     = $total_belanja;
+        $respons['rata_rata_belanja'] = $rata_rata_belanja;
+        $respons['terakhir_datang']   = $terakhir_datang;
+
+        return response()->json($respons);
+    }
     public function view()
     {
         $pelanggan = Pelanggan::with('penjualan')->where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(1000000);
-        return response($pelanggan);
-        // print_r($pelanggan[1]['id']);
-        return;
-        $penjualan    = Penjualan::where('pelanggan_id', $pelanggan[1]['toko_id'])->get();
-        $jumlah_order = $penjualan->count();
-        return response($penjualan);
-        return response($pelanggan[0]['nama_pelanggan']);
-        exit;
-        // $pelangganData = [];
+
+        $pelangganData = [];
 
         foreach ($pelanggan as $key => $val) {
             $kode_pelanggan                        = explode('/', $val->kode_pelanggan);

@@ -50,5 +50,18 @@ class Penjualan extends Model
         $query->select([DB::raw('HOUR(created_at) as jam'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $waktu)->groupBy(DB::raw('HOUR(created_at)'));
         return $query;
     }
+    public function scopePerilakuPelanggan($query, $id)
+    {
+        $query->select(DB::raw('SUM(total_bayar) as total_bayars'))
+            ->where('pelanggan_id', $id);
+        return $query;
+    }
+    public function scopeTerakhirDatang($query, $id)
+    {
+        $query->select(DB::raw('created_at as created_at'))
+            ->where('pelanggan_id', $id)
+            ->orderBy('created_at', 'desc');
+        return $query;
+    }
 
 }

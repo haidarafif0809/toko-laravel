@@ -341,7 +341,7 @@ ul :hover {background: #ffd11a;}
 					<ul class="scroll-panel-list-result">
 						<li class="pointer" v-for="pelanggan ,index in pelanggans">
 							<ul>
-								<li  v-on:click="detailPelanggan(pelanggan.id, pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
+								<li class="detail_pelanggan"  v-on:click="detailPelanggan(pelanggan.id, pelanggan.kode_pelanggan, pelanggan.nama_pelanggan, pelanggan.jenis_kelamin, pelanggan.tanggal_lahir, pelanggan.nomor_telepon, pelanggan.email, pelanggan.kota, pelanggan.alamat, pelanggan.kode_pos, pelanggan.catatan)">
 									<p>
 										<br>
 										<div class="col-md-3" v-if="pelanggan.jenis_kelamin == 1">
@@ -376,17 +376,17 @@ ul :hover {background: #ffd11a;}
 				<div class="head-info">INFORMASI PELANGGAN</div>
 			</div>
 			<div class="panel panel-default">
-				<ul class="nav nav-tabs">
-					<li class="tabInformasi active">
+				<ul class="nav nav-tabs" >
+					<li id="nav_tentang_pelanggan" class="tabInformasi active">
 						<a data-toggle="tab" v-on:click="tentangPelanggan">TENTANG PELANGGAN</a>
 					</li>
 
-					<li class="tabInformasi">
+					<li id="nav_riwayat_transaksi" class="tabInformasi">
 						<a data-toggle="tab" v-on:click="riwayatTransaksi">RIWAYAT TRANSAKSI</a>
 					</li>
 
-					<li class="tabInformasi">
-						<a data-toggle="tab"  v-on:click="perilaku">PERILAKU</a>
+					<li id="nav_perilaku" class="tabInformasi">
+						<a data-toggle="tab" v-on:click="perilaku">PERILAKU</a>
 					</li>
 				</ul>
 
@@ -597,19 +597,20 @@ ul :hover {background: #ffd11a;}
 								<tbody>	
 									<tr>
 										<td>Jumlah Order</td>
-										<!-- <td>9</td> -->
+										<td>{{perilaku_pelanggan.jumlah_order | pemisahTitik}}</td>
 									</tr>
 									<tr>
 										<td>Total Belanja</td>
-										<td>Rp 617.800,00</td>
+										<td>{{perilaku_pelanggan.total_belanja.total_bayars | pemisahTitik}}</td>
 									</tr>
 									<tr>
 										<td>Rata-rata Belanja</td>
-										<td>Rp 68.644,44</td>
+										<td>{{perilaku_pelanggan.rata_rata_belanja | pemisahTitik}}</td>
 									</tr>
 									<tr>
 										<td>Terakhir Datang</td>
-										<td>1 minggu yang lalu</td>						
+										<td v-if="perilaku_pelanggan.terakhir_datang == null">Tidak Ada</td>
+										<td v-else>{{perilaku_pelanggan.terakhir_datang.created_at }}</td>						
 									</tr>
 									<tr>
 										<td>Rata-rata Kedatangan</td>
@@ -632,6 +633,7 @@ export default {
 	data: function () {
 		return {
 			pelanggans: [],
+			perilaku_pelanggan:{},
 			import_pelanggan: {
 				excel: '',
 			},
@@ -677,15 +679,29 @@ export default {
 	mounted() {
 		var app = this;
 		app.loading = true
-		app.getPelanggans();	
+		app.getPelanggans();
+		// app.getPerilaku();	
 		// app.getPelanggan();
 	},
+	filters: {
+		pemisahTitik: function (value) {
+			var angka = [value];
+			var numberFormat = new Intl.NumberFormat('es-ES');
+			var formatted = angka.map(numberFormat.format);
+			return formatted.join('; ');
+		},
+		tanggal: function (value) {
+			return moment(String(value)).format('DD/MM/YYYY hh:mm')
+		}
+	},
+
 	watch: {
         // whenever question changes, this function will run
         search: function (newQuestion) {
         	this.getHasilPencarian();  
         }
     },
+
     methods: {
     	tentangPelanggan(){
     		this.formPelanggan = 1
@@ -758,6 +774,14 @@ export default {
     		this.riwayatBelanja = 0
     		this.perilakuPelanggan = 0
     		this.memberPelanggan =1
+
+    		$(".detail_pelanggan").click(function () {
+    			$("#nav_riwayat_transaksi").removeClass("active");
+    			$("#nav_perilaku").removeClass("active");
+    			$("#nav_tentang_pelanggan").addClass("active");
+    		});
+
+    		this.getPerilaku(id);
     	},
     	editPelanggan(){
     		this.disable = 2
@@ -773,7 +797,7 @@ export default {
     		}
     		axios.get(app.url+'/view?page='+page)
     		.then(function (resp) {
-    			console.log(resp);
+    			// console.log(resp);
     			app.loading = false
     			app.pelanggans = resp.data.data;
     			app.pelanggansData = resp.data
@@ -796,10 +820,23 @@ export default {
     			app.pelanggansData = resp.data;
     		})
     		.catch(function (resp) {
-    			console.log(resp);
     			app.loading = false
     			alert("Could not load pelanggans");
     		});
+    	},
+    	getPerilaku(id){
+    		var app = this;
+
+    		axios.get(app.url+/perilaku/+id)
+    		.then(function (resp) {
+    			app.loading = false
+    			app.perilaku_pelanggan = resp.data;
+    			console.log(resp.data);
+    		})
+    		.catch(function (resp) {
+    			app.loading = false;
+    			alert("Could not load perilaku")
+    		})
     	},
 
     	saveForm() {
@@ -945,7 +982,7 @@ export default {
 
     		axios.post(app.url_import_pelanggan, newPelanggan)
     		.then(function (resp) {
-    			console.log(resp);
+    			// console.log(resp);
                 // return;
                 // Menampilkan pesan error jika nilai dari kolom Bisa Dijual
                 // bukan bernilai ya atau tidak
@@ -968,7 +1005,7 @@ export default {
                 // app.$router.replace('/pelanggan/');
             })
     		.catch(function (resp) {
-    			console.log(resp.response)
+    			// console.log(resp.response)
     			if (resp.response.data.errors != undefined) {
     				app.errors = resp.response.data.errors.excel[0];
     			}

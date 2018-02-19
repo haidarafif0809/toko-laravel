@@ -112,7 +112,7 @@ Route::get('staf-toko/search', 'StafTokoController@search');
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
-Route::get('/pelanggan/detail/{id}', 'PelangganController@detail');
+Route::get('/pelanggan/perilaku/{id}', 'PelangganController@perilaku');
 Route::get('/pelanggan/template_import', 'PelangganController@generateExcelTemplate');
 Route::post('/pelanggan/import_pelanggan', 'PelangganController@importExcel');
 Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
