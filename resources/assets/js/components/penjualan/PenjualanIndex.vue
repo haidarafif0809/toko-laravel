@@ -105,7 +105,7 @@
 #kategori_shadow{
 	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#modalPembayaran{
+.modalPembayaran{
 /*	width: 400px;
 height: 400px;*/
 border-radius:0px;
@@ -204,7 +204,7 @@ display:block;
 					<div class="modal-header">
 						<h3>Pembayaran</h3>
 					</div>
-					<div class="modal-body" id="modalPembayaran">
+					<div class="modal-body modalPembayaran">
 						<form  v-on:submit.prevent="saveForm()">
 							<table width="100%">
 								<tbody>
@@ -222,201 +222,247 @@ display:block;
 									<tr width="100%">
 										<td width="20%">Tunai</td>
 										<td width="10%">:</td>
-										<td><money class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="pembayaran.bayar" v-bind="money" name="bayar" style="text-align:right;" ref="tunai"></money></td>
-									</tr>
-									<tr width="100%">
-										<td width="10%"></td>
-										<td width="10%"></td>
-										<td width="80%"></td>
-									</tr>
-									<tr width="100%">
-										<td width="10%">Kembalian</td>
-										<td width="10%">:</td>
-										<td width="80%"><h2 style="text-align:right;">{{pembayaran.kembalian|pemisahTitik}}</h2></td>
-									</tr>
-									<tr width="100%">
-										<td>Status Pesanan</td>
-										<td>:</td>
 										<td>
-											<selectize-component v-model="penjualan.status_pemesanan"  id="status_pemesanan" ref="status_pemesanan"> 
-												<option v-bind:value="0">Dine In </option>
-												<option v-bind:value="1" >Take Away </option>
-												<option v-bind:value="2" >Delivery </option>
-											</selectize-component>
-										</td>
-									</tr>
-									<tr width="100%">
-										<td>Keterangan</td>
-										<td>:</td>
-										<td>
-											<textarea style="width:400px;"  v-model="penjualan.keterangan"></textarea>
-										</td>
-									</tr>
-									<tr width="100%">
-										<td>Pelanggan</td>
-										<td>:</td>
-										<td>
-											<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
-												<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
-											</selectize-component>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal"v-on:click="saveForm()">Bayar</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- MODAL INPUT JUMLAH PRODUK -->
-		<div id="modalJumlahProduk" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						Jumlah Produk
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal">
-							<input class="form-control" required autocomplete="off"  type="number" name="jumlahProduk"  autofocus="" v-model="dataTbs.jumlah">
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal untuk Diskon per faktur -->
-		<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
-						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
-						<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
-
-					</div>
-					<div class="modal-body">
-						<form v-on:submit.prevent="" class="form-horizontal">
-							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
-							<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
-							<br>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerFaktur()" >Simpan</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Modal untuk Diskon per Produk-->
-		<div id="modalDiskonPenjualanPerProduk" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<!-- <h4 class="modal-title">Diskon Penjualan</h4> -->
-						<button class="btn btn-default" v-on:click="diskonPenjualanProdukPersen">Diskon %</button>
-						<button class="btn btn-default" v-on:click="diskonPenjualanProdukRp">Diskon Rp</button>
-
-					</div>
-					<div class="modal-body">
-						<form v-on:submit.prevent="" class="form-horizontal">
-							<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_produk"  autofocus="" v-if="diskonProduk == 1" v-model="formDiskonProduk.persen">
-							<money v-bind="money" class="form-control" required autocomplete="off" placeholder="Rp"  name="diskon_per_produk"  autofocus="" v-if="diskonProdukRp == 1" v-model="formDiskonProduk.rupiah"></money>
-							<br>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk)" >Simpan</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- MODAL SIMPAN PENJUALAN -->
-		<div id="modalSimpanPenjualan" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-
-						<div class="modal-body">
-
-							<form class="form-horizontal">
-
-								<!-- Form Name -->
-								<legend>Simpan</legend>
-
-								<!-- Text input-->
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="textinput">No Meja</label>  
-									<div class="col-md-8">
-										<input v-model="bukaPenjualan.nomor_meja" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
-										<span class="help-block"></span>  
-									</div>
-								</div>
-
-								<!-- Textarea -->
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="textarea">Catatan</label>
-									<div class="col-md-8">                     
-										<textarea v-model="bukaPenjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
-									</div>
-								</div>
-
+											<p id="p" style="color:red;"></p>
+											<money id="bayar"class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="pembayaran.bayar" v-bind="money" name="bayar" style="text-align:right;" ref="tunai"></money></td>
+										</tr>
+										<tr width="100%">
+											<td width="10%"></td>
+											<td width="10%"></td>
+											<td width="80%"></td>
+										</tr>
+										<tr width="100%">
+											<td width="10%">Kembalian</td>
+											<td width="10%">:</td>
+											<td width="80%"><h2 style="text-align:right;">{{pembayaran.kembalian|pemisahTitik}}</h2></td>
+										</tr>
+										<tr width="100%">
+											<td>Status Pesanan</td>
+											<td>:</td>
+											<td>
+												<selectize-component v-model="penjualan.status_pemesanan"  id="status_pemesanan" ref="status_pemesanan"> 
+													<option v-bind:value="0">Dine In </option>
+													<option v-bind:value="1" >Take Away </option>
+													<option v-bind:value="2" >Delivery </option>
+												</selectize-component>
+											</td>
+										</tr>
+										<tr width="100%">
+											<td>Keterangan</td>
+											<td>:</td>
+											<td>
+												<textarea style="width:400px;"  v-model="penjualan.keterangan"></textarea>
+											</td>
+										</tr>
+										<tr width="100%">
+											<td>Pelanggan</td>
+											<td>:</td>
+											<td>
+												<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+													<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+												</selectize-component>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</form>
-
 						</div>
-						
-					</div>
-					<div class="modal-footer">
-						<button v-on:click="simpanPenjualan()" class="btn btn-primary" type="button" data-dismiss="modal">Simpan</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+						<div class="modal-footer">
+							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="saveForm()">Bayar</button>
+							<button type="button" class="btn btn-default" id="btnTutup" data-dismiss="modal" >Tutup</button> 
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<!-- MODAL INPUT JUMLAH PRODUK -->
+			<div id="modalJumlahProduk" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							Jumlah Produk
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal">
+								<input class="form-control" required autocomplete="off"  type="number" name="jumlahProduk"  autofocus="" v-model="dataTbs.jumlah">
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<div class="col-md-8" id="pull-right">
-			<div class="panel panel-default" id="kategori_shadow">
-				<!-- KATEGORI PRODUK -->
-				<div class="panel-heading">KATEGORI PRODUK</div>
-				<div class="panel-body">
-					<div class="row">
-						<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
-							<div class="col-md-12">
-								<div v-if="kategori_produks.length == 1">
-									<div v-for="kategori_produk , index in kategori_produks">
-										<div class=" btn btn-success col-md-3">
-											<div class="caption"  @click="submitTbsPenjualan(produk)">
-												<h4 v-if="kategori_produk.id.length > 15">
-													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-												</h4>
-												<h4 v-else>
-													<center>{{kategori_produk.nama_kategori_produk}}</center>
-												</h4>
+			<!-- Modal untuk Diskon per faktur -->
+			<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
+							<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
+							<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
+
+						</div>
+						<div class="modal-body">
+							<form v-on:submit.prevent="" class="form-horizontal">
+								<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
+								<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
+								<br>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerFaktur()" >Simpan</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal untuk Diskon per Produk-->
+			<div id="modalDiskonPenjualanPerProduk" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<!-- <h4 class="modal-title">Diskon Penjualan</h4> -->
+							<button class="btn btn-default" v-on:click="diskonPenjualanProdukPersen">Diskon %</button>
+							<button class="btn btn-default" v-on:click="diskonPenjualanProdukRp">Diskon Rp</button>
+
+						</div>
+						<div class="modal-body">
+							<form v-on:submit.prevent="" class="form-horizontal">
+								<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_produk"  autofocus="" v-if="diskonProduk == 1" v-model="formDiskonProduk.persen">
+								<money v-bind="money" class="form-control" required autocomplete="off" placeholder="Rp"  name="diskon_per_produk"  autofocus="" v-if="diskonProdukRp == 1" v-model="formDiskonProduk.rupiah"></money>
+								<br>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk)" >Simpan</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- MODAL SIMPAN PENJUALAN -->
+			<div id="modalSimpanPenjualan" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<div class="modal-body">
+
+								<form class="form-horizontal">
+
+									<!-- Form Name -->
+									<legend>Simpan</legend>
+
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="textinput">No Meja</label>  
+										<div class="col-md-8">
+											<input v-model="bukaPenjualan.nomor_meja" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+											<span class="help-block"></span>  
+										</div>
+									</div>
+
+									<!-- Textarea -->
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="textarea">Catatan</label>
+										<div class="col-md-8">                     
+											<textarea v-model="bukaPenjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
+										</div>
+									</div>
+
+								</form>
+
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button v-on:click="simpanPenjualan()" class="btn btn-primary" type="button" data-dismiss="modal">Simpan</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-8" id="pull-right">
+				<div class="panel panel-default" id="kategori_shadow">
+					<!-- KATEGORI PRODUK -->
+					<div class="panel-heading">KATEGORI PRODUK</div>
+					<div class="panel-body">
+						<div class="row">
+							<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
+								<div class="col-md-12">
+									<div v-if="kategori_produks.length == 1">
+										<div v-for="kategori_produk , index in kategori_produks">
+											<div class=" btn btn-success col-md-3">
+												<div class="caption"  @click="submitTbsPenjualan(produk)">
+													<h4 v-if="kategori_produk.id.length > 15">
+														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
+													</h4>
+													<h4 v-else>
+														<center>{{kategori_produk.nama_kategori_produk}}</center>
+													</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div v-else>
+										<div v-for="kategori_produk , index in kategori_produks" >
+											<div class=" btn btn-success col-md-3">
+												<div class="caption"  @click="submitTbsPenjualan(produk)">
+													<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
+														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
+													</h4>
+													<h4 v-else>
+														<center>{{kategori_produk.nama_kategori_produk}}</center>
+													</h4>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div v-else>
-									<div v-for="kategori_produk , index in kategori_produks" >
-										<div class=" btn btn-success col-md-3">
-											<div class="caption"  @click="submitTbsPenjualan(produk)">
-												<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
-													<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-												</h4>
-												<h4 v-else>
-													<center>{{kategori_produk.nama_kategori_produk}}</center>
-												</h4>
+							</div>
+						</div>
+						<br>
+
+
+						<!-- PRODUK PENJUALAN -->
+						<div class="row">
+							<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
+								<div class="col-md-12">
+									<div v-if="produksPenjualan.length == 1">
+										<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
+											<div class="thumbnail box-dalam-produk">
+												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
+												<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
+													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
+														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
+													</h6>
+													<h6 v-else>
+														{{produksPenjualans.data_produk.nama_produk}}
+													</h6>
+													<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<div v-else>
+										<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-3 box-produk">
+											<div class="thumbnail box-dalam-produk">
+												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" width="150px" height="80px">
+												<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
+													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
+														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
+													</h6>
+													<h6 v-else>
+														{{produksPenjualans.data_produk.nama_produk}}
+													</h6>
+													<p class="font-harga">Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -424,114 +470,72 @@ display:block;
 							</div>
 						</div>
 					</div>
-					<br>
 
+					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
 
-					<!-- PRODUK PENJUALAN -->
-					<div class="row">
-						<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
-							<div class="col-md-12">
-								<div v-if="produksPenjualan.length == 1">
-									<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
-										<div class="thumbnail box-dalam-produk">
-											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
-											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
-												<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
-													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
-												</h6>
-												<h6 v-else>
-													{{produksPenjualans.data_produk.nama_produk}}
-												</h6>
-												<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
+					<div align="right">
+						<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
+					</div>
+					<div align="right">
+					</div>
+				</div>
+			</div>
 
-											</div>
-										</div>
-									</div>
-								</div>
-								<div v-else>
-									<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-3 box-produk">
-										<div class="thumbnail box-dalam-produk">
-											<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" width="150px" height="80px">
-											<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
-												<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
-													{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
-												</h6>
-												<h6 v-else>
-													{{produksPenjualans.data_produk.nama_produk}}
-												</h6>
-												<p class="font-harga">Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
-											</div>
-										</div>
+			<div class="col-md-4" id="pull-left">
+				<div class="panel panel-default" id="digital">
+					<div class="panel-body" width="100%" style="size:100%;">
+
+						<div width="80%" style="float:right;size:95%;">
+							<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ jumlahBayar|pemisahTitik }}</h3>
+							<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
+						</div>
+
+						<div width="5%" style="float:left;size:5%;">
+							<tr>
+								<td>Subtotal</td>
+								<td>:</td>
+								<td v-if="tbs_penjualans.total_bayar === undefined">{{''}}</td>
+								<td v-else>{{tbs_penjualans.total_bayar|pemisahTitik}}</td>
+							</tr>
+							<tr>
+								<td>Diskon</td>
+								<td>:</td>
+								<td v-if="diskonPerfaktur.persen === '' ">{{''}}</td>
+								<td v-else>{{Number.parseInt(diskonPerfaktur.persen)}} %</td>
+							</tr>
+							<tr>
+								<td>Diskon</td>
+								<td>:</td>
+								<td v-if="diskonPerfaktur.rupiah === '' ">{{''}}</td>
+								<td v-else>{{diskonPerfaktur.rupiah|pemisahTitik}}</td>
+							</tr>
+							<tr>
+								<td>Pajak</td>
+								<td>:</td>
+								<td>{{''}}</td>
+							</tr>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default" id="items">
+					<div class="panel-heading"></div>
+					<div class="panel-body">
+
+						<div class="row">
+							<div class="col-md-12 pencarian">
+								<div class="input-group">
+									<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
+									<div class="input-group-addon">
+										<i class="fa fa-search" aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 
-				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-
-				<div align="right">
-					<pagination :data="dataProduksPenjualan" v-on:pagination-change-page="getProduksPenjualan" :limit="3"></pagination>
-				</div>
-				<div align="right">
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-4" id="pull-left">
-			<div class="panel panel-default" id="digital">
-				<div class="panel-body" width="100%" style="size:100%;">
-
-					<div width="80%" style="float:right;size:95%;">
-						<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ jumlahBayar|pemisahTitik }}</h3>
-						<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
-					</div>
-
-					<div width="5%" style="float:left;size:5%;">
-						<tr>
-							<td>Subtotal</td>
-							<td>:</td>
-							<td v-if="tbs_penjualans.total_bayar === undefined">{{0}}</td>
-							<td v-else>{{tbs_penjualans.total_bayar|pemisahTitik}}</td>
-						</tr>
-						<tr>
-							<td>Diskon</td>
-							<td>:</td>
-							<td>{{diskonPerfaktur.persen}} %</td>
-						</tr>
-						<tr>
-							<td>Diskon</td>
-							<td>:</td>
-							<td>{{diskonPerfaktur.rupiah}}</td>
-						</tr>
-						<tr>
-							<td>Pajak</td>
-							<td>:</td>
-							<td>2,2%</td>
-						</tr>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="panel panel-default" id="items">
-				<div class="panel-heading"></div>
-				<div class="panel-body">
-
-					<div class="row">
-						<div class="col-md-12 pencarian">
-							<div class="input-group">
-								<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
-								<div class="input-group-addon">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="table-responsive" id="tbs">
-						<table class="table table-striped table-hover">
+						<div class="table-responsive" id="tbs">
+							<table class="table table-striped table-hover">
 							<!-- <thead>
 								<th>Barang</th>
 								<th>Jml</th>
@@ -542,7 +546,8 @@ display:block;
 									<td>{{ tbs_penjualan.nama_produk}} <br>
 										<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
 										
-										<p>Disc. {{diskonPerproduk.persen}}% ({{diskonPerproduk.rupiah | pemisahTitik}})</p>
+										<p v-if="diskonPerproduk.persen === '' ">{{''}}</p>
+										<p v-else>Disc.{{Number.parseInt(diskonPerproduk.persen)}}% ({{diskonPerproduk.rupiah | pemisahTitik}})</p>
 									</td>
 									<td>
 										<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)">
@@ -569,9 +574,9 @@ display:block;
 				<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 			</div>
 			<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
-			<button class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+			<button v-bind:disabled="!isValid" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
 			
-			<button class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
+			<button v-bind:disabled="!validate" class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 		</div>
 	</div>
 </template>
@@ -694,6 +699,14 @@ export default {
 			var formatted = angka.map(numberFormat.format);
 			return formatted.join('; ');
 		}
+	},
+	computed: {
+		isValid: function () {
+			return this.tbs_penjualans != '' 
+		},
+		validate: function(){
+			return this.tbs_penjualans != ''
+		},
 	},
 	methods: {
 		getDataTbs(id, subtotal, harga, jumlah) {
@@ -867,6 +880,9 @@ export default {
 		},
 		saveForm(){
 			var app = this;
+			var total = app.penjualan.total_bayar;
+			var Pembayaran = app.pembayaran.bayar;
+			
 			app.penjualan.total_bayar = app.jumlahBayar;
 			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
 			app.penjualan.status_pemesanan = app.penjualan.status_pemesanan;
@@ -875,28 +891,55 @@ export default {
 			app.penjualan.keterangan = app.penjualan.keterangan;
 			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
 			var Penjualan = app.penjualan;
-			console.log(app.penjualan.subtotal)
-			axios.post(app.url, Penjualan)
-			.then(function(resp){
-				app.alert('berhasil');
-				app.getKategoriProduk();
-				app.getProduksPenjualan();
-				app.getTbsPenjualan();
-				app.selectPelanggans();
-				app.tbs_penjualans = '';
-				app.pelanggans = '';
-				app.diskonPerfaktur.rupiah = '';
-				app.diskonPerfaktur.persen = '';
-				app.pembayaran.bayar = '';
-				app.pembayaran.kembalian = 0;
-				app.penjualan.keterangan = '';
-				app.penjualan.status_pemesanan = '';
+			var validate = document.getElementById("bayar");
+			var validates = document.getElementById("p");
+			if (Pembayaran == 0 || Pembayaran == "") {
+				validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
+				validates.innerHTML="Pembayaran tidak boleh kosong!!";
+			}else if(app.pembayaran.kembalian < 0){
+				validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
+				validates.innerHTML="Jumlah pembayaran kurang!!";	
+			}
+			else{
+
+				app.closeModal();
+
+				console.log(app.penjualan.subtotal)
+				axios.post(app.url, Penjualan)
+				.then(function(resp){
+					app.message = 'Sukses : Berhasil Melakukan Pembayaran ';
+					swal({
+						title: 'Berhasil!',
+						type: 'success',
+						text: app.message
+					})
+					app.getKategoriProduk();
+					app.getProduksPenjualan();
+					app.getTbsPenjualan();
+					app.selectPelanggans();
+					app.tbs_penjualans = '';
+					app.pelanggans = '';
+					app.diskonPerfaktur.rupiah = '';
+					app.diskonPerfaktur.persen = '';
+					app.pembayaran.bayar = '';
+					app.pembayaran.kembalian = 0;
+					app.penjualan.keterangan = '';
+					app.penjualan.status_pemesanan = '';
 				// app.getPenjualans();
 			})
-			.catch(function (resp) {
-				app.alert('gagal')
-			})
+				.catch(function (resp) {
+					app.success = false;
+					app.errors = resp.response.data.errors;
+				})
+			}
 
+		},
+		alert(pesan){
+			this.$swal({
+				title: "Berhasil!",
+				text: pesan,
+				icon: "success",
+			});
 		},
 		simpanPenjualan() {
 			var app = this;
@@ -1007,6 +1050,10 @@ export default {
 					return;
 				}
 				this.tbs_penjualans = '',
+				this.diskonPerfaktur.rupiah = '',
+				this.diskonPerfaktur.persen = '',
+				this.diskonPerproduk.rupiah = '',
+				this.diskonPerproduk.persen = '',
 				this.$router.replace('/penjualan');
 			});
 		},
@@ -1029,6 +1076,9 @@ export default {
 			text: pesan,
 			icon: "success",
 		});
+	},
+	closeModal(){
+		$("#btnBayar").attr("data-dismiss", "modal");
 	}
 
 }
