@@ -51,4 +51,16 @@ class Penjualan extends Model
         return $query;
     }
 
+    public function scopeLaporanPenjualanHarian($query, $waktu)
+    {
+        $query->select([DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $waktu)->groupBy(DB::raw('DATE(created_at)'));
+        return $query;
+    }
+    public static function tanggalSql($tangal)
+    {
+        $date        = date_create($tangal);
+        $date_format = date_format($date, "d F Y");
+        return $date_format;
+    }
+
 }
