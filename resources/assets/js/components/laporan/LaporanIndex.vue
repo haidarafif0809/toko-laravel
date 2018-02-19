@@ -89,8 +89,8 @@ i{margin-bottom: 20px}
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">
 							<i class="fa fa-th fa-3x"></i>
-							<p class="judul">Laporan Stok</p>
-							<p class="keterangan">Menampilkan laporan stok produk per lokasi.</p>
+							<p class="judul">Laporan Penjualan Produk</p>
+							<p class="keterangan">Menampilkan laporan penjualan produk.</p>
 						</div>
 					</router-link>
 				</div>
