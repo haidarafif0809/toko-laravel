@@ -2,6 +2,10 @@
 .tombol-export{
 	float: right;
 }
+.btn.active
+{
+	background-color:#002a38;
+}
 </style>
 <template>
 	<div class="container">
@@ -18,11 +22,10 @@
 					</div>
 					<div class="panel-body">
 						<div class="btn-group">
-							<button class="btn btn-default">Harian</button>
-							<button class="btn btn-default">Mingguan</button>	
-							<button class="btn btn-default">Bulanan</button>
-							<button class="btn btn-default">Tahunan</button>
-							<button class="btn btn-default">Rentang Waktu</button>
+							<button class="btn btn-primary active" id="1" v-on:click="getDataLaporan(1); getDataGrandTotal(1);">Harian</button>
+							<button class="btn btn-primary" id="11" v-on:click="getDataLaporan(2); getDataGrandTotal(2);">Mingguan</button>	
+							<button class="btn btn-primary" id="111" v-on:click="getDataLaporan(3); getDataGrandTotal(3);">Bulanan</button>
+							<button class="btn btn-primary" id="1111" v-on:click="getDataLaporan(4); getDataGrandTotal(4);">Tahunan</button>
 						</div>
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
@@ -39,7 +42,7 @@
 										<th style="text-align:right">RATA-RATA NOMINAL PENJUALAN (RP)</th>
 									</tr>
 								</thead>
-								<tbody >
+								<tbody v-if="laporan_penjualan_harian.length > 0">
 									<tr v-for="laporan_penjualan_harians ,index in laporan_penjualan_harian">
 										<td>
 											{{ laporan_penjualan_harians.tanggal }}
@@ -55,33 +58,52 @@
 										</td>
 									</tr>
 								</tbody>
+								<tbody v-else class="data-tidak-ada">
+									<tr>
+										<td colspan="4" class="text-center">Tidak Ada Data</td>
+									</tr>
+								</tbody>
 								<tfoot bgcolor="#d6d6c2">	
 									<tr>
-										<td><b><font color="#000000">Grand Total:</font></b></td>
-										<td align="right"><b><font color="#000000">
-											{{ new Intl.NumberFormat().format(grand_total_penjualan.total_penjualan) }}
-										</font></b></td>
-										<td align="right"><b><font color="#000000">
-											{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran) }}
-										</font></b></td>
-										<td v-if="grand_total_penjualan.total_penjualan > 0" align="right"><b><font color="#000000">
-											{{ (grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }}
-										</font></b></td>
-										<td v-else align="right"> <b><font color="#000000">
+										<td><b color="#000000">Grand Total:</b></td>
+										<td  v-if="grand_total_penjualan.total_penjualan > 0" align="right">
+											<b color="#000000">
+												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_penjualan) }}
+											</b>
+										</td>
+										<td v-else align="right">
+											<b color="#000000">
+												0
+											</b>
+										</td>
+										<td v-if="grand_total_penjualan.total_pembayaran > 0" align="right">
+											<b color="#000000">
+												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran) }}
+											</b>
+										</td>
+										<td v-else align="right">
+											<b color="#000000">
+												0
+											</b>
+										</td>
+										<td v-if="grand_total_penjualan.total_penjualan > 0" align="right">
+											<b color="#000000">
+												{{ (grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }}
+											</b>
+										</td>
+										<td v-else align="right"> <b color="#000000">
 											0
-										</font></b></td>
-										<!-- <td align="right"><b><font color="#000000">
-											{{ (grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan).toFixed(2) }}
-										</font></b></td> -->
-									</tr>
-								</tfoot>
-							</table>
-						</div>
+										</b>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </template>
 <script>
 export default{
@@ -96,19 +118,23 @@ export default{
 		var app = this;
 		app.getDataLaporan();
 		app.getDataGrandTotal();
+		$(".btn-group > .btn").click(function(){
+			$(".btn-group > .btn").removeClass("active");
+			$(this).addClass("active");
+		});
 	},
 	methods: {
-		getDataLaporan(){
+		getDataLaporan(type = 1){
 			let app = this;
-			axios.get(app.url+'/laporan-penjualan-harian/')
+			axios.get(app.url+'/laporan-penjualan-harian/'+type)
 			.then(function (resp){
 				app.laporan_penjualan_harian = resp.data;
 				console.log(resp.data)
 			})
 		},
-		getDataGrandTotal(){
+		getDataGrandTotal(type = 1){
 			let app = this;
-			axios.get(app.url+'/grand-total-penjualan/')
+			axios.get(app.url+'/grand-total-penjualan/'+type)
 			.then(function (resp){
 				app.grand_total_penjualan = resp.data;
 				console.log(resp.data)

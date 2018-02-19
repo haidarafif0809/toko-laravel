@@ -120,9 +120,10 @@ Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
 //laporan
 Route::resource('laporan', 'LaporanController', ['except' => 'show']);
 Route::get('/laporan/laporan-ringkas/{type}', 'LaporanController@laporanRingkas');
-Route::get('/laporan/laporan-penjualan-harian', 'LaporanController@laporanPenjualanHarian');
+Route::get('/laporan/laporan-penjualan-harian/{type}', 'LaporanController@laporanPenjualanHarian');
 Route::get('/laporan/laporan-penjualan-perjam/{type}', 'LaporanController@laporanPenjualanPerJam');
 Route::get('/laporan/grand-total-penjualan/{type}', 'LaporanController@grandTotalPenjualan');
+Route::get('/laporan/data-transaksi-penjualan/{type}', 'LaporanController@dataTransaksiPenjualan');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');

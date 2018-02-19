@@ -28,7 +28,7 @@
 							<button class="btn btn-primary" id="1111" v-on:click="getDataLaporan(4); getDataGrandTotal(4);">Tahunan</button>
 						</div>
 						<div class="tombol-export">
-							<button class="btn btn-primary">Excel</button><p>{{ laporan_filter }}</p>
+							<button class="btn btn-primary">Excel</button>
 						</div>
 						<br>
 						<br>

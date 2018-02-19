@@ -89,6 +89,7 @@ import LaporanRingkasIndex from './components/laporan/LaporanRingkasIndex.vue'
 import RekapKasIndex from './components/laporan/RekapKasIndex.vue'
 import LaporanPenjualanHarianIndex from './components/laporan/LaporanPenjualanHarianIndex.vue'
 import LaporanPenjualanPerJam from './components/laporan/LaporanPenjualanPerJam.vue'
+import DataTransaksiPenjualan from './components/laporan/DataTransaksiPenjualan.vue'
 // staf toko
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
@@ -227,6 +228,10 @@ const routes = [{
         path: '/laporan/laporan-penjualan-perjam',
         component: LaporanPenjualanPerJam,
         name: 'indexLaporanPenjualanPerJam'
+    },{
+        path: '/laporan/data-transaksi-penjualan',
+        component: DataTransaksiPenjualan,
+        name: 'indexDataTransaksiPenjualan'
     },
     // staf toko
     {

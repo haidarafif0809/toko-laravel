@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Penjualan;
-use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -48,16 +46,6 @@ class LaporanController extends Controller
         }
         return $array_laporan;
 
-    }
-
-    public function laporanPenjualanHarian()
-    {
-        $laporan       = Penjualan::select([DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->groupBy(DB::raw('DATE(created_at)'))->get();
-        $array_laporan = array();
-        foreach ($laporan as $key) {
-            array_push($array_laporan, ['tanggal' => $key->tanggal, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-        }
-        return $array_laporan;
     }
 
     public function grandTotalPenjualan($type)
@@ -122,12 +110,89 @@ class LaporanController extends Controller
             $laporan = Penjualan::LaporanPerJam($tahun)->get();
         }
 
-        $array_laporan = array();
+        $array_laporan = [];
         foreach ($laporan as $key) {
-            array_push($array_laporan, ['jam' => $key->jam, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
+            array_push($array_laporan, [
+                'jam'              => $key->jam,
+                'total_pembayaran' => $key->total_pembayaran,
+                'jumlah_penjualan' => $key->total_penjualan,
+            ]);
         }
         return $array_laporan;
 
+    }
+
+    public function laporanPenjualanHarian($type)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        //per hari
+        if ($type == 1) {
+            $laporan = Penjualan::LaporanPenjualanHarian($hari)->get();
+        }
+        //per minggu
+        elseif ($type == 2) {
+            $laporan = Penjualan::LaporanPenjualanHarian($minggu)->get();
+        }
+        //per bulan
+        elseif ($type == 3) {
+            $laporan = Penjualan::LaporanPenjualanHarian($bulan)->get();
+        }
+        //per tahun
+        elseif ($type == 4) {
+            $laporan = Penjualan::LaporanPenjualanHarian($tahun)->get();
+        }
+
+        $array_laporan = array();
+        foreach ($laporan as $laporanPenjualanHarian) {
+            $tanggal = Penjualan::tanggalSql($laporanPenjualanHarian->tanggal);
+            array_push($array_laporan, ['tanggal' => $tanggal, 'total_pembayaran' => $laporanPenjualanHarian->total_pembayaran, 'jumlah_penjualan' => $laporanPenjualanHarian->total_penjualan]);
+        }
+        return $array_laporan;
+
+    }
+
+    public function dataTransaksiPenjualan($type)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        //per hari
+        if ($type == 1) {
+            $laporan = Penjualan::TransaksiPenjualan($hari)->get();
+        }
+        //per minggu
+        elseif ($type == 2) {
+            $laporan = Penjualan::TransaksiPenjualan($minggu)->get();
+        }
+        //per bulan
+        elseif ($type == 3) {
+            $laporan = Penjualan::TransaksiPenjualan($bulan)->get();
+        }
+        //per tahun
+        elseif ($type == 4) {
+            $laporan = Penjualan::TransaksiPenjualan($tahun)->get();
+        }
+
+        $array_laporan = [];
+        foreach ($laporan as $key) {
+            array_push($array_laporan, [
+                'tanggal'   => $key->tanggal,
+                'no_faktur' => $key->no_faktur,
+                'pelanggan' => $key->nama_pelanggan,
+                'catatan'   => $key->keterangan,
+                'produk'    => $key->nama_produk,
+                'subtotal'  => $key->subtotal,
+                'diskon'    => $key->diskon,
+
+            ]);
+        }
+        return $array_laporan;
     }
 
     public function index()
