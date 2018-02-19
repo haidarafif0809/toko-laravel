@@ -48,16 +48,6 @@ class LaporanController extends Controller
 
     }
 
-    public function laporanPenjualanHarian()
-    {
-        $laporan       = Penjualan::select([DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->groupBy(DB::raw('DATE(created_at)'))->get();
-        $array_laporan = array();
-        foreach ($laporan as $key) {
-            array_push($array_laporan, ['tanggal' => $key->tanggal, 'total_pembayaran' => $key->total_pembayaran, 'jumlah_penjualan' => $key->total_penjualan]);
-        }
-        return $array_laporan;
-    }
-
     public function grandTotalPenjualan($type)
     {
         $hari   = Carbon::now()->toDay();
