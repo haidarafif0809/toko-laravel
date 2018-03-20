@@ -81,7 +81,7 @@ i{margin-bottom: 20px}
 						<div class="box">
 							<i class="fa fa-copy fa-3x"></i>
 							<p class="judul">Rekapitulasi Kas</p>
-							<p class="keterangan">Menampilkan penerimaan kasyang dilaporkan oleh operator</p>
+							<p class="keterangan">Menampilkan penerimaan kas yang dilaporkan oleh operator</p>
 						</div>
 					</router-link>
 				</div>
@@ -91,6 +91,78 @@ i{margin-bottom: 20px}
 							<i class="fa fa-th fa-3x"></i>
 							<p class="judul">Laporan Penjualan Produk</p>
 							<p class="keterangan">Menampilkan laporan penjualan produk.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-server fa-3x"></i>
+							<p class="judul">Laporan Penjualan Modifier</p>
+							<p class="keterangan">Menampilkan laporan penjualan modifier.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-money fa-3x"></i>
+							<p class="judul">Laporan Penjualan Per Penjualan</p>
+							<p class="keterangan">Menampilkan laporan penjualan Per penjualan.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-tag fa-3x"></i>
+							<p class="judul">Laporan Penjualan Per Kategori</p>
+							<p class="keterangan">Menampilkan laporan penjualan per kategori.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-fire fa-3x"></i>
+							<p class="judul">Laporan Penerimaan Pajak</p>
+							<p class="keterangan">Menampilkan laporan penerimaan pajak per transaksi.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-cut fa-3x"></i>
+							<p class="judul">Laporan Diskon</p>
+							<p class="keterangan">Menampilkan laporan jumlah diskon yang sudah diberikan.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-user fa-3x"></i>
+							<p class="judul">Laporan Pembelian Member</p>
+							<p class="keterangan">Menampilkan laporan jumlah pembelian member.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-rss fa-3x"></i>
+							<p class="judul">Laporan Laba Harian</p>
+							<p class="keterangan">Menampilkan laporan laba per hari.</p>
+						</div>
+					</router-link>
+				</div>
+				<div class="col-md-4">
+					<router-link :to="{name: 'indexDashboard'}">
+						<div class="box">
+							<i class="fa fa-line-chart fa-3x"></i>
+							<p class="judul">Laporan Laba Produk</p>
+							<p class="keterangan">Menampilkan laporan laba produk.</p>
 						</div>
 					</router-link>
 				</div>
