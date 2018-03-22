@@ -88,7 +88,7 @@
 										</td>
 										<td v-if="grand_total_penjualan.total_penjualan > 0" align="right">
 											<b color="#000000">
-												{{ (grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }}
+												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }}
 											</b>
 										</td>
 										<td v-else align="right"> <b color="#000000">
