@@ -18,7 +18,7 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/timer.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 
     <style type="text/css">
     @font-face {
@@ -52,7 +52,7 @@ input {
 }
 @media screen and (min-width: 480px){
     .main-container {
-    margin-left: 65px;
+        margin-left: 65px;
     }
     #nav-mobile{
         display: none;
@@ -64,7 +64,7 @@ input {
     <div id="app">
 
         <div id="nav-desktop">
-        @include('layouts.nav-desktop')
+            @include('layouts.nav-desktop')
         </div>
 
 
@@ -150,6 +150,13 @@ input {
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
 <script src="{{ asset('js/timer.js') }}"></script>
+<script src="{{ asset('js/moment.min.js') }}"></script>
+<script src="{{ asset('js/moment.js') }}"></script>
+<script src="{{ asset('js/moment-with-locales.js') }}"></script>
+<script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+<script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+<script src="{{ asset('js/locales.js') }}"></script>
+<script src="{{ asset('js/locales.min.js') }}"></script>
 <!-- charts -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
 <script src="{{ asset('js/vue-charts.js') }}"></script>
@@ -173,30 +180,10 @@ input {
         var atpos = emails.indexOf("@");
         var dotpos = emails.lastIndexOf(".");
         if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || namaToko == '' || userName == '' || email == '' || no_telp == '' || password == '') {
-              return;
-            }
-            else{
-             swal({
-                title: "Memproses...",
-                text: "Mohon tunggu",
-                imageUrl: "images/ajaxloader.gif",
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                allowEscapeKey: false
-            });
-         }
-     }
-  function sweetAlerts(){
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var emails = document.forms['emails']['email'].value;
-            var atpos = emails.indexOf("@");
-            var dotpos = emails.lastIndexOf(".");
-    if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || email == '' || password == '') {
-        return;
-    }
-    else{
-     swal({
+          return;
+      }
+      else{
+       swal({
         title: "Memproses...",
         text: "Mohon tunggu",
         imageUrl: "images/ajaxloader.gif",
@@ -204,7 +191,27 @@ input {
         allowOutsideClick: false,
         allowEscapeKey: false
     });
- }
+   }
+}
+function sweetAlerts(){
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var emails = document.forms['emails']['email'].value;
+    var atpos = emails.indexOf("@");
+    var dotpos = emails.lastIndexOf(".");
+    if (atpos < 1 || dotpos < atpos + 2 || dotpos+2 >= emails.length || email == '' || password == '') {
+        return;
+    }
+    else{
+       swal({
+        title: "Memproses...",
+        text: "Mohon tunggu",
+        imageUrl: "images/ajaxloader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+   }
 }
 </script>
 </body>

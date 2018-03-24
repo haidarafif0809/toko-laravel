@@ -110,6 +110,9 @@ Route::get('staf-toko/search', 'StafTokoController@search');
 
 // Pelanggan
 Route::resource('pelanggan', 'PelangganController', ['except' => 'show']);
+Route::get('/pelanggan/riwayat_transaksi', 'PelangganController@riwayatTransaksi');
+Route::get('/pelanggan/total_riwayat_transaksi', 'PelangganController@totalRiwayatTransaksi');
+Route::get('/pelanggan/data_produk_per_tgl/{tanggal}', 'PelangganController@dataProdukRiwayatTransaksiPerTgl');
 Route::get('/pelanggan/view', 'PelangganController@view');
 Route::get('/pelanggan/pencarian', 'PelangganController@search');
 Route::get('/pelanggan/perilaku/{id}', 'PelangganController@perilaku');

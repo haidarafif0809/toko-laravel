@@ -160,11 +160,12 @@ class PenjualanController extends Controller
             ]);
 
             foreach ($tbsPenjualan->get() as $tbs_penjualans) {
+                $subtotal = $tbs_penjualans->harga_produk * $tbs_penjualans->jumlah_produk;
                 DetailPenjualan::create([
                     'id_produk'        => $tbs_penjualans->produk_id,
                     'id_penjualan'     => $penjualan->id,
                     'harga_produk'     => $tbs_penjualans->harga_produk,
-                    'subtotal'         => $penjualan->subtotal,
+                    'subtotal'         => $subtotal,
                     'diskon'           => $penjualan->diskon,
                     'jumlah_produk'    => $tbs_penjualans->jumlah_produk,
                     'status_pemesanan' => $penjualan->status_pemesanan,

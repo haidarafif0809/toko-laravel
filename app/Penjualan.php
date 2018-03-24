@@ -102,4 +102,12 @@ class Penjualan extends Model
             ->orderBy('created_at', 'desc');
         return $query;
     }
+
+    public function scopeRataRataDatang($query, $id, $waktu)
+    {
+        $query->select(DB::raw('DATE(created_at) as created_at'))
+            ->where('pelanggan_id', $id)
+            ->where('created_at', '>=', $waktu)
+            ->groupBy(DB::raw('DATE(created_at)'));
+    }
 }

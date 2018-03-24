@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('./bootstrap');
+ require('./bootstrap');
 // chartjs package
 require('chart.js');
 // vue-charts package
@@ -19,8 +19,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from 'vue'
 import money from 'v-money'
-import AmCharts from 'amcharts3'
-import AmSerial from 'amcharts3/amcharts/serial'
+import myDatepicker from 'vuejs-datepicker'
 // chart.js
 import VueChartJs from 'vue-chartjs'
 Vue.use(money, {
@@ -50,12 +49,14 @@ Vue.component('vue-chart', require('vue-chartjs'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('vue-simple-spinner', require('vue-simple-spinner'));
 Vue.component('selectize-component', require('vue2-selectize'));
+Vue.component('datepicker', require('vuejs-datepicker'));
 Vue.component('example', require('./components/Example.vue'));
 window.Vue.use(VueRouter);
 window.Vue = require('vue');
 //DASHBOARD
 import DashboardIndex from './components/dashboard/Dashboard.vue'
 //USER
+import Datepicker from './components/datepicker/Datepicker.vue'
 import UserIndex from './components/user/UserIndex.vue'
 import UserCreate from './components/user/UserCreate.vue'
 import UserEdit from './components/user/UserEdit.vue'
@@ -105,13 +106,18 @@ import StafTokoEdit from './components/stafToko/StafTokoEdit.vue'
 //     Vue.component('chartjs-doughnut', require('./components/chartjs-doughnut.vue'));
 // }
 const routes = [{
-        path: '/',
-        components: {
-            dashboardIndex: DashboardIndex
-        },
-        name: 'indexDashboard'
+    path: '/',
+    components: {
+        dashboardIndex: DashboardIndex
     },
+    name: 'indexDashboard'
+},
     // Master data Produk
+    {
+        path: '/datepicker',
+        component: Datepicker,
+        name: 'indexDatepicker'
+    }, 
     {
         path: '/produk',
         component: ProdukIndex,
@@ -247,7 +253,7 @@ const routes = [{
         component: StafTokoEdit,
         name: 'editStafToko',
     }
-]
+    ]
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

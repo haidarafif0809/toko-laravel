@@ -16,7 +16,7 @@ class ProdukSeeder extends Seeder
         $produk                      = new Produk();
         $produk->toko_id             = 1;
         $produk->nama_produk         = "Fettuccine Carbonara";
-        $produk->harga_jual          = "3336250";
+        $produk->harga_jual          = "10000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
         $produk->foto                = '1516674546.jpeg';
@@ -28,7 +28,7 @@ class ProdukSeeder extends Seeder
         $produk                      = new Produk();
         $produk->toko_id             = 1;
         $produk->nama_produk         = "Steak and Cheese with French Onion Dip";
-        $produk->harga_jual          = "3603150";
+        $produk->harga_jual          = "15000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
         $produk->foto                = '1516674506.jpeg';
@@ -40,7 +40,7 @@ class ProdukSeeder extends Seeder
         $produk                      = new Produk();
         $produk->toko_id             = 1;
         $produk->nama_produk         = "French Onion Soup";
-        $produk->harga_jual          = "2669000";
+        $produk->harga_jual          = "10000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
         $produk->foto                = '1516674386.jpeg';

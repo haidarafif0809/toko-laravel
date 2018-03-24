@@ -1,4 +1,5 @@
 <style scoped>
+
 .row .control-label {
 	text-align: left;
 }
@@ -136,6 +137,7 @@ ul :hover {background: #ffd11a;}
 		<div class="test" >
 			<hr>
 			<h4>MANAJEMEN PELANGGAN</h4>
+			
 			<hr>
 		</div>
 
@@ -547,47 +549,75 @@ ul :hover {background: #ffd11a;}
 						</div>
 					</div>
 					<div class="panel panel-body">
-						<input type="text">
-
-						<select > 
-							<option value="1"  >Jan</option>
-							<option value="2"  >Feb</option>
-							<option value="3"  >Mar</option>
-							<option value="4"  >Apr</option>
-							<option value="5"  >Mei</option>
-							<option value="6"  >Jun</option>
-							<option value="7"  >Jul</option>
-							<option value="8"  >Agt</option>
-							<option value="9"  >Sep</option>
-							<option value="10" >Okt</option>
-							<option value="11" >Nov</option>
-							<option value="12" >Des</option>
-						</select>
-
-						<select > 
-							<option value="2016"  >2016</option>
-							<option value="2017"  >2017</option>
-							<option value="2018"  >2018</option>
-						</select>
-						<button class="btn btn-success">
-							<i class="fa fa-download" aria-hidden="true"></i>
-							Excel
-						</button>
+						<div class="row">
+							<div class="form-group col-md-3">
+								<datepicker :input-class="'form-control'" placeholder="Dari Tanggal" v-model="filter.dari_tanggal" name="dari_tanggal" v-bind:id="'dari_tanggal'" :format="customFormatter"></datepicker>			
+							</div>
+							<div class="col-xs-1">s/d</div>
+							<div class="form-group col-md-3">
+								<datepicker :input-class="'form-control'" placeholder="Sampai Tanggal" v-model="filter.sampai_tanggal" name="sampai_tanggal" v-bind:id="'sampai_tanggal'"></datepicker>
+							</div>
+							<div class="form-group col-md-1">
+								<button class="btn btn-primary" id="btnSubmit" type="submit" style="margin: 0px 0px;" @click="submitLabaKotor()"> Cari</button>
+							</div>
+							<div class="form-group col-md-2">
+								<button class="btn btn-success">
+									<i class="fa fa-download" aria-hidden="true"></i>
+									Excel
+								</button>
+							</div>
+						</div>
 					</div>
-					<table border="2">
-						<thead>
-							<th class="col-md-2">Tanggal</th>
-							<th class="col-md-4">Produk</th>
-							<th class="col-md-3 text-right">Jumlah Produk</th>
-							<th class="col-md-3">Total Transaksi</th>
+					<table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+						<thead table table-striped table-hover>
+							<tr>								
+								<th class="col-md-2">Tanggal</th>
+								<th class="col-md-4">Produk</th>
+								<th class="col-md-3 text-right">Jumlah Produk</th>
+								<th class="col-md-3 text-right">Total Transaksi</th>
+							</tr>
 						</thead>
-						<tbody>
-							<td>05 Dec 2017 / 11:49</td>
-							<td>kentang goreng x1.000</td>
-							<td>10</td>
-							<td>126,000</td>
+						<tbody v-if="riwayat_transaksi.length > 0 && loading == false" class="data-ada">
+							<tr v-for="riwayat_transaksis, index in riwayat_transaksi">								
+								<td>{{riwayat_transaksis.created_at.date | tanggal}}</td>
+								<td>
+									<ul>
+										<li v-for="item in riwayat_transaksis.data_produk">
+											{{ item.nama_produk  }}   X {{item.jumlah_produk }}
+										</li>
+									</ul>
+								</td>								
+								<td align="right">
+									{{riwayat_transaksis.kwantitas.kwantitas | pemisahTitik}}
+								</td>								
+								<td align="right">
+									{{riwayat_transaksis.total_bayar | pemisahTitik}}
+								</td>
+							</tr>
+							<tr>
+								<td style="color: red; font-weight: bold">TOTAL</td>
+								<td></td>
+								<td align="right" style="color: red; font-weight: bold">{{total_riwayat_transaksi.jumlah_produks | pemisahTitik}}</td>
+								<td align="right" style="color: red; font-weight: bold">{{total_riwayat_transaksi.total | pemisahTitik}}</td>
+							</tr>
+						</tbody>
+						<tbody v-else-if="loading == true" class="data-ada" >
+							<tr >
+								<td colspan="4"  class="text-center">
+									Sedang Memuat Data
+								</td>
+							</tr>
+						</tbody>
+						<tbody v-else class="tidak-ada-data">
+							<tr>
+								<td colspan="4"  class="text-center">
+									Tidak Ada Data
+								</td>
+							</tr>
 						</tbody>
 					</table>
+					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+					<div align="right"><pagination :data="riwayatPelanggansData" v-on:pagination-change-page="getRiwayatTransaksi" :limit="3"></pagination></div>
 				</div>
 
 				<div class="row-fluid" v-if="perilakuPelanggan == 1">
@@ -614,7 +644,8 @@ ul :hover {background: #ffd11a;}
 									</tr>
 									<tr>
 										<td>Rata-rata Kedatangan</td>
-										<td>setiap 3 hari</td>
+										<td v-if="perilaku_pelanggan.terakhir_datang == null">Tidak Ada</td>
+										<td v-else>Sebulan {{perilaku_pelanggan.rata_rata_datang}}x</td>
 									</tr>
 								</tbody>
 							</table>
@@ -632,8 +663,13 @@ ul :hover {background: #ffd11a;}
 export default {
 	data: function () {
 		return {
+			id_pelanggan:'',
 			pelanggans: [],
+			data_produk: [],
 			perilaku_pelanggan:{},
+			riwayat_transaksi:[],
+			riwayatPelanggansData:{},
+			total_riwayat_transaksi:{},
 			import_pelanggan: {
 				excel: '',
 			},
@@ -673,15 +709,16 @@ export default {
 			perilakuPelanggan:0,
 			settings: {
 				placeholder: 'Pilih Jenis Kelamin'
-			} 
+			},
+			filter: {
+				sampai_tanggal: new Date()
+			}
 		}
 	},
 	mounted() {
 		var app = this;
 		app.loading = true
 		app.getPelanggans();
-		// app.getPerilaku();	
-		// app.getPelanggan();
 	},
 	filters: {
 		pemisahTitik: function (value) {
@@ -691,7 +728,10 @@ export default {
 			return formatted.join('; ');
 		},
 		tanggal: function (value) {
-			return moment(String(value)).format('DD/MM/YYYY hh:mm')
+
+			if (value){
+				return moment(String(value)).format('MM/DD/YYYY hh:mm');
+			}
 		}
 	},
 
@@ -703,6 +743,10 @@ export default {
     },
 
     methods: {
+    	customFormatter(date) {
+    		return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    	},
+
     	tentangPelanggan(){
     		this.formPelanggan = 1
     		this.riwayatBelanja = 0
@@ -782,6 +826,9 @@ export default {
     		});
 
     		this.getPerilaku(id);
+    		this.id_pelanggan = id;
+    		this.getRiwayatTransaksi();
+    		this.getTotalRiwayatTransaksi();
     	},
     	editPelanggan(){
     		this.disable = 2
@@ -797,7 +844,6 @@ export default {
     		}
     		axios.get(app.url+'/view?page='+page)
     		.then(function (resp) {
-    			// console.log(resp);
     			app.loading = false
     			app.pelanggans = resp.data.data;
     			app.pelanggansData = resp.data
@@ -827,15 +873,60 @@ export default {
     	getPerilaku(id){
     		var app = this;
 
-    		axios.get(app.url+/perilaku/+id)
+    		axios.get(app.url+'/perilaku/'+id)
     		.then(function (resp) {
     			app.loading = false
     			app.perilaku_pelanggan = resp.data;
-    			console.log(resp.data);
+    			// console.log(resp.data);
     		})
     		.catch(function (resp) {
     			app.loading = false;
     			alert("Could not load perilaku")
+    		})
+    	},
+    	getRiwayatTransaksi(page){
+    		var app = this;
+    		var id = app.id_pelanggan;
+    		app.loading = true;
+    		if (typeof page === 'undefined') {
+    			page = 1;
+    		}
+    		axios.get(app.url+'/riwayat_transaksi?id='+id+'&page='+page)
+    		.then(function (resp) {
+    			app.loading = false;
+    			app.riwayat_transaksi = resp.data.data;
+    			app.riwayatPelanggansData = resp.data;
+    			console.log(resp.data.data)
+    			// $.each(app.riwayat_transaksi, function(key, data) {
+    			// 	axios.get(app.url+'/data_produk_per_tgl/'+app.riwayat_transaksi[key].created_at)
+    			// 	.then(function (resp) {
+    			// 		app.data_produk = resp.data;
+    			// 		console.log(app.data_produk)
+    			// 		console.log(app.data_produk)
+    			// 	})
+    			// 	.catch(function (resp) {
+    			// 		app.loading = false;
+    			// 		alert("Could not load data produk")
+    			// 	})
+    			// });   
+    		})
+    		.catch(function (resp) {
+    			app.loading = false;
+    			alert("Could not load riwayat transaksi")
+    		})
+    	},
+    	getTotalRiwayatTransaksi(){
+    		var app = this;
+    		var id = app.id_pelanggan;
+    		axios.get(app.url+'/total_riwayat_transaksi?id='+id)
+    		.then(function (resp) {
+    			app.loading = false;
+    			app.total_riwayat_transaksi = resp.data;
+    			// console.log(resp.data);
+    		})
+    		.catch(function (resp) {
+    			app.loading = false;
+    			alert("Could not load total riwayat transaksi")
     		})
     	},
 

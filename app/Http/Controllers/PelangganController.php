@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailPenjualan;
 use App\Pelanggan;
 use App\Penjualan;
 use App\User;
 use Auth;
+use Carbon\carbon;
 use Excel;
 use File;
 use Illuminate\Http\Request;
@@ -25,23 +27,73 @@ class PelangganController extends Controller
     }
     public function perilaku($id)
     {
-        $pelanggan       = Pelanggan::select()->where('id', $id)->first();
-        $jumlah_order    = Penjualan::where('pelanggan_id', $pelanggan->id)->count();
-        $total_belanja   = Penjualan::perilakuPelanggan($id)->first();
-        $terakhir_datang = Penjualan::terakhirDatang($id)->first();
+        $waktu            = Carbon::now()->subMonth();
+        $pelanggan        = Pelanggan::select()->where('id', $id)->first();
+        $jumlah_order     = Penjualan::where('pelanggan_id', $pelanggan->id)->count();
+        $total_belanja    = Penjualan::perilakuPelanggan($id)->first();
+        $terakhir_datang  = Penjualan::terakhirDatang($id)->first();
+        $rata_rata_datang = Penjualan::rataRataDatang($id, $waktu)->count();
         if ($jumlah_order > 0) {
             $rata_rata_belanja = $total_belanja->total_bayars / $jumlah_order;
         } else {
             $rata_rata_belanja = 0;
         }
-
         $respons['jumlah_order']      = $jumlah_order;
         $respons['total_belanja']     = $total_belanja;
-        $respons['rata_rata_belanja'] = $rata_rata_belanja;
+        $respons['rata_rata_belanja'] = ceil($rata_rata_belanja);
         $respons['terakhir_datang']   = $terakhir_datang;
+        $respons['rata_rata_datang']  = $rata_rata_datang;
 
         return response()->json($respons);
     }
+
+    public function dataPagination($pelanggan, $pelangganData, $link)
+    {
+
+        //DATA PAGINATION
+        $respons['current_page']   = $pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/pelanggan/' . $link . '?page=' . $pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $pelanggan->lastPage();
+        $respons['last_page_url']  = url('/pelanggan/' . $link . '?page=' . $pelanggan->lastPage());
+        $respons['next_page_url']  = $pelanggan->nextPageUrl();
+        $respons['path']           = url('/pelanggan/' . $link . '');
+        $respons['per_page']       = $pelanggan->perPage();
+        $respons['prev_page_url']  = $pelanggan->previousPageUrl();
+        $respons['to']             = $pelanggan->perPage();
+        $respons['total']          = $pelanggan->total();
+
+        return $respons;
+
+    }
+
+    public function riwayatTransaksi()
+    {
+        $riwayatPelanggan = DetailPenjualan::riwayatTransaksiPelanggan($_GET['id'])->paginate(10);
+        $data_array       = [];
+        foreach ($riwayatPelanggan as $riwayatPelanggans) {
+            $data_produk = DetailPenjualan::detailPenjualanPerTanggal($riwayatPelanggans->id_penjualan)->get();
+            $kwantitas   = DetailPenjualan::kwantitas($riwayatPelanggans->id_penjualan)->first();
+
+            array_push($data_array, [
+                'created_at'  => $riwayatPelanggans->created_at,
+                'total_bayar' => $riwayatPelanggans->total_bayar,
+                'data_produk' => $data_produk,
+                'kwantitas'   => $kwantitas,
+            ]);
+        }
+        $link    = '/riwayat_transaksi?id=' . $_GET['id'];
+        $respons = $this->dataPagination($riwayatPelanggan, $data_array, $link);
+        return response()->json($respons);
+    }
+
+    public function totalRiwayatTransaksi()
+    {
+        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($_GET['id'])->first();
+        return response()->json($total);
+    }
+
     public function view()
     {
         $pelanggan = Pelanggan::with('penjualan')->where('toko_id', Auth::user()->toko_id)->orderBy('id', 'desc')->paginate(1000000);
@@ -54,23 +106,12 @@ class PelangganController extends Controller
             $pelangganData[]                       = $val;
             $pelangganData[$key]['kode_pelanggan'] = $kode_pelanggan;
         }
-
         //DATA PAGINATION
-        $respons['current_page']   = $pelanggan->currentPage();
-        $respons['data']           = $pelangganData;
-        $respons['first_page_url'] = url('/pelanggan/view?page=' . $pelanggan->firstItem());
-        $respons['from']           = 1;
-        $respons['last_page']      = $pelanggan->lastPage();
-        $respons['last_page_url']  = url('/pelanggan/view?page=' . $pelanggan->lastPage());
-        $respons['next_page_url']  = $pelanggan->nextPageUrl();
-        $respons['path']           = url('/pelanggan/view');
-        $respons['per_page']       = $pelanggan->perPage();
-        $respons['prev_page_url']  = $pelanggan->previousPageUrl();
-        $respons['to']             = $pelanggan->perPage();
-        $respons['total']          = $pelanggan->total();
-
+        $link    = 'view';
+        $respons = $this->dataPagination($pelanggan, $pelangganData, $link);
         return response()->json($respons);
     }
+
     public function search(Request $request)
     {
         $cari_pelanggan = Pelanggan::where('toko_id', Auth::user()->toko_id)
@@ -91,19 +132,8 @@ class PelangganController extends Controller
         }
 
         //DATA PAGINATION
-        $respons['current_page']   = $cari_pelanggan->currentPage();
-        $respons['data']           = $pelangganData;
-        $respons['first_page_url'] = url('/pelanggan/view?page=' . $cari_pelanggan->firstItem());
-        $respons['from']           = 1;
-        $respons['last_page']      = $cari_pelanggan->lastPage();
-        $respons['last_page_url']  = url('/pelanggan/view?page=' . $cari_pelanggan->lastPage());
-        $respons['next_page_url']  = $cari_pelanggan->nextPageUrl();
-        $respons['path']           = url('/pelanggan/view');
-        $respons['per_page']       = $cari_pelanggan->perPage();
-        $respons['prev_page_url']  = $cari_pelanggan->previousPageUrl();
-        $respons['to']             = $cari_pelanggan->perPage();
-        $respons['total']          = $cari_pelanggan->total();
-
+        $link    = 'view';
+        $respons = $this->dataPagination($cari_pelanggan, $pelangganData, $link);
         return response()->json($respons);
     }
 
