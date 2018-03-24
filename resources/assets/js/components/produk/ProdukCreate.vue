@@ -82,21 +82,6 @@
 								</div>
 							</div>
 						</div> 
-						<div v-if="produk.foto != ''" class="form-group">
-							<label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-							<div v-if="produk.foto != null" class="col-md-4">
-								<img :src="produk.foto" class="img-responsive thumbnail shadow">
-							</div>
-							<div v-else class="col-md-4">
-								<img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="foto" class="col-md-2 control-label">Foto</label>
-							<div class="col-md-4">
-								<input class="form-control" type="file" name="foto" v-on:change="onFileChange">
-							</div>
-						</div>
 
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Satuan</label>
@@ -120,6 +105,22 @@
 									<input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
 									<span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
 								</div>
+							</div>
+						</div>
+						
+						<div v-if="produk.foto != ''" class="form-group">
+							<label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
+							<div v-if="produk.foto != null" class="col-md-4">
+								<img :src="produk.foto" class="img-responsive thumbnail shadow">
+							</div>
+							<div v-else class="col-md-4">
+								<img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="foto" class="col-md-2 control-label">Foto</label>
+							<div class="col-md-4">
+								<input class="form-control" type="file" name="foto" v-on:change="onFileChange">
 							</div>
 						</div>
 
