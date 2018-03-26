@@ -337,7 +337,7 @@ display:block;
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk)" >Simpan</button>
+							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk, tbs_penjualans.id)" >Simpan</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 						</div>
 					</div>
@@ -751,15 +751,15 @@ export default {
 
 		},
 
-		simpanDiskonPerProduk(){
+		simpanDiskonPerProduk(id, harga_produk){
 			var app = this;
 			if(app.formDiskonProduk.persen > 0){
 				app.diskonPerproduk.persen = app.formDiskonProduk.persen;
-				app.diskonPerproduk.rupiah = (app.tbs_penjualans.total_bayar * app.diskonPerproduk.persen) / 100;
+				app.diskonPerproduk.rupiah = (app.tbs_penjualans.subtotal * app.diskonPerproduk.persen) / 100;
 
 			}else if(app.formDiskonProduk.rupiah > 0){
 				app.diskonPerproduk.rupiah = app.formDiskonProduk.rupiah;
-				app.diskonPerproduk.persen = (app.diskonPerproduk.rupiah / app.tbs_penjualans.total_bayar) * 100;
+				app.diskonPerproduk.persen = (app.diskonPerproduk.rupiah / app.tbs_penjualans.subtotal) * 100;
 
 			}
 			else{
@@ -924,7 +924,7 @@ export default {
 					app.pembayaran.bayar = '';
 					app.pembayaran.kembalian = 0;
 					app.penjualan.keterangan = '';
-					app.penjualan.status_pemesanan = '';
+					app.penjualan.status_pemesanan = 0;
 				// app.getPenjualans();
 			})
 				.catch(function (resp) {
