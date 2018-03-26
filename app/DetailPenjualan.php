@@ -11,6 +11,7 @@ class DetailPenjualan extends Model
     protected $fillable = [
         'no_faktur', 'id_produk', 'id_penjualan', 'harga_produk', 'subtotal', 'diskon', 'jumlah_produk',
     ];
+
     public function scopeKwantitas($query, $id_penjualan)
     {
         $query->select([
@@ -18,7 +19,7 @@ class DetailPenjualan extends Model
         ])
             ->where('detail_penjualans.id_penjualan', $id_penjualan);
     }
-    public function scopeDetailPenjualanPerTanggal($query, $id_penjualan)
+    public function scopeDetailPenjualanPerTransaksi($query, $id_penjualan)
     {
         $query->select([
             'produks.nama_produk',
@@ -29,36 +30,19 @@ class DetailPenjualan extends Model
             ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
             ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
             ->where('pelanggans.toko_id', Auth::user()->toko_id)
-            ->where('detail_penjualans.id_penjualan', $id_penjualan);
-        // ->groupBy('detail_penjualans.id');
+            ->where('detail_penjualans.id_penjualan', $id_penjualan)
+            ->groupBy('detail_penjualans.id');
         return $query;
     }
 
-    public function scopeRiwayatTransaksiPelanggan($query, $id)
-    {
-        $query->select([
-            'penjualans.id AS id_penjualan',
-            'penjualans.total_bayar',
-            'detail_penjualans.jumlah_produk',
-            DB::raw('DATE(penjualans.created_at) as created_at'),
-        ])
-            ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
-            ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
-            ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
-            ->where('pelanggans.toko_id', Auth::user()->toko_id)
-            ->where('pelanggans.id', $id)
-            ->groupBy('penjualans.id');
-        return $query;
-    }
-
-    public function scopeTotalRiwayatTransaksiPelanggan($query, $id)
+    public function scopeTotalRiwayatTransaksiPelanggan($query, $request)
     {
         $query->select(
             DB::raw('SUM(detail_penjualans.subtotal) as total'),
             DB::raw('SUM(detail_penjualans.jumlah_produk) as jumlah_produks'))
             ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
-            ->where('penjualans.pelanggan_id', $id)
+            ->where('penjualans.pelanggan_id', $request->id)
             ->groupBy('penjualans.pelanggan_id');
         return $query;
     }

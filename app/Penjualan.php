@@ -28,10 +28,6 @@ class Penjualan extends Model
     {
         return $this->hasOne('App\TbsPenjualan');
     }
-    // public function produk()
-    // {
-    //     return $this->hasOne('App\Produk', 'id', 'penjualan_id');
-    // }
 
     public function scopeLaporanRingkas($query, $waktu)
     {
@@ -81,12 +77,6 @@ class Penjualan extends Model
         $query->select([DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $waktu)->groupBy(DB::raw('DATE(created_at)'));
         return $query;
     }
-    public static function tanggalSql($tangal)
-    {
-        $date        = date_create($tangal);
-        $date_format = date_format($date, "d F Y");
-        return $date_format;
-    }
 
     public function scopePerilakuPelanggan($query, $id)
     {
@@ -109,5 +99,18 @@ class Penjualan extends Model
             ->where('pelanggan_id', $id)
             ->where('created_at', '>=', $waktu)
             ->groupBy(DB::raw('DATE(created_at)'));
+    }
+
+    public function scopeRiwayatTransaksiPelanggan($query, $request)
+    {
+        $query->select([
+            'penjualans.id as id_penjualan',
+            'penjualans.total_bayar',
+            'penjualans.created_at  AS waktu',
+        ])
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->where('penjualans.pelanggan_id', $request->id)
+            ->groupBy('penjualans.id');
+        return $query;
     }
 }
