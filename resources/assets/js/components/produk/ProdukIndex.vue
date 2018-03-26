@@ -120,7 +120,7 @@
                                         <tr>
                                             <td class="bold">Kategori Produk</td>
                                             <td>:</td>
-                                            <td>Kategori Produk Anda. Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
+                                            <td>Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
                                         </tr>
                                         <tr>
                                             <td class="bold">Harga Jual</td>
@@ -156,7 +156,7 @@
                                             <th>Harga Jual</th>
                                             <th>Bisa Dijual</th>
                                             <th>Satuan</th>
-                                            <th>Tambahan</th>
+                                            <!-- <th>Tambahan</th> -->
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -165,7 +165,7 @@
                                                 <td align="right">25000</td>
                                                 <td>ya</td>
                                                 <td>Porsi</td>
-                                                <td>Cumi</td>
+                                                <!-- <td>Cumi</td> -->
                                             </tr>
                                             <tr>
                                                 <td>Nasi Goreng</td>
@@ -173,7 +173,7 @@
                                                 <td align="right">23000</td>
                                                 <td>ya</td>
                                                 <td>Piring</td>
-                                                <td>ayam</td>
+                                                <!-- <td>ayam</td> -->
                                             </tr>
                                             <tr>
                                                 <td>Jus Jeruk</td>
@@ -181,7 +181,7 @@
                                                 <td align="right">12000</td>
                                                 <td>ya</td>
                                                 <td>Porsi</td>
-                                                <td>Susu Coklat</td>
+                                                <!-- <td>Susu Coklat</td> -->
                                             </tr>
                                         </tbody>
                                     </table>
