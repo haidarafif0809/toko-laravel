@@ -545,20 +545,20 @@ ul :hover {background: #ffd11a;}
 							<button class="btn btn-xs btn-default">Mingguan</button>	
 							<button class="btn btn-xs btn-default">Bulanan</button>
 							<button class="btn btn-xs btn-default">Tahunan</button>
-							<button class="btn btn-xs btn-default">Rentang Waktu</button>
+							<button class="btn btn-xs btn-default" @click="rentangWaktu()">Rentang Waktu</button>
 						</div>
 					</div>
 					<div class="panel panel-body">
 						<div class="row">
-							<div class="form-group col-md-3">
-								<datepicker :input-class="'form-control'" placeholder="Dari Tanggal" v-model="filter.dari_tanggal" name="dari_tanggal" v-bind:id="'dari_tanggal'" :format="customFormatter"></datepicker>			
+							<div class="form-group col-md-3" id="rentang_waktu" style="display:none">
+								<datepicker :input-class="'form-control'" placeholder="Dari Tanggal" v-model="filter.dari_tanggal" name="dari_tanggal" v-bind:id="'dari_tanggal'"></datepicker>			
 							</div>
-							<div class="col-xs-1">s/d</div>
-							<div class="form-group col-md-3">
+							<div class="col-xs-1" id="rentang_waktu2" style="display:none">s/d</div>
+							<div class="form-group col-md-3" id="rentang_waktu3" style="display:none">
 								<datepicker :input-class="'form-control'" placeholder="Sampai Tanggal" v-model="filter.sampai_tanggal" name="sampai_tanggal" v-bind:id="'sampai_tanggal'"></datepicker>
 							</div>
-							<div class="form-group col-md-1">
-								<button class="btn btn-primary" id="btnSubmit" type="submit" style="margin: 0px 0px;" @click="submitLabaKotor()"> Cari</button>
+							<div class="form-group col-md-1" id="rentang_waktu4" style="display:none">
+								<button class="btn btn-primary" id="btnSubmit" type="submit" style="margin: 0px 0px;" @click="submitPostRiwayatTransaksi()"> Cari</button>
 							</div>
 							<div class="form-group col-md-2">
 								<button class="btn btn-success">
@@ -579,7 +579,7 @@ ul :hover {background: #ffd11a;}
 						</thead>
 						<tbody v-if="riwayat_transaksi.length > 0 && loading == false" class="data-ada">
 							<tr v-for="riwayat_transaksis, index in riwayat_transaksi">								
-								<td>{{riwayat_transaksis.created_at.date | tanggal}}</td>
+								<td>{{riwayat_transaksis.riwayat_pelanggan.waktu | tanggal}}</td>
 								<td>
 									<ul>
 										<li v-for="item in riwayat_transaksis.data_produk">
@@ -591,7 +591,7 @@ ul :hover {background: #ffd11a;}
 									{{riwayat_transaksis.kwantitas.kwantitas | pemisahTitik}}
 								</td>								
 								<td align="right">
-									{{riwayat_transaksis.total_bayar | pemisahTitik}}
+									{{riwayat_transaksis.riwayat_pelanggan.total_bayar | pemisahTitik}}
 								</td>
 							</tr>
 							<tr>
@@ -711,15 +711,23 @@ export default {
 				placeholder: 'Pilih Jenis Kelamin'
 			},
 			filter: {
-				sampai_tanggal: new Date()
+				id: '', //id pelanggan
+				dari_tanggal: '',
+				sampai_tanggal: ''
 			}
 		}
 	},
+	
 	mounted() {
 		var app = this;
 		app.loading = true
 		app.getPelanggans();
+		var awal_tanggal = new Date();
+		awal_tanggal.setDate(1);
+		app.filter.dari_tanggal = awal_tanggal;
+		app.filter.sampai_tanggal = new Date();
 	},
+
 	filters: {
 		pemisahTitik: function (value) {
 			var angka = [value];
@@ -743,8 +751,15 @@ export default {
     },
 
     methods: {
+    	rentangWaktu(){
+    		$('#rentang_waktu').show();
+    		$('#rentang_waktu2').show();
+    		$('#rentang_waktu3').show();
+    		$('#rentang_waktu4').show();
+    	},
+
     	customFormatter(date) {
-    		return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    		return moment(date).format('MMMM Do YYYY');
     	},
 
     	tentangPelanggan(){
@@ -827,6 +842,7 @@ export default {
 
     		this.getPerilaku(id);
     		this.id_pelanggan = id;
+    		this.filter.id = id;
     		this.getRiwayatTransaksi();
     		this.getTotalRiwayatTransaksi();
     	},
@@ -877,7 +893,6 @@ export default {
     		.then(function (resp) {
     			app.loading = false
     			app.perilaku_pelanggan = resp.data;
-    			// console.log(resp.data);
     		})
     		.catch(function (resp) {
     			app.loading = false;
@@ -918,11 +933,50 @@ export default {
     	getTotalRiwayatTransaksi(){
     		var app = this;
     		var id = app.id_pelanggan;
+    		var newFilter = app.filter;
     		axios.get(app.url+'/total_riwayat_transaksi?id='+id)
     		.then(function (resp) {
     			app.loading = false;
     			app.total_riwayat_transaksi = resp.data;
-    			// console.log(resp.data);
+    		})
+    		.catch(function (resp) {
+    			app.loading = false;
+    			alert("Could not load total riwayat transaksi")
+    		})
+    	},
+    	submitPostRiwayatTransaksi(page){
+    		let app = this;
+    		app.postRiwayatTransaksi();
+    		app.postTotalRiwayatTransaksi();
+    	},
+    	postRiwayatTransaksi(page){
+    		var app = this;
+    		var id = app.id_pelanggan;
+    		var newFilter = app.filter;
+    		app.loading = true;
+    		if (typeof page === 'undefined') {
+    			page = 1;
+    		}
+    		axios.post(app.url+'/post_riwayat_transaksi', newFilter)
+    		.then(function (resp) {
+    			app.loading = false;
+    			app.riwayat_transaksi = resp.data.data;
+    			app.riwayatPelanggansData = resp.data;
+    			console.log(resp.data.data)
+    		})
+    		.catch(function (resp) {
+    			app.loading = false;
+    			alert("Could not load post riwayat transaksi")
+    		})
+    	},
+    	postTotalRiwayatTransaksi(){
+    		var app = this;
+    		var id = app.id_pelanggan;
+    		var newFilter = app.filter;
+    		axios.post(app.url+'/post_total_riwayat_transaksi', newFilter)
+    		.then(function (resp) {
+    			app.loading = false;
+    			app.total_riwayat_transaksi = resp.data;
     		})
     		.catch(function (resp) {
     			app.loading = false;

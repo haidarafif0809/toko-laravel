@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailPenjualan;
 use App\Penjualan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -146,12 +147,12 @@ class LaporanController extends Controller
             $laporan = Penjualan::LaporanPenjualanHarian($tahun)->get();
         }
 
-        $array_laporan = array();
-        foreach ($laporan as $laporanPenjualanHarian) {
-            $tanggal = Penjualan::tanggalSql($laporanPenjualanHarian->tanggal);
-            array_push($array_laporan, ['tanggal' => $tanggal, 'total_pembayaran' => $laporanPenjualanHarian->total_pembayaran, 'jumlah_penjualan' => $laporanPenjualanHarian->total_penjualan]);
-        }
-        return $array_laporan;
+        // $array_laporan = array();
+        // foreach ($laporan as $laporanPenjualanHarian) {
+        //     // $tanggal = Penjualan::tanggalSql($laporanPenjualanHarian->tanggal);
+        //     array_push($array_laporan, ['total_pembayaran' => $laporanPenjualanHarian->total_pembayaran, 'jumlah_penjualan' => $laporanPenjualanHarian->total_penjualan]);
+        // }
+        return $laporan;
 
     }
 
@@ -180,15 +181,17 @@ class LaporanController extends Controller
         }
 
         $array_laporan = [];
-        foreach ($laporan as $key) {
+        foreach ($laporan as $laporans) {
+            $nama_produk = DetailPenjualan::DetailPenjualanPerTransaksi($laporans->id_penjualan)->get();
             array_push($array_laporan, [
-                'tanggal'   => $key->tanggal,
-                'no_faktur' => $key->no_faktur,
-                'pelanggan' => $key->nama_pelanggan,
-                'catatan'   => $key->keterangan,
-                'produk'    => $key->nama_produk,
-                'subtotal'  => $key->subtotal,
-                'diskon'    => $key->diskon,
+                'tanggal'       => $laporans->tanggal,
+                'no_faktur'     => $laporans->no_faktur,
+                'pelanggan'     => $laporans->nama_pelanggan,
+                'catatan'       => $laporans->keterangan,
+                'detail_produk' => $nama_produk,
+                'subtotal'      => $laporans->subtotal,
+                'diskon'        => $laporans->diskon,
+                'pajak'         => $laporans->pajak,
 
             ]);
         }

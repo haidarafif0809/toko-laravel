@@ -11,6 +11,7 @@ use Carbon\carbon;
 use Excel;
 use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class PelangganController extends Controller
@@ -67,30 +68,93 @@ class PelangganController extends Controller
         return $respons;
 
     }
-
-    public function riwayatTransaksi()
+    public function dataPagination2($pelanggan, $pelangganData, $link)
     {
-        $riwayatPelanggan = DetailPenjualan::riwayatTransaksiPelanggan($_GET['id'])->paginate(10);
-        $data_array       = [];
+
+        //DATA PAGINATION
+        $respons['current_page']   = $pelanggan->currentPage();
+        $respons['data']           = $pelangganData;
+        $respons['first_page_url'] = url('/pelanggan/' . $link . '&page=' . $pelanggan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $pelanggan->lastPage();
+        $respons['last_page_url']  = url('/pelanggan/' . $link . '&page=' . $pelanggan->lastPage());
+        $respons['next_page_url']  = $pelanggan->nextPageUrl();
+        $respons['path']           = url('/pelanggan/' . $link . '');
+        $respons['per_page']       = $pelanggan->perPage();
+        $respons['prev_page_url']  = $pelanggan->previousPageUrl();
+        $respons['to']             = $pelanggan->perPage();
+        $respons['total']          = $pelanggan->total();
+
+        return $respons;
+
+    }
+
+    public function createDate($waktu)
+    {
+        $date = date_create($waktu);
+        return date_format($date, 'Y-m-d');
+    }
+
+    public function riwayatTransaksi(Request $request)
+    {
+        // DB::enableQueryLog();
+
+        $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)->paginate(10);
+        // dd(DB::getQueryLog());
+
+        $data_array = [];
         foreach ($riwayatPelanggan as $riwayatPelanggans) {
-            $data_produk = DetailPenjualan::detailPenjualanPerTanggal($riwayatPelanggans->id_penjualan)->get();
-            $kwantitas   = DetailPenjualan::kwantitas($riwayatPelanggans->id_penjualan)->first();
+            $data_produk = DetailPenjualan::detailPenjualanPerTransaksi($riwayatPelanggans->id_penjualan, $request)->get();
+            $kwantitas   = DetailPenjualan::kwantitas($riwayatPelanggans->id_penjualan, $request)->first();
 
             array_push($data_array, [
-                'created_at'  => $riwayatPelanggans->created_at,
-                'total_bayar' => $riwayatPelanggans->total_bayar,
-                'data_produk' => $data_produk,
-                'kwantitas'   => $kwantitas,
+                'riwayat_pelanggan' => $riwayatPelanggans,
+                // 'total_bayar' => $riwayatPelanggans->total_bayar,
+                'data_produk'       => $data_produk,
+                'kwantitas'         => $kwantitas,
             ]);
         }
-        $link    = '/riwayat_transaksi?id=' . $_GET['id'];
-        $respons = $this->dataPagination($riwayatPelanggan, $data_array, $link);
+        $link    = 'riwayat_transaksi?id=' . $request->id;
+        $respons = $this->dataPagination2($riwayatPelanggan, $data_array, $link);
         return response()->json($respons);
     }
 
-    public function totalRiwayatTransaksi()
+    public function totalRiwayatTransaksi(Request $request)
     {
-        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($_GET['id'])->first();
+        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)->first();
+        return response()->json($total);
+    }
+
+    public function posRiwayatTransaksi(Request $request)
+    {
+        // DB::enableQueryLog();
+        $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+            ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+            ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
+            ->paginate(10);
+        // dd(DB::getQueryLog());
+
+        $data_array = [];
+        foreach ($riwayatPelanggan as $riwayatPelanggans) {
+            $data_produk = DetailPenjualan::detailPenjualanPerTransaksi($riwayatPelanggans->id_penjualan, $request)->get();
+            $kwantitas   = DetailPenjualan::kwantitas($riwayatPelanggans->id_penjualan, $request)->first();
+
+            array_push($data_array, [
+                'riwayat_pelanggan' => $riwayatPelanggans,
+                'data_produk'       => $data_produk,
+                'kwantitas'         => $kwantitas,
+            ]);
+        }
+        $link    = 'riwayat_transaksi?id=' . $request->id;
+        $respons = $this->dataPagination2($riwayatPelanggan, $data_array, $link);
+        return response()->json($respons);
+    }
+
+    public function postTotalRiwayatTransaksi(Request $request)
+    {
+        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)
+            ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+            ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))->first();
         return response()->json($total);
     }
 
