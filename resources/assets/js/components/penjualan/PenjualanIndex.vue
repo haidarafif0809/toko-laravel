@@ -337,7 +337,7 @@ display:block;
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.harga_produk, tbs_penjualans.id)" >Simpan</button>
+							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.subtotal, tbs_penjualans.id)" >Simpan</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 						</div>
 					</div>
