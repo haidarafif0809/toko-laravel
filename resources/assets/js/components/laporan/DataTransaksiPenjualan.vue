@@ -4,7 +4,7 @@
 }
 .btn.active
 {
-  background-color:#002a38;
+	background-color:#002a38;
 }
 </style>
 <template>
@@ -42,13 +42,13 @@
 									<th>Pembayaran</th>
 									<th>Catatan</th>
 									<th>Produk</th>
-									<th>Subtotal</th>
-									<th>Diskon</th>
-									<th>Pajak</th>
-									<th>Total</th>
+									<th class="text-right">Subtotal</th>
+									<th class="text-right">Diskon</th>
+									<th class="text-right">Pajak</th>
+									<th class="text-right">Total</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody >
 								<tr v-for="data_transaksi, index in data_transaksi_penjualan">
 									<td>{{ data_transaksi.tanggal }}</td>
 									<td>{{ data_transaksi.no_faktur }}</td>
@@ -56,11 +56,19 @@
 									<td>{{ data_transaksi.pelanggan }}</td>
 									<td>Tunai</td>
 									<td>{{ data_transaksi.catatan }}</td>
-									<td>{{ data_transaksi.produk }}</td>
-									<td>{{new Intl.NumberFormat().format(data_transaksi.subtotal) }}</td>
-									<td>{{ data_transaksi.diskon }}</td>
-									<td>0,00</td>
-									<td>{{ new Intl.NumberFormat().format(data_transaksi.subtotal - data_transaksi.diskon) }}</td>
+									<td>
+										<ul>
+											<li v-for="data in data_transaksi.detail_produk">
+												{{ data.nama_produk }} x {{ data.jumlah_produk}}
+											</li>
+										</ul>
+									</td>
+									<td align="right">{{new Intl.NumberFormat().format(data_transaksi.subtotal) }}</td>
+									<td v-if="data_transaksi.diskon == null" align="right">0</td>
+									<td v-else align="right">{{ data_transaksi.diskon }}</td>
+									<td v-if="data_transaksi.pajak == null" align="right">0</td>
+									<td v-else align="right">{{data_transaksi.pajak}}</td>	
+									<td align="right">{{ new Intl.NumberFormat().format(data_transaksi.subtotal - data_transaksi.diskon) }}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -74,6 +82,7 @@
 export default{
 	data: function(){
 		return{
+			loading : true,
 			data_transaksi_penjualan:[],
 			grand_total_penjualan:[],
 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
@@ -83,9 +92,9 @@ export default{
 		var app = this;
 		app.getDataTransaksiPenjualan();
 		app.getDataGrandTotal();
-			$(".btn-group > .btn").click(function(){
-		    $(".btn-group > .btn").removeClass("active");
-		    $(this).addClass("active");
+		$(".btn-group > .btn").click(function(){
+			$(".btn-group > .btn").removeClass("active");
+			$(this).addClass("active");
 		});
 	},
 	methods: {
@@ -93,7 +102,8 @@ export default{
 			let app = this;
 			axios.get(app.url+'/data-transaksi-penjualan/'+type)
 			.then(function (resp){
-			app.data_transaksi_penjualan = resp.data;
+				app.data_transaksi_penjualan = resp.data;
+				console.log(resp.data)
 			})
 
 		},
@@ -102,7 +112,7 @@ export default{
 			axios.get(app.url+'/grand-total-penjualan/'+type)
 			.then(function (resp){
 				app.grand_total_penjualan = resp.data;
-				console.log(resp.data)
+				// console.log(resp.data)
 			})
 		}
 	}

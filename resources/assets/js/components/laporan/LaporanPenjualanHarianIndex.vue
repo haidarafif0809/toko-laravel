@@ -48,13 +48,13 @@
 											{{ laporan_penjualan_harians.tanggal }}
 										</td>
 										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.jumlah_penjualan) }}
+											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_penjualan) }}
 										</td>
 										<td align="right">
 											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran) }}
 										</td>
 										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran / laporan_penjualan_harians.jumlah_penjualan) }}
+											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran / laporan_penjualan_harians.total_penjualan) }}
 										</td>
 									</tr>
 								</tbody>

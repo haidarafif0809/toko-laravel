@@ -27,9 +27,8 @@ class DetailPenjualan extends Model
             'detail_penjualans.jumlah_produk',
         ])
             ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
-            ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
             ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
-            ->where('pelanggans.toko_id', Auth::user()->toko_id)
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->where('detail_penjualans.id_penjualan', $id_penjualan)
             ->groupBy('detail_penjualans.id');
         return $query;

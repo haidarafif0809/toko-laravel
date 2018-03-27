@@ -55,26 +55,33 @@ class Penjualan extends Model
 
     public function scopeTransaksiPenjualan($query, $waktu)
     {
-        $query->select([DB::raw('DATE(penjualans.created_at) as tanggal'),
-            'penjualans.subtotal as subtotal',
-            'penjualans.keterangan as keterangan',
-            'produks.nama_produk as nama_produk',
-            'penjualans.no_faktur as no_faktur',
-            'penjualans.diskon as diskon',
-            'pelanggans.nama_pelanggan as nama_pelanggan',
-            'cara_bayar',
+        $query->select([
+            DB::raw('DATE(penjualans.created_at) as tanggal'),
+            'penjualans.id as id_penjualan',
+            'penjualans.subtotal',
+            'penjualans.keterangan',
+            'penjualans.no_faktur',
+            'penjualans.diskon',
+            'penjualans.pajak',
+            'pelanggans.nama_pelanggan',
+            'penjualans.cara_bayar',
         ])
-            ->leftJoin('detail_penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
-            ->leftJoin('pelanggans', 'pelanggan_id', '=', 'pelanggans.id')
-            ->leftJoin('produks', 'detail_penjualans.id_produk', '=', 'produks.produk_id')
+            ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
-            ->where('.penjualans.created_at', '>=', $waktu);
+            ->where('.penjualans.created_at', '>=', $waktu)
+            ->groupBy('penjualans.id');
         return $query;
     }
 
     public function scopeLaporanPenjualanHarian($query, $waktu)
     {
-        $query->select([DB::raw('DATE(created_at) as tanggal'), DB::raw('SUM(total_bayar) as total_pembayaran'), DB::raw('COUNT(*) as total_penjualan')])->where('toko_id', Auth::user()->toko_id)->where('created_at', '>=', $waktu)->groupBy(DB::raw('DATE(created_at)'));
+        $query->select([
+            DB::raw('DATE(created_at) as tanggal'),
+            DB::raw('SUM(total_bayar) as total_pembayaran'),
+            DB::raw('COUNT(*) as total_penjualan'),
+        ])
+            ->where('toko_id', Auth::user()->toko_id)
+            ->where('created_at', '>=', $waktu)->groupBy(DB::raw('DATE(created_at)'));
         return $query;
     }
 
