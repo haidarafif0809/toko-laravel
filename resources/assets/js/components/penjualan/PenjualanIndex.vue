@@ -53,7 +53,7 @@
 	text-align: center;
 }
 #digital{
-	background-color: black;
+	background-color: #F2F2F2;
 	border-radius: 3px;
 	color:#FF0000;
 	border:4px solid #F5F5F5;
@@ -151,6 +151,7 @@ display:block;
 
 <template>
 	<div class="container">
+
 		<!-- modal jumlah item -->
 		<div id="modalJumlahItem" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -164,39 +165,13 @@ display:block;
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
+						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah, dataTbs.harga_produk)" >Simpan</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- Modal untuk Diskon per faktur -->
-		<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
-						<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen"
-						onclick="document.getElementById('myInput').focus();return false;">Diskon %</button>
-						<button onclick="document.getElementById('myInput2').focus();return false;" class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
-
-					</div>
-					<div class="modal-body">
-						<form v-on:submit.prevent="" class="form-horizontal">
-							<input id="myInput" class="form-control" required autocomplete="off" placeholder="%" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
-							<money id="myInput2" v-bind="money" class="form-control" required autocomplete="off" placeholder="Rp" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah"></money>
-							<br>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerFaktur()" >Simpan</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
-					</div>
-				</div>
-			</div>
-		</div>
-
+		
 		<!-- Modal Pembayaran -->
 		<div id="modalBayar" class="modal fade" role="dialog" tabindex="-1">
 			<div class="modal-dialog">
@@ -274,25 +249,6 @@ display:block;
 					</div>
 				</div>
 			</div>
-			<!-- MODAL INPUT JUMLAH PRODUK -->
-			<div id="modalJumlahProduk" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							Jumlah Produk
-						</div>
-						<div class="modal-body">
-							<form class="form-horizontal">
-								<input class="form-control" required autocomplete="off"  type="number" name="jumlahProduk"  autofocus="" v-model="dataTbs.jumlah">
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanJumlahProduk(dataTbs.jumlah)" >Simpan</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal" >Tutup</button> 
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<!-- Modal untuk Diskon per faktur -->
 			<div id="modalDiskonPenjualan" class="modal fade" role="dialog">
@@ -300,14 +256,14 @@ display:block;
 					<div class="modal-content">
 						<div class="modal-header">
 							<!-- <h4 class="modal-title">Diskon Penjualan Per Faktur</h4> -->
-							<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen">Diskon %</button>
-							<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp">Diskon Rp</button>
+							<button class="btn btn-default" v-on:click="diskonPenjualanFakturPersen()">Diskon %</button>
+							<button class="btn btn-default" v-on:click="diskonPenjualanFakturRp()">Diskon Rp</button>
 
 						</div>
 						<div class="modal-body">
 							<form v-on:submit.prevent="" class="form-horizontal">
-								<input class="form-control" required autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFaktur == 1"  v-model="formDiskon.persen">
-								<input class="form-control" required autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus="" v-if="diskonFakturRp == 1" v-model="formDiskon.rupiah">
+								<input v-if="diskonFaktur == 1" class="form-control" autocomplete="off" placeholder="%" type="number" name="diskon_per_Faktur"  autofocus  v-model="formDiskon.persen">
+								<input v-if="diskonFakturRp == 1" class="form-control" autocomplete="off" placeholder="Rp" type="number" name="diskon_per_Faktur"  autofocus  v-model="formDiskon.rupiah">
 								<br>
 							</form>
 						</div>
@@ -337,7 +293,7 @@ display:block;
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(tbs_penjualans.subtotal, tbs_penjualans.id)" >Simpan</button>
+							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(diskonPerproduk.subtotal)" >Simpan</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 						</div>
 					</div>
@@ -387,47 +343,22 @@ display:block;
 				</div>
 			</div>
 
+			<!-- .................................................................................................. -->
+
 			<div class="col-md-8" id="pull-right">
 				<div class="panel panel-default" id="kategori_shadow">
 					<!-- KATEGORI PRODUK -->
-					<div class="panel-heading">KATEGORI PRODUK</div>
+					<div class="panel-heading text-center " ><h3><b>DAFTAR MENU PENJUALAN</b></h3></div>
 					<div class="panel-body">
 						<div class="row">
-							<div v-if="kategori_produks.length > 0 && loading == false" class="data-ada">	
-								<div class="col-md-12">
-									<div v-if="kategori_produks.length == 1">
-										<div v-for="kategori_produk , index in kategori_produks">
-											<div class=" btn btn-success col-md-3">
-												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 v-if="kategori_produk.id.length > 15">
-														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-													</h4>
-													<h4 v-else>
-														<center>{{kategori_produk.nama_kategori_produk}}</center>
-													</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div v-else>
-										<div v-for="kategori_produk , index in kategori_produks" >
-											<div class=" btn btn-success col-md-3">
-												<div class="caption"  @click="submitTbsPenjualan(produk)">
-													<h4 class="kategori" v-if="kategori_produk.nama_kategori_produk.length > 15">
-														<center>{{kategori_produk.nama_kategori_produk.slice(0, 15)}}...</center>
-													</h4>
-													<h4 v-else>
-														<center>{{kategori_produk.nama_kategori_produk}}</center>
-													</h4>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="form-group col-md-4 ">
+								<selectize-component class="form-control" v-model="filter.kategori_produk" :settings="placeholder_kategori_produk" id="pilih_kasir"> 
+									<option v-bind:value=0>Semua Kategori</option>									
+									<option v-for="kategori_produk, index in kategori_produks" v-bind:value="kategori_produk.id">{{ kategori_produk.nama_kategori_produk }}</option>
+								</selectize-component>
 							</div>
 						</div>
 						<br>
-
 
 						<!-- PRODUK PENJUALAN -->
 						<div class="row">
@@ -435,9 +366,9 @@ display:block;
 								<div class="col-md-12">
 									<div v-if="produksPenjualan.length == 1">
 										<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
-											<div class="thumbnail box-dalam-produk">
-												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto">
-												<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
+											<div class="thumbnail box-dalam-produk" @click="submitTbsPenjualan(produksPenjualans)">
+												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" @click="submitTbsPenjualan(produksPenjualans)">
+												<div class="caption"  >
 													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
 													</h6>
@@ -445,16 +376,15 @@ display:block;
 														{{produksPenjualans.data_produk.nama_produk}}
 													</h6>
 													<p>Harga: {{produksPenjualans.data_produk.harga_jual|pemisahTitik}}</p>
-
 												</div>
 											</div>
 										</div>
 									</div>
 									<div v-else>
 										<div v-for="produksPenjualans , index in produksPenjualan" class="col-md-3 box-produk">
-											<div class="thumbnail box-dalam-produk">
-												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" width="150px" height="80px">
-												<div class="caption"  @click="submitTbsPenjualan(produksPenjualans)">
+											<div class="thumbnail box-dalam-produk" >
+												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" width="150px" height="80px"  @click="submitTbsPenjualan(produksPenjualans)">
+												<div class="caption"  >
 													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
 														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
 													</h6>
@@ -467,6 +397,20 @@ display:block;
 										</div>
 									</div>
 								</div>
+							</div>
+							<div v-else-if="loading == true" class="data-ada" >
+								<ul >
+									<li colspan="4"  class="text-center">
+										Sedang Memuat Data
+									</li>
+								</ul>
+							</div>
+							<div v-else class="data-tidak-ada" >
+								<ul >
+									<li colspan="4"  class="text-center">
+										Tidak Ada Data
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -522,7 +466,7 @@ display:block;
 				<div class="panel panel-default" id="items">
 					<div class="panel-heading"></div>
 					<div class="panel-body">
-
+						<!-- pencarian produk -->
 						<div class="row">
 							<div class="col-md-12 pencarian">
 								<div class="input-group">
@@ -534,161 +478,175 @@ display:block;
 							</div>
 						</div>
 
+						<!-- data item tbs_penjualan -->
 						<div class="table-responsive" id="tbs">
 							<table class="table table-striped table-hover">
-							<!-- <thead>
-								<th>Barang</th>
-								<th>Jml</th>
-								<th>Total</th>
-							</thead> -->
-							<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
-								<tr v-for="tbs_penjualan, index in tbs_penjualans">
-									<td>{{ tbs_penjualan.nama_produk}} <br>
-										<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
-										
-										<p v-if="diskonPerproduk.persen === '' ">{{''}}</p>
-										<p v-else>Disc.{{Number.parseInt(diskonPerproduk.persen)}}% ({{diskonPerproduk.rupiah | pemisahTitik}})</p>
-									</td>
-									<td>
-										<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)">
-											{{ tbs_penjualan.jumlah_produk }}
-										</button>
-									</td>
-									<td>
-									{{tbs_penjualan.subtotal|pemisahTitik}}</td>
-									<td>
-										<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
-										</button>
-									</td>
-								</tr>
-							</tbody>
-							<tbody v-else-if="loadingTbs == true" class="text-center">
-								<li>Sedang Memuat Item</li>
-							</tbody>
-							<tbody v-else class="text-center">
-								Tidak Ada Item
-							</tbody>
-						</table>
+								<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
+									<tr v-for="tbs_penjualan, index in tbs_penjualans">
+										<td>{{ tbs_penjualan.nama_produk}} <br>
+											<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal" @click="getDiskonProdukTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal)">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
+
+											<p v-if="tbs_penjualan.diskon_persen != undefined ">Disc.{{Number.parseInt(tbs_penjualan.diskon_persen)}}% ({{tbs_penjualan.diskon | pemisahTitik}})</p>
+											<p v-else>Disc.0% (0)</p>
+										</td>
+										<td>
+											<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.jumlah_produk, tbs_penjualan.harga_produk)">
+												{{ tbs_penjualan.jumlah_produk }}
+											</button>
+										</td>
+										<td>
+										{{tbs_penjualan.subtotal|pemisahTitik}}</td>
+										<td>
+											<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
+											</button>
+										</td>
+									</tr>
+								</tbody>
+								<tbody v-else-if="loadingTbs == true" class="text-center">
+									<li>Sedang Memuat Item</li>
+								</tbody>
+								<tbody v-else class="text-center">
+									Tidak Ada Item
+								</tbody>
+							</table>
+						</div>
 					</div>
+					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
 				</div>
-				<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
+
+				<!-- button aksi: simpan, bayar, diskon -->
+				<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
+				<button v-bind:disabled="!isValid" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+				<button v-bind:disabled="!validate" class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 			</div>
-			<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
-			<button v-bind:disabled="!isValid" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
 			
-			<button v-bind:disabled="!validate" class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
 		</div>
-	</div>
-</template>
+	</template>
 
-<script>
-export default {
-	data: function () {
-		return {
-			bukaPenjualan: {
-				nomor_meja: '',
-				catatan: '',
-			},
-			formJumlahProduk: '',
-			jumlahBayar: '',
-			diskonPerfaktur: {
-				persen: '',
-				rupiah: '',
-			},
-			formDiskon: {
-				persen: '',
-				rupiah: '',
-			},
-			diskonPerproduk:{
-				persen: '',
-				rupiah: '',
-			},
-			formDiskonProduk:{
-				persen: '',
-			},	rupiah: '',
-			pembayaran:{
-				bayar: '',
-				kembalian: '',
-			},
-			kategori_produks: [],
-			penjualan: {
-				nama_pelanggan: '',
-				cara_bayar: '',
-				diskon: '',
-				subtotal: '',
-				total_bayar: '',
-				keterangan: '',
-				status_pemesanan: 0,
-			},
-			pelanggans:[],
-			produksPenjualan: [],
-			tbs_penjualans: [],
-			dataProduksPenjualan:{},
-			inputTbsPenjualan: {
-				satuan:'',
-				produk_id:'',
-				jumlah: '',
-				harga:'',
-				total_bayar: '',
-			},
-			deleteProdukTbsPenjualan: {
-				produk_id: ''
-			},
-			dataTbs: {
-				id: '',
-				jumlah: '',
-				subtotal: '',
-				harga: ''
-			},
-			price:1,
-			money: {
-				decimal: ',',
-				thousands: '.',
-				precision: 0,
-				masked: false
-			},
-			search: '',
-			formTunai: 1,
-			diskonProduk: 1,
-			diskonProdukRp: 0,
-			diskonFaktur: 1,
-			diskonFakturRp: 0,
-			formKartu: 0,
-			urlBukaPenjualan: window.location.origin + (window.location.pathname).replace("home","buka-penjualan"),
-			url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
-			urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
-			urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
-			urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
-			urlFotoProduk : window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
-			loading : true,
-			loadingTbs : true,
+	<script>
+	export default {
+		data: function () {
+			return {
+				kategori_produks: [],
+				produksPenjualan: [],
+				dataProduksPenjualan:{}, //paginations
+				tbs_penjualans: [],
+				pelanggans:[],
+				bukaPenjualan: {
+					nomor_meja: '',
+					catatan: '',
+				},
+				filter: {
+					kategori_produk: ''
+				},
+				formJumlahProduk: '',
+				jumlahBayar: '',
+				formDiskon: {
+					persen: '',
+					rupiah: '',
+				},
+				formDiskonProduk:{
+					persen: '',
+				},	rupiah: '',
+				diskonPerfaktur: {
+					persen: '',
+					rupiah: '',
+				},
+				diskonPerproduk:{
+					id: '',
+					subtotal: '',
+					persen: '',
+					rupiah: '',
+				},
+				pembayaran:{
+					bayar: '',
+					kembalian: '',
+				},
+				penjualan: {
+					nama_pelanggan: '',
+					cara_bayar: '',
+					diskon: '',
+					subtotal: '',
+					total_bayar: '',
+					keterangan: '',
+					status_pemesanan: 0,
+				},
+				inputTbsPenjualan: {
+					satuan:'',
+					produk_id:'',
+					jumlah: '',
+					harga:'',
+					total_bayar: '',
+				},
+				deleteProdukTbsPenjualan: {
+					produk_id: ''
+				},
+				dataTbs: {
+					diskon: '',
+					diskon_persen: '',
+					id: '',
+					jumlah: '',
+					subtotal: '',
+					harga_produk:'',
+				},
+				price:1,
+				money: {
+					decimal: ',',
+					thousands: '.',
+					precision: 0,
+					masked: false
+				},
+				diskon_per_produk: {
 
-			setting_pelanggan:{
-				placeholder: 'Pilih Pelanggan'
-			},
-			settingss:{
-				placeholder: 'Pilih Bank'
-			},
-		}
-	},
-	mounted() {
-		var app = this;
-		app.loading = true
-		app.loadingTbs = true
-		app.getKategoriProduk();
-		app.getProduksPenjualan();
-		app.getTbsPenjualan();
-		app.selectPelanggans();
-	},
+				},
+				search: '',
+				formTunai: 1,
+				diskonProduk: 1,
+				diskonProdukRp: 0,
+				diskonFaktur: 1,
+				diskonFakturRp: 0,
+				formKartu: 0,
+				urlBukaPenjualan: window.location.origin + (window.location.pathname).replace("home","buka-penjualan"),
+				url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
+				urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
+				urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
+				urlUpdateDiskonTbs : window.location.origin + (window.location.pathname).replace("home", "update-diskon-tbs-penjualan"),
+				urlHapusTbs : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-tbs-penjualan"),
+				urlFotoProduk : window.location.origin + (window.location.pathname).replace("home", "foto_produk"),
+				loading : true,
+				loadingTbs : true,
 
+				setting_pelanggan:{
+					placeholder: 'Pilih Pelanggan'
+				},
+				settingss:{
+					placeholder: 'Pilih Bank'
+				},				
+				placeholder_kategori_produk:{
+					placeholder: 'PILIH KATEGORI PRODUK'
+				},
+			}
+		},
+		mounted() {
+			var app = this;
+			app.loading = true
+			app.loadingTbs = true
+			app.getKategoriProduk();
+			app.getProduksPenjualan();
+			app.getTbsPenjualan();
+			app.selectPelanggans();
+		},
 
-	watch: {
+		watch: {
 	    // whenever question changes, this function will run
 	    search: function (newQuestion) {
 	    	this.getHasilPencarian()
 	    },
 	    'pembayaran.bayar': function (newQuestion){
 	    	this.getHasilKembalian()
+	    },
+	    'filter.kategori_produk': function (newQuestion){
+	    	this.submitKategoriProduk();
 	    }
 	},
 
@@ -709,11 +667,21 @@ export default {
 		},
 	},
 	methods: {
-		getDataTbs(id, subtotal, harga, jumlah) {
+		submitKategoriProduk(){
+			var app = this;
+			var filter = app.filter;
+			app.getProduksPenjualan();
+		},
+		getDiskonProdukTbs(id, subtotal) {
+			let app = this;
+			app.diskonPerproduk.id = id;
+			app.diskonPerproduk.subtotal = subtotal;
+		},
+		getDataTbs(id, subtotal, jumlah, harga_produk) {
 			this.dataTbs.id = id;
 			this.dataTbs.subtotal = subtotal;
-			this.dataTbs.harga = harga;
 			this.dataTbs.jumlah = jumlah;
+			this.dataTbs.harga_produk = harga_produk;
 		},
 
 		getHasilKembalian(){
@@ -751,15 +719,15 @@ export default {
 
 		},
 
-		simpanDiskonPerProduk(id, harga_produk){
+		simpanDiskonPerProduk(subtotal){
 			var app = this;
 			if(app.formDiskonProduk.persen > 0){
 				app.diskonPerproduk.persen = app.formDiskonProduk.persen;
-				app.diskonPerproduk.rupiah = (app.tbs_penjualans.subtotal * app.diskonPerproduk.persen) / 100;
+				app.diskonPerproduk.rupiah = (subtotal * app.diskonPerproduk.persen) / 100;
 
 			}else if(app.formDiskonProduk.rupiah > 0){
 				app.diskonPerproduk.rupiah = app.formDiskonProduk.rupiah;
-				app.diskonPerproduk.persen = (app.diskonPerproduk.rupiah / app.tbs_penjualans.subtotal) * 100;
+				app.diskonPerproduk.persen = (app.diskonPerproduk.rupiah / subtotal) * 100;
 
 			}
 			else{
@@ -767,6 +735,16 @@ export default {
 				app.diskonPerproduk.rupiah = '';
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerproduk.rupiah;
+
+			var newDiskon = app.diskonPerproduk;
+			axios.post(app.urlUpdateDiskonTbs, newDiskon)
+			.then(function (resp) {
+				app.$router.replace('/penjualan');
+				app.getTbsPenjualan();
+			})
+			.catch(function (resp) {
+				app.errors = resp.response.data.errors;
+			});		
 
 			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualanPerProduk').hide();
@@ -792,15 +770,12 @@ export default {
 			if (typeof page === 'undefined') {
 				page = 1;
 			}
-
-			axios.get(app.url+'/view?page='+page)
+			var newFilter = app.filter;
+			axios.post(app.url+'/view?page='+page, newFilter)
 			.then(function (resp) {
 				app.loading = false;
 				app.produksPenjualan = resp.data.data;
 				app.dataProduksPenjualan = resp.data;
-				console.log(app.urlFotoProduk);
-				console.log(app.produksPenjualan)
-
 			})
 			.catch(function (resp) {
 				alert("Could not load produksPenjualan");
@@ -812,12 +787,12 @@ export default {
 			axios.get(app.url +'/tbs-penjualan')
 			.then(function (resp) {
 				if (resp.data.data != undefined) {
-
 					app.tbs_penjualans = resp.data.data;
 					app.tbs_penjualans.total_bayar = resp.data.total_bayar;
 					app.jumlahBayar = resp.data.total_bayar;
 					app.loadingTbs = false;
-					console.log(resp);
+					console.log(resp.data.data);
+					// console.log(resp.data);
 				}
 				app.loadingTbs = false;
 				// else {
@@ -878,6 +853,8 @@ export default {
 				icon: "warning",
 			});
 		},
+
+		// ketika melakukan tombol bayar dan get ke methode store pada penjualanController
 		saveForm(){
 			var app = this;
 			var total = app.penjualan.total_bayar;
@@ -904,7 +881,7 @@ export default {
 
 				app.closeModal();
 
-				console.log(app.penjualan.subtotal)
+				// console.log(app.penjualan.subtotal)
 				axios.post(app.url, Penjualan)
 				.then(function(resp){
 					app.message = 'Sukses : Berhasil Melakukan Pembayaran ';
@@ -978,7 +955,7 @@ export default {
 			var app = this;
 			app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
 			app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
-			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuans_id;
+			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
 			app.inputTbsPenjualan.jumlah = 1;
 			var newTbs = app.inputTbsPenjualan;
 
@@ -998,8 +975,15 @@ export default {
 			});
 		},
 
-		simpanJumlahProduk(jumlah){
+		simpanJumlahProduk(jumlah, harga_produk){
 			var app = this;
+			var subtotal = (jumlah * harga_produk);
+			if (app.diskonPerproduk.persen > 0) {
+				app.diskonPerproduk.rupiah = (subtotal * app.diskonPerproduk.persen) / 100;
+				app.dataTbs.diskon =  app.diskonPerproduk.rupiah;
+				app.dataTbs.diskon_persen =  app.diskonPerproduk.persen;
+			}
+
 			var newJumlah = app.dataTbs;
 			axios.post(app.urlUpdateTbs, newJumlah)
 			.then(function (resp) {
@@ -1013,74 +997,45 @@ export default {
 		},
 
 		deleteTbsPenjualan(id_tbs_penjualan) {
-			swal({
-				title: "Hapus?", 
-				text: "Yakin Ingin Menghapus ?", 
-				type: "warning",
-				showCancelButton: true,
-				cancelButtonColor: '#3085d6',
-				confirmButtonColor: '#d33',
-				confirmButtonText: 'Hapus',
-				cancelButtonText: 'Batal',
-				reverseButtons: true
-			})
-			.then((result) => {
-				if (result.value) {
-					var app = this;
-					axios.delete(app.urlHapusTbs+ '/'+id_tbs_penjualan)
-					.then(function (resp) {
-						app.getTbsPenjualan();
-						swal({
-							title: 'Berhasil!',
-							type: 'success',
-							text: 'Berhasil menghapus '
-						});
+			var app = this;
+			axios.delete(app.urlHapusTbs+ '/'+id_tbs_penjualan)
+			.then(function (resp) {
+				app.getTbsPenjualan();
+				swal({
+					title: 'Berhasil!',
+					type: 'success',
+					text: 'Berhasil menghapus',
+					showConfirmButton: false,
+					timer: 1000,
+				});
 						// app.$router.replace('/penjualan');
 					})
-					.catch(function (resp) {
-						app.$router.replace('/penjualan');
-						swal({
-							title: 'Gagal!',
-							type: 'warning',
-							text: 'Tidak dapat menghapus produk!'
-						})
-					});
-				}
-				else {
-					return;
-				}
-				this.tbs_penjualans = '',
-				this.diskonPerfaktur.rupiah = '',
-				this.diskonPerfaktur.persen = '',
-				this.diskonPerproduk.rupiah = '',
-				this.diskonPerproduk.persen = '',
-				this.$router.replace('/penjualan');
+			.catch(function (resp) {
+				app.$router.replace('/penjualan');
+				swal({
+					title: 'Gagal!',
+					type: 'warning',
+					text: 'Tidak dapat menghapus produk!'
+				})
+			});
+			this.tbs_penjualans = '',
+			this.diskonPerfaktur.rupiah = '',
+			this.diskonPerfaktur.persen = '',
+			this.diskonPerproduk.rupiah = '',
+			this.diskonPerproduk.persen = '',
+			this.$router.replace('/penjualan');
+		},
+		alert(pesan) {
+			this.$swal({
+				title: "Berhasil!",
+				text: pesan,
+				icon: "success",
 			});
 		},
-	// deleteEntry(id, index,nama_produk) {
-	// 	if (confirm("Yakin Ingin Menghapus produk "+nama_produk+" ?")) {
-	// 		var app = this;
-	// 		axios.delete(app.url+'/' + id)
-	// 		.then(function (resp) {
-	// 			app.getProduks();
-	// 			app.alert("Berhasil Menghapus produk "+nama_produk)
-	// 		})
-	// 		.catch(function (resp) {
-	// 			alert("Tidak dapat menghapus produk!");
-	// 		});
-	// 	}
-	// },
-	alert(pesan) {
-		this.$swal({
-			title: "Berhasil!",
-			text: pesan,
-			icon: "success",
-		});
-	},
-	closeModal(){
-		$("#btnBayar").attr("data-dismiss", "modal");
-	}
+		closeModal(){
+			$("#btnBayar").attr("data-dismiss", "modal");
+		}
 
-}
+	}
 }
 </script>

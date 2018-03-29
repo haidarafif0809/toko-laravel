@@ -67,11 +67,13 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
-Route::get('/penjualan/view', 'PenjualanController@view');
+Route::post('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
+Route::post('/update-diskon-tbs-penjualan', 'PenjualanController@ubahDiskonProdukTbsPenjualan');
+Route::post('/update-diskon-faktur-tbs-penjualan', 'PenjualanController@ubahDiskonFakturTbsPenjualan');
 Route::post('/proses-tambah-tbs', 'PenjualanController@prosesTambahTbs');
 
 Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
