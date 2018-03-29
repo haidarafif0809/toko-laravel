@@ -95,6 +95,7 @@ class PenjualanController extends Controller
 
     public function tbsPenjualan()
     {
+        $session_id   = session()->getId();
         $tbsPenjualan = DB::table('tbs_penjualans')
             ->select(
                 'produks.nama_produk',
@@ -107,6 +108,7 @@ class PenjualanController extends Controller
                 'tbs_penjualans.produk_id AS id_produk')
             ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
             ->where('tbs_penjualans.toko_id', Auth::user()->toko_id)
+            ->where('session_id', $session_id)
             ->get();
 
         if (count($tbsPenjualan) > 0) {
