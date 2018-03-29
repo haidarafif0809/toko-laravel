@@ -121,8 +121,13 @@ class PelangganController extends Controller
 
     public function totalRiwayatTransaksi(Request $request)
     {
-        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)->first();
-        return response()->json($total);
+        $diskon                  = Penjualan::diskonTransaksiPelanggan($request)->first();
+        $total                   = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)->first();
+        $array                   = [];
+        $result                  = ($total->total - $diskon->diskon);
+        $array['total']          = $result;
+        $array['jumlah_produks'] = $total->jumlah_produks;
+        return response()->json($array);
     }
 
     public function posRiwayatTransaksi(Request $request)

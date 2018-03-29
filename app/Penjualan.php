@@ -120,4 +120,13 @@ class Penjualan extends Model
             ->groupBy('penjualans.id');
         return $query;
     }
+    public function scopeDiskonTransaksiPelanggan($query, $request)
+    {
+        $query->select(DB::raw('SUM(diskon) as diskon'),
+            'penjualans.pelanggan_id')
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->where('penjualans.pelanggan_id', $request->id)
+            ->groupBy('penjualans.pelanggan_id');
+        return $query;
+    }
 }
