@@ -107,8 +107,7 @@ class PenjualanController extends Controller
                 'tbs_penjualans.id_tbs_penjualan',
                 'tbs_penjualans.produk_id AS id_produk')
             ->join('produks', 'tbs_penjualans.produk_id', '=', 'produks.produk_id')
-            ->where('tbs_penjualans.toko_id', Auth::user()->toko_id)
-            ->where('session_id', $session_id)
+            ->where('tbs_penjualans.toko_id', Auth::user()->toko_id)->where('session_id', $session_id)
             ->get();
 
         if (count($tbsPenjualan) > 0) {
@@ -184,10 +183,10 @@ class PenjualanController extends Controller
     // proses create dan update tbs_penjualans
     public function prosesTbsPenjualan(Request $request)
     {
-
-        $itemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id);
+        $session_id       = session()->getId();
+        $itemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('session_id', $session_id);
         if (count($itemTbsPenjualan->get()) > 0) {
-            $item     = TbsPenjualan::select()->where('produk_id', $request->produk_id)->first();
+            $item     = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('session_id', $session_id)->first();
             $subtotal = ($item->jumlah_produk + 1) * $item->harga_produk;
             $itemTbsPenjualan->update([
                 'jumlah_produk' => $item->jumlah_produk + $request->jumlah,
