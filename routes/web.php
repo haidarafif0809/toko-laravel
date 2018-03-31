@@ -74,7 +74,6 @@ Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');
 Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
 Route::post('/update-diskon-tbs-penjualan', 'PenjualanController@ubahDiskonProdukTbsPenjualan');
 Route::post('/update-diskon-faktur-tbs-penjualan', 'PenjualanController@ubahDiskonFakturTbsPenjualan');
-Route::post('/proses-tambah-tbs', 'PenjualanController@prosesTambahTbs');
 
 Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
 
