@@ -68,6 +68,7 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::post('/penjualan/view', 'PenjualanController@view');
+Route::post('/simpan-penjualan', 'PenjualanController@simpanDataPenjualan');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
 Route::post('/proses-tbs-penjualan', 'PenjualanController@prosesTbsPenjualan');

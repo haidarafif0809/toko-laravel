@@ -317,7 +317,7 @@ display:block;
 									<div class="form-group">
 										<label class="col-md-4 control-label" for="textinput">No Meja</label>  
 										<div class="col-md-8">
-											<input v-model="bukaPenjualan.nomor_meja" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
+											<input v-model="penjualan.nomor_meja" id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control input-md">
 											<span class="help-block"></span>  
 										</div>
 									</div>
@@ -326,7 +326,16 @@ display:block;
 									<div class="form-group">
 										<label class="col-md-4 control-label" for="textarea">Catatan</label>
 										<div class="col-md-8">                     
-											<textarea v-model="bukaPenjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
+											<textarea v-model="penjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-md-4 control-label" for="textarea">Pelanggan</label>
+										<div class="col-md-8">    
+											<selectize-component v-model="penjualan.nama_pelanggan" :settings="setting_pelanggan"> 
+												<option v-for="pelanggan in pelanggans" v-bind:value="pelanggan.id" >{{ pelanggan.nama_pelanggan }}</option>
+											</selectize-component>
 										</div>
 									</div>
 
@@ -532,10 +541,6 @@ display:block;
 				dataProduksPenjualan:{}, //paginations
 				tbs_penjualans: [],
 				pelanggans:[],
-				bukaPenjualan: {
-					nomor_meja: '',
-					catatan: '',
-				},
 				filter: {
 					kategori_produk: ''
 				},
@@ -563,6 +568,8 @@ display:block;
 					kembalian: '',
 				},
 				penjualan: {
+					nomor_meja: '',
+					catatan: '',
 					nama_pelanggan: '',
 					cara_bayar: '',
 					diskon: '',
@@ -606,7 +613,7 @@ display:block;
 				diskonFaktur: 1,
 				diskonFakturRp: 0,
 				formKartu: 0,
-				urlBukaPenjualan: window.location.origin + (window.location.pathname).replace("home","buka-penjualan"),
+				urlSimpanPenjualan: window.location.origin + (window.location.pathname).replace("home","simpan-penjualan"),
 				url : window.location.origin + (window.location.pathname).replace("home", "penjualan"),
 				urlTambahTbs : window.location.origin + (window.location.pathname).replace("home", "proses-tbs-penjualan"),
 				urlUpdateTbs : window.location.origin + (window.location.pathname).replace("home", "update-tbs-penjualan"),
@@ -697,6 +704,7 @@ display:block;
 
 			}
 		},
+
 		simpanDiskonPerFaktur(){
 			var app = this;
 			
@@ -765,6 +773,7 @@ display:block;
 				app.loading = false;
 			});
 		},
+
 		getProduksPenjualan(page) {
 			var app = this;
 			if (typeof page === 'undefined') {
@@ -782,6 +791,8 @@ display:block;
 				app.loading = false
 			});
 		},
+
+		// menampilakan tbs penjualan / pesanan
 		getTbsPenjualan() {
 			var app = this;
 			axios.get(app.url +'/tbs-penjualan')
@@ -795,18 +806,10 @@ display:block;
 					// console.log(resp.data);
 				}
 				app.loadingTbs = false;
-				// else {
-					
-				// 	app.tbs_penjualans = resp.data;
-				// 	app.loadingTbs = false;
-				// }
-				// app.tbs_penjualans.total_item = 
-				
 			})	
 			.catch(function () {
 				alert("Could not load tbs penjualan");
 			});
-
 		},
 
 		selectPelanggans() {
@@ -817,40 +820,6 @@ display:block;
 			})
 			.catch(function (resp) {
 				alert("Could not load pelanggan");
-			});
-		},
-
-		tunai(){
-			this.formTunai = 1
-			this.formKartu = 0
-		},
-
-		diskonPenjualanProdukPersen(){
-			this.diskonProduk = 1
-			this.diskonProdukRp = 0
-		},
-
-		diskonPenjualanProdukRp(){
-			this.diskonProduk = 0
-			this.diskonProdukRp = 1
-		},
-
-		diskonPenjualanFakturPersen(){
-			this.diskonFaktur = 1
-			this.diskonFakturRp = 0
-		},
-
-		diskonPenjualanFakturRp(){
-			this.diskonFaktur = 0
-			this.diskonFakturRp = 1
-		},
-		kartu(){
-			this.formTunai = 0
-			// this.formKartu = 1
-			this.$swal({
-				title: "GAGAL!",
-				text: "Fitur ini sedang dalam pengembangan",
-				icon: "warning",
 			});
 		},
 
@@ -867,7 +836,7 @@ display:block;
 			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
 			app.penjualan.keterangan = app.penjualan.keterangan;
 			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
-			var Penjualan = app.penjualan;
+			var newPenjualan = app.penjualan;
 			var validate = document.getElementById("bayar");
 			var validates = document.getElementById("p");
 			if (Pembayaran == 0 || Pembayaran == "") {
@@ -878,11 +847,9 @@ display:block;
 				validates.innerHTML="Jumlah pembayaran kurang!!";	
 			}
 			else{
-
 				app.closeModal();
-
 				// console.log(app.penjualan.subtotal)
-				axios.post(app.url, Penjualan)
+				axios.post(app.url, newPenjualan)
 				.then(function(resp){
 					app.message = 'Sukses : Berhasil Melakukan Pembayaran ';
 					swal({
@@ -911,46 +878,40 @@ display:block;
 			}
 
 		},
-		alert(pesan){
-			this.$swal({
-				title: "Berhasil!",
-				text: pesan,
-				icon: "success",
-			});
-		},
+
 		simpanPenjualan() {
 			var app = this;
-
-			axios.post(app.urlBukaPenjualan, app.bukaPenjualan)
+			app.penjualan.total_bayar = app.jumlahBayar;
+			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.cara_bayar = 'Tunai';
+			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
+			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
+			app.penjualan.nomor_meja = app.penjualan.nomor_meja;
+			app.penjualan.catatan = app.penjualan.catatan;
+			var newPenjualan = app.penjualan;
+			axios.post(app.urlSimpanPenjualan, newPenjualan)
 			.then(function (resp) {
-				console.log(resp);
-				app.alert('Berhasil');
+				app.getKategoriProduk();
+				app.getProduksPenjualan();
+				app.getTbsPenjualan();
+				app.selectPelanggans();
+				app.tbs_penjualans = '';
+				app.pelanggans = '';
+				app.diskonPerfaktur.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.pembayaran.bayar = '';
+				app.pembayaran.kembalian = 0;
+				app.penjualan.keterangan = '';
+				app.penjualan.status_pemesanan = 0;
+				app.alert('Berhasil disimpan');
 			})
 			.catch(function (resp) {
-				console.log(resp);
 				app.alert('Gagal');
 			});
 
 		},
-		getHasilPencarian(page) {
-			var app = this;
-			app.loading = true;
-			if (typeof page === 'undefined') {
-				page = 1;
-			}
 
-			axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
-			.then(function (resp) {
-				app.loading = false    
-				app.produksPenjualan = resp.data;
-				app.dataProduksPenjualan = resp;
-				console.log(resp.data);
-			})
-			.catch(function (resp) {
-				alert("Tidak dapat memuat produk..");
-				app.loading = false;
-			});
-		},
+		// create tbs_penjulan / klik gambar produk
 		submitTbsPenjualan(produksPenjualans){
 			var app = this;
 			app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
@@ -958,14 +919,10 @@ display:block;
 			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
 			app.inputTbsPenjualan.jumlah = 1;
 			var newTbs = app.inputTbsPenjualan;
-
 			axios.post(app.urlTambahTbs, newTbs)
 			.then(function (resp) {
-				// app.message = 'Sukses : Berhasil Menambah "'+ produk.data_produk.nama_produk+'" ke Pemesanan';
-				// app.alert(app.message);
 				app.$router.replace('/penjualan');
 				app.getTbsPenjualan();
-				// app.$swal.close();
 			})
 			.catch(function (resp) {
 				console.log(resp)
@@ -975,6 +932,7 @@ display:block;
 			});
 		},
 
+		// tambah / kurang kwantitas produk pada tbs_penjualan
 		simpanJumlahProduk(jumlah, harga_produk){
 			var app = this;
 			var subtotal = (jumlah * harga_produk);
@@ -996,6 +954,25 @@ display:block;
 			});		
 		},
 
+		getHasilPencarian(page) {
+			var app = this;
+			app.loading = true;
+			if (typeof page === 'undefined') {
+				page = 1;
+			}
+			axios.get(app.url+'/pencarian?search='+app.search+'&page='+page)
+			.then(function (resp) {
+				app.loading = false    
+				app.produksPenjualan = resp.data;
+				app.dataProduksPenjualan = resp;
+				console.log(resp.data);
+			})
+			.catch(function (resp) {
+				alert("Tidak dapat memuat produk..");
+				app.loading = false;
+			});
+		},
+
 		deleteTbsPenjualan(id_tbs_penjualan) {
 			var app = this;
 			axios.delete(app.urlHapusTbs+ '/'+id_tbs_penjualan)
@@ -1008,8 +985,7 @@ display:block;
 					showConfirmButton: false,
 					timer: 1000,
 				});
-						// app.$router.replace('/penjualan');
-					})
+			})
 			.catch(function (resp) {
 				app.$router.replace('/penjualan');
 				swal({
@@ -1025,6 +1001,43 @@ display:block;
 			this.diskonPerproduk.persen = '',
 			this.$router.replace('/penjualan');
 		},
+
+		tunai(){
+			this.formTunai = 1
+			this.formKartu = 0
+		},
+
+		diskonPenjualanProdukPersen(){
+			this.diskonProduk = 1
+			this.diskonProdukRp = 0
+		},
+
+		diskonPenjualanProdukRp(){
+			this.diskonProduk = 0
+			this.diskonProdukRp = 1
+		},
+
+		diskonPenjualanFakturPersen(){
+			this.diskonFaktur = 1
+			this.diskonFakturRp = 0
+		},
+
+		diskonPenjualanFakturRp(){
+			this.diskonFaktur = 0
+			this.diskonFakturRp = 1
+		},
+		
+		kartu(){
+			this.formTunai = 0
+			// this.formKartu = 1
+			this.$swal({
+				title: "GAGAL!",
+				text: "Fitur ini sedang dalam pengembangan",
+				icon: "warning",
+			});
+		},
+
+
 		alert(pesan) {
 			this.$swal({
 				title: "Berhasil!",
@@ -1032,6 +1045,7 @@ display:block;
 				icon: "success",
 			});
 		},
+
 		closeModal(){
 			$("#btnBayar").attr("data-dismiss", "modal");
 		}
