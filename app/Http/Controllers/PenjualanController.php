@@ -188,9 +188,12 @@ class PenjualanController extends Controller
         if (count($itemTbsPenjualan->get()) > 0) {
             $item     = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('session_id', $session_id)->first();
             $subtotal = ($item->jumlah_produk + 1) * $item->harga_produk;
+            $diskon   = ($subtotal * $item->diskon_persen) / 100;
+            $total    = $subtotal - $diskon;
             $itemTbsPenjualan->update([
                 'jumlah_produk' => $item->jumlah_produk + $request->jumlah,
-                'subtotal'      => $subtotal,
+                'subtotal'      => $total,
+                'diskon'        => $diskon,
             ]);
         } else {
             $session_id = session()->getId();
