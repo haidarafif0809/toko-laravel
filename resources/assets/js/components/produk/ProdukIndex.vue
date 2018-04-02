@@ -117,32 +117,37 @@
                                             <td>:</td>
                                             <td>Nama Produk Anda.</td>
                                         </tr>
+
                                         <tr>
                                             <td class="bold">Kategori Produk</td>
                                             <td>:</td>
                                             <td>Masukkan Kategori Produk yang sudah ada atau masukkan yang lain untuk membuat yang baru.</td>
                                         </tr>
+
                                         <tr>
                                             <td class="bold">Harga Jual</td>
                                             <td>:</td>
                                             <td>Harga Jual Produk Anda.</td>
                                         </tr>
-                                        <tr>
-                                            <td class="bold">Bisa Dijual</td>
-                                            <td>:</td>
-                                            <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
-                                        </tr>
+
                                         <tr>
                                             <td class="bold">Satuan</td>
                                             <td>:</td>
                                             <td>Isi satuan produk anda, contoh Pcs, Porsi, Pack, atau yang lainnya.</td>
                                         </tr>
+
                                         <tr>
+                                            <td class="bold">Bisa Dijual</td>
+                                            <td>:</td>
+                                            <td>Menentukan apakah Produk Anda dapat dijual atau tidak ( <b>ya</b> / <b>tidak</b> ).</td>
+                                        </tr>
+
+                                        <!-- <tr>
                                             <td class="bold">Tambahan</td>
                                             <td>:</td>
                                             <td>Isi Tambahan apabila ada tambahan bahan dalam produk anda</td>
                                         </tr>
-                                    </tbody>
+ -->                                    </tbody>
                                 </table>
                                 <div class="row">
                                     <div class="col-md-12">Contoh seperti tabel di bawah:</div>
@@ -154,33 +159,33 @@
                                             <th>Nama Produk</th>
                                             <th>Kategori Produk</th>
                                             <th>Harga Jual</th>
-                                            <th>Bisa Dijual</th>
                                             <th>Satuan</th>
+                                            <th>Bisa Dijual</th>
                                             <!-- <th>Tambahan</th> -->
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>Mie Goreng</td>
                                                 <td>Makanan</td>
-                                                <td align="right">25000</td>
-                                                <td>ya</td>
+                                                <td align="right">25.000</td>
                                                 <td>Porsi</td>
+                                                <td>ya</td>
                                                 <!-- <td>Cumi</td> -->
                                             </tr>
                                             <tr>
                                                 <td>Nasi Goreng</td>
                                                 <td>Makanan</td>
-                                                <td align="right">23000</td>
-                                                <td>ya</td>
+                                                <td align="right">23.000</td>
                                                 <td>Piring</td>
+                                                <td>ya</td>
                                                 <!-- <td>ayam</td> -->
                                             </tr>
                                             <tr>
                                                 <td>Jus Jeruk</td>
                                                 <td>Minuman</td>
-                                                <td align="right">12000</td>
-                                                <td>ya</td>
+                                                <td align="right">12.000</td>
                                                 <td>Porsi</td>
+                                                <td>ya</td>
                                                 <!-- <td>Susu Coklat</td> -->
                                             </tr>
                                         </tbody>

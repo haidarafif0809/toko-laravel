@@ -312,8 +312,8 @@ class ProdukController extends Controller
                     'Nama Produk',
                     'Kategori Produk',
                     'Harga Jual',
-                    'Bisa Dijual',
                     'Satuan',
+                    'Bisa Dijual',
 
                 ]);
             });
@@ -336,8 +336,8 @@ class ProdukController extends Controller
             'Nama Produk'     => 'required',
             'Kategori Produk' => 'required|exists:kategori_produks,id',
             'Harga Jual'      => 'required|numeric',
-            'Bisa Dijual'     => 'required',
             'Satuan'          => 'required',
+            'Bisa Dijual'     => 'required',
 
         ];
         // Catat semua id buku baru
@@ -488,8 +488,8 @@ class ProdukController extends Controller
                     'nama_produk'         => $row['nama_produk'],
                     'kategori_produks_id' => $arrNamaIdKategoriProduk[$importNamaKategoriProduk],
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $bisa_dijual,
                     'satuan'              => $satuan,
+                    'bisa_dijual'         => $bisa_dijual,
                     'produk_modifier_id'  => '',
 
                 ]);
@@ -510,8 +510,8 @@ class ProdukController extends Controller
                     'nama_produk'         => $row['nama_produk'],
                     'kategori_produks_id' => $idKategoriProdukTerbaru->id,
                     'harga_jual'          => $row['harga_jual'],
-                    'bisa_dijual'         => $bisa_dijual,
                     'satuan'              => $satuan,
+                    'bisa_dijual'         => $bisa_dijual,
                     'produk_modifier_id'  => '',
 
                 ]);
