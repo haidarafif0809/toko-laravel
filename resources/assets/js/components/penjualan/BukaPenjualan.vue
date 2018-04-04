@@ -44,7 +44,7 @@
 								<td align="right">{{ buka_penjualan.data_simpan_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
-									<a href="#" class="btn btn-xs btn-success" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)"><i class="fa fa-box-open"></i> buka
+									<a href="#/penjualan" class="btn btn-xs btn-success" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)"><i class="fa fa-box-open"></i> buka
 									</a>
 									<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.id"><i class="fa fa-print"></i> cetak
 									</router-link>
@@ -148,10 +148,8 @@ export default {
     	saveForm(id) {
     		var app = this;
     		if (app.tbs_penjualans === undefined) {
+    			app.$router.replace('/penjualan');
     			axios.get(app.url+'/create-tbs-penjualan?id=' + id)
-    			.then(function(resp){
-    				app.$router.replace('/penjualan');
-    			}) 
     		} else{
     			var app = this;
     			app.getBukaPenjualan();

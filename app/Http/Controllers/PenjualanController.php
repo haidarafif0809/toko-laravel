@@ -317,9 +317,10 @@ class PenjualanController extends Controller
     // create tbs_penjualan pada saat buka penjualan
     public function createTbsPenjualan(Request $request)
     {
+        $session_id                   = session()->getId();
         $data_simpan_penjualan        = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
         $data_detail_simpan_penjualan = SimpanDetailPenjualan::dataSimpanDetailPenjualan($data_simpan_penjualan->id)->get();
-        $tbs_penjualan                = TbsPenjualan::select()->where('toko_id', Auth::user()->toko_id)->get();
+        $tbs_penjualan                = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->get();
         if (count($tbs_penjualan) < 1) {
             foreach ($data_detail_simpan_penjualan as $data_detail_simpan_penjualans) {
                 $session = session()->getId();
@@ -335,6 +336,8 @@ class PenjualanController extends Controller
                     'toko_id'       => Auth::user()->toko_id,
                 ]);
             }
+            $data_simpan_penjualan->delete();
+            $data_detail_simpan_penjualan->delete();
             $array = array();
             array_push($array, ['total_bayar' => $data_simpan_penjualan->total_bayar, 'diskon' =>
                 $data_simpan_penjualan->diskon, 'nomor_meja' => $data_simpan_penjualan->nomor_meja, 'catatan' => $data_simpan_penjualan->catatan]);

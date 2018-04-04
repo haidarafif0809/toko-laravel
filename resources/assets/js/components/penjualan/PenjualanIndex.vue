@@ -298,7 +298,7 @@ display:block;
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(diskonPerproduk.subtotal)" >Simpan</button>
+							<button id="btnDiskon" class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="simpanDiskonPerProduk(diskonPerproduk.harga_produk, diskonPerproduk.jumlah_produk)" >Simpan</button>
 							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
 						</div>
 					</div>
@@ -434,7 +434,7 @@ display:block;
 								<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
 									<tr v-for="tbs_penjualan, index in tbs_penjualans">
 										<td>{{ tbs_penjualan.nama_produk}} <br>
-											<a href="#modalDiskonPenjualanPerProduk" v-bind:title="message" data-toggle="modal" @click="getDiskonProdukTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal)">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
+											<a href="#modalDiskonPenjualanPerProduk" v-bind:title="message" data-toggle="modal" @click="getDiskonProdukTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.harga_produk, tbs_penjualan.jumlah_produk)">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
 
 											<p v-if="tbs_penjualan.diskon_persen != undefined ">Disc.{{Number.parseInt(tbs_penjualan.diskon_persen)}}% ({{tbs_penjualan.diskon | pemisahTitik}})</p>
 											<p v-else>Disc.0% (0)</p>
@@ -581,6 +581,8 @@ display:block;
 				diskonPerproduk:{
 					id: '',
 					subtotal: '',
+					harga_produk: '',
+					jumlah_produk: '',
 					persen: '',
 					rupiah: '',
 				},
@@ -700,10 +702,12 @@ display:block;
 			var filter = app.filter;
 			app.getProduksPenjualan();
 		},
-		getDiskonProdukTbs(id, subtotal) {
+		getDiskonProdukTbs(id, subtotal, harga, jumlah) {
 			let app = this;
 			app.diskonPerproduk.id = id;
 			app.diskonPerproduk.subtotal = subtotal;
+			app.diskonPerproduk.harga_produk = harga;
+			app.diskonPerproduk.jumlah_produk = jumlah;
 		},
 		getDataTbs(id, subtotal, jumlah, harga_produk) {
 			this.dataTbs.id = id;
@@ -748,8 +752,9 @@ display:block;
 
 		},
 
-		simpanDiskonPerProduk(subtotal){
+		simpanDiskonPerProduk(harga, jumlah){
 			var app = this;
+			var subtotal = (harga * jumlah);
 			if(app.formDiskonProduk.persen > 0){
 				app.diskonPerproduk.persen = app.formDiskonProduk.persen;
 				app.diskonPerproduk.rupiah = (subtotal * app.diskonPerproduk.persen) / 100;
@@ -770,6 +775,8 @@ display:block;
 			.then(function (resp) {
 				app.$router.replace('/penjualan');
 				app.getTbsPenjualan();
+				app.formDiskonProduk.persen = '';
+				app.formDiskonProduk.rupiah = '';
 			})
 			.catch(function (resp) {
 				app.errors = resp.response.data.errors;
