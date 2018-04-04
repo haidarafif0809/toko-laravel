@@ -14,7 +14,7 @@
 			<li class="active" >Detail</li>    
 		</ol>
 		<div class="panel panel-default">
-			<div class="panel-heading">Detail Produk {{ produk.nama_produk }}</div>
+			<div class="panel-heading"><h4>Detail Produk : {{ produk.nama_produk }}</h4></div>
 
 			<div class="panel-body">
 				<div class="col-md-5">
@@ -34,21 +34,7 @@
 									</td>
 									<td>{{  "Rp" }}{{ new Intl.NumberFormat().format(produk.harga_jual) }}</td>
 								</tr>
-								<tr>
-									<td>
-										<label>Kategori Produk:</label>
-									</td>
-									<td>{{ kategori_produk.nama_kategori_produk }}</td>
-								</tr>
-								<tr>
-									<td>
-										<label>Status Jual:</label>
-									</td>
-									<td>
-										<span v-if="produk.bisa_dijual == 1">Aktif</span>
-										<span v-if="produk.bisa_dijual == 0">Tidak Aktif</span>
-									</td>
-								</tr>
+
 								<tr>
 									<td>
 										<label>Satuan:</label>
@@ -60,6 +46,24 @@
 										<span v-else>{{ produk.satuan }}</span>
 									</td>
 								</tr>
+
+								<tr>
+									<td>
+										<label>Kategori Produk:</label>
+									</td>
+									<td>{{ kategori_produk.nama_kategori_produk }}</td>
+								</tr>
+
+								<tr>
+									<td>
+										<label>Status Jual:</label>
+									</td>
+									<td>
+										<span v-if="produk.bisa_dijual == 1">Aktif</span>
+										<span v-if="produk.bisa_dijual == 0">Tidak Aktif</span>
+									</td>
+								</tr>
+
 								<tr>
 									<td>
 										<label>Tambahan:</label>

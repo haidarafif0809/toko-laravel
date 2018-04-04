@@ -57,6 +57,7 @@
 
 							</div>
 						</div>
+
 						<div class="form-group">
 							<label for="harga" class="col-md-2 control-label">Harga Jual</label>
 							<div class="col-md-4">
@@ -64,22 +65,6 @@
 								</money>
 								<span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
-							</div>
-						</div> 
-						<div class="form-group">
-							<label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
-							<div class="col-md-4 margin-atas">
-								<div class="col-md-6">
-									<label>
-										<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"  checked="checked"> Ya
-									</label>
-								</div>
-								<div class="col-md-6">
-									<label>
-										<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
-									</label>
-									<span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
-								</div>
 							</div>
 						</div> 
 
@@ -107,6 +92,23 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
+							<div class="col-md-4 margin-atas">
+								<div class="col-md-6">
+									<label>
+										<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"  checked="checked"> Ya
+									</label>
+								</div>
+								<div class="col-md-6">
+									<label>
+										<input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
+									</label>
+									<span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
+								</div>
+							</div>
+						</div> 
 						
 						<div v-if="produk.foto != ''" class="form-group">
 							<label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
@@ -117,6 +119,7 @@
 								<img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Foto</label>
 							<div class="col-md-4">

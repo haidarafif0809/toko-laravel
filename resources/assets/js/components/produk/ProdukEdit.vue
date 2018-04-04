@@ -27,6 +27,7 @@
 
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="kategori_produks_id" class="col-md-2 control-label">Kategori Produk</label>
                             <div class="col-md-4">
@@ -50,6 +51,7 @@
 
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="harga" class="col-md-2 control-label">Harga Jual</label>
                             <div class="col-md-2">
@@ -57,42 +59,6 @@
                                 </money>
                                 <span v-if="errors.harga_jual" class="label label-danger">{{ errors.harga_jual[0] }}</span>
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
-                            <div class="col-md-4 margin-atas">
-                                <div class="col-md-6">
-                                    <label>
-                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"> Ya
-                                    </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>
-                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
-                                    </label>
-                                    <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
-                            <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
-                            <div class="col-md-4">
-                                <div v-if="produk.foto.length > 100">
-                                    <img :src="produk.foto" class="img-responsive thumbnail shadow">
-                                </div>
-                                <div v-else>
-                                    <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
-                                </div>
-                            </div>
-                            <div v-if="produk.foto == ''" class="col-md-4">
-                                <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="foto" class="col-md-2 control-label">Foto</label>
-                            <div class="col-md-4">
-                                <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
                             </div>
                         </div>
 
@@ -118,6 +84,45 @@
                                     <input class="form-control" required autocomplete="off" placeholder="Nama satuan" type="text" v-model="produk.satuan" name="satuan"  autofocus="">
                                     <span v-if="errors.satuan" class="label label-danger">{{ errors.satuan[0] }}</span>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bisa_dijual" class="col-md-2 control-label">Bisa Dijual</label>
+                            <div class="col-md-4 margin-atas">
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="1"> Ya
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>
+                                        <input type="radio" name="bisa_dijual" v-model="produk.bisa_dijual" value="0"> Tidak
+                                    </label>
+                                    <span v-if="errors.bisa_dijual" class="label label-danger">{{ errors.bisa_dijual[0] }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="produk.foto !== null && produk.foto != ''" class="form-group">
+                            <label for="pratinjau_foto_produk" class="col-md-2 control-label">Pratinjau Foto</label>
+                            <div class="col-md-4">
+                                <div v-if="produk.foto.length > 100">
+                                    <img :src="produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
+                                <div v-else>
+                                    <img :src="url_foto_produk +'/'+ produk.foto" class="img-responsive thumbnail shadow">
+                                </div>
+                            </div>
+                            <div v-if="produk.foto == ''" class="col-md-4">
+                                <img :src="broken_file" title="File yang Anda masukkan tidak didukung" class="img-responsive thumbnail shadow">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto" class="col-md-2 control-label">Foto</label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
                             </div>
                         </div>
 
