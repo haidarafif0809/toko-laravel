@@ -244,6 +244,7 @@ class PenjualanController extends Controller
         ]);
     }
 
+    // create simpan_penjualan dan simpan_detail_penjualan saat klik tombol simpan
     public function simpanDataPenjualan(Request $request)
     {
         $session_id   = session()->getId();
@@ -268,10 +269,77 @@ class PenjualanController extends Controller
                     'harga_produk'  => $tbs_penjualans->harga_produk,
                     'subtotal'      => $tbs_penjualans->subtotal,
                     'diskon'        => $tbs_penjualans->diskon,
+                    'diskon_persen' => $tbs_penjualans->diskon_persen,
                     'jumlah_produk' => $tbs_penjualans->jumlah_produk,
                 ]);
             }
             $tbsPenjualan->delete();
+        }
+    }
+
+    public function dataPagination($penjualan, $penjualanData, $link)
+    {
+
+        //DATA PAGINATION
+        $respons['current_page']   = $penjualan->currentPage();
+        $respons['data']           = $penjualanData;
+        $respons['first_page_url'] = url('/penjualan/' . $link . '?page=' . $penjualan->firstItem());
+        $respons['from']           = 1;
+        $respons['last_page']      = $penjualan->lastPage();
+        $respons['last_page_url']  = url('/penjualan/' . $link . '?page=' . $penjualan->lastPage());
+        $respons['next_page_url']  = $penjualan->nextPageUrl();
+        $respons['path']           = url('/penjualan/' . $link . '');
+        $respons['per_page']       = $penjualan->perPage();
+        $respons['prev_page_url']  = $penjualan->previousPageUrl();
+        $respons['to']             = $penjualan->perPage();
+        $respons['total']          = $penjualan->total();
+
+        return $respons;
+    }
+
+    public function viewBukaPenjualan()
+    {
+        $buka_penjualan = SimpanPenjualan::dataSimpanPenjualan()->paginate(10);
+        // return response()->json($buka_penjualan);
+        $data = [];
+        foreach ($buka_penjualan as $buka_penjualans) {
+            $data_produk = SimpanDetailPenjualan::simpanDetailProduk($buka_penjualans->id)->get();
+            array_push($data, ['data_simpan_penjualan' => $buka_penjualans, 'data_produk' => $data_produk]);
+            // $data[]['data_simpan_penjualan'] = $buka_penjualans;
+            // $data[]['data_produk']           = $data_produk;
+            # code...
+        }
+        $link    = 'view-buka-penjualan';
+        $respons = $this->dataPagination($buka_penjualan, $data, $link);
+        return response()->json($respons);
+    }
+
+    // create tbs_penjualan pada saat buka penjualan
+    public function createTbsPenjualan(Request $request)
+    {
+        $data_simpan_penjualan        = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
+        $data_detail_simpan_penjualan = SimpanDetailPenjualan::dataSimpanDetailPenjualan($data_simpan_penjualan->id)->get();
+        $tbs_penjualan                = TbsPenjualan::select()->where('toko_id', Auth::user()->toko_id)->get();
+        if (count($tbs_penjualan) < 1) {
+            foreach ($data_detail_simpan_penjualan as $data_detail_simpan_penjualans) {
+                $session = session()->getId();
+                TbsPenjualan::create([
+                    'session_id'    => $session,
+                    'satuan_id'     => $data_detail_simpan_penjualans->id_satuan,
+                    'produk_id'     => $data_detail_simpan_penjualans->id_produk,
+                    'harga_produk'  => $data_detail_simpan_penjualans->harga_produk,
+                    'jumlah_produk' => $data_detail_simpan_penjualans->jumlah_produk,
+                    'diskon'        => $data_detail_simpan_penjualans->diskon,
+                    'diskon_persen' => $data_detail_simpan_penjualans->diskon_persen,
+                    'subtotal'      => $data_detail_simpan_penjualans->subtotal,
+                    'toko_id'       => Auth::user()->toko_id,
+                ]);
+            }
+            $array = array();
+            array_push($array, ['total_bayar' => $data_simpan_penjualan->total_bayar, 'diskon' =>
+                $data_simpan_penjualan->diskon, 'nomor_meja' => $data_simpan_penjualan->nomor_meja, 'catatan' => $data_simpan_penjualan->catatan]);
+            return response()->json($data_detail_simpan_penjualan);
+            # code...
         }
     }
 
