@@ -38,7 +38,8 @@ class DetailPenjualan extends Model
     {
         $query->select(
             DB::raw('SUM(detail_penjualans.subtotal) as total'),
-            DB::raw('SUM(detail_penjualans.jumlah_produk) as jumlah_produks'))
+            DB::raw('SUM(detail_penjualans.jumlah_produk) as jumlah_produks')
+        )
             ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->where('penjualans.pelanggan_id', $request->id)

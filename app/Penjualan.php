@@ -123,6 +123,7 @@ class Penjualan extends Model
     public function scopeDiskonTransaksiPelanggan($query, $request)
     {
         $query->select(DB::raw('SUM(diskon) as diskon'),
+            DB::raw('SUM(total_bayar) as total_bayar'),
             'penjualans.pelanggan_id')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->where('penjualans.pelanggan_id', $request->id)

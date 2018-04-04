@@ -1,111 +1,116 @@
 <style scoped>
-.kategori {
+/*.kategori {
 	color: red;
 	font-weight: bold;
 	text-align: center;
-}
-.cart-item {
+	}*/
+	.cart-item {
 
-	overflow: auto;
-}
-#pull-right{
-	float:right;
+		overflow: auto;
+	}
+	#pull-right{
+		/*float:right;*/
 
-}
-#pull-left{
-	float:left;
+	}
+	#pull-left{
+		/*float:left;*/
 
-}
+	}
+	.head{
+		background: linear-gradient(60deg, #29b6f6, #0288d1);
+		color: white;
+	}
+	.link{
+		color: white;
+	}
+	.bayar{
+		padding: 30px 20px;
+		font-size: 35px;
+	}
 
-.bayar{
-	padding: 30px 20px;
-	font-size: 35px;
-}
+	.tombol{
+		padding: 10px 20px;
+		font-size: 15px;
+	}
+	.button{
+		padding: 5px 15px;
+		font-size: 10px;
+	}
+	.tombolBayar{
+		padding: 10px 20px;
+		font-size: 15px;
+		width: 40%;
+	}
 
-.tombol{
-	padding: 10px 20px;
-	font-size: 15px;
-}
-.button{
-	padding: 5px 15px;
-	font-size: 10px;
-}
-.tombolBayar{
-	padding: 10px 20px;
-	font-size: 15px;
-	width: 40%;
-}
+	.tabInformasi{
+		width: 50%;
+	}
+	#box{
+		border:1px solid #F0F0F0;
+		background-color:#F5F8FA;
+		border-radius: 3px;
+	}
+	#box2{
+		border:1px solid #F0F0F0;
+	}
+	.total-bayar{
+		color: red;
+		font-weight: bold;
+		text-align: center;
+	}
+	#digital{
+		background: linear-gradient(60deg, #29b6f6, #0288d1);
+		color: white;
+		border:4px solid #F5F5F5;
+	}
+	.button1{
+		background-color: black;
+		color: white;
+		border-radius:10px;
+		width: 114px;
+		height:60px;
+		left: 10px;
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		font-size: 15px;
+	}
+	.button1:hover {background-color: #424EF7;}
 
-.tabInformasi{
-	width: 50%;
-}
-#box{
-	border:1px solid #F0F0F0;
-	background-color:#F5F8FA;
-	border-radius: 3px;
-}
-#box2{
-	border:1px solid #F0F0F0;
-}
-.total-bayar{
-	color: red;
-	font-weight: bold;
-	text-align: center;
-}
-#digital{
-	background-color: #F2F2F2;
-	border-radius: 3px;
-	color:#FF0000;
-	border:4px solid #F5F5F5;
-}
-.button1{
-	background-color: black;
-	color: white;
-	border-radius:10px;
-	width: 114px;
-	height:60px;
-	left: 10px;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	font-size: 15px;
-}
-.button1:hover {background-color: #424EF7;}
+	.button2{
+		background-color: black;
+		color: white;
+		border-radius:10px;
+		width: 114px;
+		height:60px;
+		left: 10px;
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		font-size: 15px;
+	}
+	.button2:hover {background-color: #424EF7;}
 
-.button2{
-	background-color: black;
-	color: white;
-	border-radius:10px;
-	width: 114px;
-	height:60px;
-	left: 10px;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	font-size: 15px;
-}
-.button2:hover {background-color: #424EF7;}
+	.button3 {
+		background-color: green;
+		color: white;
+		border-radius:10px;
+		width: 114px;
+		height:60px;
+		left:30px;
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		font-size: 15px;
+	}
 
-.button3 {
-	background-color: green;
-	color: white;
-	border-radius:10px;
-	width: 114px;
-	height:60px;
-	left:30px;
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	font-size: 15px;
-}
+	.button3:hover {background-color: #424EF7;}
 
-.button3:hover {background-color: #424EF7;}
-
-#tbs{
-	height: 250px;
-	overflow: auto;
-}
-#digital{
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-#kategori_shadow{
-	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.modalPembayaran{
+	#tbs{
+		height: 250px;
+		overflow: auto;
+	}
+	#digital{
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	#kategori_shadow{
+		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.modalPembayaran{
 /*	width: 400px;
 height: 400px;*/
 border-radius:0px;
@@ -353,11 +358,122 @@ display:block;
 			</div>
 
 			<!-- .................................................................................................. -->
+			<div class="col-md-4" id="pull-left">
+				<div class="panel head panel-heading">
+					<span>
+						<router-link :to="{name:'indexPenjualan'}" id="tambah-kas"><a href="" class="link">Penjualan</a></router-link>
+					</span>
+					<span>|</span>
+					<span>
+						<router-link :to="{name:'bukaPenjualan'}" id="tambah-kas"><a href="" class="link">Buka Penjualan</a></router-link>
+					</span>
+				</div>
+				<div class="panel panel-default" id="digital">
+					<div class="panel-body" width="100%" style="size:100%;">
+
+						<div width="80%" style="float:right;size:95%;">
+							<h3 style="text-align:right;font-family: 'Fugaz One', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ jumlahBayar|pemisahTitik }}</h3>
+							<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
+						</div>
+
+						<div width="5%" style="float:left;size:5%;">
+							<tr>
+								<td>Subtotal</td>
+								<td>&nbsp</td>
+								<td> : </td>
+								<td>&nbsp</td>
+								<td v-if="tbs_penjualans.total_bayar === undefined">{{''}}</td>
+								<td v-else>{{tbs_penjualans.total_bayar|pemisahTitik}}</td>
+							</tr>
+							<tr>
+								<td>Diskon</td>
+								<td>&nbsp</td>
+								<td> : </td>
+								<td>&nbsp</td>
+								<td v-if="diskonPerfaktur.persen === '' ">{{''}}</td>
+								<td v-else>{{Number.parseInt(diskonPerfaktur.persen)}} %</td>
+							</tr>
+							<tr>
+								<td>Diskon</td>
+								<td>&nbsp</td>
+								<td> : </td>
+								<td>&nbsp</td>
+								<td v-if="diskonPerfaktur.rupiah === '' ">{{''}}</td>
+								<td v-else>{{diskonPerfaktur.rupiah|pemisahTitik}}</td>
+							</tr>
+							<tr>
+								<td>Pajak</td>
+								<td>&nbsp</td>
+								<td> : </td>
+								<td>&nbsp</td>
+								<td>{{''}}</td>
+							</tr>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default" id="items">
+					<div class="head panel-heading"></div>
+					<div class="panel-body">
+						<!-- pencarian produk -->
+						<div class="row">
+							<div class="col-md-12 pencarian">
+								<div class="input-group">
+									<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
+									<div class="input-group-addon">
+										<i class="fa fa-search" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- data item tbs_penjualan -->
+						<div class="table-responsive" id="tbs">
+							<table class="table table-striped table-hover">
+								<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
+									<tr v-for="tbs_penjualan, index in tbs_penjualans">
+										<td>{{ tbs_penjualan.nama_produk}} <br>
+											<a href="#modalDiskonPenjualanPerProduk" v-bind:title="message" data-toggle="modal" @click="getDiskonProdukTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal)">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
+
+											<p v-if="tbs_penjualan.diskon_persen != undefined ">Disc.{{Number.parseInt(tbs_penjualan.diskon_persen)}}% ({{tbs_penjualan.diskon | pemisahTitik}})</p>
+											<p v-else>Disc.0% (0)</p>
+										</td>
+										<td>
+											<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.jumlah_produk, tbs_penjualan.harga_produk)">
+												{{ tbs_penjualan.jumlah_produk }}
+											</button>
+										</td>
+										<td>
+										{{tbs_penjualan.subtotal|pemisahTitik}}</td>
+										<td>
+											<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
+											</button>
+										</td>
+									</tr>
+								</tbody>
+								<tbody v-else-if="loadingTbs == true" class="text-center">
+									<li>Sedang Memuat Item</li>
+								</tbody>
+								<tbody v-else class="text-center">
+									Tidak Ada Item
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
+				</div>
+
+				<!-- button aksi: simpan, bayar, diskon -->
+				<button v-bind:disabled="!isValid" class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan"><i class="fa fa-bookmark"></i> Simpan</button>
+				<button v-bind:disabled="!isValid" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
+				<button v-bind:disabled="!validate" class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
+			</div>
 
 			<div class="col-md-8" id="pull-right">
 				<div class="panel panel-default" id="kategori_shadow">
 					<!-- KATEGORI PRODUK -->
-					<div class="panel-heading text-center " ><h3><b>DAFTAR MENU PENJUALAN</b></h3></div>
+					<div class="head panel-heading text-center " ><h3><b>DAFTAR MENU PENJUALAN</b></h3></div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="form-group col-md-4 ">
@@ -375,7 +491,7 @@ display:block;
 								<div class="col-md-12">
 									<div v-if="produksPenjualan.length == 1">
 										<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
-											<div class="thumbnail box-dalam-produk" @click="submitTbsPenjualan(produksPenjualans)">
+											<div class="thumbnail box-dalam-produk">
 												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" @click="submitTbsPenjualan(produksPenjualans)">
 												<div class="caption"  >
 													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
@@ -433,102 +549,6 @@ display:block;
 					</div>
 				</div>
 			</div>
-
-			<div class="col-md-4" id="pull-left">
-				<div class="panel panel-default" id="digital">
-					<div class="panel-body" width="100%" style="size:100%;">
-
-						<div width="80%" style="float:right;size:95%;">
-							<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-if="tbs_penjualans.total_bayar != undefined" class="total-bayar" v-model="jumlahBayar">{{ jumlahBayar|pemisahTitik }}</h3>
-							<h3 style="text-align:right;font-family: 'Orbitron', sans-serif;" v-else class="total-bayar"></h3>
-						</div>
-
-						<div width="5%" style="float:left;size:5%;">
-							<tr>
-								<td>Subtotal</td>
-								<td>:</td>
-								<td v-if="tbs_penjualans.total_bayar === undefined">{{''}}</td>
-								<td v-else>{{tbs_penjualans.total_bayar|pemisahTitik}}</td>
-							</tr>
-							<tr>
-								<td>Diskon</td>
-								<td>:</td>
-								<td v-if="diskonPerfaktur.persen === '' ">{{''}}</td>
-								<td v-else>{{Number.parseInt(diskonPerfaktur.persen)}} %</td>
-							</tr>
-							<tr>
-								<td>Diskon</td>
-								<td>:</td>
-								<td v-if="diskonPerfaktur.rupiah === '' ">{{''}}</td>
-								<td v-else>{{diskonPerfaktur.rupiah|pemisahTitik}}</td>
-							</tr>
-							<tr>
-								<td>Pajak</td>
-								<td>:</td>
-								<td>{{''}}</td>
-							</tr>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="panel panel-default" id="items">
-					<div class="panel-heading"></div>
-					<div class="panel-body">
-						<!-- pencarian produk -->
-						<div class="row">
-							<div class="col-md-12 pencarian">
-								<div class="input-group">
-									<input type="text" class="form-control" name="search" placeholder="Pencarian Produk"  v-model="search" >
-									<div class="input-group-addon">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- data item tbs_penjualan -->
-						<div class="table-responsive" id="tbs">
-							<table class="table table-striped table-hover">
-								<tbody v-if="tbs_penjualans.length > 0 && loadingTbs == false" class="data-ada">
-									<tr v-for="tbs_penjualan, index in tbs_penjualans">
-										<td>{{ tbs_penjualan.nama_produk}} <br>
-											<a href="#modalDiskonPenjualanPerProduk" data-toggle="modal" @click="getDiskonProdukTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal)">@{{tbs_penjualan.harga_produk|pemisahTitik}}</a><br>
-
-											<p v-if="tbs_penjualan.diskon_persen != undefined ">Disc.{{Number.parseInt(tbs_penjualan.diskon_persen)}}% ({{tbs_penjualan.diskon | pemisahTitik}})</p>
-											<p v-else>Disc.0% (0)</p>
-										</td>
-										<td>
-											<button class="button trash" data-toggle="modal" data-target="#modalJumlahItem" @click="getDataTbs(tbs_penjualan.id_tbs_penjualan, tbs_penjualan.subtotal, tbs_penjualan.jumlah_produk, tbs_penjualan.harga_produk)">
-												{{ tbs_penjualan.jumlah_produk }}
-											</button>
-										</td>
-										<td>
-										{{tbs_penjualan.subtotal|pemisahTitik}}</td>
-										<td>
-											<button class="fa fa-times fa-1x splice" v-on:click="deleteTbsPenjualan(tbs_penjualan.id_tbs_penjualan)" type="button">
-											</button>
-										</td>
-									</tr>
-								</tbody>
-								<tbody v-else-if="loadingTbs == true" class="text-center">
-									<li>Sedang Memuat Item</li>
-								</tbody>
-								<tbody v-else class="text-center">
-									Tidak Ada Item
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<vue-simple-spinner v-if="loadingTbs"></vue-simple-spinner>
-				</div>
-
-				<!-- button aksi: simpan, bayar, diskon -->
-				<button class="button button2" data-toggle="modal" data-target="#modalSimpanPenjualan">Simpan</button>
-				<button v-bind:disabled="!isValid" class="button button1" data-toggle="modal" data-target="#modalDiskonPenjualan">Diskon</button>
-				<button v-bind:disabled="!validate" class="button button3" data-target="#modalBayar" data-toggle="modal">Bayar</button>
-			</div>
-			
 		</div>
 	</template>
 
@@ -536,6 +556,7 @@ display:block;
 	export default {
 		data: function () {
 			return {
+				message: 'Input Diskon Per Produk',
 				kategori_produks: [],
 				produksPenjualan: [],
 				dataProduksPenjualan:{}, //paginations

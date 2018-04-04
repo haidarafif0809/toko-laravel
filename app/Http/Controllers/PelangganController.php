@@ -121,12 +121,19 @@ class PelangganController extends Controller
 
     public function totalRiwayatTransaksi(Request $request)
     {
-        $diskon                  = Penjualan::diskonTransaksiPelanggan($request)->first();
-        $total                   = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)->first();
-        $array                   = [];
-        $result                  = ($total->total - $diskon->diskon);
-        $array['total']          = $result;
-        $array['jumlah_produks'] = $total->jumlah_produks;
+        $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($request);
+        $array = [];
+        if ($total->count() > 0) {
+            $diskon                  = Penjualan::diskonTransaksiPelanggan($request)->first();
+            $total                   = $total->first();
+            $result                  = ($total->total - $diskon->diskon);
+            $array['total']          = $result;
+            $array['jumlah_produks'] = $total->jumlah_produks;
+            # code...
+        } else {
+            $array['total']          = null;
+            $array['jumlah_produks'] = null;
+        }
         return response()->json($array);
     }
 
@@ -159,8 +166,22 @@ class PelangganController extends Controller
     {
         $total = DetailPenjualan::totalRiwayatTransaksiPelanggan($request)
             ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
-            ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))->first();
-        return response()->json($total);
+            ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal));
+        $array = [];
+        if ($total->count() > 0) {
+            $diskon = Penjualan::diskonTransaksiPelanggan($request)
+                ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+                ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))->first();
+            $total                   = $total->first();
+            $result                  = $diskon->total_bayar;
+            $array['total']          = $result;
+            $array['jumlah_produks'] = $total->jumlah_produks;
+            # code...
+        } else {
+            $array['total']          = null;
+            $array['jumlah_produks'] = null;
+        }
+        return response()->json($array);
     }
 
     public function view()

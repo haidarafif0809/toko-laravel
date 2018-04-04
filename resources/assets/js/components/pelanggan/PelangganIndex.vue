@@ -752,10 +752,10 @@ export default {
 
     methods: {
     	rentangWaktu(){
-    		$('#rentang_waktu').show();
-    		$('#rentang_waktu2').show();
-    		$('#rentang_waktu3').show();
-    		$('#rentang_waktu4').show();
+    		$('#rentang_waktu').toggle();
+    		$('#rentang_waktu2').toggle();
+    		$('#rentang_waktu3').toggle();
+    		$('#rentang_waktu4').toggle();
     	},
 
     	customFormatter(date) {
@@ -799,9 +799,6 @@ export default {
     		this.riwayatBelanja = 0
     		this.perilakuPelanggan = 0
     		this.memberPelanggan = 0
-
-
-
     	},
 
     	onDisable(){
@@ -951,7 +948,6 @@ export default {
     	},
     	postRiwayatTransaksi(page){
     		var app = this;
-    		var id = app.id_pelanggan;
     		var newFilter = app.filter;
     		app.loading = true;
     		if (typeof page === 'undefined') {
@@ -971,7 +967,6 @@ export default {
     	},
     	postTotalRiwayatTransaksi(){
     		var app = this;
-    		var id = app.id_pelanggan;
     		var newFilter = app.filter;
     		axios.post(app.url+'/post_total_riwayat_transaksi', newFilter)
     		.then(function (resp) {

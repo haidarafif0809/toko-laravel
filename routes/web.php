@@ -68,6 +68,8 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::post('/penjualan/view', 'PenjualanController@view');
+Route::get('/penjualan/create-tbs-penjualan', 'PenjualanController@createTbsPenjualan');
+Route::get('/penjualan/view-buka-penjualan', 'PenjualanController@viewBukaPenjualan');
 Route::post('/simpan-penjualan', 'PenjualanController@simpanDataPenjualan');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
 Route::get('/penjualan/pelanggan', 'PenjualanController@pelanggan');
@@ -76,7 +78,7 @@ Route::post('/update-tbs-penjualan', 'PenjualanController@ubahTbsPenjualan');
 Route::post('/update-diskon-tbs-penjualan', 'PenjualanController@ubahDiskonProdukTbsPenjualan');
 Route::post('/update-diskon-faktur-tbs-penjualan', 'PenjualanController@ubahDiskonFakturTbsPenjualan');
 
-Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
+// Route::resource('buka-penjualan', 'BukaPenjualanController', ['except' => 'show']);
 
 // hapus item penjualan
 Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [

@@ -22,42 +22,42 @@
 
     <style type="text/css">
     @font-face {
-        font-family: Ubuntu Medium;
-        src: url({{ asset('fonts/Ubuntu-Medium.ttf') }});
+        font-family: Fugaz One;
+        src: url({{ asset('fonts/FugazOne-Regular.ttf') }});
 }
-@font-face {
+/*@font-face {
     font-family: Museo Sans;
     src: url({{ asset('fonts/MuseoSans_500.otf') }});
-}
-body {
-    font-family: Museo Sans;
-}
-input {
-    font-family: Ubuntu Medium;
-}
-.swal2-content {
-    font-family: Museo Sans;
-}
-.logo-navbar{
-    width:30px;
-    height:30px;
-}
-@media screen and (max-width: 480px){
-    #nav-desktop{
-        display: none;
+    }*/
+    body {
+        font-family: Fugaz One;
     }
-    #nav-top-desktop{
-        display: none;
+    input {
+        font-family: Fugaz One;
     }
-}
-@media screen and (min-width: 480px){
-    .main-container {
-        margin-left: 65px;
+    .swal2-content {
+        font-family: Fugaz One;
     }
-    #nav-mobile{
-        display: none;
+    .logo-navbar{
+        width:30px;
+        height:30px;
     }
-}
+    @media screen and (max-width: 480px){
+        #nav-desktop{
+            display: none;
+        }
+        #nav-top-desktop{
+            display: none;
+        }
+    }
+    @media screen and (min-width: 480px){
+        .main-container {
+            margin-left: 65px;
+        }
+        #nav-mobile{
+            display: none;
+        }
+    }
 </style>
 </head>
 <body>
@@ -183,17 +183,17 @@ input {
           return;
       }
       else{
-       swal({
-        title: "Memproses...",
-        text: "Mohon tunggu",
-        imageUrl: "images/ajaxloader.gif",
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        allowEscapeKey: false
-    });
-   }
-}
-function sweetAlerts(){
+         swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+     }
+ }
+ function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var emails = document.forms['emails']['email'].value;
@@ -203,7 +203,7 @@ function sweetAlerts(){
         return;
     }
     else{
-       swal({
+     swal({
         title: "Memproses...",
         text: "Mohon tunggu",
         imageUrl: "images/ajaxloader.gif",
@@ -211,7 +211,7 @@ function sweetAlerts(){
         allowOutsideClick: false,
         allowEscapeKey: false
     });
-   }
+ }
 }
 </script>
 </body>
