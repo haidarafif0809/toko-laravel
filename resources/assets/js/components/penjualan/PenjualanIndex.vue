@@ -557,6 +557,7 @@ display:block;
 		data: function () {
 			return {
 				message: 'Input Diskon Per Produk',
+				id_simpan_penjualan: '',
 				kategori_produks: [],
 				produksPenjualan: [],
 				dataProduksPenjualan:{}, //paginations
@@ -665,6 +666,7 @@ display:block;
 			app.getProduksPenjualan();
 			app.getTbsPenjualan();
 			app.selectPelanggans();
+			// apabila ada diskon perfaktur dari simpan penjualan
 		},
 
 		watch: {
@@ -729,17 +731,21 @@ display:block;
 
 			}
 		},
-
+		// create diskon per faktur
 		simpanDiskonPerFaktur(){
 			var app = this;
 			
 			if(app.formDiskon.persen > 0 ){
 				app.diskonPerfaktur.persen = app.formDiskon.persen;
 				app.diskonPerfaktur.rupiah = (app.tbs_penjualans.total_bayar / 100) * app.formDiskon.persen;
+				app.formDiskon.persen = '';
+				app.formDiskon.rupiah = '';
 			}
 			else if(app.formDiskon.rupiah > 0 ){
 				app.diskonPerfaktur.rupiah = app.formDiskon.rupiah;
 				app.diskonPerfaktur.persen = (app.formDiskon.rupiah * 100) / app.tbs_penjualans.total_bayar;
+				app.formDiskon.persen = '';
+				app.formDiskon.rupiah = '';
 			}
 			else {
 				app.diskonPerfaktur.persen = '';
@@ -747,11 +753,10 @@ display:block;
 			}
 			app.jumlahBayar = app.tbs_penjualans.total_bayar - app.diskonPerfaktur.rupiah;
 			
-			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualan').hide();
 
 		},
-
+		// create diskon per produk
 		simpanDiskonPerProduk(harga, jumlah){
 			var app = this;
 			var subtotal = (harga * jumlah);
@@ -782,7 +787,6 @@ display:block;
 				app.errors = resp.response.data.errors;
 			});		
 
-			console.log(app.tbs_penjualans.total_bayar);
 			$('#modalDiskonPenjualanPerProduk').hide();
 		},
 
@@ -829,9 +833,12 @@ display:block;
 					app.tbs_penjualans = resp.data.data;
 					app.tbs_penjualans.total_bayar = resp.data.total_bayar;
 					app.jumlahBayar = resp.data.total_bayar;
+					app.id_simpan_penjualan = resp.data.id_simpan_penjualan;
 					app.loadingTbs = false;
-					console.log(resp.data.data);
-					// console.log(resp.data);
+					// if (resp.data.id_simpan_penjualan != null) {
+						app.getDiskonSimpanPenjualan();
+					// }
+					// console.log(resp.data.id_simpan_penjualan);
 				}
 				app.loadingTbs = false;
 			})	
@@ -839,12 +846,25 @@ display:block;
 				alert("Could not load tbs penjualan");
 			});
 		},
+		// mengambil diskon perfaktur dari simpan_penjualan
+		getDiskonSimpanPenjualan(){
+			var app = this;
+			if (app.id_simpan_penjualan != null ) {				
+				axios.get(app.url+'/diskon-simpan-penjualan?id='+app.id_simpan_penjualan)
+				.then(function(resp) {
+					app.formDiskon.rupiah = resp.data.diskon;
+					app.simpanDiskonPerFaktur();
+					// console.log(app.formDiskon.rupiah);
+				})
+			}
+		},
 
 		selectPelanggans() {
 			var app = this;
 			axios.get(app.url+'/pelanggan')
 			.then(function (resp) {
 				app.pelanggans = resp.data;
+				// console.log(resp.data);
 			})
 			.catch(function (resp) {
 				alert("Could not load pelanggan");
@@ -906,7 +926,7 @@ display:block;
 			}
 
 		},
-
+		// create table simpan_penjualan dan simpan_detail_penjualan
 		simpanPenjualan() {
 			var app = this;
 			app.penjualan.total_bayar = app.jumlahBayar;
@@ -953,7 +973,7 @@ display:block;
 				app.getTbsPenjualan();
 			})
 			.catch(function (resp) {
-				console.log(resp)
+				// console.log(resp)
 
 				app.success = false;
 				app.errors = resp.response.data.errors;
@@ -993,12 +1013,17 @@ display:block;
 				app.loading = false    
 				app.produksPenjualan = resp.data;
 				app.dataProduksPenjualan = resp;
-				console.log(resp.data);
+				// console.log(resp.data);
 			})
 			.catch(function (resp) {
 				alert("Tidak dapat memuat produk..");
 				app.loading = false;
 			});
+		},
+
+		getDataSimpanPenjualan(){
+			var app = this;
+			axios.get(app.url+'/create-tbs-penjualan');
 		},
 
 		deleteTbsPenjualan(id_tbs_penjualan) {
