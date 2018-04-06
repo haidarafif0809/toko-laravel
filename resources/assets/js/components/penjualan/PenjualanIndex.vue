@@ -249,6 +249,7 @@ display:block;
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="saveForm()">Bayar</button>
+							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="">Bayar & Print</button>
 							<button type="button" class="btn btn-default" id="btnTutup" data-dismiss="modal" >Tutup</button> 
 						</div>
 					</div>
@@ -593,6 +594,7 @@ display:block;
 				},
 				penjualan: {
 					nomor_meja: '',
+					id_simpan_penjualan: '',
 					catatan: '',
 					nama_pelanggan: '',
 					cara_bayar: '',
@@ -823,7 +825,6 @@ display:block;
 				app.loading = false
 			});
 		},
-
 		// menampilakan tbs penjualan / pesanan
 		getTbsPenjualan() {
 			var app = this;
@@ -835,10 +836,7 @@ display:block;
 					app.jumlahBayar = resp.data.total_bayar;
 					app.id_simpan_penjualan = resp.data.id_simpan_penjualan;
 					app.loadingTbs = false;
-					// if (resp.data.id_simpan_penjualan != null) {
-						app.getDiskonSimpanPenjualan();
-					// }
-					// console.log(resp.data.id_simpan_penjualan);
+					app.getDiskonSimpanPenjualan();
 				}
 				app.loadingTbs = false;
 			})	
@@ -853,6 +851,9 @@ display:block;
 				axios.get(app.url+'/diskon-simpan-penjualan?id='+app.id_simpan_penjualan)
 				.then(function(resp) {
 					app.formDiskon.rupiah = resp.data.diskon;
+					app.penjualan.nomor_meja = resp.data.nomor_meja
+					app.penjualan.catatan = resp.data.catatan
+					app.penjualan.nama_pelanggan = resp.data.pelanggan_id
 					app.simpanDiskonPerFaktur();
 					// console.log(app.formDiskon.rupiah);
 				})
@@ -930,6 +931,7 @@ display:block;
 		simpanPenjualan() {
 			var app = this;
 			app.penjualan.total_bayar = app.jumlahBayar;
+			app.penjualan.id_simpan_penjualan = app.id_simpan_penjualan;
 			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
 			app.penjualan.cara_bayar = 'Tunai';
 			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
@@ -950,8 +952,14 @@ display:block;
 				app.pembayaran.bayar = '';
 				app.pembayaran.kembalian = 0;
 				app.penjualan.keterangan = '';
+				app.penjualan.id_simpan_penjualan = '';
+				app.penjualan.nomor_meja = '';
+				app.penjualan.catatan = '';
+				app.penjualan.nama_pelanggan = '';
+				// app.id_simpan_penjualan = '';
 				app.penjualan.status_pemesanan = 0;
 				app.alert('Berhasil disimpan');
+				console.log(app.id_simpan_penjualan);
 			})
 			.catch(function (resp) {
 				app.alert('Gagal');
@@ -1019,11 +1027,6 @@ display:block;
 				alert("Tidak dapat memuat produk..");
 				app.loading = false;
 			});
-		},
-
-		getDataSimpanPenjualan(){
-			var app = this;
-			axios.get(app.url+'/create-tbs-penjualan');
 		},
 
 		deleteTbsPenjualan(id_tbs_penjualan) {

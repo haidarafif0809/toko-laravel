@@ -252,7 +252,33 @@ class PenjualanController extends Controller
     {
         $session_id   = session()->getId();
         $tbsPenjualan = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id);
-        if ($tbsPenjualan->count() > 0) {
+        if ($tbsPenjualan->count() > 0 && $request->id_simpan_penjualan != null) {
+            $data = SimpanDetailPenjualan::where('id_penjualan', $request->id_simpan_penjualan);
+            $data->delete();
+            $penjualan = SimpanPenjualan::where('id', $request->id_simpan_penjualan)->update([
+                // 'toko_id'      => Auth::user()->toko_id,
+                'total_bayar'  => $request->total_bayar,
+                'cara_bayar'   => $request->cara_bayar,
+                'diskon'       => $request->diskon,
+                'pelanggan_id' => $request->pelanggan_id,
+                'subtotal'     => $request->subtotal,
+                'nomor_meja'   => $request->nomor_meja,
+                'catatan'      => $request->catatan,
+            ]);
+            foreach ($tbsPenjualan->get() as $tbs_penjualans) {
+                SimpanDetailPenjualan::create([
+                    'id_satuan'     => $tbs_penjualans->satuan_id,
+                    'id_produk'     => $tbs_penjualans->produk_id,
+                    'id_penjualan'  => $request->id_simpan_penjualan,
+                    'harga_produk'  => $tbs_penjualans->harga_produk,
+                    'subtotal'      => $tbs_penjualans->subtotal,
+                    'diskon'        => $tbs_penjualans->diskon,
+                    'diskon_persen' => $tbs_penjualans->diskon_persen,
+                    'jumlah_produk' => $tbs_penjualans->jumlah_produk,
+                ]);
+                $tbsPenjualan->delete();
+            }
+        } elseif ($tbsPenjualan->count() > 0 && $request->id_simpan_penjualan === null) {
             $penjualan = SimpanPenjualan::create([
                 'toko_id'      => Auth::user()->toko_id,
                 'total_bayar'  => $request->total_bayar,
@@ -278,6 +304,7 @@ class PenjualanController extends Controller
             }
             $tbsPenjualan->delete();
         }
+        // return $request->id_simpan_penjualan;
     }
 
     public function dataPagination($penjualan, $penjualanData, $link)
@@ -325,7 +352,6 @@ class PenjualanController extends Controller
         $data_simpan_penjualan        = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id);
         $data_detail_simpan_penjualan = SimpanDetailPenjualan::dataSimpanDetailPenjualan($data_simpan_penjualan->first()->id);
         $tbs_penjualan                = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->get();
-        // if (count($tbs_penjualan) < 1) {
         foreach ($data_detail_simpan_penjualan->get() as $data_detail_simpan_penjualans) {
             $session = session()->getId();
             TbsPenjualan::create([
@@ -343,20 +369,16 @@ class PenjualanController extends Controller
 
             $data_tbs++;
         }
-        // $data_detail_simpan_penjualan->delete();
-        // $data_simpan_penjualan->delete();
-        // }
         $respon['data_tbs']      = $data_tbs;
         $respon['diskon_faktur'] = $data_simpan_penjualan->first()->diskon;
 
         return response()->json($respon);
     }
 
+    // mendapatkan diskon perfaktur saat klik buka di buka penjualan
     public function diskonSimpanPenjualan(Request $request)
     {
         $data_simpan_penjualan = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
-        // $respon['diskon_faktur'] = $data_simpan_penjualan->first()->diskon;
-
         return response()->json($data_simpan_penjualan);
     }
 

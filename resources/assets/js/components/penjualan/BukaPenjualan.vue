@@ -45,37 +45,35 @@
 								<td align="right">{{ buka_penjualan.data_simpan_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
-									<button class="btn btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">bukan</button
-										<a href="#" class="btn btn-xs btn-success" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)"><i class="fa fa-box-open"></i> buka
-										</a>
-										<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.data_simpan_penjualan.id}}"  @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.data_simpan_penjualan.id"><i class="fa fa-print"></i> cetak
-										</router-link>
-									</td>
-								</tr>
-							</tbody>
-							<tbody v-else-if="loading == true" class="data-ada" >
-								<tr >
-									<td colspan="6"  class="text-center">
-										Sedang Memuat Data
-									</td>
-								</tr>
-							</tbody>
-							<tbody v-else class="tidak-ada-data">
-								<tr>
-									<td colspan="6"  class="text-center">
-										Tidak Ada Data
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<vue-simple-spinner v-if="loading"></vue-simple-spinner>
-					<div align="right"><pagination :data="buka_penjualan_data" v-on:pagination-change-page="getBukaPenjualan" v-if="search == '' "></pagination></div>
-					<div align="right"><pagination :data="buka_penjualan_data" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
+									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">buka</button>
+									<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.data_simpan_penjualan.id}}"  @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.data_simpan_penjualan.id"><i class="fa fa-print"></i> cetak tagihan
+									</router-link>
+								</td>
+							</tr>
+						</tbody>
+						<tbody v-else-if="loading == true" class="data-ada" >
+							<tr >
+								<td colspan="6"  class="text-center">
+									Sedang Memuat Data
+								</td>
+							</tr>
+						</tbody>
+						<tbody v-else class="tidak-ada-data">
+							<tr>
+								<td colspan="6"  class="text-center">
+									Tidak Ada Data
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
+				<vue-simple-spinner v-if="loading"></vue-simple-spinner>
+				<div align="right"><pagination :data="buka_penjualan_data" v-on:pagination-change-page="getBukaPenjualan" v-if="search == '' "></pagination></div>
+				<div align="right"><pagination :data="buka_penjualan_data" v-on:pagination-change-page="getHasilPencarian" v-if="search != '' "></pagination></div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 </template>
