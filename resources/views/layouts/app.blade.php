@@ -22,21 +22,21 @@
 
     <style type="text/css">
     @font-face {
-        font-family: Fugaz One;
-        src: url({{ asset('fonts/FugazOne-Regular.ttf') }});
+        font-family: Roboto;
+        src: url({{ asset('fonts/Roboto-Bold.ttf') }});
 }
 /*@font-face {
     font-family: Museo Sans;
     src: url({{ asset('fonts/MuseoSans_500.otf') }});
     }*/
     body {
-        font-family: Fugaz One;
+        font-family: Roboto;
     }
     input {
-        font-family: Fugaz One;
+        font-family: Roboto;
     }
     .swal2-content {
-        font-family: Fugaz One;
+        font-family: Roboto;
     }
     .logo-navbar{
         width:30px;
@@ -183,17 +183,17 @@
           return;
       }
       else{
-         swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
-     }
- }
- function sweetAlerts(){
+       swal({
+        title: "Memproses...",
+        text: "Mohon tunggu",
+        imageUrl: "images/ajaxloader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+   }
+}
+function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var emails = document.forms['emails']['email'].value;
@@ -203,7 +203,7 @@
         return;
     }
     else{
-     swal({
+       swal({
         title: "Memproses...",
         text: "Mohon tunggu",
         imageUrl: "images/ajaxloader.gif",
@@ -211,7 +211,7 @@
         allowOutsideClick: false,
         allowEscapeKey: false
     });
- }
+   }
 }
 </script>
 </body>
