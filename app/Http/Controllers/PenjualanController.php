@@ -10,6 +10,7 @@ use App\Produk;
 use App\SimpanDetailPenjualan;
 use App\SimpanPenjualan;
 use App\TbsPenjualan;
+use App\Toko;
 use App\TransaksiKas;
 use Auth;
 use DB;
@@ -175,6 +176,8 @@ class PenjualanController extends Controller
                 ]);
             }
             $tbsPenjualan->delete();
+            $respon['id_penjualan'] = $penjualan->id;
+            return response()->json($respon);
         }
     }
 
@@ -381,6 +384,43 @@ class PenjualanController extends Controller
         $data_simpan_penjualan = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
         return response()->json($data_simpan_penjualan);
     }
+    public function cetakPenjualan(Request $request)
+    {
+        $toko = Toko::select(
+            'tokos.nama_toko',
+            'tokos.no_telp',
+            'provinces.name',
+            'cities.name'
+        )
+            ->leftJoin('provinces', 'provinces.id', '=', 'tokos.provinsi')
+            ->leftJoin('cities', 'cities.id', '=', 'tokos.kabupaten')
+            ->where('tokos.id', Auth::user()->toko_id)->first();
+        $penjualan        = Penjualan::cetakPenjualan($request->id_penjualan)->first();
+        $detail_penjualan = DetailPenjualan::select([
+            'detail_penjualans.jumlah_produk',
+            'detail_penjualans.harga_produk',
+            'detail_penjualans.diskon',
+            'produks.nama_produk',
+        ])
+            ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
+            ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
+            ->where('id_penjualan', $request->id_penjualan)
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->groupBy('detail_penjualans.id')
+            ->get();
+        $total_item = 0;
+        foreach ($detail_penjualan as $key => $detail_penjualans) {
+            $total_item += $detail_penjualans->jumlah_produk;
+        }
+        // return $detail_penjualan;
+
+        return view('penjualan.cetak_penjualan', ['total_item' => $total_item, 'detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan, 'nama_toko' => $toko])->with(compact('html'));
+    }
+    // menampilkan kategori produk
+    public function kategoriProduk()
+    {
+        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
+    }
 
     public function hapusTbsPenjualan($id)
     {
@@ -390,12 +430,6 @@ class PenjualanController extends Controller
             return;
         }
 
-    }
-
-    // menampilkan kategori produk
-    public function kategoriProduk()
-    {
-        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
     }
 
 /**

@@ -248,8 +248,7 @@ display:block;
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="saveForm()">Bayar</button>
-							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="">Bayar & Print</button>
+							<button class="btn btn-primary" id="btnBayar" type="button" data-dismiss=""v-on:click="saveForm()">Bayar & Print</button>
 							<button type="button" class="btn btn-default" id="btnTutup" data-dismiss="modal" >Tutup</button> 
 						</div>
 					</div>
@@ -391,16 +390,8 @@ display:block;
 								<td>&nbsp</td>
 								<td> : </td>
 								<td>&nbsp</td>
-								<td v-if="diskonPerfaktur.persen === '' ">{{''}}</td>
-								<td v-else>{{Number.parseInt(diskonPerfaktur.persen)}} %</td>
-							</tr>
-							<tr>
-								<td>Diskon</td>
-								<td>&nbsp</td>
-								<td> : </td>
-								<td>&nbsp</td>
-								<td v-if="diskonPerfaktur.rupiah === '' ">{{''}}</td>
-								<td v-else>{{diskonPerfaktur.rupiah|pemisahTitik}}</td>
+								<td v-if="diskonPerfaktur.persen === '' && diskonPerfaktur.rupiah === '' ">{{''}}</td>
+								<td v-else>{{Number.parseInt(diskonPerfaktur.persen)}} % ({{diskonPerfaktur.rupiah|pemisahTitik}})</td>
 							</tr>
 							<tr>
 								<td>Pajak</td>
@@ -889,23 +880,25 @@ display:block;
 			var validate = document.getElementById("bayar");
 			var validates = document.getElementById("p");
 			if (Pembayaran == 0 || Pembayaran == "") {
-				validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
-				validates.innerHTML="Pembayaran tidak boleh kosong!!";
+				app.$swal("Pembayaran tidak boleh kosong");
+				// validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
+				// validates.innerHTML="Pembayaran tidak boleh kosong!!";
 			}else if(app.pembayaran.kembalian < 0){
-				validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
-				validates.innerHTML="Jumlah pembayaran kurang!!";	
+				app.$swal("Jumlah pembayaran kurang!");
 			}
 			else{
 				app.closeModal();
-				// console.log(app.penjualan.subtotal)
 				axios.post(app.url, newPenjualan)
 				.then(function(resp){
-					app.message = 'Sukses : Berhasil Melakukan Pembayaran ';
+					app.closeModal();
 					swal({
 						title: 'Berhasil!',
 						type: 'success',
-						text: app.message
-					})
+						text: 'Berhasil Melakukan Pembayaran ',
+						showConfirmButton: false,
+						timer: 2000,
+					});
+					app.urlCetak(resp.data.id_penjualan);
 					app.getKategoriProduk();
 					app.getProduksPenjualan();
 					app.getTbsPenjualan();
@@ -918,11 +911,12 @@ display:block;
 					app.pembayaran.kembalian = 0;
 					app.penjualan.keterangan = '';
 					app.penjualan.status_pemesanan = 0;
-				// app.getPenjualans();
-			})
+					// console.log(resp.data.id_penjualan);
+				})
 				.catch(function (resp) {
 					app.success = false;
-					app.errors = resp.response.data.errors;
+					app.alert('Gagal');
+					// app.errors = resp.response.data.errors;
 				})
 			}
 
@@ -1104,6 +1098,9 @@ display:block;
 
 		closeModal(){
 			$("#btnBayar").attr("data-dismiss", "modal");
+		},
+		urlCetak(id_penjualan){
+			window.open('penjualan/cetak-penjualan?id_penjualan='+id_penjualan,'_blank');
 		}
 
 	}

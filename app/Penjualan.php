@@ -130,4 +130,22 @@ class Penjualan extends Model
             ->groupBy('penjualans.pelanggan_id');
         return $query;
     }
+
+    public function scopeCetakPenjualan($query, $id_penjualan)
+    {
+        $query->select([
+            'penjualans.created_at as waktu',
+            'penjualans.id',
+            'penjualans.total_bayar',
+            'penjualans.subtotal',
+            'penjualans.diskon',
+            'pelanggans.nama_pelanggan',
+            'users.nama_pemilik',
+        ])
+            ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
+            ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
+            ->where('penjualans.id', $id_penjualan)
+            ->where('penjualans.toko_id', Auth::user()->toko_id);
+        return $query;
+    }
 }
