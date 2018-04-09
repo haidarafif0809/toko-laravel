@@ -11,7 +11,7 @@ use DB;
 use Excel;
 use File;
 use Illuminate\Http\Request;
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
 use Validator;
 
 class ProdukController extends Controller
@@ -168,10 +168,20 @@ class ProdukController extends Controller
                 'foto' => 'image64:jpeg,jpg,png|max:3072000',
             ]);
 
-            $imageData = $request->foto;
-            $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
-            Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            // $imageData = $request->foto;
+            // $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            // $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
+            // $fileName->resize(300, 300);
+            // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            // Mengambil file yang diupload
+            $uploaded_foto = $request->foto;
+            // mengambil extension file
+            $extension = $uploaded_foto->getClientOriginalExtension();
+            // membuat nama file random berikut extension
+            $filename     = str_random(40) . '.' . $extension;
+            $image_resize = Image::make($foto->getRealPath());
+            $image_resize->fit(300);
+            $image_resize->save(public_path('foto_produk/' . $filename));
         } else {
             $this->validate($request, [
                 'nama_produk'         => 'required',
