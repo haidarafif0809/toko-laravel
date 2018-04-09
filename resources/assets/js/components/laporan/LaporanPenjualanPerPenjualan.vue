@@ -1,0 +1,144 @@
+<style scoped> 
+.tombol-export{ 
+  float: right; 
+} 
+.btn.active 
+{ 
+  background-color:#002a38; 
+} 
+</style> 
+<template> 
+  <div class="container"> 
+    <ul class="breadcrumb"> 
+      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li> 
+      <li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li> 
+      <li class="active">Laporan Penjualan Per Penjualan  </li> 
+    </ul> 
+    <div class="row"> 
+      <div class="col-md-12"> 
+        <div class="panel panel-default"> 
+          <div class="panel-heading"> 
+            <p class="panel-title">Laporan Penjualan Per Penjualan</p> 
+          </div> 
+          <div class="panel-body"> 
+            <div class="btn-group"> 
+              <button class="btn btn-primary active" id="1" v-on:click="getDataLaporan(1); getDataGrandTotal(1);">Harian</button> 
+              <button class="btn btn-primary" id="11" v-on:click="getDataLaporan(2); getDataGrandTotal(2);">Mingguan</button>   
+              <button class="btn btn-primary" id="111" v-on:click="getDataLaporan(3); getDataGrandTotal(3);">Bulanan</button> 
+              <button class="btn btn-primary" id="1111" v-on:click="getDataLaporan(4); getDataGrandTotal(4);">Tahunan</button> 
+            </div> 
+            <div class="tombol-export"> 
+              <button class="btn btn-primary">Excel</button> 
+            </div> 
+            <br> 
+            <br> 
+            <div class="table-responsive"> 
+              <table class="table table-striped table-condensed table-responsive"> 
+                <thead bgcolor="#d6d6c2"> 
+                    <tr> 
+                    <th>TANGGAL</th> 
+                    <th  >JAM</th> 
+                    <th style="text-align:right">TOTAL (RP)</th> 
+                    </tr> 
+                </thead> 
+                  <!-- tbody > 
+                  <tr v-for="laporan_penjualan_harians ,index in laporan_penjualan_harian"> 
+                    <td> 
+                      {{ laporan_penjualan_harians.tanggal }} 
+                    </td> 
+                    <td align="right"> 
+                      {{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_penjualan) }} 
+                    </td> 
+                    <td align="right"> 
+                      {{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran) }} 
+                    </td> 
+                    <td align="right"> 
+                      {{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran / laporan_penjualan_harians.total_penjualan) }} 
+                    </td> 
+                  </tr> 
+                </tbody> --> 
+                <tbody> 
+                  <tr> 
+                    <td colspan="4" class="text-center">Tidak Ada Data</td> 
+                  </tr> 
+                </tbody> 
+                <tfoot bgcolor="#d6d6c2">   
+                  <!-- <tr> 
+                    <td><b color="#000000">Grand Total:</b></td> 
+                    <td  v-if="grand_total_penjualan.total_penjualan > 0" align="right"> 
+                      <b color="#000000"> 
+                        {{ new Intl.NumberFormat().format(grand_total_penjualan.total_penjualan) }} 
+                      </b> 
+                    </td> 
+                    <td v-else align="right"> 
+                      <b color="#000000"> 
+                        0 
+                      </b> 
+                    </td> 
+                    <td v-if="grand_total_penjualan.total_pembayaran > 0" align="right"> 
+                      <b color="#000000"> 
+                        {{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran) }} 
+                      </b> 
+                    </td> 
+                    <td v-else align="right"> 
+                      <b color="#000000"> 
+                        0 
+                      </b> 
+                    </td> 
+                    <td v-if="grand_total_penjualan.total_penjualan > 0" align="right"> 
+                      <b color="#000000">
+{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }} 
+                      </b> 
+                    </td> 
+                    <td v-else align="right"> <b color="#000000"> 
+                      0 
+                    </b> 
+                  </td> 
+                </tr> --> 
+              </tfoot> 
+            </table> 
+          </div> 
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</div> 
+</template> 
+<script> 
+export default{ 
+  data: function(){ 
+    return{ 
+      laporan_penjualan_harian:[], 
+      grand_total_penjualan:[], 
+      url : window.location.origin + (window.location.pathname).replace("home", "laporan"), 
+    } 
+  }, 
+  mounted(){ 
+    var app = this; 
+    app.getDataLaporan(); 
+    app.getDataGrandTotal(); 
+    $(".btn-group > .btn").click(function(){ 
+      $(".btn-group > .btn").removeClass("active"); 
+      $(this).addClass("active"); 
+    }); 
+  }, 
+  methods: { 
+    getDataLaporan(type = 1){ 
+      let app = this; 
+      axios.get(app.url+'/laporan-penjualan-harian/'+type) 
+      .then(function (resp){ 
+        app.laporan_penjualan_harian = resp.data; 
+        console.log(resp.data) 
+      }) 
+    }, 
+    getDataGrandTotal(type = 1){ 
+      let app = this; 
+      axios.get(app.url+'/grand-total-penjualan/'+type) 
+      .then(function (resp){ 
+        app.grand_total_penjualan = resp.data; 
+        console.log(resp.data) 
+      }) 
+    } 
+  } 
+} 
+</script>
