@@ -15,7 +15,7 @@
 			<li class="active">Data Simpan Penjualan</li>
 		</ul>
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-user-circle" aria-hidden="true"></i> Data Simpan Penjualan</div>
+			<div class="panel-heading"><i class="fa fa-bookmark"></i> Data Simpan Penjualan</div>
 			<div class="panel-body">
 				<div class="table-responsive">
 					<div class="pencarian">
@@ -24,7 +24,7 @@
 					<table class="table table-striped table-bordered">
 						<thead class="thead-dark">
 							<th class="col-md-2">Tanggal / Waktu</th>
-							<th class="col-md-1">User</th>
+							<th class="col-md-1">Waiters</th>
 							<th class="col-md-2">Pelanggan</th>
 							<th class="col-md-2">Produk</th>
 							<th class=" col-md-2 text-right">Total</th>
@@ -35,7 +35,8 @@
 							<tr v-for="buka_penjualan ,index in buka_penjualans">
 								<td>{{ buka_penjualan.data_simpan_penjualan.waktu}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.nama_pemilik }}</td>
-								<td>{{ buka_penjualan.data_simpan_penjualan.nama_pelanggan }}</td>
+								<td v-if="buka_penjualan.data_simpan_penjualan.nama_pelanggan == null">Umum</td>
+								<td v-else>{{ buka_penjualan.data_simpan_penjualan.nama_pelanggan }}</td>
 								<td>
 									<ul v-for="data_produk, index in buka_penjualan.data_produk">
 										<li >{{ data_produk.nama_produk }}</li>
@@ -44,9 +45,8 @@
 								<td align="right">{{ buka_penjualan.data_simpan_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
-									<a href="#" class="btn btn-xs btn-success" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)"><i class="fa fa-box-open"></i> buka
-									</a>
-									<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.id"><i class="fa fa-print"></i> cetak
+									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">buka</button>
+									<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.data_simpan_penjualan.id}}"  @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.data_simpan_penjualan.id"><i class="fa fa-print"></i> cetak tagihan
 									</router-link>
 								</td>
 							</tr>
@@ -113,21 +113,20 @@ export default {
         }
     },
     methods: {
+    	// melihat data bts_penjualans = ada / tidak
     	getTbsPenjualan() {
     		var app = this;
     		axios.get(app.url +'/tbs-penjualan')
     		.then(function (resp) {
-    			// if (resp.data.data != undefined) {
-    				app.tbs_penjualans = resp.data.data;
-    				app.loadingTbs = false;
-    				console.log(resp.data.data);
-				// 	// console.log(resp.data);
-				// }
-			})	
+    			app.tbs_penjualans = resp.data.data;
+    			app.loadingTbs = false;
+    			// console.log(resp.data.data);
+    		})	
     		.catch(function () {
     			alert("Could not load tbs penjualan");
     		});
     	},
+    	// menampilkan data simpan penjualan
     	getBukaPenjualan(page) {
     		var app = this;
     		if (typeof page === 'undefined') {
@@ -145,22 +144,31 @@ export default {
     			alert("Could not load buka_penjualans");
     		});
     	},
+
     	saveForm(id) {
     		var app = this;
     		if (app.tbs_penjualans === undefined) {
     			axios.get(app.url+'/create-tbs-penjualan?id=' + id)
-    			.then(function(resp){
+    			.then(function(resp) {
+    				swal({
+    					title: 'Berhasil!',
+    					type: 'success',
+    					text: 'Berhasil membuka ke penjualan',
+    					showConfirmButton: false,
+    					timer: 2000,
+    				});
     				app.$router.replace('/penjualan');
-    			}) 
+    			})
+
     		} else{
     			var app = this;
+    			app.$router.replace('/penjualan');
     			app.getBukaPenjualan();
     			swal({
     				title: 'Gagal!',
     				type: 'warning',
-    				text: 'Selesaikan dahulu penjualan!'
+    				text: 'Selesaikan dahulu penjualan sebelumnya!'
     			});
-    			// app.$router.replace('penjualan/view-buka-penjualan');
     		}
     	}
     	// getHasilPencarian(page){

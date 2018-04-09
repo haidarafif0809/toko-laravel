@@ -10,6 +10,7 @@ use App\Produk;
 use App\SimpanDetailPenjualan;
 use App\SimpanPenjualan;
 use App\TbsPenjualan;
+use App\Toko;
 use App\TransaksiKas;
 use Auth;
 use DB;
@@ -101,6 +102,7 @@ class PenjualanController extends Controller
             ->select(
                 'produks.nama_produk',
                 'tbs_penjualans.harga_produk',
+                'tbs_penjualans.id_simpan_penjualan',
                 'tbs_penjualans.jumlah_produk',
                 'tbs_penjualans.subtotal',
                 'tbs_penjualans.diskon',
@@ -116,13 +118,15 @@ class PenjualanController extends Controller
             $json_tbs = json_decode($tbsPenjualan, true);
             for ($i = 0; $i < count($json_tbs); $i++) {
                 $arraySubtotal[] = $json_tbs[$i]['subtotal'];
+                $arraySubtotal2  = $json_tbs[$i]['id_simpan_penjualan'];
             }
             foreach ($arraySubtotal as $key => $val) {
                 $subtotalData[] = $val;
             }
             $dataArray = [
-                'data'        => $tbsPenjualan,
-                'total_bayar' => array_sum($subtotalData),
+                'data'                => $tbsPenjualan,
+                'total_bayar'         => array_sum($subtotalData),
+                'id_simpan_penjualan' => $arraySubtotal2,
             ];
             // $dataArray['data']['total_bayar'] = array_sum($subtotalData);
             return response()->json($dataArray);
@@ -172,6 +176,8 @@ class PenjualanController extends Controller
                 ]);
             }
             $tbsPenjualan->delete();
+            $respon['id_penjualan'] = $penjualan->id;
+            return response()->json($respon);
         }
     }
 
@@ -249,7 +255,33 @@ class PenjualanController extends Controller
     {
         $session_id   = session()->getId();
         $tbsPenjualan = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id);
-        if ($tbsPenjualan->count() > 0) {
+        if ($tbsPenjualan->count() > 0 && $request->id_simpan_penjualan != null) {
+            $data = SimpanDetailPenjualan::where('id_penjualan', $request->id_simpan_penjualan);
+            $data->delete();
+            $penjualan = SimpanPenjualan::where('id', $request->id_simpan_penjualan)->update([
+                // 'toko_id'      => Auth::user()->toko_id,
+                'total_bayar'  => $request->total_bayar,
+                'cara_bayar'   => $request->cara_bayar,
+                'diskon'       => $request->diskon,
+                'pelanggan_id' => $request->pelanggan_id,
+                'subtotal'     => $request->subtotal,
+                'nomor_meja'   => $request->nomor_meja,
+                'catatan'      => $request->catatan,
+            ]);
+            foreach ($tbsPenjualan->get() as $tbs_penjualans) {
+                SimpanDetailPenjualan::create([
+                    'id_satuan'     => $tbs_penjualans->satuan_id,
+                    'id_produk'     => $tbs_penjualans->produk_id,
+                    'id_penjualan'  => $request->id_simpan_penjualan,
+                    'harga_produk'  => $tbs_penjualans->harga_produk,
+                    'subtotal'      => $tbs_penjualans->subtotal,
+                    'diskon'        => $tbs_penjualans->diskon,
+                    'diskon_persen' => $tbs_penjualans->diskon_persen,
+                    'jumlah_produk' => $tbs_penjualans->jumlah_produk,
+                ]);
+                $tbsPenjualan->delete();
+            }
+        } elseif ($tbsPenjualan->count() > 0 && $request->id_simpan_penjualan === null) {
             $penjualan = SimpanPenjualan::create([
                 'toko_id'      => Auth::user()->toko_id,
                 'total_bayar'  => $request->total_bayar,
@@ -275,6 +307,7 @@ class PenjualanController extends Controller
             }
             $tbsPenjualan->delete();
         }
+        // return $request->id_simpan_penjualan;
     }
 
     public function dataPagination($penjualan, $penjualanData, $link)
@@ -317,30 +350,76 @@ class PenjualanController extends Controller
     // create tbs_penjualan pada saat buka penjualan
     public function createTbsPenjualan(Request $request)
     {
-        $data_simpan_penjualan        = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
-        $data_detail_simpan_penjualan = SimpanDetailPenjualan::dataSimpanDetailPenjualan($data_simpan_penjualan->id)->get();
-        $tbs_penjualan                = TbsPenjualan::select()->where('toko_id', Auth::user()->toko_id)->get();
-        if (count($tbs_penjualan) < 1) {
-            foreach ($data_detail_simpan_penjualan as $data_detail_simpan_penjualans) {
-                $session = session()->getId();
-                TbsPenjualan::create([
-                    'session_id'    => $session,
-                    'satuan_id'     => $data_detail_simpan_penjualans->id_satuan,
-                    'produk_id'     => $data_detail_simpan_penjualans->id_produk,
-                    'harga_produk'  => $data_detail_simpan_penjualans->harga_produk,
-                    'jumlah_produk' => $data_detail_simpan_penjualans->jumlah_produk,
-                    'diskon'        => $data_detail_simpan_penjualans->diskon,
-                    'diskon_persen' => $data_detail_simpan_penjualans->diskon_persen,
-                    'subtotal'      => $data_detail_simpan_penjualans->subtotal,
-                    'toko_id'       => Auth::user()->toko_id,
-                ]);
-            }
-            $array = array();
-            array_push($array, ['total_bayar' => $data_simpan_penjualan->total_bayar, 'diskon' =>
-                $data_simpan_penjualan->diskon, 'nomor_meja' => $data_simpan_penjualan->nomor_meja, 'catatan' => $data_simpan_penjualan->catatan]);
-            return response()->json($data_detail_simpan_penjualan);
-            # code...
+        $data_tbs                     = 0;
+        $session_id                   = session()->getId();
+        $data_simpan_penjualan        = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id);
+        $data_detail_simpan_penjualan = SimpanDetailPenjualan::dataSimpanDetailPenjualan($data_simpan_penjualan->first()->id);
+        $tbs_penjualan                = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->get();
+        foreach ($data_detail_simpan_penjualan->get() as $data_detail_simpan_penjualans) {
+            $session = session()->getId();
+            TbsPenjualan::create([
+                'session_id'          => $session,
+                'id_simpan_penjualan' => $request->id,
+                'satuan_id'           => $data_detail_simpan_penjualans->id_satuan,
+                'produk_id'           => $data_detail_simpan_penjualans->id_produk,
+                'harga_produk'        => $data_detail_simpan_penjualans->harga_produk,
+                'jumlah_produk'       => $data_detail_simpan_penjualans->jumlah_produk,
+                'diskon'              => $data_detail_simpan_penjualans->diskon,
+                'diskon_persen'       => $data_detail_simpan_penjualans->diskon_persen,
+                'subtotal'            => $data_detail_simpan_penjualans->subtotal,
+                'toko_id'             => Auth::user()->toko_id,
+            ]);
+
+            $data_tbs++;
         }
+        $respon['data_tbs']      = $data_tbs;
+        $respon['diskon_faktur'] = $data_simpan_penjualan->first()->diskon;
+
+        return response()->json($respon);
+    }
+
+    // mendapatkan diskon perfaktur saat klik buka di buka penjualan
+    public function diskonSimpanPenjualan(Request $request)
+    {
+        $data_simpan_penjualan = SimpanPenjualan::select()->where('id', $request->id)->where('toko_id', Auth::user()->toko_id)->first();
+        return response()->json($data_simpan_penjualan);
+    }
+    public function cetakPenjualan(Request $request)
+    {
+        $toko = Toko::select(
+            'tokos.nama_toko',
+            'tokos.no_telp',
+            'provinces.name',
+            'cities.name'
+        )
+            ->leftJoin('provinces', 'provinces.id', '=', 'tokos.provinsi')
+            ->leftJoin('cities', 'cities.id', '=', 'tokos.kabupaten')
+            ->where('tokos.id', Auth::user()->toko_id)->first();
+        $penjualan        = Penjualan::cetakPenjualan($request->id_penjualan)->first();
+        $detail_penjualan = DetailPenjualan::select([
+            'detail_penjualans.jumlah_produk',
+            'detail_penjualans.harga_produk',
+            'detail_penjualans.diskon',
+            'produks.nama_produk',
+        ])
+            ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
+            ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
+            ->where('id_penjualan', $request->id_penjualan)
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->groupBy('detail_penjualans.id')
+            ->get();
+        $total_item = 0;
+        foreach ($detail_penjualan as $key => $detail_penjualans) {
+            $total_item += $detail_penjualans->jumlah_produk;
+        }
+        // return $detail_penjualan;
+
+        return view('penjualan.cetak_penjualan', ['total_item' => $total_item, 'detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan, 'nama_toko' => $toko])->with(compact('html'));
+    }
+    // menampilkan kategori produk
+    public function kategoriProduk()
+    {
+        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
     }
 
     public function hapusTbsPenjualan($id)
@@ -351,12 +430,6 @@ class PenjualanController extends Controller
             return;
         }
 
-    }
-
-    // menampilkan kategori produk
-    public function kategoriProduk()
-    {
-        return KategoriProduk::where('toko_id', Auth::user()->toko_id)->get();
     }
 
 /**
