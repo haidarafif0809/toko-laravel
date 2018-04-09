@@ -165,23 +165,25 @@ class ProdukController extends Controller
 
         if ($request->foto !== null) {
             $this->validate($request, [
-                'foto' => 'image64:jpeg,jpg,png|max:3072000',
+                'foto' => 'image64:jpeg,jpg,png|max:5072000',
             ]);
 
-            // $imageData = $request->foto;
-            // $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            // $fileName  = Carbon::now()->timestamp . '.' . $ekstensi;
-            // $fileName->resize(300, 300);
-            // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
-            // Mengambil file yang diupload
-            $uploaded_foto = $request->foto;
-            // mengambil extension file
-            $extension = $uploaded_foto->getClientOriginalExtension();
-            // membuat nama file random berikut extension
-            $filename     = str_random(40) . '.' . $extension;
-            $image_resize = Image::make($foto->getRealPath());
+            $imageData    = $request->foto;
+            $ekstensi     = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+            $fileName     = Carbon::now()->timestamp . '.' . $ekstensi;
+            $image_resize = Image::make($request->foto);
             $image_resize->fit(300);
-            $image_resize->save(public_path('foto_produk/' . $filename));
+            $image_resize->save(public_path('foto_produk/' . $fileName));
+            // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            // // Mengambil file yang diupload
+            // $uploaded_foto = $request->foto;
+            // // mengambil extension file
+            // $extension = $uploaded_foto->getClientOriginalExtension();
+            // // membuat nama file random berikut extension
+            // $filename     = str_random(40) . '.' . $extension;
+            // $image_resize = Image::make($foto->getRealPath());
+            // $image_resize->fit(300);
+            // $image_resize->save(public_path('foto_produk/' . $filename));
         } else {
             $this->validate($request, [
                 'nama_produk'         => 'required',
