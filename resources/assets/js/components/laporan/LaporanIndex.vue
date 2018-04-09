@@ -103,15 +103,15 @@ i{margin-bottom: 20px}
 						</div>
 					</router-link>
 				</div>
-				<div class="col-md-4">
-					<router-link :to="{name: 'indexDashboard'}">
+				<!-- <div class="col-md-4">
+					<router-link :to="{name: 'indexLaporanPenjualanPerPenjualan'}">
 						<div class="box">
 							<i class="fa fa-money fa-3x"></i>
 							<p class="judul">Laporan Penjualan Per Penjualan</p>
 							<p class="keterangan">Menampilkan laporan penjualan Per penjualan.</p>
 						</div>
 					</router-link>
-				</div>
+				</div> -->
 				<div class="col-md-4">
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">

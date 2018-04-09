@@ -181,6 +181,7 @@ return [
         Laravolt\Indonesia\ServiceProvider::class,
         // Excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -233,6 +234,8 @@ return [
         'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'Agent'        => Jenssegers\Agent\Facades\Agent::class,
         'Indonesia'    => Laravolt\Indonesia\Facade::class,
+        'Image'        => Intervention\Image\Facades\Image::class,
+
     ],
 
 ];
