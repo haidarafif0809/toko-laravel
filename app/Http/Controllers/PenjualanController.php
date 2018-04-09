@@ -150,6 +150,8 @@ class PenjualanController extends Controller
                 'keterangan'       => $request->keterangan,
                 'pelanggan_id'     => $request->pelanggan_id,
                 'subtotal'         => $request->subtotal,
+                'tunai'            => $request->bayar,
+                'kembalian'        => $request->kembalian,
                 'status_pemesanan' => $request->status_pemesanan,
             ]);
 
@@ -408,13 +410,18 @@ class PenjualanController extends Controller
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->groupBy('detail_penjualans.id')
             ->get();
-        $total_item = 0;
+        $total_item   = 0;
+        $total_diskon = 0;
         foreach ($detail_penjualan as $key => $detail_penjualans) {
             $total_item += $detail_penjualans->jumlah_produk;
+            $total_item += $detail_penjualans->jumlah_produk;
+            if ($detail_penjualans->diskon != null) {
+                $total_diskon += $detail_penjualans->diskon;
+            }
         }
         // return $detail_penjualan;
 
-        return view('penjualan.cetak_penjualan', ['total_item' => $total_item, 'detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan, 'nama_toko' => $toko])->with(compact('html'));
+        return view('penjualan.cetak_penjualan', ['total_item' => $total_item, 'total_diskon' => $total_diskon, 'detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan, 'nama_toko' => $toko])->with(compact('html'));
     }
     // menampilkan kategori produk
     public function kategoriProduk()
