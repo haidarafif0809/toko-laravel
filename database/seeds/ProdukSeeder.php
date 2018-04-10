@@ -19,7 +19,7 @@ class ProdukSeeder extends Seeder
         $produk->harga_jual          = "10000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
-        $produk->foto                = '1516674546.jpeg';
+        $produk->foto                = '1.jpeg';
         $produk->satuan              = 1;
         $produk->produk_modifier_id  = 1;
         $produk->save();
@@ -31,7 +31,7 @@ class ProdukSeeder extends Seeder
         $produk->harga_jual          = "15000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
-        $produk->foto                = '1516674506.jpeg';
+        $produk->foto                = '2.jpeg';
         $produk->satuan              = 2;
         $produk->produk_modifier_id  = 2;
         $produk->save();
@@ -43,7 +43,7 @@ class ProdukSeeder extends Seeder
         $produk->harga_jual          = "10000";
         $produk->kategori_produks_id = "1";
         $produk->bisa_dijual         = 1;
-        $produk->foto                = '1516674386.jpeg';
+        $produk->foto                = '3.jpeg';
         $produk->satuan              = 3;
         $produk->produk_modifier_id  = 3;
         $produk->save();
