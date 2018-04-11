@@ -68,6 +68,8 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::post('/penjualan/view', 'PenjualanController@view');
+Route::post('/penjualan/riwayat-penjualan', 'PenjualanController@dataRiwayatPenjualan');
+Route::get('/penjualan/detail-riwayat-penjualan', 'PenjualanController@detailRiwayatPenjualan');
 Route::get('/penjualan/cetak-penjualan', 'PenjualanController@cetakPenjualan');
 Route::get('/penjualan/diskon-simpan-penjualan', 'PenjualanController@diskonSimpanPenjualan');
 Route::get('/penjualan/create-tbs-penjualan', 'PenjualanController@createTbsPenjualan');

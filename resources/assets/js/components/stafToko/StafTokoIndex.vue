@@ -3,7 +3,8 @@
 	color: red;
 
 	float: right;
-	padding-bottom: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
 }
 .label {
     display: inline-block;
@@ -40,7 +41,7 @@
                         <input type="text" class="form-control" name="search"placeholder="Pencarian"  v-model="search" >
                     </div>
                     <table class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                       <thead>
+                     <thead>
                         <th>Nama Pemilik</th>
                         <th>Email</th>
                         <th>No. Tlp</th>
@@ -53,7 +54,7 @@
                             <td>{{ user.no_telp }}</td>
                             <td>{{ user.last_login }}</td>
                             <td>
-                                <router-link :to="{ name:'editStafToko', params: {id: user.id}}" class="btn btn-xs btn-success" v-bin:id="'edit-' + user.id"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                                <router-link :to="{ name:'editStafToko', params: {id: user.id}}" class="btn btn-xs btn-success" v-bind:id="'edit-' + user.id"><i class="fa fa-pencil" aria-hidden="true"></i> Edit
                                 </router-link>
                                 <a href="#" class="btn btn-xs btn-danger" v-bind:id="'delete-' + user.id" v-on:click="deleteEntry(user.id, index,user.nama_pemilik)"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus
                                 </a>
@@ -87,24 +88,21 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-
 </template>
 
 <script>
 export default {
-   data: function () {
-      return {
-         users: [],
-         usersData: {},
-         url : window.location.origin+(window.location.pathname).replace("home","staf-toko"),
-         search : '',
-         loading : true
+ data: function () {
+  return {
+   users: [],
+   usersData: {},
+   url : window.location.origin+(window.location.pathname).replace("home","staf-toko"),
+   search : '',
+   loading : true
 
-     }
- },
- mounted() {
+}
+},
+mounted() {
   var app = this;
   app.loading = true
   app.getUsers();   

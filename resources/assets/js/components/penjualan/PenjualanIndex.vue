@@ -4,6 +4,9 @@
 	font-weight: bold;
 	text-align: center;
 	}*/
+	.thumbnail{
+		margin: 5px;
+	}
 	.cart-item {
 
 		overflow: auto;
@@ -58,10 +61,10 @@
 	.button1{
 		background-color: black;
 		color: white;
-		border-radius:10px;
-		width: 114px;
-		height:60px;
-		left: 10px;
+		border-radius:8px;
+		/*width: 114px;*/
+		/*height:60px;*/
+		/*left: 10px;*/
 		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
@@ -70,10 +73,10 @@
 	.button2{
 		background-color: black;
 		color: white;
-		border-radius:10px;
-		width: 114px;
-		height:60px;
-		left: 10px;
+		border-radius:8px;
+		/*width: 114px;*/
+		/*height:60px;*/
+		/*left: 10px;*/
 		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
@@ -82,10 +85,10 @@
 	.button3 {
 		background-color: green;
 		color: white;
-		border-radius:10px;
-		width: 114px;
-		height:60px;
-		left:30px;
+		border-radius:8px;
+		/*width: 114px;*/
+		/*height:60px;*/
+		/*left:30px;*/
 		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
@@ -347,11 +350,7 @@ width: 160px;*/
 		<div class="col-md-4 col-sm-4" id="pull-left">
 			<div class="panel head panel-heading">
 				<span>
-					<router-link :to="{name:'indexPenjualan'}" id="tambah-kas"><a href="" class="link">Penjualan</a></router-link>
-				</span>
-				<span>|</span>
-				<span>
-					<router-link :to="{name:'bukaPenjualan'}" id="tambah-kas"><a href="" class="link">Buka Penjualan</a></router-link>
+					<router-link :to="{name:'bukaPenjualan'}" id="tambah-kas"><a href="" class="link"><i class="fa fa-cart-plus "></i> Penjualan Tersimpan</a></router-link>
 				</span>
 			</div>
 			<div class="panel panel-default" id="digital">
@@ -443,9 +442,9 @@ width: 160px;*/
 			</div>
 
 			<!-- button aksi: simpan, bayar, diskon -->
-			<button v-bind:disabled="!isValid" class="button button2" @click="openModalSimpanPenjualan()"><i class="fa fa-bookmark"></i> Simpan</button>
-			<button v-bind:disabled="!isValid" class="button button1" @click="modalDiskonFaktur()">Diskon</button>
-			<button v-bind:disabled="!validate" class="button button3" @click="openModal()">Bayar</button>
+			<button v-bind:disabled="!isValid" class="button button2 btn-xs btn-md" @click="openModalSimpanPenjualan()"><i class="fa fa-bookmark"></i> Simpan</button>
+			<button v-bind:disabled="!isValid" class="button button1 btn-xs btn-md" @click="modalDiskonFaktur()">Diskon</button>
+			<button v-bind:disabled="!validate" class="button button3 btn-xs btn-md" @click="openModal()">Bayar</button>
 		</div>
 
 		<div class="col-md-8 col-sm-8" id="pull-right">
@@ -468,13 +467,13 @@ width: 160px;*/
 						<div v-if="produksPenjualan.length > 0 && loading == false" class="data-ada">	
 							<div class="col-md-12">
 								<div v-if="produksPenjualan.length == 1">
-									<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk">
+									<div v-for="produksPenjualans , index in produksPenjualan" class="box-produk col-md-3 col-sm-4 col-xs-6 ">
 										<div class="row">
 											<div class="thumbnail box-dalam-produk">
 												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" @click="submitTbsPenjualan(produksPenjualans)">
 												<div class="caption"  >
 													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
-														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
+														{{produksPenjualans.data_produk.nama_produk.slice(0, 50)}}...
 													</h6>
 													<h6 v-else>
 														{{produksPenjualans.data_produk.nama_produk}}
@@ -492,7 +491,7 @@ width: 160px;*/
 												<img :src="urlFotoProduk + '/' + produksPenjualans.data_produk.foto" class="img-responsive"  @click="submitTbsPenjualan(produksPenjualans)">
 												<div class="caption"  >
 													<h6 v-if="produksPenjualans.data_produk.nama_produk.length > 15">
-														{{produksPenjualans.data_produk.nama_produk.slice(0, 15)}}...
+														{{produksPenjualans.data_produk.nama_produk.slice(0, 50)}}...
 													</h6>
 													<h6 v-else>
 														{{produksPenjualans.data_produk.nama_produk}}
@@ -658,7 +657,7 @@ export default {
 	    	this.getHasilKembalian()
 	    },
 	    'filter.kategori_produk': function (newQuestion){
-	    	this.submitKategoriProduk();
+	    	this.getProduksPenjualan();
 	    }
 	},
 
@@ -679,12 +678,6 @@ export default {
 		},
 	},
 	methods: {
-
-		submitKategoriProduk(){
-			var app = this;
-			var filter = app.filter;
-			app.getProduksPenjualan();
-		},
 		getDiskonProdukTbs(id, subtotal, harga, jumlah) {
 			let app = this;
 			app.diskonPerproduk.id = id;

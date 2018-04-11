@@ -24,7 +24,8 @@ class SimpanPenjualan extends Model
         ])
             ->leftJoin('pelanggans', 'pelanggans.id', '=', 'simpan_penjualans.pelanggan_id')
             ->leftJoin('users', 'users.id', '=', 'simpan_penjualans.created_by')
-            ->where('simpan_penjualans.toko_id', Auth::user()->toko_id);
+            ->where('simpan_penjualans.toko_id', Auth::user()->toko_id)
+            ->orderBy('simpan_penjualans.id', 'desc');
+        return $query;
     }
-
 }

@@ -18,7 +18,6 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidenav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/timer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 
     <style type="text/css">
     @font-face {
@@ -152,9 +151,7 @@
 <script src="{{ asset('js/timer.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
 <script src="{{ asset('js/moment.js') }}"></script>
-<script src="{{ asset('js/moment-with-locales.js') }}"></script>
-<script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
-<script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+<!-- <script src="{{ asset('js/moment-with-locales.min.js') }}"></script> -->
 <script src="{{ asset('js/locales.js') }}"></script>
 <script src="{{ asset('js/locales.min.js') }}"></script>
 <!-- charts -->
@@ -162,10 +159,6 @@
 <script src="{{ asset('js/vue-charts.js') }}"></script>
 <script src="js/Chart.min.js "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script> -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script src="{{ asset('js/Chart.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>

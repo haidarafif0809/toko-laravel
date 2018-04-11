@@ -11,7 +11,7 @@ class Penjualan extends Model
 {
     //
     use AuditableTrait;
-    protected $fillable = (['no_faktur', 'total_bayar', 'status_pemesanan', 'pelanggan_id', 'cara_bayar', 'keterangan', 'toko_id', 'subtotal', 'tunai', 'kembalian', 'diskon', 'pajak',
+    protected $fillable = (['no_faktur', 'total_bayar', 'status_pemesanan', 'pelanggan_id', 'cara_ayar', 'keterangan', 'toko_id', 'subtotal', 'tunai', 'kembalian', 'diskon', 'pajak',
     ]);
 
     public function kategoriProduk()
@@ -149,6 +149,58 @@ class Penjualan extends Model
             ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
             ->where('penjualans.id', $id_penjualan)
             ->where('penjualans.toko_id', Auth::user()->toko_id);
+        return $query;
+    }
+
+    public function queryRiwayatPenjualan()
+    {
+        $penjualan = Penjualan::select([
+            'penjualans.created_at as waktu',
+            'penjualans.id',
+            'penjualans.total_bayar',
+            'penjualans.subtotal',
+            'penjualans.diskon',
+            'penjualans.tunai',
+            'penjualans.kembalian',
+            'penjualans.pelanggan_id',
+            'pelanggans.nama_pelanggan',
+            'users.nama_pemilik',
+        ])
+            ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
+            ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
+            ->where('penjualans.toko_id', Auth::user()->toko_id);
+        return $penjualan;
+    }
+
+    // menampilakan riwayat penjualan
+    public function scopeRiwayatPenjualan($query, $request, $hari, $minggu, $bulan, $tahun)
+    {
+        if ($request->priode == 0 || $request->priode == "") {
+            $query = $this->queryRiwayatPenjualan()
+                ->orderBy('penjualans.id', 'desc');
+            # code...
+        }
+        if ($request->priode == 1) {
+            $query = $this->queryRiwayatPenjualan()
+                ->where('penjualans.created_at', '>=', $hari)
+                ->orderBy('penjualans.id', 'desc');
+            # code...
+        }if ($request->priode == 2) {
+            $query = $this->queryRiwayatPenjualan()
+                ->where('penjualans.created_at', '>=', $minggu)
+                ->orderBy('penjualans.id', 'desc');
+            # code...
+        }if ($request->priode == 3) {
+            $query = $this->queryRiwayatPenjualan()
+                ->where('penjualans.created_at', '>=', $bulan)
+                ->orderBy('penjualans.id', 'desc');
+            # code...
+        }if ($request->priode == 4) {
+            $query = $this->queryRiwayatPenjualan()
+                ->where('penjualans.created_at', '>=', $tahun)
+                ->orderBy('penjualans.id', 'desc');
+            # code...
+        }
         return $query;
     }
 }
