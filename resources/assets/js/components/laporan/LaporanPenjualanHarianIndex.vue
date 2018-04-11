@@ -27,6 +27,12 @@
 							<button class="btn btn-primary" id="111" v-on:click="getDataLaporan(3); getDataGrandTotal(3);">Bulanan</button>
 							<button class="btn btn-primary" id="1111" v-on:click="getDataLaporan(4); getDataGrandTotal(4);">Tahunan</button>
 						</div>
+						<selectize-component class="form-control">
+							<option>Hari Ini</option>
+							<option>7 Hari Terakhir </option>
+							<option>30 Hari Terakhir </option>
+							<option>1 Tahun Terakhir </option>
+						</selectize-component>
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
 						</div>
