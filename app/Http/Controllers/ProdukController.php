@@ -172,7 +172,7 @@ class ProdukController extends Controller
             $ekstensi     = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
             $fileName     = Carbon::now()->timestamp . '.' . $ekstensi;
             $image_resize = Image::make($request->foto);
-            $image_resize->fit(300);
+            $image_resize->fit(200);
             $image_resize->save(public_path('foto_produk/' . $fileName));
             // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
             // // Mengambil file yang diupload
@@ -279,7 +279,10 @@ class ProdukController extends Controller
             $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
 
             $fileName = Carbon::now()->timestamp . '.' . $ekstensi;
-            Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+            $image_resize = Image::make($request->foto);
+            $image_resize->fit(200);
+            $image_resize->save(public_path('foto_produk/' . $fileName));
             if ($produk->foto) {
                 $oldImg   = $produk->foto;
                 $filePath = public_path('foto_produk/') . $produk->foto;
