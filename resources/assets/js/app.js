@@ -74,6 +74,7 @@ import PelangganIndex from './components/pelanggan/PelangganIndex.vue'
 //Penjualan
 import PenjualanIndex from './components/penjualan/PenjualanIndex.vue'
 import BukaPenjualan from './components/penjualan/BukaPenjualan.vue'
+import RiwayatPenjualan from './components/penjualan/RiwayatPenjualan.vue'
 // toko
 import TokoIndex from './components/toko/TokoIndex.vue'
 import TokoEdit from './components/toko/TokoEdit.vue'
@@ -179,6 +180,10 @@ const routes = [{
         path: '/penjualan/view-buka-penjualan',
         component: BukaPenjualan,
         name: 'bukaPenjualan'
+    },{
+        path: '/penjualan/riwayat-penjualan',
+        component: RiwayatPenjualan,
+        name: 'riwayatPenjualan'
     },
     // toko
     {

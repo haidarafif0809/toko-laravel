@@ -4,16 +4,16 @@
 }
 .btn.active
 {
-  background-color:#002a38;
+	background-color:#002a38;
 }
 </style>
 <template>
 	<div class="container">
 		<ul class="breadcrumb">
-	      <li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-	      <li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
-	      <li class="active">Laporan Ringkas</li>
-	    </ul>
+			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+			<li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
+			<li class="active">Laporan Ringkas</li>
+		</ul>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
@@ -22,7 +22,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="btn-group">
-							<button class="btn btn-primary active" v-on:click="getDataLaporan(1)">Harian</button>
+							<button class="btn btn-primary active" v-on:click="getDataLaporan(1)">Hari ini</button>
 							<button class="btn btn-primary" v-on:click="getDataLaporan(2)">Mingguan</button>	
 							<button class="btn btn-primary" v-on:click="getDataLaporan(3)">Bulanan</button>
 							<button class="btn btn-primary" v-on:click="getDataLaporan(4)">Tahunan</button>
@@ -35,9 +35,9 @@
 						<table class="table table-striped table-condensed table-responsive">
 							<thead>
 								<tr>
-								<th>Jenis Laporan</th>
-								<th style="text-align:right">Total Nominal(Rp)</th>
-							    </tr>
+									<th>Jenis Laporan</th>
+									<th style="text-align:right">Total Nominal(Rp)</th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr>
@@ -89,30 +89,30 @@
 	</div>
 </template>
 <script>
-	export default{
-		data: function(){
-			return{
-				laporan_ringkas:[],
-				url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
-			}
-		},
-		mounted(){
-			var app = this;
-			app.getDataLaporan();
-				$(".btn-group > .btn").click(function(){
-			    $(".btn-group > .btn").removeClass("active");
-			    $(this).addClass("active");
-			});
-		},
-		methods: {
-			getDataLaporan(type = 1){
-				let app = this;
-				axios.get(app.url+'/laporan-ringkas/'+type)
-				.then(function (resp){
-					app.laporan_ringkas = resp.data;
-					console.log(resp.data)
-				})
-			}
+export default{
+	data: function(){
+		return{
+			laporan_ringkas:[],
+			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
+		}
+	},
+	mounted(){
+		var app = this;
+		app.getDataLaporan();
+		$(".btn-group > .btn").click(function(){
+			$(".btn-group > .btn").removeClass("active");
+			$(this).addClass("active");
+		});
+	},
+	methods: {
+		getDataLaporan(type = 1){
+			let app = this;
+			axios.get(app.url+'/laporan-ringkas/'+type)
+			.then(function (resp){
+				app.laporan_ringkas = resp.data;
+				console.log(resp.data)
+			})
 		}
 	}
+}
 </script>

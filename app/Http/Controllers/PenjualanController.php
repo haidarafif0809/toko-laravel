@@ -13,6 +13,7 @@ use App\TbsPenjualan;
 use App\Toko;
 use App\TransaksiKas;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Session;
@@ -349,7 +350,7 @@ class PenjualanController extends Controller
         return response()->json($respons);
     }
 
-    // create tbs_penjualan pada saat buka penjualan
+    // create tbs_penjualan pada saat klik buka di buka penjualan
     public function createTbsPenjualan(Request $request)
     {
         $data_tbs                     = 0;
@@ -422,6 +423,47 @@ class PenjualanController extends Controller
         // return $detail_penjualan;
 
         return view('penjualan.cetak_penjualan', ['total_item' => $total_item, 'total_diskon' => $total_diskon, 'detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan, 'nama_toko' => $toko])->with(compact('html'));
+    }
+
+    public function dataRiwayatPenjualan(Request $request)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        $data_penjualan = Penjualan::riwayatPenjualan($request, $hari, $minggu, $bulan, $tahun)->paginate(10);
+        $data_array     = [];
+        foreach ($data_penjualan as $data_penjualans) {
+            array_push($data_array, ['data_riwayat_penjualan' => $data_penjualans]);
+        }
+        $link    = 'riwayat-penjualan';
+        $respons = $this->dataPagination($data_penjualan, $data_array, $link);
+        return response()->json($respons);
+    }
+
+    public function detailRiwayatPenjualan(Request $request)
+    {
+        $detail_penjualan = DetailPenjualan::select([
+            'detail_penjualans.jumlah_produk',
+            'produks.nama_produk',
+        ])
+            ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
+            ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
+            ->where('id_penjualan', $request->id)
+            ->where('penjualans.toko_id', Auth::user()->toko_id)->get();
+        $penjualan = Penjualan::select('penjualans.id',
+            'penjualans.pelanggan_id',
+            'penjualans.created_at',
+            'penjualans.total_bayar',
+            'users.nama_pemilik')
+            ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
+            ->where('penjualans.id', $request->id)
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->first();
+        $array = [];
+        array_push($array, ['detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan]);
+        return $array;
     }
     // menampilkan kategori produk
     public function kategoriProduk()

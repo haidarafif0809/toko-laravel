@@ -5,6 +5,9 @@
 	float: right;
 	padding-bottom: 10px;
 }
+table{
+	min-width: 775px;
+}
 </style>
 
 <template>  
@@ -12,12 +15,12 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexPenjualan'}">Penjualan</router-link></li>
-			<li class="active">Data Simpan Penjualan</li>
+			<li class="active">Data Penjualan Tersimpan</li>
 		</ul>
 		<div class="panel panel-default">
-			<div class="panel-heading"><i class="fa fa-bookmark"></i> Data Simpan Penjualan</div>
+			<div class="panel-heading"><i class="fa fa-bookmark"></i> Data Penjualan Tersimpan</div>
 			<div class="panel-body">
-				<div class="table-responsive">
+				<div class="table-responsive table">
 					<div class="pencarian">
 						<input type="text" class="form-control" name="search"placeholder="Pencarian"  v-model="search" >
 					</div>
@@ -26,22 +29,22 @@
 							<th class="col-md-2">Tanggal / Waktu</th>
 							<th class="col-md-1">Waiters</th>
 							<th class="col-md-2">Pelanggan</th>
-							<th class="col-md-2">Produk</th>
+							<!-- <th class="col-md-2">Produk</th> -->
 							<th class=" col-md-2 text-right">Total</th>
 							<th class=" col-md-3">Catatan</th>
 							<th class=" col-md-1"></th>
 						</thead>
 						<tbody v-if="buka_penjualans.length > 0 && loading == false" class="data-ada">
 							<tr v-for="buka_penjualan ,index in buka_penjualans">
-								<td>{{ buka_penjualan.data_simpan_penjualan.waktu}}</td>
+								<td>{{ buka_penjualan.data_simpan_penjualan.waktu | tanggal}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.nama_pemilik }}</td>
 								<td v-if="buka_penjualan.data_simpan_penjualan.nama_pelanggan == null">Umum</td>
 								<td v-else>{{ buka_penjualan.data_simpan_penjualan.nama_pelanggan }}</td>
-								<td>
+								<!-- <td>
 									<ul v-for="data_produk, index in buka_penjualan.data_produk">
 										<li >{{ data_produk.nama_produk }}</li>
 									</ul>
-								</td>
+								</td> -->
 								<td align="right">{{ buka_penjualan.data_simpan_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
@@ -73,9 +76,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-
 </template>
 
 <script>
@@ -104,6 +104,13 @@ export default {
 			var numberFormat = new Intl.NumberFormat('es-ES');
 			var formatted = angka.map(numberFormat.format);
 			return formatted.join('; ');
+		},
+
+		tanggal: function (value) {
+
+			if (value){
+				return moment(String(value)).format('MM/DD/YYYY hh:mm');
+			}
 		}
 	},
 	watch: {
