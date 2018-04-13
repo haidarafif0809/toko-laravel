@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\KategoriProduk;
+use App\Produk;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -97,6 +98,14 @@ class KategoriProdukController extends Controller
      */
     public function destroy($id)
     {
+        $produk = Produk::select('kategori_produks_id')->get();
+
+        foreach ($produk as $kategori_produks_id) {
+            if ($kategori_produks_id->kategori_produks_id == $id) {
+                return response()->json(['error' => 1]);
+            }
+
+        }
         $hapus = KategoriProduk::destroy($id);
         return $hapus;
     }

@@ -345,11 +345,21 @@ export default {
                     axios.delete(app.url+'/' + id)
                     .then(function (resp) {
                         app.getProduks();
-                        swal({
-                            title: 'Berhasil!',
-                            type: 'success',
-                            text: 'Berhasil menghapus '+ nama_produk
-                        })
+
+                        if (resp.data.error == 1){
+                            swal({
+                                title: 'Gagal!',
+                                type: 'warning',
+                                text: nama_produk+' sudah pernah dijual'
+                            });
+                        }else{
+                            swal({
+                                title: 'Berhasil!',
+                                type: 'success',
+                                text: 'Berhasil menghapus '+ nama_produk
+                            })
+                        }
+                        
                     })
                     .catch(function (resp) {
                         app.$router.replace('/produk/');

@@ -152,11 +152,26 @@ watch: {
                     axios.delete(app.url+'/' + id)
                     .then(function (resp) {
                         app.getKategoriProduks();
-                        swal({
-                            title: 'Berhasil!',
-                            type: 'success',
-                            text: 'Berhasil menghapus '+ nama_kategori_produk
-                        })
+                        // swal({
+                        //     title: 'Berhasil!',
+                        //     type: 'success',
+                        //     text: 'Berhasil menghapus '+ nama_kategori_produk
+                        // })
+
+                        if (resp.data.error == 1){
+                            swal({
+                                title: 'Gagal!',
+                                type: 'warning',
+                                text: nama_kategori_produk+' sudah digunakan di produk'
+                            });
+                        }else{
+                            swal({
+                                title: 'Berhasil!',
+                                type: 'success',
+                                text: 'Berhasil menghapus '+ nama_kategori_produk
+                            })
+                        }
+
                         app.$router.replace('/kategoriProduk/');
                     })
                     .catch(function (resp) {

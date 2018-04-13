@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailPenjualan;
 use App\KategoriProduk;
 use App\Modifier;
 use App\Produk;
@@ -165,7 +166,7 @@ class ProdukController extends Controller
 
         if ($request->foto !== null) {
             $this->validate($request, [
-                'foto' => 'image64:jpeg,jpg,png|max:5072000',
+                'foto' => 'image64:jpeg,jpg,png|max:6072000',
             ]);
 
             $imageData    = $request->foto;
@@ -310,6 +311,15 @@ class ProdukController extends Controller
 
     public function destroy($id)
     {
+        $detailPenjualan = DetailPenjualan::select('id_produk')->get();
+
+        foreach ($detailPenjualan as $id_produk) {
+            if ($id_produk->id_produk == $id) {
+                return response()->json(['error' => 1]);
+            }
+
+        }
+
         return Produk::destroy($id);
     }
 
