@@ -84,6 +84,11 @@
           </router-link>
         </li>
         <li>
+          <router-link :to="{name: 'riwayatPenjualan'}">
+            Riwayat Penjualan
+          </router-link>
+        </li>
+        <li>
           <router-link :to="{name: 'indexLaporan'}">
             Laporan
           </router-link>
