@@ -1056,11 +1056,25 @@ export default {
     				axios.delete(app.url+'/' + app.pelanggan.id)
     				.then(function (resp) {
     					app.getPelanggans();
-    					swal({
-    						title: 'Berhasil!',
-    						type: 'success',
-    						text: 'Berhasil menghapus '+ app.pelanggan.nama_pelanggan
-    					})
+    					// swal({
+    					// 	title: 'Berhasil!',
+    					// 	type: 'success',
+    					// 	text: 'Berhasil menghapus '+ app.pelanggan.nama_pelanggan
+    					// })
+
+    					if (resp.data.error == 1){
+                            swal({
+                                title: 'Gagal!',
+                                type: 'warning',
+                                text: 'Pelanggan sudah melakukan transaksi '
+                            });
+                        }else{
+                            swal({
+                                title: 'Berhasil!',
+                                type: 'success',
+                                text: 'Berhasil menghapus '+ app.pelanggan.nama_pelanggan
+                            })
+                        }
     				})
     				.catch(function (resp) {
     					app.$router.replace('/pelanggan/');

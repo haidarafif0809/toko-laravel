@@ -325,6 +325,15 @@ class PelangganController extends Controller
 
     public function destroy($id)
     {
+        $penjualan = Penjualan::select('pelanggan_id')->get();
+
+        foreach ($penjualan as $pelanggan_id) {
+            if ($pelanggan_id->pelanggan_id == $id) {
+                return response()->json(['error' => 1]);
+            }
+
+        }
+
         Pelanggan::destroy($id);
     }
 
