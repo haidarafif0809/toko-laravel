@@ -123,6 +123,8 @@
                             <label for="foto" class="col-md-2 control-label">Foto</label>
                             <div class="col-md-4">
                                 <input class="form-control" type="file" name="foto" v-on:change="onFileChange" id="image">
+                                <font size="2px"><i>Ukuran yang direkomendasikan 200x200</i></font> <br>
+                                <font color="red">Size Foto (Ukuran Max : 3MB)</font>
                             </div>
                         </div>
 
