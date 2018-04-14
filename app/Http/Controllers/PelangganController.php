@@ -139,11 +139,41 @@ class PelangganController extends Controller
 
     public function posRiwayatTransaksi(Request $request)
     {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
         // DB::enableQueryLog();
-        $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
-            ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
-            ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
-            ->paginate(10);
+        if ($request->dari_tanggal != "" && $request->sampai_tanggal != "") {
+            # code...
+            $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+                ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
+                ->paginate(10);
+        } elseif ($request->dari_tanggal == "" && $request->sampai_tanggal == "") {
+            if ($request->priode == 1) {
+                $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                    ->where('penjualans.created_at', '>=', $hari)
+                    ->paginate(10);
+                # code...
+            }if ($request->priode == 2) {
+                $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                    ->where('penjualans.created_at', '>=', $minggu)
+                    ->paginate(10);
+                # code...
+            }if ($request->priode == 3) {
+                $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                    ->where('penjualans.created_at', '>=', $bulan)
+                    ->paginate(10);
+                # code...
+            }if ($request->priode == 4) {
+                $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                    ->where('penjualans.created_at', '>=', $tahun)
+                    ->paginate(10);
+                # code...
+            }
+            # code...
+        }
         // dd(DB::getQueryLog());
 
         $data_array = [];

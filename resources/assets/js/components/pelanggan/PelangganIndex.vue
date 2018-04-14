@@ -24,14 +24,8 @@
 	left: 5px;
 }
 
-
 .rata{
-	margin-left: 25px;
-}
-
-{
-	width: 33%;
-	height:60px;
+	margin-left: 10px;
 }
 
 .star{
@@ -128,168 +122,164 @@ ul :hover {background: #ffd11a;}
 </style>
 
 <template>
-	<div class="container">
-		<!-- <ol class="breadcrumb">
-			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
-			<li class="active">Pelanggan</li>
-		</ol> -->
-
-		<div class="test" >
-			<hr>
-			<h4>MANAJEMEN PELANGGAN</h4>
-			
-			<hr>
-		</div>
-
-
-		<!-- Modal untuk import pelanggan -->
-		<div id="modalImportPelanggan" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Import Pelanggan</h4>
-					</div>
-					<div class="modal-body">
-						<form v-on:submit.prevent="importPelanggan()" class="form-horizontal">
-
-							<div class="form-group">
-								<label for="template" class="col-md-2 control-label">Template</label>
-								<div class="col-md-6">
-									Gunakan <a name="template" :href="url_template_import_pelanggan">Template</a> untuk Import Pelanggan. Lihat <a style="color: blue;" data-toggle="modal" data-target="#modalCaraPengisianExcel" href="#">cara pengisian</a> untuk lebih detail.
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="excel" class="col-md-2 control-label">Pilih file</label>
-								<div class="col-md-4">
-									<input name="excel" type="file" id="excel">
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-md-4 col-md-offset-2">
-									<input class="btn btn-primary" type="submit" value="Simpan">
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-					</div>
-				</div>
-
+	<div class="container-fluid">
+		<div class="row">
+			<div class="test" >
+				<hr>
+				<h4>MANAJEMEN PELANGGAN</h4>
+				
+				<hr>
 			</div>
-		</div>
 
-		<!-- Modal Cara Pengisian Excel -->
-		<div id="modalCaraPengisianExcel" class="modal animated fadeIn" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4>Cara Pengisian</h4>
+
+			<!-- Modal untuk import pelanggan -->
+			<div id="modalImportPelanggan" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Import Pelanggan</h4>
+						</div>
+						<div class="modal-body">
+							<form v-on:submit.prevent="importPelanggan()" class="form-horizontal">
+
+								<div class="form-group">
+									<label for="template" class="col-md-2 control-label">Template</label>
+									<div class="col-md-6">
+										Gunakan <a name="template" :href="url_template_import_pelanggan">Template</a> untuk Import Pelanggan. Lihat <a style="color: blue;" data-toggle="modal" data-target="#modalCaraPengisianExcel" href="#">cara pengisian</a> untuk lebih detail.
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="excel" class="col-md-2 control-label">Pilih file</label>
+									<div class="col-md-4">
+										<input name="excel" type="file" id="excel">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4 col-md-offset-2">
+										<input class="btn btn-primary" type="submit" value="Simpan">
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						</div>
 					</div>
-					<div class="modal-body">
-						<div class="container">
-							<table class="tablePenjelasan">
-								<tbody>
-									<tr>
-										<td class="bold">Nama Pelanggan</td>
-										<td>:</td>
-										<td>Nama Pelanggan Anda.</td>
-									</tr>
-									<tr>
-										<td class="bold">Jenis Kelamin</td>
-										<td>:</td>
-										<td>Jenis kelamin diisi laki-laki atau perempuan</td>
-									</tr>
-									<tr>
-										<td class="bold">Tanggal Lahir</td>
-										<td>:</td>
-										<td>Tanggal Lahir diisi dengan format Tanggal/Bulan/Tahun/ (dd/mm/yyyy)</td>
-									</tr>
-									<tr>
-										<td class="bold">Nomor Telepon</td>
-										<td>:</td>
-										<td>Nomor telepon diisi dengan maksimal 13 karakter, dan setiap pelanggan nomor teleponnya berbeda</td>
-									</tr>
-									<tr>
-										<td class="bold">email</td>
-										<td>:</td>
-										<td>email diisi menggunakan format email(example@example.example)</td>
-									</tr>
-									<tr>
-										<td class="bold">Alamat</td>
-										<td>:</td>
-										<td>Alamat diisi sesuai dengan alamat pelanggan</td>
-									</tr>
-									<tr>
-										<td class="bold">Kota</td>
-										<td>:</td>
-										<td>Kota diisi sesuai dengan alamat pelanggan</td>
-									</tr>
-									<tr>
-										<td class="bold">Kode Pos</td>
-										<td>:</td>
-										<td>Kode Pos diisi dengan maksimal 5 karakter</td>
-									</tr>
-									<tr>
-										<td class="bold">Catatan</td>
-										<td>:</td>
-										<td>Catatan diisi apabila pelanggan ada catatan khusus</td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="row">
-								<div class="col-md-12">Contoh seperti tabel di bawah:</div>
-							</div>
-							<br>
-							<div align="center">
-								<table class="tableContoh" border="1px">
-									<thead>
-										<th><b>Nama Pelanggan</b></th>
-										<th><b>Jenis Kelamin</b></th>
-										<th><b>Tanggal Lahir</b></th>
-										<th><b>Nomor Telepon</b></th>
-										<th><b>Email</b></th>
-										<th><b>Alamat</b></th>
-										<th><b>Kota</b></th>
-										<th><b>Kode Pos</b></th>
-										<th><b>Catatan</b></th>
-									</thead>
+
+				</div>
+			</div>
+
+			<!-- Modal Cara Pengisian Excel -->
+			<div id="modalCaraPengisianExcel" class="modal animated fadeIn" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4>Cara Pengisian</h4>
+						</div>
+						<div class="modal-body">
+							<div class="container">
+								<table class="tablePenjelasan">
 									<tbody>
 										<tr>
-											<td>Adi</td>
-											<td align="right">laki-laki	</td>
-											<td align="right">17/12/1997</td>
-											<td align="right">08764537255</td>
-											<td>adi@gmail.com</td>
-											<td>Kedaton</td>
-											<td>Bandar Lampung</td>
-											<td>12345</td>
-											<td>test pelanggan</td>
+											<td class="bold">Nama Pelanggan</td>
+											<td>:</td>
+											<td>Nama Pelanggan Anda.</td>
 										</tr>
 										<tr>
-											<td>Galang</td>
-											<td align="right">laki-laki	</td>
-											<td align="right">14/10/1998</td>
-											<td align="right">08776537255</td>
-											<td>galang@gmail.com</td>
-											<td>Kemiling</td>
-											<td>Bandar Lampung</td>
-											<td>12345</td>
-											<td>Coba Pelanggan</td>
+											<td class="bold">Jenis Kelamin</td>
+											<td>:</td>
+											<td>Jenis kelamin diisi laki-laki atau perempuan</td>
+										</tr>
+										<tr>
+											<td class="bold">Tanggal Lahir</td>
+											<td>:</td>
+											<td>Tanggal Lahir diisi dengan format Tanggal/Bulan/Tahun/ (dd/mm/yyyy)</td>
+										</tr>
+										<tr>
+											<td class="bold">Nomor Telepon</td>
+											<td>:</td>
+											<td>Nomor telepon diisi dengan maksimal 13 karakter, dan setiap pelanggan nomor teleponnya berbeda</td>
+										</tr>
+										<tr>
+											<td class="bold">email</td>
+											<td>:</td>
+											<td>email diisi menggunakan format email(example@example.example)</td>
+										</tr>
+										<tr>
+											<td class="bold">Alamat</td>
+											<td>:</td>
+											<td>Alamat diisi sesuai dengan alamat pelanggan</td>
+										</tr>
+										<tr>
+											<td class="bold">Kota</td>
+											<td>:</td>
+											<td>Kota diisi sesuai dengan alamat pelanggan</td>
+										</tr>
+										<tr>
+											<td class="bold">Kode Pos</td>
+											<td>:</td>
+											<td>Kode Pos diisi dengan maksimal 5 karakter</td>
+										</tr>
+										<tr>
+											<td class="bold">Catatan</td>
+											<td>:</td>
+											<td>Catatan diisi apabila pelanggan ada catatan khusus</td>
 										</tr>
 									</tbody>
 								</table>
+								<div class="row">
+									<div class="col-md-12">Contoh seperti tabel di bawah:</div>
+								</div>
+								<br>
+								<div align="center">
+									<table class="tableContoh" border="1px">
+										<thead>
+											<th><b>Nama Pelanggan</b></th>
+											<th><b>Jenis Kelamin</b></th>
+											<th><b>Tanggal Lahir</b></th>
+											<th><b>Nomor Telepon</b></th>
+											<th><b>Email</b></th>
+											<th><b>Alamat</b></th>
+											<th><b>Kota</b></th>
+											<th><b>Kode Pos</b></th>
+											<th><b>Catatan</b></th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Adi</td>
+												<td align="right">laki-laki	</td>
+												<td align="right">17/12/1997</td>
+												<td align="right">08764537255</td>
+												<td>adi@gmail.com</td>
+												<td>Kedaton</td>
+												<td>Bandar Lampung</td>
+												<td>12345</td>
+												<td>test pelanggan</td>
+											</tr>
+											<tr>
+												<td>Galang</td>
+												<td align="right">laki-laki	</td>
+												<td align="right">14/10/1998</td>
+												<td align="right">08776537255</td>
+												<td>galang@gmail.com</td>
+												<td>Kemiling</td>
+												<td>Bandar Lampung</td>
+												<td>12345</td>
+												<td>Coba Pelanggan</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 
 		<!-- <div class="col-md-12">
@@ -406,133 +396,113 @@ ul :hover {background: #ffd11a;}
 						</div>
 
 						<form v-on:submit.prevent="saveForm()" class="form-horizontal" >
-							<div class="row" v-if="memberPelanggan == 1">
-								<div class="form-group">
-									<label for="kode_pelanggan" class="col-md-3 control-label rata">Member Id</label>
-									<div class="col-md-8">
-										<input class="form-control not-allowed" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" readonly>
-										<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
-									</div>
+							<div class="form-group" v-if="memberPelanggan == 1">
+								<label for="kode_pelanggan" class="col-md-3 control-label rata">Member Id</label>
+								<div class="col-md-8">
+									<input class="form-control not-allowed" required autocomplete="off" placeholder="Member Id" type="text" v-model="pelanggan.kode_pelanggan" name="kode_pelanggan"  autofocus="" readonly>
+									<span v-if="errors.kode_pelanggan" class="label label-danger">{{ errors.kode_pelanggan[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row"> 
-								<div class="form-group">
-									<label for="nama_pelanggan" class="col-md-3 control-label rata">Nama<font size="2px" color="red">*</font></label>
-									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="nama_pelanggan" class="col-md-3 control-label rata">Nama<font size="2px" color="red">*</font></label>
+								<div class="col-md-8">
+									<input class="form-control" required autocomplete="off" placeholder="Nama Pelanggan" type="text" v-model="pelanggan.nama_pelanggan" name="nama_pelanggan"  autofocus="" :disabled="disable == 1">
+									<span v-if="errors.nama_pelanggan" class="label label-danger">{{ errors.nama_pelanggan[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="jenis_kelamin'" class="col-md-3 control-label rata">Jenis Kelamin <font size="2px" color="red">*</font></label>
-									<div class="col-md-8">
-										<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings" :disabled="disable == 1"> 
-											<option value="1"  >laki-laki</option>
-											<option value="2"  >perempuan</option>
-										</selectize-component>
-										<span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="jenis_kelamin'" class="col-md-3 control-label rata">Jenis Kelamin <font size="2px" color="red">*</font></label>
+								<div class="col-md-8">
+									<selectize-component v-model="pelanggan.jenis_kelamin" :settings="settings" :disabled="disable == 1"> 
+										<option value="1"  >laki-laki</option>
+										<option value="2"  >perempuan</option>
+									</selectize-component>
+									<span v-if="errors.jenis_kelamin" class="label label-danger">{{ errors.jenis_kelamin[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="tanggal_lahir" class="col-md-3 control-label rata">Tanggal Lahir</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="tanggal_lahir" class="col-md-3 control-label rata">Tanggal Lahir</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
+									<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="nomor_telepon" class="col-md-3 control-label rata">Nomor Telepon <font size="2px" color="red">*</font></label>
-									<div class="col-md-8">
-										<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="" :disabled="disable == 1">
-										<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="nomor_telepon" class="col-md-3 control-label rata">Nomor Telepon <font size="2px" color="red">*</font></label>
+								<div class="col-md-8">
+									<input class="form-control" required autocomplete="off" placeholder="Nomor Telepon" type="number" v-model.phone="pelanggan.nomor_telepon" name="nomor_telepon"  autofocus="" :disabled="disable == 1">
+									<span v-if="errors.nomor_telepon" class="label label-danger">{{ errors.nomor_telepon[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="email" class="col-md-3 control-label rata">Email</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="" :disabled="disable == 1 ">
-										<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="email" class="col-md-3 control-label rata">Email</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Email" type="email" v-model="pelanggan.email" name="email" autofocus="" :disabled="disable == 1 ">
+									<span v-if="errors.email" id="email_error" class="label label-danger">{{ errors.email[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="alamat" class="col-md-3 control-label rata">Alamat</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="alamat" class="col-md-3 control-label rata">Alamat</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Alamat" type="text" v-model="pelanggan.alamat" name="alamat" autofocus="" :disabled="disable == 1">
+									<span v-if="errors.alamat" class="label label-danger">{{ errors.alamat[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="kota" class="col-md-3 control-label rata">Kota</label>
-									<div class="col-md-8">
-										<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
-										<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="kota" class="col-md-3 control-label rata">Kota</label>
+								<div class="col-md-8">
+									<input class="form-control" autocomplete="off" placeholder="Kota" type="text" v-model="pelanggan.kota" name="kota" autofocus="" :disabled="disable == 1">
+									<span v-if="errors.kota" id="email_error" class="label label-danger">{{ errors.kota[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<label for="catatan" class="col-md-3 control-label rata">Catatan</label>
-									<div class="col-md-8">
-										<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus="" :disabled="disable == 1"></textarea>
-										<span v-if="errors.catatan" id="email_error" class="label label-danger">{{ errors.catatan[0] }}</span>
-									</div>
+							<div class="form-group">
+								<label for="catatan" class="col-md-3 control-label rata">Catatan</label>
+								<div class="col-md-8">
+									<textarea class="form-control" autocomplete="off" placeholder="Catatan" v-model="pelanggan.catatan" name="catatan"  autofocus="" :disabled="disable == 1"></textarea>
+									<span v-if="errors.catatan" id="email_error" class="label label-danger">{{ errors.catatan[0] }}</span>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-12 col-md-offset-8">
+							<div class="form-group">
+								<div class="col-md-10 col-md-offset-1">
 
-										<button v-if="tambah == 0" class="btn btn-warning" id="btnSimpanPelanggan" type="submit">
-											<i class="fa fa-floppy-o" aria-hidden="true"></i>
-											Simpan 
-										</button>
+									<button v-if="tambah == 0" class="btn btn-warning" id="btnSimpanPelanggan" type="submit">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i>
+										Simpan 
+									</button>
 
-										<button v-if="tambah == 0" class="btn btn-default" @click="onDisable">
-											<i class="fa fa-times" aria-hidden="true"></i>
-											Batal
-										</button>
+									<button v-if="tambah == 0" class="btn btn-default" @click="onDisable">
+										<i class="fa fa-times" aria-hidden="true"></i>
+										Batal
+									</button>
 
-										<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
-											Edit
-										</button>
+									<button v-if="edit == 1" type="button" class="btn btn-primary" v-on:click="editPelanggan">
+										<i class="fa fa-pencil" aria-hidden="true"></i>
+										Edit
+									</button>
 
-										<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
-											<i class="fa fa-floppy-o" aria-hidden="true"></i>
-											Simpan
-										</button>
+									<button v-if="disable == 2" class="btn btn-warning" type="button" v-on:click="saveFormEdit">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i>
+										Simpan
+									</button>
 
-										<button v-if="disable == 2" class="btn btn-default" type="button" @click="batalEdit">
-											<i class="fa fa-times" aria-hidden="true"></i>
-											Batal
-										</button>
+									<button v-if="disable == 2" class="btn btn-default" type="button" @click="batalEdit">
+										<i class="fa fa-times" aria-hidden="true"></i>
+										Batal
+									</button>
 
-										<button v-if="edit == 1" class="btn btn-danger" type="button" v-on:click="deleteEntry">
-											<i class="fa fa-trash-o" aria-hidden="true"></i>
-											Hapus
-										</button>
-									</div>
+									<button v-if="edit == 1" class="btn btn-danger" type="button" v-on:click="deleteEntry">
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+										Hapus
+									</button>
 								</div>
 							</div>
 						</form>
@@ -541,12 +511,16 @@ ul :hover {background: #ffd11a;}
 
 				<div class="row-fluid" v-if="riwayatBelanja == 1">
 					<div class="panel-heading">
-						<div class="btn-group">
-							<button class="btn btn-xs btn-default">Mingguan</button>	
-							<button class="btn btn-xs btn-default">Bulanan</button>
-							<button class="btn btn-xs btn-default">Tahunan</button>
-							<button class="btn btn-xs btn-default" @click="rentangWaktu()">Rentang Waktu</button>
+						<div class="form-group col-md-3 ">
+							<selectize-component class="form-control" v-model="filter.priode" :settings="placeholder_priode" id="pilih_priode"> 
+								<option v-bind:value=0>Semua</option>									
+								<option v-bind:value=1>Hari ini</option>
+								<option v-bind:value=2>7 hari terakhir</option>
+								<option v-bind:value=3>30 hari terakhir</option>
+								<option v-bind:value=4>1 tahun terakhir</option>
+							</selectize-component>
 						</div>
+						<button class="btn btn-sm btn-default" @click="rentangWaktu()">Rentang Waktu</button>
 					</div>
 					<div class="panel panel-body">
 						<div class="row">
@@ -656,7 +630,6 @@ ul :hover {background: #ffd11a;}
 		</div>
 	</div>
 </div>
-</div>
 </template>
 
 <script>
@@ -710,8 +683,12 @@ export default {
 			settings: {
 				placeholder: 'Pilih Jenis Kelamin'
 			},
+			placeholder_priode: {
+				placeholder: 'Pilih Priode'
+			},
 			filter: {
 				id: '', //id pelanggan
+				priode: '',
 				dari_tanggal: '',
 				sampai_tanggal: ''
 			}
@@ -722,10 +699,6 @@ export default {
 		var app = this;
 		app.loading = true
 		app.getPelanggans();
-		var awal_tanggal = new Date();
-		awal_tanggal.setDate(1);
-		app.filter.dari_tanggal = awal_tanggal;
-		app.filter.sampai_tanggal = new Date();
 	},
 
 	filters: {
@@ -747,11 +720,25 @@ export default {
         // whenever question changes, this function will run
         search: function (newQuestion) {
         	this.getHasilPencarian();  
+        },
+        'filter.priode': function(value) {
+        	this.submitPriode();
         }
     },
 
     methods: {
+    	submitPriode(){
+    		this.filter.dari_tanggal = '';
+    		this.filter.sampai_tanggal = '';
+    		var newFilter = this.filter;
+    		this.postRiwayatTransaksi();
+    		this.postTotalRiwayatTransaksi();
+    	},
     	rentangWaktu(){
+    		var awal_tanggal = new Date();
+    		awal_tanggal.setDate(1);
+    		this.filter.dari_tanggal = awal_tanggal;
+    		this.filter.sampai_tanggal = new Date();
     		$('#rentang_waktu').toggle();
     		$('#rentang_waktu2').toggle();
     		$('#rentang_waktu3').toggle();
