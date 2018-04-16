@@ -21,24 +21,20 @@
 						<p class="panel-title">Laporan Penjualan Harian</p>
 					</div>
 					<div class="panel-body">
-						<div class="btn-group">
-							<button class="btn btn-primary active" id="1" v-on:click="getDataLaporan(1); getDataGrandTotal(1);">Harian</button>
-							<button class="btn btn-primary" id="11" v-on:click="getDataLaporan(2); getDataGrandTotal(2);">Mingguan</button>	
-							<button class="btn btn-primary" id="111" v-on:click="getDataLaporan(3); getDataGrandTotal(3);">Bulanan</button>
-							<button class="btn btn-primary" id="1111" v-on:click="getDataLaporan(4); getDataGrandTotal(4);">Tahunan</button>
+						<div class="col-md-2" >
+							<selectize-component class="form-control"  v-model="filter.priode" :settings="placeholder_priode" id="pilih_priode">
+								<option v-bind:value="1">Hari ini</option>
+								<option v-bind:value="2">7 hari terakhir</option>
+								<option v-bind:value="3">30 hari terakhir</option>
+								<option v-bind:value="4">1 tahun terakhir</option>
+							</selectize-component>
 						</div>
-						<selectize-component class="form-control">
-							<option>Hari Ini</option>
-							<option>7 Hari Terakhir </option>
-							<option>30 Hari Terakhir </option>
-							<option>1 Tahun Terakhir </option>
-						</selectize-component>
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
 						</div>
 						<br>
 						<br>
-						<div class="table-responsive">
+						<div class="table-responsive col-md-12">
 							<table class="table table-striped table-condensed table-responsive">
 								<thead bgcolor="#d6d6c2">
 									<tr>
@@ -118,21 +114,38 @@ export default{
 			laporan_penjualan_harian:[],
 			grand_total_penjualan:[],
 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
+			placeholder_priode: {
+				placeholder: 'Pilih Priode'
+			},
+			filter: {
+				// id: '', //id pelanggan
+				priode: '',
+				// dari_tanggal: '',
+				// sampai_tanggal: ''
+			}
 		}
 	},
 	mounted(){
 		var app = this;
 		app.getDataLaporan();
 		app.getDataGrandTotal();
-		$(".btn-group > .btn").click(function(){
-			$(".btn-group > .btn").removeClass("active");
-			$(this).addClass("active");
-		});
+		// $(".btn-group > .btn").click(function(){
+		// 	$(".btn-group > .btn").removeClass("active");
+		// 	$(this).addClass("active");
+		// });
 	},
+
+	watch: {
+        'filter.priode': function(value) {
+        	this.getDataLaporan(this.filter.priode);
+        	this.getDataGrandTotal(this.filter.priode);
+        }
+    },
+
 	methods: {
 		getDataLaporan(type = 1){
 			let app = this;
-			axios.get(app.url+'/laporan-penjualan-harian/'+type)
+			axios.get(app.url+'/laporan-penjualan-harian/?type=' + type)
 			.then(function (resp){
 				app.laporan_penjualan_harian = resp.data;
 				console.log(resp.data)
@@ -140,12 +153,13 @@ export default{
 		},
 		getDataGrandTotal(type = 1){
 			let app = this;
-			axios.get(app.url+'/grand-total-penjualan/'+type)
+			axios.get(app.url+'/grand-total-penjualan?type=' + type)
 			.then(function (resp){
 				app.grand_total_penjualan = resp.data;
 				console.log(resp.data)
 			})
-		}
-	}
+		},
+
+	},
 }
 </script>

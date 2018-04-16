@@ -49,7 +49,7 @@ class LaporanController extends Controller
 
     }
 
-    public function grandTotalPenjualan($type)
+    public function grandTotalPenjualan(Request $request)
     {
         $hari   = Carbon::now()->toDay();
         $minggu = Carbon::now()->subWeek();
@@ -57,20 +57,20 @@ class LaporanController extends Controller
         $tahun  = Carbon::now()->subYear();
 
         //per hari
-        if ($type == 1) {
+        if ($request->type == 1) {
             $laporan = Penjualan::TotalPenjualan($hari)->get();
         }
         //per minggu
-        elseif ($type == 2) {
+        elseif ($request->type == 2) {
             $laporan = Penjualan::TotalPenjualan($minggu)->get();
         }
         //per bulan
-        elseif ($type == 3) {
+        elseif ($request->type == 3) {
             $laporan = Penjualan::TotalPenjualan($bulan)->get();
         }
 
         //per tahun
-        elseif ($type == 4) {
+        elseif ($request->type == 4) {
             $laporan = Penjualan::TotalPenjualan($tahun)->get();
         }
 
@@ -123,7 +123,7 @@ class LaporanController extends Controller
 
     }
 
-    public function laporanPenjualanHarian($type)
+    public function laporanPenjualanHarian(Request $request)
     {
         $hari   = Carbon::now()->toDay();
         $minggu = Carbon::now()->subWeek();
@@ -131,19 +131,19 @@ class LaporanController extends Controller
         $tahun  = Carbon::now()->subYear();
 
         //per hari
-        if ($type == 1) {
+        if ($request->type == 1) {
             $laporan = Penjualan::LaporanPenjualanHarian($hari)->get();
         }
         //per minggu
-        elseif ($type == 2) {
+        elseif ($request->type == 2) {
             $laporan = Penjualan::LaporanPenjualanHarian($minggu)->get();
         }
         //per bulan
-        elseif ($type == 3) {
+        elseif ($request->type == 3) {
             $laporan = Penjualan::LaporanPenjualanHarian($bulan)->get();
         }
         //per tahun
-        elseif ($type == 4) {
+        elseif ($request->type == 4) {
             $laporan = Penjualan::LaporanPenjualanHarian($tahun)->get();
         }
 
