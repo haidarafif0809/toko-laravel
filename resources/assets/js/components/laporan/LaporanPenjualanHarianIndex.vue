@@ -115,7 +115,7 @@ export default{
 			grand_total_penjualan:[],
 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
 			placeholder_priode: {
-				placeholder: 'Pilih Priode'
+				placeholder: 'Pilih Periode'
 			},
 			filter: {
 				// id: '', //id pelanggan

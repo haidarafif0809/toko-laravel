@@ -21,11 +21,13 @@
 						<p class="panel-title">Laporan Ringkas</p>
 					</div>
 					<div class="panel-body">
-						<div class="btn-group">
-							<button class="btn btn-primary active" v-on:click="getDataLaporan(1)">Hari ini</button>
-							<button class="btn btn-primary" v-on:click="getDataLaporan(2)">Mingguan</button>	
-							<button class="btn btn-primary" v-on:click="getDataLaporan(3)">Bulanan</button>
-							<button class="btn btn-primary" v-on:click="getDataLaporan(4)">Tahunan</button>
+						<div class="col-md-2" >
+							<selectize-component class="form-control"  v-model="filter.priode" :settings="placeholder_priode" id="pilih_priode">
+								<option v-bind:value="1">Hari ini</option>
+								<option v-bind:value="2">7 hari terakhir</option>
+								<option v-bind:value="3">30 hari terakhir</option>
+								<option v-bind:value="4">1 tahun terakhir</option>
+							</selectize-component>
 						</div>
 						<div class="tombol-export">
 							<button class="btn btn-primary">Excel</button>
@@ -94,20 +96,37 @@ export default{
 		return{
 			laporan_ringkas:[],
 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
+			placeholder_priode: {
+				placeholder: 'Pilih Periode'
+			},
+			filter: {
+				// id: '', //id pelanggan
+				priode: '',
+				// dari_tanggal: '',
+				// sampai_tanggal: ''
+			},
 		}
 	},
 	mounted(){
 		var app = this;
 		app.getDataLaporan();
-		$(".btn-group > .btn").click(function(){
-			$(".btn-group > .btn").removeClass("active");
-			$(this).addClass("active");
-		});
+		// $(".btn-group > .btn").click(function(){
+		// 	$(".btn-group > .btn").removeClass("active");
+		// 	$(this).addClass("active");
+		// });
 	},
+
+	watch: {
+        'filter.priode': function(value) {
+        	this.getDataLaporan(this.filter.priode);
+        	// this.getDataGrandTotal(this.filter.priode);
+        }
+    },
+
 	methods: {
 		getDataLaporan(type = 1){
 			let app = this;
-			axios.get(app.url+'/laporan-ringkas/'+type)
+			axios.get(app.url+'/laporan-ringkas/?type=' + type)
 			.then(function (resp){
 				app.laporan_ringkas = resp.data;
 				console.log(resp.data)
