@@ -87,7 +87,7 @@ class LaporanController extends Controller
         return $array_laporan;
     }
 
-    public function laporanPenjualanPerJam($type)
+    public function laporanPenjualanPerJam(Request $request)
     {
         $hari   = Carbon::now()->toDay();
         $minggu = Carbon::now()->subWeek();
@@ -95,19 +95,19 @@ class LaporanController extends Controller
         $tahun  = Carbon::now()->subYear();
 
         //per hari
-        if ($type == 1) {
+        if ($request->type == 1) {
             $laporan = Penjualan::LaporanPerJam($hari)->get();
         }
         //per minggu
-        elseif ($type == 2) {
+        elseif ($request->type == 2) {
             $laporan = Penjualan::LaporanPerJam($minggu)->get();
         }
         //per bulan
-        elseif ($type == 3) {
+        elseif ($request->type == 3) {
             $laporan = Penjualan::LaporanPerJam($bulan)->get();
         }
         //per tahun
-        elseif ($type == 4) {
+        elseif ($request->type == 4) {
             $laporan = Penjualan::LaporanPerJam($tahun)->get();
         }
 
