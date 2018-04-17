@@ -8,6 +8,9 @@ span{
 	float: right;
 	padding-bottom: 50px;
 }
+.waktu{
+	margin: 1px;
+}
 </style>
 
 <template>  
@@ -16,51 +19,53 @@ span{
 		<div class="modal" id="modalDetail" role="dialog" aria-hidden="true" >
 			<div class="modal-dialog modal-medium">
 				<div class="modal-content">
-					<form class="form-horizontal" v-on:submit.prevent=""> 
-						<div class="modal-header">
-							<label>Detai Penjualan</label>
-							<button type="button" class="close"  v-on:click="closeModal()">&times;</button> 
-						</div>
-						<div class="modal-body"  v-for ="detail_penjualans, index in detail_penjualan">
-							<span class="col-xs-4">No. Pesanan</span>  
-							<span class="col-xs-8">
+					<form class="form-horizontal" v-on:submit.prevent="">
+						<div class="data" v-for ="detail_penjualans, index in detail_penjualan">
+							<div class="modal-header">
+								<label>Detai Penjualan</label>
+								<button type="button" class="close"  v-on:click="closeModal()">&times;</button> 
+							</div>
+							<div class="modal-body"  >
+								<span class="col-xs-4">No. Pesanan</span>  
+								<span class="col-xs-8">
 
-								<span>: {{detail_penjualans.penjualan.id}}</span>
-								
-							</span>
-							<span class="col-xs-4">Tanggal</span>  
-							<span class="col-xs-8">
+									<span>: #{{detail_penjualans.penjualan.id}}</span>
 
-								<span>: {{detail_penjualans.penjualan.created_at | tanggal}}</span>
-								
-							</span>
-							<span class="col-xs-4">Kasir</span>  
-							<span class="col-xs-8">
+								</span>
+								<span class="col-xs-4">Tanggal</span>  
+								<span class="col-xs-8">
 
-								<span>: {{detail_penjualans.penjualan.nama_pemilik }}</span>
-								
-							</span>
-							<span class="col-xs-4">Pesanan</span>  
-							<span class="col-xs-8">
-								<ul v-for="data, index in detail_penjualans.detail_penjualan">
-									<li>{{data.jumlah_produk}} x {{data.nama_produk}}</li>
-								</ul>
-							</span>
-							<span class="col-xs-4">Total</span>  
-							<span class="col-xs-8">
+									<span>: {{detail_penjualans.penjualan.created_at | tanggal}}</span>
 
-								<span>: {{detail_penjualans.penjualan.Total_bayar | pemisahTitik }}</span>
-								
-							</span>
-							<div class="form-group">
-								<label class="col-xs-12 control-label"></label>
+								</span>
+								<span class="col-xs-4">Kasir</span>  
+								<span class="col-xs-8">
+
+									<span>: {{detail_penjualans.penjualan.nama_pemilik }}</span>
+
+								</span>
+								<span class="col-xs-4">Pesanan</span>  
+								<span class="col-xs-8">
+									<ul v-for="data, index in detail_penjualans.detail_penjualan">
+										<li>{{data.nama_produk}} x {{data.jumlah_produk}}</li>
+									</ul>
+								</span>
+								<span class="col-xs-4">Total</span>  
+								<span class="col-xs-8">
+
+									<span>: {{detail_penjualans.penjualan.total_bayar | pemisahTitik }}</span>
+
+								</span>
+								<div class="form-group">
+									<label class="col-xs-12 control-label"></label>
+								</div>
+
 							</div>
 
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-simple" v-on:click="closeModal()">Batal</button>
-							<button type="submit" class="btn btn-info">Cetak Struk</button>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-simple" v-on:click="closeModal()">Keluar</button>
+								<button type="submit" class="btn btn-info" @click="urlCetak(detail_penjualans.penjualan.id)">Cetak Struk</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -74,18 +79,28 @@ span{
 		<div class="panel panel-default">
 			<div class="panel-heading"><i class="fa fa-bookmark"></i> Riwayat Penjualan</div>
 			<div class="panel-body">
+				<div class="form-group col-md-2 ">
+					<selectize-component class="form-control" v-model="filter.priode" :settings="placeholder_priode" id="pilih_priode"> 
+						<option v-bind:value=0>Semua</option>									
+						<option v-bind:value=1>Hari ini</option>
+						<option v-bind:value=2>7 hari terakhir</option>
+						<option v-bind:value=3>30 hari terakhir</option>
+						<option v-bind:value=4>1 tahun terakhir</option>
+					</selectize-component>
+				</div>
+				<button class="btn btn-md btn-primary" @click="rentangWaktu()">Rentang Waktu</button>
 				<div class="table-responsive table">
 					<div class="waktu">
-						<div class="form-group col-md-2 ">
-							<selectize-component class="form-control" v-model="filter.priode" :settings="placeholder_priode" id="pilih_priode"> 
-								<option v-bind:value=0>Semua</option>									
-								<option v-bind:value=1>Hari ini</option>
-								<option v-bind:value=2>7 hari terakhir</option>
-								<option v-bind:value=3>30 hari terakhir</option>
-								<option v-bind:value=4>1 tahun terakhir</option>
-							</selectize-component>
-						</div>        
-					</div>
+						<div class="form-group col-md-2" id="rentang_waktu1" style="display:none">
+							<datepicker :input-class="'form-control'" placeholder="Dari Tanggal" v-model="filter.dari_tanggal" name="dari_tanggal" v-bind:id="'dari_tanggal'"></datepicker>			
+						</div>
+						<div class="form-group col-md-2" id="rentang_waktu2" style="display:none">
+							<datepicker :input-class="'form-control'" placeholder="Sampai Tanggal" v-model="filter.sampai_tanggal" name="sampai_tanggal" v-bind:id="'sampai_tanggal'"></datepicker>
+						</div>
+						<div class="form-group col-md-1" id="rentang_waktu3" style="display:none">
+							<button class="btn btn-primary" id="btnSubmit" type="submit" style="margin: 0px 0px;" @click="submitPostRiwayatTransaksi()"> Cari</button>
+						</div>
+					</div>        
 					<div class="pencarian">
 						<input type="text" class="form-control" name="search"placeholder="Pencarian"  v-model="search" >
 					</div>
@@ -137,7 +152,9 @@ export default {
 			riwayat_penjualan: [],
 			riwayat_penjualan_data: {},
 			filter:{
-				priode:''
+				priode:'',
+				dari_tanggal: '',
+				sampai_tanggal:''
 			},
 			url : window.location.origin+(window.location.pathname).replace("home","penjualan"),
 			search : '',
@@ -150,7 +167,7 @@ export default {
 	},
 	mounted() {
 		var app = this;
-		app.loading = true
+		app.loading = true;
 		app.getRiwayatPenjualan();   
 	},
 	filters: {
@@ -173,10 +190,24 @@ export default {
         	this.getHasilPencarian();  
         },
         'filter.priode': function(value) {
-        	this.getRiwayatPenjualan();
+        	this.submitPriode();
         }
     },
     methods: {
+    	submitPostRiwayatTransaksi()
+    	{
+    		var app = this;
+    		var filter = app.filter;
+    		app.getRiwayatPenjualan();
+    	},
+    	submitPriode()
+    	{
+    		var app = this;
+    		app.filter.dari_tanggal = '';
+    		app.filter.sampai_tanggal = '';
+    		var filter = app.filter;
+    		app.getRiwayatPenjualan();
+    	},
     	// menampilkan data simpan penjualan
     	getRiwayatPenjualan(page) {
     		var app = this;
@@ -206,6 +237,19 @@ export default {
     	},
     	closeModal(id) {
     		$('#modalDetail').hide();
+    	},
+    	rentangWaktu(){
+    		var app = this;
+    		var awal_tanggal = new Date();
+    		awal_tanggal.setDate(1);
+    		app.filter.dari_tanggal = awal_tanggal;
+    		app.filter.sampai_tanggal = new Date();
+    		$('#rentang_waktu1').toggle();
+    		$('#rentang_waktu2').toggle();
+    		$('#rentang_waktu3').toggle();
+    	},
+    	urlCetak(id_penjualan){
+    		window.open('penjualan/cetak-penjualan?id_penjualan='+id_penjualan,'_blank');
     	}
     	// getHasilPencarian(page){
     	// 	var app = this;
