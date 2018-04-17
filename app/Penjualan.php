@@ -172,34 +172,50 @@ class Penjualan extends Model
         return $penjualan;
     }
 
+    public function createDate($waktu)
+    {
+        $date   = date_create($waktu);
+        $format = date_format($date, 'Y-m-d');
+        return $format;
+    }
+
     // menampilakan riwayat penjualan
     public function scopeRiwayatPenjualan($query, $request, $hari, $minggu, $bulan, $tahun)
     {
-        if ($request->priode == 0 || $request->priode == "") {
+        if ($request->dari_tanggal != "" && $request->sampai_tanggal != "") {
             $query = $this->queryRiwayatPenjualan()
+                ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+                ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
                 ->orderBy('penjualans.id', 'desc');
             # code...
-        }
-        if ($request->priode == 1) {
-            $query = $this->queryRiwayatPenjualan()
-                ->where('penjualans.created_at', '>=', $hari)
-                ->orderBy('penjualans.id', 'desc');
-            # code...
-        }if ($request->priode == 2) {
-            $query = $this->queryRiwayatPenjualan()
-                ->where('penjualans.created_at', '>=', $minggu)
-                ->orderBy('penjualans.id', 'desc');
-            # code...
-        }if ($request->priode == 3) {
-            $query = $this->queryRiwayatPenjualan()
-                ->where('penjualans.created_at', '>=', $bulan)
-                ->orderBy('penjualans.id', 'desc');
-            # code...
-        }if ($request->priode == 4) {
-            $query = $this->queryRiwayatPenjualan()
-                ->where('penjualans.created_at', '>=', $tahun)
-                ->orderBy('penjualans.id', 'desc');
-            # code...
+        } elseif ($request->dari_tanggal == "" && $request->sampai_tanggal == "") {
+            if ($request->priode == 0 || $request->priode == "") {
+                $query = $this->queryRiwayatPenjualan()
+                    ->orderBy('penjualans.id', 'desc');
+                # code...
+            }
+            if ($request->priode == 1) {
+                $query = $this->queryRiwayatPenjualan()
+                    ->where('penjualans.created_at', '>=', $hari)
+                    ->orderBy('penjualans.id', 'desc');
+                # code...
+            }if ($request->priode == 2) {
+                $query = $this->queryRiwayatPenjualan()
+                    ->where('penjualans.created_at', '>=', $minggu)
+                    ->orderBy('penjualans.id', 'desc');
+                # code...
+            }if ($request->priode == 3) {
+                $query = $this->queryRiwayatPenjualan()
+                    ->where('penjualans.created_at', '>=', $bulan)
+                    ->orderBy('penjualans.id', 'desc');
+                # code...
+            }if ($request->priode == 4) {
+                $query = $this->queryRiwayatPenjualan()
+                    ->where('penjualans.created_at', '>=', $tahun)
+                    ->orderBy('penjualans.id', 'desc');
+                # code...
+                # code...
+            }
         }
         return $query;
     }

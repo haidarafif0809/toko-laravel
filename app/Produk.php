@@ -27,7 +27,8 @@ class Produk extends Model
             'produks.harga_jual',
             'produks.kategori_produks_id',
             'produks.foto',
-            'produks.satuan'
+            'produks.satuan',
+            'produks.produk_modifier_id'
         )
             ->where('toko_id', Auth::user()->toko_id);
         return $data;

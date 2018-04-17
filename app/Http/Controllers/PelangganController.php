@@ -151,7 +151,11 @@ class PelangganController extends Controller
                 ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
                 ->paginate(10);
         } elseif ($request->dari_tanggal == "" && $request->sampai_tanggal == "") {
-            if ($request->priode == 1) {
+            if ($request->priode == 0) {
+                $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
+                    ->paginate(10);
+                # code...
+            }if ($request->priode == 1) {
                 $riwayatPelanggan = Penjualan::riwayatTransaksiPelanggan($request)
                     ->where('penjualans.created_at', '>=', $hari)
                     ->paginate(10);

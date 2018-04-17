@@ -93,7 +93,6 @@ h4 {
           <div class="content">
             <div class="tab-content text-center">
               <div class="tab-pane active" id="profile">
-                <h1><chartjs-horizontal-bar></chartjs-horizontal-bar></h1>
               </div>
               <div class="tab-pane" id="messages">
                 <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
@@ -118,7 +117,6 @@ h4 {
           <div class="content">
             <div class="tab-content text-center">
               <div class="tab-pane active" id="profile">
-                <h1><chartjs-polar-area></chartjs-polar-area></h1>
               </div>
               <div class="tab-pane" id="messages">
                 <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
@@ -143,7 +141,6 @@ h4 {
           <div class="content">
             <div class="tab-content text-center">
               <div class="tab-pane active" id="profile">
-                <h1><chartjs-horizontal-bar></chartjs-horizontal-bar></h1>
               </div>
               <div class="tab-pane" id="messages">
                 <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>

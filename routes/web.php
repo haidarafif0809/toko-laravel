@@ -68,9 +68,11 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
 Route::post('/penjualan/view', 'PenjualanController@view');
+Route::get('/penjualan/data-modifier/{id_produk}', 'PenjualanController@dataModifier');
 Route::post('/penjualan/riwayat-penjualan', 'PenjualanController@dataRiwayatPenjualan');
 Route::get('/penjualan/detail-riwayat-penjualan', 'PenjualanController@detailRiwayatPenjualan');
 Route::get('/penjualan/cetak-penjualan', 'PenjualanController@cetakPenjualan');
+Route::get('/penjualan/cetak-pesanan', 'PenjualanController@cetakPesanan');
 Route::get('/penjualan/diskon-simpan-penjualan', 'PenjualanController@diskonSimpanPenjualan');
 Route::get('/penjualan/create-tbs-penjualan', 'PenjualanController@createTbsPenjualan');
 Route::get('/penjualan/view-buka-penjualan', 'PenjualanController@viewBukaPenjualan');
@@ -89,6 +91,11 @@ Route::delete('/penjualan/hapus-tbs-penjualan/{id}', [
     'middleware' => ['auth'],
     'as'         => 'penjualan.hapus_tbs_penjualan',
     'uses'       => 'PenjualanController@hapusTbsPenjualan',
+]);
+Route::delete('/penjualan/hapus-simpan-penjualan/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'penjualan.hapus_tbs_penjualan',
+    'uses'       => 'PenjualanController@hapusSimpanPenjualan',
 ]);
 // ketegori produk pada penjualan
 Route::get('/penjualan/kategori-produk', 'PenjualanController@kategoriProduk');
