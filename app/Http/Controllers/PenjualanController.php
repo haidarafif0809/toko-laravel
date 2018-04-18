@@ -237,17 +237,16 @@ class PenjualanController extends Controller
     // proses create dan update tbs_penjualans
     public function prosesTbsPenjualan(Request $request)
     {
-        $session_id       = session()->getId();
-        $itemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('session_id', $session_id);
-        $modifier         = '';
-        $noUrut           = 1;
-        $produk_modifier  = $request->id_modifier;
-        $harga_modifier   = 0;
+        $session_id      = session()->getId();
+        $modifier        = '';
+        $noUrut          = 1;
+        $produk_modifier = $request->id_modifier;
+        $harga_modifier  = 0;
         if (is_array($produk_modifier) || is_object($produk_modifier)) {
             foreach ($produk_modifier as $produk_modifiers) {
                 if ($noUrut != count($request->id_modifier)) {
                     $modifier .= $produk_modifiers . ',';
-                } else {
+                } elseif ($noUrut == count($request->id_modifier)) {
                     $modifier .= $produk_modifiers;
                 }
                 $noUrut++;
@@ -255,8 +254,10 @@ class PenjualanController extends Controller
                 $harga_modifier += $harga;
             }
         }
-        // return $harga_modifier;
-        if (count($itemTbsPenjualan->get()) == 0 && $produk_modifier != null) {
+        $itemTbsPenjualan  = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('id_modifier', $modifier)->where('session_id', $session_id);
+        $sitemTbsPenjualan = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('id_modifier', null)->where('session_id', $session_id);
+        // return yang punya modifier
+        if (count($itemTbsPenjualan->get()) < 1 && $produk_modifier != null) {
             $session_id = session()->getId();
 
             TbsPenjualan::create([
@@ -269,29 +270,38 @@ class PenjualanController extends Controller
                 'id_modifier'   => $modifier,
                 'toko_id'       => Auth::user()->toko_id,
             ]);
-        } elseif (count($itemTbsPenjualan->get()) == 0 && $produk_modifier == null) {
-            $session_id = session()->getId();
-
-            TbsPenjualan::create([
-                'session_id'    => $session_id,
-                'produk_id'     => $request->produk_id,
-                'jumlah_produk' => $request->jumlah,
-                'harga_produk'  => $request->harga + $harga_modifier,
-                'satuan_id'     => $request->satuan,
-                'subtotal'      => $request->harga + $harga_modifier,
-                'toko_id'       => Auth::user()->toko_id,
-            ]);
-            # code...
-        } else if (count($itemTbsPenjualan->get()) > 0) {
-            $item     = TbsPenjualan::select()->where('produk_id', $request->produk_id)->where('session_id', $session_id)->first();
-            $subtotal = ($item->jumlah_produk + 1) * $item->harga_produk;
-            $diskon   = ($subtotal * $item->diskon_persen) / 100; //result diskon per produk
+        } elseif (count($itemTbsPenjualan->get()) > 0 && $produk_modifier != null) {
+            $subtotal = ($itemTbsPenjualan->first()->jumlah_produk + 1) * $itemTbsPenjualan->first()->harga_produk;
+            $diskon   = ($subtotal * $itemTbsPenjualan->first()->diskon_persen) / 100; //result diskon per produk
             $total    = $subtotal - $diskon; //potongan diskon per produk
             $itemTbsPenjualan->update([
-                'jumlah_produk' => $item->jumlah_produk + $request->jumlah,
+                'jumlah_produk' => $itemTbsPenjualan->first()->jumlah_produk + $request->jumlah,
                 'subtotal'      => $total,
                 'diskon'        => $diskon,
                 'id_modifier'   => $modifier,
+            ]);
+        }
+        // return yang punya modifier
+        if (count($sitemTbsPenjualan->get()) < 1 && $produk_modifier == null) {
+            $session_id = session()->getId();
+            TbsPenjualan::create([
+                'session_id'    => $session_id,
+                'produk_id'     => $request->produk_id,
+                'jumlah_produk' => $request->jumlah,
+                'harga_produk'  => $request->harga,
+                'satuan_id'     => $request->satuan,
+                'subtotal'      => $request->harga,
+                'toko_id'       => Auth::user()->toko_id,
+            ]);
+            # code...
+        } elseif (count($sitemTbsPenjualan->get()) > 0 && $produk_modifier == null) {
+            $subtotal = ($sitemTbsPenjualan->first()->jumlah_produk + 1) * $sitemTbsPenjualan->first()->harga_produk;
+            $diskon   = ($subtotal * $sitemTbsPenjualan->first()->diskon_persen) / 100; //result diskon per produk
+            $total    = $subtotal - $diskon; //potongan diskon per produk
+            $sitemTbsPenjualan->update([
+                'jumlah_produk' => $sitemTbsPenjualan->first()->jumlah_produk + $request->jumlah,
+                'subtotal'      => $total,
+                'diskon'        => $diskon,
             ]);
         }
 
