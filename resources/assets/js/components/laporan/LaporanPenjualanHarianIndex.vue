@@ -118,10 +118,7 @@ export default{
 				placeholder: 'Pilih Periode'
 			},
 			filter: {
-				// id: '', //id pelanggan
 				priode: '',
-				// dari_tanggal: '',
-				// sampai_tanggal: ''
 			}
 		}
 	},
@@ -129,10 +126,6 @@ export default{
 		var app = this;
 		app.getDataLaporan();
 		app.getDataGrandTotal();
-		// $(".btn-group > .btn").click(function(){
-		// 	$(".btn-group > .btn").removeClass("active");
-		// 	$(this).addClass("active");
-		// });
 	},
 
 	watch: {
