@@ -156,7 +156,7 @@ class LaporanController extends Controller
 
     }
 
-    public function dataTransaksiPenjualan($type)
+    public function dataTransaksiPenjualan(Request $request)
     {
         $hari   = Carbon::now()->toDay();
         $minggu = Carbon::now()->subWeek();
@@ -164,19 +164,19 @@ class LaporanController extends Controller
         $tahun  = Carbon::now()->subYear();
 
         //per hari
-        if ($type == 1) {
+        if ($request->type == 1) {
             $laporan = Penjualan::TransaksiPenjualan($hari)->get();
         }
         //per minggu
-        elseif ($type == 2) {
+        elseif ($request->type == 2) {
             $laporan = Penjualan::TransaksiPenjualan($minggu)->get();
         }
         //per bulan
-        elseif ($type == 3) {
+        elseif ($request->type == 3) {
             $laporan = Penjualan::TransaksiPenjualan($bulan)->get();
         }
         //per tahun
-        elseif ($type == 4) {
+        elseif ($request->type == 4) {
             $laporan = Penjualan::TransaksiPenjualan($tahun)->get();
         }
 
