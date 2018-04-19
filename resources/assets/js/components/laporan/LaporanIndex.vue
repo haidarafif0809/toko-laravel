@@ -77,7 +77,7 @@ i{margin-bottom: 20px}
 					</router-link>
 				</div>
 				<div class="col-md-4">
-					<router-link :to="{name: 'indexDashboard'}">
+					<router-link :to="{name: 'indexLaporanRekapitulasiKas'}">
 						<div class="box">
 							<i class="fa fa-copy fa-3x"></i>
 							<p class="judul">Rekapitulasi Kas</p>
