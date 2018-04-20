@@ -62,11 +62,16 @@
 								</tbody> -->
 								<tbody >
 									<tr>
-										<td colspan="4" class="text-center">Tidak Ada Data</td>
+										<!-- <td colspan="4" class="text-center">Tidak Ada Data</td> -->
+										<td>2018-01-17 10:50:18	</td>
+										<td align="right">70.000</td>
+										<td align="right">50.000</td>
+										<td>Galang</td>
 									</tr>
 								</tbody>
 								<!-- <tfoot bgcolor="#d6d6c2">	
 									<tr>
+										<td><b color="#000000">Grand Total:</b></td>
 										<td><b color="#000000">Grand Total:</b></td>
 										<td  v-if="grand_total_penjualan.total_penjualan > 0" align="right">
 											<b color="#000000">
