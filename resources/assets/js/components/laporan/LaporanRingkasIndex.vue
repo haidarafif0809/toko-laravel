@@ -100,26 +100,18 @@ export default{
 				placeholder: 'Pilih Periode'
 			},
 			filter: {
-				// id: '', //id pelanggan
 				priode: '',
-				// dari_tanggal: '',
-				// sampai_tanggal: ''
 			},
 		}
 	},
 	mounted(){
 		var app = this;
 		app.getDataLaporan();
-		// $(".btn-group > .btn").click(function(){
-		// 	$(".btn-group > .btn").removeClass("active");
-		// 	$(this).addClass("active");
-		// });
 	},
 
 	watch: {
         'filter.priode': function(value) {
         	this.getDataLaporan(this.filter.priode);
-        	// this.getDataGrandTotal(this.filter.priode);
         }
     },
 
