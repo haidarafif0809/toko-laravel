@@ -516,9 +516,9 @@ class PenjualanController extends Controller
         $total_diskon = 0;
         $array        = [];
         foreach ($detail_penjualan as $key => $detail_penjualans) {
-            $data = explode(',', $detail_penjualans->id_modifier);
+            $data                = explode(',', $detail_penjualans->id_modifier);
+            $array_data_modifier = [];
             foreach ($data as $datas) {
-                $array_data_modifier   = [];
                 $data_id_modifier      = Modifier::select('nama_modifier')->whereId($datas)->first();
                 $array_data_modifier[] = $data_id_modifier;
                 # code...
@@ -558,9 +558,9 @@ class PenjualanController extends Controller
         $total_diskon = 0;
         $array        = [];
         foreach ($detail_penjualan as $key => $detail_penjualans) {
-            $data = explode(',', $detail_penjualans->id_modifier);
+            $data                = explode(',', $detail_penjualans->id_modifier);
+            $array_data_modifier = [];
             foreach ($data as $datas) {
-                $array_data_modifier   = [];
                 $data_id_modifier      = Modifier::select('nama_modifier')->whereId($datas)->first();
                 $array_data_modifier[] = $data_id_modifier;
                 # code...
@@ -600,13 +600,31 @@ class PenjualanController extends Controller
     public function detailRiwayatPenjualan(Request $request)
     {
         $detail_penjualan = DetailPenjualan::select([
-            'detail_penjualans.jumlah_produk',
+            'detail_penjualans.jumlah_produk', 'detail_penjualans.id_modifier',
             'produks.nama_produk',
         ])
             ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
             ->leftJoin('penjualans', 'penjualans.id', '=', 'detail_penjualans.id_penjualan')
             ->where('id_penjualan', $request->id)
-            ->where('penjualans.toko_id', Auth::user()->toko_id)->get();
+            ->where('penjualans.toko_id', Auth::user()->toko_id);
+        $data = [];
+        // $array = [];
+        foreach ($detail_penjualan->get() as $detail_penjualans) {
+            $data_modifier       = explode(',', $detail_penjualans->id_modifier);
+            $array_data_modifier = [];
+            foreach ($data_modifier as $data_modifiers) {
+                $data_id_modifier      = Modifier::select('nama_modifier')->whereId($data_modifiers)->first();
+                $array_data_modifier[] = $data_id_modifier;
+                # code...
+            }
+            array_push($data, [
+                'nama_produk'   => $detail_penjualans->nama_produk,
+                'jumlah_produk' => $detail_penjualans->jumlah_produk,
+                'id_modifier'   => $detail_penjualans->id_modifier,
+                'nama_modifier' => $array_data_modifier,
+            ]);
+            # code...
+        }
         $penjualan = Penjualan::select('penjualans.id',
             'penjualans.pelanggan_id',
             'penjualans.created_at',
@@ -617,7 +635,7 @@ class PenjualanController extends Controller
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->first();
         $array = [];
-        array_push($array, ['detail_penjualan' => $detail_penjualan, 'penjualan' => $penjualan]);
+        array_push($array, ['detail_penjualan' => $data, 'penjualan' => $penjualan]);
         return $array;
     }
     // menampilkan kategori produk
