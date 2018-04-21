@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SimpanDetailPenjualan extends Model
 {
     protected $fillable = [
-        'no_faktur', 'id_satuan', 'id_produk', 'id_penjualan', 'harga_produk', 'jumlah_produk', 'diskon', 'diskon_persen', 'subtotal',
+        'no_faktur', 'id_satuan', 'id_produk', 'id_modifier', 'id_penjualan', 'harga_produk', 'jumlah_produk', 'diskon', 'diskon_persen', 'subtotal',
     ];
 
     public function scopeSimpanDetailProduk($query, $id_penjualan)
@@ -30,6 +30,7 @@ class SimpanDetailPenjualan extends Model
             'simpan_detail_penjualans.id_satuan',
             'simpan_detail_penjualans.id_produk',
             'simpan_detail_penjualans.id_penjualan',
+            'simpan_detail_penjualans.id_modifier',
             'simpan_detail_penjualans.harga_produk',
             'simpan_detail_penjualans.jumlah_produk',
             'simpan_detail_penjualans.diskon',

@@ -49,8 +49,6 @@ table{
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
 									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">buka</button>
-									<router-link :to="{ name:'indexPenjualan', params: {id: buka_penjualan.data_simpan_penjualan.id}}"  @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" class="btn btn-xs btn-success" v-bind:id="'edit-' + buka_penjualan.data_simpan_penjualan.id"><i class="fa fa-print"></i> cetak tagihan
-									</router-link>
 								</td>
 							</tr>
 						</tbody>

@@ -18,6 +18,7 @@ class CreateSimpanDetailPenjualansTable extends Migration
             $table->integer('no_faktur')->nullable();
             $table->integer('id_satuan');
             $table->integer('id_produk');
+            $table->string('id_modifier')->nullable();
             $table->integer('id_penjualan');
             $table->integer('harga_produk');
             $table->integer('jumlah_produk');

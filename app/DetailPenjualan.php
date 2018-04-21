@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPenjualan extends Model
 {
     protected $fillable = [
-        'no_faktur', 'id_produk', 'id_penjualan', 'harga_produk', 'subtotal', 'diskon', 'jumlah_produk',
+        'no_faktur', 'id_produk', 'id_penjualan', 'id_modifier', 'harga_produk', 'subtotal', 'diskon', 'jumlah_produk',
     ];
 
     public function scopeKwantitas($query, $id_penjualan)

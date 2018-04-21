@@ -47,12 +47,18 @@ p{
 
 	<table >
 		<tbody >
-
 			@foreach ($detail_simpan_penjualan as $detail_simpan_penjualans)
 			<tr>
-				<td class="marginProduk"> {{title_case($detail_simpan_penjualans->nama_produk)}} </td>
-				<td class="marginProduk" align="right">x {{number_format($detail_simpan_penjualans->jumlah_produk, 0, ',', '.')}}</td>
+				<td class="marginProduk"> {{title_case($detail_simpan_penjualans['nama_produk'])}} </td>
+				<td class="marginProduk" align="right">x {{number_format($detail_simpan_penjualans['jumlah_produk'], 0, ',', '.')}}</td>
 			</tr>
+			@foreach ($detail_simpan_penjualans['nama_modifier'] as $detail_simpan_penjualanss)
+			@if($detail_simpan_penjualanss != null)
+			<tr>
+				<td class="marginProduk">Add: {{title_case($detail_simpan_penjualanss['nama_modifier'])}}, </td>
+			</tr>
+			@endif
+			@endforeach
 			@endforeach
 		</tbody>
 	</table>
