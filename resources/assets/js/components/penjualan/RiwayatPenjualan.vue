@@ -46,9 +46,14 @@ span{
 								</span>
 								<span class="col-xs-4">Pesanan</span>  
 								<span class="col-xs-8">
-									<ul v-for="data, index in detail_penjualans.detail_penjualan">
-										<li>{{data.nama_produk}} x {{data.jumlah_produk}}</li>
-									</ul>
+									<div  v-for="data, index in detail_penjualans.detail_penjualan">
+										<tr>- {{data.nama_produk}} x {{data.jumlah_produk}}</tr>
+										<tr v-if="data.id_modifier != null">
+											<span v-for="datas, index in data.nama_modifier">+ {{datas.nama_modifier}}, </span>
+										</tr>
+										<p></p>
+									</div>
+
 								</span>
 								<span class="col-xs-4">Total</span>  
 								<span class="col-xs-8">

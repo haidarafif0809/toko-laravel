@@ -181,7 +181,7 @@ width: 160px;*/
 								<button type="button" class="close"  v-on:click="closeModal()">&times;</button> 
 							</div>
 							<div class="modal-body">
-								<label>modifier</label>
+								<p>Pilih Modifier(Opsional)</p>
 								<span v-for="modifiers, index in modifier.modifier">
 									<button :id="modifiers.id" type="button" class="btn btn-primary btn-md" @click="getModifier(modifiers.id)">{{modifiers.nama_modifier}} | <br>{{modifiers.harga_modifier | pemisahTitik}}</button>
 								</span>
@@ -462,7 +462,7 @@ width: 160px;*/
 
 				<!-- button aksi: simpan, bayar, diskon -->
 				<button v-bind:disabled="!isValid" class="button button2 btn-xs btn-md" @click="openModalSimpanPenjualan()"><i class="fa fa-bookmark"></i> Simpan</button>
-				<button v-bind:disabled="!isValid" class="button button1 btn-xs btn-md" @click="modalDiskonFaktur()">Diskon</button>
+				<button v-bind:disabled="!isValid" class="button button1 btn-xs btn-md" @click="modalDiskonFaktur()">Diskon Per Transaksi</button>
 				<button v-bind:disabled="!validate" class="button button3 btn-xs btn-md" @click="openModal()">Bayar</button>
 			</div>
 
@@ -756,7 +756,6 @@ export default {
 		// create diskon per faktur
 		simpanDiskonPerFaktur(){
 			var app = this;
-			
 			if(app.formDiskon.persen > 0 ){
 				app.diskonPerfaktur.persen = app.formDiskon.persen;
 				app.diskonPerfaktur.rupiah = (app.tbs_penjualans.total_bayar / 100) * app.formDiskon.persen;
@@ -804,6 +803,7 @@ export default {
 				app.getTbsPenjualan();
 				app.formDiskonProduk.persen = '';
 				app.formDiskonProduk.rupiah = '';
+				app.formDiskon.rupiah = '';
 			})
 			.catch(function (resp) {
 				app.errors = resp.response.data.errors;
@@ -1008,6 +1008,9 @@ export default {
 			.then(function (resp) {
 				app.$router.replace('/penjualan');
 				app.getTbsPenjualan();
+				app.formDiskon.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.diskonPerfaktur.rupiah = '';
 			})
 			.catch(function (resp) {
 				// console.log(resp)
@@ -1046,6 +1049,10 @@ export default {
 				app.$router.replace('/penjualan');
 				app.inputTbsPenjualan.jumlah = '';
 				app.getTbsPenjualan();
+				app.formDiskon.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.diskonPerfaktur.rupiah = '';
+
 			})
 			.catch(function (resp) {
 				app.success = false;
@@ -1095,6 +1102,8 @@ export default {
 			.then(function (resp) {
 				app.inputTbsPenjualan.jumlah = ''	
 				app.getTbsPenjualan();
+				app.diskonPerfaktur.persen = '';
+				app.diskonPerfaktur.rupiah = '';
 				$("#modalJumlahProduk").hide();
 			})
 			.catch(function (resp) {

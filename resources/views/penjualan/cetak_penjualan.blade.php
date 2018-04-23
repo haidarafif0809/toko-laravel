@@ -43,14 +43,21 @@ p{
 
 			@foreach ($detail_penjualan as $detail_penjualans)
 			<tr>
-				<td class="marginProduk"> {{title_case($detail_penjualans->nama_produk)}} </td>
-				<td class="marginProduk" align="right"> {{number_format($detail_penjualans->harga_produk, 0, ',', '.')}}</td>
-				<td class="marginProduk" align="right">{{number_format($detail_penjualans->jumlah_produk, 0, ',', '.')}}</td>
-				<td class="marginProduk" align="right">{{number_format($detail_penjualans->harga_produk * $detail_penjualans->jumlah_produk, 0, ',', '.')}}</td>
+				<td class="marginProduk"> {{title_case($detail_penjualans['nama_produk'])}} </td>
+				<td class="marginProduk" align="right"> {{number_format($detail_penjualans['harga_produk'], 0, ',', '.')}}</td>
+				<td class="marginProduk" align="right">{{number_format($detail_penjualans['jumlah_produk'], 0, ',', '.')}}</td>
+				<td class="marginProduk" align="right">{{number_format($detail_penjualans['harga_produk'] * $detail_penjualans['jumlah_produk'], 0, ',', '.')}}</td>
 			</tr>
-			@if($detail_penjualans->diskon != null)
+			@foreach ($detail_penjualans['nama_modifier'] as $detail_simpan_penjualanss)
+			@if($detail_simpan_penjualanss != null)
 			<tr>
-				<td class="marginProduk">Disc. {{number_format($detail_penjualans->diskon, 0, ',', '.')}} </td>
+				<td class="marginProduk">Add: {{title_case($detail_simpan_penjualanss['nama_modifier'])}}, </td>
+			</tr>
+			@endif
+			@endforeach
+			@if($detail_penjualans['diskon'] != null)
+			<tr>
+				<td class="marginProduk">Disc. {{number_format($detail_penjualans['diskon'], 0, ',', '.')}} </td>
 			</tr>
 			@endif
 			@endforeach
