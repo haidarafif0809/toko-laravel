@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DetailPenjualan;
+use App\KelolaKas;
 use App\Penjualan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -193,6 +194,44 @@ class LaporanController extends Controller
                 'diskon'        => $laporans->diskon,
                 'pajak'         => $laporans->pajak,
 
+            ]);
+        }
+        return $array_laporan;
+    }
+
+    public function laporanRekapitulasiKas(Request $request)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        //per hari
+        if ($request->type == 1) {
+            $laporan = KelolaKas::LaporanKas($hari)->get();
+        }
+        //per minggu
+        elseif ($request->type == 2) {
+            $laporan = KelolaKas::LaporanKas($minggu)->get();
+        }
+        //per bulan
+        elseif ($request->type == 3) {
+            $laporan = KelolaKas::LaporanKas($bulan)->get();
+        }
+        //per tahun
+        elseif ($request->type == 4) {
+            $laporan = KelolaKas::LaporanKas($tahun)->get();
+        }
+
+        $array_laporan = [];
+        foreach ($laporan as $laporans) {
+            // $nama_produk = DetailPenjualan::DetailPenjualanPerTransaksi($laporans->id_penjualan)->get();
+            array_push($array_laporan, [
+                'tanggal'      => $laporans->tanggal,
+                'type'         => $laporans->type,
+                'jumlah'       => $laporans->jumlah,
+                'keterangan'   => $laporans->keterangan,
+                'nama_pemilik' => $laporans->nama_pemilik,
             ]);
         }
         return $array_laporan;

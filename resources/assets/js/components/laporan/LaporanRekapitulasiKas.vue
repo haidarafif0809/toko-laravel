@@ -12,13 +12,13 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
-			<li class="active">Laporan Penjualan Harian</li>
+			<li class="active">Laporan Rekapitulasi Kas</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Laporan Penjualan Harian</p>
+						<p class="panel-title">Laporan Rekapitulasi Kas</p>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-2" >
@@ -39,71 +39,44 @@
 								<thead bgcolor="#d6d6c2">
 									<tr>
 										<th>TANGGAL & WAKTU	</th>
-										<th style="text-align:right">KAS MASUK</th>
-										<th style="text-align:right">KAS KELUAR</th>
-										<th>STAF</th>
+										<th>Jenis Kas</th>
+										<th style="text-align:right">Jumlah</th>
+										<th>Keterangan</th>
+										<th>Staf</th>
 									</tr>
 								</thead>
-								<!-- <tbody v-if="laporan_penjualan_harian.length > 0">
-									<tr v-for="laporan_penjualan_harians ,index in laporan_penjualan_harian">
+								<tbody v-if="laporan_kas.length > 0">
+									<tr v-for="laporan_kas ,index in laporan_kas">
 										<td>
-											{{ laporan_penjualan_harians.tanggal }}
+											{{ laporan_kas.tanggal }}
+										</td>
+										<td v-if="laporan_kas.type == 1">
+											<!-- {{ (laporan_kas.type) }} -->
+											<!-- <div v-if="laporan_kas.type == 1"> -->
+												Kas Masuk 
+											<!-- </div> -->
+												<!-- <div v-else> -->
+											<!-- </div> -->
+										</td>
+										<td v-else>
+											Kas Keluar
 										</td>
 										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_penjualan) }}
+											{{ new Intl.NumberFormat().format(laporan_kas.jumlah) }}
 										</td>
-										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran) }}
+										<td>
+											{{ (laporan_kas.keterangan) }}
 										</td>
-										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_penjualan_harians.total_pembayaran / laporan_penjualan_harians.total_penjualan) }}
+										<td>
+											{{ (laporan_kas.nama_pemilik) }}
 										</td>
-									</tr>
-								</tbody> -->
-								<tbody >
-									<tr>
-										<!-- <td colspan="4" class="text-center">Tidak Ada Data</td> -->
-										<td>2018-01-17 10:50:18	</td>
-										<td align="right">70.000</td>
-										<td align="right">50.000</td>
-										<td>Galang</td>
 									</tr>
 								</tbody>
-								<!-- <tfoot bgcolor="#d6d6c2">	
+								<tbody v-else class="data-tidak-ada">
 									<tr>
-										<td><b color="#000000">Grand Total:</b></td>
-										<td><b color="#000000">Grand Total:</b></td>
-										<td  v-if="grand_total_penjualan.total_penjualan > 0" align="right">
-											<b color="#000000">
-												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_penjualan) }}
-											</b>
-										</td>
-										<td v-else align="right">
-											<b color="#000000">
-												0
-											</b>
-										</td>
-										<td v-if="grand_total_penjualan.total_pembayaran > 0" align="right">
-											<b color="#000000">
-												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran) }}
-											</b>
-										</td>
-										<td v-else align="right">
-											<b color="#000000">
-												0
-											</b>
-										</td>
-										<td v-if="grand_total_penjualan.total_penjualan > 0" align="right">
-											<b color="#000000">
-												{{ new Intl.NumberFormat().format(grand_total_penjualan.total_pembayaran / grand_total_penjualan.total_penjualan) }}
-											</b>
-										</td>
-										<td v-else align="right"> <b color="#000000">
-											0
-										</b>
-									</td>
-								</tr>
-							</tfoot> -->
+										<td colspan="4" class="text-center">Tidak Ada Data</td>
+									</tr>
+								</tbody>
 						</table>
 					</div>
 				</div>
@@ -116,9 +89,9 @@
 export default{
 	data: function(){
 		return{
-// 			laporan_penjualan_harian:[],
+			laporan_kas:[],
 // 			grand_total_penjualan:[],
-// 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
+			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
 			placeholder_priode: {
 				placeholder: 'Pilih Periode'
 			},
@@ -127,37 +100,37 @@ export default{
 			}
 		}
 	},
-// 	mounted(){
-// 		var app = this;
-// 		app.getDataLaporan();
-// 		app.getDataGrandTotal();
-// 	},
+	mounted(){
+		var app = this;
+		app.getDataLaporan();
+		// app.getDataGrandTotal();
+	},
 
-// 	watch: {
-//         'filter.priode': function(value) {
-//         	this.getDataLaporan(this.filter.priode);
+	watch: {
+        'filter.priode': function(value) {
+        	this.getDataLaporan(this.filter.priode);
 //         	this.getDataGrandTotal(this.filter.priode);
-//         }
-//     },
+        }
+    },
 
-// 	methods: {
-// 		getDataLaporan(type = 1){
-// 			let app = this;
-// 			axios.get(app.url+'/laporan-penjualan-harian/?type=' + type)
-// 			.then(function (resp){
-// 				app.laporan_penjualan_harian = resp.data;
-// 				console.log(resp.data)
-// 			})
-// 		},
-// 		getDataGrandTotal(type = 1){
-// 			let app = this;
-// 			axios.get(app.url+'/grand-total-penjualan?type=' + type)
-// 			.then(function (resp){
-// 				app.grand_total_penjualan = resp.data;
-// 				console.log(resp.data)
-// 			})
-// 		},
+	methods: {
+		getDataLaporan(type = 1){
+			let app = this;
+			axios.get(app.url+'/rekapitulasi-kas/?type=' + type)
+			.then(function (resp){
+				app.laporan_kas = resp.data;
+				console.log(resp.data)
+			})
+		},
+		// getDataGrandTotal(type = 1){
+		// 	let app = this;
+		// 	axios.get(app.url+'/grand-total-penjualan?type=' + type)
+		// 	.then(function (resp){
+		// 		app.grand_total_penjualan = resp.data;
+		// 		console.log(resp.data)
+		// 	})
+		// },
 
-// 	},
+	},
 }
 </script>

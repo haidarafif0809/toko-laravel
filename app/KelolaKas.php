@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Yajra\Auditable\AuditableTrait;
 
 class KelolaKas extends Model
@@ -42,5 +44,23 @@ class KelolaKas extends Model
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
             ->diffForHumans();
+    }
+
+    public function scopeLaporanKas($query, $waktu)
+    {
+        $query->select([
+            DB::raw('kelola_kas.created_at as tanggal'),
+            'kelola_kas.kelola_kas_id as id_kelola_kas',
+            'kelola_kas.toko_id',
+            'kelola_kas.type',
+            'kelola_kas.jumlah',
+            'kelola_kas.keterangan',
+            'users.nama_pemilik',
+        ])
+            ->leftJoin('users', 'users.id', '=', 'kelola_kas.created_by')
+            ->where('kelola_kas.toko_id', Auth::user()->toko_id)
+            ->where('.kelola_kas.created_at', '>=', $waktu)
+            ->groupBy('kelola_kas.kelola_kas_id');
+        return $query;
     }
 }
