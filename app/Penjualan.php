@@ -11,7 +11,7 @@ class Penjualan extends Model
 {
     //
     use AuditableTrait;
-    protected $fillable = (['no_faktur', 'total_bayar', 'status_pemesanan', 'pelanggan_id', 'cara_ayar', 'keterangan', 'toko_id', 'subtotal', 'tunai', 'kembalian', 'diskon', 'pajak',
+    protected $fillable = (['no_faktur', 'total_bayar', 'status_pemesanan', 'pelanggan_id', 'cara_bayar', 'keterangan', 'toko_id', 'subtotal', 'tunai', 'kembalian', 'diskon', 'pajak',
     ]);
 
     public function kategoriProduk()
@@ -217,6 +217,21 @@ class Penjualan extends Model
                 # code...
             }
         }
+        return $query;
+    }
+
+    public function scopeLaporanDiskon($query, $waktu)
+    {
+        $query->select([
+            DB::raw('penjualans.created_at as tanggal'),
+            'penjualans.id as id_penjualans',
+            'penjualans.keterangan',
+            'penjualans.diskon',
+        ])
+            ->where('penjualans.toko_id', Auth::user()->toko_id)
+            ->where('.penjualans.created_at', '>=', $waktu)
+            ->where('penjualans.diskon', '!=', null)
+            ->groupBy('penjualans.id');
         return $query;
     }
 }

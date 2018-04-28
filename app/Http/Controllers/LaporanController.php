@@ -237,6 +237,41 @@ class LaporanController extends Controller
         return $array_laporan;
     }
 
+    public function laporanDiskon(Request $request)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        //per hari
+        if ($request->type == 1) {
+            $laporan = Penjualan::LaporanDiskon($hari)->get();
+        }
+        //per minggu
+        elseif ($request->type == 2) {
+            $laporan = Penjualan::LaporanDiskon($minggu)->get();
+        }
+        //per bulan
+        elseif ($request->type == 3) {
+            $laporan = Penjualan::LaporanDiskon($bulan)->get();
+        }
+        //per tahun
+        elseif ($request->type == 4) {
+            $laporan = Penjualan::LaporanDiskon($tahun)->get();
+        }
+
+        $array_laporan = [];
+        foreach ($laporan as $laporans) {
+            array_push($array_laporan, [
+                'tanggal'    => $laporans->tanggal,
+                'keterangan' => $laporans->keterangan,
+                'diskon'     => $laporans->diskon,
+            ]);
+        }
+        return $array_laporan;
+    }
+
     public function index()
     {
         //

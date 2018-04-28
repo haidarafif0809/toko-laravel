@@ -12,13 +12,13 @@
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
 			<li><router-link :to="{name: 'indexLaporan'}">Laporan</router-link></li>
-			<li class="active">Laporan Rekapitulasi Kas</li>
+			<li class="active">Laporan Diskon</li>
 		</ul>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<p class="panel-title">Laporan Rekapitulasi Kas</p>
+						<p class="panel-title">Laporan Diskon</p>
 					</div>
 					<div class="panel-body">
 						<div class="col-md-2" >
@@ -39,57 +39,35 @@
 								<thead bgcolor="#d6d6c2">
 									<tr>
 										<th>TANGGAL & WAKTU	</th>
-										<th>JENIS KAS</th>
-										<th style="text-align:right">JUMLAH</th>
-										<th>KETERANGAN</th>
-										<th>STAF</th>
+										<th>KETERANGAN PENJUALAN</th>
+										<th style="text-align:right">NOMINAL DISKON (RP)</th>
 									</tr>
 								</thead>
-								<tbody v-if="laporan_kas.length > 0">
-									<tr v-for="laporan_kas ,index in laporan_kas">
+								<tbody v-if="laporan_diskon.length > 0">
+									<tr v-for="laporan_diskons ,index in laporan_diskon">
 										<td>
-											{{ laporan_kas.tanggal }}
+											{{ laporan_diskons.tanggal }}
 										</td>
-										<td v-if="laporan_kas.type == 1">
-											<!-- {{ (laporan_kas.type) }} -->
-											<!-- <div v-if="laporan_kas.type == 1"> -->
-												Kas Masuk 
-											<!-- </div> -->
-												<!-- <div v-else> -->
-											<!-- </div> -->
-										</td>
-										<td v-else>
-											Kas Keluar
+										<td>
+											{{ (laporan_diskons.keterangan) }}
 										</td>
 										<td align="right">
-											{{ new Intl.NumberFormat().format(laporan_kas.jumlah) }}
-										</td>
-										<td>
-											{{ (laporan_kas.keterangan) }}
-										</td>
-										<td>
-											{{ (laporan_kas.nama_pemilik) }}
-										</td>
-									</tr>
+											{{ new Intl.NumberFormat().format(laporan_diskons.diskon) }}
+										</td>									</tr>
 								</tbody>
-								<tbody v-else class="data-tidak-ada">
-									<tr>
-										<td colspan="4" class="text-center">Tidak Ada Data</td>
-									</tr>
-								</tbody>
-						</table>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 <script>
 export default{
 	data: function(){
 		return{
-			laporan_kas:[],
+			laporan_diskon:[],
 // 			grand_total_penjualan:[],
 			url : window.location.origin + (window.location.pathname).replace("home", "laporan"),
 			placeholder_priode: {
@@ -116,9 +94,9 @@ export default{
 	methods: {
 		getDataLaporan(type = 1){
 			let app = this;
-			axios.get(app.url+'/rekapitulasi-kas/?type=' + type)
+			axios.get(app.url+'/laporan-diskon/?type=' + type)
 			.then(function (resp){
-				app.laporan_kas = resp.data;
+				app.laporan_diskon = resp.data;
 				console.log(resp.data)
 			})
 		},
