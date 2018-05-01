@@ -92,6 +92,9 @@
                                 <a href="{{ route('register') }}">Register</a>
                             </li>
                             @else
+                            @role('member')
+                            <notification v-bind:notifications="notifications"></notification>
+                            @endrole
                             <li class="dropdown">
                                 <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
                                     @role('admin')

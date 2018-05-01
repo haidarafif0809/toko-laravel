@@ -67,6 +67,8 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
+Route::post('/notification/get', 'PenjualanController@notification');
+Route::post('/notification/read', 'PenjualanController@notificationRead');
 Route::post('/penjualan/view', 'PenjualanController@view');
 Route::get('/penjualan/data-modifier/{id_produk}', 'PenjualanController@dataModifier');
 Route::post('/penjualan/riwayat-penjualan', 'PenjualanController@dataRiwayatPenjualan');

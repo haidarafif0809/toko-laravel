@@ -46,6 +46,7 @@ Vue.component('line-chart', {
     }
 });
 Vue.component('vue-chart', require('vue-chartjs'));
+Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('vue-simple-spinner', require('vue-simple-spinner'));
 Vue.component('selectize-component', require('vue2-selectize'));
@@ -284,5 +285,15 @@ const router = new VueRouter({
     routes
 })
 const app = new Vue({
+    data: {
+        notifications: ''
+    },
+    created(){
+        var app = this;
+        axios.post(window.location.origin+(window.location.pathname).replace('home', 'notification/get'))
+        .then(resp =>{
+            app.notifications = resp.data;
+        })
+    },
     router
 }).$mount('#app')

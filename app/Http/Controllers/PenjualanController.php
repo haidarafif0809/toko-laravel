@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DetailPenjualan;
 use App\KategoriProduk;
 use App\Modifier;
+use App\notifications\NotifyPostOwner;
 use App\Pelanggan;
 use App\Penjualan;
 use App\Produk;
@@ -406,6 +407,8 @@ class PenjualanController extends Controller
                     'jumlah_produk' => $tbs_penjualans->jumlah_produk,
                 ]);
             }
+            $toko_id = Auth::user()->toko_id;
+            Toko::find($toko_id)->notify(new NotifyPostOwner());
             $tbsPenjualan->delete();
             $respon['id_penjualan'] = $penjualan->id;
             return response()->json($respon);
@@ -637,6 +640,19 @@ class PenjualanController extends Controller
         $array = [];
         array_push($array, ['detail_penjualan' => $data, 'penjualan' => $penjualan]);
         return $array;
+    }
+    public function notification()
+    {
+        $toko = Auth::user()->toko_id;
+        $haha = Toko::find($toko)->unreadNotifications;
+        return $haha;
+    }
+    public function notificationRead(Request $request)
+    {
+        $toko     = Auth::user()->toko_id;
+        $result   = Toko::find($toko);
+        $response = $result->unreadNotifications()->find($request->id)->MarkAsRead();
+        return $response;
     }
     // menampilkan kategori produk
     public function kategoriProduk()
