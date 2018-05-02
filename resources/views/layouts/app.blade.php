@@ -150,7 +150,7 @@
 <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="{{ asset('js/app.js?v=1.30') }}"></script>
+<script src="{{ asset('js/app.js?v=1.32') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/sidenav.js') }}"></script>
 <script src="{{ asset('js/timer.js') }}"></script>
@@ -181,17 +181,17 @@
           return;
       }
       else{
-       swal({
-        title: "Memproses...",
-        text: "Mohon tunggu",
-        imageUrl: "images/ajaxloader.gif",
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        allowEscapeKey: false
-    });
-   }
-}
-function sweetAlerts(){
+         swal({
+            title: "Memproses...",
+            text: "Mohon tunggu",
+            imageUrl: "images/ajaxloader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+     }
+ }
+ function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var emails = document.forms['emails']['email'].value;
@@ -201,7 +201,7 @@ function sweetAlerts(){
         return;
     }
     else{
-       swal({
+     swal({
         title: "Memproses...",
         text: "Mohon tunggu",
         imageUrl: "images/ajaxloader.gif",
@@ -209,7 +209,7 @@ function sweetAlerts(){
         allowOutsideClick: false,
         allowEscapeKey: false
     });
-   }
+ }
 }
 </script>
 </body>
