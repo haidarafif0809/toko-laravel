@@ -211,6 +211,7 @@
                     <p>
                         <router-link :to="{name: 'createProduk'}" class="btn btn-primary">Tambah Produk</router-link>
                         <span class="btn btn-primary" data-toggle="modal" data-target="#modalImportProduk">Import Produk</span>
+                        <router-link :to="{name: 'indexKategoriProduk'}" class="btn btn-info">Kategori Produk</router-link>
                     </p>
                     <!-- <button type="button" class="btn btn-info btn-lg">Open Modal</button> -->
 

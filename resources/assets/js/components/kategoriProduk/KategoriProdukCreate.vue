@@ -2,6 +2,7 @@
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><router-link :to="{name: 'indexDashboard'}">Home</router-link></li>
+			<li><router-link :to="{name: 'indexProduk'}">Produk</router-link></li>
 			<li><router-link :to="{name: 'indexKategoriProduk'}">Kategori Produk</router-link></li>
 			<li class="active">Tambah Kategori Produk</li>
 		</ul>
