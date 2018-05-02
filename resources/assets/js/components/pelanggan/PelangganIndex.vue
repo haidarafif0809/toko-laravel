@@ -423,10 +423,19 @@ ul :hover {background: #ffd11a;}
 								</div>
 							</div>
 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label for="tanggal_lahir" class="col-md-3 control-label rata">Tanggal Lahir</label>
 								<div class="col-md-8">
 									<input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1">
+									<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
+								</div>
+							</div> -->
+
+							<div class="form-group">
+								<label for="tanggal_lahir" class="col-md-3 control-label rata">Tanggal Lahir</label>
+								<div class="col-md-8">
+									<!-- <input class="form-control" autocomplete="off" placeholder="YYYY-MM-DD" type="date" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir"  autofocus="" :disabled="disable == 1"> -->
+									<datepicker :input-class="'form-control'" placeholder="Tanggal Lahir" v-model="pelanggan.tanggal_lahir" name="tanggal_lahir" :disabled="disable == 1"></datepicker>
 									<span v-if="errors.tanggal_lahir" class="label label-danger">{{ errors.tanggal_lahir[0] }}</span>
 								</div>
 							</div>
