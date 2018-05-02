@@ -84,6 +84,62 @@ class Penjualan extends Model
             ->where('created_at', '>=', $waktu)->groupBy(DB::raw('DATE(created_at)'));
         return $query;
     }
+    public function queryGrafikPenjualanHarian()
+    {
+        $query = Penjualan::select([
+            DB::raw('DATE(penjualans.created_at) as tanggal'),
+            DB::raw('SUM(penjualans.total_bayar) as total_pembayaran'),
+            DB::raw('COUNT(*) as total_penjualan'),
+        ])
+            ->where('toko_id', Auth::user()->toko_id);
+        return $query;
+    }
+    public function scopeGrafikPenjualanHarian($query, $request, $hari, $minggu, $bulan, $tahun)
+    {
+        if ($request->dari_tanggal != "" && $request->sampai_tanggal != "") {
+            $query = $this->queryGrafikPenjualanHarian()
+                ->where(DB::raw('DATE(penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+                ->where(DB::raw('DATE(penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
+                ->orderBy('penjualans.id', 'asc')
+                ->groupBy(DB::raw('DATE(created_at)'));
+            # code...
+        } elseif ($request->dari_tanggal == "" && $request->sampai_tanggal == "") {
+            if ($request->priode == 0 || $request->priode == "") {
+                $query = $this->queryGrafikPenjualanHarian()
+                    ->orderBy('penjualans.id', 'asc')
+                    ->groupBy(DB::raw('DATE(created_at)'));
+                # code...
+            }
+            if ($request->priode == 1) {
+                $query = $this->queryGrafikPenjualanHarian()
+                    ->where('penjualans.created_at', '>=', $hari)
+                    ->orderBy('penjualans.id', 'asc')
+                    ->groupBy(DB::raw('DATE(created_at)'));
+                # code...
+            }if ($request->priode == 2) {
+                $query = $this->queryGrafikPenjualanHarian()
+                    ->where('penjualans.created_at', '>=', $minggu)
+                    ->orderBy('penjualans.id', 'asc')
+                    ->groupBy(DB::raw('DATE(created_at)'));
+                # code...
+            }if ($request->priode == 3) {
+                $query = $this->queryGrafikPenjualanHarian()
+                    ->where('penjualans.created_at', '>=', $bulan)
+                    ->orderBy('penjualans.id', 'asc')
+                    ->groupBy(DB::raw('DATE(created_at)'));
+                # code...
+            }if ($request->priode == 4) {
+                $query = $this->queryGrafikPenjualanHarian()
+                    ->where('penjualans.created_at', '>=', $tahun)
+                    ->orderBy('penjualans.id', 'asc')
+                    ->groupBy(DB::raw('DATE(created_at)'));
+                # code...
+                # code...
+            }
+        }
+        return $query;
+
+    }
 
     public function scopePerilakuPelanggan($query, $id)
     {

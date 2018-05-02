@@ -5,7 +5,7 @@
 	text-align: center;
 	}*/
 	.thumbnail{
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 		margin: 5px;
 		height: 280px;
 	}
@@ -14,7 +14,8 @@
 		overflow: auto;
 	}
 	.head{
-		background: linear-gradient(60deg, #29b6f6, #0288d1);
+		/*background: linear-gradient(60deg, #29b6f6, #0288d1);*/
+		background: #578ca9;
 		color: white;
 	}
 	.link{
@@ -56,7 +57,8 @@
 		text-align: center;
 	}
 	#digital{
-		background: linear-gradient(60deg, #29b6f6, #0288d1);
+		/*background: linear-gradient(60deg, #29b6f6, #0288d1);*/
+		background: #578ca9;
 		color: white;
 		border:4px solid #F5F5F5;
 	}
@@ -67,7 +69,7 @@
 		/*width: 114px;*/
 		/*height:60px;*/
 		/*left: 10px;*/
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
 	.button1:hover {background-color: #424EF7;}
@@ -79,7 +81,7 @@
 		/*width: 114px;*/
 		/*height:60px;*/
 		/*left: 10px;*/
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
 	.button2:hover {background-color: #424EF7;}
@@ -91,7 +93,7 @@
 		/*width: 114px;*/
 		/*height:60px;*/
 		/*left:30px;*/
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 		font-size: 15px;
 	}
 
@@ -102,10 +104,10 @@
 		overflow: auto;
 	}
 	#digital{
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 	}
 	#kategori_shadow{
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 	}
 	.modal{
 		overflow:scroll;
@@ -125,7 +127,7 @@
 	.trash:hover {background-color: red;}
 
 	#items{
-		box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);
 	}
 	.focus:focus{
 		background-color: #EFF0F1;
@@ -204,14 +206,26 @@ width: 160px;*/
 						</div>
 						<form  v-on:submit.prevent="saveForm()">
 							<div class="row modal-body">
-								<span class="col-xs-4">Total Bayar</span>  
+								<span class="col-xs-4"><h3>Total Bayar</h3></span>  
 								<span class="col-xs-8">
-									<span style="text-align:right;">: Rp. {{jumlahBayar|pemisahTitik}}</span>
+									<span style="text-align:right;"><h3> Rp. {{jumlahBayar|pemisahTitik}}</h3></span>
 								</span>
 								<span class=" col-xs-4">Total Item</span>
 								<span class="col-xs-8">
 									<span style="text-align:right;">: {{ tbs_penjualans.length }}</span>
 								</span>
+								<div class="form-group">
+									<label class="col-xs-4 control-label" for="textarea">Tunai</label>
+									<div class="col-xs-8">    
+										<money id="bayar" class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="penjualan.bayar" v-bind="money" name="bayar" style="text-align:right;" ref="tunai"></money>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-xs-12 control-label" style="text-align:right;">Kembalian</label>
+									<div class="col-xs-12">    
+										<h4 v-model="penjualan.kembalian"style="text-align:right;">{{penjualan.kembalian|pemisahTitik}}</h4>
+									</div>
+								</div>
 
 								<div class="form-group">
 									<label class="col-xs-12 control-label"></label>
@@ -251,23 +265,12 @@ width: 160px;*/
 									<label class="col-xs-12 control-label" for="textarea"></label>
 								</div>
 								<div class="form-group">
-									<label class="col-xs-4 control-label" for="textarea">Tunai</label>
-									<div class="col-xs-8">    
-										<money id="bayar" class="form-control" required autocomplete="off" placeholder="Jumlah" v-model="penjualan.bayar" v-bind="money" name="bayar" style="text-align:right;" ref="tunai"></money>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-xs-12 control-label" for="textarea"></label>
-								</div>
-								<div class="form-group">
-									<label class="col-xs-12 control-label" style="text-align:right;">Kembalian</label>
-									<div class="col-xs-12">    
-										<h4 v-model="penjualan.kembalian"style="text-align:right;">{{penjualan.kembalian|pemisahTitik}}</h4>
-									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-primary" id="btnBayar" type="submit">Bayar & Cetak</button>
+								<button class="btn btn-primary" id="btnBayar" type="submit">Bayar</button>
+								<button class="btn btn-primary" @click="saveForm2()" type="button">Bayar & Cetak</button>
 								<button type="button" class="btn btn-default" id="btnTutup" @click="closeModal()" >Tutup</button> 
 							</div>
 						</form>
@@ -359,7 +362,8 @@ width: 160px;*/
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-primary" type="submit">Simpan & Cetak Pesanan</button>
+								<button class="btn btn-primary" type="submit">Simpan</button>
+								<button class="btn btn-primary" @click="simpanPenjualan2()" type="button">Simpan & Cetak Pesanan</button>
 								<button type="button" class="btn btn-default" @click="closeModal()">Tutup</button> 
 							</div>
 						</form>
@@ -931,6 +935,64 @@ export default {
 						showConfirmButton: false,
 						timer: 2000,
 					});
+					app.getKategoriProduk();
+					app.getProduksPenjualan();
+					app.getTbsPenjualan();
+					app.selectPelanggans();
+					app.tbs_penjualans = '';
+					app.pelanggans = '';
+					app.diskonPerfaktur.rupiah = '';
+					app.diskonPerfaktur.persen = '';
+					app.penjualan.bayar = '';
+					app.penjualan.kembalian = 0;
+					app.penjualan.keterangan = '';
+					app.penjualan.status_pemesanan = 0;
+					app.penjualan.nama_pelanggan = 0;
+					// console.log(resp.data.id_penjualan);
+				})
+				.catch(function (resp) {
+					app.success = false;
+					app.alert('Gagal');
+				})
+			}
+		},
+		saveForm2(){
+			var app = this;
+			var total = app.penjualan.total_bayar;
+			var Pembayaran = app.penjualan.bayar;
+			
+			app.penjualan.total_bayar = app.jumlahBayar;
+			// app.penjualan.id_simpan_penjualan = app.id_simpan_penjualan;
+			app.penjualan.bayar = app.penjualan.bayar;
+			app.penjualan.kembalian = app.penjualan.kembalian;
+			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.status_pemesanan = app.penjualan.status_pemesanan;
+			app.penjualan.cara_bayar = 'Tunai';
+			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
+			app.penjualan.keterangan = app.penjualan.keterangan;
+			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
+			var newPenjualan = app.penjualan;
+			var validate = document.getElementById("bayar");
+			var validates = document.getElementById("p");
+			if (Pembayaran == 0 || Pembayaran == "") {
+				app.$swal("Pembayaran tidak boleh kosong");
+				// validate.style.boxShadow = '0 0 10px rgb(252, 107, 97)';
+				// validates.innerHTML="Pembayaran tidak boleh kosong!!";
+			}else if(app.penjualan.kembalian < 0){
+				app.$swal("Jumlah pembayaran kurang!");
+			}
+			else{
+				axios.post(app.url, newPenjualan)
+				.then(function(resp){
+					app.deleteSimpanPenjualan(app.id_simpan_penjualan);
+					app.closeModal();
+					swal({
+						title: 'Berhasil!',
+						type: 'success',
+						text: 'Berhasil Melakukan Pembayaran ',
+						showConfirmButton: false,
+						timer: 2000,
+					});
 					app.urlCetak(resp.data.id_penjualan);
 					app.getKategoriProduk();
 					app.getProduksPenjualan();
@@ -956,6 +1018,46 @@ export default {
 
 		// create table simpan_penjualan dan simpan_detail_penjualan
 		simpanPenjualan() {
+			var app = this;
+			app.penjualan.total_bayar = app.jumlahBayar;
+			app.penjualan.id_simpan_penjualan = app.id_simpan_penjualan;
+			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.cara_bayar = 'Tunai';
+			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
+			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
+			app.penjualan.nomor_meja = app.penjualan.nomor_meja;
+			app.penjualan.catatan = app.penjualan.catatan;
+			var newPenjualan = app.penjualan;
+			axios.post(app.urlSimpanPenjualan, newPenjualan)
+			.then(function (resp) {
+				app.getKategoriProduk();
+				app.getProduksPenjualan();
+				app.getTbsPenjualan();
+				app.selectPelanggans();
+				app.tbs_penjualans = '';
+				app.pelanggans = '';
+				app.diskonPerfaktur.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.penjualan.bayar = '';
+				app.penjualan.kembalian = 0;
+				app.penjualan.keterangan = '';
+				app.penjualan.id_simpan_penjualan = '';
+				app.penjualan.nomor_meja = '';
+				app.penjualan.catatan = '';
+				app.penjualan.nama_pelanggan = '';
+				// app.id_simpan_penjualan = '';
+				app.penjualan.status_pemesanan = 0;
+				app.alert('Berhasil disimpan');
+				$('#modalSimpanPenjualan').hide();
+				// console.log(app.id_simpan_penjualan);
+			})
+			.catch(function (resp) {
+				app.alert('Gagal');
+			});
+
+		},
+		// create table simpan_penjualan dan simpan_detail_penjualan
+		simpanPenjualan2() {
 			var app = this;
 			app.penjualan.total_bayar = app.jumlahBayar;
 			app.penjualan.id_simpan_penjualan = app.id_simpan_penjualan;
@@ -1164,7 +1266,7 @@ export default {
 		},
 		openModal(){
 			$("#modalBayar").show();
-			this.$refs.nama_pelanggan2.$el.selectize.focus();
+			this.$refs.tunai.$el.focus();
 		},
 		openModalSimpanPenjualan(){
 			$('#modalSimpanPenjualan').show();

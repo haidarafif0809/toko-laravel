@@ -27,8 +27,18 @@ class UserSeeder extends Seeder
         $memberRole->display_name = "Member";
         $memberRole->save();
 
+        $kasirRole               = new Role();
+        $kasirRole->name         = "kasir";
+        $kasirRole->display_name = "Kasir";
+        $kasirRole->save();
+
+        $waiterRole               = new Role();
+        $waiterRole->name         = "waiter";
+        $waiterRole->display_name = "Waiter";
+        $waiterRole->save();
+
         // Membuat sample admin
-        $type1               = 0;
+        $type1               = 1;
         $status1             = 1;
         $admin               = new User();
         $admin->type         = $type1;
@@ -49,7 +59,7 @@ class UserSeeder extends Seeder
         $toko1->prefix_member_id = 'mm';
         $toko1->save();
         // Membuat sample member
-        $type                 = 1;
+        $type                 = 2;
         $status               = 1;
         $member               = new User();
         $member->type         = $type;

@@ -126,7 +126,7 @@ class ProdukController extends Controller
 
     public function kategoriProduksId()
     {
-        $kategoriProduk = KategoriProduk::all();
+        $kategoriProduk = KategoriProduk::all()->where('toko_id', Auth::user()->toko_id);
         return response()->json($kategoriProduk);
     }
 

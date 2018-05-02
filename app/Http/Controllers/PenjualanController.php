@@ -44,7 +44,7 @@ class PenjualanController extends Controller
 
     public function pelanggan()
     {
-        $pelanggan = Pelanggan::all();
+        $pelanggan = Pelanggan::all()->where('toko_id', Auth::user()->toko_id);
         return response()->json($pelanggan);
     }
     /**
@@ -103,7 +103,7 @@ class PenjualanController extends Controller
     // mencari produk penjualan
     public function search(Request $request)
     {
-        $produks = Produk::where('nama_produk', 'LIKE', "%$request->search%")->paginate(9);
+        $produks = Produk::where('nama_produk', 'LIKE', "%$request->search%")->where('toko_id', Auth::user()->toko_id)->paginate(9);
         $array   = [];
         $respons = [];
         $num     = 0;
