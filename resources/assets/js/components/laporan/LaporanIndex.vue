@@ -121,7 +121,7 @@ i{margin-bottom: 20px}
 						</div>
 					</router-link>
 				</div>
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">
 							<i class="fa fa-fire fa-3x"></i>
@@ -129,9 +129,9 @@ i{margin-bottom: 20px}
 							<p class="keterangan">Menampilkan laporan penerimaan pajak per transaksi.</p>
 						</div>
 					</router-link>
-				</div>
+				</div> -->
 				<div class="col-md-4">
-					<router-link :to="{name: 'indexDashboard'}">
+					<router-link :to="{name: 'indexLaporanDiskon'}">
 						<div class="box">
 							<i class="fa fa-cut fa-3x"></i>
 							<p class="judul">Laporan Diskon</p>
@@ -139,7 +139,7 @@ i{margin-bottom: 20px}
 						</div>
 					</router-link>
 				</div>
-				<div class="col-md-4">
+				<!-- <div class="col-md-4">
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">
 							<i class="fa fa-user fa-3x"></i>
@@ -147,8 +147,8 @@ i{margin-bottom: 20px}
 							<p class="keterangan">Menampilkan laporan jumlah pembelian member.</p>
 						</div>
 					</router-link>
-				</div>
-				<div class="col-md-4">
+				</div> -->
+				<!-- <div class="col-md-4">
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">
 							<i class="fa fa-rss fa-3x"></i>
@@ -156,8 +156,8 @@ i{margin-bottom: 20px}
 							<p class="keterangan">Menampilkan laporan laba per hari.</p>
 						</div>
 					</router-link>
-				</div>
-				<div class="col-md-4">
+				</div> -->
+				<!-- <div class="col-md-4">
 					<router-link :to="{name: 'indexDashboard'}">
 						<div class="box">
 							<i class="fa fa-line-chart fa-3x"></i>
@@ -165,7 +165,7 @@ i{margin-bottom: 20px}
 							<p class="keterangan">Menampilkan laporan laba produk.</p>
 						</div>
 					</router-link>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

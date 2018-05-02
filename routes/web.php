@@ -148,6 +148,7 @@ Route::get('/laporan/laporan-penjualan-perjam', 'LaporanController@laporanPenjua
 Route::get('/laporan/grand-total-penjualan', 'LaporanController@grandTotalPenjualan');
 Route::get('/laporan/data-transaksi-penjualan', 'LaporanController@dataTransaksiPenjualan');
 Route::get('/laporan/rekapitulasi-kas', 'LaporanController@LaporanRekapitulasiKas');
+Route::get('/laporan/laporan-diskon', 'LaporanController@LaporanDiskon');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');

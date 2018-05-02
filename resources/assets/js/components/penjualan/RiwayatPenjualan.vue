@@ -113,12 +113,14 @@ span{
 						<thead class="thead-dark">
 							<th class="">Tanggal / Waktu</th>
 							<th class="">Status</th>
+							<th class="text-right">Diskon</th>
 							<th class="text-right">Tunai</th>
 						</thead>
 						<tbody v-if="riwayat_penjualan.length > 0 && loading == false" class="data-ada">
 							<tr v-for="riwayat_penjualans ,index in riwayat_penjualan">
 								<td>{{ riwayat_penjualans.data_riwayat_penjualan.waktu | tanggal}}</td>
 								<td>Sukses</td>
+								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.diskon | pemisahTitik}}</td>
 								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>
 									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Detail</button>

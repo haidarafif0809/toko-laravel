@@ -96,6 +96,7 @@ import LaporanPenjualanHarianIndex from './components/laporan/LaporanPenjualanHa
 import LaporanPenjualanPerJam from './components/laporan/LaporanPenjualanPerJam.vue'
 import DataTransaksiPenjualan from './components/laporan/DataTransaksiPenjualan.vue'
 import LaporanRekapitulasiKas from './components/laporan/LaporanRekapitulasiKas.vue'
+import LaporanDiskon from './components/laporan/LaporanDiskon.vue'
 // staf toko
 import StafTokoIndex from './components/stafToko/StafTokoIndex.vue'
 import StafTokoCreate from './components/stafToko/StafTokoCreate.vue'
@@ -255,6 +256,10 @@ const routes = [{
         path: '/laporan/rekapitulasi-kas',
         component: LaporanRekapitulasiKas,
         name: 'indexLaporanRekapitulasiKas'
+    },{
+        path: '/laporan/laporan-diskon',
+        component: LaporanDiskon,
+        name: 'indexLaporanDiskon'
     },
     // staf toko
     {
