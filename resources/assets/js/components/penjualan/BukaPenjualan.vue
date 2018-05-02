@@ -84,6 +84,7 @@ export default {
 			buka_penjualans: [],
 			buka_penjualan_data: {},
 			url : window.location.origin+(window.location.pathname).replace("home","penjualan"),
+			urlHapusSimpanPenjualan : window.location.origin + (window.location.pathname).replace("home", "penjualan/hapus-simpan-penjualan"),
 			search : '',
 			loading : true
 
@@ -155,6 +156,7 @@ export default {
     		if (app.tbs_penjualans === undefined) {
     			axios.get(app.url+'/create-tbs-penjualan?id=' + id)
     			.then(function(resp) {
+    				// app.deleteSimpanPenjualan(id);
     				swal({
     					title: 'Berhasil!',
     					type: 'success',
@@ -175,7 +177,11 @@ export default {
     				text: 'Selesaikan dahulu penjualan sebelumnya!'
     			});
     		}
-    	}
+    	},
+    	deleteSimpanPenjualan(id_simpan_penjualan) {
+    		var app = this;
+    		axios.delete(app.urlHapusSimpanPenjualan+ '/'+id_simpan_penjualan)
+    	},
     	// getHasilPencarian(page){
     	// 	var app = this;
     	// 	app.loading = true;

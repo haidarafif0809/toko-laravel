@@ -57,13 +57,13 @@ class UserController extends Controller
     }
     public function view()
     {
-        $user_view = User::where('type', 1)->orderBy('id', 'desc')->paginate(10);
+        $user_view = User::where('type', 2)->orderBy('id', 'desc')->paginate(10);
         return response()->json($user_view);
     }
     public function pencarian(Request $request)
     {
         $search    = $request->search;
-        $cari_user = User::where('type', 1)
+        $cari_user = User::where('type', 2)
             ->where(function ($query) use ($search) {
                 $query->orwhere('nama_pemilik', 'LIKE', '%' . $search . '%')
                     ->orwhere('nama_toko', 'LIKE', '%' . $search . '%')
@@ -91,7 +91,7 @@ class UserController extends Controller
     public function viewStaff()
     {
         $array      = [];
-        $user_staff = User::select('toko_id', 'nama_pemilik', 'email', 'no_telp', 'last_login')->where('type', 2)->orderBy('id', 'desc')->get();
+        $user_staff = User::select('toko_id', 'nama_pemilik', 'email', 'no_telp', 'last_login')->where('type', '!=', 2)->orderBy('id', 'desc')->get();
         foreach ($user_staff as $key) {
             $array[$key->toko_id][] = $key;
         }

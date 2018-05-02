@@ -51,16 +51,18 @@ class StafTokoController extends Controller
 
         ]);
         $password    = 'rahasia';
-        $type        = 2;
+        $type        = 3;
+        $status      = 1;
         $tambah_user = User::create([
             'type'         => $type,
             'toko_id'      => Auth::user()->toko_id,
             'nama_pemilik' => $request->nama_pemilik,
             'password'     => $request->password,
+            'status'       => $status,
             'email'        => $request->email,
             'no_telp'      => $request->no_telp,
         ]);
-        $memberRole = Role::where('name', 'member')->first();
+        $memberRole = Role::where('name', 'kasir')->first();
         $tambah_user->attachRole($memberRole);
         $tambah_user->sendVerificationStaff();
         return $tambah_user;
@@ -124,7 +126,7 @@ class StafTokoController extends Controller
 
     public function view()
     {
-        return User::where('toko_id', Auth::user()->toko_id)->where('type', 2)->orderBy('id', 'desc')->paginate(10);
+        return User::where('toko_id', Auth::user()->toko_id)->where('type', '!=', 2)->orderBy('id', 'desc')->paginate(10);
     }
 
     public function search(Request $request)

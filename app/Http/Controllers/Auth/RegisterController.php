@@ -72,7 +72,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // type 1 = user toko, 2 = staf toko
-        $type = 1;
+        $type = 2;
         $toko = Toko::create([
             'nama_toko'    => $data['nama_toko'],
             'nama_pemilik' => $data['nama_pemilik'],

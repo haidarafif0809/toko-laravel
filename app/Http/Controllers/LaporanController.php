@@ -156,6 +156,25 @@ class LaporanController extends Controller
         return $laporan;
 
     }
+    public function grafikPenjualanHarian(Request $request)
+    {
+
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        $data_penjualan = Penjualan::grafikPenjualanHarian($request, $hari, $minggu, $bulan, $tahun)->get();
+        $data_array     = [];
+        $nested_array   = [];
+        foreach ($data_penjualan as $data_penjualans) {
+            $data_array['labels'][] = $data_penjualans->tanggal;
+
+            array_push($nested_array, $data_penjualans->total_penjualan);
+        }
+        $data_array['series'][] = $nested_array;
+        return response()->json($data_array);
+    }
 
     public function dataTransaksiPenjualan(Request $request)
     {

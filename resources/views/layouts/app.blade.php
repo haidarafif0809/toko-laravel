@@ -9,6 +9,8 @@
     <title>
         KavePos
     </title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"> <!-- untuk chart -->
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> <!-- untuk chart -->
     <link rel="icon" type="img" href="{{ asset('favicon-kavepos.ico') }}">
     <!-- Styles -->
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>

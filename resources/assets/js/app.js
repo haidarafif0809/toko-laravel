@@ -25,6 +25,7 @@ import VueChartJs from 'vue-chartjs'
 Vue.use(money, {
     precision: 4
 })
+Vue.use(require('vue-chartist'))
 Vue.use(BootstrapVue);
 window.Vue.use(VueSwal)
 window.Vue.use(Spinner)
