@@ -53,7 +53,7 @@
 	margin-bottom: 0px;
 	border-bottom: none;
 	background: #fff;
-	box-shadow: 0 0 1px #eee;
+	/*box-shadow: 0 0 1px #eee;*/
 }
 
 .nav li {
@@ -84,12 +84,12 @@ div > ul > li[class="tabInformasi active"] {
 }
 
 .head{
-	background-color: #80ffe5;
+	background-color: #578CA9;
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
 .head-info{
-	background-color: #80ffe5;
+	background-color: #578CA9;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	padding-left: 20px;
@@ -304,17 +304,17 @@ ul :hover {background: #ffd11a;}
 			<div class="col-md-4">
 				<div class="panel panel-default ">
 					<div class="head" align="center">
-						<span class="btn btn-success" data-toggle="modal" data-target="#modalImportPelanggan">
+						<span class="btn btn-default" data-toggle="modal" data-target="#modalImportPelanggan">
 							<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
-							Import
+							<font color="#578CA9">Import</font>
 						</span>
-						<a :href="url_export_pelanggan" class="btn btn-primary">
+						<a :href="url_export_pelanggan" class="btn btn-default">
 							<i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-							Unduh
+							<font color="#578CA9">Unduh</font>
 						</a>
-						<button class="btn btn-primary" v-on:click="tambahPelanggan">
+						<button class="btn btn-default" v-on:click="tambahPelanggan">
 							<i class="fa fa-plus" aria-hidden="true"></i>
-							Tambah
+							<font color="#578CA9">Tambah</font>
 						</button>
 					</div>
 				</div>
@@ -363,7 +363,7 @@ ul :hover {background: #ffd11a;}
 
 		<div class="col-md-8">
 			<div class="panel panel-default">
-				<div class="head-info">INFORMASI PELANGGAN</div>
+				<div class="head-info"><font color="white">INFORMASI PELANGGAN</font></div>
 			</div>
 			<div class="panel panel-default">
 				<ul class="nav nav-tabs" >
