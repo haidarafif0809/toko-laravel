@@ -77,6 +77,7 @@ div > ul > li[class="tabInformasi active"] {
 .test{
 	background-color: white;
 	margin-left: 20px;
+	margin-top: -20px;
 }
 .mencoba{
 	margin-top: 10px;
@@ -122,13 +123,10 @@ ul :hover {background: #ffd11a;}
 </style>
 
 <template>
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<div class="test" >
-				<hr>
 				<h4>MANAJEMEN PELANGGAN</h4>
-				
-				<hr>
 			</div>
 
 
