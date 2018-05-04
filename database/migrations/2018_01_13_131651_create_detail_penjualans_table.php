@@ -17,6 +17,7 @@ class CreateDetailPenjualansTable extends Migration
             $table->increments('id');
             $table->integer('no_faktur')->nullable();
             $table->integer('id_produk');
+            $table->integer('id_kategori');
             $table->integer('id_penjualan');
             $table->string('id_modifier')->nullable();
             $table->integer('harga_produk');

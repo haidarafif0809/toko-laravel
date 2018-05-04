@@ -38,7 +38,6 @@
 							<thead>
 								<tr>
 									<th>Tanggal</th>
-									<th>Order</th>
 									<th>Staf</th>
 									<th>Pelanggan</th>
 									<th>Pembayaran</th>
@@ -53,8 +52,7 @@
 							<tbody >
 								<tr v-for="data_transaksi, index in data_transaksi_penjualan">
 									<td>{{ data_transaksi.tanggal }}</td>
-									<td>{{ data_transaksi.no_faktur }}</td>
-									<td>Staf</td>
+									<td>{{ data_transaksi.staf }}</td>
 									<td>{{ data_transaksi.pelanggan }}</td>
 									<td>Tunai</td>
 									<td>{{ data_transaksi.catatan }}</td>
@@ -103,11 +101,11 @@ export default{
 	},
 
 	watch: {
-        'filter.priode': function(value) {
-        	this.getDataTransaksiPenjualan(this.filter.priode);
-        	this.getDataGrandTotal(this.filter.priode);
-        }
-    },
+		'filter.priode': function(value) {
+			this.getDataTransaksiPenjualan(this.filter.priode);
+			this.getDataGrandTotal(this.filter.priode);
+		}
+	},
 
 	methods: {
 		getDataTransaksiPenjualan(type = 1) {

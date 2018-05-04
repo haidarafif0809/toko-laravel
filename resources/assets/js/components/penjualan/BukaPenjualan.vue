@@ -48,7 +48,7 @@ table{
 								<td align="right">{{ buka_penjualan.data_simpan_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>{{ buka_penjualan.data_simpan_penjualan.catatan }} | No. Meja {{buka_penjualan.data_simpan_penjualan.nomor_meja}}</td>
 								<td>
-									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">buka</button>
+									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="saveForm(buka_penjualan.data_simpan_penjualan.id)" type="submit">Buka Pesanan</button><button class="btn btn-xs btn-success" id="btnSimpanKategoriProduk" @click="urlCetakPesanan(buka_penjualan.data_simpan_penjualan.id)" type="submit">Cetak Pesanan</button><button class="btn btn-xs btn-danger" id="btnSimpanKategoriProduk" @click="deleteSimpanPenjualan2(buka_penjualan.data_simpan_penjualan.id)" type="submit">Hapus</button>
 								</td>
 							</tr>
 						</tbody>
@@ -181,6 +181,38 @@ export default {
     	deleteSimpanPenjualan(id_simpan_penjualan) {
     		var app = this;
     		axios.delete(app.urlHapusSimpanPenjualan+ '/'+id_simpan_penjualan)
+    	},    	
+    	deleteSimpanPenjualan2(id_simpan_penjualan) {
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus Pesanan ini ?",
+    			type : "warning",
+    			showCancelButton: true,
+    			cancelButtonColor: '#3085d6',
+    			confirmButtonColor: '#d33',
+    			confirmButtonText: 'Hapus',
+    			cancelButtonText: 'Batal',
+    			reverseButtons: true
+    		}).then((result) => {
+    			var app = this;
+    			if (result.value) {    				
+    				axios.delete(app.urlHapusSimpanPenjualan+ '/'+id_simpan_penjualan)
+    				.then(resp =>{
+    					app.getBukaPenjualan();
+    					app.$router.replace('/penjualan/view-buka-penjualan');
+    					swal({
+    						title: 'Berhasil!',
+    						type: 'success',
+    						text: 'Berhasil menghapus simpan penjualan',
+    						showConfirmButton: false,
+    						timer: 2000,
+    					});
+    				})
+    			}
+    		})
+    	},
+    	urlCetakPesanan(id_penjualan){
+    		window.open('penjualan/cetak-pesanan?id_penjualan='+id_penjualan,'_blank');
     	},
     	// getHasilPencarian(page){
     	// 	var app = this;

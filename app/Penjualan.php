@@ -60,6 +60,7 @@ class Penjualan extends Model
             'penjualans.id as id_penjualan',
             'penjualans.subtotal',
             'penjualans.keterangan',
+            'users.nama_pemilik',
             'penjualans.no_faktur',
             'penjualans.diskon',
             'penjualans.pajak',
@@ -67,6 +68,7 @@ class Penjualan extends Model
             'penjualans.cara_bayar',
         ])
             ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
+            ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->where('.penjualans.created_at', '>=', $waktu)
             ->groupBy('penjualans.id');

@@ -15,8 +15,10 @@ class CreateTbsPenjualansTable extends Migration
     {
         Schema::create('tbs_penjualans', function (Blueprint $table) {
             $table->increments('id_tbs_penjualan');
+            $table->integer('id_penjualan')->nullable();
             $table->integer('id_simpan_penjualan')->nullable();
             $table->string('id_modifier')->nullable();
+            $table->string('id_kategori')->nullable();
             $table->integer('toko_id');
             $table->string('session_id')->nullable();
             $table->string('satuan_id')->nullable();

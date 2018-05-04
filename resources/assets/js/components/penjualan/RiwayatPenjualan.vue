@@ -112,18 +112,23 @@ span{
 					<table class="table table-striped table-no-bordered">
 						<thead class="thead-dark">
 							<th class="">Tanggal / Waktu</th>
+							<th class="">No. Faktur</th>
 							<th class="">Status</th>
 							<th class="text-right">Diskon</th>
 							<th class="text-right">Tunai</th>
+							<th class="text-right"></th>
 						</thead>
 						<tbody v-if="riwayat_penjualan.length > 0 && loading == false" class="data-ada">
 							<tr v-for="riwayat_penjualans ,index in riwayat_penjualan">
 								<td>{{ riwayat_penjualans.data_riwayat_penjualan.waktu | tanggal}}</td>
+								<td></td>
 								<td>Sukses</td>
 								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.diskon | pemisahTitik}}</td>
 								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>
-									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Detail</button>
+									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Detail</button>									
+									<button class="btn btn-xs btn-success" id="btnSimpanKategoriProduk" @click="saveForm(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Edit</button>									
+									<button class="btn btn-xs btn-danger" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Hapus</button>
 								</td>
 							</tr>
 						</tbody>
@@ -156,6 +161,7 @@ export default {
 	data: function () {
 		return {
 			detail_penjualan: [],
+			tbs_penjualans: [],
 			riwayat_penjualan: [],
 			riwayat_penjualan_data: {},
 			filter:{
@@ -175,7 +181,8 @@ export default {
 	mounted() {
 		var app = this;
 		app.loading = true;
-		app.getRiwayatPenjualan();   
+		app.getRiwayatPenjualan(); 
+		app.getTbsPenjualan();  
 	},
 	filters: {
 		pemisahTitik: function(value) {
@@ -257,7 +264,48 @@ export default {
     	},
     	urlCetak(id_penjualan){
     		window.open('penjualan/cetak-penjualan?id_penjualan='+id_penjualan,'_blank');
-    	}
+    	},
+    	// melihat data bts_penjualans = ada / tidak
+    	getTbsPenjualan() {
+    		var app = this;
+    		axios.get(app.url +'/tbs-penjualan')
+    		.then(function (resp) {
+    			app.tbs_penjualans = resp.data.data;
+    			app.loadingTbs = false;
+    			// console.log(resp.data.data);
+    		})	
+    		.catch(function () {
+    			alert("Could not load tbs penjualan");
+    		});
+    	},
+    	// edit penjualan
+    	saveForm(id) {
+    		var app = this;
+    		if (app.tbs_penjualans === undefined) {
+    			axios.get(app.url+'/update-riwayat-penjualan?id_penjualan=' + id) 
+    			.then(function(resp) {
+    				// app.deleteSimpanPenjualan(id);
+    				swal({
+    					title: 'Berhasil!',
+    					type: 'success',
+    					text: 'Berhasil membuka ke penjualan',
+    					showConfirmButton: false,
+    					timer: 2000,
+    				});
+    				app.$router.replace('/penjualan');
+    			})
+
+    		} else{
+    			var app = this;
+    			app.$router.replace('/penjualan');
+    			// app.getBukaPenjualan();
+    			swal({
+    				title: 'Gagal!',
+    				type: 'warning',
+    				text: 'Selesaikan dahulu penjualan yang ada!'
+    			});
+    		}
+    	},
     	// getHasilPencarian(page){
     	// 	var app = this;
     	// 	app.loading = true;
