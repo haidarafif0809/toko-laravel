@@ -1,6 +1,6 @@
 <nav>
     <div class='link-wrapper'>
-        <div class='link-container' style="background-color:#101920;">
+        <div class='link-container' style="background-color:#457087;">
 
             <div class='hum-container'>
                 <div class='bar2'></div>
@@ -21,6 +21,9 @@
                 @if (Auth::check())
                 <li class='w-lnk'><router-link :to="{name: 'indexDashboard'}">
                     Dashboard
+                </router-link></li>
+                <li class='w-lnk'><router-link :to="{name: 'indexPenjualan'}">
+                    Penjualan
                 </router-link></li>
                 @endif
                 @role('member')
@@ -54,21 +57,9 @@
                 {{-- dropdown PRODUK--}}
                 <a href="">
                     <li data-toggle="collapse" href="#produk-collapse">
-                        <p>Produk <i class="fa fa-chevron-down"></i></p>
+                        <p>Produk</p>
                     </li>
                 </a>
-                <div class="collapse" id="produk-collapse">
-                    <ul>
-                        <li class='w-lnk'><router-link :to="{name: 'indexProduk'}">
-                            <i class="fa fa-circle"></i> Produk
-                        </router-link></li>
-
-                        <li class='w-lnk'><router-link :to="{name: 'indexKategoriProduk'}">
-                            <i class="fa fa-circle"></i> Kategori Produk
-                        </router-link></li>
-                    </ul>
-                </div>
-                {{-- dropdown --}}
 
                 <li class='w-lnk'><router-link :to="{name: 'indexKelolaKas'}">
                     Kelola Kas
@@ -78,9 +69,6 @@
                     Pelanggan
                 </router-link></li>
 
-                <li class='w-lnk'><router-link :to="{name: 'indexPenjualan'}">
-                    Penjualan
-                </router-link></li>
 
                 <li class='w-lnk'><router-link :to="{name: 'riwayatPenjualan'}">
                  Riwayat Penjualan
@@ -102,6 +90,10 @@
             <span class='nav_txt'>Home</span>
             @endif
             @role('member')
+            <li><router-link :to="{name: 'indexPenjualan'}">
+                <i class="fa fa-shopping-bag fa-2x"></i>
+            </router-link></li>
+            <span class='nav_txt'>Penjualan</span>
             <li><router-link :to="{name: 'indexStafToko'}">
                 <i class="fa fa-user-circle-o fa-2x"></i>
             </router-link></li>
@@ -128,23 +120,11 @@
 
             @endrole
             @role('member')
-            <a href="">
-                <li data-toggle="collapse" href="#logo-produk-collapse">
-                    <i class="fa fa-cubes fa-2x"></i><i class="fa fa-chevron-down" style="font-size: 10px;padding-bottom: 5px;"></i>
-                </li>
-            </a>
-            <span class="nav_txt">Produk</span>
-            <ul id="logo-produk-collapse" class="collapse">
                 <li><router-link :to="{name: 'indexProduk'}">
                     <i class="fa fa-tag fa-2x"></i>
                 </router-link></li>
                 <span class='nav_txt'>Produk</span>
 
-                <li><router-link :to="{name: 'indexKategoriProduk'}">
-                    <i class="fa fa-filter fa-2x"></i>
-                </router-link></li>
-                <span class='nav_txt'>Kategori Produk</span>
-            </ul>
 
             <li><router-link :to="{name: 'indexKelolaKas'}">
                 <i class="fa fa-money fa-2x"></i>
@@ -156,10 +136,6 @@
             </router-link></li>
             <span class='nav_txt'>Pelanggan</span>
 
-            <li><router-link :to="{name: 'indexPenjualan'}">
-                <i class="fa fa-shopping-bag fa-2x"></i>
-            </router-link></li>
-            <span class='nav_txt'>Penjualan</span>
 
             <li><router-link :to="{name: 'riwayatPenjualan'}">
                 <i class="fa fa-history fa-2x"></i>

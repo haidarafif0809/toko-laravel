@@ -25,6 +25,11 @@
         @endif
         @role('member')
         <li>
+          <router-link :to="{name: 'indexPenjualan'}">
+            Penjualan
+          </router-link>
+        </li>
+        <li>
           <router-link :to="{name: 'indexStafToko'}">
             Staf Toko
           </router-link>
@@ -52,22 +57,11 @@
         @endrole
         @role('member')
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produk <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
+              <li>
               <router-link :to="{name: 'indexProduk'}">
                 Produk
               </router-link>
             </li>
-
-            <li>
-              <router-link :to="{name: 'indexKategoriProduk'}">
-                Kategori Produk
-              </router-link>
-            </li>
-
-          </ul>
-        </li>
         <li>
           <router-link :to="{name: 'indexKelolaKas'}">
             Kelola Kas
@@ -76,11 +70,6 @@
         <li>
           <router-link :to="{name: 'indexPelanggan'}">
             Pelanggan
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{name: 'indexPenjualan'}">
-            Penjualan
           </router-link>
         </li>
         <li>
