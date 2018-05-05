@@ -233,7 +233,7 @@ class PelangganController extends Controller
         //DATA PAGINATION
         $link    = 'view';
         $respons = $this->dataPagination($pelanggan, $pelangganData, $link);
-        return response()->json($pelangganData);
+        return response()->json($respons);
     }
 
     public function search(Request $request)
