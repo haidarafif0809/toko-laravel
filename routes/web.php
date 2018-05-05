@@ -67,7 +67,7 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
-Route::get('/penjualan/hapus-tbs-penjualan', 'PenjualanController@hapusTbs');
+Route::get('/penjualan/hapus-tbs-penjualan', 'PenjualanController@batalUpdateRiwayatPenjualan');
 Route::post('/notification/get', 'PenjualanController@notification');
 Route::post('/notification/read', 'PenjualanController@notificationRead');
 Route::post('/penjualan/view', 'PenjualanController@view');
@@ -100,6 +100,11 @@ Route::delete('/penjualan/hapus-simpan-penjualan/{id}', [
     'middleware' => ['auth'],
     'as'         => 'penjualan.hapus_tbs_penjualan',
     'uses'       => 'PenjualanController@hapusSimpanPenjualan',
+]);
+Route::delete('/penjualan/hapus-riwayat-penjualan/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'penjualan.hapus_riwayat_penjualan',
+    'uses'       => 'PenjualanController@hapusRiwayatPenjualan',
 ]);
 // ketegori produk pada penjualan
 Route::get('/penjualan/kategori-produk', 'PenjualanController@kategoriProduk');

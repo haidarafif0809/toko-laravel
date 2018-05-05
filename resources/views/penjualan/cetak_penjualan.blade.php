@@ -31,7 +31,7 @@ p{
 			@else
 			<p>Pelanggan : {{$penjualan->nama_pelanggan}}</p>
 			@endif
-			<p>No. Transaksi : #{{$penjualan->id}}</p>
+			<p>No. Transaksi : #{{$penjualan->no_faktur}}</p>
 			<p>Kasir : {{$penjualan->nama_pemilik}}</p>
 
 			<p>-------------------------------------------------------------</p>

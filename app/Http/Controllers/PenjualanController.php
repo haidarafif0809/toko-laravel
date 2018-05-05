@@ -195,6 +195,7 @@ class PenjualanController extends Controller
     // proses create table penjualan, transaksi_kas dan detail_penjualan
     public function store(Request $request)
     {
+        $no_faktur     = Penjualan::noFaktur($toko_id = Auth::user()->toko_id);
         $session_id    = session()->getId();
         $tbsPenjualan  = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->where('id_penjualan', '=', null);
         $tbsPenjualan2 = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->where('id_penjualan', '!=', null);
@@ -202,6 +203,7 @@ class PenjualanController extends Controller
             $penjualan = Penjualan::create([
                 'toko_id'          => Auth::user()->toko_id,
                 'total_bayar'      => $request->total_bayar,
+                'no_faktur'        => $no_faktur,
                 'cara_bayar'       => $request->cara_bayar,
                 'diskon'           => $request->diskon,
                 'keterangan'       => $request->keterangan,
@@ -681,7 +683,8 @@ class PenjualanController extends Controller
     public function detailRiwayatPenjualan(Request $request)
     {
         $detail_penjualan = DetailPenjualan::select([
-            'detail_penjualans.jumlah_produk', 'detail_penjualans.id_modifier',
+            'detail_penjualans.jumlah_produk',
+            'detail_penjualans.id_modifier',
             'produks.nama_produk',
         ])
             ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
@@ -706,7 +709,9 @@ class PenjualanController extends Controller
             ]);
             # code...
         }
-        $penjualan = Penjualan::select('penjualans.id',
+        $penjualan = Penjualan::select(
+            'penjualans.id',
+            'penjualans.no_faktur',
             'penjualans.pelanggan_id',
             'penjualans.created_at',
             'penjualans.total_bayar',
@@ -760,11 +765,19 @@ class PenjualanController extends Controller
 
     }
 
-    public function hapusTbs()
+    public function batalUpdateRiwayatPenjualan()
     {
         $session_id    = session()->getId();
         $tbsPenjualan2 = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id);
         $tbsPenjualan2->delete();
+        return response('200');
+    }
+
+    public function hapusRiwayatPenjualan($id)
+    {
+        $penjualan        = Penjualan::destroy($id);
+        $detail_penjualan = DetailPenjualan::where('id_penjualan', $id);
+        $detail_penjualan->delete();
         return response('200');
     }
 

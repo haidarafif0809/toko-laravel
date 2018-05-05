@@ -25,13 +25,7 @@ span{
 								<label>Detai Penjualan</label>
 								<button type="button" class="close"  v-on:click="closeModal()">&times;</button> 
 							</div>
-							<div class="modal-body"  >
-								<span class="col-xs-4">No. Pesanan</span>  
-								<span class="col-xs-8">
-
-									<span>: #{{detail_penjualans.penjualan.id}}</span>
-
-								</span>
+							<div class="modal-body" >
 								<span class="col-xs-4">Tanggal</span>  
 								<span class="col-xs-8">
 
@@ -121,14 +115,14 @@ span{
 						<tbody v-if="riwayat_penjualan.length > 0 && loading == false" class="data-ada">
 							<tr v-for="riwayat_penjualans ,index in riwayat_penjualan">
 								<td>{{ riwayat_penjualans.data_riwayat_penjualan.waktu | tanggal}}</td>
-								<td></td>
+								<td>{{ riwayat_penjualans.data_riwayat_penjualan.no_faktur}}</td>
 								<td>Sukses</td>
 								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.diskon | pemisahTitik}}</td>
 								<td align="right">{{ riwayat_penjualans.data_riwayat_penjualan.total_bayar | pemisahTitik}}</td>
 								<td>
 									<button class="btn btn-xs btn-primary" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Detail</button>									
 									<button class="btn btn-xs btn-success" id="btnSimpanKategoriProduk" @click="saveForm(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Edit</button>									
-									<button class="btn btn-xs btn-danger" id="btnSimpanKategoriProduk" @click="modalDetailRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Hapus</button>
+									<button class="btn btn-xs btn-danger" id="btnSimpanKategoriProduk" @click="deleteRiwayatPenjualan(riwayat_penjualans.data_riwayat_penjualan.id)" type="submit">Hapus</button>
 								</td>
 							</tr>
 						</tbody>
@@ -306,6 +300,40 @@ export default {
     			});
     		}
     	},
+    	deleteRiwayatPenjualan(id) {
+    		var app = this;
+    		swal({
+    			title: "Konfirmasi Hapus",
+    			text : "Anda Yakin Ingin Menghapus ini ?",
+    			type : "warning",
+    			showCancelButton: true,
+    			cancelButtonColor: '#3085d6',
+    			confirmButtonColor: '#d33',
+    			confirmButtonText: 'Hapus',
+    			cancelButtonText: 'Batal',
+    			reverseButtons: true
+    		})
+    		.then((willDelete) => {
+    			if (willDelete.value) {
+    				axios.delete(app.url + '/hapus-riwayat-penjualan/' + id)
+    				.then(resp => {
+    					app.getRiwayatPenjualan();
+    					swal({
+    						title: 'Berhasil!',
+    						type: 'success',
+    						text: 'Berhasil menghapus riwayat penjualan',
+    						showConfirmButton: false,
+    						timer: 2000,
+    					});
+    					app.$router.replace('/penjualan/riwayat-penjualan');
+    				})
+    				.catch(function () {
+    					alert("Could not hapus riwayat penjualan");
+    				});
+    				
+    			}
+    		})
+    	}
     	// getHasilPencarian(page){
     	// 	var app = this;
     	// 	app.loading = true;

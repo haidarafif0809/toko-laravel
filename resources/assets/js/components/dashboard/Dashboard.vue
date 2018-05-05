@@ -147,7 +147,6 @@ h4 {
         <div class="content">
           <div class="tab-content text-center">
             <div class="tab-pane active" id="profile2">
-              <chartist ratio=".ct-minor-seventh" type="Pie" :data="chartData3" :options="chartOptions3" > </chartist>
             </div>
           </div>
         </div>
@@ -241,14 +240,6 @@ export default {
           offset: 70,
         }
       },
-      chartData3: {
-        series: [1, 4, 2]
-      },
-      chartOptions3:{
-        labelInterpolationFnc: function(value) {
-          return Math.round(value / data.series.reduce(sum) * 100) + '%';
-        }
-      },
       chartData4: {
         labels: [],
         series: []
@@ -274,8 +265,8 @@ export default {
     }
   },
   mounted(){
-    this.getGrafikPenjualanHarian();
-    this.getGrafikPenjualanProdukTeratas();
+    // this.getGrafikPenjualanHarian();
+    // this.getGrafikPenjualanProdukTeratas();
   },
   watch: {
     'filter.priode': function(value) {
@@ -300,7 +291,7 @@ export default {
       .then(function (resp) {
         app.chartData.labels = resp.data.labels;
         app.chartData.series = resp.data.series;
-        console.log(resp.data.series)
+        console.log(resp.data.labels)
       })
       .catch(function (resp) {
         alert("Could not load riwayat_penjualan");
@@ -316,7 +307,7 @@ export default {
         // chart nominal tertinggi
         app.chartData4.labels = resp.data.labels;
         app.chartData4.series = resp.data.series2;
-        console.log(resp.data.series)
+        console.log('hha',resp.data.labels)
       })
       .catch(function (resp) {
         alert("Could not load riwayat_penjualan");
