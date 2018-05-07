@@ -126,6 +126,7 @@ class PenjualanController extends Controller
                 'produks.nama_produk',
                 'tbs_penjualans.harga_produk',
                 'tbs_penjualans.id_simpan_penjualan',
+                'tbs_penjualans.id_penjualan',
                 'tbs_penjualans.id_modifier',
                 'tbs_penjualans.jumlah_produk',
                 'tbs_penjualans.subtotal',
@@ -143,6 +144,7 @@ class PenjualanController extends Controller
             for ($i = 0; $i < count($json_tbs); $i++) {
                 $arraySubtotal[] = $json_tbs[$i]['subtotal'];
                 $arraySubtotal2  = $json_tbs[$i]['id_simpan_penjualan'];
+                $arraySubtotal3  = $json_tbs[$i]['id_penjualan'];
             }
             foreach ($arraySubtotal as $key => $val) {
                 $subtotalData[] = $val;
@@ -161,6 +163,7 @@ class PenjualanController extends Controller
                     'nama_produk'         => $tbs_penjualans->nama_produk,
                     'harga_produk'        => $tbs_penjualans->harga_produk,
                     'id_simpan_penjualan' => $tbs_penjualans->id_simpan_penjualan,
+                    'id_penjualan'        => $tbs_penjualans->id_penjualan,
                     'id_modifier'         => $tbs_penjualans->id_modifier,
                     'jumlah_produk'       => $tbs_penjualans->jumlah_produk,
                     'subtotal'            => $tbs_penjualans->subtotal,
@@ -179,6 +182,7 @@ class PenjualanController extends Controller
                 'data'                => $array,
                 'total_bayar'         => array_sum($subtotalData),
                 'id_simpan_penjualan' => $arraySubtotal2,
+                'id_penjualan'        => $arraySubtotal3,
             ];
             // $dataArray['data']['total_bayar'] = array_sum($subtotalData);
             return response()->json($dataArray);
@@ -191,12 +195,15 @@ class PenjualanController extends Controller
     // proses create table penjualan, transaksi_kas dan detail_penjualan
     public function store(Request $request)
     {
-        $session_id   = session()->getId();
-        $tbsPenjualan = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id);
+        $no_faktur     = Penjualan::noFaktur($toko_id = Auth::user()->toko_id);
+        $session_id    = session()->getId();
+        $tbsPenjualan  = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->where('id_penjualan', '=', null);
+        $tbsPenjualan2 = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->where('id_penjualan', '!=', null);
         if ($tbsPenjualan->count() > 0) {
             $penjualan = Penjualan::create([
                 'toko_id'          => Auth::user()->toko_id,
                 'total_bayar'      => $request->total_bayar,
+                'no_faktur'        => $no_faktur,
                 'cara_bayar'       => $request->cara_bayar,
                 'diskon'           => $request->diskon,
                 'keterangan'       => $request->keterangan,
@@ -223,6 +230,7 @@ class PenjualanController extends Controller
                     'id_produk'        => $tbs_penjualans->produk_id,
                     'id_penjualan'     => $penjualan->id,
                     'id_modifier'      => $tbs_penjualans->id_modifier,
+                    'id_kategori'      => $tbs_penjualans->id_kategori,
                     'harga_produk'     => $tbs_penjualans->harga_produk,
                     'subtotal'         => $tbs_penjualans->subtotal,
                     'diskon'           => $tbs_penjualans->diskon,
@@ -232,6 +240,40 @@ class PenjualanController extends Controller
             }
             $tbsPenjualan->delete();
             $respon['id_penjualan'] = $penjualan->id;
+            return response()->json($respon);
+        }
+        if ($tbsPenjualan2->count() > 0) {
+            $detail_penjualan = DetailPenjualan::where('id_penjualan', $request->id_penjualan);
+            $detail_penjualan->delete();
+            $data_penjualan = Penjualan::find($request->id_penjualan);
+            $data_penjualan->update([
+                'toko_id'          => Auth::user()->toko_id,
+                'total_bayar'      => $request->total_bayar,
+                'cara_bayar'       => $request->cara_bayar,
+                'diskon'           => $request->diskon,
+                'keterangan'       => $request->keterangan,
+                'pelanggan_id'     => $request->pelanggan_id,
+                'subtotal'         => $request->subtotal,
+                'tunai'            => $request->bayar,
+                'kembalian'        => $request->kembalian,
+                'status_pemesanan' => $request->status_pemesanan,
+            ]);
+            foreach ($tbsPenjualan2->get() as $tbs_penjualans) {
+                // $subtotal = $tbs_penjualans->harga_produk * $tbs_penjualans->jumlah_produk;
+                DetailPenjualan::create([
+                    'created_at'    => $data_penjualan->created_at,
+                    'id_produk'     => $tbs_penjualans->produk_id,
+                    'id_kategori'   => $tbs_penjualans->id_kategori,
+                    'id_penjualan'  => $request->id_penjualan,
+                    'id_modifier'   => $tbs_penjualans->id_modifier,
+                    'harga_produk'  => $tbs_penjualans->harga_produk,
+                    'subtotal'      => $tbs_penjualans->subtotal,
+                    'diskon'        => $tbs_penjualans->diskon,
+                    'jumlah_produk' => $tbs_penjualans->jumlah_produk,
+                ]);
+            }
+            $tbsPenjualan2->delete();
+            $respon['id_penjualan'] = $request->id_penjualan;
             return response()->json($respon);
         }
     }
@@ -263,14 +305,17 @@ class PenjualanController extends Controller
             $session_id = session()->getId();
 
             TbsPenjualan::create([
-                'session_id'    => $session_id,
-                'produk_id'     => $request->produk_id,
-                'jumlah_produk' => $request->jumlah,
-                'harga_produk'  => $request->harga + $harga_modifier,
-                'satuan_id'     => $request->satuan,
-                'subtotal'      => $request->harga + $harga_modifier,
-                'id_modifier'   => $modifier,
-                'toko_id'       => Auth::user()->toko_id,
+                'session_id'          => $session_id,
+                'produk_id'           => $request->produk_id,
+                'id_simpan_penjualan' => $request->id_simpan_penjualan,
+                'id_penjualan'        => $request->id_penjualan,
+                'id_kategori'         => $request->kategori_produks_id,
+                'jumlah_produk'       => $request->jumlah,
+                'harga_produk'        => $request->harga + $harga_modifier,
+                'satuan_id'           => $request->satuan,
+                'subtotal'            => $request->harga + $harga_modifier,
+                'id_modifier'         => $modifier,
+                'toko_id'             => Auth::user()->toko_id,
             ]);
         } elseif (count($itemTbsPenjualan->get()) > 0 && $produk_modifier != null) {
             $subtotal = ($itemTbsPenjualan->first()->jumlah_produk + 1) * $itemTbsPenjualan->first()->harga_produk;
@@ -287,13 +332,16 @@ class PenjualanController extends Controller
         if (count($sitemTbsPenjualan->get()) < 1 && $produk_modifier == null) {
             $session_id = session()->getId();
             TbsPenjualan::create([
-                'session_id'    => $session_id,
-                'produk_id'     => $request->produk_id,
-                'jumlah_produk' => $request->jumlah,
-                'harga_produk'  => $request->harga,
-                'satuan_id'     => $request->satuan,
-                'subtotal'      => $request->harga,
-                'toko_id'       => Auth::user()->toko_id,
+                'session_id'          => $session_id,
+                'produk_id'           => $request->produk_id,
+                'id_simpan_penjualan' => $request->id_simpan_penjualan,
+                'id_penjualan'        => $request->id_penjualan,
+                'id_kategori'         => $request->kategori_produks_id,
+                'jumlah_produk'       => $request->jumlah,
+                'harga_produk'        => $request->harga,
+                'satuan_id'           => $request->satuan,
+                'subtotal'            => $request->harga,
+                'toko_id'             => Auth::user()->toko_id,
             ]);
             # code...
         } elseif (count($sitemTbsPenjualan->get()) > 0 && $produk_modifier == null) {
@@ -371,6 +419,7 @@ class PenjualanController extends Controller
                     'id_satuan'     => $tbs_penjualans->satuan_id,
                     'id_produk'     => $tbs_penjualans->produk_id,
                     'id_penjualan'  => $tbs_penjualans->id_simpan_penjualan,
+                    'id_kategori'   => $tbs_penjualans->id_kategori,
                     'harga_produk'  => $tbs_penjualans->harga_produk,
                     'subtotal'      => $tbs_penjualans->subtotal,
                     'diskon'        => $tbs_penjualans->diskon,
@@ -399,6 +448,7 @@ class PenjualanController extends Controller
                     'id_satuan'     => $tbs_penjualans->satuan_id,
                     'id_produk'     => $tbs_penjualans->produk_id,
                     'id_penjualan'  => $penjualan->id,
+                    'id_kategori'   => $tbs_penjualans->id_kategori,
                     'harga_produk'  => $tbs_penjualans->harga_produk,
                     'subtotal'      => $tbs_penjualans->subtotal,
                     'diskon'        => $tbs_penjualans->diskon,
@@ -467,6 +517,7 @@ class PenjualanController extends Controller
                 'id_simpan_penjualan' => $request->id,
                 'satuan_id'           => $data_detail_simpan_penjualans->id_satuan,
                 'produk_id'           => $data_detail_simpan_penjualans->id_produk,
+                'id_kategori'         => $data_detail_simpan_penjualans->id_kategori,
                 'harga_produk'        => $data_detail_simpan_penjualans->harga_produk,
                 'jumlah_produk'       => $data_detail_simpan_penjualans->jumlah_produk,
                 'diskon'              => $data_detail_simpan_penjualans->diskon,
@@ -480,6 +531,35 @@ class PenjualanController extends Controller
         }
         $respon['data_tbs']      = $data_tbs;
         $respon['diskon_faktur'] = $data_simpan_penjualan->first()->diskon;
+
+        return response()->json($respon);
+    }
+    public function updateRiwayatPenjualan(Request $request)
+    {
+        $data_tbs              = 0;
+        $session_id            = session()->getId();
+        $data_penjualan        = Penjualan::select()->where('id', $request->id_penjualan)->where('toko_id', Auth::user()->toko_id);
+        $data_detail_penjualan = DetailPenjualan::dataDetailPenjualan($data_penjualan->first()->id);
+        $tbs_penjualan         = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id)->get();
+        foreach ($data_detail_penjualan->get() as $data_detail_penjualans) {
+            $session = session()->getId();
+            TbsPenjualan::create([
+                'session_id'    => $session,
+                'id_penjualan'  => $request->id_penjualan,
+                'produk_id'     => $data_detail_penjualans->id_produk,
+                'id_kategori'   => $data_detail_penjualans->id_kategori,
+                'harga_produk'  => $data_detail_penjualans->harga_produk,
+                'jumlah_produk' => $data_detail_penjualans->jumlah_produk,
+                'diskon'        => $data_detail_penjualans->diskon,
+                'id_modifier'   => $data_detail_penjualans->id_modifier,
+                'subtotal'      => $data_detail_penjualans->subtotal,
+                'toko_id'       => Auth::user()->toko_id,
+            ]);
+
+            $data_tbs++;
+        }
+        $respon['data_tbs']     = $data_tbs;
+        $respon['id_penjualan'] = $data_penjualan->first()->id;
 
         return response()->json($respon);
     }
@@ -603,7 +683,8 @@ class PenjualanController extends Controller
     public function detailRiwayatPenjualan(Request $request)
     {
         $detail_penjualan = DetailPenjualan::select([
-            'detail_penjualans.jumlah_produk', 'detail_penjualans.id_modifier',
+            'detail_penjualans.jumlah_produk',
+            'detail_penjualans.id_modifier',
             'produks.nama_produk',
         ])
             ->leftJoin('produks', 'produks.produk_id', '=', 'detail_penjualans.id_produk')
@@ -628,7 +709,9 @@ class PenjualanController extends Controller
             ]);
             # code...
         }
-        $penjualan = Penjualan::select('penjualans.id',
+        $penjualan = Penjualan::select(
+            'penjualans.id',
+            'penjualans.no_faktur',
             'penjualans.pelanggan_id',
             'penjualans.created_at',
             'penjualans.total_bayar',
@@ -673,11 +756,29 @@ class PenjualanController extends Controller
     {
         if ($id != null) {
             SimpanPenjualan::destroy($id);
+            $detail_simpan_penjualan = SimpanDetailPenjualan::where('id_penjualan', $id);
+            $detail_simpan_penjualan->delete();
             return response('200');
         } else {
             return;
         }
 
+    }
+
+    public function batalUpdateRiwayatPenjualan()
+    {
+        $session_id    = session()->getId();
+        $tbsPenjualan2 = TbsPenjualan::select()->where('session_id', $session_id)->where('toko_id', Auth::user()->toko_id);
+        $tbsPenjualan2->delete();
+        return response('200');
+    }
+
+    public function hapusRiwayatPenjualan($id)
+    {
+        $penjualan        = Penjualan::destroy($id);
+        $detail_penjualan = DetailPenjualan::where('id_penjualan', $id);
+        $detail_penjualan->delete();
+        return response('200');
     }
 
 /**

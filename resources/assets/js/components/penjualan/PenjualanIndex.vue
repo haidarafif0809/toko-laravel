@@ -338,7 +338,7 @@ width: 160px;*/
 									<div class="form-group">
 										<label class="col-xs-4 control-label" for="textinput">No Meja</label>  
 										<div class="col-xs-8">
-											<input v-model="penjualan.nomor_meja" id="textinput" name="textinput" type="number" placeholder="placeholder" class="form-control input-xs" ref="no_meja">
+											<input v-model="penjualan.nomor_meja" id="textinput" name="textinput" type="number" placeholder="No. meja" class="form-control input-xs" ref="no_meja">
 											<span class="help-block"></span>  
 										</div>
 									</div>
@@ -347,7 +347,7 @@ width: 160px;*/
 									<div class="form-group">
 										<label class="col-xs-4 control-label" for="textarea">Catatan</label>
 										<div class="col-xs-8">                     
-											<textarea v-model="penjualan.catatan" class="form-control" id="textarea" name="textarea"></textarea>
+											<textarea v-model="penjualan.catatan" placeholder="(Optional)" class="form-control" id="textarea" name="textarea"></textarea>
 										</div>
 									</div>
 
@@ -465,9 +465,11 @@ width: 160px;*/
 				</div>
 
 				<!-- button aksi: simpan, bayar, diskon -->
-				<button v-bind:disabled="!isValid" class="button button2 btn-xs btn-md" @click="openModalSimpanPenjualan()"><i class="fa fa-bookmark"></i> Simpan</button>
-				<button v-bind:disabled="!isValid" class="button button1 btn-xs btn-md" @click="modalDiskonFaktur()">Diskon Per Transaksi</button>
-				<button v-bind:disabled="!validate" class="button button3 btn-xs btn-md" @click="openModal()">Bayar</button>
+				<button v-bind:disabled="!isValid" v-if="isIdPenjualan" class="button button2 btn-xs btn-md" @click="simpanUpdateRiwayatTransaksi()"><i class="fa fa-bookmark"></i> Simpan Perubahan</button>
+				<button v-bind:disabled="!isValid" v-if="isIdPenjualan" class="button button2 btn-xs btn-md" @click="batalUpdate()"> Batal</button>
+				<button v-bind:disabled="!isValid" v-if="!isIdPenjualan"class="button button2 btn-xs btn-md" @click="openModalSimpanPenjualan()"><i class="fa fa-bookmark"></i> Simpan</button>
+				<button v-bind:disabled="!isValid" v-if="!isIdPenjualan"class="button button1 btn-xs btn-md" @click="modalDiskonFaktur()">Diskon Per Transaksi</button>
+				<button v-bind:disabled="!validate" v-if="!isIdPenjualan"class="button button3 btn-xs btn-md" @click="openModal()">Bayar</button>
 			</div>
 
 			<div class="col-md-8 col-sm-8" id="pull-right">
@@ -573,7 +575,9 @@ export default {
 	data: function () {
 		return {
 			message: 'Input Diskon Per Produk',
+			button: 0,
 			id_simpan_penjualan: '',
+			id_penjualan: '',
 			modifier: [],
 			data_modifier:[],
 			kategori_produks: [],
@@ -717,6 +721,9 @@ export default {
 	computed: {
 		isValid: function () {
 			return this.tbs_penjualans != '' 
+		},		
+		isIdPenjualan: function () {
+			return this.id_penjualan != '' && this.id_penjualan != null
 		},
 		validate: function(){
 			return this.tbs_penjualans != ''
@@ -859,6 +866,7 @@ export default {
 					app.tbs_penjualans.total_bayar = resp.data.total_bayar;
 					app.jumlahBayar = resp.data.total_bayar;
 					app.id_simpan_penjualan = resp.data.id_simpan_penjualan;
+					app.id_penjualan = resp.data.id_penjualan;
 					app.loadingTbs = false;
 					app.getDiskonSimpanPenjualan();
 					console.log(app.tbs_penjualans);
@@ -1016,6 +1024,50 @@ export default {
 			}
 		},
 
+		simpanUpdateRiwayatTransaksi(){
+			var app = this;
+			var total = app.penjualan.total_bayar;
+			var Pembayaran = app.penjualan.bayar;
+			
+			app.penjualan.total_bayar = app.jumlahBayar;
+			// app.penjualan.id_simpan_penjualan = app.id_simpan_penjualan;
+			app.penjualan.bayar = app.penjualan.bayar;
+			app.penjualan.kembalian = app.penjualan.kembalian;
+			app.penjualan.subtotal = app.tbs_penjualans.total_bayar;
+			app.penjualan.status_pemesanan = app.penjualan.status_pemesanan;
+			app.penjualan.cara_bayar = 'Tunai';
+			app.penjualan.diskon = app.diskonPerfaktur.rupiah;
+			app.penjualan.keterangan = app.penjualan.keterangan;
+			app.penjualan.pelanggan_id = app.penjualan.nama_pelanggan;
+			app.penjualan.id_penjualan = app.id_penjualan;
+			var newPenjualan = app.penjualan;
+			axios.post(app.url, newPenjualan)
+			.then(function(resp){
+				app.$router.replace('/penjualan/riwayat-penjualan');
+				swal({
+					title: 'Berhasil!',
+					type: 'success',
+					text: 'Berhasil Update Riwayat Penjualan',
+					showConfirmButton: false,
+					timer: 2000,
+				});
+				app.tbs_penjualans = '';
+				app.pelanggans = '';
+				app.diskonPerfaktur.rupiah = '';
+				app.diskonPerfaktur.persen = '';
+				app.penjualan.bayar = '';
+				app.penjualan.kembalian = 0;
+				app.penjualan.keterangan = '';
+				app.penjualan.status_pemesanan = 0;
+				app.penjualan.nama_pelanggan = 0;
+					// console.log(resp.data.id_penjualan);
+				})
+			.catch(function (resp) {
+				app.success = false;
+				app.alert('Gagal');
+			})
+		},
+
 		// create table simpan_penjualan dan simpan_detail_penjualan
 		simpanPenjualan() {
 			var app = this;
@@ -1045,7 +1097,7 @@ export default {
 				app.penjualan.nomor_meja = '';
 				app.penjualan.catatan = '';
 				app.penjualan.nama_pelanggan = '';
-				// app.id_simpan_penjualan = '';
+				app.id_simpan_penjualan = '';
 				app.penjualan.status_pemesanan = 0;
 				app.alert('Berhasil disimpan');
 				$('#modalSimpanPenjualan').hide();
@@ -1086,7 +1138,7 @@ export default {
 				app.penjualan.nomor_meja = '';
 				app.penjualan.catatan = '';
 				app.penjualan.nama_pelanggan = '';
-				// app.id_simpan_penjualan = '';
+				app.id_simpan_penjualan = '';
 				app.penjualan.status_pemesanan = 0;
 				app.alert('Berhasil disimpan');
 				$('#modalSimpanPenjualan').hide();
@@ -1101,25 +1153,54 @@ export default {
 		// create or update tbs_penjulan / klik gambar produk
 		submitTbsPenjualan(produksPenjualans){
 			var app = this;
-			app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
-			app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
-			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
-			app.inputTbsPenjualan.jumlah = 1;
-			var newTbs = app.inputTbsPenjualan;
-			axios.post(app.urlTambahTbs, newTbs)
-			.then(function (resp) {
-				app.$router.replace('/penjualan');
-				app.getTbsPenjualan();
-				app.formDiskon.rupiah = '';
-				app.diskonPerfaktur.persen = '';
-				app.diskonPerfaktur.rupiah = '';
-			})
-			.catch(function (resp) {
+			if (app.tbs_penjualans.length != 0) {				
+				app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
+				app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
+				app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
+				app.inputTbsPenjualan.kategori_produks_id = produksPenjualans.data_produk.kategori_produks_id;
+				app.inputTbsPenjualan.id_simpan_penjualan = app.id_simpan_penjualan;
+				app.inputTbsPenjualan.id_penjualan = app.id_penjualan;
+				app.inputTbsPenjualan.jumlah = 1;
+				var newTbs = app.inputTbsPenjualan;
+				axios.post(app.urlTambahTbs, newTbs)
+				.then(function (resp) {
+					app.$router.replace('/penjualan');
+					app.getTbsPenjualan();
+					app.formDiskon.rupiah = '';
+					app.diskonPerfaktur.persen = '';
+					app.diskonPerfaktur.rupiah = '';
+				})
+				.catch(function (resp) {
 				// console.log(resp)
 
 				app.success = false;
 				app.errors = resp.response.data.errors;
 			});
+			}
+			else if(app.tbs_penjualans.length == 0){
+				app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
+				app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
+				app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
+				app.inputTbsPenjualan.kategori_produks_id = produksPenjualans.data_produk.kategori_produks_id;
+				app.inputTbsPenjualan.id_simpan_penjualan = null;
+				app.inputTbsPenjualan.id_penjualan = null;
+				app.inputTbsPenjualan.jumlah = 1;
+				var newTbs = app.inputTbsPenjualan;
+				axios.post(app.urlTambahTbs, newTbs)
+				.then(function (resp) {
+					app.$router.replace('/penjualan');
+					app.getTbsPenjualan();
+					app.formDiskon.rupiah = '';
+					app.diskonPerfaktur.persen = '';
+					app.diskonPerfaktur.rupiah = '';
+				})
+				.catch(function (resp) {
+				// console.log(resp)
+
+				app.success = false;
+				app.errors = resp.response.data.errors;
+			});
+			}
 		},
 
 		openModalModifier(produksPenjualans){
@@ -1132,12 +1213,28 @@ export default {
 				});
 				app.data_modifier = [];				
 			}
-			// console.log(app.data_modifier);
-			app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
-			app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
-			app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
-			app.inputTbsPenjualan.jumlah = 1;
-			$('#modalModifier').show();
+			console.log(app.tbs_penjualans);
+			if (app.tbs_penjualans.length != 0) {
+				app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
+				app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
+				app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
+				app.inputTbsPenjualan.kategori_produks_id = produksPenjualans.data_produk.kategori_produks_id;
+				app.inputTbsPenjualan.id_simpan_penjualan = app.id_simpan_penjualan;
+				app.inputTbsPenjualan.id_penjualan = app.id_penjualan;
+				app.inputTbsPenjualan.jumlah = 1;
+				$('#modalModifier').show();
+			}
+			else if(app.tbs_penjualans.length == 0){
+				app.inputTbsPenjualan.produk_id = produksPenjualans.data_produk.produk_id;
+				app.inputTbsPenjualan.harga = produksPenjualans.data_produk.harga_jual;
+				app.inputTbsPenjualan.satuan = produksPenjualans.data_produk.satuan;
+				app.inputTbsPenjualan.kategori_produks_id = produksPenjualans.data_produk.kategori_produks_id;
+				app.inputTbsPenjualan.id_simpan_penjualan = null;
+				app.inputTbsPenjualan.id_penjualan = null;
+				app.inputTbsPenjualan.jumlah = 1;
+				$('#modalModifier').show();
+
+			}
 			// console.log(app.inputTbsPenjualan.modifier);
 		},
 		// create or update tbs_penjulan if produk have modifier/ klik gambar produk
@@ -1337,6 +1434,13 @@ export default {
 		urlCetakPesanan(id_penjualan){
 			window.open('penjualan/cetak-pesanan?id_penjualan='+id_penjualan,'_blank');
 		},
+		batalUpdate(){
+			var app = this;
+			axios.get(app.url + '/hapus-tbs-penjualan')
+			.then(function (resp) {
+				app.$router.replace('/penjualan/riwayat-penjualan');
+			})
+		}
 	}
 }
 </script>

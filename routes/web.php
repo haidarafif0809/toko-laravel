@@ -67,6 +67,7 @@ Route::get('/kategoriProduk/search', 'KategoriProdukController@search');
 
 // Penjualan
 Route::resource('penjualan', 'PenjualanController', ['except' => 'show']);
+Route::get('/penjualan/hapus-tbs-penjualan', 'PenjualanController@batalUpdateRiwayatPenjualan');
 Route::post('/notification/get', 'PenjualanController@notification');
 Route::post('/notification/read', 'PenjualanController@notificationRead');
 Route::post('/penjualan/view', 'PenjualanController@view');
@@ -77,6 +78,7 @@ Route::get('/penjualan/cetak-penjualan', 'PenjualanController@cetakPenjualan');
 Route::get('/penjualan/cetak-pesanan', 'PenjualanController@cetakPesanan');
 Route::get('/penjualan/diskon-simpan-penjualan', 'PenjualanController@diskonSimpanPenjualan');
 Route::get('/penjualan/create-tbs-penjualan', 'PenjualanController@createTbsPenjualan');
+Route::get('/penjualan/update-riwayat-penjualan', 'PenjualanController@updateRiwayatPenjualan');
 Route::get('/penjualan/view-buka-penjualan', 'PenjualanController@viewBukaPenjualan');
 Route::post('/simpan-penjualan', 'PenjualanController@simpanDataPenjualan');
 Route::get('/penjualan/pencarian', 'PenjualanController@search');
@@ -98,6 +100,11 @@ Route::delete('/penjualan/hapus-simpan-penjualan/{id}', [
     'middleware' => ['auth'],
     'as'         => 'penjualan.hapus_tbs_penjualan',
     'uses'       => 'PenjualanController@hapusSimpanPenjualan',
+]);
+Route::delete('/penjualan/hapus-riwayat-penjualan/{id}', [
+    'middleware' => ['auth'],
+    'as'         => 'penjualan.hapus_riwayat_penjualan',
+    'uses'       => 'PenjualanController@hapusRiwayatPenjualan',
 ]);
 // ketegori produk pada penjualan
 Route::get('/penjualan/kategori-produk', 'PenjualanController@kategoriProduk');
@@ -143,12 +150,15 @@ Route::get('/pelanggan/export_pelanggan', 'PelangganController@exportExcel');
 Route::resource('laporan', 'LaporanController', ['except' => 'show']);
 Route::get('/laporan/laporan-ringkas', 'LaporanController@laporanRingkas');
 Route::get('/laporan/laporan-penjualan-harian', 'LaporanController@laporanPenjualanHarian');
-Route::post('/laporan/grafik-penjualan-harian', 'LaporanController@grafikPenjualanHarian');
 Route::get('/laporan/laporan-penjualan-perjam', 'LaporanController@laporanPenjualanPerJam');
 Route::get('/laporan/grand-total-penjualan', 'LaporanController@grandTotalPenjualan');
 Route::get('/laporan/data-transaksi-penjualan', 'LaporanController@dataTransaksiPenjualan');
 Route::get('/laporan/rekapitulasi-kas', 'LaporanController@LaporanRekapitulasiKas');
 Route::get('/laporan/laporan-diskon', 'LaporanController@LaporanDiskon');
+Route::post('/laporan/grafik-penjualan-harian', 'LaporanController@grafikPenjualanHarian');
+Route::post('/laporan/grafik-penjualan-produk-teratas', 'LaporanController@grafikPenjualanProdukTeratas');
+Route::post('/laporan/grafik-penjualan-produk-kategori', 'LaporanController@grafikPenjualanProdukKategori');
+Route::post('/laporan/grafik-nominal-produk-tertinggi', 'LaporanController@grafikNominalProdukTertinggi');
 
 // verifikasi user baru
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');

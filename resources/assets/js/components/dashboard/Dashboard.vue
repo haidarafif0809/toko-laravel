@@ -1,7 +1,4 @@
 <style type="text/css">
-.ct-area{
-  /*width: 10%;*/
-}
 .ct-series-a .ct-line {
   /* Set the colour of this series line */
   stroke: #578CA9;
@@ -38,7 +35,7 @@
   display: inline-block;
   position: relative;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 20px;
   /*border-radius: 10px;*/
   color: rgba(0,0,0, 0.87);
   background: #fff;
@@ -115,78 +112,60 @@ h4 {
     </div>
     <div class="row">
       <div>
-        <chartist ratio="ct-double-octave" type="Line" :data="chartData" :options="chartOptions" > </chartist>
+        <chartist ratio=".ct-minor-seventh" type="Line" :data="chartData" :options="chartOptions" > </chartist>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card card-nav-tabs">
-          <div class="header header-info">
-            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Produk Teratas</h4>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <div class="tab-content text-center">
-              <div class="tab-pane active" id="profile">
-              </div>
-              <div class="tab-pane" id="messages">
-                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-              </div>
-              <div class="tab-pane" id="settings">
-                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-              </div>
+    <div class="col-md-4">
+      <div class="card card-nav-tabs">
+        <div class="header header-info">
+          <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Produk Teratas</h4>
             </div>
           </div>
         </div>
-      </div>      
-      <div class="col-md-4">
-        <div class="card card-nav-tabs">
-          <div class="header header-info">
-            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Per Kategori</h4>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <div class="tab-content text-center">
-              <div class="tab-pane active" id="profile">
-              </div>
-              <div class="tab-pane" id="messages">
-                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-              </div>
-              <div class="tab-pane" id="settings">
-                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-              </div>
+        <div class="content">
+          <div class="tab-content text-center">
+            <div class="tab-pane active" id="profile">
+              <chartist ratio=".ct-double-octave" type="Bar" :data="chartData2" :options="chartOptions2" > </chartist>
             </div>
           </div>
         </div>
-      </div>      
-      <div class="col-md-4">
-        <div class="card card-nav-tabs">
-          <div class="header header-info">
-            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Nominal Penjualan Tertinggi</h4>
-              </div>
+      </div>
+    </div>      
+    <div class="col-md-4">
+      <div class="card card-nav-tabs">
+        <div class="header header-info">
+          <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Penjualan Per Kategori</h4>
             </div>
           </div>
-          <div class="content">
-            <div class="tab-content text-center">
-              <div class="tab-pane active" id="profile">
-              </div>
-              <div class="tab-pane" id="messages">
-                <p> I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus. I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at.</p>
-              </div>
-              <div class="tab-pane" id="settings">
-                <p>I think that’s a responsibility that I have, to push possibilities, to show people, this is the level that things could be at. So when you get something that has the name Kanye West on it, it’s supposed to be pushing the furthest possibilities. I will be the leader of a company that ends up being worth billions of dollars, because I got the answers. I understand culture. I am the nucleus.</p>
-              </div>
+        </div>
+        <div class="content">
+          <div class="tab-content text-center">
+            <div class="tab-pane active" id="profile2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+    <div class="col-md-4">
+      <div class="card card-nav-tabs">
+        <div class="header header-info">
+          <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <h4><i class="fa fa-area-chart" aria-hidden="true"></i> Nominal Penjualan Tertinggi</h4>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="tab-content text-center">
+            <div class="tab-pane active" id="profile3">
+              <chartist ratio=".ct-minor-seventh" type="Bar" :data="chartData4" :options="chartOptions4" > </chartist>
             </div>
           </div>
         </div>
@@ -209,32 +188,22 @@ export default {
       url : window.location.origin+(window.location.pathname).replace("home","laporan"),
       riwayat_penjualan: [],
       msg: 'Grafik Penjualan harian',
-            // chart
+            // chart penualan harian
             chartData: {
-        // labels: ["A", "B", "C"],
-        labels:[],
-        series: [],
-        // series: [[
-        // {x: 1, y: 100},
-        // {x: 2, y: 50},
-        // {x: 3, y: 25},
-        // {x: 5, y: 12.5},
-        // {x: 8, y: 6.25}
-        // ]]
-
-      },
-      chartOptions: {
-        low: 0,
+              labels:[],
+              series: [],
+            },
+            chartOptions: {
+              low: 0,
+              showArea: true,
+              lineSmooth: true,
         // stretch: true,
-        // fullWidth: true,
-        showArea: true,
-        lineSmooth: true,
+        fullWidth: false,
         axisX: {
           // We can disable the grid for this axis
           showGrid: true,
           // and also don't show the label
           showLabel: true,
-          // offset: 60,
         },
         // Y-Axis specific configuration
         axisY: {
@@ -247,11 +216,57 @@ export default {
             return 'Qty ' + value;
           }
         }
-      }
+      },
+      // chart penjualan produk teratas
+      chartData2: {
+        labels: [],
+        series: []
+      },
+      chartOptions2:{
+        fullWidth: false,
+        seriesBarDistance: 10,
+        reverseData: true,
+        horizontalBars: true,
+        axisX: {
+          // We can disable the grid for this axis
+          showGrid: true,
+          // and also don't show the label
+          showLabel: true,
+          labelInterpolationFnc: function(value) {
+            return 'Qty '+value;
+          }
+        },
+        axisY: {
+          offset: 70,
+        }
+      },
+      chartData4: {
+        labels: [],
+        series: []
+      },
+      chartOptions4:{
+        seriesBarDistance: 10,
+        reverseData: true,
+        horizontalBars: true,
+        axisX: {
+          // We can disable the grid for this axis
+          showGrid: true,
+          // and also don't show the label
+          showLabel: true,
+          labelInterpolationFnc: function(value) {
+            return value + ' k';
+          }
+        },
+
+        axisY: {
+          offset: 70,
+        }
+      },
     }
   },
   mounted(){
-    this.getRiwayatPenjualan();
+    // this.getGrafikPenjualanHarian();
+    // this.getGrafikPenjualanProdukTeratas();
   },
   watch: {
     'filter.priode': function(value) {
@@ -265,17 +280,34 @@ export default {
       app.filter.dari_tanggal = '';
       app.filter.sampai_tanggal = '';
       var filter = app.filter;
-      app.getRiwayatPenjualan();
+      app.getGrafikPenjualanHarian();
+      app.getGrafikPenjualanProdukTeratas();
     },
     // menampilkan data simpan penjualan
-    getRiwayatPenjualan() {
+    getGrafikPenjualanHarian() {
       var app = this;
       var filter = app.filter;
       axios.post(app.url+'/grafik-penjualan-harian', filter)
       .then(function (resp) {
         app.chartData.labels = resp.data.labels;
         app.chartData.series = resp.data.series;
-        console.log(resp.data.series)
+        console.log(resp.data.labels)
+      })
+      .catch(function (resp) {
+        alert("Could not load riwayat_penjualan");
+      });
+    },
+    getGrafikPenjualanProdukTeratas() {
+      var app = this;
+      var filter = app.filter;
+      axios.post(app.url+'/grafik-penjualan-produk-teratas', filter)
+      .then(function (resp) {
+        app.chartData2.labels = resp.data.labels;
+        app.chartData2.series = resp.data.series;
+        // chart nominal tertinggi
+        app.chartData4.labels = resp.data.labels;
+        app.chartData4.series = resp.data.series2;
+        console.log('hha',resp.data.labels)
       })
       .catch(function (resp) {
         alert("Could not load riwayat_penjualan");

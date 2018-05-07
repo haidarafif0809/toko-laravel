@@ -121,7 +121,6 @@
                                     <li>
                                         <a href="{{ url('/ubah-password/password') }}"><i class="fa fa-btn fa-lock"></i> Ubah Password</a>
                                     </li>
-
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -181,17 +180,17 @@
           return;
       }
       else{
-         swal({
-            title: "Memproses...",
-            text: "Mohon tunggu",
-            imageUrl: "images/ajaxloader.gif",
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            allowEscapeKey: false
-        });
-     }
- }
- function sweetAlerts(){
+       swal({
+        title: "Memproses...",
+        text: "Mohon tunggu",
+        imageUrl: "images/ajaxloader.gif",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+   }
+}
+function sweetAlerts(){
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var emails = document.forms['emails']['email'].value;
@@ -201,7 +200,7 @@
         return;
     }
     else{
-     swal({
+       swal({
         title: "Memproses...",
         text: "Mohon tunggu",
         imageUrl: "images/ajaxloader.gif",
@@ -209,7 +208,7 @@
         allowOutsideClick: false,
         allowEscapeKey: false
     });
- }
+   }
 }
 </script>
 </body>

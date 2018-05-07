@@ -156,25 +156,6 @@ class LaporanController extends Controller
         return $laporan;
 
     }
-    public function grafikPenjualanHarian(Request $request)
-    {
-
-        $hari   = Carbon::now()->toDay();
-        $minggu = Carbon::now()->subWeek();
-        $bulan  = Carbon::now()->subMonth();
-        $tahun  = Carbon::now()->subYear();
-
-        $data_penjualan = Penjualan::grafikPenjualanHarian($request, $hari, $minggu, $bulan, $tahun)->get();
-        $data_array     = [];
-        $nested_array   = [];
-        foreach ($data_penjualan as $data_penjualans) {
-            $data_array['labels'][] = $data_penjualans->tanggal;
-
-            array_push($nested_array, $data_penjualans->total_penjualan);
-        }
-        $data_array['series'][] = $nested_array;
-        return response()->json($data_array);
-    }
 
     public function dataTransaksiPenjualan(Request $request)
     {
@@ -206,6 +187,7 @@ class LaporanController extends Controller
             array_push($array_laporan, [
                 'tanggal'       => $laporans->tanggal,
                 'no_faktur'     => $laporans->no_faktur,
+                'staf'          => $laporans->nama_pemilik,
                 'pelanggan'     => $laporans->nama_pelanggan,
                 'catatan'       => $laporans->keterangan,
                 'detail_produk' => $nama_produk,
@@ -289,6 +271,55 @@ class LaporanController extends Controller
             ]);
         }
         return $array_laporan;
+    }
+    public function grafikPenjualanHarian(Request $request)
+    {
+
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        $data_penjualan = Penjualan::grafikPenjualanHarian($request, $hari, $minggu, $bulan, $tahun)->get();
+        $data_array     = [];
+        $nested_array   = [];
+        foreach ($data_penjualan as $data_penjualans) {
+            $data_array['labels'][] = $data_penjualans->tanggal;
+
+            array_push($nested_array, $data_penjualans->total_penjualan);
+        }
+        $data_array['series'][] = $nested_array;
+        return response()->json($data_array);
+    }
+    public function grafikPenjualanProdukTeratas(Request $request)
+    {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
+
+        $data_penjualan = DetailPenjualan::grafikPenjualanProdukTeratas($request, $hari, $minggu, $bulan, $tahun)->get();
+        $data_array     = [];
+        $nested_array   = [];
+        $nested_array2  = [];
+        foreach ($data_penjualan as $data_penjualans) {
+            $data_array['labels'][] = $data_penjualans->nama_produk;
+
+            array_push($nested_array, $data_penjualans->jumlah_produk);
+            array_push($nested_array2, $data_penjualans->harga_produk);
+        }
+        $data_array['series'][]  = $nested_array;
+        $data_array['series2'][] = $nested_array2;
+        return response()->json($data_array);
+
+    }
+    public function grafikPenjualanProdukKategori()
+    {
+
+    }
+    public function grafikNominalProdukTertinggi()
+    {
+
     }
 
     public function index()

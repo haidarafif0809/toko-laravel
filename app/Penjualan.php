@@ -60,6 +60,7 @@ class Penjualan extends Model
             'penjualans.id as id_penjualan',
             'penjualans.subtotal',
             'penjualans.keterangan',
+            'users.nama_pemilik',
             'penjualans.no_faktur',
             'penjualans.diskon',
             'penjualans.pajak',
@@ -67,6 +68,7 @@ class Penjualan extends Model
             'penjualans.cara_bayar',
         ])
             ->leftJoin('pelanggans', 'pelanggans.id', '=', 'penjualans.pelanggan_id')
+            ->leftJoin('users', 'users.id', '=', 'penjualans.created_by')
             ->where('penjualans.toko_id', Auth::user()->toko_id)
             ->where('.penjualans.created_at', '>=', $waktu)
             ->groupBy('penjualans.id');
@@ -192,6 +194,7 @@ class Penjualan extends Model
         $query->select([
             'penjualans.created_at as waktu',
             'penjualans.id',
+            'penjualans.no_faktur',
             'penjualans.total_bayar',
             'penjualans.subtotal',
             'penjualans.diskon',
@@ -215,6 +218,7 @@ class Penjualan extends Model
             'penjualans.id',
             'penjualans.total_bayar',
             'penjualans.subtotal',
+            'penjualans.no_faktur',
             'penjualans.diskon',
             'penjualans.tunai',
             'penjualans.kembalian',
@@ -289,5 +293,42 @@ class Penjualan extends Model
             ->where('penjualans.diskon', '!=', null)
             ->groupBy('penjualans.id');
         return $query;
+    }
+
+    public static function noFaktur($toko_id)
+    {
+        $prefix_id  = Toko::select('prefix_member_id')->whereId($toko_id)->first();
+        $this_year  = date("y");
+        $this_month = date("m");
+        $penjualan  = Penjualan::select([DB::raw('MONTH(created_at) as bulan'), 'no_faktur'])->where('toko_id', $toko_id)->orderBy('id', 'DESC')->first();
+        if ($penjualan != null) {
+            if (is_null($prefix_id->prefix_member_id)) {
+                $faktur           = explode("/", $penjualan->no_faktur);
+                $increment        = $faktur[0];
+                $bulan_terakhir   = $penjualan->bulan;
+                $prefix_member_id = "KV";
+            } else {
+                $faktur           = explode("/", $penjualan->no_faktur);
+                $increment        = $faktur[0];
+                $bulan_terakhir   = $penjualan->bulan;
+                $prefix_member_id = $prefix_id->prefix_member_id;
+            }
+        } else {
+            if (is_null($prefix_id->prefix_member_id)) {
+                $increment        = 1;
+                $bulan_terakhir   = 13;
+                $prefix_member_id = "KV";
+            } else {
+                $increment        = 1;
+                $bulan_terakhir   = 13;
+                $prefix_member_id = $prefix_id->prefix_member_id;
+            }
+        }
+        if ($bulan_terakhir == $this_month) {
+            $no_faktur = 1 + $increment . '/' . $prefix_member_id . '/' . $this_month . '/' . $this_year;
+        } else {
+            $no_faktur = $increment . '/' . $prefix_member_id . '/' . $this_month . '/' . $this_year;
+        }
+        return $no_faktur;
     }
 }
