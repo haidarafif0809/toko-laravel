@@ -296,6 +296,7 @@ export default {
       chartOptions3: {
         data: {
           // labels:['ddd', 'dds', 'ff'],
+          
           series: [5, 3, 2]
         },
         labelInterpolationFnc: function(value) {
