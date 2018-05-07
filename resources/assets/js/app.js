@@ -22,6 +22,8 @@ import money from 'v-money'
 import myDatepicker from 'vuejs-datepicker'
 // chart.js
 import VueChartJs from 'vue-chartjs'
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
 Vue.use(money, {
     precision: 4
 })
@@ -30,23 +32,22 @@ Vue.use(BootstrapVue);
 window.Vue.use(VueSwal)
 window.Vue.use(Spinner)
 window.Vue.use(VueChartJs)
-Vue.component('line-chart', {
-    extends: VueChartJs.Line,
-    mounted() {
-        this.renderChart({
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'Data Satu',
-                backgroundColor: '#f87979',
-                data: [40, 39, 10, 40, 39, 80, 40]
-            }]
-        }, {
-            responsive: true,
-            maintainAspectRatio: false
-        })
-    }
-});
-Vue.component('vue-chart', require('vue-chartjs'));
+// Vue.component('line-chart', {
+//     extends: VueChartJs.Line,
+//     mounted() {
+//         this.renderChart({
+//             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//             datasets: [{
+//                 label: 'Data Satu',
+//                 backgroundColor: '#f87979',
+//                 data: [40, 39, 10, 40, 39, 80, 40]
+//             }]
+//         }, {
+//             responsive: true,
+//             maintainAspectRatio: false
+//         })
+//     }
+// });
 Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('vue-simple-spinner', require('vue-simple-spinner'));

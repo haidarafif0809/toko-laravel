@@ -46,6 +46,12 @@ class DetailPenjualan extends Model
             ->groupBy('penjualans.pelanggan_id');
         return $query;
     }
+    public function createDate($waktu)
+    {
+        $date   = date_create($waktu);
+        $format = date_format($date, 'Y-m-d');
+        return $format;
+    }
     public function queryGrafikPenjualanProdukTeratas()
     {
         $query = DetailPenjualan::select([
@@ -98,6 +104,63 @@ class DetailPenjualan extends Model
                     ->where('detail_penjualans.created_at', '>=', $tahun)
                     ->orderBy('detail_penjualans.id', 'asc')
                     ->groupBy('produks.nama_produk');
+                # code...
+                # code...
+            }
+        }
+        return $query;
+
+    }
+    public function queryGrafikPenjualanProdukKategori()
+    {
+        $query = DetailPenjualan::select([
+            'detail_penjualans.id',
+            'kategori_produks.nama_kategori_produk',
+            DB::raw('SUM(detail_penjualans.id_kategori) as jumlah_kategori'),
+        ])
+            ->leftJoin('kategori_produks', 'kategori_produks.id', '=', 'detail_penjualans.id_kategori')
+            ->where('kategori_produks.toko_id', Auth::user()->toko_id);
+        return $query;
+    }
+    public function scopeGrafikPenjualanProdukKategori($query, $request, $hari, $minggu, $bulan, $tahun)
+    {
+        if ($request->dari_tanggal != "" && $request->sampai_tanggal != "") {
+            $query = $this->queryGrafikPenjualanProdukKategori()
+                ->where(DB::raw('DATE(detail_penjualans.created_at)'), '>=', $this->createDate($request->dari_tanggal))
+                ->where(DB::raw('DATE(detail_penjualans.created_at)'), '<=', $this->createDate($request->sampai_tanggal))
+                ->orderBy('detail_penjualans.id', 'asc')
+                ->groupBy('kategori_produks.nama_kategori_produk');
+            # code...
+        } elseif ($request->dari_tanggal == "" && $request->sampai_tanggal == "") {
+            if ($request->priode == 0 || $request->priode == "") {
+                $query = $this->queryGrafikPenjualanProdukKategori()
+                    ->orderBy('detail_penjualans.id', 'asc')
+                    ->groupBy('kategori_produks.nama_kategori_produk');
+                # code...
+            }
+            if ($request->priode == 1) {
+                $query = $this->queryGrafikPenjualanProdukKategori()
+                    ->where('detail_penjualans.created_at', '>=', $hari)
+                    ->orderBy('detail_penjualans.id', 'asc')
+                    ->groupBy('kategori_produks.nama_kategori_produk');
+                # code...
+            }if ($request->priode == 2) {
+                $query = $this->queryGrafikPenjualanProdukKategori()
+                    ->where('detail_penjualans.created_at', '>=', $minggu)
+                    ->orderBy('detail_penjualans.id', 'asc')
+                    ->groupBy('kategori_produks.nama_kategori_produk');
+                # code...
+            }if ($request->priode == 3) {
+                $query = $this->queryGrafikPenjualanProdukKategori()
+                    ->where('detail_penjualans.created_at', '>=', $bulan)
+                    ->orderBy('detail_penjualans.id', 'asc')
+                    ->groupBy('kategori_produks.nama_kategori_produk');
+                # code...
+            }if ($request->priode == 4) {
+                $query = $this->queryGrafikPenjualanProdukKategori()
+                    ->where('detail_penjualans.created_at', '>=', $tahun)
+                    ->orderBy('detail_penjualans.id', 'asc')
+                    ->groupBy('kategori_produks.nama_kategori_produk');
                 # code...
                 # code...
             }

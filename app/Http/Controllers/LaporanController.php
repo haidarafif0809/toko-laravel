@@ -303,19 +303,30 @@ class LaporanController extends Controller
         $nested_array   = [];
         $nested_array2  = [];
         foreach ($data_penjualan as $data_penjualans) {
-            $data_array['labels'][] = $data_penjualans->nama_produk;
+            $data_array['labels'][] = substr($data_penjualans->nama_produk, 0, 25);
 
             array_push($nested_array, $data_penjualans->jumlah_produk);
-            array_push($nested_array2, $data_penjualans->harga_produk);
+            array_push($nested_array2, $data_penjualans->harga_produk / 1000);
         }
         $data_array['series'][]  = $nested_array;
         $data_array['series2'][] = $nested_array2;
         return response()->json($data_array);
 
     }
-    public function grafikPenjualanProdukKategori()
+    public function grafikPenjualanProdukKategori(Request $request)
     {
+        $hari   = Carbon::now()->toDay();
+        $minggu = Carbon::now()->subWeek();
+        $bulan  = Carbon::now()->subMonth();
+        $tahun  = Carbon::now()->subYear();
 
+        $data_penjualan = DetailPenjualan::grafikPenjualanProdukKategori($request, $hari, $minggu, $bulan, $tahun)->get();
+        $data_array     = [];
+        foreach ($data_penjualan as $data_penjualans) {
+            $data_array['labels'][] = $data_penjualans->nama_kategori_produk;
+            $data_array['series'][] = $data_penjualans->jumlah_kategori;
+        }
+        return response()->json($data_array);
     }
     public function grafikNominalProdukTertinggi()
     {
