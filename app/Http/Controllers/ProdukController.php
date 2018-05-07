@@ -164,38 +164,60 @@ class ProdukController extends Controller
     {
         //validate
 
-        if ($request->foto !== null) {
-            $this->validate($request, [
-                'foto' => 'image64:jpeg,jpg,png|max:6072000',
-            ]);
+        // if ($request->foto !== null) {
+        //     $this->validate($request, [
+        //         'foto' => 'image64:jpeg,jpg,png|max:6072000',
+        //     ]);
 
-            $imageData    = $request->foto;
-            $ekstensi     = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-            $fileName     = Carbon::now()->timestamp . '.' . $ekstensi;
-            $image_resize = Image::make($request->foto);
-            $image_resize->fit(200);
-            $image_resize->save(public_path('foto_produk/' . $fileName));
-            // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
-            // // Mengambil file yang diupload
-            // $uploaded_foto = $request->foto;
-            // // mengambil extension file
-            // $extension = $uploaded_foto->getClientOriginalExtension();
-            // // membuat nama file random berikut extension
-            // $filename     = str_random(40) . '.' . $extension;
-            // $image_resize = Image::make($foto->getRealPath());
-            // $image_resize->fit(300);
-            // $image_resize->save(public_path('foto_produk/' . $filename));
-        } else {
-            $this->validate($request, [
-                'nama_produk'         => 'required',
-                'kategori_produks_id' => 'required|exists:kategori_produks,id',
-                'harga_jual'          => 'required|numeric',
-                'bisa_dijual'         => 'required',
-                'satuan'              => 'required',
-                'produk_modifier_id'  => 'nullable|exists:modifiers,id',
-            ]);
+        //     $imageData    = $request->foto;
+        //     $ekstensi     = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        //     $fileName     = Carbon::now()->timestamp . '.' . $ekstensi;
+        //     $image_resize = Image::make($imageData->realpath());
+        //     $image_resize->fit(200);
+        //     $image_resize->save(public_path('foto_produk/' . $fileName));
 
-        }
+        // }
+
+        // if ($request->foto !== null) {
+        //     $foto = $request->foto;
+
+        //     $this->validate($request, [
+        //         'foto' => 'image64:jpeg,jpg,png|max:6072000',
+        //     ]);
+        //     // Mengambil file yang diupload
+        //     $uploaded_foto = $foto;
+        //     // mengambil extension file
+        //     // $extension = $uploaded_foto->getClientOriginalExtension();
+        //     $imageData = $request->foto;
+        //     $ekstensi  = explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
+        //     // membuat nama file random berikut extension
+        //     $filename     = str_random(40) . '.' . $ekstensi;
+        //     $image_resize = Image::make($foto->getRealPath());
+        //     $image_resize->fit(300);
+        //     $image_resize->save(public_path('foto_produk/' . $filename));
+        //     $insert_barang->foto = $filename;
+        //     // menyimpan field foto di table barangs  dengan filename yang baru dibuat
+        //     $insert_barang->save();
+        // Image::make($request->foto)->save(public_path('foto_produk/') . $fileName);
+        // // Mengambil file yang diupload
+        // $uploaded_foto = $request->foto;
+        // // mengambil extension file
+        // $extension = $uploaded_foto->getClientOriginalExtension();
+        // // membuat nama file random berikut extension
+        // $filename     = str_random(40) . '.' . $extension;
+        // $image_resize = Image::make($foto->getRealPath());
+        // $image_resize->fit(300);
+        // $image_resize->save(public_path('foto_produk/' . $filename));
+        $this->validate($request, [
+            'nama_produk'         => 'required',
+            'kategori_produks_id' => 'required|exists:kategori_produks,id',
+            'harga_jual'          => 'required|numeric',
+            'bisa_dijual'         => 'required',
+            'satuan'              => 'required',
+            'produk_modifier_id'  => 'nullable|exists:modifiers,id',
+            'foto'                => 'image|max:6072000',
+
+        ]);
 
         $modifier        = '';
         $noUrut          = 1;
@@ -212,8 +234,8 @@ class ProdukController extends Controller
         }
 
         // insert
-        $toko_id = Auth::user()->toko_id;
-        $produk  = Produk::create([
+        $toko_id       = Auth::user()->toko_id;
+        $insert_barang = Produk::create([
             'toko_id'             => $toko_id,
             'nama_produk'         => $request->nama_produk,
             'kategori_produks_id' => $request->kategori_produks_id,
@@ -223,6 +245,25 @@ class ProdukController extends Controller
             'satuan'              => $request->satuan,
             'produk_modifier_id'  => $modifier,
         ]);
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+
+            if (is_array($foto) || is_object($foto)) {
+                // Mengambil file yang diupload
+                $uploaded_foto = $foto;
+                // mengambil extension file
+                $extension = $uploaded_foto->getClientOriginalExtension();
+                // membuat nama file random berikut extension
+                $filename     = str_random(40) . '.' . $extension;
+                $image_resize = Image::make($foto->getRealPath());
+                $image_resize->fit(300);
+                $image_resize->save(public_path('foto_produk/' . $filename));
+                $insert_barang->foto = $filename;
+                // menyimpan field foto di table barangs  dengan filename yang baru dibuat
+                $insert_barang->save();
+            }
+        }
+        echo $foto;
     }
 
     public function show($id)

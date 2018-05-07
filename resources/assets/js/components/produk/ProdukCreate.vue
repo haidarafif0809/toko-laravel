@@ -123,7 +123,7 @@
 						<div class="form-group">
 							<label for="foto" class="col-md-2 control-label">Foto</label>
 							<div class="col-md-4">
-								<input class="form-control" type="file" name="foto" v-on:change="onFileChange">
+								<input class="form-control" id="foto" type="file" name="foto" v-on:change="onFileChange">
 								<font size="2px"><i>Ukuran yang direkomendasikan 200x200</i></font> <br>
 								<font color="red">Size Foto (Ukuran Max : 3MB)</font>
 							</div>
@@ -294,30 +294,52 @@ export default {
 		},
 		saveForm() {
 			var app = this;
-			var newProduk = app.produk;
-			console.log(newProduk);
-			axios.post(app.url, newProduk)
-			.then(function (resp) {
-				app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
-				app.alert(app.message);
-				app.produk.kode_produk = '';
-				app.produk.nama_produk = '';
-				app.produk.harga_jual = '';
-				app.produk.harga_beli = '';
-				app.produk.kategori_produks_id = '';
-				app.produk.bisa_dijual = '';
-				app.produk.foto = '';
-				app.produk.satuan = '';
-				app.produk.produk_modifier_id = '';
-				app.errors = '';
-				app.$router.replace('/produk');
+			var newProduk = app.inputData();
+			console.log(app.produk.nama_produk);
 
-			})
-			.catch(function (resp) {
-				app.success = false;
-				app.errors = resp.response.data.errors;
-			});
+			 axios.post(app.url, newProduk)
+			 .then(function (resp) {
+			 	app.message = 'Sukses : Berhasil Menambah produk '+ app.produk.nama_produk;
+			 	app.alert(app.message);
+			 	 // app.produk.kode_produk = '';
+			 	 // app.produk.nama_produk = '';
+			 	 // app.produk.harga_jual = '';
+			 	 // app.produk.harga_beli = '';
+			 	 // app.produk.kategori_produks_id = '';
+			 	 // app.produk.bisa_dijual = '';
+			 	 // app.produk.foto = '';
+			 	 // app.produk.satuan = '';
+			 	 // app.produk.produk_modifier_id = '';
+			 	app.errors = '';
+			 	app.$router.replace('/produk');
+
+			 })
+			 .catch(function (resp) {
+			 	app.success = false;
+			 	app.errors = resp.response.data.errors;
+			 });
 		},
+
+		inputData(){
+			var app = this;
+
+			let newProduk = new FormData();
+			if (document.getElementById('foto').files[0] != undefined) {
+				newProduk.append('foto', document.getElementById('foto').files[0]);
+			}
+			newProduk.append('kode_produk', this.produk.kode_produk);
+			newProduk.append('nama_produk', this.produk.nama_produk);
+			newProduk.append('harga_jual', this.produk.harga_jual);
+			newProduk.append('harga_beli', this.produk.harga_beli);
+			newProduk.append('kategori_produks_id', this.produk.kategori_produks_id);
+			newProduk.append('bisa_dijual', this.produk.bisa_dijual);
+			newProduk.append('satuan', this.produk.satuan);
+			newProduk.append('produk_modifier_id', this.produk.produk_modifier_id);
+
+			return newProduk;
+		},
+
+
 		selectedKategoriProduksId() {
 			var app = this;
 			axios.get(app.url+'/kategori_produks_id')
